@@ -16,6 +16,10 @@ jobs:
       - run: ruff check src tests scripts
       - name: Revenue OS experiment contract
         run: clinicops-experiments examples/experiments.json > /tmp/clinicops-experiments.json
+      - name: Agent five-gate contract
+        run: python scripts/agent_gate.py examples/agent_tasks.json 2026-09-09 > /tmp/clinicops-agent-gate.json
+      - name: Readiness score contract
+        run: python scripts/validate_readiness_page.py
       - name: Client bundle smoke test
         run: |
           rm -rf /tmp/clinicops-pilot
@@ -34,4 +38,4 @@ jobs:
       - name: Sanitized report fixture
         run: python scripts/render_examples.py --check
       - name: Public-copy claim gate
-        run: python scripts/claim_gate.py README.md PRIMARY_SOURCES.md docs website examples/portfolio_report.md
+        run: python scripts/claim_gate.py README.md PRIMARY_SOURCES.md docs website examples/portfolio_report.md offers sales research content
