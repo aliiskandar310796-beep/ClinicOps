@@ -24,7 +24,7 @@ SCORE_WEIGHTS = {
 }
 
 
-def _parse_optional_score(value: str | float | int | None) -> float | None:
+def _parse_optional_score(value: str | float | None) -> float | None:
     if value is None or value == "":
         return None
     score = float(value)
