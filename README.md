@@ -30,9 +30,10 @@ The current commercial focus is the **legacy-to-MDR transition and SS(C)P/docume
 - Versioned claim registry with evidence class, limitations, allowed uses, review dates and supersession.
 - Evidence-gated publication-pack generation.
 - Opportunity scoring that penalises regulatory/reputation risk and ongoing maintenance burden.
-- AR/manufacturer portfolio transition report generation.
+- AR/manufacturer portfolio transition report generation with operator-priority triage.
+- Portfolio intake diagnostics for missing evidence and structural conflicts.
 - Read-only EUDAMED API reachability canary.
-- CI gates for tests, Ruff, claim-registry integrity and public-facing copy.
+- CI gates for tests, Ruff, claim-registry integrity, generated fixtures and public-facing copy.
 - Client-side Identifier Check under `docs/`.
 
 ## Important limitations
@@ -49,6 +50,7 @@ pytest
 clinicops-id-check B-123456789
 clinicops-claims research/claims.jsonl 2026-09-09
 clinicops-rank-opportunities examples/opportunities.json
+clinicops-portfolio-validate examples/portfolio_intake_template.csv
 clinicops-portfolio-report examples/portfolio.csv 2026-09-09
 clinicops-publication-pack "Transition gap note" CO-CLM-0001,CO-CLM-0002,CO-CLM-0004 research-note 2026-09-09
 ```
@@ -63,7 +65,13 @@ A rejected claim stays in the registry as institutional memory rather than disap
 
 ## Class III Transition Map
 
-`offers/class-iii-transition-map.md` defines the first productised service layer around the toolkit: portfolio segmentation, certificate/transition timing, evidence gaps, SS(C)P operations and market-language work planning. The deterministic scan is the low-cost front door; the paid layer is human-reviewed regulatory judgement.
+`offers/class-iii-transition-map.md` is the canonical product specification: portfolio segmentation, certificate/transition timing, evidence gaps, SS(C)P operations and market-language work planning. The deterministic scan is the low-cost front door; the paid layer is human-reviewed regulatory judgement.
+
+Use `examples/portfolio_intake_template.csv` as the minimum portable intake shape. Extra client-export columns are tolerated by the report loader, while `clinicops-portfolio-validate` surfaces missing dates, evidence links, actor-role uncertainty and conflicting registration signals before review begins.
+
+## Research-note pipeline
+
+`research/drafts/2026-09-classIII-transition-gap.md` is the internal first-draft research note built from the corrected 8 September census. It is deliberately not published. Its pre-publication gate requires current API canary evidence, claim-registry approval, publication-pack generation and an adversarial final read.
 
 ## Identifier Check deployment
 
