@@ -53,10 +53,10 @@ The 8 September sample (`CO-CLM-0002`) can support methodology discussion but mu
 
 ## Claims to avoid
 
-- “Manufacturers are failing to link SS(C)Ps.”
-- “We can audit EUDAMED end-to-end.”
-- “A B-prefix proves non-compliance / proves no SS(C)P is possible.”
-- “27 February 2027 is a statutory MDR deadline.”
+- Unsupported diligence-failure allegations about SS(C)P linkage.
+- Claims of complete, end-to-end EUDAMED public-register audit coverage.
+- Treating a B-prefix as proof of non-compliance or as proof of a specific SS(C)P outcome.
+- Presenting 27 February 2027 as a statutory MDR deadline.
 - Any claim about the number or status of Obelis client devices without actual portfolio evidence.
 
 ## Pilot proposal if discovery validates the problem
