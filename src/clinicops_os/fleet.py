@@ -1,8 +1,8 @@
 from __future__ import annotations
 
+import json
 from dataclasses import asdict, dataclass
 from pathlib import Path
-import json
 
 
 @dataclass(frozen=True)
@@ -25,7 +25,7 @@ class FleetRegistry:
         self.agents = agents
 
     @classmethod
-    def load(cls, path: str | Path) -> "FleetRegistry":
+    def load(cls, path: str | Path) -> FleetRegistry:
         raw = json.loads(Path(path).read_text(encoding="utf-8"))
         agents = []
         for item in raw["agents"]:
@@ -37,7 +37,10 @@ class FleetRegistry:
                     inputs=tuple(item.get("inputs", [])),
                     outputs=tuple(item.get("outputs", [])),
                     guardrails=tuple(item.get("guardrails", [])),
-                    escalation=item.get("escalation", "Escalate material ambiguity."),
+                    escalation=item.get(
+                        "escalation",
+                        "Escalate material ambiguity.",
+                    ),
                     leverage=int(item.get("leverage", 5)),
                 )
             )
