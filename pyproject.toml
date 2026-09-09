@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "clinicops-eudamed-os"
+version = "0.1.0"
+description = "ClinicOps public-source EUDAMED research toolkit"
+requires-python = ">=3.11"
+dependencies = ["requests>=2.32"]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "ruff>=0.6"]
+
+[project.scripts]
+clinicops-id-check = "clinicops_eudamed.cli:id_check"
+clinicops-claim-check = "clinicops_eudamed.cli:claim_check"
+clinicops-fleet-status = "clinicops_os.cli:fleet_status"
+clinicops-rank-opportunities = "clinicops_os.cli:rank_opportunities"
+clinicops-portfolio-report = "clinicops_os.cli:portfolio_report"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
