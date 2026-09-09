@@ -19,6 +19,7 @@ clinicops-fleet-status = "clinicops_os.cli:fleet_status"
 clinicops-rank-opportunities = "clinicops_os.cli:rank_opportunities"
 clinicops-portfolio-report = "clinicops_os.cli:portfolio_report"
 clinicops-claims = "clinicops_os.cli:claims_status"
+clinicops-publication-pack = "clinicops_os.cli:publication_pack"
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
