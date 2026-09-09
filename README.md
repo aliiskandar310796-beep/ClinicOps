@@ -34,9 +34,9 @@ The current commercial focus is the **legacy-to-MDR transition and SS(C)P/docume
 - Machine-readable portfolio JSON for downstream tools and agent handoffs.
 - Portfolio intake diagnostics for missing evidence and structural conflicts.
 - One-command pilot bundle generation with input hash, diagnostics, Markdown and JSON outputs.
-- Read-only EUDAMED API reachability canary.
-- CI gates for tests, Ruff, claim-registry integrity, governed website copy, generated fixtures and public-facing copy.
-- Client-side Identifier Check under `docs/`.
+- Read-only EUDAMED API reachability canary with reviewed drift semantics.
+- CI gates for tests, Ruff, custom-agent profiles, claim-registry integrity, governed website copy, generated fixtures and public-facing copy.
+- Live client-side Identifier Check deployed from `docs/`.
 
 ## Important limitations
 
@@ -101,7 +101,11 @@ Use `examples/portfolio_intake_template.csv` as the minimum portable intake shap
 
 ## Identifier Check deployment
 
-`docs/index.html` is prepared for GitHub Pages. Pages enablement is the only remaining manual hosting dependency and is tracked in repository issue #1. Do not introduce a second hosting stack unless Pages proves unsuitable.
+The client-side Identifier Check is deployed through GitHub Pages from `docs/index.html`:
+
+https://aliiskandar310796-beep.github.io/ClinicOps/
+
+Deployment is controlled by `.github/workflows/pages.yml` and uses Node-24-native GitHub Actions majors. Repository issue #1 was closed after successful deployment run `34354035445`.
 
 ## Repository visibility
 
