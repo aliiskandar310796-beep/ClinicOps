@@ -7,6 +7,7 @@ from pathlib import Path
 
 from .bundle import build_pilot_bundle
 from .claim_registry import audit_registry, load_registry, render_matrix
+from .experiments import load_experiments, render_experiment_json
 from .fleet import FleetRegistry
 from .intake import render_intake_findings, validate_portfolio
 from .publication import build_publication_pack, render_publication_pack
@@ -50,6 +51,16 @@ def revenue_rank() -> None:
     except ValueError as exc:
         raise SystemExit(str(exc)) from exc
     print(render_revenue_json(accounts), end="")
+
+
+def experiment_status() -> None:
+    if len(sys.argv) != 2:
+        raise SystemExit("usage: clinicops-experiments <experiments.json>")
+    try:
+        experiments = load_experiments(sys.argv[1])
+    except (OSError, ValueError, json.JSONDecodeError) as exc:
+        raise SystemExit(str(exc)) from exc
+    print(render_experiment_json(experiments), end="")
 
 
 def _load_validated_portfolio(command: str) -> tuple[list[object], date]:
