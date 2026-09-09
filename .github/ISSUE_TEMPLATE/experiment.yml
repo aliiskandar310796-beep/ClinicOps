@@ -1,0 +1,97 @@
+name: Commercial experiment
+description: Define one bounded Revenue OS experiment with evidence, thresholds and a kill condition.
+title: "[EXP] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form only for a real commercial learning experiment. Do not include private client/prospect data or unsupported regulatory conclusions.
+
+  - type: input
+    id: experiment_id
+    attributes:
+      label: Experiment ID
+      description: Use the canonical EXP-### identifier.
+      placeholder: EXP-003
+    validations:
+      required: true
+
+  - type: input
+    id: opportunity_id
+    attributes:
+      label: Opportunity ID
+      description: Link to the Revenue OS opportunity, e.g. REV-001.
+      placeholder: REV-001
+    validations:
+      required: true
+
+  - type: textarea
+    id: hypothesis
+    attributes:
+      label: Hypothesis
+      description: State one falsifiable buyer/product hypothesis.
+      placeholder: We believe that...
+    validations:
+      required: true
+
+  - type: input
+    id: target_buyer
+    attributes:
+      label: Target buyer
+      placeholder: Authorised representative regulatory lead
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence supporting the test
+      description: Link only to public/sanitized repo evidence or describe the private evidence class without exposing private content.
+    validations:
+      required: true
+
+  - type: textarea
+    id: smallest_test
+    attributes:
+      label: Smallest test
+      description: Define the cheapest test that could change a decision.
+    validations:
+      required: true
+
+  - type: input
+    id: metric
+    attributes:
+      label: Decision metric
+      description: Prefer qualified-buyer behavior over vanity metrics.
+      placeholder: Qualified requests for a pilot discussion
+    validations:
+      required: true
+
+  - type: input
+    id: success_threshold
+    attributes:
+      label: Success threshold
+      placeholder: At least 2 qualified follow-up requests
+    validations:
+      required: true
+
+  - type: input
+    id: kill_condition
+    attributes:
+      label: Kill condition
+      description: Define before running the test.
+      placeholder: No repeated pain after 5 conversations
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: safeguards
+    attributes:
+      label: Safeguards
+      options:
+        - label: No confidential client/prospect data is included in this issue.
+          required: true
+        - label: This experiment does not treat commercial scoring as regulatory/compliance risk.
+          required: true
+        - label: Success and kill criteria are defined before execution.
+          required: true

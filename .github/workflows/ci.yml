@@ -14,6 +14,15 @@ jobs:
       - run: pip install -e .[dev]
       - run: pytest -q
       - run: ruff check src tests scripts
+      - name: Revenue OS experiment contract
+        run: clinicops-experiments examples/experiments.json > /tmp/clinicops-experiments.json
+      - name: Client bundle smoke test
+        run: |
+          rm -rf /tmp/clinicops-pilot
+          clinicops-pilot-bundle examples/portfolio.csv /tmp/clinicops-pilot 2026-09-09 > /tmp/clinicops-manifest.json
+          test -s /tmp/clinicops-pilot/client_report.html
+          test -s /tmp/clinicops-pilot/portfolio_report.json
+          grep -q '"bundle_schema_version": "1.1"' /tmp/clinicops-manifest.json
       - name: Custom-agent profile audit
         run: python scripts/audit_agent_profiles.py
       - name: Claim registry audit

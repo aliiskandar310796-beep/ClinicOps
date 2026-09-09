@@ -6,6 +6,7 @@ from dataclasses import dataclass
 from datetime import date
 from pathlib import Path
 
+from .client_report import render_client_html
 from .intake import render_intake_findings, validate_portfolio
 from .transition_report import load_portfolio, render_json, render_markdown
 
@@ -44,15 +45,20 @@ def build_pilot_bundle(
     destination.mkdir(parents=True, exist_ok=True)
     markdown_path = destination / "portfolio_report.md"
     json_path = destination / "portfolio_report.json"
+    html_path = destination / "client_report.html"
     intake_path = destination / "intake_diagnostics.md"
     manifest_path = destination / "manifest.json"
 
     markdown_path.write_text(render_markdown(rows, as_of=as_of), encoding="utf-8")
     json_path.write_text(render_json(rows, as_of=as_of), encoding="utf-8")
+    html_path.write_text(render_client_html(rows, as_of=as_of), encoding="utf-8")
     intake_path.write_text(render_intake_findings(findings), encoding="utf-8")
 
+    output_paths = [markdown_path, json_path, html_path, intake_path]
+    output_sha256 = {path.name: _sha256(path) for path in output_paths}
+
     manifest: dict[str, object] = {
-        "bundle_schema_version": "1.0",
+        "bundle_schema_version": "1.1",
         "as_of": as_of.isoformat(),
         "source_file": source.name,
         "source_sha256": _sha256(source),
@@ -62,11 +68,8 @@ def build_pilot_bundle(
             "warnings": sum(item.severity == "warning" for item in findings),
             "information_gaps": sum(item.severity == "info" for item in findings),
         },
-        "outputs": [
-            markdown_path.name,
-            json_path.name,
-            intake_path.name,
-        ],
+        "outputs": [path.name for path in output_paths],
+        "output_sha256": output_sha256,
         "interpretation": (
             "Evidence-quality diagnostics and operator triage only; "
             "not a compliance determination or legal conclusion."

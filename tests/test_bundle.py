@@ -1,4 +1,5 @@
 import csv
+import hashlib
 import json
 from datetime import date
 from pathlib import Path
@@ -41,6 +42,10 @@ def _write_portfolio(path: Path, *, company: str = "Example Co") -> None:
         )
 
 
+def _sha256(path: Path) -> str:
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
 def test_bundle_builds_reproducible_deliverable_set(tmp_path):
     source = tmp_path / "portfolio.csv"
     output = tmp_path / "bundle"
@@ -48,12 +53,13 @@ def test_bundle_builds_reproducible_deliverable_set(tmp_path):
 
     result = build_pilot_bundle(source, output, as_of=date(2026, 9, 9))
 
-    assert result.manifest["bundle_schema_version"] == "1.0"
+    assert result.manifest["bundle_schema_version"] == "1.1"
     assert result.manifest["records_reviewed"] == 1
     assert len(result.manifest["source_sha256"]) == 64
     for name in (
         "portfolio_report.md",
         "portfolio_report.json",
+        "client_report.html",
         "intake_diagnostics.md",
         "manifest.json",
     ):
@@ -64,6 +70,22 @@ def test_bundle_builds_reproducible_deliverable_set(tmp_path):
     assert "not a compliance" in (output / "portfolio_report.md").read_text(
         encoding="utf-8"
     )
+
+    html = (output / "client_report.html").read_text(encoding="utf-8")
+    assert "ClinicOps Portfolio Transition Brief" in html
+    assert "Example device" in html
+    assert "not a compliance determination" in html
+
+    output_hashes = result.manifest["output_sha256"]
+    assert set(output_hashes) == {
+        "portfolio_report.md",
+        "portfolio_report.json",
+        "client_report.html",
+        "intake_diagnostics.md",
+    }
+    for name, digest in output_hashes.items():
+        assert len(digest) == 64
+        assert digest == _sha256(output / name)
 
 
 def test_bundle_blocks_structurally_invalid_input(tmp_path):
