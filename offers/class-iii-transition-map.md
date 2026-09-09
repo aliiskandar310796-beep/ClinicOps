@@ -15,6 +15,16 @@ This is **not** positioned as a compliance audit of EUDAMED and it does not alle
 - Regulatory consultancies that need a white-label evidence/work-plan layer.
 - Portfolio owners entering Denmark or another market where language/document-control work must be scheduled.
 
+## Competitive posture
+
+ClinicOps should not compete head-on with established authorised representatives on generic EUDAMED registration, mandate management or legal-representation breadth. Firms such as Obelis and MDSS already position those services strongly.
+
+ClinicOps' differentiated layer is **portfolio evidence reconciliation + prioritisation + machine-readable handoff + human-reviewed work planning**.
+
+For ARs and consultancies, default to a partner/white-label posture where appropriate: preserve their legal role and client relationship while reducing repeated reconciliation work across manufacturer portfolios.
+
+See `research/market/2026-09-09-ar-eudamed-positioning.md` for the dated positioning scan.
+
 ## Trigger events
 
 - Certificate transition / expiry planning.
@@ -43,7 +53,7 @@ Do not require every field before starting. Missing join keys are themselves use
 
 ## Engine
 
-Use `clinicops-portfolio-report` for deterministic segmentation and report generation. Feed only evidence-supported fields into the engine.
+Use `clinicops-portfolio-validate` first, then `clinicops-portfolio-report` for deterministic segmentation and human-readable work planning. Use `clinicops-portfolio-json` when the output needs to feed another system or agent. Feed only evidence-supported fields into the engine.
 
 Core categories:
 
@@ -51,6 +61,8 @@ Core categories:
 2. **MDR MF-role registration** — verify current portfolio/document-operating state without presuming a defect.
 3. **PR-role system/procedure-pack record** — keep separate from ordinary manufacturer-device interpretation.
 4. **Unresolved** — evidence gap requiring targeted human review.
+
+The priority score is an operator triage mechanism only. Never present it as a regulatory risk, compliance or legal-conclusion score.
 
 ## Deliverables
 
@@ -75,6 +87,9 @@ Answer portfolio questions such as:
 - Which items have the nearest transition/certificate dates?
 - Which records need Basic UDI-DI / certificate / SS(C)P evidence reconciliation before a work plan can be finalised?
 - Which market-language document sets need coordinated review?
+
+### 5. Machine handoff
+Where useful, provide the versioned JSON output containing the same ordered work queue, derived fields and limitations as the human-facing report. This is designed for downstream internal systems, not as an autonomous regulatory decision feed.
 
 Always describe the population as the supplied/reachable portfolio evidence, not the entire public register unless full coverage has actually been established by another method.
 
@@ -108,12 +123,18 @@ Current claim IDs to use in discovery / deliverables only where their gate allow
 - Do not call the 27 February 2027 MDCG recommendation a statutory Article 32 deadline.
 - Do not imply full-register API coverage.
 - Do not infer certificate expiry, market placement or language obligation when the evidence does not support it.
+- Do not undermine an AR's existing client mandate when the better commercial role is a white-label evidence/work-plan layer.
 
 ## Validation experiment
 
 Before building more product surface, validate the offer in three portfolio conversations.
 
 Success signal: the buyer supplies or discusses a portfolio list and asks for a scoped transition work plan, not merely general regulatory advice.
+
+Secondary success signals:
+- the buyer identifies repeated manual portfolio reconciliation;
+- machine-readable output would plug into an existing AR/manufacturer workflow;
+- the buyer values the evidence-gap queue before any compliance conclusion is made.
 
 Failure signal: conversations consistently remain at generic EUDAMED education and no buyer is willing to share a portfolio or pay for human-reviewed prioritisation.
 
