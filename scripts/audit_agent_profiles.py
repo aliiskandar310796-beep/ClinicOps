@@ -4,9 +4,12 @@ from pathlib import Path
 
 AGENT_DIR = Path(".github/agents")
 REQUIRED_FILES = {
+    "customer-discovery.agent.md",
+    "opportunity-architect.agent.md",
     "portfolio-operator.agent.md",
     "regulatory-evidence-steward.agent.md",
     "release-sentinel.agent.md",
+    "visibility-architect.agent.md",
 }
 REQUIRED_KEYS = {"name", "description", "tools"}
 
