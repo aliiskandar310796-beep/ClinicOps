@@ -10,6 +10,7 @@ from .claim_registry import audit_registry, load_registry, render_matrix
 from .fleet import FleetRegistry
 from .intake import render_intake_findings, validate_portfolio
 from .publication import build_publication_pack, render_publication_pack
+from .revenue import load_accounts, render_revenue_json
 from .scoring import Idea, rank_ideas
 from .transition_report import load_portfolio, render_json, render_markdown
 
@@ -39,6 +40,16 @@ def rank_opportunities() -> None:
     print("--  -----  ----------  -----------")
     for idx, idea in enumerate(ranked, start=1):
         print(f"{idx:>2}  {idea.score:>5.2f}  {idea.decision:<10}  {idea.name}")
+
+
+def revenue_rank() -> None:
+    if len(sys.argv) != 2:
+        raise SystemExit("usage: clinicops-revenue-rank <accounts.csv>")
+    try:
+        accounts = load_accounts(sys.argv[1])
+    except ValueError as exc:
+        raise SystemExit(str(exc)) from exc
+    print(render_revenue_json(accounts), end="")
 
 
 def _load_validated_portfolio(command: str) -> tuple[list[object], date]:
