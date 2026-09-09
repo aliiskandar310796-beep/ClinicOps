@@ -16,5 +16,7 @@ jobs:
       - run: ruff check src tests scripts
       - name: Claim registry audit
         run: python scripts/audit_claim_registry.py
+      - name: Sanitized report fixture
+        run: python scripts/render_examples.py --check
       - name: Public-copy claim gate
-        run: python scripts/claim_gate.py README.md PRIMARY_SOURCES.md docs
+        run: python scripts/claim_gate.py README.md PRIMARY_SOURCES.md docs examples/portfolio_report.md
