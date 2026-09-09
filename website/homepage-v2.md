@@ -1,27 +1,29 @@
 <!-- claim-use: website -->
 <!-- claim-ids: CO-CLM-0001,CO-CLM-0004 -->
 
-# ClinicOps homepage v2 — deployment pack
+# ClinicOps homepage — canonical deployment pack
 
 Status: ready for browser-assisted implementation on clinicops.dk. This file is the canonical homepage copy until replaced by a newer validated version.
 
 ## SEO title
 
-ClinicOps — EUDAMED Transition Work Plans for MedTech
+EUDAMED Transition Work Plans for MedTech | ClinicOps
 
 ## Meta description
 
-Evidence-backed EUDAMED portfolio screening and human-reviewed transition work plans for MedTech manufacturers, authorised representatives and regulatory partners.
+Evidence-backed EUDAMED portfolio screening and human-reviewed transition work plans for EU MedTech manufacturers, authorised representatives and regulatory partners.
 
 ## Hero
 
-### Turn EUDAMED transition signals into a defensible work plan.
+### Turn EUDAMED transition evidence into an actionable work plan.
 
-ClinicOps helps MedTech manufacturers and authorised representatives map class III and implantable portfolios, separate legacy and MDR registration paths, reconcile identifiers, prioritise transition evidence, and organise SS(C)P and market-language work.
+ClinicOps helps EU MedTech manufacturers, authorised representatives and regulatory partners map class III and implantable portfolios, separate legacy and MDR registration paths, reconcile identifiers, prioritise transition evidence, and organise SS(C)P and market-language work.
 
 **Primary CTA:** Request a portfolio transition map
 
 **Secondary CTA:** Check an EUDAMED identifier
+
+**Trust line:** Danish domain. EU-wide regulatory operations scope.
 
 Small-print qualifier: Public-register screening is an evidence input, not a compliance determination or a full-register audit.
 
@@ -83,7 +85,18 @@ ClinicOps is designed for:
 - authorised representatives managing multiple manufacturer portfolios;
 - manufacturers with class III / implantable transition workload;
 - regulatory consultancies that need a white-label evidence and work-plan layer;
-- teams entering Denmark or other markets where document-language operations must be coordinated.
+- teams entering Denmark or other EU markets where document-language operations must be coordinated.
+
+## Explore the workflow
+
+Create focused landing pages rather than loading every search intent onto the homepage:
+
+- `/eudamed-transition` — portfolio transition screening and work planning;
+- `/sscp-operations` — SS(C)P evidence, translation and operational handoffs;
+- `/authorised-representative-portfolio-intelligence` — partner / white-label portfolio layer;
+- `/denmark-medtech-language-review` — Danish IFU, labelling and market-language consistency work.
+
+The homepage should link to all four and remain the broad conversion page.
 
 ## What ClinicOps does not promise
 
@@ -102,9 +115,13 @@ Send a small portfolio export or discuss the workflow first. ClinicOps will iden
 
 **Secondary CTA:** Check an identifier
 
-## Implementation notes
+## GoDaddy implementation notes
 
-- Replace the current broad clinic/laboratory compliance positioning; do not mix the two narratives on the same homepage.
+- Replace the current broad `Independent review of EUDAMED records, Basic UDI-DI, SS(C)P and Danish IFUs` hero with the transition-work-plan hero above.
+- Keep Danish capability visible, but do not make the English homepage read as Denmark-only.
 - Keep the free Identifier Check as the low-friction entry point and the Class III Transition Map as the paid judgement layer.
+- Move long legal/rules material away from the main conversion flow where GoDaddy page structure permits; link to focused supporting pages instead.
+- Keep one H1 only. Use descriptive H2s for offer, free tool, best fit, evidence boundaries and contact.
+- Use the exact SEO title and meta description above in GoDaddy SEO settings.
 - Do not publish internal claim IDs in the rendered website; they are editorial traceability markers only.
 - Before deployment, run the repository claim gate and the content-claim-reference validator.
