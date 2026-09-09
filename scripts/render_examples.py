@@ -4,32 +4,44 @@ import sys
 from datetime import date
 from pathlib import Path
 
-from clinicops_os.transition_report import load_portfolio, render_markdown
+from clinicops_os.transition_report import load_portfolio, render_json, render_markdown
 
 ROOT = Path(__file__).resolve().parents[1]
 INPUT = ROOT / "examples" / "portfolio.csv"
-OUTPUT = ROOT / "examples" / "portfolio_report.md"
+MARKDOWN_OUTPUT = ROOT / "examples" / "portfolio_report.md"
+JSON_OUTPUT = ROOT / "examples" / "portfolio_report.json"
 AS_OF = date(2026, 9, 9)
 
 
-def render() -> str:
-    return render_markdown(load_portfolio(INPUT), as_of=AS_OF)
+def render() -> dict[Path, str]:
+    rows = load_portfolio(INPUT)
+    return {
+        MARKDOWN_OUTPUT: render_markdown(rows, as_of=AS_OF),
+        JSON_OUTPUT: render_json(rows, as_of=AS_OF),
+    }
 
 
 def main() -> int:
     expected = render()
     if "--check" in sys.argv:
-        if not OUTPUT.exists() or OUTPUT.read_text(encoding="utf-8") != expected:
-            print(
-                "examples/portfolio_report.md is stale; "
-                "run: python scripts/render_examples.py"
-            )
+        stale = [
+            path
+            for path, content in expected.items()
+            if not path.exists() or path.read_text(encoding="utf-8") != content
+        ]
+        if stale:
+            for path in stale:
+                print(
+                    f"{path.relative_to(ROOT)} is stale; "
+                    "run: python scripts/render_examples.py"
+                )
             return 1
-        print("sanitized portfolio report fixture is current")
+        print("sanitized portfolio report fixtures are current")
         return 0
 
-    OUTPUT.write_text(expected, encoding="utf-8")
-    print(f"wrote {OUTPUT.relative_to(ROOT)}")
+    for path, content in expected.items():
+        path.write_text(content, encoding="utf-8")
+        print(f"wrote {path.relative_to(ROOT)}")
     return 0
 
 
