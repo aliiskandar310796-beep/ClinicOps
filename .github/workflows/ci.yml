@@ -14,3 +14,5 @@ jobs:
       - run: pip install -e .[dev]
       - run: pytest -q
       - run: ruff check src tests scripts
+      - name: Public-copy claim gate smoke test
+        run: python scripts/claim_gate.py README.md PRIMARY_SOURCES.md
