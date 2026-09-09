@@ -24,7 +24,7 @@ This GitHub repository is the shared source of truth. Local ZIPs and chat transc
 - Internal source-locked C-10/24 LinkedIn correction pack.
 - 16-loop on-demand fleet specification; not 16 scheduled jobs.
 - Client-side Identifier Check under `docs/`.
-- CI gates: pytest, Ruff, claim-registry audit, claim-reference integrity, governed-content claim validation, sanitized report fixtures and public-copy claim guard.
+- CI gates: pytest, Ruff, custom-agent profile audit, claim-registry audit, claim-reference integrity, governed-content claim validation, sanitized report fixtures and public-copy claim guard.
 - Repository-wide agent doctrine under `.github/copilot-instructions.md` and `AGENTS.md`.
 
 ## GitHub custom agents
@@ -35,6 +35,8 @@ Three repository-scoped Copilot agent profiles live under `.github/agents/`:
 3. **Release Sentinel** — CI/deployment health, generated artifacts, rollback discipline and scheduled operational checks.
 
 These profiles are specialization/instruction layers. Their existence does **not** mean they are continuously running. Unattended recurring work is implemented separately through GitHub Actions.
+
+`Release Sentinel` also protects `research/canary/baseline.json` from silent drift: a baseline change must be reviewed and, when material, accompanied by a dated correction/method note and claim-registry update rather than merely following the latest observed behavior.
 
 ## GitHub automation
 `.github/workflows/ops-watch.yml` runs weekly on Monday at 06:13 UTC, can be dispatched manually, and self-tests when the canary/evidence automation files change.
@@ -59,8 +61,9 @@ Operational consequence:
 - future canaries compare reachability shape against `research/canary/baseline.json` rather than hard-coding the discarded ~32k-wall inference.
 
 ## Last verified baselines
-- Commit `611833caaad884a9720c892ad80a88821693b09e` passed the full CI chain on 9 Sep 2026 after repository-wide Copilot/agent instructions were added.
+- Commit `a9619322261520961f44b9e8cbe7466f18b8104f` passed the full CI chain on 9 Sep 2026, including the custom-agent profile audit plus tests, Ruff, claim-registry/reference checks, governed content, fixtures and public-copy gate.
 - Commit `de1dc92a93bc57e4535d5811d338e1f13c769d87` passed both the full CI chain and drift-aware `Ops Watch` on 9 Sep 2026.
+- Commit `611833caaad884a9720c892ad80a88821693b09e` passed CI after repository-wide Copilot/agent instructions were added.
 
 ## Known manual dependencies
 1. GitHub Pages repository enablement is still required once. It is tracked in issue #1. Do not introduce a second hosting stack merely to bypass this one-time setting.
