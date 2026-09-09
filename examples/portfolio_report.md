@@ -12,13 +12,15 @@
 - PR/system-procedure-pack records: **1**
 - Confirmed Danish-market rows: **2**
 
-## Work plan
+## Prioritised work plan
 
-| Company | Device | Role | Registration | Certificate expiry | Danish market | Workstream |
-|---|---|---|---|---|---|---|
-| Example MedTech A | Example Class III Device | MF | legacy | 2027-02-15 | confirmed | Legacy → MDR transition: urgent work-plan review |
-| Example MedTech B | Example MDR Device | MF | MDR | 2028-06-30 | yes | MDR manufacturer record — monitor document/market-language controls |
-| Example Pack Producer | Example Procedure Pack | PR | MDR | — | unknown | Separate PR/system-procedure-pack review |
+> Priority is an operator triage score only; it is not a regulatory risk, compliance, or legal-conclusion score.
+
+| Priority | Company | Device | Role | Registration | Certificate expiry | Danish market | Workstream |
+|---:|---|---|---|---|---|---|---|
+| 98 | Example MedTech A | Example Class III Device | MF | legacy | 2027-02-15 | confirmed | Legacy → MDR transition: urgent work-plan review |
+| 33 | Example MedTech B | Example MDR Device | MF | MDR | 2028-06-30 | yes | MDR manufacturer record — monitor document/market-language controls |
+| 8 | Example Pack Producer | Example Procedure Pack | PR | MDR | — | unknown | Separate PR/system-procedure-pack review |
 
 ## Interpretation constraints
 
