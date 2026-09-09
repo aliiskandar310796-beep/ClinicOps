@@ -67,6 +67,18 @@ Every material external claim should move through:
 
 A rejected claim stays in the registry as institutional memory rather than disappearing. That makes later assistants and scripts less likely to rediscover the same attractive mistake.
 
+## GitHub agents and unattended automation
+
+Repository-scoped Copilot profiles under `.github/agents/` divide high-agency work without creating a permanently running agent swarm:
+
+- **Regulatory Evidence Steward** — primary-source verification, claim lifecycle and corrections.
+- **Portfolio Operator** — intake validation, portfolio analysis, reports, JSON handoffs and pilot bundles.
+- **Release Sentinel** — CI/deployment health, reproducibility and rollback discipline.
+
+Use the narrowest agent that matches the work. The custom-agent files are execution profiles, not background daemons.
+
+Unattended recurring work lives in `.github/workflows/ops-watch.yml`. `Ops Watch` runs weekly and on relevant automation/canary changes. It checks evidence freshness and records a bounded EUDAMED reachability snapshot as a workflow artifact. It does not publish content, send communications or make compliance findings.
+
 ## Class III Transition Map
 
 `offers/class-iii-transition-map.md` is the canonical product specification: portfolio segmentation, certificate/transition timing, evidence gaps, SS(C)P operations and market-language work planning. The deterministic scan is the low-cost front door; the paid layer is human-reviewed regulatory judgement.
