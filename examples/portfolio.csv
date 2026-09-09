@@ -1,0 +1,4 @@
+company,device,actor_role,registration_type,basic_udi_di,certificate_expiry,danish_market,linked_sscp,source_url,notes
+Example MedTech A,Example Class III Device,MF,legacy,B-123456789,2027-02-15,confirmed,null,https://example.com,Sanitized fictional example
+Example MedTech B,Example MDR Device,MF,MDR,12345678901234,2028-06-30,yes,yes,https://example.com,Sanitized fictional example
+Example Pack Producer,Example Procedure Pack,PR,MDR,98765432109876,,unknown,null,https://example.com,Sanitized fictional example
