@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import json
 import sys
-from datetime import date
+from datetime import UTC, date, datetime
 from pathlib import Path
 
 from clinicops_os.agents import gate_payload, load_agent_tasks
@@ -13,7 +13,11 @@ def main() -> None:
         raise SystemExit("usage: python scripts/agent_gate.py <tasks.json> [YYYY-MM-DD]")
 
     root = Path(__file__).resolve().parents[1]
-    as_of = date.fromisoformat(sys.argv[2]) if len(sys.argv) == 3 else date.today()
+    as_of = (
+        date.fromisoformat(sys.argv[2])
+        if len(sys.argv) == 3
+        else datetime.now(UTC).date()
+    )
     try:
         tasks = load_agent_tasks(sys.argv[1])
         payload = gate_payload(
