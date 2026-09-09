@@ -5,6 +5,7 @@ import sys
 from datetime import date
 from pathlib import Path
 
+from .claim_registry import audit_registry, load_registry, render_matrix
 from .fleet import FleetRegistry
 from .scoring import Idea, rank_ideas
 from .transition_report import load_portfolio, render_markdown
@@ -49,3 +50,24 @@ def portfolio_report() -> None:
     )
     rows = load_portfolio(sys.argv[1])
     print(render_markdown(rows, as_of=as_of), end="")
+
+
+def claims_status() -> None:
+    if len(sys.argv) not in {1, 2, 3}:
+        raise SystemExit(
+            "usage: clinicops-claims [registry.jsonl] [YYYY-MM-DD]"
+        )
+    root = Path(__file__).resolve().parents[2]
+    path = Path(sys.argv[1]) if len(sys.argv) >= 2 else root / "research" / "claims.jsonl"
+    as_of = (
+        date.fromisoformat(sys.argv[2])
+        if len(sys.argv) == 3
+        else date.today()  # noqa: DTZ011 — operator-facing status uses local calendar date.
+    )
+    claims = load_registry(path)
+    findings = audit_registry(claims, as_of=as_of)
+    print(render_matrix(claims, as_of=as_of), end="")
+    if findings:
+        print("\n## Registry audit")
+        for item in findings:
+            print(f"- [{item.severity}] {item.claim_id}: {item.message}")
