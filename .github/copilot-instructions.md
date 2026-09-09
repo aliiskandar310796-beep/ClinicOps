@@ -6,8 +6,8 @@ Use the narrowest relevant custom agent under `.github/agents/` when the task ma
 - `regulatory-evidence-steward.agent.md` for regulatory claims, evidence, source verification and corrections;
 - `portfolio-operator.agent.md` for intake validation, transition analysis, reports, JSON handoffs and pilot bundles;
 - `release-sentinel.agent.md` for CI, workflows, deployment health, reproducibility and rollback;
-- `opportunity-architect.agent.md` for evidence-backed opportunity generation, experiment design and kill criteria;
-- `customer-discovery.agent.md` for structured buyer learning, objections, urgency and willingness signals;
+- `opportunity-architect.agent.md` for evidence-backed opportunity generation, experiment design, Revenue OS prioritisation and kill criteria;
+- `customer-discovery.agent.md` for structured buyer learning, Revenue OS evidence updates, objections, urgency and willingness signals;
 - `visibility-architect.agent.md` for approved research-to-SEO, website, partner and content assets.
 
 Repository rules:
@@ -24,7 +24,9 @@ Repository rules:
 11. Do not autonomously publish external content, send email, modify LinkedIn or make client-facing compliance conclusions.
 12. Prefer small reversible changes and portable Markdown/JSON/CSV over new platform dependencies.
 13. For commercial work, move from signal to experiment: buyer, pain, evidence, smallest test, metric, kill condition, learning.
-14. For visibility work, prefer focused pages with one search intent over one oversized page trying to rank for many unrelated intents.
-15. Do not create new agents when an existing specialist can own the loop; expand capability before expanding fleet size.
+14. For commercial account prioritisation, follow `revenue/README.md`; preserve unknown fields and use `clinicops-revenue-rank` only as a commercial learning/pilot queue, never as regulatory/compliance/legal/enforcement risk.
+15. Real account/prospect working sets stay private. Public GitHub may contain sanitized fixtures and aggregated learnings only.
+16. For visibility work, prefer focused pages with one search intent over one oversized page trying to rank for many unrelated intents.
+17. Do not create new agents when an existing specialist can own the loop; expand capability before expanding fleet size.
 
 When an observation changes, preserve the old dated observation, add the new evidence, and update the interpretation instead of deleting institutional memory.
