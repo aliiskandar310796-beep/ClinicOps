@@ -4,6 +4,15 @@ on:
   workflow_dispatch:
   schedule:
     - cron: '13 6 * * 1'
+  push:
+    paths:
+      - '.github/workflows/ops-watch.yml'
+      - 'scripts/eudamed_canary.py'
+      - 'src/clinicops_eudamed/canary.py'
+      - 'scripts/audit_claim_registry.py'
+      - 'scripts/audit_claim_references.py'
+      - 'scripts/validate_content_claims.py'
+      - 'research/claims.jsonl'
 
 permissions:
   contents: read
