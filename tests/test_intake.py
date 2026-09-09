@@ -1,3 +1,8 @@
+import sys
+
+import pytest
+
+from clinicops_os.cli import portfolio_report
 from clinicops_os.intake import validate_portfolio
 from clinicops_os.transition_report import PortfolioRow
 
@@ -89,3 +94,21 @@ def test_intake_flags_duplicate_rows_before_counting():
     ]
     findings = validate_portfolio(rows)
     assert any("possible duplicate of CSV row 2" in item.message for item in findings)
+
+
+def test_report_cli_blocks_structural_errors(tmp_path, monkeypatch, capsys):
+    portfolio = tmp_path / "bad.csv"
+    portfolio.write_text(
+        "company,device,actor_role,registration_type,certificate_expiry,danish_market,source_url\n"
+        "Example,Device,MF,legacy,31/12/2027,yes,https://example.test/source\n",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(sys, "argv", ["clinicops-portfolio-report", str(portfolio)])
+
+    with pytest.raises(SystemExit) as exc:
+        portfolio_report()
+
+    assert exc.value.code == 2
+    output = capsys.readouterr().out
+    assert "Portfolio intake diagnostics" in output
+    assert "YYYY-MM-DD" in output
