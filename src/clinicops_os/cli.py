@@ -5,6 +5,7 @@ import sys
 from datetime import date
 from pathlib import Path
 
+from .bundle import build_pilot_bundle
 from .claim_registry import audit_registry, load_registry, render_matrix
 from .fleet import FleetRegistry
 from .intake import render_intake_findings, validate_portfolio
@@ -75,6 +76,23 @@ def portfolio_validate() -> None:
     print(render_intake_findings(findings), end="")
     if any(item.severity == "error" for item in findings):
         raise SystemExit(2)
+
+
+def pilot_bundle() -> None:
+    if len(sys.argv) not in {3, 4}:
+        raise SystemExit(
+            "usage: clinicops-pilot-bundle <portfolio.csv> <output-dir> [YYYY-MM-DD]"
+        )
+    as_of = (
+        date.fromisoformat(sys.argv[3])
+        if len(sys.argv) == 4
+        else date.today()  # noqa: DTZ011 — bundle semantics intentionally use local calendar date.
+    )
+    try:
+        result = build_pilot_bundle(sys.argv[1], sys.argv[2], as_of=as_of)
+    except ValueError as exc:
+        raise SystemExit(str(exc)) from exc
+    print(json.dumps(result.manifest, indent=2, ensure_ascii=False))
 
 
 def claims_status() -> None:
