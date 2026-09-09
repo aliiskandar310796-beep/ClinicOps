@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import csv
+import json
 from dataclasses import dataclass, fields
 from datetime import date, datetime
 from pathlib import Path
@@ -121,6 +122,73 @@ def load_portfolio(path: str | Path) -> list[PortfolioRow]:
         ]
 
 
+def ordered_rows(rows: list[PortfolioRow], *, as_of: date) -> list[PortfolioRow]:
+    return sorted(
+        rows,
+        key=lambda row: (
+            -row.priority_score(as_of),
+            row.company.lower(),
+            row.device.lower(),
+        ),
+    )
+
+
+def portfolio_payload(rows: list[PortfolioRow], *, as_of: date) -> dict[str, object]:
+    legacy_mf = [row for row in rows if row.is_manufacturer and row.is_legacy]
+    mdr_mf = [row for row in rows if row.is_manufacturer and not row.is_legacy]
+    packs = [row for row in rows if row.is_pack_role]
+    danish = [row for row in rows if row.is_danish_market]
+
+    payload_rows = []
+    for row in ordered_rows(rows, as_of=as_of):
+        payload_rows.append(
+            {
+                "company": row.company,
+                "device": row.device,
+                "actor_role": row.actor_role,
+                "registration_type": row.registration_type,
+                "basic_udi_di": row.basic_udi_di,
+                "certificate_expiry": row.certificate_expiry,
+                "danish_market": row.danish_market,
+                "linked_sscp": row.linked_sscp,
+                "source_url": row.source_url,
+                "notes": row.notes,
+                "legacy_screen": row.is_legacy,
+                "manufacturer_role": row.is_manufacturer,
+                "pack_role": row.is_pack_role,
+                "danish_market_confirmed": row.is_danish_market,
+                "priority_score": row.priority_score(as_of),
+                "workstream": row.workstream(as_of),
+                "evidence_note": row.evidence_note(),
+            }
+        )
+
+    return {
+        "schema_version": "1.0",
+        "as_of": as_of.isoformat(),
+        "interpretation": "Operator triage only; not a regulatory risk, compliance, or legal-conclusion score.",
+        "summary": {
+            "records_reviewed": len(rows),
+            "manufacturer_legacy": len(legacy_mf),
+            "manufacturer_mdr_non_legacy": len(mdr_mf),
+            "procedure_pack_role": len(packs),
+            "danish_market_confirmed": len(danish),
+        },
+        "rows": payload_rows,
+        "limitations": [
+            "Separate MF and PR actor-role records before interpreting class or SS(C)P fields.",
+            "Treat B-prefix handling as a derived screening signal, not a quoted Commission rule.",
+            "Do not infer SS(C)P non-compliance solely from a null or absent public link.",
+            "Verify certificate dates and target-market evidence before external reliance.",
+            "Do not describe reachable public-API screening as an end-to-end EUDAMED audit.",
+        ],
+    }
+
+
+def render_json(rows: list[PortfolioRow], *, as_of: date) -> str:
+    return json.dumps(portfolio_payload(rows, as_of=as_of), indent=2, ensure_ascii=False) + "\n"
+
+
 def render_markdown(
     rows: list[PortfolioRow],
     *,
@@ -154,15 +222,7 @@ def render_markdown(
         "| Priority | Company | Device | Role | Registration | Certificate expiry | Danish market | Workstream |",
         "|---:|---|---|---|---|---|---|---|",
     ]
-    ordered = sorted(
-        rows,
-        key=lambda row: (
-            -row.priority_score(as_of),
-            row.company.lower(),
-            row.device.lower(),
-        ),
-    )
-    for row in ordered:
+    for row in ordered_rows(rows, as_of=as_of):
         out.append(
             "| "
             + " | ".join(
