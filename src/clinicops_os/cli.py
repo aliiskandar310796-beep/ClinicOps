@@ -51,6 +51,11 @@ def portfolio_report() -> None:
         else date.today()  # noqa: DTZ011 — report semantics intentionally use local calendar date.
     )
     rows = load_portfolio(sys.argv[1])
+    findings = validate_portfolio(rows)
+    errors = [item for item in findings if item.severity == "error"]
+    if errors:
+        print(render_intake_findings(findings), end="")
+        raise SystemExit(2)
     print(render_markdown(rows, as_of=as_of), end="")
 
 
