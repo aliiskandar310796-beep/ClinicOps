@@ -1,0 +1,30 @@
+{
+  "experiments": [
+    {
+      "experiment_id": "EXP-001",
+      "opportunity_id": "REV-001",
+      "hypothesis": "Authorised representatives value portfolio-level transition work planning more than generic regulatory information.",
+      "target_buyer": "authorised representative",
+      "smallest_test": "Show the sanitized transition-map method in five discovery conversations.",
+      "metric": "qualified requests for a deeper pilot discussion",
+      "success_threshold": "at least two qualified follow-up requests",
+      "kill_condition": "no repeated portfolio-reconciliation pain after five conversations",
+      "evidence": "Current ClinicOps AR/consultancy positioning research and transition workflow hypothesis.",
+      "status": "planned",
+      "decision": "pending"
+    },
+    {
+      "experiment_id": "EXP-002",
+      "opportunity_id": "REV-002",
+      "hypothesis": "Evidence-approved transition research creates more qualified conversations than generic compliance marketing.",
+      "target_buyer": "manufacturer or regulatory consultancy",
+      "smallest_test": "Publish one source-governed research asset and reuse it as website, LinkedIn, and partner material.",
+      "metric": "qualified conversations attributable to the asset",
+      "success_threshold": "at least two qualified conversations",
+      "kill_condition": "no qualified engagement after the planned distribution cycle",
+      "evidence": "ClinicOps visibility thesis and claim-governed publication workflow.",
+      "status": "planned",
+      "decision": "pending"
+    }
+  ]
+}
