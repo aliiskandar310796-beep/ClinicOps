@@ -1,6 +1,7 @@
 import argparse
-from .identifier import classify_identifier
+
 from .claim_guard import check_claim
+from .identifier import classify_identifier
 
 
 def id_check():
