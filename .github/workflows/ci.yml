@@ -14,6 +14,8 @@ jobs:
       - run: pip install -e .[dev]
       - run: pytest -q
       - run: ruff check src tests scripts
+      - name: Custom-agent profile audit
+        run: python scripts/audit_agent_profiles.py
       - name: Claim registry audit
         run: python scripts/audit_claim_registry.py
       - name: Claim reference integrity
