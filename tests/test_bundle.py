@@ -1,6 +1,6 @@
 import csv
-import json
 from datetime import date
+import json
 from pathlib import Path
 
 import pytest
