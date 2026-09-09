@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ClinicOps Transition Readiness Score</title>
+<meta name="description" content="A private, browser-only screening aid for organising EUDAMED transition work-plan evidence before a human regulatory review.">
+<style>
+:root{color-scheme:light dark}body{font-family:system-ui,sans-serif;max-width:820px;margin:40px auto;padding:0 20px;line-height:1.55}fieldset{border:1px solid #bbb;border-radius:10px;margin:18px 0;padding:16px}legend{font-weight:700;padding:0 6px}label{display:block;margin:8px 0}select{width:100%;padding:11px;font-size:1rem;box-sizing:border-box}button,.cta{display:inline-block;margin-top:12px;padding:11px 16px;border-radius:8px;border:1px solid currentColor;text-decoration:none;font:inherit;cursor:pointer}.result{margin-top:24px;padding:18px;border:1px solid #bbb;border-radius:12px}.score{font-size:2rem;font-weight:800}.muted{opacity:.75;font-size:.95rem}.gap{margin:.55rem 0}.nav{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:24px}.nav a{color:inherit}.badge{display:inline-block;padding:3px 8px;border:1px solid #aaa;border-radius:999px;font-size:.85rem}ul{padding-left:1.2rem}</style>
+</head>
+<body>
+<!-- claim-use: website -->
+<!-- claim-ids: CO-CLM-0001 -->
+<nav class="nav" aria-label="ClinicOps tools">
+<a href="index.html">EUDAMED Identifier Check</a>
+<span aria-current="page">Transition Readiness Score</span>
+</nav>
+
+<h1>Transition Readiness Score</h1>
+<p>Answer five self-reported work-plan questions. The tool runs entirely in your browser. <strong>Nothing is sent to ClinicOps.</strong></p>
+<p class="muted">This is a screening aid for operational readiness, not a regulatory determination, compliance score, legal conclusion, or live EUDAMED verification.</p>
+
+<form id="readiness-form">
+<fieldset>
+<legend>1. Registration path</legend>
+<label for="registration">How clearly is the device's current registration / transition path understood?</label>
+<select id="registration" name="registration" required>
+<option value="">Select…</option>
+<option value="controlled">MDR / transition path is known and documented</option>
+<option value="legacy">Legacy / transition-related path is known, but work remains</option>
+<option value="unknown">Not sure / needs evidence review</option>
+</select>
+</fieldset>
+
+<fieldset>
+<legend>2. Basic UDI-DI / identifier control</legend>
+<label for="basic_udi">How controlled is the relevant identifier information?</label>
+<select id="basic_udi" name="basic_udi" required>
+<option value="">Select…</option>
+<option value="controlled">Confirmed and controlled in the working evidence set</option>
+<option value="in_progress">Known but reconciliation or transition work is still open</option>
+<option value="unknown">Unknown / not yet reconciled</option>
+</select>
+</fieldset>
+
+<fieldset>
+<legend>3. SS(C)P workstream</legend>
+<label for="sscp">If SS(C)P applies to this device, how controlled is the current evidence and workflow?</label>
+<select id="sscp" name="sscp" required>
+<option value="">Select…</option>
+<option value="controlled">Applicability and current evidence/workflow are controlled</option>
+<option value="not_applicable">Not applicable, confirmed by the responsible RA/QA team</option>
+<option value="review">Applicability or evidence/workflow needs review</option>
+<option value="unknown">Unknown</option>
+</select>
+</fieldset>
+
+<fieldset>
+<legend>4. Certificate / transition timing</legend>
+<label for="timing">How well controlled are the dates and timing evidence that drive the work plan?</label>
+<select id="timing" name="timing" required>
+<option value="">Select…</option>
+<option value="controlled">Verified dates are controlled and have an owner</option>
+<option value="partial">Some timing evidence is known but incomplete</option>
+<option value="unknown">Timing evidence is not yet established</option>
+</select>
+</fieldset>
+
+<fieldset>
+<legend>5. Target-market document control</legend>
+<label for="market_docs">How controlled are target-market / language document requirements and ownership?</label>
+<select id="market_docs" name="market_docs" required>
+<option value="">Select…</option>
+<option value="controlled">Markets, language/document controls, and owners are confirmed</option>
+<option value="partial">Partially mapped / some ownership is unresolved</option>
+<option value="unknown">Not yet mapped</option>
+</select>
+</fieldset>
+
+<button type="submit">Calculate readiness signal</button>
+<button type="reset">Reset</button>
+</form>
+
+<section id="result" class="result" hidden aria-live="polite">
+<span class="badge">Self-reported operational signal</span>
+<div id="score" class="score"></div>
+<h2 id="band"></h2>
+<p id="band-note"></p>
+<h3>What is driving the result</h3>
+<ul id="gaps"></ul>
+<p><strong>Next step:</strong> Resolve unresolved points against EUDAMED and your RA/QA team before relying on the result externally.</p>
+<a class="cta" href="mailto:info@clinicops.dk?subject=Regulatory%20Intelligence%20Assessment">Request a Regulatory Intelligence Assessment</a>
+</section>
+
+<p class="muted">The score measures how complete the self-reported evidence/work-plan inputs are. A lower score is a prompt to organise evidence and ownership; it is not a finding of non-compliance. Where SS(C)P applicability is uncertain, confirm it with the responsible regulatory team before treating that input as settled.</p>
+
+<script type="application/json" id="score-config">
+{
+  "questions": [
+    {
+      "id": "registration",
+      "weight": 20,
+      "options": {
+        "controlled": {"factor": 1, "gap": ""},
+        "legacy": {"factor": 0.65, "gap": "Registration path is known, but the transition work plan and evidence ownership still need closure."},
+        "unknown": {"factor": 0, "gap": "Establish the registration / transition path from controlled evidence before prioritising downstream work."}
+      }
+    },
+    {
+      "id": "basic_udi",
+      "weight": 20,
+      "options": {
+        "controlled": {"factor": 1, "gap": ""},
+        "in_progress": {"factor": 0.5, "gap": "Complete identifier reconciliation and assign an owner for the remaining work."},
+        "unknown": {"factor": 0, "gap": "Reconcile the relevant Basic UDI-DI / identifier evidence before relying on the work plan."}
+      }
+    },
+    {
+      "id": "sscp",
+      "weight": 20,
+      "options": {
+        "controlled": {"factor": 1, "gap": ""},
+        "not_applicable": {"factor": 1, "gap": ""},
+        "review": {"factor": 0.4, "gap": "Confirm SS(C)P applicability and, where applicable, the current evidence, version, translation and handoff workflow."},
+        "unknown": {"factor": 0, "gap": "Ask the responsible RA/QA team to establish SS(C)P applicability and the evidence/workflow state."}
+      }
+    },
+    {
+      "id": "timing",
+      "weight": 20,
+      "options": {
+        "controlled": {"factor": 1, "gap": ""},
+        "partial": {"factor": 0.5, "gap": "Verify the remaining certificate / transition timing evidence and assign ownership."},
+        "unknown": {"factor": 0, "gap": "Establish the dated timing evidence that determines work-plan sequencing."}
+      }
+    },
+    {
+      "id": "market_docs",
+      "weight": 20,
+      "options": {
+        "controlled": {"factor": 1, "gap": ""},
+        "partial": {"factor": 0.5, "gap": "Map the remaining target-market document/language controls and owners."},
+        "unknown": {"factor": 0, "gap": "Establish target markets, document/language controls and accountable owners."}
+      }
+    }
+  ],
+  "bands": [
+    {"min": 0, "max": 54, "label": "Foundational evidence gaps", "note": "Several inputs needed for a dependable work plan are unresolved."},
+    {"min": 55, "max": 79, "label": "Work-plan gaps to close", "note": "The core shape is visible, but material evidence or ownership gaps remain."},
+    {"min": 80, "max": 100, "label": "Strong work-plan readiness", "note": "Most self-reported inputs are controlled; verify them before external reliance."}
+  ]
+}
+</script>
+<script>
+const config=JSON.parse(document.getElementById('score-config').textContent);
+const form=document.getElementById('readiness-form');
+const result=document.getElementById('result');
+form.addEventListener('submit',event=>{
+  event.preventDefault();
+  let score=0;
+  const gaps=[];
+  for(const question of config.questions){
+    const selected=form.elements[question.id].value;
+    const option=question.options[selected];
+    if(!option)return;
+    score+=question.weight*option.factor;
+    if(option.gap)gaps.push(option.gap);
+  }
+  score=Math.round(score);
+  const band=config.bands.find(item=>score>=item.min&&score<=item.max);
+  document.getElementById('score').textContent=`${score}/100`;
+  document.getElementById('band').textContent=band.label;
+  document.getElementById('band-note').textContent=band.note;
+  const list=document.getElementById('gaps');
+  list.replaceChildren();
+  const items=gaps.length?gaps:['No self-reported evidence gap was selected. Verify the underlying evidence before external reliance.'];
+  for(const text of items){const li=document.createElement('li');li.className='gap';li.textContent=text;list.appendChild(li);}
+  result.hidden=false;
+  result.scrollIntoView({behavior:'smooth',block:'start'});
+});
+form.addEventListener('reset',()=>{result.hidden=true;});
+</script>
+</body>
+</html>
