@@ -43,3 +43,49 @@ def test_intake_clean_row_has_no_findings():
         source_url="https://example.test/source",
     )
     assert validate_portfolio([row]) == []
+
+
+def test_intake_flags_invalid_date_without_crashing_report_prep():
+    row = PortfolioRow(
+        "Example",
+        "Device",
+        "MF",
+        "legacy",
+        certificate_expiry="31/12/2027",
+        danish_market="yes",
+        source_url="https://example.test/source",
+    )
+    findings = validate_portfolio([row])
+    assert any(
+        item.severity == "error"
+        and item.field == "certificate_expiry"
+        and "YYYY-MM-DD" in item.message
+        for item in findings
+    )
+
+
+def test_intake_flags_duplicate_rows_before_counting():
+    rows = [
+        PortfolioRow(
+            "Example",
+            "Device",
+            "MF",
+            "MDR",
+            basic_udi_di="123",
+            certificate_expiry="2027-12-31",
+            danish_market="yes",
+            source_url="https://example.test/source",
+        ),
+        PortfolioRow(
+            " example ",
+            "DEVICE",
+            "mf",
+            "MDR",
+            basic_udi_di="123",
+            certificate_expiry="2027-12-31",
+            danish_market="yes",
+            source_url="https://example.test/source",
+        ),
+    ]
+    findings = validate_portfolio(rows)
+    assert any("possible duplicate of CSV row 2" in item.message for item in findings)
