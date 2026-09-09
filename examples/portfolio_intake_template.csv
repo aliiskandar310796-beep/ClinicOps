@@ -1,0 +1,4 @@
+company,device,actor_role,registration_type,basic_udi_di,certificate_expiry,danish_market,linked_sscp,source_url,notes
+Example Manufacturer,Example Legacy Device,MF,legacy,B-EXAMPLE-001,2026-12-31,yes,unknown,https://example.invalid/source,Replace with verified source data
+Example Manufacturer,Example MDR Device,MF,MDR,EXAMPLE-BASIC-UDI,,yes,true,https://example.invalid/source,Illustrative only
+Example Pack Producer,Example Procedure Pack,PR,MDR,,,unknown,unknown,https://example.invalid/source,Keep PR role separate from ordinary manufacturer-device interpretation
