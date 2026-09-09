@@ -31,9 +31,10 @@ The current commercial focus is the **legacy-to-MDR transition and SS(C)P/docume
 - Evidence-gated publication-pack generation.
 - Opportunity scoring that penalises regulatory/reputation risk and ongoing maintenance burden.
 - AR/manufacturer portfolio transition report generation with operator-priority triage.
+- Machine-readable portfolio JSON for downstream tools and agent handoffs.
 - Portfolio intake diagnostics for missing evidence and structural conflicts.
 - Read-only EUDAMED API reachability canary.
-- CI gates for tests, Ruff, claim-registry integrity, generated fixtures and public-facing copy.
+- CI gates for tests, Ruff, claim-registry integrity, governed website copy, generated fixtures and public-facing copy.
 - Client-side Identifier Check under `docs/`.
 
 ## Important limitations
@@ -52,6 +53,7 @@ clinicops-claims research/claims.jsonl 2026-09-09
 clinicops-rank-opportunities examples/opportunities.json
 clinicops-portfolio-validate examples/portfolio_intake_template.csv
 clinicops-portfolio-report examples/portfolio.csv 2026-09-09
+clinicops-portfolio-json examples/portfolio.csv 2026-09-09
 clinicops-publication-pack "Transition gap note" CO-CLM-0001,CO-CLM-0002,CO-CLM-0004 research-note 2026-09-09
 ```
 
@@ -69,9 +71,15 @@ A rejected claim stays in the registry as institutional memory rather than disap
 
 Use `examples/portfolio_intake_template.csv` as the minimum portable intake shape. Extra client-export columns are tolerated by the report loader, while `clinicops-portfolio-validate` surfaces missing dates, evidence links, actor-role uncertainty and conflicting registration signals before review begins.
 
+`clinicops-portfolio-report` renders the human-facing work plan. `clinicops-portfolio-json` emits the same ordered analysis as a versioned JSON contract for Notion, client portals, future web forms or other agents. `examples/portfolio_report.md` and `examples/portfolio_report.json` are reproducible sanitized fixtures checked by CI.
+
 ## Research-note pipeline
 
 `research/drafts/2026-09-classIII-transition-gap.md` is the internal first-draft research note built from the corrected 8 September census. It is deliberately not published. Its pre-publication gate requires current API canary evidence, claim-registry approval, publication-pack generation and an adversarial final read.
+
+## Website deployment pack
+
+`website/homepage-v2.md` is the canonical transition-focused homepage copy prepared for clinicops.dk. Its material regulatory statements are linked to claim IDs and CI checks that those claims remain valid for website use. Browser-assisted implementation can therefore be fast without bypassing evidence governance.
 
 ## Identifier Check deployment
 
