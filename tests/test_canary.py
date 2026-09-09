@@ -49,4 +49,8 @@ def test_snapshot_contract_is_explicitly_non_audit():
 
 def test_snapshot_rejects_naive_timestamp():
     with pytest.raises(ValueError, match="timezone-aware"):
-        canary.build_snapshot([], captured_at=datetime(2026, 9, 9, 10, 0))
+        canary.build_snapshot(
+            [],
+            # noqa: DTZ001 — intentionally construct a naive timestamp to test rejection.
+            captured_at=datetime(2026, 9, 9, 10, 0),
+        )
