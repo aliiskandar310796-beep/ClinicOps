@@ -8,7 +8,10 @@ on:
     paths:
       - '.github/workflows/ops-watch.yml'
       - 'scripts/eudamed_canary.py'
+      - 'scripts/evaluate_canary.py'
       - 'src/clinicops_eudamed/canary.py'
+      - 'src/clinicops_eudamed/canary_eval.py'
+      - 'research/canary/baseline.json'
       - 'scripts/audit_claim_registry.py'
       - 'scripts/audit_claim_references.py'
       - 'scripts/validate_content_claims.py'
@@ -51,6 +54,8 @@ jobs:
       - run: pip install -e .
       - name: Probe bounded public API pages
         run: python scripts/eudamed_canary.py
+      - name: Evaluate reviewed canary drift
+        run: python scripts/evaluate_canary.py
       - name: Add canary snapshot to job summary
         if: always()
         run: |
