@@ -1,0 +1,54 @@
+{
+  "tasks": [
+    {
+      "task_id": "AGT-001",
+      "role": "Evidence Guardian",
+      "objective": "Review the B-prefix structural-screening statement before internal reuse.",
+      "output_text": "For EUDAMED legacy-device identification, a B-prefixed EUDAMED DI is used as a legacy registration identifier signal.",
+      "evidence_refs": [
+        "research/claims.jsonl#CO-CLM-0004"
+      ],
+      "claim_ids": [
+        "CO-CLM-0004"
+      ],
+      "intended_use": "internal",
+      "business_value": "Protect downstream product and sales copy from identifier overreach.",
+      "next_action": "Keep the statement behind the claim gate before any external draft is produced.",
+      "reproduction_steps": [
+        "Run python scripts/agent_gate.py examples/agent_tasks.json 2026-09-09.",
+        "Confirm the task resolves to the regulatory-evidence-steward profile and passes all five gates."
+      ],
+      "artifacts": [
+        "research/claims.jsonl",
+        ".github/agents/regulatory-evidence-steward.agent.md"
+      ],
+      "external_publish": false,
+      "human_reviewed": false
+    },
+    {
+      "task_id": "AGT-002",
+      "role": "Content Engine",
+      "objective": "Prepare a human-reviewed website sentence using the Article 32 duty-holder claim.",
+      "output_text": "Under MDR Article 32, the manufacturer is the duty holder for drawing up the SSCP for applicable implantable and class III devices, subject to the Article 32 exclusions.",
+      "evidence_refs": [
+        "research/claims.jsonl#CO-CLM-0001"
+      ],
+      "claim_ids": [
+        "CO-CLM-0001"
+      ],
+      "intended_use": "website",
+      "business_value": "Keep public positioning technically accurate while preserving the manufacturer duty-holder context.",
+      "next_action": "Retain the sentence only in a governed website draft approved for deployment.",
+      "reproduction_steps": [
+        "Run python scripts/agent_gate.py examples/agent_tasks.json 2026-09-09.",
+        "Confirm the role resolves to visibility-architect and the registered claim is allowed for website use."
+      ],
+      "artifacts": [
+        "website/homepage-v2.md",
+        ".github/agents/visibility-architect.agent.md"
+      ],
+      "external_publish": true,
+      "human_reviewed": true
+    }
+  ]
+}
