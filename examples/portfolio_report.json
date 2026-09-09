@@ -1,0 +1,78 @@
+{
+  "schema_version": "1.0",
+  "as_of": "2026-09-09",
+  "interpretation": "Operator triage only; not a regulatory risk, compliance, or legal-conclusion score.",
+  "summary": {
+    "records_reviewed": 3,
+    "manufacturer_legacy": 1,
+    "manufacturer_mdr_non_legacy": 1,
+    "procedure_pack_role": 1,
+    "danish_market_confirmed": 2
+  },
+  "rows": [
+    {
+      "company": "Example MedTech A",
+      "device": "Example Class III Device",
+      "actor_role": "MF",
+      "registration_type": "legacy",
+      "basic_udi_di": "B-123456789",
+      "certificate_expiry": "2027-02-15",
+      "danish_market": "confirmed",
+      "linked_sscp": "null",
+      "source_url": "https://example.com",
+      "notes": "Sanitized fictional example",
+      "legacy_screen": true,
+      "manufacturer_role": true,
+      "pack_role": false,
+      "danish_market_confirmed": true,
+      "priority_score": 98,
+      "workstream": "Legacy → MDR transition: urgent work-plan review",
+      "evidence_note": "B-prefix used only as a derived legacy screening signal; absence of linked SS(C)P is not treated as non-compliance"
+    },
+    {
+      "company": "Example MedTech B",
+      "device": "Example MDR Device",
+      "actor_role": "MF",
+      "registration_type": "MDR",
+      "basic_udi_di": "12345678901234",
+      "certificate_expiry": "2028-06-30",
+      "danish_market": "yes",
+      "linked_sscp": "yes",
+      "source_url": "https://example.com",
+      "notes": "Sanitized fictional example",
+      "legacy_screen": false,
+      "manufacturer_role": true,
+      "pack_role": false,
+      "danish_market_confirmed": true,
+      "priority_score": 33,
+      "workstream": "MDR manufacturer record — monitor document/market-language controls",
+      "evidence_note": ""
+    },
+    {
+      "company": "Example Pack Producer",
+      "device": "Example Procedure Pack",
+      "actor_role": "PR",
+      "registration_type": "MDR",
+      "basic_udi_di": "98765432109876",
+      "certificate_expiry": "",
+      "danish_market": "unknown",
+      "linked_sscp": "null",
+      "source_url": "https://example.com",
+      "notes": "Sanitized fictional example",
+      "legacy_screen": false,
+      "manufacturer_role": false,
+      "pack_role": true,
+      "danish_market_confirmed": false,
+      "priority_score": 8,
+      "workstream": "Separate PR/system-procedure-pack review",
+      "evidence_note": "absence of linked SS(C)P is not treated as non-compliance"
+    }
+  ],
+  "limitations": [
+    "Separate MF and PR actor-role records before interpreting class or SS(C)P fields.",
+    "Treat B-prefix handling as a derived screening signal, not a quoted Commission rule.",
+    "Do not infer SS(C)P non-compliance solely from a null or absent public link.",
+    "Verify certificate dates and target-market evidence before external reliance.",
+    "Do not describe reachable public-API screening as an end-to-end EUDAMED audit."
+  ]
+}
