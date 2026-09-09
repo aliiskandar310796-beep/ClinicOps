@@ -1,0 +1,61 @@
+name: Ops Watch
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '13 6 * * 1'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: clinicops-ops-watch
+  cancel-in-progress: false
+
+jobs:
+  evidence-freshness:
+    name: Evidence freshness
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -e .
+      - name: Claim registry freshness
+        run: python scripts/audit_claim_registry.py
+      - name: Claim reference integrity
+        run: python scripts/audit_claim_references.py
+      - name: Governed content claim validation
+        run: python scripts/validate_content_claims.py
+
+  eudamed-canary:
+    name: EUDAMED reachability canary
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -e .
+      - name: Probe bounded public API pages
+        run: python scripts/eudamed_canary.py
+      - name: Add canary snapshot to job summary
+        if: always()
+        run: |
+          if [ -f research/canary/latest.json ]; then
+            echo '## EUDAMED canary snapshot' >> "$GITHUB_STEP_SUMMARY"
+            echo '```json' >> "$GITHUB_STEP_SUMMARY"
+            cat research/canary/latest.json >> "$GITHUB_STEP_SUMMARY"
+            echo '```' >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Upload canary snapshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: eudamed-canary-${{ github.run_id }}
+          path: research/canary/latest.json
+          if-no-files-found: warn
+          retention-days: 90
