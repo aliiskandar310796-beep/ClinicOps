@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 import json
-from pathlib import Path
 import sys
 from datetime import date
+from pathlib import Path
 
 from .fleet import FleetRegistry
 from .scoring import Idea, rank_ideas
@@ -15,7 +15,10 @@ def fleet_status() -> None:
     fleet = FleetRegistry.load(root / "agents" / "fleet.json")
     print(f"ClinicOps fleet: {len(fleet.agents)} specialized loops")
     for agent in fleet.by_min_leverage(0):
-        print(f"{agent.leverage:>2}/10  {agent.name:<28} {agent.cadence:<15} {agent.mission}")
+        print(
+            f"{agent.leverage:>2}/10  {agent.name:<28} "
+            f"{agent.cadence:<15} {agent.mission}"
+        )
 
 
 def rank_opportunities() -> None:
@@ -36,7 +39,13 @@ def rank_opportunities() -> None:
 
 def portfolio_report() -> None:
     if len(sys.argv) not in {2, 3}:
-        raise SystemExit("usage: clinicops-portfolio-report <portfolio.csv> [YYYY-MM-DD]")
-    as_of = date.fromisoformat(sys.argv[2]) if len(sys.argv) == 3 else date.today()
+        raise SystemExit(
+            "usage: clinicops-portfolio-report <portfolio.csv> [YYYY-MM-DD]"
+        )
+    as_of = (
+        date.fromisoformat(sys.argv[2])
+        if len(sys.argv) == 3
+        else date.today()  # noqa: DTZ011 — report semantics intentionally use local calendar date.
+    )
     rows = load_portfolio(sys.argv[1])
     print(render_markdown(rows, as_of=as_of), end="")
