@@ -33,6 +33,7 @@ The current commercial focus is the **legacy-to-MDR transition and SS(C)P/docume
 - AR/manufacturer portfolio transition report generation with operator-priority triage.
 - Machine-readable portfolio JSON for downstream tools and agent handoffs.
 - Portfolio intake diagnostics for missing evidence and structural conflicts.
+- One-command pilot bundle generation with input hash, diagnostics, Markdown and JSON outputs.
 - Read-only EUDAMED API reachability canary.
 - CI gates for tests, Ruff, claim-registry integrity, governed website copy, generated fixtures and public-facing copy.
 - Client-side Identifier Check under `docs/`.
@@ -54,6 +55,7 @@ clinicops-rank-opportunities examples/opportunities.json
 clinicops-portfolio-validate examples/portfolio_intake_template.csv
 clinicops-portfolio-report examples/portfolio.csv 2026-09-09
 clinicops-portfolio-json examples/portfolio.csv 2026-09-09
+clinicops-pilot-bundle examples/portfolio.csv /tmp/clinicops-pilot 2026-09-09
 clinicops-publication-pack "Transition gap note" CO-CLM-0001,CO-CLM-0002,CO-CLM-0004 research-note 2026-09-09
 ```
 
@@ -69,9 +71,13 @@ A rejected claim stays in the registry as institutional memory rather than disap
 
 `offers/class-iii-transition-map.md` is the canonical product specification: portfolio segmentation, certificate/transition timing, evidence gaps, SS(C)P operations and market-language work planning. The deterministic scan is the low-cost front door; the paid layer is human-reviewed regulatory judgement.
 
+The AR/regulatory-firm posture is partner-first where useful: established firms already sell EUDAMED registration and representation, so ClinicOps differentiates on portfolio evidence reconciliation, prioritisation, machine-readable handoff and a human-reviewed work queue. The dated positioning scan is in `research/market/2026-09-09-ar-eudamed-positioning.md`.
+
 Use `examples/portfolio_intake_template.csv` as the minimum portable intake shape. Extra client-export columns are tolerated by the report loader, while `clinicops-portfolio-validate` surfaces missing dates, evidence links, actor-role uncertainty and conflicting registration signals before review begins.
 
 `clinicops-portfolio-report` renders the human-facing work plan. `clinicops-portfolio-json` emits the same ordered analysis as a versioned JSON contract for Notion, client portals, future web forms or other agents. `examples/portfolio_report.md` and `examples/portfolio_report.json` are reproducible sanitized fixtures checked by CI.
+
+`clinicops-pilot-bundle` packages a validated portfolio into `portfolio_report.md`, `portfolio_report.json`, `intake_diagnostics.md` and `manifest.json`. The manifest includes the input SHA-256 so a delivered bundle can be tied back to the exact source export used for that analysis.
 
 ## Research-note pipeline
 
