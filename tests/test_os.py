@@ -4,6 +4,7 @@ import pytest
 
 from clinicops_eudamed.claim_guard import check_claim
 from clinicops_eudamed.identifier import classify_identifier
+from clinicops_eudamed.srn import decode_srn
 from clinicops_os.evidence import (
     Claim,
     EvidenceClass,
@@ -119,3 +120,17 @@ def test_b_prefix_is_qualified_derivation():
     result = classify_identifier("B-123")
     assert result.legacy_screen
     assert "Derived" in result.note
+
+
+def test_srn_decoder_maps_actor_role_without_overclaiming():
+    result = decode_srn("DK-MF-123456789")
+    assert result.valid_shape
+    assert result.country == "DK"
+    assert result.role_code == "MF"
+    assert result.role_name == "Manufacturer"
+    assert "does not verify" in result.note.lower()
+
+
+def test_srn_decoder_rejects_unknown_shape():
+    result = decode_srn("DK-XX-123")
+    assert not result.valid_shape
