@@ -18,7 +18,9 @@ jobs:
         run: python scripts/audit_claim_registry.py
       - name: Claim reference integrity
         run: python scripts/audit_claim_references.py
+      - name: Governed content claim validation
+        run: python scripts/validate_content_claims.py website
       - name: Sanitized report fixture
         run: python scripts/render_examples.py --check
       - name: Public-copy claim gate
-        run: python scripts/claim_gate.py README.md PRIMARY_SOURCES.md docs examples/portfolio_report.md
+        run: python scripts/claim_gate.py README.md PRIMARY_SOURCES.md docs website examples/portfolio_report.md
