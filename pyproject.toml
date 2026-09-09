@@ -20,6 +20,7 @@ clinicops-rank-opportunities = "clinicops_os.cli:rank_opportunities"
 clinicops-portfolio-report = "clinicops_os.cli:portfolio_report"
 clinicops-portfolio-json = "clinicops_os.cli:portfolio_json"
 clinicops-portfolio-validate = "clinicops_os.cli:portfolio_validate"
+clinicops-pilot-bundle = "clinicops_os.cli:pilot_bundle"
 clinicops-claims = "clinicops_os.cli:claims_status"
 clinicops-publication-pack = "clinicops_os.cli:publication_pack"
 
