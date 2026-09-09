@@ -66,3 +66,19 @@ def test_duplicate_experiment_ids_are_rejected(tmp_path: Path) -> None:
     )
     with pytest.raises(ValueError, match="duplicate experiment_id"):
         load_experiments(path)
+
+
+def test_invalid_top_level_experiment_shape_is_type_error(tmp_path: Path) -> None:
+    path = tmp_path / "experiments.json"
+    path.write_text('{"experiments":"not-a-list"}', encoding="utf-8")
+
+    with pytest.raises(TypeError, match="JSON list"):
+        load_experiments(path)
+
+
+def test_non_object_experiment_entry_is_type_error(tmp_path: Path) -> None:
+    path = tmp_path / "experiments.json"
+    path.write_text('{"experiments":["not-an-object"]}', encoding="utf-8")
+
+    with pytest.raises(TypeError, match="JSON object"):
+        load_experiments(path)
