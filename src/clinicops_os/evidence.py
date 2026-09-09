@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from dataclasses import dataclass
 from enum import StrEnum
 
@@ -30,9 +31,16 @@ class Claim:
 def publication_gate(claims: list[Claim]) -> tuple[bool, list[str]]:
     reasons: list[str] = []
     for claim in claims:
-        if claim.status in {VerificationStatus.UNCHECKED, VerificationStatus.REJECTED}:
+        if claim.status in {
+            VerificationStatus.UNCHECKED,
+            VerificationStatus.REJECTED,
+        }:
             reasons.append(f"Claim not publishable: {claim.text}")
-        if claim.evidence_class in {EvidenceClass.OBSERVATION, EvidenceClass.DERIVATION} and not claim.limitation:
+        if (
+            claim.evidence_class
+            in {EvidenceClass.OBSERVATION, EvidenceClass.DERIVATION}
+            and not claim.limitation
+        ):
             reasons.append(f"Observed/derived claim missing limitation: {claim.text}")
         if claim.evidence_class == EvidenceClass.PRIMARY and not claim.source:
             reasons.append(f"Primary-source claim missing source: {claim.text}")
