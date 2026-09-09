@@ -1,9 +1,9 @@
 from __future__ import annotations
 
+import csv
 from dataclasses import dataclass
 from datetime import date, datetime
 from pathlib import Path
-import csv
 
 
 @dataclass(frozen=True)
@@ -36,7 +36,10 @@ class PortfolioRow:
     def expiry_date(self) -> date | None:
         if not self.certificate_expiry.strip():
             return None
-        return datetime.strptime(self.certificate_expiry.strip(), "%Y-%m-%d").date()
+        return datetime.strptime(  # noqa: DTZ007 — input is a date-only field by design.
+            self.certificate_expiry.strip(),
+            "%Y-%m-%d",
+        ).date()
 
     def workstream(self, as_of: date) -> str:
         if self.is_pack_role:
@@ -72,14 +75,26 @@ def load_portfolio(path: str | Path) -> list[PortfolioRow]:
         missing = required - set(reader.fieldnames or [])
         if missing:
             raise ValueError(f"missing required columns: {', '.join(sorted(missing))}")
-        return [PortfolioRow(**{k: (v or "") for k, v in row.items()}) for row in reader]
+        return [
+            PortfolioRow(**{k: (v or "") for k, v in row.items()})
+            for row in reader
+        ]
 
 
-def render_markdown(rows: list[PortfolioRow], *, as_of: date, title: str = "ClinicOps Portfolio Transition Brief") -> str:
+def render_markdown(
+    rows: list[PortfolioRow],
+    *,
+    as_of: date,
+    title: str = "ClinicOps Portfolio Transition Brief",
+) -> str:
     legacy_mf = [r for r in rows if r.is_manufacturer and r.is_legacy]
     mdr_mf = [r for r in rows if r.is_manufacturer and not r.is_legacy]
     packs = [r for r in rows if r.is_pack_role]
-    danish = [r for r in rows if r.danish_market.strip().lower() in {"yes", "true", "1", "confirmed"}]
+    danish = [
+        r
+        for r in rows
+        if r.danish_market.strip().lower() in {"yes", "true", "1", "confirmed"}
+    ]
 
     out = [
         f"# {title}",
@@ -103,7 +118,8 @@ def render_markdown(rows: list[PortfolioRow], *, as_of: date, title: str = "Clin
     ]
     for row in sorted(rows, key=lambda r: (r.company.lower(), r.device.lower())):
         out.append(
-            "| " + " | ".join(
+            "| "
+            + " | ".join(
                 [
                     row.company or "—",
                     row.device or "—",
@@ -113,7 +129,8 @@ def render_markdown(rows: list[PortfolioRow], *, as_of: date, title: str = "Clin
                     row.danish_market or "unknown",
                     row.workstream(as_of),
                 ]
-            ) + " |"
+            )
+            + " |"
         )
 
     cautions = sorted({r.evidence_note() for r in rows if r.evidence_note()})
@@ -128,7 +145,10 @@ def render_markdown(rows: list[PortfolioRow], *, as_of: date, title: str = "Clin
         ]
     )
     if cautions:
-        out.extend(["", "### Row-level derived cautions", ""] + [f"- {c}" for c in cautions])
+        out.extend(
+            ["", "### Row-level derived cautions", ""]
+            + [f"- {c}" for c in cautions]
+        )
 
     out.extend(
         [
