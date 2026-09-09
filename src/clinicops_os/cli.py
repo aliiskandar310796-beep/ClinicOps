@@ -5,8 +5,17 @@ from pathlib import Path
 import sys
 from datetime import date
 
+from .fleet import FleetRegistry
 from .scoring import Idea, rank_ideas
 from .transition_report import load_portfolio, render_markdown
+
+
+def fleet_status() -> None:
+    root = Path(__file__).resolve().parents[2]
+    fleet = FleetRegistry.load(root / "agents" / "fleet.json")
+    print(f"ClinicOps fleet: {len(fleet.agents)} specialized loops")
+    for agent in fleet.by_min_leverage(0):
+        print(f"{agent.leverage:>2}/10  {agent.name:<28} {agent.cadence:<15} {agent.mission}")
 
 
 def rank_opportunities() -> None:
