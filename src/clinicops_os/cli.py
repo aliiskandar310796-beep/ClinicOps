@@ -7,6 +7,7 @@ from pathlib import Path
 
 from .claim_registry import audit_registry, load_registry, render_matrix
 from .fleet import FleetRegistry
+from .intake import render_intake_findings, validate_portfolio
 from .publication import build_publication_pack, render_publication_pack
 from .scoring import Idea, rank_ideas
 from .transition_report import load_portfolio, render_markdown
@@ -51,6 +52,16 @@ def portfolio_report() -> None:
     )
     rows = load_portfolio(sys.argv[1])
     print(render_markdown(rows, as_of=as_of), end="")
+
+
+def portfolio_validate() -> None:
+    if len(sys.argv) != 2:
+        raise SystemExit("usage: clinicops-portfolio-validate <portfolio.csv>")
+    rows = load_portfolio(sys.argv[1])
+    findings = validate_portfolio(rows)
+    print(render_intake_findings(findings), end="")
+    if any(item.severity == "error" for item in findings):
+        raise SystemExit(2)
 
 
 def claims_status() -> None:
