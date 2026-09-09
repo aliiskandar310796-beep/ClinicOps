@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import csv
-from dataclasses import dataclass
+from dataclasses import dataclass, fields
 from datetime import date, datetime
 from pathlib import Path
 
@@ -33,6 +33,10 @@ class PortfolioRow:
         b_prefix = self.basic_udi_di.strip().upper().startswith("B-")
         return explicit or b_prefix
 
+    @property
+    def is_danish_market(self) -> bool:
+        return self.danish_market.strip().lower() in {"yes", "true", "1", "confirmed"}
+
     def expiry_date(self) -> date | None:
         if not self.certificate_expiry.strip():
             return None
@@ -59,6 +63,35 @@ class PortfolioRow:
             return "Legacy → MDR transition: timing to establish"
         return "MDR manufacturer record — monitor document/market-language controls"
 
+    def priority_score(self, as_of: date) -> int:
+        """Operator triage score, not a regulatory risk or compliance score."""
+        score = 0
+        if self.is_manufacturer and self.is_legacy:
+            score += 50
+            expiry = self.expiry_date()
+            if expiry:
+                days = (expiry - as_of).days
+                if days < 0:
+                    score += 35
+                elif days <= 90:
+                    score += 30
+                elif days <= 180:
+                    score += 25
+                elif days <= 365:
+                    score += 15
+            else:
+                score += 10
+        elif self.is_manufacturer:
+            score += 10
+        elif self.is_pack_role:
+            score += 5
+
+        if self.is_danish_market:
+            score += 20
+        if self.source_url.strip():
+            score += 3
+        return score
+
     def evidence_note(self) -> str:
         notes = []
         if self.basic_udi_di.strip().upper().startswith("B-"):
@@ -75,8 +108,15 @@ def load_portfolio(path: str | Path) -> list[PortfolioRow]:
         missing = required - set(reader.fieldnames or [])
         if missing:
             raise ValueError(f"missing required columns: {', '.join(sorted(missing))}")
+        known = {field.name for field in fields(PortfolioRow)}
         return [
-            PortfolioRow(**{k: (v or "") for k, v in row.items()})
+            PortfolioRow(
+                **{
+                    key: (value or "")
+                    for key, value in row.items()
+                    if key in known
+                }
+            )
             for row in reader
         ]
 
@@ -90,11 +130,7 @@ def render_markdown(
     legacy_mf = [r for r in rows if r.is_manufacturer and r.is_legacy]
     mdr_mf = [r for r in rows if r.is_manufacturer and not r.is_legacy]
     packs = [r for r in rows if r.is_pack_role]
-    danish = [
-        r
-        for r in rows
-        if r.danish_market.strip().lower() in {"yes", "true", "1", "confirmed"}
-    ]
+    danish = [r for r in rows if r.is_danish_market]
 
     out = [
         f"# {title}",
@@ -111,16 +147,27 @@ def render_markdown(
         f"- PR/system-procedure-pack records: **{len(packs)}**",
         f"- Confirmed Danish-market rows: **{len(danish)}**",
         "",
-        "## Work plan",
+        "## Prioritised work plan",
         "",
-        "| Company | Device | Role | Registration | Certificate expiry | Danish market | Workstream |",
-        "|---|---|---|---|---|---|---|",
+        "> Priority is an operator triage score only; it is not a regulatory risk, compliance, or legal-conclusion score.",
+        "",
+        "| Priority | Company | Device | Role | Registration | Certificate expiry | Danish market | Workstream |",
+        "|---:|---|---|---|---|---|---|---|",
     ]
-    for row in sorted(rows, key=lambda r: (r.company.lower(), r.device.lower())):
+    ordered = sorted(
+        rows,
+        key=lambda row: (
+            -row.priority_score(as_of),
+            row.company.lower(),
+            row.device.lower(),
+        ),
+    )
+    for row in ordered:
         out.append(
             "| "
             + " | ".join(
                 [
+                    str(row.priority_score(as_of)),
                     row.company or "—",
                     row.device or "—",
                     row.actor_role or "—",
