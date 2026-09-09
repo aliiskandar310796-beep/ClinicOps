@@ -18,6 +18,7 @@ clinicops-claim-check = "clinicops_eudamed.cli:claim_check"
 clinicops-fleet-status = "clinicops_os.cli:fleet_status"
 clinicops-rank-opportunities = "clinicops_os.cli:rank_opportunities"
 clinicops-portfolio-report = "clinicops_os.cli:portfolio_report"
+clinicops-portfolio-validate = "clinicops_os.cli:portfolio_validate"
 clinicops-claims = "clinicops_os.cli:claims_status"
 clinicops-publication-pack = "clinicops_os.cli:publication_pack"
 
