@@ -1,0 +1,5 @@
+company,segment,geography,trigger,source_url,evidence_note,experiment_id,urgency,offer_fit,evidence_strength,partner_leverage,access_strength,budget_signal,reuse_potential
+Example AR Partner,authorised_representative,EU,Legacy-to-MDR portfolio reconciliation workload,https://example.com/ar,Sanitized partner hypothesis only,EXP-001,4,5,4,5,3,2,5
+Example Manufacturer,manufacturer,EU,Portfolio transition planning,https://example.com/manufacturer,Sanitized manufacturer hypothesis only,EXP-001,5,5,4,2,3,4,4
+Example Consultancy,consultancy,EU,White-label evidence reconciliation demand,https://example.com/consultancy,Sanitized consultancy hypothesis only,EXP-001,3,4,3,3,3,2,4
+Example Early Signal,manufacturer,EU,Unverified transition signal,https://example.com/early,Research required before outreach,EXP-001,,5,,,,,
