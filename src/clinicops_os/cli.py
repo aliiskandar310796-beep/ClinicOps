@@ -10,7 +10,7 @@ from .fleet import FleetRegistry
 from .intake import render_intake_findings, validate_portfolio
 from .publication import build_publication_pack, render_publication_pack
 from .scoring import Idea, rank_ideas
-from .transition_report import load_portfolio, render_markdown
+from .transition_report import load_portfolio, render_json, render_markdown
 
 
 def fleet_status() -> None:
@@ -40,11 +40,9 @@ def rank_opportunities() -> None:
         print(f"{idx:>2}  {idea.score:>5.2f}  {idea.decision:<10}  {idea.name}")
 
 
-def portfolio_report() -> None:
+def _load_validated_portfolio(command: str) -> tuple[list[object], date]:
     if len(sys.argv) not in {2, 3}:
-        raise SystemExit(
-            "usage: clinicops-portfolio-report <portfolio.csv> [YYYY-MM-DD]"
-        )
+        raise SystemExit(f"usage: {command} <portfolio.csv> [YYYY-MM-DD]")
     as_of = (
         date.fromisoformat(sys.argv[2])
         if len(sys.argv) == 3
@@ -56,7 +54,17 @@ def portfolio_report() -> None:
     if errors:
         print(render_intake_findings(findings), end="")
         raise SystemExit(2)
+    return rows, as_of
+
+
+def portfolio_report() -> None:
+    rows, as_of = _load_validated_portfolio("clinicops-portfolio-report")
     print(render_markdown(rows, as_of=as_of), end="")
+
+
+def portfolio_json() -> None:
+    rows, as_of = _load_validated_portfolio("clinicops-portfolio-json")
+    print(render_json(rows, as_of=as_of), end="")
 
 
 def portfolio_validate() -> None:
