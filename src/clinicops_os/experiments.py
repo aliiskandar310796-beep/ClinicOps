@@ -78,8 +78,10 @@ def load_experiments(path: str | Path) -> list[ExperimentRecord]:
     raw = json.loads(Path(path).read_text(encoding="utf-8"))
     rows = raw.get("experiments", raw) if isinstance(raw, dict) else raw
     if not isinstance(rows, list):
-        raise ValueError("experiment input must be a JSON list or object with 'experiments'")
-    experiments = [experiment_from_dict(dict(row)) for row in rows]
+        raise TypeError("experiment input must be a JSON list or object with 'experiments'")
+    if any(not isinstance(row, dict) for row in rows):
+        raise TypeError("each experiment entry must be a JSON object")
+    experiments = [experiment_from_dict(row) for row in rows]
     if not experiments:
         raise ValueError("experiment input must include at least one experiment")
 
