@@ -85,7 +85,7 @@ def load_registry(path: str | Path) -> list[RegistryClaim]:
         except json.JSONDecodeError as exc:
             raise ValueError(f"invalid JSON on line {line_number}: {exc}") from exc
         if not isinstance(row, dict):
-            raise ValueError(f"line {line_number} must contain a JSON object")
+            raise TypeError(f"line {line_number} must contain a JSON object")
         claims.append(RegistryClaim.from_dict(row))
     return claims
 
