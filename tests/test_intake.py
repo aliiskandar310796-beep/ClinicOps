@@ -1,0 +1,45 @@
+from clinicops_os.intake import validate_portfolio
+from clinicops_os.transition_report import PortfolioRow
+
+
+def test_intake_flags_b_prefix_mdr_conflict_and_missing_evidence():
+    row = PortfolioRow(
+        "Example",
+        "Device",
+        "MF",
+        "MDR",
+        basic_udi_di="B-123",
+        danish_market="unknown",
+    )
+    findings = validate_portfolio([row])
+    messages = "\n".join(item.message for item in findings)
+    assert "conflicts with B-prefix" in messages
+    assert "Danish-market relevance is unresolved" in messages
+    assert "no evidence URL" in messages
+
+
+def test_intake_flags_legacy_timing_gap():
+    row = PortfolioRow(
+        "Example",
+        "Device",
+        "MF",
+        "legacy",
+        source_url="https://example.test/source",
+    )
+    findings = validate_portfolio([row])
+    assert any(item.field == "certificate_expiry" for item in findings)
+
+
+def test_intake_clean_row_has_no_findings():
+    row = PortfolioRow(
+        "Example",
+        "Device",
+        "MF",
+        "MDR",
+        basic_udi_di="1234567890",
+        certificate_expiry="2027-12-31",
+        danish_market="yes",
+        linked_sscp="true",
+        source_url="https://example.test/source",
+    )
+    assert validate_portfolio([row]) == []
