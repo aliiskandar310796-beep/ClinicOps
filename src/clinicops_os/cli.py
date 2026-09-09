@@ -58,7 +58,7 @@ def experiment_status() -> None:
         raise SystemExit("usage: clinicops-experiments <experiments.json>")
     try:
         experiments = load_experiments(sys.argv[1])
-    except (OSError, ValueError, json.JSONDecodeError) as exc:
+    except (OSError, TypeError, ValueError, json.JSONDecodeError) as exc:
         raise SystemExit(str(exc)) from exc
     print(render_experiment_json(experiments), end="")
 
