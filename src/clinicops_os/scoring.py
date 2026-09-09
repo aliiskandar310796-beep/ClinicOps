@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
 import math
-
+from dataclasses import dataclass
 
 SCALE_MIN = 0.0
 SCALE_MAX = 10.0
@@ -15,12 +14,7 @@ def _check_scale(name: str, value: float) -> None:
 
 @dataclass(frozen=True)
 class Idea:
-    """A ClinicOps opportunity scored on a 0-10 scale.
-
-    Rewards evidence, leverage and durable reuse; penalizes regulatory/reputation
-    risk plus ongoing maintenance burden. Effort is divided by sqrt(effort) so
-    tiny low-value tasks do not automatically dominate meaningful projects.
-    """
+    """A ClinicOps opportunity scored on a 0-10 scale."""
 
     name: str
     impact: float
@@ -38,8 +32,17 @@ class Idea:
 
     def __post_init__(self) -> None:
         for field in (
-            "impact", "confidence", "leverage", "reversibility", "learning_value",
-            "risk", "evidence", "defensibility", "reuse", "urgency", "maintenance",
+            "impact",
+            "confidence",
+            "leverage",
+            "reversibility",
+            "learning_value",
+            "risk",
+            "evidence",
+            "defensibility",
+            "reuse",
+            "urgency",
+            "maintenance",
         ):
             _check_scale(field, float(getattr(self, field)))
         if self.effort <= 0:
@@ -50,9 +53,14 @@ class Idea:
     @property
     def raw_value(self) -> float:
         positive = (
-            self.impact * 0.19 + self.evidence * 0.14 + self.leverage * 0.14
-            + self.defensibility * 0.11 + self.reuse * 0.11 + self.urgency * 0.09
-            + self.learning_value * 0.08 + self.confidence * 0.07
+            self.impact * 0.19
+            + self.evidence * 0.14
+            + self.leverage * 0.14
+            + self.defensibility * 0.11
+            + self.reuse * 0.11
+            + self.urgency * 0.09
+            + self.learning_value * 0.08
+            + self.confidence * 0.07
             + self.reversibility * 0.07
         )
         penalty = self.risk * 0.18 + self.maintenance * 0.12
@@ -75,7 +83,7 @@ class Idea:
         return "KILL/PARK"
 
     @classmethod
-    def from_dict(cls, data: dict) -> "Idea":
+    def from_dict(cls, data: dict) -> Idea:
         allowed = {f.name for f in cls.__dataclass_fields__.values()}
         unknown = set(data) - allowed
         if unknown:
