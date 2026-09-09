@@ -52,7 +52,7 @@ def probe(page: int, page_size: int = 50, timeout: float = 25.0) -> Probe:
             total_elements=data.get("totalElements") if isinstance(data, dict) else None,
             error=None,
         )
-    except Exception as exc:  # network canary intentionally captures transport failures.
+    except (requests.RequestException, ValueError) as exc:
         elapsed = perf_counter() - started
         status = getattr(getattr(exc, "response", None), "status_code", None)
         return Probe(
