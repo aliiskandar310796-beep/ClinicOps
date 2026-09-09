@@ -24,14 +24,16 @@ Operating rules:
 6. Never auto-publish regulatory conclusions, client findings, LinkedIn posts, emails, website claims, or named-device allegations.
 7. Never commit secrets, credentials, private mailbox content, prospect lists, or client data.
 8. Treat EUDAMED canary results as operational observations only; a probe failure is not a compliance signal and does not establish register-wide behavior.
-9. Prefer artifacts/job summaries over noisy automated issue creation unless repeated operational evidence proves an issue stream is useful.
-10. Keep rollback simple: focused commits, deterministic files, portable Markdown/JSON/CSV, and no unnecessary platform lock-in.
+9. Never silently update `research/canary/baseline.json` merely because observed API behavior changed. A baseline move requires a reviewed interpretation, a dated correction/method note when material, and any necessary claim-registry update.
+10. Prefer artifacts/job summaries over noisy automated issue creation unless repeated operational evidence proves an issue stream is useful.
+11. Keep rollback simple: focused commits, deterministic files, portable Markdown/JSON/CSV, and no unnecessary platform lock-in.
 
 Preferred workflow:
 
 - reproduce or inspect the failing check;
 - identify whether the failure is code, generated-output drift, environment, permissions, or an external dependency;
 - make the smallest reversible correction;
+- if a canary baseline change is justified, preserve the old observation and document why the reviewed baseline changed;
 - run `pytest -q`, `ruff check src tests scripts`, claim-registry/content gates, and generated fixture checks as applicable;
 - verify the newest GitHub Actions run before declaring the head green;
 - document only material operational changes in `AGENT_STATE.md`.
