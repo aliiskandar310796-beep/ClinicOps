@@ -5,6 +5,7 @@ import pytest
 from clinicops_eudamed.claim_guard import check_claim
 from clinicops_eudamed.identifier import classify_identifier
 from clinicops_eudamed.srn import decode_srn
+from clinicops_os.claim_registry import RegistryClaim
 from clinicops_os.evidence import (
     Claim,
     EvidenceClass,
@@ -12,6 +13,7 @@ from clinicops_os.evidence import (
     publication_gate,
 )
 from clinicops_os.prospect import ProspectSignal
+from clinicops_os.publication import build_publication_pack
 from clinicops_os.resilience import Dependency, resilience_backlog
 from clinicops_os.scoring import Idea, rank_ideas
 from clinicops_os.transition_report import PortfolioRow
@@ -134,3 +136,52 @@ def test_srn_decoder_maps_actor_role_without_overclaiming():
 def test_srn_decoder_rejects_unknown_shape():
     result = decode_srn("DK-XX-123")
     assert not result.valid_shape
+
+
+def _registry_claim(*, status=VerificationStatus.VERIFIED, allowed_uses=("research-note",), review_after=None):
+    return RegistryClaim(
+        claim_id="CO-CLM-9999",
+        text="Qualified test claim",
+        evidence_class=EvidenceClass.PRIMARY,
+        status=status,
+        sources=("https://example.test/source",),
+        limitations=("Test limitation",),
+        allowed_uses=allowed_uses,
+        review_after=review_after,
+        supersedes=(),
+        superseded_by=None,
+    )
+
+
+def test_publication_pack_accepts_current_allowed_claim():
+    claim = _registry_claim()
+    pack = build_publication_pack(
+        [claim],
+        [claim.claim_id],
+        title="Test pack",
+        use="research-note",
+        as_of=date(2026, 9, 9),
+    )
+    assert pack.claims == (claim,)
+
+
+def test_publication_pack_blocks_expired_or_wrong_context_claim():
+    claim = _registry_claim(review_after=date(2026, 9, 1))
+    with pytest.raises(ValueError, match="review expired"):
+        build_publication_pack(
+            [claim],
+            [claim.claim_id],
+            title="Test pack",
+            use="research-note",
+            as_of=date(2026, 9, 9),
+        )
+
+    internal_only = _registry_claim(allowed_uses=("internal",))
+    with pytest.raises(ValueError, match="not allowed"):
+        build_publication_pack(
+            [internal_only],
+            [internal_only.claim_id],
+            title="Test pack",
+            use="research-note",
+            as_of=date(2026, 9, 9),
+        )
