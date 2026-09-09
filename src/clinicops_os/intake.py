@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from datetime import datetime
 
 from .transition_report import PortfolioRow
 
@@ -16,9 +17,20 @@ class IntakeFinding:
     message: str
 
 
+def _row_key(row: PortfolioRow) -> tuple[str, str, str, str]:
+    return (
+        row.company.strip().casefold(),
+        row.device.strip().casefold(),
+        row.actor_role.strip().upper(),
+        row.basic_udi_di.strip().upper(),
+    )
+
+
 def validate_portfolio(rows: list[PortfolioRow]) -> list[IntakeFinding]:
     """Validate evidence completeness/consistency without making compliance conclusions."""
     findings: list[IntakeFinding] = []
+    seen: dict[tuple[str, str, str, str], int] = {}
+
     for index, row in enumerate(rows, start=2):  # CSV header is row 1.
         if not row.company.strip():
             findings.append(IntakeFinding(index, "error", "company", "company is required"))
@@ -58,6 +70,21 @@ def validate_portfolio(rows: list[PortfolioRow]) -> list[IntakeFinding]:
                 )
             )
 
+        if row.certificate_expiry.strip():
+            try:
+                datetime.strptime(  # noqa: DTZ007 — input is intentionally date-only.
+                    row.certificate_expiry.strip(), "%Y-%m-%d"
+                )
+            except ValueError:
+                findings.append(
+                    IntakeFinding(
+                        index,
+                        "error",
+                        "certificate_expiry",
+                        "certificate/transition date must use YYYY-MM-DD",
+                    )
+                )
+
         if row.is_manufacturer and row.is_legacy and not row.certificate_expiry.strip():
             findings.append(
                 IntakeFinding(
@@ -87,6 +114,22 @@ def validate_portfolio(rows: list[PortfolioRow]) -> list[IntakeFinding]:
                     "no evidence URL recorded for this row",
                 )
             )
+
+        key = _row_key(row)
+        if any(key):
+            first_row = seen.get(key)
+            if first_row is not None:
+                findings.append(
+                    IntakeFinding(
+                        index,
+                        "warning",
+                        "row",
+                        f"possible duplicate of CSV row {first_row}; verify before counting or prioritising",
+                    )
+                )
+            else:
+                seen[key] = index
+
     return findings
 
 
