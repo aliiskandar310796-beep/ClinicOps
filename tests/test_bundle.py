@@ -1,12 +1,11 @@
 import csv
-from datetime import date
 import json
+from datetime import date
 from pathlib import Path
 
 import pytest
 
 from clinicops_os.bundle import build_pilot_bundle
-
 
 FIELDNAMES = [
     "company",
@@ -52,12 +51,19 @@ def test_bundle_builds_reproducible_deliverable_set(tmp_path):
     assert result.manifest["bundle_schema_version"] == "1.0"
     assert result.manifest["records_reviewed"] == 1
     assert len(result.manifest["source_sha256"]) == 64
-    for name in ("portfolio_report.md", "portfolio_report.json", "intake_diagnostics.md", "manifest.json"):
+    for name in (
+        "portfolio_report.md",
+        "portfolio_report.json",
+        "intake_diagnostics.md",
+        "manifest.json",
+    ):
         assert (output / name).exists()
 
     payload = json.loads((output / "portfolio_report.json").read_text(encoding="utf-8"))
     assert payload["rows"][0]["company"] == "Example Co"
-    assert "not a compliance" in (output / "portfolio_report.md").read_text(encoding="utf-8")
+    assert "not a compliance" in (output / "portfolio_report.md").read_text(
+        encoding="utf-8"
+    )
 
 
 def test_bundle_blocks_structurally_invalid_input(tmp_path):
