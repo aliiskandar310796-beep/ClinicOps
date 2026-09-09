@@ -1,1 +1,1 @@
-__all__ = ["identifier", "client", "currency", "claim_guard"]
+__all__ = ["claim_guard", "client", "currency", "identifier"]
