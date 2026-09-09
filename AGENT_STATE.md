@@ -19,24 +19,51 @@ This GitHub repository is the shared source of truth. Local ZIPs and chat transc
 - Sanitized portfolio CSV, Markdown and JSON fixtures with deterministic drift checks.
 - Canonical Class III Transition Map offer specification.
 - Canonical transition-focused homepage deployment pack under `website/homepage-v2.md`.
+- ClinicOps.dk visibility plan plus focused landing-page deployment packs under `website/`.
 - Internal anonymised class III transition research-note draft.
 - Internal Obelis transition-work-plan conversation brief.
 - Internal source-locked C-10/24 LinkedIn correction pack.
 - 16-loop on-demand fleet specification; not 16 scheduled jobs.
 - Client-side Identifier Check under `docs/`.
+- Experiment ledger under `experiments/EXPERIMENT_LEDGER.md`.
+- Revenue OS: coverage-aware commercial account prioritisation in `src/clinicops_os/revenue.py`, sanitized fixture `examples/revenue_accounts.csv`, tests, `clinicops-revenue-rank` JSON CLI, operating contract in `revenue/README.md`, and Claude continuation handoff in `revenue/CLAUDE_HANDOFF.md`.
 - CI gates: pytest, Ruff, custom-agent profile audit, claim-registry audit, claim-reference integrity, governed-content claim validation, sanitized report fixtures and public-copy claim guard.
 - Repository-wide agent doctrine under `.github/copilot-instructions.md` and `AGENTS.md`.
 
 ## GitHub custom agents
-Three repository-scoped Copilot agent profiles live under `.github/agents/`:
+Six repository-scoped Copilot agent profiles live under `.github/agents/`:
 
 1. **Regulatory Evidence Steward** — primary-source verification, claim lifecycle, corrections and publication evidence gates.
 2. **Portfolio Operator** — intake validation, transition analysis, deterministic reports, JSON handoffs and pilot bundles.
 3. **Release Sentinel** — CI/deployment health, generated artifacts, rollback discipline and scheduled operational checks.
+4. **Opportunity Architect** — evidence-backed opportunities, experiments, kill criteria and Revenue OS prioritisation.
+5. **Customer Discovery Agent** — structured buyer learning, objections, willingness signals and evidence-backed Revenue OS updates.
+6. **Visibility Architect** — claim-approved research-to-SEO, website, partner and content assets.
 
 These profiles are specialization/instruction layers. Their existence does **not** mean they are continuously running. Unattended recurring work is implemented separately through GitHub Actions.
 
+Do not add another agent when one of these six can absorb the capability. Expand capability before fleet size.
+
 `Release Sentinel` also protects `research/canary/baseline.json` from silent drift: a baseline change must be reviewed and, when material, accompanied by a dated correction/method note and claim-registry update rather than merely following the latest observed behavior.
+
+## Revenue OS operating boundary
+Revenue OS implements:
+
+`commercial signal → evidence coverage → ranked account → smallest commercial experiment → result → learning`
+
+The score is for commercial learning and pilot selection only. It is **not** regulatory, compliance, legal, enforcement, or manufacturer risk.
+
+Unknown commercial values stay unknown. Budget, access, urgency and offer-fit fields must not be guessed to improve a ranking.
+
+Real account/prospect working sets remain private. Public GitHub may contain sanitized fixtures and aggregated learnings only.
+
+The CLI handoff is:
+
+```bash
+clinicops-revenue-rank <accounts.csv>
+```
+
+It emits a versioned JSON object with score coverage, priority band and next experiment so ChatGPT, Claude, Copilot and future tooling can share the same commercial semantics without reparsing prose.
 
 ## GitHub automation
 `.github/workflows/ops-watch.yml` runs weekly on Monday at 06:13 UTC, can be dispatched manually, and self-tests when the canary/evidence automation files change.
@@ -61,13 +88,13 @@ Operational consequence:
 - future canaries compare reachability shape against `research/canary/baseline.json` rather than hard-coding the discarded ~32k-wall inference.
 
 ## Last verified baselines
-- Commit `a9619322261520961f44b9e8cbe7466f18b8104f` passed the full CI chain on 9 Sep 2026, including the custom-agent profile audit plus tests, Ruff, claim-registry/reference checks, governed content, fixtures and public-copy gate.
+- Commit `16efcc15f60bf45bb9775802de1afc715ee7d4fc` passed the full CI job on 9 Sep 2026 after Revenue OS implementation and the Claude handoff were added. The chain included 54 pytest tests, Ruff, custom-agent audit, claim registry/reference checks, governed content, sanitized fixtures and the public-copy gate.
 - Commit `de1dc92a93bc57e4535d5811d338e1f13c769d87` passed both the full CI chain and drift-aware `Ops Watch` on 9 Sep 2026.
 - Commit `611833caaad884a9720c892ad80a88821693b09e` passed CI after repository-wide Copilot/agent instructions were added.
 
 ## Known manual dependencies
 1. GitHub Pages repository enablement is still required once. It is tracked in issue #1. Do not introduce a second hosting stack merely to bypass this one-time setting.
-2. Opera Browser Connector is not currently reachable by ChatGPT even when the user reports it connected; browser-dependent GoDaddy, clinicops.dk, LinkedIn and Gumroad changes remain deferred until the connector returns tabs successfully.
+2. Browser/account execution for GoDaddy, clinicops.dk, LinkedIn and Gumroad can be delegated to Claude when it has working account access. These surfaces are not a blocker for GitHub-native Revenue OS, portfolio, evidence, research or visibility development.
 
 ## Claude / ChatGPT / Copilot coordination
 Before changing shared files:
@@ -77,23 +104,25 @@ Before changing shared files:
 4. Preserve corrections, claim IDs and evidence limitations.
 5. If a write receives HTTP 409, fetch the newest file and merge rather than force-overwriting concurrent work.
 6. Run CI after code or generated-output changes.
-7. Use `clinicops-portfolio-json` / `examples/portfolio_report.json` for machine handoffs instead of reparsing Markdown where practical.
-8. Use the narrowest relevant custom agent rather than a general-purpose agent when delegating GitHub work.
-9. Treat `.github/copilot-instructions.md`, `AGENTS.md`, `AGENT_STATE.md` and `CLAIM_RULES.md` as the shared doctrine floor.
-10. Update this file only when the operational truth materially changes.
+7. Use `clinicops-portfolio-json` / `examples/portfolio_report.json` for portfolio machine handoffs instead of reparsing Markdown where practical.
+8. Use `clinicops-revenue-rank` and `revenue/README.md` for commercial prioritisation semantics; keep real prospect data private.
+9. Use the narrowest relevant custom agent rather than a general-purpose agent when delegating GitHub work.
+10. Treat `.github/copilot-instructions.md`, `AGENTS.md`, `AGENT_STATE.md` and `CLAIM_RULES.md` as the shared doctrine floor.
+11. Update this file only when the operational truth materially changes.
 
 ## Current commercial thesis
 ClinicOps sells **accountable regulatory judgement around legacy-to-MDR transition, SS(C)P/document operations and portfolio work planning**. Automation is the inexpensive screening/front-door layer.
 
-The default buyer-validation sequence is:
-`portfolio export → evidence validation → role-aware segmentation → priority queue → evidence ledger → human-reviewed action plan`
+The buyer-validation loop is now:
+`signal → commercial evidence → Revenue OS ranking → smallest buyer experiment → portfolio export → evidence validation → role-aware segmentation → priority queue → evidence ledger → human-reviewed action plan → measured learning`
 
 Do not revert to a manufacturer-diligence-failure narrative without new evidence and a dated correction.
 
 ## Next high-leverage work
-1. Validate the Class III Transition Map in real portfolio conversations before building a larger dashboard.
-2. Keep improving intake/report reliability around actual buyer data shapes, while preserving a stable JSON handoff contract.
-3. Convert only claim-registry-approved research into external content.
-4. Use the weekly Ops Watch for evidence aging/API reachability; do not add higher-frequency probes without a demonstrated operational need.
-5. Keep raw named-device, prospect and client data out of the public repo by default.
-6. When browser access works, verify GoDaddy/email continuity first, then implement `website/homepage-v2.md`, then handle LinkedIn correction/Gumroad optimization.
+1. Operationalise Revenue OS against a small private set of real AR/consultancy/manufacturer accounts and run 3–5 high-information experiments rather than mass outreach.
+2. Validate the Class III Transition Map in real portfolio conversations before building a larger dashboard.
+3. Keep improving intake/report reliability around actual buyer data shapes while preserving stable JSON handoff contracts.
+4. Convert only claim-registry-approved research into external content and feed results into EXP-002.
+5. Use the weekly Ops Watch for evidence aging/API reachability; do not add higher-frequency probes without a demonstrated operational need.
+6. Keep raw named-device, prospect and client data out of the public repo by default.
+7. When external browser/account execution is available, verify live clinicops.dk indexing/SEO changes and LinkedIn/Gumroad updates; record only verified changes.
