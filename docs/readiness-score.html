@@ -166,7 +166,11 @@ footer.site{border-top:1px solid var(--border);margin-top:52px}
 <h3>What is driving the result</h3>
 <ul id="gaps"></ul>
 <p><strong>Next step:</strong> Resolve unresolved points against EUDAMED and your RA/QA team before relying on the result externally.</p>
-<a class="cta primary" href="mailto:info@clinicops.dk?subject=Regulatory%20Intelligence%20Assessment">Request a Regulatory Intelligence Assessment</a>
+<div class="cta-row">
+<a class="cta primary" id="continue-brief" href="assessment-intake.html">Continue to the assessment brief</a>
+<a class="cta" href="mailto:info@clinicops.dk?subject=Regulatory%20Intelligence%20Assessment">Request a Regulatory Intelligence Assessment by email</a>
+</div>
+<p class="muted">Continuing carries only this score, band and gap list into the brief page &mdash; locally, in this browser tab. Nothing is sent to ClinicOps.</p>
 </section>
 
 <p class="muted">The score measures how complete the self-reported evidence/work-plan inputs are. A lower score is a prompt to organise evidence and ownership; it is not a finding of non-compliance. Where SS(C)P applicability is uncertain, confirm it with the responsible regulatory team before treating that input as settled.</p>
@@ -232,6 +236,8 @@ footer.site{border-top:1px solid var(--border);margin-top:52px}
 const config=JSON.parse(document.getElementById('score-config').textContent);
 const form=document.getElementById('readiness-form');
 const result=document.getElementById('result');
+const HANDOFF_KEY='clinicops.readiness.handoff';
+let lastResult=null;
 form.addEventListener('submit',event=>{
   event.preventDefault();
   let score=0;
@@ -252,10 +258,17 @@ form.addEventListener('submit',event=>{
   list.replaceChildren();
   const items=gaps.length?gaps:['No self-reported evidence gap was selected. Verify the underlying evidence before external reliance.'];
   for(const text of items){const li=document.createElement('li');li.className='gap';li.textContent=text;list.appendChild(li);}
+  lastResult={score:score,band:band.label,gaps:gaps.slice()};
   result.hidden=false;
   result.scrollIntoView({behavior:'smooth',block:'start'});
 });
-form.addEventListener('reset',()=>{result.hidden=true;});
+form.addEventListener('reset',()=>{result.hidden=true;lastResult=null;});
+document.getElementById('continue-brief').addEventListener('click',()=>{
+  if(!lastResult)return;
+  try{
+    sessionStorage.setItem(HANDOFF_KEY,JSON.stringify({score:lastResult.score,band:lastResult.band,gaps:lastResult.gaps,at:Date.now()}));
+  }catch(_){/* storage unavailable (e.g. private mode): the link still navigates; nothing is carried over */}
+});
 </script>
 </main>
 <footer class="site">

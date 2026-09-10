@@ -135,6 +135,38 @@
     window.location.href = `mailto:info@clinicops.dk?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(brief)}`;
     status.textContent = "Your email application should open with the brief pre-filled. Review it before sending.";
   });
+
+  // Browser-local handoff from the Transition Readiness Score. One-shot and
+  // tab-scoped: the key is consumed immediately, nothing is transmitted, and
+  // the page behaves exactly as before if storage is unavailable or empty.
+  try {
+    const HANDOFF_KEY = "clinicops.readiness.handoff";
+    const raw = sessionStorage.getItem(HANDOFF_KEY);
+    if (raw) {
+      sessionStorage.removeItem(HANDOFF_KEY);
+      const data = JSON.parse(raw);
+      const score = Number(data.score);
+      const band = typeof data.band === "string" ? data.band.slice(0, 80) : "";
+      const gaps = Array.isArray(data.gaps)
+        ? data.gaps.filter(item => typeof item === "string").slice(0, 8)
+        : [];
+      const fresh = typeof data.at === "number" && Date.now() - data.at < 3600000;
+      const notes = byId("notes");
+      if (fresh && Number.isFinite(score) && score >= 0 && score <= 100 && band && !notes.value.trim()) {
+        const lines = [
+          `Context from the Transition Readiness Score (self-reported, browser-local): ${score}/100 — ${band}.`,
+        ];
+        if (gaps.length) {
+          lines.push("Self-reported gaps: " + gaps.join(" | "));
+        }
+        notes.value = lines.join("\n").slice(0, 900);
+        status.textContent =
+          "Your Readiness Score context was carried into the notes locally, in this browser tab only. Edit or delete it freely; nothing has been sent.";
+      }
+    }
+  } catch (_) {
+    /* storage unavailable or malformed: page behaves exactly as before */
+  }
 })();
 </script>
 </body>
