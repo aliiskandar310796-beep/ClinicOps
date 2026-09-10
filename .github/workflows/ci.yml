@@ -28,6 +28,10 @@ jobs:
         run: python scripts/render_sitemap.py --check
       - name: Internal link contract
         run: python scripts/validate_internal_links.py
+      - name: Standard paid-pilot preflight
+        run: |
+          clinicops-pilot-preflight examples/standard_pilot_preflight.example.json > /tmp/clinicops-pilot-preflight.json
+          grep -q '"status": "ACTIVATED"' /tmp/clinicops-pilot-preflight.json
       - name: Client bundle smoke test
         run: |
           rm -rf /tmp/clinicops-pilot

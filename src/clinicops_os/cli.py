@@ -10,6 +10,11 @@ from .claim_registry import audit_registry, load_registry, render_matrix
 from .experiments import load_experiments, render_experiment_json
 from .fleet import FleetRegistry
 from .intake import render_intake_findings, validate_portfolio
+from .pilot_gate import (
+    evaluate_standard_pilot,
+    load_preflight_record,
+    render_preflight_result,
+)
 from .publication import build_publication_pack, render_publication_pack
 from .revenue import load_accounts, render_revenue_json
 from .scoring import Idea, rank_ideas
@@ -97,6 +102,19 @@ def portfolio_validate() -> None:
     findings = validate_portfolio(rows)
     print(render_intake_findings(findings), end="")
     if any(item.severity == "error" for item in findings):
+        raise SystemExit(2)
+
+
+def pilot_preflight() -> None:
+    if len(sys.argv) != 2:
+        raise SystemExit("usage: clinicops-pilot-preflight <activation-record.json>")
+    try:
+        record = load_preflight_record(sys.argv[1])
+    except (OSError, TypeError, ValueError, json.JSONDecodeError) as exc:
+        raise SystemExit(str(exc)) from exc
+    result = evaluate_standard_pilot(record)
+    print(render_preflight_result(result), end="")
+    if not result.activated:
         raise SystemExit(2)
 
 
