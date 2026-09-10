@@ -133,14 +133,22 @@ A buyer disagreeing with a regulatory interpretation is not automatically a deli
 
 # 7. Execution commands
 
-Use an approved private path for real buyer data:
+For a standard paid pilot, first copy `examples/standard_pilot_preflight.example.json` into the approved private workspace, replace the synthetic values with the private operating facts, and run the fail-closed activation check:
+
+```bash
+clinicops-pilot-preflight /private/path/activation-record.json
+```
+
+Do not begin material delivery unless the preflight returns `"status": "ACTIVATED"`. A failing result is **NON-STANDARD — NOT ACTIVATED** and must be parked or declined under `sales/commercial-activation-gate.md`, not bypassed with an ad-hoc transaction exception.
+
+Then use an approved private path for real buyer data:
 
 ```bash
 clinicops-portfolio-validate /private/path/portfolio.csv
 clinicops-pilot-bundle /private/path/portfolio.csv /private/path/output YYYY-MM-DD
 ```
 
-The bundle process must block on intake errors. Warnings and information gaps must be reviewed before interpretation or delivery.
+The bundle process must block on intake errors. Warnings and information gaps must be reviewed before interpretation or delivery. The preflight does not replace the final human-review gate.
 
 ---
 
