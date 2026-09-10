@@ -1,6 +1,6 @@
 # ClinicOps shared agent state
 
-Last updated: 2026-09-11 after PR #25 commercial-priority correction and privacy-surface resilience hardening.
+Last updated: 2026-09-11 after PR #25 commercial-priority correction, privacy-surface resilience hardening and standard paid-pilot delegation hardening.
 
 ## Canonical truth
 This GitHub repository is the shared source of truth. Pull/fetch `main` before work. Local terminal state, ZIPs and chat transcripts are secondary until their changes land here. Preserve concurrent work; never force-overwrite a newer branch/file.
@@ -217,11 +217,17 @@ The Class III Transition Map Pilot is the only default `DO NOW` service entry un
 
 Activate an adjacent entry only when a qualified buyer conversation, concrete flagship objection, paid/design-partner delivery, or verified external change produces evidence for that exact workflow. Do not create outreach, pricing, public product surface or delivery work merely because an adjacent idea scores well on paper.
 
-Before material client work begins, apply `sales/commercial-activation-gate.md`: written scope/acceptance plus an approved activation condition (upfront payment, agreed deposit/milestone, accepted PO/signed procurement commitment, or Ali-approved bounded design-partner exception). Do not consume delivery capacity on an informal “go ahead” or open-ended unpaid work.
+Before material client work begins, apply `sales/commercial-activation-gate.md`: written scope/acceptance plus an approved activation condition (upfront payment, agreed deposit/milestone or accepted PO/signed procurement commitment). Design-partner work is outside the standard delegated workflow and requires a separately approved, time-bounded policy rather than ad hoc transaction approval. Do not consume delivery capacity on an informal “go ahead” or open-ended unpaid work.
 
 Service-first delivery remains:
 
 `clinicops.dk → free screening / proof sample → browser-local scope brief → controlled private intake → validation/analysis → human regulatory review → secure client bundle → feedback → Revenue OS learning`
+
+### Standard paid-pilot delegation envelope
+
+`sales/commercial-activation-gate.md` defines the founder-independent operating boundary for the existing Class III Transition Map Pilot. A trained operator may execute a standard paid pilot from written scope through closeout only when the EXP-001 buyer, bounded population, approved commercial terms, private data route, controlled bundle schema and qualified named human-review gate are all satisfied.
+
+Anything outside that envelope is marked **NON-STANDARD — NOT ACTIVATED** and parked or declined. The delegated workflow abstains rather than routing design-partner work, custom scope/pricing, unusual liability, unsupported interpretation, patient-identifiable data or unavailable qualified review to Ali for an ad hoc transaction decision. Founder-independent execution is not considered proven until one eligible paid pilot or two controlled dry runs complete with zero Ali transaction-level decisions and no unplanned exception.
 
 Bundle schema `1.1` includes:
 - `client_report.html`
