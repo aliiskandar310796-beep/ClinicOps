@@ -94,7 +94,10 @@ def evaluate_standard_pilot(record: Mapping[str, object]) -> PilotPreflightResul
     )
 
     activation_condition = record.get("activation_condition")
-    if activation_condition not in APPROVED_ACTIVATION_CONDITIONS:
+    if (
+        not isinstance(activation_condition, str)
+        or activation_condition not in APPROVED_ACTIVATION_CONDITIONS
+    ):
         reasons.append("activation_condition is not an approved paid-pilot condition")
     _require_true(
         record,
