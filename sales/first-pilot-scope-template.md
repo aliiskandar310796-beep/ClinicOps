@@ -150,6 +150,14 @@ clinicops-pilot-bundle /private/path/portfolio.csv /private/path/output YYYY-MM-
 
 The bundle process must block on intake errors. Warnings and information gaps must be reviewed before interpretation or delivery. The preflight does not replace the final human-review gate.
 
+Immediately before external release, after the human-review gate and any required regeneration, verify that the supplied source and every manifest-declared output still match the final bundle:
+
+```bash
+clinicops-pilot-verify /private/path/output /private/path/portfolio.csv
+```
+
+External release requires `"status": "VERIFIED"`. A hash mismatch is a delivery-integrity failure: do not edit the manifest to match a changed output. Correct the underlying source/output workflow, regenerate the controlled bundle when needed, repeat human review as applicable, and verify again.
+
 ---
 
 # 8. Human-review gate
@@ -161,9 +169,11 @@ Before release to the buyer:
 3. confirm structural signals are not presented as compliance findings;
 4. verify role distinctions and responsibility context;
 5. keep unsupported facts unresolved;
-6. verify source/output hashes and bundle version;
+6. run `clinicops-pilot-verify` against the final private source/bundle and require `VERIFIED`;
 7. remove internal comments and prospect-sensitive notes not intended for the buyer;
 8. approve the final client-facing interpretation as the responsible human reviewer.
+
+If step 7 changes a manifest-declared output, regenerate/re-review as applicable and rerun step 6 before release. Integrity verification proves file correspondence only; it does not replace the responsible human review.
 
 ---
 
