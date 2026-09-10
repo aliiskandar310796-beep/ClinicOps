@@ -10,6 +10,8 @@ from clinicops_os.site_quality import (
     validate_page_metadata,
 )
 
+ROOT = Path(__file__).resolve().parents[1]
+
 
 def _page(url: str, *, homepage: bool = False) -> str:
     extra = ""
@@ -71,6 +73,12 @@ def test_validate_page_metadata_rejects_canonical_drift() -> None:
     )
     assert any("canonical" in error for error in errors)
     assert any("og:url" in error for error in errors)
+
+
+def test_homepage_social_metadata_reuses_search_metadata() -> None:
+    parser = parse_metadata((ROOT / "docs" / "index.html").read_text(encoding="utf-8"))
+    assert parser.meta["og:title"] == parser.title
+    assert parser.meta["og:description"] == parser.meta["description"]
 
 
 def test_url_to_docs_path_maps_directory_and_file_urls(tmp_path: Path) -> None:
