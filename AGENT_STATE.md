@@ -1,6 +1,6 @@
 # ClinicOps shared agent state
 
-Last updated: 2026-09-10 after production funnel, SEO guardrail and Ops Watch hardening.
+Last updated: 2026-09-10 after PR #16 proof-to-pilot conversion hardening and commercial-validation integration.
 
 ## Canonical truth
 This GitHub repository is the shared source of truth. Pull/fetch `main` before work. Local terminal state, ZIPs and chat transcripts are secondary until their changes land here. Preserve concurrent work; never force-overwrite a newer branch/file.
@@ -8,13 +8,15 @@ This GitHub repository is the shared source of truth. Pull/fetch `main` before w
 ## Current production baseline
 - `clinicops.dk` is the live GitHub Pages production site. The old GoDaddy-hosted site is retired; GoDaddy remains DNS only.
 - HTTPS is enforced and GitHub Pages deploys `docs/**` through `.github/workflows/pages.yml`.
-- Latest functional baseline before this state-only commit: `0f27b19bccdff0f6aa223df23538b32d0484536d` — **Monitor assessment intake in Ops Watch (#11)**.
-- Post-merge CI on that baseline passed the complete configured gate stack.
-- Live-site health passed against the production domain, including the homepage, tools, readiness score, sanitized Transition Map sample, assessment intake, sitemap, robots.txt and custom 404.
-- The bounded EUDAMED canary and evidence-freshness jobs are also green on the current Ops Watch path.
+- Latest functional baseline before this state-only update: `27410995f9e00d8d819210d426099880aeffa965` — **Tighten proof-to-pilot buyer path (#16)**.
+- PR #14 (`5df4a3f`) added the browser-local Readiness Score → assessment-brief handoff; PR #15 (`a1279e9`) added decision-grade commercial-validation thresholds; PR #16 (`27410995`) clarified the Class III/sample → assessment-intake path.
+- Post-merge CI on PR #16 passed the complete configured gate stack and the exact-sha GitHub Pages deployment completed successfully.
+- Live on-page crawl after PR #16 confirmed `class-iii-transition.html` and `transition-map-sample/` return HTTP 200, are indexable, self-canonical and expose structured data.
+- Live-site health covers the homepage, tools, readiness score, sanitized Transition Map sample, assessment intake, sitemap, robots.txt and custom 404. The Identifier Check is being added to the same bounded check in the current ops-coordination cleanup.
+- The bounded EUDAMED canary and evidence-freshness jobs remain on the current Ops Watch path.
 
 ## Production acquisition and conversion surface
-The public site now has 13 sitemap URLs:
+The public site has 13 sitemap URLs:
 - `/`
 - `/about.html`
 - `/assessment-intake.html`
@@ -32,7 +34,7 @@ The public site now has 13 sitemap URLs:
 All public HTML pages are governed by production metadata/link/sitemap checks. Do not recreate duplicate `/eudamed/` or `/mdr-transition/` pillar pages that compete with the existing production pages.
 
 ### Homepage conversion path
-The homepage now exposes three useful levels of commitment:
+The homepage exposes three useful levels of commitment:
 1. **Request a Regulatory Intelligence Assessment** → `assessment-intake.html`.
 2. **View a sanitized Transition Map sample** → `/transition-map-sample/`.
 3. A direct **Scope a small pilot** mailto remains as the shortest high-intent path.
@@ -51,25 +53,20 @@ Homepage Open Graph title and description are locked to the canonical `<title>` 
 
 Do not replace this with a third-party form endpoint or account without Ali's explicit approval.
 
-#### Readiness Score → assessment-brief handoff (added 2026-09-10 by Claude)
-The Readiness Score result now offers **Continue to the assessment brief** as
-its primary CTA (the direct assessment mailto remains as the secondary path).
-Clicking it — an explicit user action — writes a one-shot, tab-scoped
-`sessionStorage` payload (`clinicops.readiness.handoff`: score, band, gap
-list, timestamp only; never company/customer data). `assessment-intake.html`
-consumes and immediately deletes the key, and prefills the optional notes
-field only when it is empty and the payload is fresh (<1h). No network path
-was added on either page; behaviour is unchanged when storage is unavailable.
-Contracts: `tests/test_readiness_handoff_contract.py` (key agreement,
-one-shot consumption, no network tokens) and `conversion_quality.py` now also
-requires `readiness-score.html → assessment-intake.html`.
+#### Readiness Score → assessment-brief handoff (added 2026-09-10 by Claude, PR #14)
+The Readiness Score result offers **Continue to the assessment brief** as its primary CTA (the direct assessment mailto remains as the secondary path). Clicking it — an explicit user action — writes a one-shot, tab-scoped `sessionStorage` payload (`clinicops.readiness.handoff`: score, band, gap list, timestamp only; never company/customer data). `assessment-intake.html` consumes and immediately deletes the key, and prefills the optional notes field only when it is empty and the payload is fresh (<1h). No network path was added on either page; behaviour is unchanged when storage is unavailable. Contracts: `tests/test_readiness_handoff_contract.py` (key agreement, one-shot consumption, no network tokens) and `conversion_quality.py` requires `readiness-score.html → assessment-intake.html`.
+
+Do not rebuild or refactor this handoff speculatively. If either page changes, keep the handoff contract green by fixing the site, not weakening the tests.
 
 ### Sanitized Class III Transition Map sample
 `docs/transition-map-sample/index.html` is public proof of the paid deliverable format.
 - Generated from the same `render_client_html()` path used by the client bundle.
 - Source fixture `examples/portfolio.csv` is fictional/sanitized.
 - `scripts/render_public_demo.py --check` prevents the public sample from drifting from the paid renderer.
-- The sample is linked from Tools and from high-intent homepage CTAs.
+- The sample explains what a small pilot can start with and what the human-reviewed output contains.
+- Its primary next step is the browser-local `assessment-intake.html`; direct email and the free Readiness Score remain available.
+- The sample is linked from Tools, the homepage and the Class III transition page.
+- The conversion contract requires the sample → assessment-intake path and the Class III page → sample/intake paths.
 - Ops Watch verifies the deployed sample.
 
 Do not put confidential client/prospect data into this sample or any public Pages artifact.
@@ -87,7 +84,7 @@ Do not put confidential client/prospect data into this sample or any public Page
 - Deterministic 0–100 result with evidence-gap explanations.
 - Not a regulatory risk, compliance, legal or enforcement score.
 - No live EUDAMED lookup and no browser network calls.
-- Contract: `scripts/validate_readiness_page.py`.
+- Contract: `scripts/validate_readiness_page.py` plus the PR #14 handoff contract.
 
 Keep both tools free. Monetize human-reviewed portfolio judgement, transition work planning and monitoring.
 
@@ -113,13 +110,16 @@ Current CI includes:
 ### Site metadata
 `scripts/validate_site_metadata.py` + `src/clinicops_os/site_quality.py` enforce self-canonical URLs, Open Graph essentials, Twitter summary card and parseable JSON-LD. Homepage additionally requires Organization/WebSite/WebPage types.
 
-The current favicon is a compact checkmark icon, not a proper corporate logo. Do **not** label it as the Organization `logo` merely to silence SEO tooling. No `og:image` until a proper brand/social asset is deliberately approved.
+The current favicon is a compact checkmark icon, not a proper corporate logo. Do **not** label it as the Organization `logo` merely to silence SEO tooling. No `og:image` until a proper brand/social asset is deliberately approved. `twitter:card` stays `summary` until that asset decision changes deliberately.
 
 ### Sitemap
 `scripts/render_sitemap.py --check` makes `docs/sitemap.xml` deterministic from public HTML canonicals and excludes the custom 404. Adding/removing a public canonical page without updating the rendered sitemap fails CI.
 
 ### Internal links
 `src/clinicops_os/link_quality.py` + `scripts/validate_internal_links.py` fail CI on broken local production links while allowing external/mailto/tel targets. Do not weaken this check to accommodate broken links; repair the links instead.
+
+### Conversion paths
+`src/clinicops_os/conversion_quality.py` + `tests/test_conversion_quality.py` protect only durable high-intent navigation contracts, not marketing copy. Current protected paths include homepage → assessment/sample, Tools → sample, Readiness Score → assessment, assessment → sample/readiness, Class III transition → assessment/sample, and public sample → assessment.
 
 ### Ops Watch
 `.github/workflows/ops-watch.yml` remains bounded and read-only. It covers:
@@ -135,14 +135,14 @@ It does not publish, contact prospects, make client compliance findings or mutat
 GSC Wizard is configured against `https://clinicops.dk/` and the canonical production sitemap `https://clinicops.dk/sitemap.xml`.
 
 Observed 2026-09-10:
-- Live crawl confirms the GitHub production homepage, sample and assessment intake return HTTP 200, are indexable, self-canonical and expose structured data.
+- Live crawl confirms the GitHub production homepage, sample and assessment intake return HTTP 200, are indexable, self-canonical and expose structured data; the post-PR #16 live crawl also confirmed the Class III page and sample remain 200/indexable/self-canonical.
 - Homepage is known/indexed in Search Console; most newly launched URLs are still unknown to Google immediately after the migration/deployment.
 - The public Transition Map sample and assessment intake are in the GSC Wizard indexing tracker.
-- `assessment-intake.html` currently reports `URL is unknown to Google`; this is an indexing/discovery state, not a live-site failure.
+- `assessment-intake.html` has reported `URL is unknown to Google`; this is an indexing/discovery state, not a live-site failure.
 - Do not mass-produce thin SEO pages while current production URLs are still being discovered.
 - A Search Console sitemap submission of `https://clinicops.dk/sitemap.xml` should be verified manually if it has not already been submitted; changing GSC Wizard's sitemap configuration does not itself prove a Search Console sitemap submission.
 
-Current SEO-tool warnings are non-blocking: the homepage meta description is slightly over the usual display guideline, and Organization schema lacks a logo. Do not rewrite approved page copy or mislabel the favicon merely to remove these warnings.
+Current SEO-tool warnings are non-blocking: some title/meta lengths exceed usual display guidelines, and Organization schema lacks a logo. Do not rewrite approved page copy or mislabel the favicon merely to remove these warnings.
 
 ## Executable agent layer
 Do not create a second fleet. The six canonical `.github/agents/` profiles remain:
@@ -192,6 +192,14 @@ Executable components:
 - `experiments/EXPERIMENT_LEDGER.md`
 - `.github/ISSUE_TEMPLATE/experiment.yml`
 
+### Current commercial validation threshold (EXP-001, merged in PR #15)
+Do not call the core offer validated from conversations or compliments alone. Current decision rule:
+1. complete three qualified portfolio conversations;
+2. at least two buyers independently describe repeated portfolio reconciliation / evidence-control work addressed by the offer; and
+3. at least one buyer makes a concrete commercial commitment such as asking for a priced scope, proposing a pilot, or identifying budget/approval ownership.
+
+A stronger signal is a paid pilot followed by repeat, expansion, referral or reuse on another portfolio. If ten qualified target-buyer conversations produce no concrete willingness to sponsor a pilot, no priced-scope request and no repeated evidence of budgeted urgency, pause product expansion and change at least one of buyer, problem, offer, packaging or distribution before building more functionality.
+
 Service-first delivery remains:
 
 `clinicops.dk → free screening / proof sample → browser-local scope brief → controlled private intake → validation/analysis → human regulatory review → secure client bundle → feedback → Revenue OS learning`
@@ -239,8 +247,8 @@ Avoid expensive CRM/cloud/portal/data purchases until real paid usage proves the
 10. Keep private customer/prospect evidence out of the public repo.
 
 ## Highest-leverage next work
-1. Verify/submit the new production sitemap in Google Search Console if not already done; then give indexing time rather than creating a large content batch.
-2. Run a **small number of high-information buyer conversations/experiments** with authorised representatives, regulatory consultancies and Class III/implantable manufacturers. Avoid mass outreach.
-3. Use the live sanitized sample + assessment brief as the proof/scoping path and deliver the first paid/design-partner Class III Transition Map with bundle schema `1.1`.
-4. Capture actual objections, missing intake fields, delivery friction and willingness-to-pay in the Revenue OS; change product/automation based on those signals.
+1. **Commercial validation now outranks speculative product work.** Use the live sample, Readiness Score and browser-local assessment brief in a small number of high-information conversations with ARs, regulatory consultancies and Class III/implantable manufacturers; record private buyer evidence against EXP-001.
+2. Verify/submit the new production sitemap in Google Search Console if not already done; then give indexing time rather than creating a large content batch.
+3. Deliver the first paid/design-partner Class III Transition Map with bundle schema `1.1`; capture actual objections, missing intake fields, delivery friction and willingness-to-pay in the Revenue OS.
+4. Strengthen credibility and offer clarity only where real buyer objections show a gap. Do not invent testimonials, ROI, turnaround promises or regulatory certainty.
 5. Build portal/SaaS features only when repeated paid engagements prove multi-user upload, action tracking or recurring monitoring needs.
