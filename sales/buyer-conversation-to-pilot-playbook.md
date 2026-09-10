@@ -138,9 +138,17 @@ The priority score is operator triage only. It is not a compliance, legal, enfor
 
 ## Pilot execution path
 
-Never place a real buyer portfolio in this public repository.
+Never place a real buyer portfolio or activation record in this public repository. The standard founder-independent path applies only to an eligible **paid pilot**. Design-partner work or any non-standard condition remains `NON-STANDARD — NOT ACTIVATED` unless the governing policy is changed at policy level.
 
-With the authorised portfolio stored in a controlled private location:
+With the authorised materials stored in an approved private location, start from the sanitized activation-record example and run the fail-closed commercial/operational preflight before material work:
+
+```bash
+clinicops-pilot-preflight /private/path/activation-record.json
+```
+
+Proceed only when it returns `"status": "ACTIVATED"`. Missing or ambiguous negative attestations do not default to safe; they block activation.
+
+Then validate and generate the controlled bundle:
 
 ```bash
 clinicops-portfolio-validate /private/path/portfolio.csv
@@ -157,6 +165,16 @@ Expected bundle schema `1.1`:
 - `intake_diagnostics.md`
 - `manifest.json`
 
+After the qualified human-review gate and any required regeneration, verify the final private source and every schema-1.1 controlled output immediately before external release:
+
+```bash
+clinicops-pilot-verify /private/path/output /private/path/portfolio.csv
+```
+
+External release requires `"status": "VERIFIED"`. A mismatch means the controlled source/output set changed: correct or regenerate the bundle, repeat human review as applicable, and verify again. Do not edit hashes or the manifest to make changed files appear verified.
+
+A successful synthetic example, CI preflight or CI bundle verification does **not** prove founder-independent execution. The delegation proof condition remains the one defined in `sales/commercial-activation-gate.md`.
+
 ## Human-review gate before client delivery
 
 Before anything leaves ClinicOps:
@@ -166,9 +184,11 @@ Before anything leaves ClinicOps:
 3. separate machine-detected structure from human regulatory judgement;
 4. confirm MF / AR / PR distinctions where relevant;
 5. leave unresolved facts unresolved rather than inferring them;
-6. verify the bundle manifest and hashes were generated from the final input/output set;
-7. remove any internal-only notes not intended for the buyer;
-8. have the responsible human reviewer approve the final client-facing interpretation.
+6. remove any internal-only notes not intended for the buyer;
+7. approve the final client-facing interpretation as the responsible qualified human reviewer;
+8. after any required regeneration, run `clinicops-pilot-verify` on the exact final private source/bundle and require `VERIFIED` immediately before release.
+
+Integrity verification proves file correspondence, not regulatory correctness, and never replaces the responsible human review.
 
 ## Evidence boundaries for discussion
 
