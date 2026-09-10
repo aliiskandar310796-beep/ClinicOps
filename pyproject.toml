@@ -24,6 +24,7 @@ clinicops-portfolio-json = "clinicops_os.cli:portfolio_json"
 clinicops-portfolio-validate = "clinicops_os.cli:portfolio_validate"
 clinicops-pilot-preflight = "clinicops_os.cli:pilot_preflight"
 clinicops-pilot-bundle = "clinicops_os.cli:pilot_bundle"
+clinicops-pilot-verify = "clinicops_os.cli:pilot_verify"
 clinicops-claims = "clinicops_os.cli:claims_status"
 clinicops-publication-pack = "clinicops_os.cli:publication_pack"
 
