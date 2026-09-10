@@ -22,6 +22,8 @@ jobs:
         run: python scripts/validate_readiness_page.py
       - name: Site metadata contract
         run: python scripts/validate_site_metadata.py
+      - name: Sitemap contract
+        run: python scripts/render_sitemap.py --check
       - name: Client bundle smoke test
         run: |
           rm -rf /tmp/clinicops-pilot
