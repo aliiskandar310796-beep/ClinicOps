@@ -7,6 +7,7 @@ on:
   push:
     paths:
       - '.github/workflows/ops-watch.yml'
+      - 'scripts/check_live_site.py'
       - 'scripts/eudamed_canary.py'
       - 'scripts/evaluate_canary.py'
       - 'src/clinicops_eudamed/canary.py'
@@ -25,6 +26,19 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  live-site-health:
+    name: Live site health
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - run: pip install -e .
+      - name: Verify clinicops.dk over HTTPS
+        run: python scripts/check_live_site.py
+
   evidence-freshness:
     name: Evidence freshness
     runs-on: ubuntu-latest
