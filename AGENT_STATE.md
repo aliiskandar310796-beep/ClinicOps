@@ -1,6 +1,6 @@
 # ClinicOps shared agent state
 
-Last updated: 2026-09-10 after PR #16 proof-to-pilot conversion hardening and commercial-validation integration.
+Last updated: 2026-09-10 after PR #25 commercial-priority correction and standard paid-pilot delegation hardening.
 
 ## Canonical truth
 This GitHub repository is the shared source of truth. Pull/fetch `main` before work. Local terminal state, ZIPs and chat transcripts are secondary until their changes land here. Preserve concurrent work; never force-overwrite a newer branch/file.
@@ -8,7 +8,7 @@ This GitHub repository is the shared source of truth. Pull/fetch `main` before w
 ## Current production baseline
 - `clinicops.dk` is the live GitHub Pages production site. The old GoDaddy-hosted site is retired; GoDaddy remains DNS only.
 - HTTPS is enforced and GitHub Pages deploys `docs/**` through `.github/workflows/pages.yml`.
-- Latest functional baseline before this state-only update: `27410995f9e00d8d819210d426099880aeffa965` — **Tighten proof-to-pilot buyer path (#16)**.
+- Latest merged baseline before the delegation change: `4960533c7e90ab11e7077de4ff152cf8d448be4f` — **Correct commercial priority contract (#25)**.
 - PR #14 (`5df4a3f`) added the browser-local Readiness Score → assessment-brief handoff; PR #15 (`a1279e9`) added decision-grade commercial-validation thresholds; PR #16 (`27410995`) clarified the Class III/sample → assessment-intake path.
 - Post-merge CI on PR #16 passed the complete configured gate stack and the exact-sha GitHub Pages deployment completed successfully.
 - Live on-page crawl after PR #16 confirmed `class-iii-transition.html` and `transition-map-sample/` return HTTP 200, are indexable, self-canonical and expose structured data.
@@ -203,6 +203,12 @@ A stronger signal is a paid pilot followed by repeat, expansion, referral or reu
 Service-first delivery remains:
 
 `clinicops.dk → free screening / proof sample → browser-local scope brief → controlled private intake → validation/analysis → human regulatory review → secure client bundle → feedback → Revenue OS learning`
+
+### Standard paid-pilot delegation envelope
+
+`sales/commercial-activation-gate.md` defines the founder-independent operating boundary for the existing Class III Transition Map Pilot. A trained operator may execute a standard paid pilot from written scope through closeout only when the EXP-001 buyer, bounded population, approved commercial terms, private data route, controlled bundle schema and qualified named human-review gate are all satisfied.
+
+Anything outside that envelope is marked **NON-STANDARD — NOT ACTIVATED** and parked or declined. The delegated workflow abstains rather than routing design-partner work, custom scope/pricing, unusual liability, unsupported interpretation, patient-identifiable data or unavailable qualified review to Ali for an ad hoc transaction decision. Founder-independent execution is not considered proven until one eligible paid pilot or two controlled dry runs complete with zero Ali transaction-level decisions and no unplanned exception.
 
 Bundle schema `1.1` includes:
 - `client_report.html`
