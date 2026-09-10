@@ -83,3 +83,13 @@ def test_missing_negative_attestation_fails_closed() -> None:
 
     assert result.activated is False
     assert "scope requires unsupported interpretation" in result.reasons
+
+
+def test_malformed_activation_condition_fails_closed_without_crashing() -> None:
+    record = _standard_record()
+    record["activation_condition"] = ["upfront_payment"]
+
+    result = evaluate_standard_pilot(record)
+
+    assert result.activated is False
+    assert "activation_condition is not an approved paid-pilot condition" in result.reasons
