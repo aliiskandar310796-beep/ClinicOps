@@ -28,6 +28,10 @@ REQUIREMENTS = (
         ("assessment-intake.html",),
     ),
     ConversionRequirement(
+        "class-iii-transition.html",
+        ("assessment-intake.html", "transition-map-sample/"),
+    ),
+    ConversionRequirement(
         "transition-map-sample/index.html",
         ("/assessment-intake.html",),
     ),
