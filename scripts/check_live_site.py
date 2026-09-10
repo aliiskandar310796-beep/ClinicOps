@@ -29,7 +29,12 @@ TARGETS = (
     Target("/", 200, "Turn EUDAMED transition evidence into an actionable work plan."),
     Target("/tools.html", 200, "Free intelligence tools"),
     Target("/readiness-score.html", 200, "Transition Readiness Score"),
-    Target("/sitemap.xml", 200, "https://clinicops.dk/"),
+    Target(
+        "/transition-map-sample/",
+        200,
+        "ClinicOps Class III Transition Map — Sanitized Sample",
+    ),
+    Target("/sitemap.xml", 200, "https://clinicops.dk/transition-map-sample/"),
     Target("/robots.txt", 200, "Sitemap: https://clinicops.dk/sitemap.xml"),
     Target(
         "/__clinicops_healthcheck_missing__.html",
