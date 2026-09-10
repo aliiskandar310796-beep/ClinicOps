@@ -1,77 +1,138 @@
 # ClinicOps shared agent state
 
-Last updated: 2026-09-10 by Claude after clinicops.dk DNS cutover + HTTPS enforcement went live.
+Last updated: 2026-09-10 after production funnel, SEO guardrail and Ops Watch hardening.
 
 ## Canonical truth
-This GitHub repository is the shared source of truth. Local terminal state, ZIPs and chat transcripts are secondary until their changes land here.
+This GitHub repository is the shared source of truth. Pull/fetch `main` before work. Local terminal state, ZIPs and chat transcripts are secondary until their changes land here. Preserve concurrent work; never force-overwrite a newer branch/file.
 
-## Latest verified deployment baseline
-- `main` code baseline: `d16672161ff6bf4aa84cfafd8adadb4e6be85a67` — **Build Transition Readiness Score and executable agent gates**.
-- PR: `#2` — merged by squash after green PR CI.
-- PR CI: run `34388234445` completed successfully after a narrow Ruff timezone fix; **67 pytest tests** passed plus every configured repository gate.
-- Post-merge CI: run `34388328839` completed successfully on `main`.
-- Pages deployment: run `34388328683` completed successfully on the same `main` commit.
-- Pages artifact: `github-pages`, artifact `10118588012`, SHA-256 digest `00e4b35676ac2d3da8f54214b468e132c690db6d50dd7c8b9a203ace53f53bc8`.
-- The downloaded Pages artifact was inspected and contains both `index.html` and `readiness-score.html`; the readiness artifact contains the browser-local privacy statement and the Regulatory Intelligence Assessment CTA.
+## Current production baseline
+- `clinicops.dk` is the live GitHub Pages production site. The old GoDaddy-hosted site is retired; GoDaddy remains DNS only.
+- HTTPS is enforced and GitHub Pages deploys `docs/**` through `.github/workflows/pages.yml`.
+- Latest functional baseline before this state-only commit: `0f27b19bccdff0f6aa223df23538b32d0484536d` — **Monitor assessment intake in Ops Watch (#11)**.
+- Post-merge CI on that baseline passed the complete configured gate stack.
+- Live-site health passed against the production domain, including the homepage, tools, readiness score, sanitized Transition Map sample, assessment intake, sitemap, robots.txt and custom 404.
+- The bounded EUDAMED canary and evidence-freshness jobs are also green on the current Ops Watch path.
 
-## Production site (added 2026-09-10 by Claude — see below)
-- `docs/index.html` is now the site **Home** page, not the Identifier Check tool.
-- Full site built: Home, About, Research, Tools, EUDAMED Intelligence
-  (`eudamed-transition.html`), MDR Transition (`class-iii-transition.html`),
-  SS(C)P Operations (`sscp-operations.html`), Authorised Representative
-  Intelligence (`authorised-representative-portfolio-intelligence.html`),
-  Contact — rendered from the `website/*.md` deployment packs, shared
-  nav/footer, no external CDN dependency, light/dark aware, claim-gated (no
-  claim IDs rendered publicly, `claim_gate.py`/`validate_content_claims.py`
-  both pass).
-- **DNS cutover is now LIVE (2026-09-10).** `docs/CNAME` was added
-  (`clinicops.dk`), Ali repointed GoDaddy DNS (4×A@ to GitHub Pages IPs,
-  `www` CNAME to `aliiskandar310796-beep.github.io`), GitHub's Pages "DNS
-  check" shows green/successful, and **Enforce HTTPS is now ticked** in
-  Settings → Pages. clinicops.dk serves the new production site over valid
-  HTTPS — confirmed via a genuinely fresh (cache-busted) fetch of the
-  homepage and sub-pages, and by direct browser load with no cert warning.
-  The old GoDaddy-hosted site is fully retired; clinicops.dk === this repo's
-  `docs/` output now.
-- Validated: 130/130 internal links resolve, one `<h1>` per page, full test
-  suite + claim gate + content-claim validator all green. Visually
-  screenshotted (Playwright, desktop 1280px + mobile 390px, light + dark) —
-  responsive nav and card grids confirmed rendering correctly, no CSS
-  regressions.
-- Site hygiene added same session: `docs/robots.txt`, `docs/sitemap.xml`
-  (all 11 public pages), `docs/404.html` (styled, matches design system),
-  `docs/favicon.svg` (referenced from every page's `<head>`). All existing
-  validators (`validate_readiness_page.py`, `validate_content_claims.py
-  website`, `claim_gate.py`, `audit_claim_references.py`) re-run green after
-  these additions.
-- **Not yet done:** no `<meta property="og:*">` / Twitter-card tags, no
-  JSON-LD structured data (ProfessionalService/Organization), no canonical
-  `<link>` tags, no analytics (deliberately — no tracking has been added
-  without a separate decision). See the 2026-09-10 build brief for ChatGPT
-  in `00_CONTROL/` for the full next-phase task list.
+## Production acquisition and conversion surface
+The public site now has 13 sitemap URLs:
+- `/`
+- `/about.html`
+- `/assessment-intake.html`
+- `/authorised-representative-portfolio-intelligence.html`
+- `/class-iii-transition.html`
+- `/contact.html`
+- `/eudamed-transition.html`
+- `/identifier-check.html`
+- `/readiness-score.html`
+- `/research.html`
+- `/sscp-operations.html`
+- `/tools.html`
+- `/transition-map-sample/`
 
-## Public tools
+All public HTML pages are governed by production metadata/link/sitemap checks. Do not recreate duplicate `/eudamed/` or `/mdr-transition/` pillar pages that compete with the existing production pages.
+
+### Homepage conversion path
+The homepage now exposes three useful levels of commitment:
+1. **Request a Regulatory Intelligence Assessment** → `assessment-intake.html`.
+2. **View a sanitized Transition Map sample** → `/transition-map-sample/`.
+3. A direct **Scope a small pilot** mailto remains as the shortest high-intent path.
+
+Homepage Open Graph title and description are locked to the canonical `<title>` and meta description by a regression test. Do not introduce separate social-marketing copy unless deliberately changing the canonical page copy as well.
+
+### Browser-local assessment intake
+`docs/assessment-intake.html` is a structured scoping brief builder, not a hosted form service.
+- No form action or backend endpoint.
+- No analytics/tracking.
+- No `fetch`, XHR, `sendBeacon` or WebSocket network submission.
+- User answers stay in the browser page until the user explicitly creates an email draft.
+- The generated draft is opened through the user's own email client to `info@clinicops.dk`; the user decides whether to send.
+- The page explicitly warns against patient-identifiable data.
+- Contract: `tests/test_assessment_intake_contract.py` blocks silent network/form regressions.
+
+Do not replace this with a third-party form endpoint or account without Ali's explicit approval.
+
+### Sanitized Class III Transition Map sample
+`docs/transition-map-sample/index.html` is public proof of the paid deliverable format.
+- Generated from the same `render_client_html()` path used by the client bundle.
+- Source fixture `examples/portfolio.csv` is fictional/sanitized.
+- `scripts/render_public_demo.py --check` prevents the public sample from drifting from the paid renderer.
+- The sample is linked from Tools and from high-intent homepage CTAs.
+- Ops Watch verifies the deployed sample.
+
+Do not put confidential client/prospect data into this sample or any public Pages artifact.
+
+## Public free tools
 ### EUDAMED Identifier Check
-- `docs/identifier-check.html` (moved off the root path — see Production site above)
-- Client-side only.
-- GS1 Mod-10 validation, SRN role decoding and B-prefix structural screening.
-- Linked from Home, Tools and Contact as the free identifier front door.
+- `docs/identifier-check.html`
+- Browser/client-side only.
+- GS1 Mod-10 validation, common SRN role decoding and B-prefix structural screening.
+- B-prefix is a ClinicOps screening signal, not a compliance conclusion or quoted Commission rule.
 
 ### Transition Readiness Score
 - `docs/readiness-score.html`
-- New browser-only lead-magnet tool.
-- Five self-reported operational work-plan questions.
-- Deterministic 0–100 readiness signal with explicit gap explanations.
-- The number is an **operational evidence/work-plan readiness signal**, not a regulatory risk, compliance, legal or enforcement score.
+- Browser-only five-question operational work-plan readiness signal.
+- Deterministic 0–100 result with evidence-gap explanations.
+- Not a regulatory risk, compliance, legal or enforcement score.
 - No live EUDAMED lookup and no browser network calls.
-- Result CTA: **Request a Regulatory Intelligence Assessment** via `info@clinicops.dk`.
-- The Identifier Check cross-links to the readiness tool; the readiness tool links back.
-- Contract validator: `scripts/validate_readiness_page.py` enforces 5–8 questions, 100 total weight, complete 0–100 band coverage, gap messages, privacy copy, CTA copy and local-only behavior.
+- Contract: `scripts/validate_readiness_page.py`.
+
+Keep both tools free. Monetize human-reviewed portfolio judgement, transition work planning and monitoring.
+
+## Website resilience gates
+Current CI includes:
+- pytest
+- Ruff
+- Revenue OS experiment-contract smoke
+- executable agent five-gate smoke
+- Transition Readiness Score contract
+- public Transition Map renderer-drift contract
+- site metadata contract
+- deterministic sitemap contract
+- internal-link contract
+- client-bundle smoke test
+- custom-agent profile audit
+- claim-registry audit
+- claim-reference integrity
+- governed website content validation
+- sanitized report fixture check
+- public-copy claim gate
+
+### Site metadata
+`scripts/validate_site_metadata.py` + `src/clinicops_os/site_quality.py` enforce self-canonical URLs, Open Graph essentials, Twitter summary card and parseable JSON-LD. Homepage additionally requires Organization/WebSite/WebPage types.
+
+The current favicon is a compact checkmark icon, not a proper corporate logo. Do **not** label it as the Organization `logo` merely to silence SEO tooling. No `og:image` until a proper brand/social asset is deliberately approved.
+
+### Sitemap
+`scripts/render_sitemap.py --check` makes `docs/sitemap.xml` deterministic from public HTML canonicals and excludes the custom 404. Adding/removing a public canonical page without updating the rendered sitemap fails CI.
+
+### Internal links
+`src/clinicops_os/link_quality.py` + `scripts/validate_internal_links.py` fail CI on broken local production links while allowing external/mailto/tel targets. Do not weaken this check to accommodate broken links; repair the links instead.
+
+### Ops Watch
+`.github/workflows/ops-watch.yml` remains bounded and read-only. It covers:
+- evidence freshness;
+- claim-reference integrity;
+- governed-content validation;
+- bounded EUDAMED reachability canary;
+- live `clinicops.dk` HTTPS/content checks.
+
+It does not publish, contact prospects, make client compliance findings or mutate third-party systems.
+
+## Search / indexing status
+GSC Wizard is configured against `https://clinicops.dk/` and the canonical production sitemap `https://clinicops.dk/sitemap.xml`.
+
+Observed 2026-09-10:
+- Live crawl confirms the GitHub production homepage, sample and assessment intake return HTTP 200, are indexable, self-canonical and expose structured data.
+- Homepage is known/indexed in Search Console; most newly launched URLs are still unknown to Google immediately after the migration/deployment.
+- The public Transition Map sample and assessment intake are in the GSC Wizard indexing tracker.
+- `assessment-intake.html` currently reports `URL is unknown to Google`; this is an indexing/discovery state, not a live-site failure.
+- Do not mass-produce thin SEO pages while current production URLs are still being discovered.
+- A Search Console sitemap submission of `https://clinicops.dk/sitemap.xml` should be verified manually if it has not already been submitted; changing GSC Wizard's sitemap configuration does not itself prove a Search Console sitemap submission.
+
+Current SEO-tool warnings are non-blocking: the homepage meta description is slightly over the usual display guideline, and Organization schema lacks a logo. Do not rewrite approved page copy or mislabel the favicon merely to remove these warnings.
 
 ## Executable agent layer
-The repo already had six canonical `.github/agents/` profiles. The new runtime does **not** add a second fleet.
-
-Canonical execution profiles:
+Do not create a second fleet. The six canonical `.github/agents/` profiles remain:
 1. Regulatory Evidence Steward
 2. Portfolio Operator
 3. Release Sentinel
@@ -79,48 +140,36 @@ Canonical execution profiles:
 5. Customer Discovery Agent
 6. Visibility Architect
 
-`06_AGENTS/AGENT_OPERATING_MODEL.md` now reconciles older conceptual names into those profiles:
-- Evidence Guardian / Intelligence Scout / Research Scout → Regulatory Evidence Steward
-- Growth Agent / Content Engine → Visibility Architect
-- Opportunity Agent / Revenue Agent → Opportunity Architect
-- Resilience Agent → Release Sentinel
-
 Executable runtime:
 - `src/clinicops_os/agents.py`
 - `scripts/agent_gate.py`
 - sanitized fixture `examples/agent_tasks.json`
 - tests `tests/test_agents.py`
 
-Five mandatory gates are enforced in code:
+Five mandatory gates:
 1. Evidence check
 2. Claim safety check
 3. Business value check
 4. Reproducibility check
 5. Human review for external publication
 
-The runtime reuses `clinicops_eudamed.claim_guard.check_claim()` and the existing claim registry. It does not create a parallel regulatory-claim checker.
+Reuse `clinicops_eudamed.claim_guard.check_claim()` and the existing claim registry; do not introduce a parallel regulatory-claim checker.
 
-## Claim governance
-- `research/claims.jsonl` remains the versioned claim registry.
-- `src/clinicops_eudamed/claim_guard.py` remains the known-bad-phrasing guard.
-- `src/clinicops_os/claim_registry.py` remains the claim-status/use/review gate.
-- Public factual/regulatory copy must remain traceable to `CO-CLM-####` claims and their allowed-use boundaries.
-- PR #2 removed a blocked-phrase example from `sales/obelis-transition-conversation.md` without weakening the underlying safety instruction.
-- CI public-copy claim-gate coverage now includes `offers`, `sales`, `research`, and `content` in addition to the prior public surfaces.
+## Claim governance and corrected regulatory thesis
+- `research/claims.jsonl` is the versioned claim registry.
+- `src/clinicops_eudamed/claim_guard.py` is the known-bad-phrasing guard.
+- `src/clinicops_os/claim_registry.py` is the claim-status/use/review gate.
+- Public regulatory copy must remain within `CO-CLM-####` evidence and allowed-use boundaries.
+- Do not revive the rejected manufacturer-diligence-failure headline from the Class III census.
+- In the corrected 8 Sep 2026 sample, sampled MF-role MDR Class III registrations had linked validated SS(C)P metadata; the commercial opportunity is legacy-to-MDR transition/document-operations workload, not a generic allegation about manufacturer diligence.
+- Preserve MF/AR/IM/PR actor-role distinctions.
+- Do not infer SS(C)P non-compliance from a missing/null public link alone.
+- Do not imply an end-to-end EUDAMED audit when public/API reachability is bounded.
+- Commercial priority scores are operator-triage signals, not regulatory/compliance/legal risk scores.
+- EUDAMED canary correction remains `CO-CLM-0011`: the previously observed apparent page-32,000 failure boundary was not reproduced on 9 Sep 2026; treat it as a dated observation, not a stable system limit.
 
-## Corrected regulatory thesis
-- Do not revive the rejected manufacturer-diligence-failure headline from the class III census.
-- In the corrected 8 Sep 2026 sample, all sampled MF-role MDR class III registrations had linked validated SS(C)P metadata; the commercial opportunity is the **legacy-to-MDR transition/document-operations workload**, not a generic allegation about manufacturer diligence.
-- B-prefix handling is a ClinicOps screening/derivation layer unless the exact proposition is directly supported by the registered primary source.
-- Do not imply an end-to-end public-register audit when API reachability is bounded.
-- Preserve MF/AR/IM/PR role distinctions.
-- Commercial priority scores are not regulatory/compliance/legal risk scores.
-
-## EUDAMED API correction
-The 9 Sep 2026 canary did not reproduce the prior apparent page-32,000 failure boundary. Pages 0, 30,000 and 32,000 returned HTTP 200 with 50 records in the bounded run. Treat the 8 Sep failure as a dated observation, not a stable boundary. Canonical claim: `CO-CLM-0011`.
-
-## Revenue OS
-Current commercial loop:
+## Revenue OS and client delivery
+Commercial loop:
 
 `signal → evidence coverage → ranked account → smallest commercial experiment → result → learning → reusable asset → revenue`
 
@@ -130,86 +179,55 @@ Executable components:
 - `experiments/EXPERIMENT_LEDGER.md`
 - `.github/ISSUE_TEMPLATE/experiment.yml`
 
-Real prospect/account data stays private. Public GitHub contains sanitized fixtures and reusable code only.
+Service-first delivery remains:
 
-## Client delivery
-Service-first deployment remains canonical:
+`clinicops.dk → free screening / proof sample → browser-local scope brief → controlled private intake → validation/analysis → human regulatory review → secure client bundle → feedback → Revenue OS learning`
 
-`clinicops.dk acquisition → controlled private intake → ClinicOps validation/analysis → human regulatory review → secure client bundle → feedback → Revenue OS learning`
-
-Existing bundle schema `1.1` includes:
+Bundle schema `1.1` includes:
 - `client_report.html`
 - `portfolio_report.md`
 - `portfolio_report.json`
 - `intake_diagnostics.md`
 - `manifest.json` with source/output hashes
 
-Do not place confidential client bundles or named private prospect data on public GitHub Pages/Actions.
+Real prospect/account data and confidential client bundles stay private. Public GitHub contains only sanitized fixtures and reusable code.
 
-## CI and GitHub automation
-Current CI checks:
-- pytest
-- Ruff
-- Revenue OS experiment-contract smoke
-- executable agent five-gate smoke
-- Transition Readiness Score contract
-- client-bundle smoke
-- custom-agent profile audit
-- claim-registry audit
-- claim-reference integrity
-- governed website content validation
-- sanitized report fixture check
-- widened public-copy claim gate
+## External-action boundaries
+Require Ali's case-by-case approval before:
+- LinkedIn publishing;
+- Gumroad/pricing changes;
+- creating third-party accounts or live form endpoints;
+- analytics/tracking deployment.
 
-`.github/workflows/ops-watch.yml` remains the bounded unattended regulatory-operations workflow: evidence freshness + EUDAMED reachability canary only. It does not publish, contact prospects, or make client compliance findings.
-
-## GitHub Pages
-- Pages is enabled and deployment works.
-- Identifier Check and Transition Readiness Score are deployed from `docs/` through `.github/workflows/pages.yml`.
-- Known Pages root: `https://aliiskandar310796-beep.github.io/ClinicOps/`.
-- Readiness path: `/ClinicOps/readiness-score.html`.
-- Do not use Pages for confidential client content.
-
-## Website / external account boundary
-- **clinicops.dk / GoDaddy DNS: now live (2026-09-10).** Ali made the DNS
-  change himself in GoDaddy (Claude does not and will not touch third-party
-  account credentials/settings). The domain now points at this repo's
-  GitHub Pages deployment with HTTPS enforced.
-- LinkedIn and Gumroad pricing/listings remain untouched — still separate
-  browser/account execution surfaces requiring explicit case-by-case
-  approval before any publish/pricing action.
-
-GitHub contains the governed deployment assets and public free-tool layer;
-external publication of anything beyond clinicops.dk still requires the
-applicable account access and human approval boundary.
+Permanent DO_NOT_CONTACT:
+- Ergomed Group
+- PrimeVigilance
 
 ## Budget/resilience doctrine
-ClinicOps is currently bootstrapped. Default architecture:
+ClinicOps is bootstrapped. Default to:
 - low fixed cost;
 - GitHub + Pages + existing domain/mail + AI leverage;
-- sell accountable intelligence before building expensive SaaS;
-- convert repeated client friction into automation;
-- reinvest validated revenue into infrastructure only after buyer evidence exists.
+- accountable service revenue before expensive SaaS;
+- automation only where repeated paid-work friction proves value;
+- reinvest validated revenue into infrastructure.
 
 Avoid expensive CRM/cloud/portal/data purchases until real paid usage proves the need.
 
 ## Coordination protocol
-Before shared-file changes:
 1. Fetch `main` first.
 2. Treat GitHub `main` as canonical over chat/local state.
 3. Preserve corrections, claim IDs and evidence limitations.
 4. Reuse existing modules before adding parallel logic.
-5. If a write conflicts, fetch newest and merge; never force-overwrite concurrent work.
+5. On conflict, fetch newest and merge; never force-overwrite concurrent work.
 6. Use feature branches/PRs for material multi-file changes.
-7. Verify the newest CI run before declaring code green.
-8. Verify Pages deployment when `docs/**` changes.
-9. Use the narrowest existing custom agent; expand capability before fleet size.
+7. Verify newest CI before declaring code green.
+8. Verify Pages deployment for `docs/**` changes.
+9. Use the narrowest existing agent; expand capability before fleet size.
 10. Keep private customer/prospect evidence out of the public repo.
 
-## Current highest-leverage next work
-1. **Unblocked as of 2026-09-10** — clinicops.dk is now the live acquisition funnel. Connect it to a structured intake path (currently `mailto:` only) and monitor real traffic/conversion once any distribution starts.
-2. Run a small number of high-information buyer experiments against ARs, regulatory consultancies and class III/implantable manufacturers; avoid mass outreach.
-3. Deliver the first paid/design-partner Class III Transition Map using bundle schema `1.1` and capture friction as structured experiment evidence.
-4. Turn only claim-approved research into distribution assets and measure qualified conversations, not vanity traffic.
-5. Build portal features only when repeated paid engagements prove multi-user/upload/action-tracking needs.
-6. Keep the readiness score and Identifier Check free; monetize the human-reviewed portfolio judgement and monitoring layer.
+## Highest-leverage next work
+1. Verify/submit the new production sitemap in Google Search Console if not already done; then give indexing time rather than creating a large content batch.
+2. Run a **small number of high-information buyer conversations/experiments** with authorised representatives, regulatory consultancies and Class III/implantable manufacturers. Avoid mass outreach.
+3. Use the live sanitized sample + assessment brief as the proof/scoping path and deliver the first paid/design-partner Class III Transition Map with bundle schema `1.1`.
+4. Capture actual objections, missing intake fields, delivery friction and willingness-to-pay in the Revenue OS; change product/automation based on those signals.
+5. Build portal/SaaS features only when repeated paid engagements prove multi-user upload, action tracking or recurring monitoring needs.
