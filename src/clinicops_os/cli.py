@@ -110,7 +110,7 @@ def pilot_preflight() -> None:
         raise SystemExit("usage: clinicops-pilot-preflight <activation-record.json>")
     try:
         record = load_preflight_record(sys.argv[1])
-    except (OSError, ValueError, json.JSONDecodeError) as exc:
+    except (OSError, TypeError, ValueError, json.JSONDecodeError) as exc:
         raise SystemExit(str(exc)) from exc
     result = evaluate_standard_pilot(record)
     print(render_preflight_result(result), end="")
