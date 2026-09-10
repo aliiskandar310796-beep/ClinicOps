@@ -25,6 +25,9 @@ def test_missing_required_conversion_link_is_reported(tmp_path: Path) -> None:
     (docs / "readiness-score.html").write_text(
         '<a href="assessment-intake.html">Assessment</a>', encoding="utf-8"
     )
+    (docs / "class-iii-transition.html").write_text(
+        '<a href="assessment-intake.html">Assessment</a>', encoding="utf-8"
+    )
     (docs / "transition-map-sample" / "index.html").write_text(
         '<a href="/readiness-score.html">Readiness</a>', encoding="utf-8"
     )
@@ -33,6 +36,10 @@ def test_missing_required_conversion_link_is_reported(tmp_path: Path) -> None:
     assert "index.html: missing high-intent path to transition-map-sample/" in errors
     assert (
         "assessment-intake.html: missing high-intent path to transition-map-sample/"
+        in errors
+    )
+    assert (
+        "class-iii-transition.html: missing high-intent path to transition-map-sample/"
         in errors
     )
     assert (
