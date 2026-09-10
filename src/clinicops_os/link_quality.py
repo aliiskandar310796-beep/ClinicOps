@@ -72,9 +72,8 @@ def validate_internal_links(docs_root: Path) -> list[str]:
                 continue
             if target is None:
                 continue
-            if target.suffix.lower() not in {".html", ""}:
-                if target.exists():
-                    continue
+            if target.suffix.lower() not in {".html", ""} and target.exists():
+                continue
             if not target.exists():
                 errors.append(
                     f"{page.relative_to(docs_root)}: broken internal link {href!r}"
