@@ -51,6 +51,19 @@ Homepage Open Graph title and description are locked to the canonical `<title>` 
 
 Do not replace this with a third-party form endpoint or account without Ali's explicit approval.
 
+#### Readiness Score → assessment-brief handoff (added 2026-09-10 by Claude)
+The Readiness Score result now offers **Continue to the assessment brief** as
+its primary CTA (the direct assessment mailto remains as the secondary path).
+Clicking it — an explicit user action — writes a one-shot, tab-scoped
+`sessionStorage` payload (`clinicops.readiness.handoff`: score, band, gap
+list, timestamp only; never company/customer data). `assessment-intake.html`
+consumes and immediately deletes the key, and prefills the optional notes
+field only when it is empty and the payload is fresh (<1h). No network path
+was added on either page; behaviour is unchanged when storage is unavailable.
+Contracts: `tests/test_readiness_handoff_contract.py` (key agreement,
+one-shot consumption, no network tokens) and `conversion_quality.py` now also
+requires `readiness-score.html → assessment-intake.html`.
+
 ### Sanitized Class III Transition Map sample
 `docs/transition-map-sample/index.html` is public proof of the paid deliverable format.
 - Generated from the same `render_client_html()` path used by the client bundle.
