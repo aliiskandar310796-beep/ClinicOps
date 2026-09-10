@@ -93,6 +93,20 @@ def test_manifest_output_key_mismatch_fails_verification(tmp_path: Path) -> None
     assert "output hash mismatch: client_report.html" in result.errors
 
 
+def test_manifest_cannot_omit_controlled_output_even_if_hash_is_removed(tmp_path: Path) -> None:
+    source, output = _build(tmp_path)
+    manifest_path = output / "manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["outputs"].remove("client_report.html")
+    del manifest["output_sha256"]["client_report.html"]
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+
+    result = verify_pilot_bundle(output, source)
+
+    assert result.valid is False
+    assert "outputs do not match the schema-1.1 controlled output set" in result.errors
+
+
 def test_manifest_cannot_escape_bundle_directory(tmp_path: Path) -> None:
     source, output = _build(tmp_path)
     manifest_path = output / "manifest.json"
