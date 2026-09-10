@@ -39,6 +39,8 @@ jobs:
           test -s /tmp/clinicops-pilot/client_report.html
           test -s /tmp/clinicops-pilot/portfolio_report.json
           grep -q '"bundle_schema_version": "1.1"' /tmp/clinicops-manifest.json
+          clinicops-pilot-verify /tmp/clinicops-pilot examples/portfolio.csv > /tmp/clinicops-bundle-verify.json
+          grep -q '"status": "VERIFIED"' /tmp/clinicops-bundle-verify.json
       - name: Custom-agent profile audit
         run: python scripts/audit_agent_profiles.py
       - name: Claim registry audit
