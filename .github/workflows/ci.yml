@@ -20,6 +20,8 @@ jobs:
         run: python scripts/agent_gate.py examples/agent_tasks.json 2026-09-09 > /tmp/clinicops-agent-gate.json
       - name: Readiness score contract
         run: python scripts/validate_readiness_page.py
+      - name: Public Transition Map sample
+        run: python scripts/render_public_demo.py --check
       - name: Site metadata contract
         run: python scripts/validate_site_metadata.py
       - name: Sitemap contract
