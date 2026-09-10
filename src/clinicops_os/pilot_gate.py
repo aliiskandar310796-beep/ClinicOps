@@ -169,7 +169,7 @@ def evaluate_standard_pilot(record: Mapping[str, object]) -> PilotPreflightResul
 def load_preflight_record(path: str | Path) -> dict[str, object]:
     raw = json.loads(Path(path).read_text(encoding="utf-8"))
     if not isinstance(raw, dict):
-        raise ValueError("preflight record must be a JSON object")
+        raise TypeError("preflight record must be a JSON object")
     return raw
 
 
