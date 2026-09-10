@@ -1,6 +1,6 @@
 # ClinicOps shared agent state
 
-Last updated: 2026-09-09 by ChatGPT after PR #2 merge and post-merge validation.
+Last updated: 2026-09-10 by Claude after clinicops.dk DNS cutover + HTTPS enforcement went live.
 
 ## Canonical truth
 This GitHub repository is the shared source of truth. Local terminal state, ZIPs and chat transcripts are secondary until their changes land here.
@@ -24,15 +24,31 @@ This GitHub repository is the shared source of truth. Local terminal state, ZIPs
   nav/footer, no external CDN dependency, light/dark aware, claim-gated (no
   claim IDs rendered publicly, `claim_gate.py`/`validate_content_claims.py`
   both pass).
-- **DNS has deliberately NOT been touched.** clinicops.dk still points at the
-  existing GoDaddy site. Ali's explicit instruction: do not create a public
-  outage — build and validate the asset first, prepare DNS migration only
-  after validation, then get explicit approval before any cutover.
+- **DNS cutover is now LIVE (2026-09-10).** `docs/CNAME` was added
+  (`clinicops.dk`), Ali repointed GoDaddy DNS (4×A@ to GitHub Pages IPs,
+  `www` CNAME to `aliiskandar310796-beep.github.io`), GitHub's Pages "DNS
+  check" shows green/successful, and **Enforce HTTPS is now ticked** in
+  Settings → Pages. clinicops.dk serves the new production site over valid
+  HTTPS — confirmed via a genuinely fresh (cache-busted) fetch of the
+  homepage and sub-pages, and by direct browser load with no cert warning.
+  The old GoDaddy-hosted site is fully retired; clinicops.dk === this repo's
+  `docs/` output now.
 - Validated: 130/130 internal links resolve, one `<h1>` per page, full test
-  suite + claim gate + content-claim validator all green. Not yet visually
-  screenshotted at mobile width (no browser access to the live Pages URL from
-  this session) — responsive CSS (flex-wrap nav, auto-fit card grid) is in
-  place by design; recommend a quick visual check once Pages redeploys.
+  suite + claim gate + content-claim validator all green. Visually
+  screenshotted (Playwright, desktop 1280px + mobile 390px, light + dark) —
+  responsive nav and card grids confirmed rendering correctly, no CSS
+  regressions.
+- Site hygiene added same session: `docs/robots.txt`, `docs/sitemap.xml`
+  (all 11 public pages), `docs/404.html` (styled, matches design system),
+  `docs/favicon.svg` (referenced from every page's `<head>`). All existing
+  validators (`validate_readiness_page.py`, `validate_content_claims.py
+  website`, `claim_gate.py`, `audit_claim_references.py`) re-run green after
+  these additions.
+- **Not yet done:** no `<meta property="og:*">` / Twitter-card tags, no
+  JSON-LD structured data (ProfessionalService/Organization), no canonical
+  `<link>` tags, no analytics (deliberately — no tracking has been added
+  without a separate decision). See the 2026-09-10 build brief for ChatGPT
+  in `00_CONTROL/` for the full next-phase task list.
 
 ## Public tools
 ### EUDAMED Identifier Check
@@ -155,12 +171,17 @@ Current CI checks:
 - Do not use Pages for confidential client content.
 
 ## Website / external account boundary
-This build did **not** publish or modify:
-- clinicops.dk / GoDaddy
-- LinkedIn
-- Gumroad pricing/listings
+- **clinicops.dk / GoDaddy DNS: now live (2026-09-10).** Ali made the DNS
+  change himself in GoDaddy (Claude does not and will not touch third-party
+  account credentials/settings). The domain now points at this repo's
+  GitHub Pages deployment with HTTPS enforced.
+- LinkedIn and Gumroad pricing/listings remain untouched — still separate
+  browser/account execution surfaces requiring explicit case-by-case
+  approval before any publish/pricing action.
 
-Those remain separate browser/account execution surfaces. GitHub contains the governed deployment assets and public free-tool layer; external publication requires the applicable account access and human approval boundary.
+GitHub contains the governed deployment assets and public free-tool layer;
+external publication of anything beyond clinicops.dk still requires the
+applicable account access and human approval boundary.
 
 ## Budget/resilience doctrine
 ClinicOps is currently bootstrapped. Default architecture:
@@ -186,7 +207,7 @@ Before shared-file changes:
 10. Keep private customer/prospect evidence out of the public repo.
 
 ## Current highest-leverage next work
-1. Connect the verified public GitHub tools into the clinicops.dk acquisition funnel when browser/domain publication is approved.
+1. **Unblocked as of 2026-09-10** — clinicops.dk is now the live acquisition funnel. Connect it to a structured intake path (currently `mailto:` only) and monitor real traffic/conversion once any distribution starts.
 2. Run a small number of high-information buyer experiments against ARs, regulatory consultancies and class III/implantable manufacturers; avoid mass outreach.
 3. Deliver the first paid/design-partner Class III Transition Map using bundle schema `1.1` and capture friction as structured experiment evidence.
 4. Turn only claim-approved research into distribution assets and measure qualified conversations, not vanity traffic.

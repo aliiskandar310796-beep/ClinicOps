@@ -155,13 +155,18 @@ Deployed through GitHub Pages at:
 
 https://aliiskandar310796-beep.github.io/ClinicOps/
 
+and, as of 2026-09-10, live at the production domain **https://clinicops.dk**
+with `Enforce HTTPS` enabled. `docs/CNAME` pins the custom domain; GoDaddy DNS
+(`A` records on `@` to the four GitHub Pages IPs, `www` CNAME to
+`aliiskandar310796-beep.github.io`) was changed by Ali directly, and GitHub's
+Pages DNS check is green. The former GoDaddy-hosted site is retired.
+
 Deployment is controlled by `.github/workflows/pages.yml` and uses Node-24-native GitHub Actions majors. Repository issue #1 was closed after successful deployment run `34354035445`.
 
-**DNS is intentionally not yet pointed at this deployment.** clinicops.dk still
-resolves to the existing GoDaddy-hosted site. Do not cut the domain over until
-the production site above has been reviewed and explicitly approved for
-publication — see the deployment-plan and DNS-migration notes in
-`website/CLINICOPS_DK_DEPLOYMENT_PLAN.md`.
+Production hygiene present: `docs/robots.txt`, `docs/sitemap.xml`, `docs/404.html`,
+`docs/favicon.svg`. Not yet present: Open Graph/Twitter-card meta tags,
+JSON-LD structured data, canonical `<link>` tags, analytics (no tracking has
+been added — that needs its own decision, not a default).
 
 ## Repository visibility
 
