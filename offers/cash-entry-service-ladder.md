@@ -12,6 +12,19 @@ The operating question is not “what else can ClinicOps sell?” It is:
 
 > Which adjacent paid outcome can be delivered from the same evidence/reconciliation capability, has a credible buyer trigger now, and naturally ladders into repeat work?
 
+## Default execution constraint
+
+Until commercial evidence changes it, the **Class III Transition Map Pilot is the only default `DO NOW` service entry**. The other entries in this ladder are conditional experiments, not parallel launch instructions.
+
+An adjacent entry may be activated only when at least one of these is true:
+
+- a qualified buyer conversation reveals that exact narrower workflow;
+- a concrete objection to the Transition Map is better solved by a smaller scope;
+- a completed paid/design-partner delivery exposes a repeatable adjacent need;
+- a verified external change creates a directly evidenced workflow for an existing or qualified buyer.
+
+Do not create outreach, product surface, pricing, or delivery work for an adjacent entry merely because it exists in this document.
+
 ## Design rules
 
 Every service entry should satisfy as many of these as possible:
@@ -35,7 +48,7 @@ Do not create new product surface merely to support an unvalidated service entry
 
 ### A1. Portfolio Evidence Triage
 
-**Use when:** a buyer is interested but is not ready to commission a full Transition Map.
+**Use when:** a buyer is interested but is not ready to commission a full Transition Map and the objection is genuinely scope/commitment rather than lack of need.
 
 **Smallest useful scope:** one manufacturer, device family or bounded record set.
 
@@ -48,7 +61,7 @@ Do not create new product surface merely to support an unvalidated service entry
 - an operator work queue;
 - human-reviewed notes on what should be verified next.
 
-**Why it can create cash quickly:** lower commitment than a broader transition project while still using the existing engine.
+**Why it may create cash quickly:** lower commitment than a broader transition project while still using the existing engine.
 
 **Expansion trigger:** more records, more manufacturers, a full Transition Map or recurring refresh.
 
@@ -75,13 +88,13 @@ This remains the core higher-value entry and should not be displaced by adjacent
 - prioritised operator follow-up list;
 - machine-readable handoff where useful.
 
-**Why it can sell quickly:** the buyer can test a concrete back-office workload without committing to a transformation project.
+**Why it may sell quickly:** the buyer can test a concrete back-office workload without committing to a transformation project.
 
 **Expansion trigger:** full Transition Map, recurring certificate/evidence monitoring or AR portfolio support.
 
 ### A4. SS(C)P Operations Readiness Pack
 
-**Use when:** a Class III / implantable manufacturer, AR, consultancy or regulatory operator needs a structured view of SS(C)P-related operational dependencies and evidence state.
+**Use when:** a Class III / implantable manufacturer, AR, consultancy or regulatory operator explicitly owns an SS(C)P-related operational workflow and needs a structured view of dependencies and evidence state.
 
 **Deliverable:**
 - supplied-evidence inventory;
@@ -96,7 +109,7 @@ Use only governed claims and limitations in `research/claims.jsonl`. Do not posi
 
 ### A5. Danish Market Document Integrity Review
 
-**Use when:** the buyer has Danish IFU, labelling, patient/clinician-facing or other controlled device documentation and needs an independent integrity layer.
+**Use when:** the buyer has Danish IFU, labelling, patient/clinician-facing or other controlled device documentation and has confirmed a need for an independent integrity layer.
 
 **Deliverable can include:**
 - terminology and cross-document consistency findings;
@@ -117,7 +130,7 @@ Possible triggers include a certificate update, identifier/device-family change,
 
 **Deliverable:** delta-focused evidence map + operator work queue rather than a full portfolio restart.
 
-**Why it is resilient:** it monetizes recurring change rather than one deadline.
+**Why it is resilient:** it can monetize recurring change rather than one deadline, where a real buyer workflow exists.
 
 **Expansion trigger:** scheduled refreshes or Portfolio Integrity Watch.
 
@@ -219,24 +232,24 @@ A short expert session can be a hybrid entry for buyers who need judgement but a
 
 ## Demand-resilience portfolio
 
-Do not depend on one deadline or one service. Maintain three economic engines:
+Do not depend on one deadline or one service. Maintain three economic engines as hypotheses whose activation is evidence-led:
 
 ### Engine 1 — urgency cash
-Current regulatory transition / EUDAMED / certificate / SS(C)P workload creates near-term buyer urgency.
+Verified regulatory transition / EUDAMED / certificate / SS(C)P changes can create near-term buyer urgency where a qualified buyer confirms the workflow.
 
-Best entries: A1–A4.
+Candidate entries: A1–A4.
 
 ### Engine 2 — recurring operational change
 Portfolios, certificates, evidence and controlled documents continue changing after transition deadlines.
 
-Best entries: A6, B1–B3.
+Candidate entries: A6, B1–B3.
 
 ### Engine 3 — distribution / reusable knowledge
-Digital tools, samples, methods briefs and partner relationships compound reach with low marginal cost.
+Digital tools, samples, methods briefs and partner relationships can compound reach with low marginal cost after repeated paid-work evidence exists.
 
-Best entries: C1–C4 plus B2 partner distribution.
+Candidate entries: C1–C4 plus B2 partner distribution.
 
-If one engine weakens, resources move to the others rather than rebuilding the company.
+If one engine weakens, resources may move to the others only when evidence supports the shift rather than because an alternative is available on paper.
 
 ---
 
@@ -246,7 +259,7 @@ If one engine weakens, resources move to the others rather than rebuilding the c
 
 `3–5 high-fit contacts → qualified workflow conversation → Portfolio Evidence Triage or small Transition Map scope → paid delivery → expansion question`
 
-**Guaranteed output:** buyer response, non-response, objection or buying signal that updates the hypothesis. Revenue is desired, not promised.
+**Required learning output:** buyer response, non-response, objection or buying signal that updates the hypothesis. Revenue is desired, not promised.
 
 ### Loop 2 — pilot → refresh / change event
 
@@ -258,7 +271,7 @@ Never manufacture urgency; use real operational triggers.
 
 `qualified AR/consultancy conversation → small white-label record set → successful handoff → second manufacturer → recurring portfolio batch`
 
-This is potentially the strongest scale path because distribution is inherited from the partner.
+This may become a strong scale path if partner conversations demonstrate repeated downstream demand.
 
 ### Loop 4 — document QA → regulatory portfolio expansion
 
@@ -284,13 +297,13 @@ Use only verified sources and current claim governance. Do not turn every news i
 
 Do not launch all entries publicly at once.
 
-1. Keep Class III Transition Map as the flagship.
-2. Use **Portfolio Evidence Triage** when a qualified buyer hesitates at scope/commitment.
+1. Keep Class III Transition Map as the flagship and only default `DO NOW` entry.
+2. Use **Portfolio Evidence Triage** only when a qualified buyer's objection is scope/commitment and the smaller scope preserves useful value.
 3. Use **Identifier + Certificate Reconciliation Sprint** when that is the buyer's actual narrow pain.
 4. Use **SS(C)P Operations Readiness Pack** when the buyer explicitly owns that workflow.
-5. Use **Danish Market Document Integrity Review** for localization/document-control entry relationships.
+5. Use **Danish Market Document Integrity Review** only for confirmed localization/document-control needs.
 6. Offer **Change-Event Review / Integrity Watch** only after a baseline has been delivered or a repeat need is visible.
-7. Test **White-Label Portfolio Desk** aggressively with qualified AR/consultancy partners because one partner can create repeated downstream demand.
+7. Test **White-Label Portfolio Desk** selectively with qualified AR/consultancy partners; do not mass-launch it or treat partner leverage as validated demand.
 8. Productize passive assets only from repeated paid artifacts.
 
 ---

@@ -21,8 +21,23 @@ def test_service_entry_example_is_valid_unique_and_rankable() -> None:
 
     assert len(ranked) == 14
     assert len(names) == len(set(names))
-    assert ranked[0].name == "Portfolio Evidence Triage"
-    assert ranked[0].decision == "DO NOW"
+    assert ranked[0].name == "Class III Transition Map Pilot"
+
+
+def test_only_flagship_is_default_do_now() -> None:
+    ranked = _load_ranked()
+    do_now = [idea.name for idea in ranked if idea.decision == "DO NOW"]
+
+    assert do_now == ["Class III Transition Map Pilot"]
+
+
+def test_adjacent_entries_require_validation_before_activation() -> None:
+    decisions = {idea.name: idea.decision for idea in _load_ranked()}
+
+    assert decisions["Portfolio Evidence Triage"] == "TEST"
+    assert decisions["Identifier + Certificate Reconciliation Sprint"] == "TEST"
+    assert decisions["AR / Consultancy White-Label Portfolio Desk"] == "TEST"
+    assert decisions["Productized Operator Packs"] == "BACKLOG"
 
 
 def test_emerging_entries_stay_in_test_not_do_now() -> None:
