@@ -6,6 +6,7 @@ from datetime import date
 from pathlib import Path
 
 from .bundle import build_pilot_bundle
+from .bundle_verify import render_bundle_verification, verify_pilot_bundle
 from .claim_registry import audit_registry, load_registry, render_matrix
 from .experiments import load_experiments, render_experiment_json
 from .fleet import FleetRegistry
@@ -133,6 +134,15 @@ def pilot_bundle() -> None:
     except ValueError as exc:
         raise SystemExit(str(exc)) from exc
     print(json.dumps(result.manifest, indent=2, ensure_ascii=False))
+
+
+def pilot_verify() -> None:
+    if len(sys.argv) != 3:
+        raise SystemExit("usage: clinicops-pilot-verify <output-dir> <portfolio.csv>")
+    result = verify_pilot_bundle(sys.argv[1], sys.argv[2])
+    print(render_bundle_verification(result), end="")
+    if not result.valid:
+        raise SystemExit(2)
 
 
 def claims_status() -> None:
