@@ -11,7 +11,9 @@ REGISTRY = ROOT / "research" / "claims.jsonl"
 DEFAULT_TARGETS = (
     ROOT / "offers",
     ROOT / "sales",
-    ROOT / "research" / "notes",
+    ROOT / "research",
+    ROOT / "content",
+    ROOT / "website",
     ROOT / "README.md",
 )
 CLAIM_REF_RE = re.compile(r"\bCO-CLM-\d{4}\b")
