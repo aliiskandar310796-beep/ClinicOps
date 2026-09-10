@@ -1,4 +1,4 @@
-name: Deploy Identifier Check
+name: Deploy ClinicOps Site
 on:
   push:
     branches: [main]
