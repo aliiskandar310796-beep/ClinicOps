@@ -1,0 +1,23 @@
+{
+  "record_schema_version": "1.0",
+  "experiment_id": "EXP-001",
+  "commercial_form": "paid_pilot",
+  "exp_001_eligible": true,
+  "scope_accepted_in_writing": true,
+  "commercial_owner_identified": true,
+  "population_bounded": true,
+  "standard_deliverables": true,
+  "standard_commercial_terms": true,
+  "activation_condition": "accepted_po_or_signed_commitment",
+  "activation_condition_satisfied": true,
+  "private_storage_approved": true,
+  "buyer_authorised_to_share": true,
+  "patient_identifiable_data": false,
+  "bundle_schema_version": "1.1",
+  "human_reviewer": "Qualified Reviewer",
+  "human_reviewer_qualified": true,
+  "novel_public_claim": false,
+  "custom_regulatory_conclusion": false,
+  "nonstandard_liability": false,
+  "unsupported_interpretation": false
+}
