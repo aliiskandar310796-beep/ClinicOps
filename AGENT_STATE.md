@@ -14,12 +14,32 @@ This GitHub repository is the shared source of truth. Local terminal state, ZIPs
 - Pages artifact: `github-pages`, artifact `10118588012`, SHA-256 digest `00e4b35676ac2d3da8f54214b468e132c690db6d50dd7c8b9a203ace53f53bc8`.
 - The downloaded Pages artifact was inspected and contains both `index.html` and `readiness-score.html`; the readiness artifact contains the browser-local privacy statement and the Regulatory Intelligence Assessment CTA.
 
+## Production site (added 2026-09-10 by Claude — see below)
+- `docs/index.html` is now the site **Home** page, not the Identifier Check tool.
+- Full site built: Home, About, Research, Tools, EUDAMED Intelligence
+  (`eudamed-transition.html`), MDR Transition (`class-iii-transition.html`),
+  SS(C)P Operations (`sscp-operations.html`), Authorised Representative
+  Intelligence (`authorised-representative-portfolio-intelligence.html`),
+  Contact — rendered from the `website/*.md` deployment packs, shared
+  nav/footer, no external CDN dependency, light/dark aware, claim-gated (no
+  claim IDs rendered publicly, `claim_gate.py`/`validate_content_claims.py`
+  both pass).
+- **DNS has deliberately NOT been touched.** clinicops.dk still points at the
+  existing GoDaddy site. Ali's explicit instruction: do not create a public
+  outage — build and validate the asset first, prepare DNS migration only
+  after validation, then get explicit approval before any cutover.
+- Validated: 130/130 internal links resolve, one `<h1>` per page, full test
+  suite + claim gate + content-claim validator all green. Not yet visually
+  screenshotted at mobile width (no browser access to the live Pages URL from
+  this session) — responsive CSS (flex-wrap nav, auto-fit card grid) is in
+  place by design; recommend a quick visual check once Pages redeploys.
+
 ## Public tools
 ### EUDAMED Identifier Check
-- `docs/index.html`
+- `docs/identifier-check.html` (moved off the root path — see Production site above)
 - Client-side only.
 - GS1 Mod-10 validation, SRN role decoding and B-prefix structural screening.
-- Existing public Pages root remains the free identifier front door.
+- Linked from Home, Tools and Contact as the free identifier front door.
 
 ### Transition Readiness Score
 - `docs/readiness-score.html`

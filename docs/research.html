@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EU Medical Device Regulatory Intelligence | ClinicOps</title>
+<meta name="description" content="What regulatory intelligence means for MedTech operations: capture the signal, classify the evidence, preserve duty-holder context, block unsupported claims, and hand a human-reviewed action plan to RA/QA.">
+<style>
+:root{color-scheme:light dark;
+--bg:#fbfaf8;--surface:#ffffff;--surface-2:#f3f1ec;--text:#1c2430;--muted:#5b6572;
+--border:#d8dee5;--accent:#0f5c52;--accent-strong:#0a413a;--accent-contrast:#ffffff;--accent-soft:#e4f2ef}
+@media (prefers-color-scheme:dark){:root{
+--bg:#11151b;--surface:#171d25;--surface-2:#1d242d;--text:#e7ebef;--muted:#9aa5b1;
+--border:#2a323c;--accent:#4fd8c4;--accent-strong:#8ff0e0;--accent-contrast:#08201c;--accent-soft:#132925}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+header.site{border-bottom:1px solid var(--border);background:var(--surface)}
+.site-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:16px 20px;max-width:900px;margin:0 auto}
+.brand{font-weight:800;font-size:1.15rem;color:var(--text);text-decoration:none;letter-spacing:-.01em}
+.brand span{color:var(--accent)}
+nav.primary{display:flex;flex-wrap:wrap;gap:4px 2px;font-size:.86rem}
+nav.primary a{color:var(--muted);text-decoration:none;padding:7px 10px;border-radius:7px;white-space:nowrap}
+nav.primary a:hover{color:var(--text);background:var(--surface-2)}
+nav.primary a[aria-current="page"]{color:var(--accent-contrast);background:var(--accent);font-weight:600}
+main{padding:44px 0 20px}
+h1{font-size:2rem;line-height:1.2;letter-spacing:-.01em;text-wrap:balance;margin:0 0 14px}
+h2{font-size:1.35rem;margin:2.2em 0 .6em;letter-spacing:-.01em}
+h3{font-size:1.08rem;margin:1.6em 0 .5em}
+p{margin:.9em 0}
+.lede{font-size:1.12rem;color:var(--muted)}
+ul{padding-left:1.3rem}
+li{margin:.4em 0}
+.eyebrow{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:4px 10px;border-radius:999px;margin-bottom:14px}
+.cta{display:inline-block;padding:12px 18px;border-radius:9px;border:1px solid var(--accent);text-decoration:none;font:inherit;font-weight:600;cursor:pointer}
+.cta.primary{background:var(--accent);color:var(--accent-contrast);border-color:var(--accent)}
+.cta.ghost{color:var(--accent);background:transparent}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0}
+.muted{color:var(--muted);font-size:.92rem}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin:20px 0}
+.card{border:1px solid var(--border);border-radius:14px;padding:18px;background:var(--surface)}
+.card h3{margin-top:0}
+.card a.cta{margin-top:6px}
+.callout{border:1px solid var(--border);background:var(--surface-2);border-radius:12px;padding:16px 18px;margin:22px 0}
+.callout p{margin:.4em 0}
+table{border-collapse:collapse;width:100%;margin:18px 0}
+td,th{border:1px solid var(--border);padding:9px 10px;text-align:left;font-size:.94rem}
+footer.site{border-top:1px solid var(--border);margin-top:52px}
+.footer-inner{max-width:900px;margin:0 auto;padding:26px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--muted);font-size:.86rem}
+.footer-inner a{color:var(--muted)}
+.badge{display:inline-block;padding:3px 9px;border:1px solid var(--border);border-radius:999px;font-size:.8rem;color:var(--muted)}
+input,select{width:100%;padding:11px;font-size:1rem;box-sizing:border-box;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)}
+button{font:inherit}
+.tool-embed pre{white-space:pre-wrap;background:var(--surface-2);padding:14px;border-radius:8px;border:1px solid var(--border)}
+</style>
+</head>
+<body>
+<!-- claim-use: website -->
+<!-- claim-ids: CO-CLM-0001,CO-CLM-0004 -->
+<header class="site">
+<div class="site-inner">
+<a class="brand" href="index.html">Clinic<span>Ops</span></a>
+<nav class="primary" aria-label="Primary"><a href="index.html">Home</a><a href="about.html">About</a><a href="research.html" aria-current="page">Research</a><a href="tools.html">Tools</a><a href="eudamed-transition.html">EUDAMED Intelligence</a><a href="class-iii-transition.html">MDR Transition</a><a href="sscp-operations.html">SS(C)P Operations</a><a href="authorised-representative-portfolio-intelligence.html">AR Intelligence</a><a href="contact.html">Contact</a></nav>
+</div>
+</header>
+<main class="wrap">
+
+<span class="eyebrow">Research &amp; methodology</span>
+<h1>EU medical device regulatory intelligence</h1>
+<p class="lede">Regulatory intelligence, for a MedTech operation, is not a feed of alerts and it is not a compliance verdict. It is a disciplined way of turning scattered public and internal signals into evidence a regulatory team can act on, with the actor-role and duty-holder context kept intact.</p>
+<p>ClinicOps applies machine breadth to find and classify the signal, and human judgement to decide what it means. RA/QA and the manufacturer keep every regulatory decision.</p>
+
+<h2>More signal is not the problem. Turning signal into reviewable evidence is.</h2>
+<p>Portfolio teams can already see EUDAMED records, certificate timing, Basic UDI-DI information, SS(C)P material and market-language documents. What they lack is a repeatable way to reconcile those inputs, hold on to who is responsible for each, and decide what deserves human review first. Without that discipline, screening either overreaches into unsupported allegations or drowns the real questions in noise.</p>
+
+<h2>The operating model</h2>
+<ol>
+<li><strong>Capture the signal</strong> &mdash; pull the public and supplied inputs across a portfolio.</li>
+<li><strong>Classify the evidence</strong> &mdash; sort what is a screening signal from what is a conclusion.</li>
+<li><strong>Preserve actor-role and duty-holder context</strong> &mdash; keep manufacturer, authorised representative, importer and notified-body roles attached to the evidence.</li>
+<li><strong>Block unsupported claims</strong> &mdash; never convert a missing field or a structural signal into a compliance allegation.</li>
+<li><strong>Prioritise the work</strong> &mdash; order the portfolio by what needs human review first.</li>
+<li><strong>Deliver a human-reviewed action plan</strong> &mdash; hand RA/QA a queue, not a verdict.</li>
+</ol>
+<p>Under MDR Article 32, the manufacturer is the duty holder for drawing up the SS(C)P for applicable implantable and class III devices, subject to the Article 32 exclusions. ClinicOps preserves that duty-holder context instead of flattening the workflow into generic document checking.</p>
+
+<h2>Evidence-input boundary</h2>
+<p>Public-register screening is an evidence input, not a compliance determination or a full-register audit. A B-prefixed EUDAMED DI signal, for example, is useful for structural screening but does not by itself establish a device's full regulatory or SS(C)P state. Where a figure would help frame the scale of a portfolio or a device population, ClinicOps cites a verifiable source rather than asserting a count.</p>
+
+<h2>Related work</h2>
+<div class="card-grid">
+<div class="card"><h3>Document control reconciliation</h3><p class="muted">Reconciling consistency across EUDAMED records, IFU, labelling and market-language versions &mdash; RA/QA retains sign-off. Discuss by email.</p></div>
+<div class="card"><h3>Danish-market language review</h3><p class="muted">Danish instructions for use, labelling and controlled regulatory source documents, reviewed against the approved master. See the SS(C)P Operations and MDR Transition pages for the wider method.</p></div>
+</div>
+
+<h2>Where the method applies</h2>
+<div class="card-grid">
+<div class="card"><h3>MDR Transition</h3><p class="muted">Portfolio mapping, legacy vs. MDR paths, certificate timing, SS(C)P duty.</p><a class="cta ghost" href="class-iii-transition.html">Read more</a></div>
+<div class="card"><h3>EUDAMED Intelligence</h3><p class="muted">Turning legacy and MDR portfolio evidence into a work plan.</p><a class="cta ghost" href="eudamed-transition.html">Read more</a></div>
+<div class="card"><h3>SS(C)P Operations</h3><p class="muted">Evidence, translations and operational handoffs.</p><a class="cta ghost" href="sscp-operations.html">Read more</a></div>
+<div class="card"><h3>AR Intelligence</h3><p class="muted">A partner / white-label reconciliation layer.</p><a class="cta ghost" href="authorised-representative-portfolio-intelligence.html">Read more</a></div>
+</div>
+
+<div class="cta-row"><a class="cta primary" href="mailto:info@clinicops.dk?subject=Regulatory%20Intelligence%20Assessment">Request a Regulatory Intelligence Assessment</a></div>
+
+</main>
+<footer class="site">
+<div class="footer-inner">
+<span>&copy; 2026 ClinicOps. Danish-based, EU-wide medical device regulatory intelligence.</span>
+<span><a href="mailto:info@clinicops.dk">info@clinicops.dk</a> &middot; <a href="https://www.linkedin.com/company/clinicops-danish-regulatory/">LinkedIn</a></span>
+</div>
+</footer>
+</body>
+</html>

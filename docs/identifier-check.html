@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>EUDAMED Identifier Check | ClinicOps</title>
+<meta name="description" content="Free, browser-only EUDAMED Identifier Check: B-prefix legacy screening, SRN actor-role decoding, and GS1 Mod-10 validation. Nothing is sent to ClinicOps.">
+<style>
+:root{color-scheme:light dark;
+--bg:#fbfaf8;--surface:#ffffff;--surface-2:#f3f1ec;--text:#1c2430;--muted:#5b6572;
+--border:#d8dee5;--accent:#0f5c52;--accent-strong:#0a413a;--accent-contrast:#ffffff;--accent-soft:#e4f2ef}
+@media (prefers-color-scheme:dark){:root{
+--bg:#11151b;--surface:#171d25;--surface-2:#1d242d;--text:#e7ebef;--muted:#9aa5b1;
+--border:#2a323c;--accent:#4fd8c4;--accent-strong:#8ff0e0;--accent-contrast:#08201c;--accent-soft:#132925}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+header.site{border-bottom:1px solid var(--border);background:var(--surface)}
+.site-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:16px 20px;max-width:900px;margin:0 auto}
+.brand{font-weight:800;font-size:1.15rem;color:var(--text);text-decoration:none;letter-spacing:-.01em}
+.brand span{color:var(--accent)}
+nav.primary{display:flex;flex-wrap:wrap;gap:4px 2px;font-size:.86rem}
+nav.primary a{color:var(--muted);text-decoration:none;padding:7px 10px;border-radius:7px;white-space:nowrap}
+nav.primary a:hover{color:var(--text);background:var(--surface-2)}
+nav.primary a[aria-current="page"]{color:var(--accent-contrast);background:var(--accent);font-weight:600}
+main{padding:44px 0 20px}
+h1{font-size:2rem;line-height:1.2;letter-spacing:-.01em;text-wrap:balance;margin:0 0 14px}
+h2{font-size:1.35rem;margin:2.2em 0 .6em;letter-spacing:-.01em}
+h3{font-size:1.08rem;margin:1.6em 0 .5em}
+p{margin:.9em 0}
+.lede{font-size:1.12rem;color:var(--muted)}
+ul{padding-left:1.3rem}
+li{margin:.4em 0}
+.eyebrow{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:4px 10px;border-radius:999px;margin-bottom:14px}
+.cta{display:inline-block;padding:12px 18px;border-radius:9px;border:1px solid var(--accent);text-decoration:none;font:inherit;font-weight:600;cursor:pointer}
+.cta.primary{background:var(--accent);color:var(--accent-contrast);border-color:var(--accent)}
+.cta.ghost{color:var(--accent);background:transparent}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0}
+.muted{color:var(--muted);font-size:.92rem}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin:20px 0}
+.card{border:1px solid var(--border);border-radius:14px;padding:18px;background:var(--surface)}
+.card h3{margin-top:0}
+.card a.cta{margin-top:6px}
+.callout{border:1px solid var(--border);background:var(--surface-2);border-radius:12px;padding:16px 18px;margin:22px 0}
+.callout p{margin:.4em 0}
+table{border-collapse:collapse;width:100%;margin:18px 0}
+td,th{border:1px solid var(--border);padding:9px 10px;text-align:left;font-size:.94rem}
+footer.site{border-top:1px solid var(--border);margin-top:52px}
+.footer-inner{max-width:900px;margin:0 auto;padding:26px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--muted);font-size:.86rem}
+.footer-inner a{color:var(--muted)}
+.badge{display:inline-block;padding:3px 9px;border:1px solid var(--border);border-radius:999px;font-size:.8rem;color:var(--muted)}
+input,select{width:100%;padding:11px;font-size:1rem;box-sizing:border-box;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)}
+button{font:inherit}
+.tool-embed pre{white-space:pre-wrap;background:var(--surface-2);padding:14px;border-radius:8px;border:1px solid var(--border)}
+</style>
+</head>
+<body>
+<!-- claim-use: website -->
+<!-- claim-ids: CO-CLM-0004 -->
+<header class="site">
+<div class="site-inner">
+<a class="brand" href="index.html">Clinic<span>Ops</span></a>
+<nav class="primary" aria-label="Primary"><a href="index.html">Home</a><a href="about.html">About</a><a href="research.html">Research</a><a href="tools.html" aria-current="page">Tools</a><a href="eudamed-transition.html">EUDAMED Intelligence</a><a href="class-iii-transition.html">MDR Transition</a><a href="sscp-operations.html">SS(C)P Operations</a><a href="authorised-representative-portfolio-intelligence.html">AR Intelligence</a><a href="contact.html">Contact</a></nav>
+</div>
+</header>
+<main class="wrap">
+
+<span class="eyebrow">Free tool</span>
+<h1>EUDAMED Identifier Check</h1>
+<p>Paste a Basic UDI-DI, UDI-DI candidate, or SRN. The check runs entirely in your browser. <strong>Nothing is sent to ClinicOps.</strong></p>
+<p class="muted"><a href="readiness-score.html">Try the Transition Readiness Score &rarr;</a></p>
+<div class="tool-embed">
+<input id="value" autocomplete="off" placeholder="e.g. B-... or DK-MF-123456789">
+<button id="check" class="cta primary" style="margin-top:10px">Check</button>
+<pre id="result">No identifier checked yet.</pre>
+</div>
+<p class="muted">This is a screening aid, not regulatory advice and not a live EUDAMED verification.</p>
+
+<h2>What this tool can and cannot tell you</h2>
+<table>
+<tr><th>Can</th><th>Cannot</th></tr>
+<tr><td>Recognise a B-prefix as a legacy-style EUDAMED identifier signal.</td><td>Prove a device's current regulatory status.</td></tr>
+<tr><td>Decode the structural role in a common SRN shape (MF/AR/IM/PR).</td><td>Verify that an actor is active or responsible for a specific device.</td></tr>
+<tr><td>Check numeric GS1 Mod-10 check digits.</td><td>Audit the EUDAMED public register end-to-end.</td></tr>
+</table>
+
+<script>
+const roles={MF:'Manufacturer',AR:'Authorised representative',IM:'Importer',PR:'System and procedure pack producer'};
+function gs1Valid(v){const d=v.replace(/\D/g,'');if(d.length<2)return null;const body=d.slice(0,-1);const check=Number(d.at(-1));let total=0;[...body].reverse().forEach((c,i)=>total+=Number(c)*(i%2===0?3:1));return ((10-(total%10))%10)===check;}
+function assess(raw){const v=raw.trim();const upper=v.toUpperCase();const srn=upper.match(/^([A-Z]{2})-(MF|AR|IM|PR)-(\d{9})$/);if(srn)return `Type: SRN-shaped identifier\nCountry code: ${srn[1]}\nRole: ${srn[2]} — ${roles[srn[2]]}\n\nStructural decoding only. This does not verify actor status or device responsibility.`;if(upper.startsWith('B-'))return `Type: EUDAMED legacy-style identifier signal\nLegacy screen: yes\n\nClinicOps derived screening rule: the B-prefix is useful for identifying a legacy-style registration path. Do not treat the downstream SS(C)P-link consequence as a directly quoted Commission rule.`;const compact=v.replace(/[\s-]/g,'');if(/^\d+$/.test(compact))return `Type: numeric UDI candidate\nGS1 Mod-10 valid: ${gs1Valid(compact)}\n\nResolve against EUDAMED before drawing regulatory conclusions.`;return 'Identifier candidate not recognised by the local structural rules. Resolve against EUDAMED before drawing regulatory conclusions.';}
+document.getElementById('check').onclick=()=>document.getElementById('result').textContent=assess(document.getElementById('value').value);
+document.getElementById('value').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('check').click();});
+</script>
+
+</main>
+<footer class="site">
+<div class="footer-inner">
+<span>&copy; 2026 ClinicOps. Danish-based, EU-wide medical device regulatory intelligence.</span>
+<span><a href="mailto:info@clinicops.dk">info@clinicops.dk</a> &middot; <a href="https://www.linkedin.com/company/clinicops-danish-regulatory/">LinkedIn</a></span>
+</div>
+</footer>
+</body>
+</html>

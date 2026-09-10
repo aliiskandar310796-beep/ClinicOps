@@ -140,13 +140,28 @@ Do not put confidential client bundles on public GitHub Pages or send private cl
 
 Focused landing-page deployment packs and `website/visibility-plan.md` separate high-intent EUDAMED, SS(C)P, authorised-representative and Denmark-market search intents rather than forcing every topic onto one homepage.
 
-## Identifier Check deployment
+## Production site deployment
 
-The client-side Identifier Check is deployed through GitHub Pages from `docs/index.html`:
+`docs/` now holds the full clinicops.dk production site (Home, About, Research,
+Tools, EUDAMED Intelligence, MDR Transition, SS(C)P Operations, Authorised
+Representative Intelligence, Contact), rendered from the `website/*.md`
+deployment packs, plus the two free client-side tools:
+`docs/identifier-check.html` (EUDAMED Identifier Check, moved off the root
+path) and `docs/readiness-score.html` (Transition Readiness Score). `docs/index.html`
+is now the site Home page, not the Identifier Check tool — update any bookmark
+or external link accordingly.
+
+Deployed through GitHub Pages at:
 
 https://aliiskandar310796-beep.github.io/ClinicOps/
 
 Deployment is controlled by `.github/workflows/pages.yml` and uses Node-24-native GitHub Actions majors. Repository issue #1 was closed after successful deployment run `34354035445`.
+
+**DNS is intentionally not yet pointed at this deployment.** clinicops.dk still
+resolves to the existing GoDaddy-hosted site. Do not cut the domain over until
+the production site above has been reviewed and explicitly approved for
+publication — see the deployment-plan and DNS-migration notes in
+`website/CLINICOPS_DK_DEPLOYMENT_PLAN.md`.
 
 ## Repository visibility
 
