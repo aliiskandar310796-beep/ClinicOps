@@ -28,6 +28,7 @@ class Result:
 TARGETS = (
     Target("/", 200, "Turn EUDAMED transition evidence into an actionable work plan."),
     Target("/tools.html", 200, "Free intelligence tools"),
+    Target("/identifier-check.html", 200, "EUDAMED Identifier Check"),
     Target("/readiness-score.html", 200, "Transition Readiness Score"),
     Target(
         "/transition-map-sample/",
