@@ -6,6 +6,12 @@ from dataclasses import dataclass
 from pathlib import Path
 
 EXPECTED_BUNDLE_SCHEMA_VERSION = "1.1"
+EXPECTED_OUTPUTS = {
+    "client_report.html",
+    "portfolio_report.md",
+    "portfolio_report.json",
+    "intake_diagnostics.md",
+}
 
 
 @dataclass(frozen=True)
@@ -75,7 +81,12 @@ def verify_pilot_bundle(
         errors.append("output_sha256 must be an object")
         output_hashes = {}
 
-    if set(outputs) != set(output_hashes):
+    output_names = set(outputs)
+    if len(outputs) != len(output_names):
+        errors.append("outputs contains duplicate filenames")
+    if output_names != EXPECTED_OUTPUTS:
+        errors.append("outputs do not match the schema-1.1 controlled output set")
+    if output_names != set(output_hashes):
         errors.append("outputs and output_sha256 keys do not match")
 
     for name in outputs:
