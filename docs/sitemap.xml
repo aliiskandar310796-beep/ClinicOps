@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://clinicops.dk/</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>
-<url><loc>https://clinicops.dk/about.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
-<url><loc>https://clinicops.dk/research.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>https://clinicops.dk/tools.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-<url><loc>https://clinicops.dk/eudamed-transition.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-<url><loc>https://clinicops.dk/class-iii-transition.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-<url><loc>https://clinicops.dk/sscp-operations.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-<url><loc>https://clinicops.dk/authorised-representative-portfolio-intelligence.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-<url><loc>https://clinicops.dk/contact.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-<url><loc>https://clinicops.dk/identifier-check.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-<url><loc>https://clinicops.dk/readiness-score.html</loc><lastmod>2026-09-10</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+<url><loc>https://clinicops.dk/</loc><changefreq>monthly</changefreq><priority>1.0</priority></url>
+<url><loc>https://clinicops.dk/about.html</loc><changefreq>monthly</changefreq><priority>0.5</priority></url>
+<url><loc>https://clinicops.dk/research.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://clinicops.dk/tools.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://clinicops.dk/eudamed-transition.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://clinicops.dk/class-iii-transition.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://clinicops.dk/sscp-operations.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://clinicops.dk/authorised-representative-portfolio-intelligence.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+<url><loc>https://clinicops.dk/contact.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
+<url><loc>https://clinicops.dk/identifier-check.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+<url><loc>https://clinicops.dk/readiness-score.html</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+<url><loc>https://clinicops.dk/eudamed/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+<url><loc>https://clinicops.dk/eudamed/registration-guide.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://clinicops.dk/eudamed/implementation-status.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://clinicops.dk/mdr-transition/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+<url><loc>https://clinicops.dk/mdr-transition/transition-roadmap.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://clinicops.dk/mdr-transition/manufacturer-obligations.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://clinicops.dk/sscp/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://clinicops.dk/sscp/requirements.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://clinicops.dk/authorised-representative/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://clinicops.dk/methodology/</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>
+<url><loc>https://clinicops.dk/assessment/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
 </urlset>
