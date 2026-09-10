@@ -34,7 +34,8 @@ TARGETS = (
         200,
         "ClinicOps Class III Transition Map — Sanitized Sample",
     ),
-    Target("/sitemap.xml", 200, "https://clinicops.dk/transition-map-sample/"),
+    Target("/assessment-intake.html", 200, "Build your assessment brief"),
+    Target("/sitemap.xml", 200, "https://clinicops.dk/assessment-intake.html"),
     Target("/robots.txt", 200, "Sitemap: https://clinicops.dk/sitemap.xml"),
     Target(
         "/__clinicops_healthcheck_missing__.html",
