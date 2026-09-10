@@ -27,6 +27,10 @@ REQUIREMENTS = (
         "readiness-score.html",
         ("assessment-intake.html",),
     ),
+    ConversionRequirement(
+        "transition-map-sample/index.html",
+        ("/assessment-intake.html",),
+    ),
 )
 
 
