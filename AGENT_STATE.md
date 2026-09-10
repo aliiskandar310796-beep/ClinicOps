@@ -1,6 +1,6 @@
 # ClinicOps shared agent state
 
-Last updated: 2026-09-10 after PR #25 commercial-priority correction and standard paid-pilot delegation hardening.
+Last updated: 2026-09-11 after PR #25 commercial-priority correction, privacy-surface resilience hardening and standard paid-pilot delegation hardening.
 
 ## Canonical truth
 This GitHub repository is the shared source of truth. Pull/fetch `main` before work. Local terminal state, ZIPs and chat transcripts are secondary until their changes land here. Preserve concurrent work; never force-overwrite a newer branch/file.
@@ -8,15 +8,15 @@ This GitHub repository is the shared source of truth. Pull/fetch `main` before w
 ## Current production baseline
 - `clinicops.dk` is the live GitHub Pages production site. The old GoDaddy-hosted site is retired; GoDaddy remains DNS only.
 - HTTPS is enforced and GitHub Pages deploys `docs/**` through `.github/workflows/pages.yml`.
-- Latest merged baseline before the delegation change: `4960533c7e90ab11e7077de4ff152cf8d448be4f` — **Correct commercial priority contract (#25)**.
-- PR #14 (`5df4a3f`) added the browser-local Readiness Score → assessment-brief handoff; PR #15 (`a1279e9`) added decision-grade commercial-validation thresholds; PR #16 (`27410995`) clarified the Class III/sample → assessment-intake path.
-- Post-merge CI on PR #16 passed the complete configured gate stack and the exact-sha GitHub Pages deployment completed successfully.
-- Live on-page crawl after PR #16 confirmed `class-iii-transition.html` and `transition-map-sample/` return HTTP 200, are indexable, self-canonical and expose structured data.
-- Live-site health covers the homepage, tools, readiness score, sanitized Transition Map sample, assessment intake, sitemap, robots.txt and custom 404. The Identifier Check is being added to the same bounded check in the current ops-coordination cleanup.
+- Latest merged baseline entering this update: `4960533c7e90ab11e7077de4ff152cf8d448be4f` — **Correct commercial priority contract (#25)**.
+- PRs #18–#20 added the reusable buyer-conversation → pilot playbook and first-pilot scope template while removing prospect-specific context from the public repository.
+- PR #21 restored `/privacy-notice/` after the DNS/hosting cutover and linked the standard public site surface to it.
+- PRs #22–#25 added a demand-resilient service ladder, cash-protecting commercial activation gate, adaptive service-entry scoring and then corrected that scoring so the Class III Transition Map Pilot is the only default `DO NOW` offer until buyer evidence activates an adjacent entry.
+- This resilience update adds `/privacy-notice/` to the bounded production live-site check, makes the generated Transition Map sample privacy-visible through its renderer, and contract-tests sitemap-wide privacy discoverability plus the current no-tracking runtime promise.
 - The bounded EUDAMED canary and evidence-freshness jobs remain on the current Ops Watch path.
 
 ## Production acquisition and conversion surface
-The public site has 13 sitemap URLs:
+The public site has 14 sitemap URLs:
 - `/`
 - `/about.html`
 - `/assessment-intake.html`
@@ -25,6 +25,7 @@ The public site has 13 sitemap URLs:
 - `/contact.html`
 - `/eudamed-transition.html`
 - `/identifier-check.html`
+- `/privacy-notice/`
 - `/readiness-score.html`
 - `/research.html`
 - `/sscp-operations.html`
@@ -66,10 +67,20 @@ Do not rebuild or refactor this handoff speculatively. If either page changes, k
 - The sample explains what a small pilot can start with and what the human-reviewed output contains.
 - Its primary next step is the browser-local `assessment-intake.html`; direct email and the free Readiness Score remain available.
 - The sample is linked from Tools, the homepage and the Class III transition page.
+- The sample exposes `/privacy-notice/` through the renderer, so regeneration cannot silently remove that privacy path.
 - The conversion contract requires the sample → assessment-intake path and the Class III page → sample/intake paths.
 - Ops Watch verifies the deployed sample.
 
 Do not put confidential client/prospect data into this sample or any public Pages artifact.
+
+### Public privacy surface
+`docs/privacy-notice/index.html` is part of the production surface and must remain reachable at `https://clinicops.dk/privacy-notice/` because prior business-development communications referenced that URL.
+- It describes the current static GitHub Pages site, browser-local tools and current no-cookie/no-analytics/no-tracking posture.
+- Every sitemap-listed HTML page must expose a privacy-notice path; `tests/test_privacy_surface_contract.py` enforces this dynamically from `docs/sitemap.xml`.
+- The same contract blocks known tracking runtime tokens while the notice says ClinicOps runs no analytics/tracking.
+- `.github/workflows/ops-watch.yml` executes `scripts/check_live_site.py`; the privacy notice is a monitored target so a repeat 404 becomes an operational failure rather than a silent legal/commercial regression.
+
+Do not add analytics/tracking or materially change the privacy posture without Ali's explicit approval and a corresponding privacy-notice/contract update.
 
 ## Public free tools
 ### EUDAMED Identifier Check
@@ -106,6 +117,7 @@ Current CI includes:
 - governed website content validation
 - sanitized report fixture check
 - public-copy claim gate
+- sitemap-wide privacy visibility / no-tracking contract
 
 ### Site metadata
 `scripts/validate_site_metadata.py` + `src/clinicops_os/site_quality.py` enforce self-canonical URLs, Open Graph essentials, Twitter summary card and parseable JSON-LD. Homepage additionally requires Organization/WebSite/WebPage types.
@@ -127,7 +139,7 @@ The current favicon is a compact checkmark icon, not a proper corporate logo. Do
 - claim-reference integrity;
 - governed-content validation;
 - bounded EUDAMED reachability canary;
-- live `clinicops.dk` HTTPS/content checks.
+- live `clinicops.dk` HTTPS/content checks, including the privacy notice.
 
 It does not publish, contact prospects, make client compliance findings or mutate third-party systems.
 
@@ -200,6 +212,13 @@ Do not call the core offer validated from conversations or compliments alone. Cu
 
 A stronger signal is a paid pilot followed by repeat, expansion, referral or reuse on another portfolio. If ten qualified target-buyer conversations produce no concrete willingness to sponsor a pilot, no priced-scope request and no repeated evidence of budgeted urgency, pause product expansion and change at least one of buyer, problem, offer, packaging or distribution before building more functionality.
 
+### Current service-entry discipline (PRs #22–#25)
+The Class III Transition Map Pilot is the only default `DO NOW` service entry until commercial evidence changes that decision. Adjacent service entries are experiments, not parallel launch instructions.
+
+Activate an adjacent entry only when a qualified buyer conversation, concrete flagship objection, paid/design-partner delivery, or verified external change produces evidence for that exact workflow. Do not create outreach, pricing, public product surface or delivery work merely because an adjacent idea scores well on paper.
+
+Before material client work begins, apply `sales/commercial-activation-gate.md`: written scope/acceptance plus an approved activation condition (upfront payment, agreed deposit/milestone or accepted PO/signed procurement commitment). Design-partner work is outside the standard delegated workflow and requires a separately approved, time-bounded policy rather than ad hoc transaction approval. Do not consume delivery capacity on an informal “go ahead” or open-ended unpaid work.
+
 Service-first delivery remains:
 
 `clinicops.dk → free screening / proof sample → browser-local scope brief → controlled private intake → validation/analysis → human regulatory review → secure client bundle → feedback → Revenue OS learning`
@@ -253,8 +272,8 @@ Avoid expensive CRM/cloud/portal/data purchases until real paid usage proves the
 10. Keep private customer/prospect evidence out of the public repo.
 
 ## Highest-leverage next work
-1. **Commercial validation now outranks speculative product work.** Use the live sample, Readiness Score and browser-local assessment brief in a small number of high-information conversations with ARs, regulatory consultancies and Class III/implantable manufacturers; record private buyer evidence against EXP-001.
-2. Verify/submit the new production sitemap in Google Search Console if not already done; then give indexing time rather than creating a large content batch.
-3. Deliver the first paid/design-partner Class III Transition Map with bundle schema `1.1`; capture actual objections, missing intake fields, delivery friction and willingness-to-pay in the Revenue OS.
+1. **Commercial validation still outranks speculative product work.** Use the live sample, Readiness Score and browser-local assessment brief in a small number of high-information conversations with ARs, regulatory consultancies and Class III/implantable manufacturers; record private buyer evidence against EXP-001.
+2. Verify/submit the production sitemap in Google Search Console if not already done; then give indexing time rather than creating a large content batch.
+3. Convert a qualified buyer signal into the first paid or deliberately approved design-partner Class III Transition Map using `sales/first-pilot-scope-template.md` plus `sales/commercial-activation-gate.md`; capture objections, missing intake fields, delivery friction, payment/procurement friction and willingness-to-pay privately.
 4. Strengthen credibility and offer clarity only where real buyer objections show a gap. Do not invent testimonials, ROI, turnaround promises or regulatory certainty.
 5. Build portal/SaaS features only when repeated paid engagements prove multi-user upload, action tracking or recurring monitoring needs.
