@@ -322,7 +322,7 @@ For each qualified conversation, capture privately:
 - whether the buyer will supply a bounded evidence set;
 - priced-scope request / budget path / pilot commitment;
 - objection;
-+- repeat / expansion potential.
+- repeat / expansion potential.
 
 Aggregate only non-identifying commercial learning into the public repository.
 
