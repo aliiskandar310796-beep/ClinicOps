@@ -2,7 +2,6 @@ from pathlib import Path
 
 from clinicops_os.conversion_quality import validate_conversion_paths
 
-
 ROOT = Path(__file__).resolve().parents[1]
 
 
