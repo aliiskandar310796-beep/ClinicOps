@@ -8,6 +8,7 @@ from pathlib import Path
 from .bundle import build_pilot_bundle
 from .bundle_verify import render_bundle_verification, verify_pilot_bundle
 from .claim_registry import audit_registry, load_registry, render_matrix
+from .dry_run import render_dry_run_result, run_pilot_dry_run
 from .experiments import load_experiments, render_experiment_json
 from .fleet import FleetRegistry
 from .intake import render_intake_findings, validate_portfolio
@@ -134,6 +135,32 @@ def pilot_bundle() -> None:
     except ValueError as exc:
         raise SystemExit(str(exc)) from exc
     print(json.dumps(result.manifest, indent=2, ensure_ascii=False))
+
+
+def pilot_dry_run() -> None:
+    if len(sys.argv) not in {5, 6}:
+        raise SystemExit(
+            "usage: clinicops-pilot-dry-run <preflight.json> <review.json> "
+            "<portfolio.csv> <output-dir> [YYYY-MM-DD]"
+        )
+    as_of = (
+        date.fromisoformat(sys.argv[5])
+        if len(sys.argv) == 6
+        else date.today()  # noqa: DTZ011 — dry-run semantics intentionally use local calendar date.
+    )
+    try:
+        result = run_pilot_dry_run(
+            preflight_record_path=sys.argv[1],
+            review_record_path=sys.argv[2],
+            portfolio_path=sys.argv[3],
+            output_dir=sys.argv[4],
+            as_of=as_of,
+        )
+    except (OSError, TypeError, ValueError, json.JSONDecodeError) as exc:
+        raise SystemExit(str(exc)) from exc
+    print(render_dry_run_result(result), end="")
+    if not result.completed:
+        raise SystemExit(2)
 
 
 def pilot_verify() -> None:

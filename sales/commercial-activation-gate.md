@@ -90,6 +90,8 @@ These are policy exceptions, not transaction-level judgement calls. They remain 
 
 ### Delegation proof test
 
+`clinicops-pilot-dry-run` (`sales/pilot-dry-run-harness.md`) runs the actual preflight -> bundle -> human-review -> verify path against a synthetic fixture so a controlled dry run can actually be executed and recorded, rather than only described in prose. Running it is necessary but not sufficient: it does not by itself satisfy the proof test below.
+
 Treat founder-independent execution as proven only after the next eligible paid pilot, or two complete controlled dry runs, moves from qualified conversation through closeout with:
 
 - zero Ali transaction-level decisions;
