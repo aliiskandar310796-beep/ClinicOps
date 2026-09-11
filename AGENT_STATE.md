@@ -1,22 +1,125 @@
 # ClinicOps shared agent state
 
-Last updated: 2026-09-11 after PR #25 commercial-priority correction, privacy-surface resilience hardening and standard paid-pilot delegation hardening.
+Last updated: 2026-09-11 after PR #33 founder-independence proof hardening.
 
 ## Canonical truth
-This GitHub repository is the shared source of truth. Pull/fetch `main` before work. Local terminal state, ZIPs and chat transcripts are secondary until their changes land here. Preserve concurrent work; never force-overwrite a newer branch/file.
+GitHub `main` is the shared source of truth. Fetch current `main` before work, inspect open PRs/branches, preserve concurrent Claude/ChatGPT work, and never force-overwrite a newer change. Chat transcripts, local copies and ZIPs are secondary until their changes land here.
 
-## Current production baseline
-- `clinicops.dk` is the live GitHub Pages production site. The old GoDaddy-hosted site is retired; GoDaddy remains DNS only.
-- HTTPS is enforced and GitHub Pages deploys `docs/**` through `.github/workflows/pages.yml`.
-- Latest merged baseline entering this update: `4960533c7e90ab11e7077de4ff152cf8d448be4f` — **Correct commercial priority contract (#25)**.
-- PRs #18–#20 added the reusable buyer-conversation → pilot playbook and first-pilot scope template while removing prospect-specific context from the public repository.
-- PR #21 restored `/privacy-notice/` after the DNS/hosting cutover and linked the standard public site surface to it.
-- PRs #22–#25 added a demand-resilient service ladder, cash-protecting commercial activation gate, adaptive service-entry scoring and then corrected that scoring so the Class III Transition Map Pilot is the only default `DO NOW` offer until buyer evidence activates an adjacent entry.
-- This resilience update adds `/privacy-notice/` to the bounded production live-site check, makes the generated Transition Map sample privacy-visible through its renderer, and contract-tests sitemap-wide privacy discoverability plus the current no-tracking runtime promise.
-- The bounded EUDAMED canary and evidence-freshness jobs remain on the current Ops Watch path.
+Current canonical main at this refresh:
 
-## Production acquisition and conversion surface
-The public site has 14 sitemap URLs:
+`080edb3651c2c6b6c4f7f3ccdef01b50625d82f6` — **Make founder-independence proof fail closed (#33)**.
+
+## Current business thesis
+ClinicOps is a human-reviewed portfolio evidence and work-planning layer for MDR / EUDAMED transition operations, especially Class III / implantable portfolios.
+
+The **Class III Transition Map Pilot is the only default `DO NOW` service entry**. Adjacent service ideas remain experiments/backlog until real buyer evidence activates the exact workflow. Do not build new offers, pricing surfaces, outreach, delivery infrastructure or SaaS features merely because an adjacent idea exists.
+
+Commercial validation outranks speculative product development.
+
+### EXP-001 validation threshold
+Do not call the core offer validated until all of the following occur:
+1. three qualified portfolio conversations;
+2. at least two independent confirmations of repeated reconciliation / evidence-control work addressed by the offer; and
+3. at least one concrete commercial commitment such as a priced-scope request, proposed/paid pilot, procurement step or identifiable budget/approval owner.
+
+Compliments, clicks, generic interest, dry runs and CI do not count.
+
+If ten qualified target-buyer conversations produce no concrete willingness to sponsor a pilot, no priced-scope request and no repeated evidence of budgeted urgency, pause product expansion and change at least one of buyer, problem, offer, packaging or distribution before building more functionality.
+
+## Standard paid-pilot operating path
+The controlled standard path is now executable and fail closed:
+
+`qualified buyer / written scope → commercial activation → private intake → validation → bundle generation → qualified human review → final integrity verification → delivery / closeout → private learning`
+
+For a standard paid pilot:
+
+```bash
+clinicops-pilot-preflight /private/path/activation-record.json
+clinicops-portfolio-validate /private/path/portfolio.csv
+clinicops-pilot-bundle /private/path/portfolio.csv /private/path/output YYYY-MM-DD
+clinicops-pilot-review-prepare /private/path/activation-record.json /private/path/output > /private/path/review-record.json
+# qualified assigned reviewer actually completes the review and explicit attestations
+clinicops-pilot-review-gate /private/path/activation-record.json /private/path/review-record.json /private/path/output
+clinicops-pilot-verify /private/path/output /private/path/portfolio.csv
+```
+
+External release requires:
+- preflight `ACTIVATED`;
+- human review `REVIEW APPROVED`; and
+- final bundle integrity `VERIFIED`.
+
+A source, manifest or controlled-output change after recorded review makes that review stale. Correct/regenerate, repeat human review as applicable, create a new manifest-bound review record and rerun both release gates. Do not edit hashes or attestations merely to force a pass.
+
+### Commercial activation gate
+Material work starts only after written scope/acceptance plus an approved activation condition:
+- upfront payment;
+- agreed deposit / first milestone; or
+- accepted PO / signed procurement commitment with defined invoice path.
+
+No open-ended unpaid work. A no-fee/reduced-fee design-partner pilot is outside the standard delegated workflow and requires a separately approved, time-bounded policy rather than an ad hoc transaction exception.
+
+Anything outside the standard envelope is **NON-STANDARD — NOT ACTIVATED** and is parked or declined rather than routed to Ali for transaction-level improvisation.
+
+### Paid-pilot preflight — PR #29
+`src/clinicops_os/pilot_gate.py` + `clinicops-pilot-preflight` turn the delegation envelope into a deterministic fail-closed gate.
+
+The standard path requires explicit evidence of buyer eligibility, bounded written scope, commercial activation, approved private-data route, controlled bundle schema, assigned qualified reviewer and absence of unsupported/non-standard work. Missing or ambiguous negative attestations block activation; omission is not equivalent to `false`.
+
+### Client bundle schema 1.1
+Controlled outputs:
+- `client_report.html`
+- `portfolio_report.md`
+- `portfolio_report.json`
+- `intake_diagnostics.md`
+- `manifest.json`
+
+`manifest.json` records source/output hashes. Real buyer inputs and client bundles stay in approved private storage, never this public repository.
+
+### Human-review gate — PR #32
+`src/clinicops_os/review_gate.py` provides:
+- `clinicops-pilot-review-prepare`
+- `clinicops-pilot-review-gate`
+
+The private review record is bound to the exact final manifest SHA-256, source hash, evidence date and reviewer assigned in the activated pilot. Preparation creates all substantive review attestations as `false`; preparation is not review.
+
+The qualified reviewer must actually confirm evidence population/date, warnings and information gaps, material derived statements, structural-vs-regulatory distinction, actor-role distinctions, unresolved facts, internal-note removal and final client-facing interpretation.
+
+The gate also requires `founder_transaction_decision_required=false` and `unplanned_exception=false` for the standard path.
+
+The gate validates the recorded attestation and exact-file binding. It cannot prove the reviewer performed the work truthfully and never replaces professional regulatory judgement.
+
+### Bundle integrity gate — PR #30
+`src/clinicops_os/bundle_verify.py` + `clinicops-pilot-verify` recompute source and controlled-output hashes immediately before release and require the exact schema-1.1 output population.
+
+Missing, substituted, modified or manifest-omitted controlled files fail verification. Integrity verification proves file correspondence, not regulatory correctness.
+
+## Founder-independence proof — PR #33
+Do **not** claim founder-independent execution merely because the tooling or CI is green.
+
+Founder-independent execution is proven only after private operational evidence shows either:
+- one qualifying real eligible paid pilot; or
+- two unique qualifying complete controlled dry runs.
+
+Use:
+
+```bash
+clinicops-delegation-proof /private/path/delegation-proof-runs.json
+```
+
+Only `FOUNDER-INDEPENDENT EXECUTION PROVEN` permits the internal claim.
+
+A qualifying run must complete the full lifecycle from qualification/written scope through activation, intake, controlled bundle, qualified human review, final integrity verification, delivery/release and closeout, with every existing evidence/claim/commercial/data gate satisfied, zero Ali transaction-level decisions, no unplanned/non-standard exception and private learning capture.
+
+CI, unit tests, automated smokes and the public sanitized example are categorically ineligible. `examples/delegation_proof.example.json` is intentionally marked `private_operational_record=false`, `proof_use_allowed=false`, `ci_or_automated_smoke=true` and must remain non-qualifying.
+
+Protocol: `sales/delegation-proof-protocol.md`.
+
+Dry-run learning is operational/process learning only. It does **not** count toward EXP-001 qualified conversations, repeated-pain confirmation, willingness to pay or commercial commitment.
+
+## Public production surface
+`clinicops.dk` is served from `docs/**` through GitHub Pages. GoDaddy is DNS only. HTTPS is enforced.
+
+Current sitemap has 14 public canonical URLs:
 - `/`
 - `/about.html`
 - `/assessment-intake.html`
@@ -32,211 +135,97 @@ The public site has 14 sitemap URLs:
 - `/tools.html`
 - `/transition-map-sample/`
 
-All public HTML pages are governed by production metadata/link/sitemap checks. Do not recreate duplicate `/eudamed/` or `/mdr-transition/` pillar pages that compete with the existing production pages.
+Do not mass-produce thin SEO pages or duplicate the existing EUDAMED/MDR-transition pillars while current URLs are still being discovered.
 
-### Homepage conversion path
-The homepage exposes three useful levels of commitment:
-1. **Request a Regulatory Intelligence Assessment** → `assessment-intake.html`.
-2. **View a sanitized Transition Map sample** → `/transition-map-sample/`.
-3. A direct **Scope a small pilot** mailto remains as the shortest high-intent path.
+### Browser-local acquisition path
+The production path remains deliberately low-infrastructure:
 
-Homepage Open Graph title and description are locked to the canonical `<title>` and meta description by a regression test. Do not introduce separate social-marketing copy unless deliberately changing the canonical page copy as well.
+`public site / free tool / sanitized sample → browser-local assessment brief → user's email client → controlled private scope/intake`
 
-### Browser-local assessment intake
-`docs/assessment-intake.html` is a structured scoping brief builder, not a hosted form service.
-- No form action or backend endpoint.
-- No analytics/tracking.
-- No `fetch`, XHR, `sendBeacon` or WebSocket network submission.
-- User answers stay in the browser page until the user explicitly creates an email draft.
-- The generated draft is opened through the user's own email client to `info@clinicops.dk`; the user decides whether to send.
-- The page explicitly warns against patient-identifiable data.
-- Contract: `tests/test_assessment_intake_contract.py` blocks silent network/form regressions.
+`docs/assessment-intake.html` has no backend form action, analytics, tracking, `fetch`, XHR, `sendBeacon` or WebSocket submission. User input remains local until the user explicitly creates an email draft to `info@clinicops.dk`. The page warns against patient-identifiable data.
 
-Do not replace this with a third-party form endpoint or account without Ali's explicit approval.
+The Readiness Score → assessment handoff uses one-shot tab-scoped `sessionStorage` containing score/band/gaps/timestamp only; no company/customer data. Preserve `tests/test_readiness_handoff_contract.py` and `tests/test_assessment_intake_contract.py`.
 
-#### Readiness Score → assessment-brief handoff (added 2026-09-10 by Claude, PR #14)
-The Readiness Score result offers **Continue to the assessment brief** as its primary CTA (the direct assessment mailto remains as the secondary path). Clicking it — an explicit user action — writes a one-shot, tab-scoped `sessionStorage` payload (`clinicops.readiness.handoff`: score, band, gap list, timestamp only; never company/customer data). `assessment-intake.html` consumes and immediately deletes the key, and prefills the optional notes field only when it is empty and the payload is fresh (<1h). No network path was added on either page; behaviour is unchanged when storage is unavailable. Contracts: `tests/test_readiness_handoff_contract.py` (key agreement, one-shot consumption, no network tokens) and `conversion_quality.py` requires `readiness-score.html → assessment-intake.html`.
+Do not create a third-party form endpoint/account without Ali's explicit approval.
 
-Do not rebuild or refactor this handoff speculatively. If either page changes, keep the handoff contract green by fixing the site, not weakening the tests.
+### Public free tools
+Keep both free:
+- EUDAMED Identifier Check — browser-only structural identifier screening;
+- Transition Readiness Score — browser-only operational work-plan readiness signal.
 
-### Sanitized Class III Transition Map sample
-`docs/transition-map-sample/index.html` is public proof of the paid deliverable format.
-- Generated from the same `render_client_html()` path used by the client bundle.
-- Source fixture `examples/portfolio.csv` is fictional/sanitized.
-- `scripts/render_public_demo.py --check` prevents the public sample from drifting from the paid renderer.
-- The sample explains what a small pilot can start with and what the human-reviewed output contains.
-- Its primary next step is the browser-local `assessment-intake.html`; direct email and the free Readiness Score remain available.
-- The sample is linked from Tools, the homepage and the Class III transition page.
-- The sample exposes `/privacy-notice/` through the renderer, so regeneration cannot silently remove that privacy path.
-- The conversion contract requires the sample → assessment-intake path and the Class III page → sample/intake paths.
-- Ops Watch verifies the deployed sample.
+The Readiness Score is not a regulatory/compliance/legal/enforcement risk score. B-prefix output is structural screening, not a compliance conclusion.
 
-Do not put confidential client/prospect data into this sample or any public Pages artifact.
+### Sanitized Transition Map sample
+`docs/transition-map-sample/index.html` is generated from the same report-rendering path used by the paid bundle through `scripts/render_public_demo.py`. Its fixture is fictional/sanitized. The sample demonstrates structure, not a compliance outcome.
 
-### Public privacy surface
-`docs/privacy-notice/index.html` is part of the production surface and must remain reachable at `https://clinicops.dk/privacy-notice/` because prior business-development communications referenced that URL.
-- It describes the current static GitHub Pages site, browser-local tools and current no-cookie/no-analytics/no-tracking posture.
-- Every sitemap-listed HTML page must expose a privacy-notice path; `tests/test_privacy_surface_contract.py` enforces this dynamically from `docs/sitemap.xml`.
-- The same contract blocks known tracking runtime tokens while the notice says ClinicOps runs no analytics/tracking.
-- `.github/workflows/ops-watch.yml` executes `scripts/check_live_site.py`; the privacy notice is a monitored target so a repeat 404 becomes an operational failure rather than a silent legal/commercial regression.
+Do not hand-edit generated output in a way that creates renderer drift and never put buyer/prospect data into a public Pages artifact.
 
-Do not add analytics/tracking or materially change the privacy posture without Ali's explicit approval and a corresponding privacy-notice/contract update.
+## Privacy / tracking posture — PR #26
+`https://clinicops.dk/privacy-notice/` is a production invariant because prior business-development communications referenced it.
 
-## Public free tools
-### EUDAMED Identifier Check
-- `docs/identifier-check.html`
-- Browser/client-side only.
-- GS1 Mod-10 validation, common SRN role decoding and B-prefix structural screening.
-- B-prefix is a ClinicOps screening signal, not a compliance conclusion or quoted Commission rule.
+Current posture:
+- static GitHub Pages;
+- ClinicOps sets no cookies;
+- no analytics/tracking runtime;
+- browser-local tools;
+- sitemap-wide privacy link visibility.
 
-### Transition Readiness Score
-- `docs/readiness-score.html`
-- Browser-only five-question operational work-plan readiness signal.
-- Deterministic 0–100 result with evidence-gap explanations.
-- Not a regulatory risk, compliance, legal or enforcement score.
-- No live EUDAMED lookup and no browser network calls.
-- Contract: `scripts/validate_readiness_page.py` plus the PR #14 handoff contract.
+`tests/test_privacy_surface_contract.py` enforces the current no-tracking/public-privacy contract, and Ops Watch checks the live privacy endpoint.
 
-Keep both tools free. Monetize human-reviewed portfolio judgement, transition work planning and monitoring.
-
-## Website resilience gates
-Current CI includes:
-- pytest
-- Ruff
-- Revenue OS experiment-contract smoke
-- executable agent five-gate smoke
-- Transition Readiness Score contract
-- public Transition Map renderer-drift contract
-- site metadata contract
-- deterministic sitemap contract
-- internal-link contract
-- client-bundle smoke test
-- custom-agent profile audit
-- claim-registry audit
-- claim-reference integrity
-- governed website content validation
-- sanitized report fixture check
-- public-copy claim gate
-- sitemap-wide privacy visibility / no-tracking contract
-
-### Site metadata
-`scripts/validate_site_metadata.py` + `src/clinicops_os/site_quality.py` enforce self-canonical URLs, Open Graph essentials, Twitter summary card and parseable JSON-LD. Homepage additionally requires Organization/WebSite/WebPage types.
-
-The current favicon is a compact checkmark icon, not a proper corporate logo. Do **not** label it as the Organization `logo` merely to silence SEO tooling. No `og:image` until a proper brand/social asset is deliberately approved. `twitter:card` stays `summary` until that asset decision changes deliberately.
-
-### Sitemap
-`scripts/render_sitemap.py --check` makes `docs/sitemap.xml` deterministic from public HTML canonicals and excludes the custom 404. Adding/removing a public canonical page without updating the rendered sitemap fails CI.
-
-### Internal links
-`src/clinicops_os/link_quality.py` + `scripts/validate_internal_links.py` fail CI on broken local production links while allowing external/mailto/tel targets. Do not weaken this check to accommodate broken links; repair the links instead.
-
-### Conversion paths
-`src/clinicops_os/conversion_quality.py` + `tests/test_conversion_quality.py` protect only durable high-intent navigation contracts, not marketing copy. Current protected paths include homepage → assessment/sample, Tools → sample, Readiness Score → assessment, assessment → sample/readiness, Class III transition → assessment/sample, and public sample → assessment.
-
-### Ops Watch
-`.github/workflows/ops-watch.yml` remains bounded and read-only. It covers:
-- evidence freshness;
-- claim-reference integrity;
-- governed-content validation;
-- bounded EUDAMED reachability canary;
-- live `clinicops.dk` HTTPS/content checks, including the privacy notice.
-
-It does not publish, contact prospects, make client compliance findings or mutate third-party systems.
-
-## Search / indexing status
-GSC Wizard is configured against `https://clinicops.dk/` and the canonical production sitemap `https://clinicops.dk/sitemap.xml`.
-
-Observed 2026-09-10:
-- Live crawl confirms the GitHub production homepage, sample and assessment intake return HTTP 200, are indexable, self-canonical and expose structured data; the post-PR #16 live crawl also confirmed the Class III page and sample remain 200/indexable/self-canonical.
-- Homepage is known/indexed in Search Console; most newly launched URLs are still unknown to Google immediately after the migration/deployment.
-- The public Transition Map sample and assessment intake are in the GSC Wizard indexing tracker.
-- `assessment-intake.html` has reported `URL is unknown to Google`; this is an indexing/discovery state, not a live-site failure.
-- Do not mass-produce thin SEO pages while current production URLs are still being discovered.
-- A Search Console sitemap submission of `https://clinicops.dk/sitemap.xml` should be verified manually if it has not already been submitted; changing GSC Wizard's sitemap configuration does not itself prove a Search Console sitemap submission.
-
-Current SEO-tool warnings are non-blocking: some title/meta lengths exceed usual display guidelines, and Organization schema lacks a logo. Do not rewrite approved page copy or mislabel the favicon merely to remove these warnings.
-
-## Executable agent layer
-Do not create a second fleet. The six canonical `.github/agents/` profiles remain:
-1. Regulatory Evidence Steward
-2. Portfolio Operator
-3. Release Sentinel
-4. Opportunity Architect
-5. Customer Discovery Agent
-6. Visibility Architect
-
-Executable runtime:
-- `src/clinicops_os/agents.py`
-- `scripts/agent_gate.py`
-- sanitized fixture `examples/agent_tasks.json`
-- tests `tests/test_agents.py`
-
-Five mandatory gates:
-1. Evidence check
-2. Claim safety check
-3. Business value check
-4. Reproducibility check
-5. Human review for external publication
-
-Reuse `clinicops_eudamed.claim_guard.check_claim()` and the existing claim registry; do not introduce a parallel regulatory-claim checker.
+Do not add analytics/tracking or materially change privacy posture without Ali's explicit approval plus corresponding notice/contract updates.
 
 ## Claim governance and corrected regulatory thesis
-- `research/claims.jsonl` is the versioned claim registry.
-- `src/clinicops_eudamed/claim_guard.py` is the known-bad-phrasing guard.
-- `src/clinicops_os/claim_registry.py` is the claim-status/use/review gate.
-- Public regulatory copy must remain within `CO-CLM-####` evidence and allowed-use boundaries.
-- Do not revive the rejected manufacturer-diligence-failure headline from the Class III census.
-- In the corrected 8 Sep 2026 sample, sampled MF-role MDR Class III registrations had linked validated SS(C)P metadata; the commercial opportunity is legacy-to-MDR transition/document-operations workload, not a generic allegation about manufacturer diligence.
-- Preserve MF/AR/IM/PR actor-role distinctions.
-- Do not infer SS(C)P non-compliance from a missing/null public link alone.
-- Do not imply an end-to-end EUDAMED audit when public/API reachability is bounded.
-- Commercial priority scores are operator-triage signals, not regulatory/compliance/legal risk scores.
-- EUDAMED canary correction remains `CO-CLM-0011`: the previously observed apparent page-32,000 failure boundary was not reproduced on 9 Sep 2026; treat it as a dated observation, not a stable system limit.
+Canonical controls:
+- `research/claims.jsonl`
+- `src/clinicops_eudamed/claim_guard.py`
+- `src/clinicops_os/claim_registry.py`
 
-## Revenue OS and client delivery
-Commercial loop:
+Preserve these boundaries:
+- do not infer non-compliance from missing/null public SS(C)P links;
+- do not imply complete EUDAMED public-register/API coverage;
+- B-prefix signals are structural screening only;
+- preserve MF / AR / IM / PR actor-role distinctions;
+- do not present non-binding recommendations as statutory deadlines;
+- do not make buyer-specific regulatory claims without authorised evidence;
+- deterministic priority scores are operator triage, not regulatory/compliance/legal/safety risk scores.
 
-`signal → evidence coverage → ranked account → smallest commercial experiment → result → learning → reusable asset → revenue`
+Corrected thesis: sampled MF-role MDR Class III registrations had linked validated SS(C)P metadata; the opportunity is legacy→MDR transition/document-operations workload, evidence control and reconciliation—not a generic allegation of manufacturer diligence failure.
 
-Executable components:
-- `src/clinicops_os/revenue.py` + `clinicops-revenue-rank`
-- `src/clinicops_os/experiments.py` + `clinicops-experiments`
-- `experiments/EXPERIMENT_LEDGER.md`
-- `.github/ISSUE_TEMPLATE/experiment.yml`
+Do not revive the rejected diligence-failure headline.
 
-### Current commercial validation threshold (EXP-001, merged in PR #15)
-Do not call the core offer validated from conversations or compliments alone. Current decision rule:
-1. complete three qualified portfolio conversations;
-2. at least two buyers independently describe repeated portfolio reconciliation / evidence-control work addressed by the offer; and
-3. at least one buyer makes a concrete commercial commitment such as asking for a priced scope, proposing a pilot, or identifying budget/approval ownership.
+## CI / resilience gates
+Current CI covers:
+- pytest and Ruff;
+- Revenue OS experiment contract;
+- agent five-gate contract;
+- Readiness Score and intake/handoff contracts;
+- public sample renderer drift;
+- site metadata, deterministic sitemap and internal links;
+- fail-closed paid-pilot preflight;
+- client bundle smoke;
+- synthetic human-review-gate packaging smoke, explicitly **not delegation proof**;
+- final client-bundle integrity verification;
+- delegation-proof negative control requiring the public CI example to return **NOT PROVEN**;
+- custom-agent profile audit;
+- claim-registry/reference/content gates;
+- sanitized report fixture;
+- public-copy claim gate;
+- privacy/no-tracking contract.
 
-A stronger signal is a paid pilot followed by repeat, expansion, referral or reuse on another portfolio. If ten qualified target-buyer conversations produce no concrete willingness to sponsor a pilot, no priced-scope request and no repeated evidence of budgeted urgency, pause product expansion and change at least one of buyer, problem, offer, packaging or distribution before building more functionality.
+Ops Watch remains bounded/read-only and covers evidence freshness, claim/reference checks, the bounded EUDAMED reachability canary and live HTTPS/content checks including the privacy notice.
 
-### Current service-entry discipline (PRs #22–#25)
-The Class III Transition Map Pilot is the only default `DO NOW` service entry until commercial evidence changes that decision. Adjacent service entries are experiments, not parallel launch instructions.
+Do not weaken a gate merely to get CI green; fix the underlying inconsistency.
 
-Activate an adjacent entry only when a qualified buyer conversation, concrete flagship objection, paid/design-partner delivery, or verified external change produces evidence for that exact workflow. Do not create outreach, pricing, public product surface or delivery work merely because an adjacent idea scores well on paper.
+## Search / indexing
+Production canonical sitemap:
 
-Before material client work begins, apply `sales/commercial-activation-gate.md`: written scope/acceptance plus an approved activation condition (upfront payment, agreed deposit/milestone or accepted PO/signed procurement commitment). Design-partner work is outside the standard delegated workflow and requires a separately approved, time-bounded policy rather than ad hoc transaction approval. Do not consume delivery capacity on an informal “go ahead” or open-ended unpaid work.
+`https://clinicops.dk/sitemap.xml`
 
-Service-first delivery remains:
+Google Search Console previously showed only the older `sitemap.website.xml` submission (7 submitted / 0 indexed, no warnings/errors) while production now exposes the 14-URL canonical sitemap.
 
-`clinicops.dk → free screening / proof sample → browser-local scope brief → controlled private intake → validation/analysis → human regulatory review → secure client bundle → feedback → Revenue OS learning`
+GitHub issue #28 tracks the remaining manual action: submit `sitemap.xml` in the actual Google Search Console UI, verify acceptance, and remove the older sitemap only if appropriate afterward. Connected GSC tooling can inspect but does not provide the required Google sitemap-submission action.
 
-### Standard paid-pilot delegation envelope
-
-`sales/commercial-activation-gate.md` defines the founder-independent operating boundary for the existing Class III Transition Map Pilot. A trained operator may execute a standard paid pilot from written scope through closeout only when the EXP-001 buyer, bounded population, approved commercial terms, private data route, controlled bundle schema and qualified named human-review gate are all satisfied.
-
-Anything outside that envelope is marked **NON-STANDARD — NOT ACTIVATED** and parked or declined. The delegated workflow abstains rather than routing design-partner work, custom scope/pricing, unusual liability, unsupported interpretation, patient-identifiable data or unavailable qualified review to Ali for an ad hoc transaction decision. Founder-independent execution is not considered proven until one eligible paid pilot or two controlled dry runs complete with zero Ali transaction-level decisions and no unplanned exception.
-
-Bundle schema `1.1` includes:
-- `client_report.html`
-- `portfolio_report.md`
-- `portfolio_report.json`
-- `intake_diagnostics.md`
-- `manifest.json` with source/output hashes
-
-Real prospect/account data and confidential client bundles stay private. Public GitHub contains only sanitized fixtures and reusable code.
+Do not create extra SEO pages simply to inflate URL count while current production pages are still being discovered.
 
 ## External-action boundaries
 Require Ali's case-by-case approval before:
@@ -245,35 +234,46 @@ Require Ali's case-by-case approval before:
 - creating third-party accounts or live form endpoints;
 - analytics/tracking deployment.
 
-Permanent DO_NOT_CONTACT:
+Permanent `DO_NOT_CONTACT`:
 - Ergomed Group
 - PrimeVigilance
 
-## Budget/resilience doctrine
+Keep prospect/customer names, emails, portfolio files, pricing negotiations, private notes and proof records out of the public repository.
+
+## Budget / resilience doctrine
 ClinicOps is bootstrapped. Default to:
 - low fixed cost;
 - GitHub + Pages + existing domain/mail + AI leverage;
-- accountable service revenue before expensive SaaS;
-- automation only where repeated paid-work friction proves value;
+- service revenue before expensive SaaS infrastructure;
+- automation only for repeated paid-work friction;
 - reinvest validated revenue into infrastructure.
 
-Avoid expensive CRM/cloud/portal/data purchases until real paid usage proves the need.
+Do not add paid CRM/cloud/portal/data infrastructure until real paid use proves it is needed.
+
+## Recent merged operating changes
+- #26 — hardened public privacy surface and production privacy check.
+- #27 — standardized founder-independent paid-pilot delegation envelope.
+- #29 — executable fail-closed paid-pilot preflight.
+- #30 — final client-bundle source/output integrity verification.
+- #31 — canonical operator docs locked to controlled execution order.
+- #32 — manifest-bound executable human-review release gate.
+- #33 — fail-closed founder-independence proof evaluator and controlled dry-run protocol.
 
 ## Coordination protocol
-1. Fetch `main` first.
-2. Treat GitHub `main` as canonical over chat/local state.
-3. Preserve corrections, claim IDs and evidence limitations.
+1. Fetch `main` and inspect open PRs before work.
+2. Treat `main` as canonical over chat/local state.
+3. Preserve evidence corrections, claim IDs, privacy posture and commercial boundaries.
 4. Reuse existing modules before adding parallel logic.
-5. On conflict, fetch newest and merge; never force-overwrite concurrent work.
-6. Use feature branches/PRs for material multi-file changes.
-7. Verify newest CI before declaring code green.
-8. Verify Pages deployment for `docs/**` changes.
-9. Use the narrowest existing agent; expand capability before fleet size.
-10. Keep private customer/prospect evidence out of the public repo.
+5. Preserve concurrent Claude/ChatGPT work; never force-overwrite.
+6. Use feature branches/PRs for material changes.
+7. Fix root causes when CI catches a real inconsistency.
+8. Verify exact merged-SHA CI before declaring code green; verify Pages/Ops Watch for public-site changes.
+9. Keep all real buyer/client/proof records private.
+10. Prefer the smallest durable control or commercial experiment over a larger feature.
 
 ## Highest-leverage next work
-1. **Commercial validation still outranks speculative product work.** Use the live sample, Readiness Score and browser-local assessment brief in a small number of high-information conversations with ARs, regulatory consultancies and Class III/implantable manufacturers; record private buyer evidence against EXP-001.
-2. Verify/submit the production sitemap in Google Search Console if not already done; then give indexing time rather than creating a large content batch.
-3. Convert a qualified buyer signal into the first paid or deliberately approved design-partner Class III Transition Map using `sales/first-pilot-scope-template.md` plus `sales/commercial-activation-gate.md`; capture objections, missing intake fields, delivery friction, payment/procurement friction and willingness-to-pay privately.
-4. Strengthen credibility and offer clarity only where real buyer objections show a gap. Do not invent testimonials, ROI, turnaround promises or regulatory certainty.
-5. Build portal/SaaS features only when repeated paid engagements prove multi-user upload, action tracking or recurring monitoring needs.
+1. **Real commercial evidence remains the primary bottleneck.** Use qualified buyer conversations to test EXP-001; do not substitute dry runs or software activity for demand.
+2. If a real eligible paid pilot arrives, execute the full controlled path and evaluate it as the strongest founder-independence proof candidate.
+3. Otherwise, conduct two genuine controlled operator dry runs under `sales/delegation-proof-protocol.md` with actual qualified human review; use them to discover hidden founder decisions. Do not auto-attest review or count CI.
+4. Submit/verify the canonical production sitemap in Google Search Console under issue #28.
+5. After real delivery or buyer objections, automate only repeated friction that the evidence exposes. Do not expand the offer or platform speculatively.
