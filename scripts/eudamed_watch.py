@@ -25,7 +25,7 @@ import sys
 import time
 import urllib.error
 import urllib.request
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 from urllib.parse import quote
@@ -57,35 +57,35 @@ REFDATA_PREFIX_RE = re.compile(r"^refdata\.[^.]+\.")
 
 # Standing limits. These are written into every snapshot and every markdown.
 STANDING_LIMITS = [
-    "This is a snapshot of what the public EUDAMED record showed at the extraction "
+    ("This is a snapshot of what the public EUDAMED record showed at the extraction "
     "date. It is not a compliance, conformity or diligence statement about any "
-    "named company, and must not be quoted as one.",
-    "Trade-name search is a case-insensitive, unanchored substring match. Results "
+    "named company, and must not be quoted as one."),
+    ("Trade-name search is a case-insensitive, unanchored substring match. Results "
     "can include unrelated devices; rows are filtered client-side by "
-    "manufacturer_contains where configured.",
-    "Zero results means 'not findable under that search string at that time', "
-    "not 'not registered'.",
-    "totalElements counts returned by the API are unstable and are reported as "
-    "approximate; they are for display only.",
-    "pageSize is capped at 50 by the API; page coverage is bounded by --max-pages, "
-    "so long result lists may be truncated (flagged per entry).",
-    "riskClass/legislation query parameters are ignored by the API; risk class is "
-    "taken from each row and filtering is client-side.",
-    "No Basic UDI-DI lookup endpoint exists; detail lookups go through a UDI-DI "
+    "manufacturer_contains where configured."),
+    ("Zero results means 'not findable under that search string at that time', "
+    "not 'not registered'."),
+    ("totalElements counts returned by the API are unstable and are reported as "
+    "approximate; they are for display only."),
+    ("pageSize is capped at 50 by the API; page coverage is bounded by --max-pages, "
+    "so long result lists may be truncated (flagged per entry)."),
+    ("riskClass/legislation query parameters are ignored by the API; risk class is "
+    "taken from each row and filtering is client-side."),
+    ("No Basic UDI-DI lookup endpoint exists; detail lookups go through a UDI-DI "
     "uuid. Only identifiers and link metadata are retrievable; SS(C)P content is "
-    "never retrievable through this API.",
-    "A basicUdi starting with 'B-' is a legacy (MDD/AIMDD) EUDAMED-generated DI "
+    "never retrievable through this API."),
+    ("A basicUdi starting with 'B-' is a legacy (MDD/AIMDD) EUDAMED-generated DI "
     "that structurally cannot carry an SS(C)P link (ClinicOps derived screening "
-    "logic, not quoted Commission law).",
-    "SRN role PR (system/procedure pack producer) records carry no SS(C)P duty "
-    "and are not looked up.",
-    "sscp_expected is ClinicOps derived screening logic (class III or implantable, "
+    "logic, not quoted Commission law)."),
+    ("SRN role PR (system/procedure pack producer) records carry no SS(C)P duty "
+    "and are not looked up."),
+    ("sscp_expected is ClinicOps derived screening logic (class III or implantable, "
     "MDR, not legacy, not PR). 'sscp_expected_but_absent' means no SS(C)P link was "
     "visible in the public record at extraction; it is not a finding that any "
-    "obligation is unmet.",
-    "Failed pages and lookups are recorded explicitly; a device 'no longer seen' "
+    "obligation is unmet."),
+    ("Failed pages and lookups are recorded explicitly; a device 'no longer seen' "
     "next to a recorded failure may be an extraction artefact, not a registry "
-    "change.",
+    "change."),
 ]
 
 
@@ -180,7 +180,7 @@ def load_watchlist(path: Path) -> list[dict[str, Any]]:
     out = []
     for i, entry in enumerate(entries):
         if not isinstance(entry, dict):
-            raise ValueError(f"{path}: entry {i} is not a mapping")
+            raise TypeError(f"{path}: entry {i} is not a mapping")
         label = str(entry.get("label", "")).strip()
         query = str(entry.get("trade_name_query", "")).strip()
         if not label or not query:
@@ -495,7 +495,7 @@ def build_snapshot(
     payload: dict[str, Any] = {
         "tool": TOOL_NAME,
         "tool_version": TOOL_VERSION,
-        "extracted_at_utc": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
+        "extracted_at_utc": datetime.now(UTC).replace(microsecond=0).isoformat(),
         "snapshot_date": snapshot_date,
         "mode": getattr(fetcher, "mode", "unknown"),
         "watchlist_path": watchlist_path,
@@ -788,7 +788,7 @@ def cmd_run(args: argparse.Namespace) -> int:
 
     watchlist = load_watchlist(Path(args.watchlist))
     fetcher = FixtureFetcher(Path(args.fetch_fixture)) if args.fetch_fixture else LiveFetcher(args.sleep, args.timeout)
-    snapshot_date = args.date or datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    snapshot_date = args.date or datetime.now(UTC).strftime("%Y-%m-%d")
     if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", snapshot_date):
         print(f"invalid --date {snapshot_date!r}, expected YYYY-MM-DD", file=sys.stderr)
         return 2
