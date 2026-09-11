@@ -14,14 +14,18 @@ def _run(run_id: str, run_kind: str) -> dict[str, object]:
         "execution_completed_on": "2026-09-11",
         "operator": "Trained Operator",
         "human_reviewer": "Qualified Reviewer",
+        "private_operational_record": True,
         "proof_use_allowed": True,
         "ci_or_automated_smoke": False,
         "execution_completed": True,
+        "qualification_stage_completed": True,
+        "written_scope_stage_completed": True,
         "preflight_status": "ACTIVATED",
         "intake_validated": True,
         "bundle_generated": True,
         "human_review_status": "REVIEW APPROVED",
         "bundle_integrity_status": "VERIFIED",
+        "delivery_stage_completed": True,
         "evidence_gate_satisfied": True,
         "claim_gate_satisfied": True,
         "commercial_gate_satisfied": True,
@@ -80,11 +84,13 @@ def test_ci_or_automated_smoke_can_never_qualify() -> None:
 
 def test_public_or_unapproved_record_cannot_qualify() -> None:
     record = _run("DRY-PUBLIC", CONTROLLED_DRY_RUN)
+    record["private_operational_record"] = False
     record["proof_use_allowed"] = False
 
     result = evaluate_delegation_run(record)
 
     assert result.qualifies is False
+    assert any("private operational record" in reason for reason in result.reasons)
     assert any("not explicitly authorised" in reason for reason in result.reasons)
 
 
@@ -145,3 +151,15 @@ def test_missing_existing_gate_disqualifies_run() -> None:
 
     assert result.qualifies is False
     assert "claim-safety gate is not recorded as satisfied" in result.reasons
+
+
+def test_incomplete_lifecycle_stage_disqualifies_run() -> None:
+    record = _run("DRY-INCOMPLETE", CONTROLLED_DRY_RUN)
+    record["qualification_stage_completed"] = False
+    record["delivery_stage_completed"] = False
+
+    result = evaluate_delegation_run(record)
+
+    assert result.qualifies is False
+    assert any("qualification stage" in reason for reason in result.reasons)
+    assert any("delivery/release stage" in reason for reason in result.reasons)
