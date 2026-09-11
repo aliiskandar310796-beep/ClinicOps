@@ -1,4 +1,7 @@
+import hashlib
+
 from clinicops_os.delegation_proof import (
+    ARTIFACT_SHA256_FIELDS,
     CONTROLLED_DRY_RUN,
     PAID_PILOT,
     evaluate_delegation_proof,
@@ -6,9 +9,13 @@ from clinicops_os.delegation_proof import (
 )
 
 
+def _hash(run_id: str, field: str) -> str:
+    return hashlib.sha256(f"{run_id}:{field}".encode()).hexdigest()
+
+
 def _run(run_id: str, run_kind: str) -> dict[str, object]:
     record: dict[str, object] = {
-        "record_schema_version": "1.0",
+        "record_schema_version": "1.1",
         "run_id": run_id,
         "run_kind": run_kind,
         "execution_completed_on": "2026-09-11",
@@ -40,6 +47,8 @@ def _run(run_id: str, run_kind: str) -> dict[str, object]:
         "payment_or_procurement_path_followed": run_kind == PAID_PILOT,
         "full_operator_dry_run": run_kind == CONTROLLED_DRY_RUN,
     }
+    for field in ARTIFACT_SHA256_FIELDS:
+        record[field] = _hash(run_id, field)
     return record
 
 
@@ -118,6 +127,18 @@ def test_negative_attestations_are_fail_closed_when_omitted() -> None:
     assert len(result.reasons) >= 3
 
 
+def test_artifact_bindings_are_required_and_fail_closed() -> None:
+    record = _run("DRY-NO-BINDING", CONTROLLED_DRY_RUN)
+    del record["review_record_sha256"]
+    record["bundle_manifest_sha256"] = "not-a-sha"
+
+    result = evaluate_delegation_run(record)
+
+    assert result.qualifies is False
+    assert any("review_record_sha256" in reason for reason in result.reasons)
+    assert any("bundle_manifest_sha256" in reason for reason in result.reasons)
+
+
 def test_duplicate_run_ids_invalidate_evidence_set() -> None:
     result = evaluate_delegation_proof(
         [
@@ -129,6 +150,19 @@ def test_duplicate_run_ids_invalidate_evidence_set() -> None:
     assert result.proven is False
     assert result.qualifying_dry_run_ids == ()
     assert any("run_id values must be unique" in error for error in result.evidence_errors)
+
+
+def test_relabelled_copy_cannot_count_as_two_independent_dry_runs() -> None:
+    first = _run("DRY-001", CONTROLLED_DRY_RUN)
+    second = _run("DRY-002", CONTROLLED_DRY_RUN)
+    for field in ARTIFACT_SHA256_FIELDS:
+        second[field] = first[field]
+
+    result = evaluate_delegation_proof([first, second])
+
+    assert result.proven is False
+    assert result.qualifying_dry_run_ids == ()
+    assert any("distinct controlled-artifact" in error for error in result.evidence_errors)
 
 
 def test_paid_pilot_requires_real_payment_or_procurement_path() -> None:
