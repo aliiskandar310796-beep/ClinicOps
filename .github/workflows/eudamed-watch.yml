@@ -1,9 +1,21 @@
-# EUDAMED watchlist monitor (monthly).
+# EUDAMED watchlist monitor (monthly) — anonymised public outputs.
 #
 # Runs scripts/eudamed_watch.py in LIVE mode against the public EUDAMED JSON API
-# for the watchlist in data/eudamed/watchlist.json, then commits the dated
-# snapshot, the diff against the previous snapshot and data/eudamed/LATEST.md
-# back to the repository with a bot identity, only when something changed.
+# for a PRIVATE watchlist supplied at runtime from the EUDAMED_WATCHLIST
+# repository secret, then commits the dated snapshot, the diff and LATEST.md,
+# only when something changed.
+#
+# ANONYMISATION: this repository is public. Everything committed here, and
+# everything printed to this (public) job log, is aggregate-level only — no
+# manufacturer names, device or trade names, Basic UDI-DIs or SS(C)P
+# references. Per-device rows in snapshots are keyed by HMAC-SHA256 of the
+# Basic UDI-DI under the EUDAMED_HMAC_KEY secret (optional; without it the
+# snapshot and diff are aggregate-only). Fully-named reports exist only via the
+# local --full-out flag, which this workflow never uses.
+#
+# Secrets: EUDAMED_WATCHLIST (required; the watchlist JSON — see
+# data/eudamed/watchlist.example.json for the format) and EUDAMED_HMAC_KEY
+# (optional; any long random string, kept stable across runs).
 #
 # OPEN ITEM: live scheduled runs should have the EUDAMED public-data reuse terms
 # (Commission reuse / legal notice for the public EUDAMED interface) confirmed
@@ -30,8 +42,9 @@ concurrency:
 
 jobs:
   eudamed-watch:
-    # Live public-API run. See the file header: EUDAMED public-data reuse terms
-    # are an open item to confirm before treating these runs as operational.
+    # Live public-API run with anonymised, aggregate-only committed outputs.
+    # See the file header: EUDAMED public-data reuse terms are an open item to
+    # confirm before treating these runs as operational.
     name: EUDAMED watchlist snapshot
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -43,14 +56,27 @@ jobs:
       # The tool itself is stdlib-only; pytest is installed only for the self-check.
       - name: Offline self-check against the committed fixture
         run: python -m pip install --quiet pytest && python -m pytest tests/test_eudamed_watch.py -q
-      - name: Run watchlist snapshot (live, read-only)
+      - name: Write private watchlist from repository secret
+        env:
+          EUDAMED_WATCHLIST: ${{ secrets.EUDAMED_WATCHLIST }}
+        run: |
+          if [ -z "$EUDAMED_WATCHLIST" ]; then
+            echo "::error::The EUDAMED_WATCHLIST repository secret is empty or missing. Create it with the private watchlist JSON (format: data/eudamed/watchlist.example.json)."
+            exit 1
+          fi
+          printf '%s' "$EUDAMED_WATCHLIST" > "$RUNNER_TEMP/watchlist.json"
+          python -c "import json,os; json.load(open(os.environ['RUNNER_TEMP'] + '/watchlist.json'))" \
+            || { echo "::error::EUDAMED_WATCHLIST is not valid JSON."; exit 1; }
+      - name: Run watchlist snapshot (live, read-only, anonymised outputs)
+        env:
+          EUDAMED_HMAC_KEY: ${{ secrets.EUDAMED_HMAC_KEY }}
         run: |
           python scripts/eudamed_watch.py run \
-            --watchlist data/eudamed/watchlist.json \
+            --watchlist "$RUNNER_TEMP/watchlist.json" \
             --out data/eudamed/ \
             --max-pages 5 \
             --sleep 1.0
-      - name: Add LATEST.md to job summary
+      - name: Add anonymised LATEST.md to job summary
         if: always()
         run: |
           if [ -f data/eudamed/LATEST.md ]; then

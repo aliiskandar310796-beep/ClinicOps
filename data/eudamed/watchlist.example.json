@@ -1,0 +1,19 @@
+{
+  "_format": "Example only — the REAL watchlist is NOT committed to this public repository. It lives in the EUDAMED_WATCHLIST repository secret and is written to a temp file at workflow runtime; locally, keep it in an untracked file and pass its path to --watchlist. JSON (not YAML) keeps the tool stdlib-only. Fields per entry: label (unique), trade_name_query, optional manufacturer_contains, optional expected_srn, optional note.",
+  "_standing_note": "trade_name_query is a case-insensitive UNANCHORED substring match on the EUDAMED API; results can include unrelated devices and are filtered client-side by manufacturer_contains (case-insensitive substring of manufacturerName). Zero rows means 'not findable under that string', not 'not registered'. Committed outputs are aggregate-only and never name a manufacturer or device.",
+  "entries": [
+    {
+      "label": "Example — Fictional Widget",
+      "trade_name_query": "FictionalWidget",
+      "manufacturer_contains": "Entirely Fictional Devices",
+      "note": "FICTIONAL example entry for documentation and tests only; not a real manufacturer or device."
+    },
+    {
+      "label": "Example — Placeholder Implant",
+      "trade_name_query": "PlaceholderImplant",
+      "manufacturer_contains": "Nonexistent Medical Example",
+      "expected_srn": "XX-MF-000000000",
+      "note": "FICTIONAL example entry for documentation and tests only; not a real manufacturer or device."
+    }
+  ]
+}
