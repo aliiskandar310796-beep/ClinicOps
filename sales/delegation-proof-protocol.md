@@ -7,7 +7,7 @@ Status: **internal operating control**. This protocol evaluates whether the exis
 Founder-independent execution is proven only when `clinicops-delegation-proof` evaluates private operational records and finds either:
 
 - at least **one qualifying real eligible paid pilot**; or
-- at least **two qualifying complete controlled dry runs** with unique run IDs.
+- at least **two qualifying complete controlled dry runs** with unique run IDs and distinct controlled-artifact bindings.
 
 Anything else remains **FOUNDER-INDEPENDENT EXECUTION NOT PROVEN**.
 
@@ -26,13 +26,14 @@ The following are categorically ineligible:
 - runs containing an unplanned or non-standard scope, claim or commercial exception;
 - runs without a qualified named human reviewer and `REVIEW APPROVED` result;
 - runs without final bundle integrity status `VERIFIED`;
-- records not explicitly approved for proof use and retained in a private operational location.
+- records not explicitly approved for proof use and retained in a private operational location;
+- a copied execution relabelled with a different `run_id`.
 
 Software can test the proof evaluator. Software tests are not proof of the organization operating independently.
 
 ## Private proof record
 
-Keep real proof records out of this public repository. Store them with the corresponding private scope/run evidence.
+Keep real proof records and all referenced run artifacts out of this public repository. Store them together in the corresponding private scope/run evidence location.
 
 A qualifying record must explicitly capture:
 
@@ -56,7 +57,24 @@ A qualifying record must explicitly capture:
 - no unplanned exception;
 - no non-standard scope, claim or commercial exception;
 - controlled closeout completed;
-- operational/commercial learning recorded privately against `EXP-001`.
+- operational/commercial learning recorded privately against `EXP-001`;
+- immutable SHA-256 bindings to the actual controlled artifacts listed below.
+
+### Required artifact bindings
+
+Proof schema `1.1` requires lowercase 64-character SHA-256 values for:
+
+- `activation_record_sha256` — exact activation record used for the run;
+- `preflight_result_sha256` — exact saved output from `clinicops-pilot-preflight` showing the evaluated result;
+- `review_record_sha256` — exact completed private human-review record;
+- `review_gate_result_sha256` — exact saved output from `clinicops-pilot-review-gate`;
+- `bundle_manifest_sha256` — exact final `manifest.json` reviewed and released;
+- `bundle_verification_record_sha256` — exact saved output from `clinicops-pilot-verify`;
+- `source_sha256` — exact source portfolio/input population bound to the final bundle.
+
+These hashes do not make a false attestation truthful. They prevent a proof record from floating free of the actual controlled files and make later substitution or accidental reuse detectable.
+
+For the two-dry-run proof route, the evaluator also rejects two otherwise qualifying records that carry the same full artifact-binding fingerprint. Renaming one execution is not a second independent run.
 
 For a real paid-pilot proof, the record must additionally confirm that it was a real eligible paid pilot and that the agreed payment/procurement path was followed through closeout.
 
@@ -68,13 +86,17 @@ A dry run exists to discover hidden founder decisions before a real client depen
 
 1. Use a fresh bounded synthetic scenario that exercises the standard paid-pilot envelope without real buyer data.
 2. Have a trained operator execute the workflow as if it were a standard eligible paid pilot, beginning with qualification/scope simulation rather than jumping directly to bundle generation.
-3. Use an approved private working location for the run record, activation record, review record and generated bundle. The public repository may contain sanitized templates only.
-4. Run the standard executable controls in order: `clinicops-pilot-preflight`, intake validation, bundle generation, qualified human review with `clinicops-pilot-review-gate`, and `clinicops-pilot-verify`.
-5. Simulate the delivery/release and closeout steps under the documented standard policy. Do not create a real invoice, PO, buyer claim or external communication for a dry run.
-6. If the operator needs Ali to decide what the transaction should do, set `founder_transaction_decision_required` to `true`. The run fails proof. Do not ask Ali to make the run pass.
-7. If an undocumented exception or decision class appears, set the corresponding exception field, stop treating that run as proof, document the decision class privately, and narrow or clarify the standard envelope before trying again.
-8. Record dry-run learning privately against `EXP-001` as **operational/process learning only**. It does not count as a qualified buyer conversation, repeated-pain confirmation, willingness to pay or commercial commitment.
-9. Complete a second independently executed dry run with a unique run ID before claiming founder independence through the dry-run route.
+3. Use an approved private working location for the run record, activation record, saved gate results, review record and generated bundle. The public repository may contain sanitized templates only.
+4. Save the actual preflight output rather than relying only on memory or a copied status, for example: `clinicops-pilot-preflight /private/path/activation-record.json > /private/path/preflight-result.json`.
+5. Run intake validation and bundle generation under the normal controlled path.
+6. Have the assigned qualified human reviewer actually perform the review, complete the private review record, and save the actual review-gate result: `clinicops-pilot-review-gate /private/path/activation-record.json /private/path/review-record.json /private/path/output > /private/path/review-gate-result.json`.
+7. Immediately run final integrity verification and save the exact result: `clinicops-pilot-verify /private/path/output /private/path/portfolio.csv > /private/path/bundle-verification.json`.
+8. Compute SHA-256 values from the exact final activation record, preflight result, completed review record, review-gate result, final manifest, final bundle-verification result and source portfolio. Record those values in the private proof record. Do not type substitute values from memory.
+9. Simulate the delivery/release and closeout steps under the documented standard policy. Do not create a real invoice, PO, buyer claim or external communication for a dry run.
+10. If the operator needs Ali to decide what the transaction should do, set `founder_transaction_decision_required` to `true`. The run fails proof. Do not ask Ali to make the run pass.
+11. If an undocumented exception or decision class appears, set the corresponding exception field, stop treating that run as proof, document the decision class privately, and narrow or clarify the standard envelope before trying again.
+12. Record dry-run learning privately against `EXP-001` as **operational/process learning only**. It does not count as a qualified buyer conversation, repeated-pain confirmation, willingness to pay or commercial commitment.
+13. Complete a second independently executed dry run with a unique run ID and distinct controlled artifacts before claiming founder independence through the dry-run route.
 
 A qualified human reviewer must actually perform the human-review steps. Auto-flipping review attestations, as CI does for packaging smoke coverage, invalidates a real proof run.
 
@@ -92,7 +114,7 @@ Only the exact status below permits the internal founder-independence claim:
 FOUNDER-INDEPENDENT EXECUTION PROVEN
 ```
 
-A non-zero exit and `FOUNDER-INDEPENDENT EXECUTION NOT PROVEN` means the threshold is not met. Do not edit fields merely to force a passing result; correct the operating gap and execute a new qualifying run.
+A non-zero exit and `FOUNDER-INDEPENDENT EXECUTION NOT PROVEN` means the threshold is not met. Do not edit fields or hashes merely to force a passing result; correct the operating gap and execute a new qualifying run.
 
 ## Relationship to EXP-001 validation
 
@@ -111,4 +133,4 @@ Two perfect dry runs can prove the first and prove nothing about the second.
 - `proof_use_allowed: false`;
 - `ci_or_automated_smoke: true`.
 
-It must therefore remain ineligible by construction.
+Its SHA-256 strings are illustrative placeholders, not evidence. It must therefore remain ineligible by construction.
