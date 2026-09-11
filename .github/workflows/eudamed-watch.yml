@@ -1,0 +1,64 @@
+# EUDAMED watchlist monitor (monthly).
+#
+# Runs scripts/eudamed_watch.py in LIVE mode against the public EUDAMED JSON API
+# for the watchlist in data/eudamed/watchlist.json, then commits the dated
+# snapshot, the diff against the previous snapshot and data/eudamed/LATEST.md
+# back to the repository with a bot identity, only when something changed.
+#
+# OPEN ITEM: live scheduled runs should have the EUDAMED public-data reuse terms
+# (Commission reuse / legal notice for the public EUDAMED interface) confirmed
+# and recorded before this schedule is relied on operationally. The schedule is
+# kept as specified; the tool is read-only, polite (one request per second, a
+# fixed identifying User-Agent, bounded page count) and requires no credentials.
+#
+# Everything this workflow writes is a snapshot of what the public record shows.
+# It is never a compliance, conformity or diligence statement about any company.
+
+name: EUDAMED Watch
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 6 1 * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: clinicops-eudamed-watch
+  cancel-in-progress: false
+
+jobs:
+  eudamed-watch:
+    # Live public-API run. See the file header: EUDAMED public-data reuse terms
+    # are an open item to confirm before treating these runs as operational.
+    name: EUDAMED watchlist snapshot
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      # The tool is stdlib-only; no dependency installation is needed.
+      - name: Offline self-check against the committed fixture
+        run: python -m pytest tests/test_eudamed_watch.py -q
+      - name: Run watchlist snapshot (live, read-only)
+        run: |
+          python scripts/eudamed_watch.py run \
+            --watchlist data/eudamed/watchlist.json \
+            --out data/eudamed/ \
+            --max-pages 5 \
+            --sleep 1.0
+      - name: Add LATEST.md to job summary
+        if: always()
+        run: |
+          if [ -f data/eudamed/LATEST.md ]; then
+            cat data/eudamed/LATEST.md >> "$GITHUB_STEP_SUMMARY"
+          fi
+      - name: Commit snapshot, diff and LATEST.md if changed
+        run: |
+          git config user.name "clinicops-eudamed-watch[bot]"
+          git config user.email "clinicops-eudamed-watch[bot]@users.noreply.github.com"
+          git add -N data/eudamed
+          git diff --quiet || (git add data/eudamed && git commit -m "eudamed-watch: snapshot $(date -u +%F)" && git push)

@@ -1,0 +1,915 @@
+{
+  "_note": "Offline fixture for scripts/eudamed_watch.py mirroring the real EUDAMED listing/detail shapes observed on 2026-09-11 (riskClass/deviceStatusType/legislation as {code} objects with refdata.<group>. prefixes; detail basicUdi as an object; linkedSscp with ulid/validated/uuid/referenceNumber/revisionNumber/issueDate/versionNumber/inactive; deviceCertificateInfoList). All 'Fixture ...' identifiers, SRNs, names and dates are FICTIONAL. The PALACOS listing row is real public-registry data; its detail uuids were truncated in the source note and are padded placeholders. Keys are the exact URLs the tool requests. {\"__error__\": \"...\"} or a missing URL simulates a failed call.",
+  "responses": {
+    "https://ec.europa.eu/tools/eudamed/api/devices/udiDiData?page=0&pageSize=50&size=50&iso2Code=en&languageIso2Code=en&tradeName=Stylet": {
+      "content": [
+        {
+          "basicUdi": "FIXTURE-BUDI-STYLET-MDR",
+          "primaryDi": "00000000000000",
+          "uuid": "fixture-uuid-0001",
+          "ulid": "01FIXTURE0001",
+          "basicUdiDiDataUlid": null,
+          "riskClass": {
+            "code": "refdata.risk-class.class-iii"
+          },
+          "tradeName": "Fixture Stylet 120 mm",
+          "manufacturerName": "Fixture Brainlab Test GmbH",
+          "manufacturerSrn": "DE-MF-000000001",
+          "deviceStatusType": {
+            "code": "refdata.device-model-status.on-the-market"
+          },
+          "manufacturerNames": null,
+          "manufacturerStatus": {
+            "code": "refdata.actor-status.active"
+          },
+          "latestVersion": true,
+          "versionNumber": 1,
+          "basicUdiDataUuid": null,
+          "basicUdiDataUlid": null,
+          "basicUdiDataVersionState": null,
+          "versionState": null,
+          "deviceName": null,
+          "deviceModel": null,
+          "lastUpdateDate": null,
+          "reference": null,
+          "basicUdiDataVersionNumber": 0,
+          "issuingAgency": null,
+          "containerPackageCount": 0,
+          "mfOrPrSrn": null,
+          "applicableLegislation": null,
+          "authorisedRepresentativeSrn": null,
+          "authorisedRepresentativeName": null,
+          "sterile": null,
+          "multiComponent": null,
+          "deviceCriterion": null
+        },
+        {
+          "basicUdi": "FIXTURE-BUDI-STYLET-MDR",
+          "primaryDi": "00000000000000",
+          "uuid": "fixture-uuid-0002",
+          "ulid": "01FIXTURE0002",
+          "basicUdiDiDataUlid": null,
+          "riskClass": {
+            "code": "refdata.risk-class.class-iii"
+          },
+          "tradeName": "Fixture Stylet 150 mm",
+          "manufacturerName": "Fixture Brainlab Test GmbH",
+          "manufacturerSrn": "DE-MF-000000001",
+          "deviceStatusType": {
+            "code": "refdata.device-model-status.on-the-market"
+          },
+          "manufacturerNames": null,
+          "manufacturerStatus": {
+            "code": "refdata.actor-status.active"
+          },
+          "latestVersion": true,
+          "versionNumber": 1,
+          "basicUdiDataUuid": null,
+          "basicUdiDataUlid": null,
+          "basicUdiDataVersionState": null,
+          "versionState": null,
+          "deviceName": null,
+          "deviceModel": null,
+          "lastUpdateDate": null,
+          "reference": null,
+          "basicUdiDataVersionNumber": 0,
+          "issuingAgency": null,
+          "containerPackageCount": 0,
+          "mfOrPrSrn": null,
+          "applicableLegislation": null,
+          "authorisedRepresentativeSrn": null,
+          "authorisedRepresentativeName": null,
+          "sterile": null,
+          "multiComponent": null,
+          "deviceCriterion": null
+        },
+        {
+          "basicUdi": "FIXTURE-BUDI-STYLET-MDR",
+          "primaryDi": "00000000000000",
+          "uuid": "fixture-uuid-0003",
+          "ulid": "01FIXTURE0003",
+          "basicUdiDiDataUlid": null,
+          "riskClass": {
+            "code": "refdata.risk-class.class-iii"
+          },
+          "tradeName": "Fixture Stylet 180 mm",
+          "manufacturerName": "Fixture Brainlab Test GmbH",
+          "manufacturerSrn": "DE-MF-000000001",
+          "deviceStatusType": {
+            "code": "refdata.device-model-status.on-the-market"
+          },
+          "manufacturerNames": null,
+          "manufacturerStatus": {
+            "code": "refdata.actor-status.active"
+          },
+          "latestVersion": true,
+          "versionNumber": 1,
+          "basicUdiDataUuid": null,
+          "basicUdiDataUlid": null,
+          "basicUdiDataVersionState": null,
+          "versionState": null,
+          "deviceName": null,
+          "deviceModel": null,
+          "lastUpdateDate": null,
+          "reference": null,
+          "basicUdiDataVersionNumber": 0,
+          "issuingAgency": null,
+          "containerPackageCount": 0,
+          "mfOrPrSrn": null,
+          "applicableLegislation": null,
+          "authorisedRepresentativeSrn": null,
+          "authorisedRepresentativeName": null,
+          "sterile": null,
+          "multiComponent": null,
+          "deviceCriterion": null
+        },
+        {
+          "basicUdi": "B-000000000000FIXTURE",
+          "primaryDi": "00000000000000",
+          "uuid": "fixture-uuid-0004",
+          "ulid": "01FIXTURE0004",
+          "basicUdiDiDataUlid": null,
+          "riskClass": {
+            "code": "refdata.risk-class.class-iib"
+          },
+          "tradeName": "Fixture Stylet legacy",
+          "manufacturerName": "Fixture Brainlab Test GmbH",
+          "manufacturerSrn": "DE-MF-000000001",
+          "deviceStatusType": {
+            "code": "refdata.device-model-status.on-the-market"
+          },
+          "manufacturerNames": null,
+          "manufacturerStatus": {
+            "code": "refdata.actor-status.active"
+          },
+          "latestVersion": true,
+          "versionNumber": 1,
+          "basicUdiDataUuid": null,
+          "basicUdiDataUlid": null,
+          "basicUdiDataVersionState": null,
+          "versionState": null,
+          "deviceName": null,
+          "deviceModel": null,
+          "lastUpdateDate": null,
+          "reference": null,
+          "basicUdiDataVersionNumber": 0,
+          "issuingAgency": null,
+          "containerPackageCount": 0,
+          "mfOrPrSrn": null,
+          "applicableLegislation": null,
+          "authorisedRepresentativeSrn": null,
+          "authorisedRepresentativeName": null,
+          "sterile": null,
+          "multiComponent": null,
+          "deviceCriterion": null
+        },
+        {
+          "basicUdi": "FIXTURE-BUDI-STYLET-PACK",
+          "primaryDi": "00000000000000",
+          "uuid": "fixture-uuid-0005",
+          "ulid": "01FIXTURE0005",
+          "basicUdiDiDataUlid": null,
+          "riskClass": {
+            "code": "refdata.risk-class.class-iii"
+          },
+          "tradeName": "Fixture Stylet procedure pack",
+          "manufacturerName": "Fixture Brainlab Pack Producer",
+          "manufacturerSrn": "DE-PR-000000002",
+          "deviceStatusType": {
+            "code": "refdata.device-model-status.on-the-market"
+          },
+          "manufacturerNames": null,
+          "manufacturerStatus": {
+            "code": "refdata.actor-status.active"
+          },
+          "latestVersion": true,
+          "versionNumber": 1,
+          "basicUdiDataUuid": null,
+          "basicUdiDataUlid": null,
+          "basicUdiDataVersionState": null,
+          "versionState": null,
+          "deviceName": null,
+          "deviceModel": null,
+          "lastUpdateDate": null,
+          "reference": null,
+          "basicUdiDataVersionNumber": 0,
+          "issuingAgency": null,
+          "containerPackageCount": 0,
+          "mfOrPrSrn": null,
+          "applicableLegislation": null,
+          "authorisedRepresentativeSrn": null,
+          "authorisedRepresentativeName": null,
+          "sterile": null,
+          "multiComponent": null,
+          "deviceCriterion": null
+        },
+        {
+          "basicUdi": "FIXTURE-BUDI-STYLET-OTHER",
+          "primaryDi": "00000000000000",
+          "uuid": "fixture-uuid-0006",
+          "ulid": "01FIXTURE0006",
+          "basicUdiDiDataUlid": null,
+          "riskClass": {
+            "code": "refdata.risk-class.class-iia"
+          },
+          "tradeName": "Fixture Unrelated Stylet",
+          "manufacturerName": "Fixture Unrelated Devices Ltd",
+          "manufacturerSrn": "IE-MF-000000003",
+          "deviceStatusType": {
+            "code": "refdata.device-model-status.on-the-market"
+          },
+          "manufacturerNames": null,
+          "manufacturerStatus": {
+            "code": "refdata.actor-status.active"
+          },
+          "latestVersion": true,
+          "versionNumber": 1,
+          "basicUdiDataUuid": null,
+          "basicUdiDataUlid": null,
+          "basicUdiDataVersionState": null,
+          "versionState": null,
+          "deviceName": null,
+          "deviceModel": null,
+          "lastUpdateDate": null,
+          "reference": null,
+          "basicUdiDataVersionNumber": 0,
+          "issuingAgency": null,
+          "containerPackageCount": 0,
+          "mfOrPrSrn": null,
+          "applicableLegislation": null,
+          "authorisedRepresentativeSrn": null,
+          "authorisedRepresentativeName": null,
+          "sterile": null,
+          "multiComponent": null,
+          "deviceCriterion": null
+        }
+      ],
+      "pageable": {
+        "pageNumber": 0,
+        "pageSize": 50
+      },
+      "last": true,
+      "totalPages": 1,
+      "totalElements": 6,
+      "size": 50,
+      "number": 0,
+      "sort": {
+        "sorted": false
+      },
+      "first": true,
+      "numberOfElements": 6,
+      "empty": false
+    },
+    "https://ec.europa.eu/tools/eudamed/api/devices/basicUdiData/udiDiData/fixture-uuid-0001?languageIso2Code=en": {
+      "uuid": "detail-fixture-uuid-0001",
+      "basicUdi": {
+        "uuid": "budi-fixture-uuid-0001",
+        "code": "FIXTURE-BUDI-STYLET-MDR",
+        "issuingAgency": {
+          "code": "refdata.issuing-agency.gs1"
+        },
+        "type": "BASIC_UDI",
+        "new": false
+      },
+      "linkedSscp": {
+        "ulid": "01SSCP0001",
+        "validated": true,
+        "uuid": "sscp-fixture-uuid-0001",
+        "referenceNumber": "FIXTURE-SSCP-001",
+        "revisionNumber": "1",
+        "issueDate": "2026-01-15",
+        "versionNumber": 1,
+        "inactive": false,
+        "inactiveStatusDate": null
+      },
+      "riskClass": {
+        "code": "refdata.risk-class.class-iii"
+      },
+      "manufacturerName": "Fixture Brainlab Test GmbH",
+      "manufacturerSrn": "DE-MF-000000001",
+      "legislation": {
+        "code": "refdata.applicable-legislation.mdr",
+        "legacyDirective": false
+      },
+      "nbDecision": {
+        "uuid": "nb-fixture-uuid-0001",
+        "reason": {
+          "code": "refdata.decision-reason.approved"
+        },
+        "actor": null,
+        "date": "2026-08-19",
+        "new": false
+      },
+      "deviceCertificateInfoList": [
+        {
+          "certificateType": {
+            "code": "refdata.certificate-mdr-type.technical-documentation"
+          },
+          "versionState": {
+            "code": "refdata.version-state.current"
+          },
+          "certificateNumber": null,
+          "certificateExpiry": null
+        }
+      ],
+      "implantable": true,
+      "active": false,
+      "versionState": {
+        "code": "refdata.version-state.current"
+      },
+      "latestVersion": true,
+      "lastUpdated": "2026-08-20",
+      "versionDate": "2026-08-20",
+      "deviceName": null,
+      "deviceModel": null,
+      "legacyDeviceUdiDiApplicable": false
+    },
+    "https://ec.europa.eu/tools/eudamed/api/devices/udiDiData?page=0&pageSize=50&size=50&iso2Code=en&languageIso2Code=en&tradeName=ONE%20Snare": {
+      "content": [
+        {
+          "basicUdi": "FIXTURE-BUDI-SNARE-MDR",
+          "primaryDi": "00000000000000",
+          "uuid": "fixture-uuid-0101",
+          "ulid": "01FIXTURE0101",
+          "basicUdiDiDataUlid": null,
+          "riskClass": {
+            "code": "refdata.risk-class.class-iia"
+          },
+          "tradeName": "Fixture ONE Snare",
+          "manufacturerName": "Fixture Merit Test Inc",
+          "manufacturerSrn": "US-MF-000000004",
+          "deviceStatusType": {
+            "code": "refdata.device-model-status.on-the-market"
+          },
+          "manufacturerNames": null,
+          "manufacturerStatus": {
+            "code": "refdata.actor-status.active"
+          },
+          "latestVersion": true,
+          "versionNumber": 1,
+          "basicUdiDataUuid": null,
+          "basicUdiDataUlid": null,
+          "basicUdiDataVersionState": null,
+          "versionState": null,
+          "deviceName": null,
+          "deviceModel": null,
+          "lastUpdateDate": null,
+          "reference": null,
+          "basicUdiDataVersionNumber": 0,
+          "issuingAgency": null,
+          "containerPackageCount": 0,
+          "mfOrPrSrn": null,
+          "applicableLegislation": null,
+          "authorisedRepresentativeSrn": null,
+          "authorisedRepresentativeName": null,
+          "sterile": null,
+          "multiComponent": null,
+          "deviceCriterion": null
+        }
+      ],
+      "pageable": {
+        "pageNumber": 0,
+        "pageSize": 50
+      },
+      "last": true,
+      "totalPages": 1,
+      "totalElements": 1,
+      "size": 50,
+      "number": 0,
+      "sort": {
+        "sorted": false
+      },
+      "first": true,
+      "numberOfElements": 1,
+      "empty": false
+    },
+    "https://ec.europa.eu/tools/eudamed/api/devices/udiDiData?page=0&pageSize=50&size=50&iso2Code=en&languageIso2Code=en&tradeName=OPRA": {
+      "__error__": "HTTP 503: Service Unavailable"
+    },
+    "https://ec.europa.eu/tools/eudamed/api/devices/udiDiData?page=0&pageSize=50&size=50&iso2Code=en&languageIso2Code=en&tradeName=PALACOS": {
+      "content": [
+        {
+          "basicUdi": "4260102130101010001AJ",
+          "primaryDi": "04260102137882",
+          "uuid": "12061375-07a4-4c1e-90b3-f4b232d886fc",
+          "ulid": "01KY7EDC1EP2JQQQJRMWD0DCT4",
+          "basicUdiDiDataUlid": "01KWHAEGFB1ER1WS83H1C1TN0C",
+          "riskClass": {
+            "code": "refdata.risk-class.class-iii"
+          },
+          "tradeName": "PALACOS R+G",
+          "manufacturerName": "Heraeus Medical GmbH",
+          "manufacturerSrn": "DE-MF-000008199",
+          "deviceStatusType": {
+            "code": "refdata.device-model-status.not-intended-for-eu-market"
+          },
+          "manufacturerNames": null,
+          "manufacturerStatus": {
+            "code": "refdata.actor-status.active"
+          },
+          "latestVersion": true,
+          "versionNumber": 1,
+          "basicUdiDataUuid": null,
+          "basicUdiDataUlid": null,
+          "basicUdiDataVersionState": null,
+          "versionState": null,
+          "deviceName": null,
+          "deviceModel": null,
+          "lastUpdateDate": null,
+          "reference": "5122125",
+          "basicUdiDataVersionNumber": 0,
+          "issuingAgency": null,
+          "containerPackageCount": 0,
+          "mfOrPrSrn": null,
+          "applicableLegislation": null,
+          "authorisedRepresentativeSrn": null,
+          "authorisedRepresentativeName": null,
+          "sterile": null,
+          "multiComponent": null,
+          "deviceCriterion": null
+        }
+      ],
+      "pageable": {
+        "pageNumber": 0,
+        "pageSize": 50
+      },
+      "last": true,
+      "totalPages": 1,
+      "totalElements": 1,
+      "size": 50,
+      "number": 0,
+      "sort": {
+        "sorted": false
+      },
+      "first": true,
+      "numberOfElements": 1,
+      "empty": false
+    },
+    "https://ec.europa.eu/tools/eudamed/api/devices/basicUdiData/udiDiData/12061375-07a4-4c1e-90b3-f4b232d886fc?languageIso2Code=en": {
+      "uuid": "6973960e-0000-4000-8000-000000000000",
+      "basicUdi": {
+        "uuid": "6973960e-0000-4000-8000-000000000001",
+        "code": "4260102130101010001AJ",
+        "issuingAgency": {
+          "code": "refdata.issuing-agency.gs1"
+        },
+        "type": "BASIC_UDI",
+        "new": false
+      },
+      "linkedSscp": {
+        "ulid": "01KZTYG4Z8F12EN7F0PFW2HXSY",
+        "validated": true,
+        "uuid": "a967b660-0000-4000-8000-000000000000",
+        "referenceNumber": "61339",
+        "revisionNumber": "10",
+        "issueDate": "2025-12-01",
+        "versionNumber": 1,
+        "inactive": false,
+        "inactiveStatusDate": null
+      },
+      "riskClass": {
+        "code": "refdata.risk-class.class-iii"
+      },
+      "manufacturerName": "Heraeus Medical GmbH",
+      "manufacturerSrn": "DE-MF-000008199",
+      "legislation": {
+        "code": "refdata.applicable-legislation.mdr",
+        "legacyDirective": false
+      },
+      "nbDecision": {
+        "uuid": "nb-0000-placeholder",
+        "reason": {
+          "code": "refdata.decision-reason.approved"
+        },
+        "actor": null,
+        "date": "2026-08-19",
+        "new": false
+      },
+      "deviceCertificateInfoList": [
+        {
+          "certificateType": {
+            "code": "refdata.certificate-mdr-type.technical-documentation"
+          },
+          "versionState": {
+            "code": "refdata.version-state.current"
+          },
+          "certificateNumber": null,
+          "certificateExpiry": null
+        }
+      ],
+      "implantable": true,
+      "active": false,
+      "versionState": {
+        "code": "refdata.version-state.current"
+      },
+      "latestVersion": true,
+      "lastUpdated": "2026-08-20",
+      "versionDate": "2026-08-20",
+      "deviceName": null,
+      "deviceModel": null,
+      "legacyDeviceUdiDiApplicable": false
+    },
+    "https://ec.europa.eu/tools/eudamed/api/devices/udiDiData?page=0&pageSize=50&size=50&iso2Code=en&languageIso2Code=en&tradeName=CERAMENT": {
+      "content": [],
+      "pageable": {
+        "pageNumber": 0,
+        "pageSize": 50
+      },
+      "last": true,
+      "totalPages": 0,
+      "totalElements": 0,
+      "size": 50,
+      "number": 0,
+      "sort": {
+        "sorted": false
+      },
+      "first": true,
+      "numberOfElements": 0,
+      "empty": true
+    },
+    "https://ec.europa.eu/tools/eudamed/api/devices/udiDiData?page=0&pageSize=50&size=50&iso2Code=en&languageIso2Code=en&tradeName=Variant": {
+      "content": [
+        {
+          "basicUdi": "FIXTURE-BUDI-VARIANT-CLASS-I",
+          "primaryDi": "00000000000000",
+          "uuid": "fixture-uuid-0201",
+          "ulid": "01FIXTURE0201",
+          "basicUdiDiDataUlid": null,
+          "riskClass": {
+            "code": "refdata.risk-class.class-i"
+          },
+          "tradeName": "Fixture Variant class I",
+          "manufacturerName": "Fixture Variant Devices AB",
+          "manufacturerSrn": "SE-MF-000000005",
+          "deviceStatusType": {
+            "code": "refdata.device-model-status.on-the-market"
+          },
+          "manufacturerNames": null,
+          "manufacturerStatus": {
+            "code": "refdata.actor-status.active"
+          },
+          "latestVersion": true,
+          "versionNumber": 1,
+          "basicUdiDataUuid": null,
+          "basicUdiDataUlid": null,
+          "basicUdiDataVersionState": null,
+          "versionState": null,
+          "deviceName": null,
+          "deviceModel": null,
+          "lastUpdateDate": null,
+          "reference": null,
+          "basicUdiDataVersionNumber": 0,
+          "issuingAgency": null,
+          "containerPackageCount": 0,
+          "mfOrPrSrn": null,
+          "applicableLegislation": null,
+          "authorisedRepresentativeSrn": null,
+          "authorisedRepresentativeName": null,
+          "sterile": null,
+          "multiComponent": null,
+          "deviceCriterion": null
+        },
+        {
+          "basicUdi": "FIXTURE-BUDI-VARIANT-MDD-III",
+          "primaryDi": "00000000000000",
+          "uuid": "fixture-uuid-0202",
+          "ulid": "01FIXTURE0202",
+          "basicUdiDiDataUlid": null,
+          "riskClass": {
+            "code": "refdata.risk-class.class-iii"
+          },
+          "tradeName": "Fixture Variant MDD class III",
+          "manufacturerName": "Fixture Variant Devices AB",
+          "manufacturerSrn": "SE-MF-000000005",
+          "deviceStatusType": {
+            "code": "refdata.device-model-status.on-the-market"
+          },
+          "manufacturerNames": null,
+          "manufacturerStatus": {
+            "code": "refdata.actor-status.active"
+          },
+          "latestVersion": true,
+          "versionNumber": 1,
+          "basicUdiDataUuid": null,
+          "basicUdiDataUlid": null,
+          "basicUdiDataVersionState": null,
+          "versionState": null,
+          "deviceName": null,
+          "deviceModel": null,
+          "lastUpdateDate": null,
+          "reference": null,
+          "basicUdiDataVersionNumber": 0,
+          "issuingAgency": null,
+          "containerPackageCount": 0,
+          "mfOrPrSrn": null,
+          "applicableLegislation": null,
+          "authorisedRepresentativeSrn": null,
+          "authorisedRepresentativeName": null,
+          "sterile": null,
+          "multiComponent": null,
+          "deviceCriterion": null
+        },
+        {
+          "basicUdi": "FIXTURE-BUDI-VARIANT-IIB-IMPL",
+          "primaryDi": "00000000000000",
+          "uuid": "fixture-uuid-0203",
+          "ulid": "01FIXTURE0203",
+          "basicUdiDiDataUlid": null,
+          "riskClass": {
+            "code": "refdata.risk-class.class-iib"
+          },
+          "tradeName": "Fixture Variant IIb implantable",
+          "manufacturerName": "Fixture Variant Devices AB",
+          "manufacturerSrn": "SE-MF-000000005",
+          "deviceStatusType": {
+            "code": "refdata.device-model-status.on-the-market"
+          },
+          "manufacturerNames": null,
+          "manufacturerStatus": {
+            "code": "refdata.actor-status.active"
+          },
+          "latestVersion": true,
+          "versionNumber": 1,
+          "basicUdiDataUuid": null,
+          "basicUdiDataUlid": null,
+          "basicUdiDataVersionState": null,
+          "versionState": null,
+          "deviceName": null,
+          "deviceModel": null,
+          "lastUpdateDate": null,
+          "reference": null,
+          "basicUdiDataVersionNumber": 0,
+          "issuingAgency": null,
+          "containerPackageCount": 0,
+          "mfOrPrSrn": null,
+          "applicableLegislation": null,
+          "authorisedRepresentativeSrn": null,
+          "authorisedRepresentativeName": null,
+          "sterile": null,
+          "multiComponent": null,
+          "deviceCriterion": null
+        },
+        {
+          "basicUdi": "FIXTURE-BUDI-VARIANT-III-NOSSCP",
+          "primaryDi": "00000000000000",
+          "uuid": "fixture-uuid-0204",
+          "ulid": "01FIXTURE0204",
+          "basicUdiDiDataUlid": null,
+          "riskClass": {
+            "code": "refdata.risk-class.class-iii"
+          },
+          "tradeName": "Fixture Variant III no link",
+          "manufacturerName": "Fixture Variant Devices AB",
+          "manufacturerSrn": "SE-MF-000000005",
+          "deviceStatusType": {
+            "code": "refdata.device-model-status.on-the-market"
+          },
+          "manufacturerNames": null,
+          "manufacturerStatus": {
+            "code": "refdata.actor-status.active"
+          },
+          "latestVersion": true,
+          "versionNumber": 1,
+          "basicUdiDataUuid": null,
+          "basicUdiDataUlid": null,
+          "basicUdiDataVersionState": null,
+          "versionState": null,
+          "deviceName": null,
+          "deviceModel": null,
+          "lastUpdateDate": null,
+          "reference": null,
+          "basicUdiDataVersionNumber": 0,
+          "issuingAgency": null,
+          "containerPackageCount": 0,
+          "mfOrPrSrn": null,
+          "applicableLegislation": null,
+          "authorisedRepresentativeSrn": null,
+          "authorisedRepresentativeName": null,
+          "sterile": null,
+          "multiComponent": null,
+          "deviceCriterion": null
+        }
+      ],
+      "pageable": {
+        "pageNumber": 0,
+        "pageSize": 50
+      },
+      "last": true,
+      "totalPages": 1,
+      "totalElements": 4,
+      "size": 50,
+      "number": 0,
+      "sort": {
+        "sorted": false
+      },
+      "first": true,
+      "numberOfElements": 4,
+      "empty": false
+    },
+    "https://ec.europa.eu/tools/eudamed/api/devices/basicUdiData/udiDiData/fixture-uuid-0201?languageIso2Code=en": {
+      "uuid": "detail-fixture-uuid-0201",
+      "basicUdi": {
+        "uuid": "budi-fixture-uuid-0201",
+        "code": "FIXTURE-BUDI-VARIANT-CLASS-I",
+        "issuingAgency": {
+          "code": "refdata.issuing-agency.gs1"
+        },
+        "type": "BASIC_UDI",
+        "new": false
+      },
+      "linkedSscp": null,
+      "riskClass": {
+        "code": "refdata.risk-class.class-i"
+      },
+      "manufacturerName": "Fixture Variant Devices AB",
+      "manufacturerSrn": "SE-MF-000000005",
+      "legislation": {
+        "code": "refdata.applicable-legislation.mdr",
+        "legacyDirective": false
+      },
+      "nbDecision": {
+        "uuid": "nb-fixture-uuid-0201",
+        "reason": {
+          "code": "refdata.decision-reason.approved"
+        },
+        "actor": null,
+        "date": "2026-08-19",
+        "new": false
+      },
+      "deviceCertificateInfoList": [],
+      "implantable": false,
+      "active": false,
+      "versionState": {
+        "code": "refdata.version-state.current"
+      },
+      "latestVersion": true,
+      "lastUpdated": "2026-08-20",
+      "versionDate": "2026-08-20",
+      "deviceName": null,
+      "deviceModel": null,
+      "legacyDeviceUdiDiApplicable": false
+    },
+    "https://ec.europa.eu/tools/eudamed/api/devices/basicUdiData/udiDiData/fixture-uuid-0202?languageIso2Code=en": {
+      "uuid": "detail-fixture-uuid-0202",
+      "basicUdi": {
+        "uuid": "budi-fixture-uuid-0202",
+        "code": "FIXTURE-BUDI-VARIANT-MDD-III",
+        "issuingAgency": {
+          "code": "refdata.issuing-agency.gs1"
+        },
+        "type": "BASIC_UDI",
+        "new": false
+      },
+      "linkedSscp": null,
+      "riskClass": {
+        "code": "refdata.risk-class.class-iii"
+      },
+      "manufacturerName": "Fixture Variant Devices AB",
+      "manufacturerSrn": "SE-MF-000000005",
+      "legislation": {
+        "code": "refdata.applicable-legislation.mdd",
+        "legacyDirective": true
+      },
+      "nbDecision": {
+        "uuid": "nb-fixture-uuid-0202",
+        "reason": {
+          "code": "refdata.decision-reason.approved"
+        },
+        "actor": null,
+        "date": "2026-08-19",
+        "new": false
+      },
+      "deviceCertificateInfoList": [
+        {
+          "certificateType": {
+            "code": "refdata.certificate-mdr-type.technical-documentation"
+          },
+          "versionState": {
+            "code": "refdata.version-state.current"
+          },
+          "certificateNumber": null,
+          "certificateExpiry": null
+        }
+      ],
+      "implantable": true,
+      "active": false,
+      "versionState": {
+        "code": "refdata.version-state.current"
+      },
+      "latestVersion": true,
+      "lastUpdated": "2026-08-20",
+      "versionDate": "2026-08-20",
+      "deviceName": null,
+      "deviceModel": null,
+      "legacyDeviceUdiDiApplicable": false
+    },
+    "https://ec.europa.eu/tools/eudamed/api/devices/basicUdiData/udiDiData/fixture-uuid-0203?languageIso2Code=en": {
+      "uuid": "detail-fixture-uuid-0203",
+      "basicUdi": {
+        "uuid": "budi-fixture-uuid-0203",
+        "code": "FIXTURE-BUDI-VARIANT-IIB-IMPL",
+        "issuingAgency": {
+          "code": "refdata.issuing-agency.gs1"
+        },
+        "type": "BASIC_UDI",
+        "new": false
+      },
+      "linkedSscp": null,
+      "riskClass": {
+        "code": "refdata.risk-class.class-iib"
+      },
+      "manufacturerName": "Fixture Variant Devices AB",
+      "manufacturerSrn": "SE-MF-000000005",
+      "legislation": {
+        "code": "refdata.applicable-legislation.mdr",
+        "legacyDirective": false
+      },
+      "nbDecision": {
+        "uuid": "nb-fixture-uuid-0203",
+        "reason": {
+          "code": "refdata.decision-reason.approved"
+        },
+        "actor": null,
+        "date": "2026-08-19",
+        "new": false
+      },
+      "deviceCertificateInfoList": [
+        {
+          "certificateType": {
+            "code": "refdata.certificate-mdr-type.technical-documentation"
+          },
+          "versionState": {
+            "code": "refdata.version-state.current"
+          },
+          "certificateNumber": null,
+          "certificateExpiry": null
+        }
+      ],
+      "implantable": true,
+      "active": false,
+      "versionState": {
+        "code": "refdata.version-state.current"
+      },
+      "latestVersion": true,
+      "lastUpdated": "2026-08-20",
+      "versionDate": "2026-08-20",
+      "deviceName": null,
+      "deviceModel": null,
+      "legacyDeviceUdiDiApplicable": false
+    },
+    "https://ec.europa.eu/tools/eudamed/api/devices/basicUdiData/udiDiData/fixture-uuid-0204?languageIso2Code=en": {
+      "uuid": "detail-fixture-uuid-0204",
+      "basicUdi": {
+        "uuid": "budi-fixture-uuid-0204",
+        "code": "FIXTURE-BUDI-VARIANT-III-NOSSCP",
+        "issuingAgency": {
+          "code": "refdata.issuing-agency.gs1"
+        },
+        "type": "BASIC_UDI",
+        "new": false
+      },
+      "linkedSscp": null,
+      "riskClass": {
+        "code": "refdata.risk-class.class-iii"
+      },
+      "manufacturerName": "Fixture Variant Devices AB",
+      "manufacturerSrn": "SE-MF-000000005",
+      "legislation": {
+        "code": "refdata.applicable-legislation.mdr",
+        "legacyDirective": false
+      },
+      "nbDecision": {
+        "uuid": "nb-fixture-uuid-0204",
+        "reason": {
+          "code": "refdata.decision-reason.approved"
+        },
+        "actor": null,
+        "date": "2026-08-19",
+        "new": false
+      },
+      "deviceCertificateInfoList": [
+        {
+          "certificateType": {
+            "code": "refdata.certificate-mdr-type.technical-documentation"
+          },
+          "versionState": {
+            "code": "refdata.version-state.current"
+          },
+          "certificateNumber": null,
+          "certificateExpiry": null
+        }
+      ],
+      "implantable": false,
+      "active": false,
+      "versionState": {
+        "code": "refdata.version-state.current"
+      },
+      "latestVersion": true,
+      "lastUpdated": "2026-08-20",
+      "versionDate": "2026-08-20",
+      "deviceName": null,
+      "deviceModel": null,
+      "legacyDeviceUdiDiApplicable": false
+    }
+  }
+}

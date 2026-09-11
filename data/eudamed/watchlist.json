@@ -1,0 +1,90 @@
+{
+  "_format": "JSON is used instead of YAML so scripts/eudamed_watch.py stays stdlib-only (no PyYAML). Fields per entry: label (unique), trade_name_query, optional manufacturer_contains, optional expected_srn, optional note.",
+  "_standing_note": "trade_name_query is a case-insensitive UNANCHORED substring match on the EUDAMED API. Short strings return unrelated devices (e.g. 'OPRA' also matches unrelated products); rows are therefore filtered client-side by manufacturer_contains (case-insensitive substring of manufacturerName). Zero rows means 'not findable under that string', not 'not registered'. Nothing produced from this list is a compliance statement about any named company.",
+  "entries": [
+    {
+      "label": "Brainlab — Disposable Stylet",
+      "trade_name_query": "Stylet",
+      "manufacturer_contains": "Brainlab",
+      "note": "Generic word; expect many unrelated rows before manufacturer filtering."
+    },
+    {
+      "label": "Merit Medical — ONE Snare",
+      "trade_name_query": "ONE Snare",
+      "manufacturer_contains": "Merit",
+      "note": "Substring may also match other snare products; filtered by manufacturer."
+    },
+    {
+      "label": "ZimVie — Tapered Screw-Vent",
+      "trade_name_query": "Screw-Vent",
+      "manufacturer_contains": "ZimVie",
+      "note": "Legacy Zimmer Biomet dental registrations may carry a different manufacturer name."
+    },
+    {
+      "label": "AtriCure — LARIAT",
+      "trade_name_query": "LARIAT",
+      "manufacturer_contains": "AtriCure",
+      "note": "Unanchored substring; filtered by manufacturer."
+    },
+    {
+      "label": "Heraeus — PALACOS",
+      "trade_name_query": "PALACOS",
+      "manufacturer_contains": "Heraeus",
+      "note": "Bone cement family; one basicUdi can occupy many rows (dedupe applies). 2026-09-11: a PALACOS R+G row (class III, MDR) carried a linked SS(C)P in the public record; used as the realistic fixture case."
+    },
+    {
+      "label": "phenox — flow diverter",
+      "trade_name_query": "p64",
+      "manufacturer_contains": "phenox",
+      "note": "Very short query; unrelated matches are expected and filtered by manufacturer."
+    },
+    {
+      "label": "RAUMEDIC — NEUROVENT",
+      "trade_name_query": "NEUROVENT",
+      "manufacturer_contains": "RAUMEDIC",
+      "note": "Unanchored substring; filtered by manufacturer."
+    },
+    {
+      "label": "Medcomp — Tesio",
+      "trade_name_query": "Tesio",
+      "manufacturer_contains": "Medical Components",
+      "note": "Medcomp registers as Medical Components; short query, filtered by manufacturer."
+    },
+    {
+      "label": "Tandem — t:slim X2",
+      "trade_name_query": "t:slim",
+      "manufacturer_contains": "Tandem",
+      "note": "Colon is URL-encoded by the tool; filtered by manufacturer."
+    },
+    {
+      "label": "BONESUPPORT — CERAMENT",
+      "trade_name_query": "CERAMENT",
+      "manufacturer_contains": "BONESUPPORT",
+      "note": "2026-09-11: tradeName=CERAMENT returned content=[] (totalElements 0) — not findable under that string at that time; may be registered under another trade name. Zero results is not 'not registered'."
+    },
+    {
+      "label": "Integrum — OPRA",
+      "trade_name_query": "OPRA",
+      "manufacturer_contains": "Integrum",
+      "note": "'OPRA' also matches unrelated products; manufacturer filter is essential here."
+    },
+    {
+      "label": "Insulet — Omnipod",
+      "trade_name_query": "Omnipod",
+      "manufacturer_contains": "Insulet",
+      "note": "Unanchored substring; filtered by manufacturer."
+    },
+    {
+      "label": "LeMaitre — XenoSure",
+      "trade_name_query": "XenoSure",
+      "manufacturer_contains": "LeMaitre",
+      "note": "Unanchored substring; filtered by manufacturer."
+    },
+    {
+      "label": "Vitrolife — SpermFreeze",
+      "trade_name_query": "SpermFreeze",
+      "manufacturer_contains": "Vitrolife",
+      "note": "Unanchored substring; filtered by manufacturer."
+    }
+  ]
+}
