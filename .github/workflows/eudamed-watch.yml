@@ -17,11 +17,13 @@
 # data/eudamed/watchlist.example.json for the format) and EUDAMED_HMAC_KEY
 # (optional; any long random string, kept stable across runs).
 #
-# OPEN ITEM: live scheduled runs should have the EUDAMED public-data reuse terms
-# (Commission reuse / legal notice for the public EUDAMED interface) confirmed
-# and recorded before this schedule is relied on operationally. The schedule is
-# kept as specified; the tool is read-only, polite (one request per second, a
-# fixed identifying User-Agent, bounded page count) and requires no credentials.
+# PUBLIC-API REUSE REVIEW: reviewed 2026-09-12 against the current Commission
+# EUDAMED Public API guide, Commission Decision 2011/833/EU and the Commission
+# legal notice. The official guide expressly permits public download and
+# third-party software integration; no EUDAMED-specific quota/rate condition
+# was stated in the reviewed guide. Keep this workflow bounded and polite and
+# re-review on 403/429, new published terms, endpoint changes or materially
+# higher request volume. See research/eudamed-public-api-reuse-review.md.
 #
 # Everything this workflow writes is a snapshot of what the public record shows.
 # It is never a compliance, conformity or diligence statement about any company.
@@ -43,8 +45,7 @@ concurrency:
 jobs:
   eudamed-watch:
     # Live public-API run with anonymised, aggregate-only committed outputs.
-    # See the file header: EUDAMED public-data reuse terms are an open item to
-    # confirm before treating these runs as operational.
+    # Public-API reuse review: research/eudamed-public-api-reuse-review.md.
     name: EUDAMED watchlist snapshot
     runs-on: ubuntu-latest
     timeout-minutes: 20
