@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title>Continuous monitoring of the public EUDAMED record | ClinicOps</title>
+<meta name="description" content="How ClinicOps continuously monitors the public EUDAMED record: monthly versioned snapshots of SS(C)P linkage for a private watchlist, diffed, aggregates only.">
+<link rel="canonical" href="https://clinicops.dk/research/eudamed-watch/">
+
+<meta property="og:title" content="Continuous monitoring of the public EUDAMED record | ClinicOps">
+<meta property="og:description" content="How ClinicOps continuously monitors the public EUDAMED record: monthly versioned snapshots of SS(C)P linkage for a private watchlist, diffed, aggregates only.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://clinicops.dk/research/eudamed-watch/">
+<meta property="og:site_name" content="ClinicOps">
+
+<meta name="twitter:card" content="summary">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://clinicops.dk/research/eudamed-watch/",
+      "name": "Continuous monitoring of the public EUDAMED record | ClinicOps",
+      "description": "How ClinicOps continuously monitors the public EUDAMED record: monthly versioned snapshots of SS(C)P linkage for a private watchlist, diffed, aggregates only.",
+      "url": "https://clinicops.dk/research/eudamed-watch/",
+      "isPartOf": {"@type": "WebSite", "name": "ClinicOps", "url": "https://clinicops.dk/"},
+      "publisher": {"@type": "Organization", "name": "ClinicOps", "url": "https://clinicops.dk/"}
+    },
+    {
+      "@type": "Article",
+      "headline": "Continuous monitoring of the public EUDAMED record",
+      "description": "Monthly automated, versioned snapshots of SS(C)P linkage in the public EUDAMED record for a private watchlist, diffed run to run, published as aggregates only.",
+      "mainEntityOfPage": {"@id": "https://clinicops.dk/research/eudamed-watch/"},
+      "url": "https://clinicops.dk/research/eudamed-watch/",
+      "inLanguage": "en",
+      "datePublished": "2026-09-11",
+      "dateModified": "2026-09-11",
+      "author": {"@type": "Person", "name": "Ali Iskandar", "email": "info@clinicops.dk"},
+      "publisher": {"@type": "Organization", "name": "ClinicOps", "url": "https://clinicops.dk/"}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://clinicops.dk/"},
+        {"@type": "ListItem", "position": 2, "name": "Research", "item": "https://clinicops.dk/research.html"},
+        {"@type": "ListItem", "position": 3, "name": "EUDAMED record monitoring", "item": "https://clinicops.dk/research/eudamed-watch/"}
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+:root{color-scheme:light dark;
+--bg:#fbfaf8;--surface:#ffffff;--surface-2:#f3f1ec;--text:#1c2430;--muted:#5b6572;
+--border:#d8dee5;--accent:#0f5c52;--accent-strong:#0a413a;--accent-contrast:#ffffff;--accent-soft:#e4f2ef}
+@media (prefers-color-scheme:dark){:root{
+--bg:#11151b;--surface:#171d25;--surface-2:#1d242d;--text:#e7ebef;--muted:#9aa5b1;
+--border:#2a323c;--accent:#4fd8c4;--accent-strong:#8ff0e0;--accent-contrast:#08201c;--accent-soft:#132925}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+header.site{border-bottom:1px solid var(--border);background:var(--surface)}
+.site-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:16px 20px;max-width:900px;margin:0 auto}
+.brand{font-weight:800;font-size:1.15rem;color:var(--text);text-decoration:none;letter-spacing:-.01em}
+.brand span{color:var(--accent)}
+nav.primary{display:flex;flex-wrap:wrap;gap:4px 2px;font-size:.86rem}
+nav.primary a{color:var(--muted);text-decoration:none;padding:7px 10px;border-radius:7px;white-space:nowrap}
+nav.primary a:hover{color:var(--text);background:var(--surface-2)}
+nav.primary a[aria-current="page"]{color:var(--accent-contrast);background:var(--accent);font-weight:600}
+main{padding:44px 0 20px}
+h1{font-size:2rem;line-height:1.2;letter-spacing:-.01em;text-wrap:balance;margin:0 0 14px}
+h2{font-size:1.35rem;margin:2.2em 0 .6em;letter-spacing:-.01em}
+p{margin:.9em 0}
+.lede{font-size:1.12rem;color:var(--muted)}
+ul{padding-left:1.3rem}
+li{margin:.5em 0}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em;background:var(--surface-2);padding:1px 5px;border-radius:5px}
+.eyebrow{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:4px 10px;border-radius:999px;margin-bottom:14px}
+.callout{border:1px solid var(--border);background:var(--surface-2);border-radius:12px;padding:16px 18px;margin:22px 0}
+.callout p{margin:.4em 0}
+.muted{color:var(--muted);font-size:.92rem}
+.crumbs{font-size:.86rem;color:var(--muted);margin-bottom:18px}
+.crumbs a{color:var(--muted)}
+.cta{display:inline-block;padding:12px 18px;border-radius:9px;border:1px solid var(--accent);text-decoration:none;font:inherit;font-weight:600}
+.cta.primary{background:var(--accent);color:var(--accent-contrast)}
+.cta.ghost{color:var(--accent);background:transparent}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0}
+footer.site{border-top:1px solid var(--border);margin-top:52px}
+.footer-inner{max-width:900px;margin:0 auto;padding:26px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--muted);font-size:.86rem}
+.footer-inner a{color:var(--muted)}
+</style>
+</head>
+<body>
+<!-- claim-use: research-note -->
+<!-- claim-ids: CO-CLM-0001,CO-CLM-0004,CO-CLM-0005,CO-CLM-0008,CO-CLM-0009,CO-CLM-0010,CO-CLM-0013,CO-CLM-0017 -->
+<!-- controlled source: website/research-eudamed-watch-method.md -->
+<header class="site">
+<div class="site-inner">
+<a class="brand" href="/">Clinic<span>Ops</span></a>
+<nav class="primary" aria-label="Primary"><a href="/">Home</a><a href="/about.html">About</a><a href="/research.html" aria-current="page">Research</a><a href="/tools.html">Tools</a><a href="/eudamed-transition.html">EUDAMED Intelligence</a><a href="/class-iii-transition.html">MDR Transition</a><a href="/sscp-operations.html">SS(C)P Operations</a><a href="/authorised-representative-portfolio-intelligence.html">AR Intelligence</a><a href="/contact.html">Contact</a></nav>
+</div>
+</header>
+<main class="wrap">
+
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> &rsaquo; <a href="/research.html">Research</a> &rsaquo; EUDAMED record monitoring</nav>
+<span class="eyebrow">ClinicOps &middot; Method &middot; September 2026</span>
+<h1>Continuous monitoring of the public EUDAMED record</h1>
+<p class="lede">A monthly, automated, versioned snapshot of what the public record shows &mdash; diffed run to run, published as aggregates only.</p>
+
+<h2>What it does</h2>
+<p>ClinicOps runs a monthly automated snapshot of what the public EUDAMED record shows for a private watchlist of devices: whether each registration carries a linked SS(C)P, its validation flag and issue year, and how each record is classified &mdash; a genuine MDR registration, a legacy registration identified by its <code>B-</code> EUDAMED DI, or a system/procedure-pack record. Each snapshot is versioned and diffed against the previous one, so what changed in the public record between runs &mdash; a link appearing, a revision moving, a registration vanishing from search &mdash; is recorded rather than remembered. Published results are aggregate-level only: counts and changes, never names, identifiers or document references.</p>
+
+<h2>Why now</h2>
+<p>MDCG 2026-4 describes a revised EUDAMED operating model in which the manufacturer uploads the SS(C)P master and translations, while the notified body indicates the validated SS(C)P against the relevant Basic UDI-DI(s) &mdash; with production deployment planned for October 2026 and uploads recommended no later than 27 February 2027 for devices placed on the market before mandatory use. Separately, following Commission Decision (EU) 2025/2371, legacy devices still on the market must be registered in EUDAMED by 28 November 2026. Many more SS(C)Ps and Basic UDI-DIs will attach to public records in a short window, and the public record will move under any portfolio that is not watching it.</p>
+<p>Under MDR Article 32(1) the manufacturer is the duty holder for drawing up the SSCP for applicable implantable and class III devices, subject to the Article 32 exclusions &mdash; the monitoring watches the public trace of that work, not the work itself.</p>
+
+<h2>Method</h2>
+<p>Automated, read-only, and polite to the public API: bounded page counts, spaced requests, an identifying agent string, no login, no scraping of anything beyond the public JSON record. Records are deduplicated by Basic UDI-DI; legacy <code>B-</code> identifiers are treated as structurally unable to carry an SS(C)P link, as ClinicOps derived screening logic rather than quoted Commission law. Every failed request is recorded, never silently skipped, so a record &ldquo;no longer seen&rdquo; next to a failure is flagged as a possible extraction artefact rather than a registry change.</p>
+
+<h2>Standing limits</h2>
+<ul>
+<li>This monitors the public record only. It is never a compliance, conformity or diligence statement about any named company, and its outputs must not be quoted as one.</li>
+<li>Trade-name search on the public API is a case-insensitive, unanchored substring match; zero results means &ldquo;not findable under that string at that time&rdquo;, not &ldquo;not registered&rdquo;.</li>
+<li>Counts returned by the public API are unstable and are treated as approximate, display-only figures; the API&rsquo;s risk-class and legislation query filters are ignored server-side, so classification is done client-side.</li>
+<li>SS(C)P content is never retrievable through the public API &mdash; only a reference number, revision, issue date and validation flag. A &ldquo;link&rdquo; is metadata, not text.</li>
+<li>A null SS(C)P link means &ldquo;no SS(C)P visible in the public record&rdquo;, never &ldquo;no SS(C)P exists&rdquo;.</li>
+</ul>
+
+<div class="callout"><p><strong>Portfolio monitoring as a service.</strong> The same monitoring can run against a manufacturer&rsquo;s or authorised representative&rsquo;s own portfolio, with the named detail delivered privately and reviewed by an accountable regulatory professional. Contact <a href="mailto:info@clinicops.dk?subject=Portfolio%20EUDAMED%20monitoring">info@clinicops.dk</a>.</p></div>
+
+<div class="cta-row"><a class="cta ghost" href="/research.html">Back to Research</a><a class="cta ghost" href="/research/sscp-public-record-scan/">Related: the SS(C)P public-record scan</a></div>
+
+</main>
+<footer class="site">
+<div class="footer-inner">
+<span>&copy; 2026 ClinicOps. Danish-based, EU-wide medical device regulatory intelligence.</span>
+<span><a href="mailto:info@clinicops.dk">info@clinicops.dk</a> &middot; <a href="https://www.linkedin.com/company/clinicops-danish-regulatory/">LinkedIn</a> &middot; <a href="/privacy-notice/">Privacy</a></span>
+</div>
+</footer>
+</body>
+</html>
