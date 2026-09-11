@@ -39,6 +39,14 @@ jobs:
           test -s /tmp/clinicops-pilot/client_report.html
           test -s /tmp/clinicops-pilot/portfolio_report.json
           grep -q '"bundle_schema_version": "1.1"' /tmp/clinicops-manifest.json
+      - name: Synthetic human-review gate packaging smoke (not delegation proof)
+        run: |
+          clinicops-pilot-review-prepare examples/standard_pilot_preflight.example.json /tmp/clinicops-pilot > /tmp/clinicops-review.json
+          python -c 'import json; from pathlib import Path; p=Path("/tmp/clinicops-review.json"); d=json.loads(p.read_text()); d.update({"review_completed_on":"2026-09-11","evidence_population_confirmed":True,"warnings_and_information_gaps_reviewed":True,"material_derived_statements_reviewed":True,"structural_signals_separated_from_regulatory_judgement":True,"actor_role_distinctions_reviewed":True,"unsupported_facts_left_unresolved":True,"internal_only_notes_removed":True,"client_facing_interpretation_approved":True}); p.write_text(json.dumps(d, indent=2)+"\n")'
+          clinicops-pilot-review-gate examples/standard_pilot_preflight.example.json /tmp/clinicops-review.json /tmp/clinicops-pilot > /tmp/clinicops-review-gate.json
+          grep -q '"status": "REVIEW APPROVED"' /tmp/clinicops-review-gate.json
+      - name: Client bundle integrity verification
+        run: |
           clinicops-pilot-verify /tmp/clinicops-pilot examples/portfolio.csv > /tmp/clinicops-bundle-verify.json
           grep -q '"status": "VERIFIED"' /tmp/clinicops-bundle-verify.json
       - name: Custom-agent profile audit
