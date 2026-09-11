@@ -1,0 +1,101 @@
+{
+  "_note": "Hand-written offline fixture for scripts/eudamed_watch.py. All identifiers, SRNs, names and dates are FICTIONAL and exist only to exercise code paths. Keys are the exact URLs the tool requests. A value of {\"__error__\": \"...\"} simulates a failed call; a missing key also fails.",
+  "responses": {
+    "https://ec.europa.eu/tools/eudamed/api/devices/udiDiData?page=0&pageSize=50&size=50&iso2Code=en&languageIso2Code=en&tradeName=Stylet": {
+      "content": [
+        {
+          "uuid": "fixture-uuid-0001",
+          "basicUdi": "FIXTURE-BUDI-STYLET-MDR",
+          "tradeName": "Fixture Stylet 120 mm",
+          "manufacturerName": "Fixture Brainlab Test GmbH",
+          "manufacturerSrn": "DE-MF-000000001",
+          "riskClass": {"code": "CLASS_III"},
+          "deviceStatusType": "ON_THE_MARKET",
+          "legislation": "MDR"
+        },
+        {
+          "uuid": "fixture-uuid-0002",
+          "basicUdi": "FIXTURE-BUDI-STYLET-MDR",
+          "tradeName": "Fixture Stylet 150 mm",
+          "manufacturerName": "Fixture Brainlab Test GmbH",
+          "manufacturerSrn": "DE-MF-000000001",
+          "riskClass": {"code": "CLASS_III"},
+          "deviceStatusType": "ON_THE_MARKET",
+          "legislation": "MDR"
+        },
+        {
+          "uuid": "fixture-uuid-0003",
+          "basicUdi": "FIXTURE-BUDI-STYLET-MDR",
+          "tradeName": "Fixture Stylet 180 mm",
+          "manufacturerName": "Fixture Brainlab Test GmbH",
+          "manufacturerSrn": "DE-MF-000000001",
+          "riskClass": {"code": "CLASS_III"},
+          "deviceStatusType": "ON_THE_MARKET",
+          "legislation": "MDR"
+        },
+        {
+          "uuid": "fixture-uuid-0004",
+          "basicUdi": "B-000000000000FIXTURE",
+          "tradeName": "Fixture Stylet legacy",
+          "manufacturerName": "Fixture Brainlab Test GmbH",
+          "manufacturerSrn": "DE-MF-000000001",
+          "riskClass": {"code": "CLASS_IIB"},
+          "deviceStatusType": "ON_THE_MARKET",
+          "legislation": "MDD"
+        },
+        {
+          "uuid": "fixture-uuid-0005",
+          "basicUdi": "FIXTURE-BUDI-STYLET-PACK",
+          "tradeName": "Fixture Stylet procedure pack",
+          "manufacturerName": "Fixture Brainlab Pack Producer",
+          "manufacturerSrn": "DE-PR-000000002",
+          "riskClass": {"code": "CLASS_III"},
+          "deviceStatusType": "ON_THE_MARKET",
+          "legislation": "MDR"
+        },
+        {
+          "uuid": "fixture-uuid-0006",
+          "basicUdi": "FIXTURE-BUDI-STYLET-OTHER",
+          "tradeName": "Fixture Unrelated Stylet",
+          "manufacturerName": "Fixture Unrelated Devices Ltd",
+          "manufacturerSrn": "IE-MF-000000003",
+          "riskClass": {"code": "CLASS_IIA"},
+          "deviceStatusType": "ON_THE_MARKET",
+          "legislation": "MDR"
+        }
+      ],
+      "totalElements": 6,
+      "totalPages": 1
+    },
+    "https://ec.europa.eu/tools/eudamed/api/devices/basicUdiData/udiDiData/fixture-uuid-0001?languageIso2Code=en": {
+      "basicUdi": "FIXTURE-BUDI-STYLET-MDR",
+      "linkedSscp": {
+        "referenceNumber": "FIXTURE-SSCP-001",
+        "revisionNumber": "1",
+        "issueDate": "2026-01-15",
+        "validated": true
+      },
+      "certificates": [{"certificateNumber": "FIXTURE-CERT-1"}],
+      "nbDecision": {"decision": "fixture"}
+    },
+    "https://ec.europa.eu/tools/eudamed/api/devices/udiDiData?page=0&pageSize=50&size=50&iso2Code=en&languageIso2Code=en&tradeName=ONE%20Snare": {
+      "content": [
+        {
+          "uuid": "fixture-uuid-0101",
+          "basicUdi": "FIXTURE-BUDI-SNARE-MDR",
+          "tradeName": "Fixture ONE Snare",
+          "manufacturerName": "Fixture Merit Test Inc",
+          "manufacturerSrn": "US-MF-000000004",
+          "riskClass": {"code": "CLASS_IIA"},
+          "deviceStatusType": "ON_THE_MARKET",
+          "legislation": "MDR"
+        }
+      ],
+      "totalElements": 1,
+      "totalPages": 1
+    },
+    "https://ec.europa.eu/tools/eudamed/api/devices/udiDiData?page=0&pageSize=50&size=50&iso2Code=en&languageIso2Code=en&tradeName=OPRA": {
+      "__error__": "HTTP 503: Service Unavailable"
+    }
+  }
+}
