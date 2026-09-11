@@ -1,0 +1,34 @@
+{
+  "runs": [
+    {
+      "record_schema_version": "1.0",
+      "run_id": "SANITIZED-EXAMPLE-ONLY",
+      "run_kind": "controlled_dry_run",
+      "execution_completed_on": "2026-09-11",
+      "operator": "Example Operator",
+      "human_reviewer": "Example Qualified Reviewer",
+      "proof_use_allowed": false,
+      "ci_or_automated_smoke": true,
+      "execution_completed": true,
+      "preflight_status": "ACTIVATED",
+      "intake_validated": true,
+      "bundle_generated": true,
+      "human_review_status": "REVIEW APPROVED",
+      "bundle_integrity_status": "VERIFIED",
+      "evidence_gate_satisfied": true,
+      "claim_gate_satisfied": true,
+      "commercial_gate_satisfied": true,
+      "data_handling_gate_satisfied": true,
+      "qualified_human_review_completed": true,
+      "founder_transaction_decision_required": false,
+      "unplanned_exception": false,
+      "nonstandard_scope_claim_or_commercial_exception": false,
+      "closeout_completed": true,
+      "commercial_learning_captured_privately": true,
+      "real_paid_pilot": false,
+      "payment_or_procurement_path_followed": false,
+      "full_operator_dry_run": true
+    }
+  ],
+  "notice": "This public sanitized example is intentionally ineligible for delegation proof. CI, unit tests and automated smokes never count toward founder-independence proof. Real proof records stay private."
+}
