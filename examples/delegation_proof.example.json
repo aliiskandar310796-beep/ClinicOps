@@ -1,12 +1,19 @@
 {
   "runs": [
     {
-      "record_schema_version": "1.0",
+      "record_schema_version": "1.1",
       "run_id": "SANITIZED-EXAMPLE-ONLY",
       "run_kind": "controlled_dry_run",
       "execution_completed_on": "2026-09-11",
       "operator": "Example Operator",
       "human_reviewer": "Example Qualified Reviewer",
+      "activation_record_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+      "preflight_result_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+      "review_record_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+      "review_gate_result_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+      "bundle_manifest_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+      "bundle_verification_record_sha256": "6666666666666666666666666666666666666666666666666666666666666666",
+      "source_sha256": "7777777777777777777777777777777777777777777777777777777777777777",
       "private_operational_record": false,
       "proof_use_allowed": false,
       "ci_or_automated_smoke": true,
@@ -34,5 +41,5 @@
       "full_operator_dry_run": true
     }
   ],
-  "notice": "This public sanitized example is intentionally ineligible for delegation proof. CI, unit tests and automated smokes never count toward founder-independence proof. Real proof records stay private."
+  "notice": "This public sanitized example is intentionally ineligible for delegation proof. The SHA-256 values are illustrative placeholders, not evidence. CI, unit tests and automated smokes never count toward founder-independence proof. Real proof records and their bound artifacts stay private."
 }
