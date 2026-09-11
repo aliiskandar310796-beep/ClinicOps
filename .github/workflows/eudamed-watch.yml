@@ -40,9 +40,9 @@ jobs:
       - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
-      # The tool is stdlib-only; no dependency installation is needed.
+      # The tool itself is stdlib-only; pytest is installed only for the self-check.
       - name: Offline self-check against the committed fixture
-        run: python -m pytest tests/test_eudamed_watch.py -q
+        run: python -m pip install --quiet pytest && python -m pytest tests/test_eudamed_watch.py -q
       - name: Run watchlist snapshot (live, read-only)
         run: |
           python scripts/eudamed_watch.py run \
