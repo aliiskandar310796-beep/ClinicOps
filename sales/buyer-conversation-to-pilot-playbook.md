@@ -138,7 +138,7 @@ The priority score is operator triage only. It is not a compliance, legal, enfor
 
 ## Pilot execution path
 
-Never place a real buyer portfolio or activation record in this public repository. The standard founder-independent path applies only to an eligible **paid pilot**. Design-partner work or any non-standard condition remains `NON-STANDARD — NOT ACTIVATED` unless the governing policy is changed at policy level.
+Never place a real buyer portfolio, activation record or review record in this public repository. The standard founder-independent path applies only to an eligible **paid pilot**. Design-partner work or any non-standard condition remains `NON-STANDARD — NOT ACTIVATED` unless the governing policy is changed at policy level.
 
 With the authorised materials stored in an approved private location, start from the sanitized activation-record example and run the fail-closed commercial/operational preflight before material work:
 
@@ -165,30 +165,46 @@ Expected bundle schema `1.1`:
 - `intake_diagnostics.md`
 - `manifest.json`
 
-After the qualified human-review gate and any required regeneration, verify the final private source and every schema-1.1 controlled output immediately before external release:
+After all review-driven corrections/regeneration are complete, prepare a private review record bound to the exact final manifest, assigned reviewer, source hash and evidence date:
+
+```bash
+clinicops-pilot-review-prepare /private/path/activation-record.json /private/path/output > /private/path/review-record.json
+```
+
+Preparation is not review. Every substantive review attestation is deliberately created as `false`. The assigned qualified reviewer must complete the review steps below, record the completion date, and explicitly attest each completed item in the private review record. Then run:
+
+```bash
+clinicops-pilot-review-gate /private/path/activation-record.json /private/path/review-record.json /private/path/output
+```
+
+Proceed toward release only when it returns `"status": "REVIEW APPROVED"`. The gate fails if the reviewer differs from the activated reviewer, the final manifest/source binding changed, a required review attestation is omitted, an unplanned exception occurred, or a founder transaction-level decision was required.
+
+Immediately after the approved review gate, verify the final private source and every schema-1.1 controlled output before external release:
 
 ```bash
 clinicops-pilot-verify /private/path/output /private/path/portfolio.csv
 ```
 
-External release requires `"status": "VERIFIED"`. A mismatch means the controlled source/output set changed: correct or regenerate the bundle, repeat human review as applicable, and verify again. Do not edit hashes or the manifest to make changed files appear verified.
+External release requires both `"status": "REVIEW APPROVED"` and `"status": "VERIFIED"` on the exact final set. A mismatch means the controlled source/output set changed: correct or regenerate the bundle, repeat human review as applicable, prepare a new review record against the new final manifest, and verify again. Do not edit hashes, the manifest or the review record merely to make changed files appear approved.
 
-A successful synthetic example, CI preflight or CI bundle verification does **not** prove founder-independent execution. The delegation proof condition remains the one defined in `sales/commercial-activation-gate.md`.
+A successful synthetic example, CI preflight, CI review-gate smoke or CI bundle verification does **not** prove founder-independent execution. The delegation proof condition remains the one defined in `sales/commercial-activation-gate.md`.
 
 ## Human-review gate before client delivery
 
 Before anything leaves ClinicOps:
 
 1. verify the supplied evidence population and `as_of` date;
-2. review every material derived statement against the evidence actually supplied/reached;
-3. separate machine-detected structure from human regulatory judgement;
-4. confirm MF / AR / PR distinctions where relevant;
-5. leave unresolved facts unresolved rather than inferring them;
-6. remove any internal-only notes not intended for the buyer;
-7. approve the final client-facing interpretation as the responsible qualified human reviewer;
-8. after any required regeneration, run `clinicops-pilot-verify` on the exact final private source/bundle and require `VERIFIED` immediately before release.
+2. review warnings and information gaps that affect interpretation;
+3. review every material derived statement against the evidence actually supplied/reached;
+4. separate machine-detected structure from human regulatory judgement;
+5. confirm MF / AR / PR distinctions where relevant;
+6. leave unresolved facts unresolved rather than inferring them;
+7. remove any internal-only notes not intended for the buyer;
+8. approve the final client-facing interpretation as the responsible qualified human reviewer;
+9. prepare/complete the manifest-bound private review record and run `clinicops-pilot-review-gate`; require `REVIEW APPROVED`;
+10. immediately run `clinicops-pilot-verify` on the exact final private source/bundle and require `VERIFIED` before release.
 
-Integrity verification proves file correspondence, not regulatory correctness, and never replaces the responsible human review.
+If any manifest-declared output, the source population or the manifest changes after the recorded review, the prior review record is stale. Regenerate/re-review as applicable, prepare a new record bound to the new manifest, rerun the review gate, and verify again. The review gate validates the recorded attestation and file binding; it cannot prove the reviewer performed the work truthfully and never replaces responsible professional judgement.
 
 ## Evidence boundaries for discussion
 
