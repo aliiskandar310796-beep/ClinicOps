@@ -74,7 +74,7 @@ jobs:
           python scripts/eudamed_watch.py run \
             --watchlist "$RUNNER_TEMP/watchlist.json" \
             --out data/eudamed/ \
-            --max-pages 5 \
+            --max-pages 8 \
             --sleep 1.0
       - name: Add anonymised LATEST.md to job summary
         if: always()
