@@ -19,7 +19,9 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import hmac
 import json
+import os
 import re
 import sys
 import time
@@ -79,6 +81,9 @@ STANDING_LIMITS = [
     "logic, not quoted Commission law)."),
     ("SRN role PR (system/procedure pack producer) records carry no SS(C)P duty "
     "and are not looked up."),
+    ("Committed snapshots, diffs and LATEST.md are aggregate-level only: they "
+    "name no manufacturer, device, trade name, identifier or SS(C)P reference. "
+    "Per-device rows, where present, use pseudonymous HMAC keys."),
     ("sscp_expected is ClinicOps derived screening logic (class III or implantable, "
     "MDR, not legacy, not PR). 'sscp_expected_but_absent' means no SS(C)P link was "
     "visible in the public record at extraction; it is not a finding that any "
@@ -173,6 +178,11 @@ class FixtureFetcher:
 
 def load_watchlist(path: Path) -> list[dict[str, Any]]:
     raw = json.loads(Path(path).read_text(encoding="utf-8"))
+    return load_watchlist_from(raw, origin=str(path))
+
+
+def load_watchlist_from(raw: Any, origin: str = "<memory>") -> list[dict[str, Any]]:
+    path = origin
     entries = raw.get("entries") if isinstance(raw, dict) else raw
     if not isinstance(entries, list) or not entries:
         raise ValueError(f"{path}: expected a non-empty list of entries")
@@ -482,30 +492,124 @@ def canonical_sha256(payload: dict[str, Any]) -> str:
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
-def build_snapshot(
+
+# ----------------------------------------------------------- Full (private) run
+
+
+def collect_full(
     fetcher: Any,
     watchlist: list[dict[str, Any]],
     *,
     max_pages: int,
     snapshot_date: str,
-    watchlist_path: str,
 ) -> dict[str, Any]:
+    """Run every watchlist entry and return the FULL, named result.
+
+    This structure names manufacturers, trade names and identifiers. It is for
+    local/attended use only (--full-out) and must never be committed or printed
+    to CI logs.
+    """
     failures: list[dict[str, Any]] = []
     entries = [run_entry(fetcher, entry, max_pages, failures) for entry in watchlist]
-    payload: dict[str, Any] = {
+    return {
         "tool": TOOL_NAME,
         "tool_version": TOOL_VERSION,
         "extracted_at_utc": datetime.now(UTC).replace(microsecond=0).isoformat(),
         "snapshot_date": snapshot_date,
         "mode": getattr(fetcher, "mode", "unknown"),
-        "watchlist_path": watchlist_path,
         "max_pages": max_pages,
         "page_size": PAGE_SIZE,
-        "counts_note": "total_elements_approximate values are unstable API counts; display only.",
-        "limits": STANDING_LIMITS,
         "entries": entries,
         "failures": failures,
     }
+
+
+# ----------------------------------------------------- Anonymised public output
+
+
+HMAC_KEY_ENV = "EUDAMED_HMAC_KEY"
+ANON_NOTE = (
+    "Committed outputs are aggregate-level only and are designed to contain no "
+    "string identifying a manufacturer, device, trade name, identifier or "
+    "SS(C)P reference. Per-device rows, where present, are keyed by a "
+    "truncated HMAC-SHA256 of the Basic UDI-DI under a private key and carry "
+    "only classification-level fields."
+)
+
+
+def device_key(hmac_key: str, basic_udi: str) -> str:
+    """Stable pseudonymous device key: HMAC-SHA256(secret, basicUdi)[:16]."""
+    digest = hmac.new(hmac_key.encode("utf-8"), basic_udi.encode("utf-8"), hashlib.sha256)
+    return digest.hexdigest()[:16]
+
+
+def _issue_year(issue_date: Any) -> int | None:
+    match = re.match(r"^(\d{4})", str(issue_date or ""))
+    return int(match.group(1)) if match else None
+
+
+def _anon_device(record: dict[str, Any]) -> dict[str, Any]:
+    linked = record.get("linked_sscp") or None
+    return {
+        "classification": record.get("classification"),
+        "risk_class": record.get("risk_class"),
+        "sscp_expected": bool(record.get("sscp_expected")),
+        "linked": bool(linked),
+        "validated": bool(linked.get("validated")) if linked else None,
+        "issue_year": _issue_year(linked.get("issueDate")) if linked else None,
+    }
+
+
+def anonymise_snapshot(full: dict[str, Any], hmac_key: str | None) -> dict[str, Any]:
+    """Reduce a full run to the committed, aggregate-only public payload."""
+    entries = full["entries"]
+    totals = {
+        "entries_queried": len(entries),
+        "pages_fetched": sum(e["pages_fetched"] for e in entries),
+        "pages_failed": sum(e["pages_failed"] for e in entries),
+        "rows_seen": sum(e["rows_seen"] for e in entries),
+        "rows_filtered_out_by_manufacturer": sum(
+            e["rows_filtered_out_by_manufacturer"] for e in entries
+        ),
+        "distinct_devices": sum(e["distinct_devices"] for e in entries),
+        "entries_truncated_by_max_pages": sum(
+            1 for e in entries if e["truncated_by_max_pages"]
+        ),
+        "entries_with_zero_rows": sum(1 for e in entries if e["rows_seen"] == 0),
+    }
+    counts: dict[str, int] = {}
+    for entry in entries:
+        for cls, n in entry["classification_counts"].items():
+            counts[cls] = counts.get(cls, 0) + n
+    totals["classification_counts"] = dict(sorted(counts.items()))
+
+    failure_counts: dict[str, int] = {}
+    for failure in full["failures"]:
+        kind = str(failure.get("kind") or "unknown")
+        failure_counts[kind] = failure_counts.get(kind, 0) + 1
+
+    payload: dict[str, Any] = {
+        "tool": full["tool"],
+        "tool_version": full["tool_version"],
+        "extracted_at_utc": full["extracted_at_utc"],
+        "snapshot_date": full["snapshot_date"],
+        "mode": full["mode"],
+        "max_pages": full["max_pages"],
+        "page_size": full["page_size"],
+        "anonymisation": "aggregate+keyed" if hmac_key else "aggregate",
+        "anonymisation_note": ANON_NOTE,
+        "counts_note": "All API counts are unstable and approximate; display only.",
+        "limits": STANDING_LIMITS,
+        "totals": totals,
+        "failure_counts": dict(sorted(failure_counts.items())),
+        "failures_recorded": len(full["failures"]),
+    }
+    if hmac_key:
+        devices: dict[str, dict[str, Any]] = {}
+        for entry in entries:
+            for basic_udi, record in entry["devices"].items():
+                devices[device_key(hmac_key, basic_udi)] = _anon_device(record)
+        payload["devices"] = {k: devices[k] for k in sorted(devices)}
     payload["sha256"] = canonical_sha256(payload)
     return payload
 
@@ -513,103 +617,101 @@ def build_snapshot(
 # ------------------------------------------------------------------------ Diff
 
 
-def _device_map(snapshot: dict[str, Any]) -> dict[tuple[str, str], dict[str, Any]]:
-    out = {}
-    for entry in snapshot.get("entries", []):
-        for basic_udi, device in (entry.get("devices") or {}).items():
-            out[(entry["label"], basic_udi)] = device
-    return out
+def snapshot_totals(snapshot: dict[str, Any]) -> dict[str, Any] | None:
+    """Totals of a public snapshot; derives them from a pre-anonymisation
+    (schema v1) snapshot so a first anonymised run can still diff counts."""
+    if isinstance(snapshot.get("totals"), dict):
+        return snapshot["totals"]
+    entries = snapshot.get("entries")
+    if not isinstance(entries, list):
+        return None
+    counts: dict[str, int] = {}
+    for entry in entries:
+        for cls, n in (entry.get("classification_counts") or {}).items():
+            counts[cls] = counts.get(cls, 0) + n
+    return {
+        "entries_queried": len(entries),
+        "pages_fetched": sum(e.get("pages_fetched", 0) for e in entries),
+        "pages_failed": sum(e.get("pages_failed", 0) for e in entries),
+        "rows_seen": sum(e.get("rows_seen", 0) for e in entries),
+        "rows_filtered_out_by_manufacturer": sum(
+            e.get("rows_filtered_out_by_manufacturer", 0) for e in entries
+        ),
+        "distinct_devices": sum(e.get("distinct_devices", 0) for e in entries),
+        "entries_truncated_by_max_pages": sum(
+            1 for e in entries if e.get("truncated_by_max_pages")
+        ),
+        "entries_with_zero_rows": sum(1 for e in entries if e.get("rows_seen") == 0),
+        "classification_counts": dict(sorted(counts.items())),
+    }
 
 
-def _labels_with_failures(snapshot: dict[str, Any]) -> set[str]:
-    return {f.get("entry_label") for f in snapshot.get("failures", [])}
+def _keyed_devices(snapshot: dict[str, Any]) -> dict[str, dict[str, Any]] | None:
+    devices = snapshot.get("devices")
+    if not isinstance(devices, dict):
+        return None
+    # Only trust pseudonymous keys (hex, 16 chars); a v1 snapshot keyed by
+    # Basic UDI-DI must never leak identifiers into a diff.
+    if any(not re.fullmatch(r"[0-9a-f]{16}", k) for k in devices):
+        return None
+    return devices
 
 
 def compute_diff(old: dict[str, Any], new: dict[str, Any]) -> dict[str, Any]:
-    old_map, new_map = _device_map(old), _device_map(new)
-    old_labels = {e["label"] for e in old.get("entries", [])}
-    new_labels = {e["label"] for e in new.get("entries", [])}
-    old_fail, new_fail = _labels_with_failures(old), _labels_with_failures(new)
+    old_totals = snapshot_totals(old) or {}
+    new_totals = snapshot_totals(new) or {}
+    scalar_keys = sorted(
+        (set(old_totals) | set(new_totals)) - {"classification_counts"}
+    )
+    totals_delta = {
+        key: {"before": old_totals.get(key), "after": new_totals.get(key)}
+        for key in scalar_keys
+        if old_totals.get(key) != new_totals.get(key)
+    }
+    old_counts = old_totals.get("classification_counts") or {}
+    new_counts = new_totals.get("classification_counts") or {}
+    counts_delta = {
+        cls: {"before": old_counts.get(cls, 0), "after": new_counts.get(cls, 0)}
+        for cls in sorted(set(old_counts) | set(new_counts))
+        if old_counts.get(cls, 0) != new_counts.get(cls, 0)
+    }
 
-    new_devices, gone_devices, sscp_changes, status_changes, class_changes = [], [], [], [], []
-    entered_expected_absent, left_expected_absent = [], []
-    for key in sorted(new_map.keys() - old_map.keys()):
-        if key[0] in old_labels:
-            new_devices.append({"label": key[0], "basic_udi": key[1], **_brief(new_map[key])})
-    for key in sorted(old_map.keys() - new_map.keys()):
-        if key[0] in new_labels:
-            gone_devices.append(
-                {
-                    "label": key[0],
-                    "basic_udi": key[1],
-                    **_brief(old_map[key]),
-                    "possible_extraction_artefact": key[0] in new_fail or key[0] in old_fail,
-                }
-            )
-    for key in sorted(old_map.keys() & new_map.keys()):
-        before, after = old_map[key], new_map[key]
-        if (before.get("linked_sscp") or None) != (after.get("linked_sscp") or None):
-            changed = [
-                f
-                for f in SSCP_FIELDS
-                if (before.get("linked_sscp") or {}).get(f) != (after.get("linked_sscp") or {}).get(f)
-            ]
-            sscp_changes.append(
-                {
-                    "label": key[0],
-                    "basic_udi": key[1],
-                    "fields": changed,
-                    "before": before.get("linked_sscp"),
-                    "after": after.get("linked_sscp"),
-                }
-            )
-        if before.get("status") != after.get("status"):
-            status_changes.append(
-                {"label": key[0], "basic_udi": key[1], "before": before.get("status"), "after": after.get("status")}
-            )
-        if before.get("classification") != after.get("classification"):
-            change = {
-                "label": key[0],
-                "basic_udi": key[1],
-                "before": before.get("classification"),
-                "after": after.get("classification"),
-            }
-            class_changes.append(change)
-            if after.get("classification") == CLS_EXPECTED_ABSENT:
-                entered_expected_absent.append({**change, **_brief(after)})
-            elif before.get("classification") == CLS_EXPECTED_ABSENT:
-                left_expected_absent.append({**change, **_brief(after)})
-    for key in sorted(new_map.keys() - old_map.keys()):
-        if key[0] in old_labels and new_map[key].get("classification") == CLS_EXPECTED_ABSENT:
-            entered_expected_absent.append(
-                {"label": key[0], "basic_udi": key[1], "before": None, "after": CLS_EXPECTED_ABSENT, **_brief(new_map[key])}
-            )
-    return {
+    diff: dict[str, Any] = {
         "old_snapshot_date": old.get("snapshot_date"),
         "new_snapshot_date": new.get("snapshot_date"),
         "old_sha256": old.get("sha256"),
         "new_sha256": new.get("sha256"),
-        "entries_added": sorted(new_labels - old_labels),
-        "entries_removed": sorted(old_labels - new_labels),
-        "new_devices": new_devices,
-        "gone_devices": gone_devices,
-        "sscp_changes": sscp_changes,
-        "status_changes": status_changes,
-        "classification_changes": class_changes,
-        "entered_sscp_expected_but_absent": entered_expected_absent,
-        "left_sscp_expected_but_absent": left_expected_absent,
-        "old_failures": len(old.get("failures", [])),
-        "new_failures": len(new.get("failures", [])),
+        "totals_delta": totals_delta,
+        "classification_counts_delta": counts_delta,
+        "old_failures": old.get("failures_recorded", len(old.get("failures", []))),
+        "new_failures": new.get("failures_recorded", len(new.get("failures", []))),
+        "keyed_comparison": False,
     }
 
-
-def _brief(device: dict[str, Any]) -> dict[str, Any]:
-    return {
-        "manufacturer_name": device.get("manufacturer_name"),
-        "risk_class": device.get("risk_class"),
-        "classification": device.get("classification"),
-        "status": device.get("status"),
-    }
+    old_devices, new_devices = _keyed_devices(old), _keyed_devices(new)
+    if old_devices is not None and new_devices is not None:
+        diff["keyed_comparison"] = True
+        diff["new_device_keys"] = sorted(new_devices.keys() - old_devices.keys())
+        diff["gone_device_keys"] = sorted(old_devices.keys() - new_devices.keys())
+        changes = []
+        for key in sorted(old_devices.keys() & new_devices.keys()):
+            before, after = old_devices[key], new_devices[key]
+            fields = sorted(
+                f
+                for f in ("classification", "linked", "validated", "issue_year")
+                if before.get(f) != after.get(f)
+            )
+            if fields:
+                changes.append(
+                    {
+                        "key": key,
+                        "fields": fields,
+                        "before": {f: before.get(f) for f in fields},
+                        "after": {f: after.get(f) for f in fields},
+                    }
+                )
+        diff["device_changes"] = changes
+    return diff
 
 
 # -------------------------------------------------------------------- Markdown
@@ -621,98 +723,131 @@ def limits_block(extraction_date: str) -> str:
     return "\n".join(lines) + "\n"
 
 
+def _totals_table(totals: dict[str, Any]) -> list[str]:
+    rows = [
+        ("Watchlist entries queried", totals.get("entries_queried")),
+        ("Search pages fetched", totals.get("pages_fetched")),
+        ("Search pages failed", totals.get("pages_failed")),
+        ("Rows seen (all entries)", totals.get("rows_seen")),
+        ("Rows filtered out client-side", totals.get("rows_filtered_out_by_manufacturer")),
+        ("Distinct devices (deduped)", totals.get("distinct_devices")),
+        ("Entries truncated by page cap", totals.get("entries_truncated_by_max_pages")),
+        ("Entries with zero rows", totals.get("entries_with_zero_rows")),
+    ]
+    out = ["| Measure | Value |", "|---|---|"]
+    out += [f"| {name} | {value} |" for name, value in rows]
+    return out
+
+
+def render_latest_markdown(snapshot: dict[str, Any], diff_path: str | None) -> str:
+    totals = snapshot["totals"]
+    out = [
+        "# EUDAMED watch — latest snapshot (aggregate)",
+        "",
+        f"- Snapshot date: {snapshot['snapshot_date']}",
+        f"- Extracted at (UTC): {snapshot['extracted_at_utc']}",
+        f"- Tool: {snapshot['tool']} {snapshot['tool_version']} (mode: {snapshot['mode']})",
+        f"- Snapshot sha256: `{snapshot['sha256']}`",
+        f"- Anonymisation: {snapshot['anonymisation']}",
+        f"- Recorded failures: {snapshot['failures_recorded']}"
+        + (
+            " (" + ", ".join(f"{k}={v}" for k, v in snapshot["failure_counts"].items()) + ")"
+            if snapshot["failure_counts"]
+            else ""
+        ),
+        f"- Diff against previous snapshot: {diff_path or 'none (first snapshot)'}",
+        "",
+        snapshot["anonymisation_note"],
+        "",
+        "## Totals",
+        "",
+        *_totals_table(totals),
+        "",
+        "## Classification counts (all entries combined)",
+        "",
+    ]
+    counts = totals["classification_counts"]
+    if counts:
+        out += [f"- {cls}: {n}" for cls, n in counts.items()]
+    else:
+        out.append("- no devices classified in this snapshot")
+    out += [
+        "",
+        limits_block(str(snapshot["snapshot_date"])),
+    ]
+    return "\n".join(out)
+
+
+def render_diff_markdown(diff: dict[str, Any]) -> str:
+    out = [
+        f"# EUDAMED watch diff (aggregate): {diff['old_snapshot_date']} -> {diff['new_snapshot_date']}",
+        "",
+        f"- Previous snapshot sha256: `{diff['old_sha256']}`",
+        f"- Current snapshot sha256: `{diff['new_sha256']}`",
+        f"- Recorded failures: previous {diff['old_failures']}, current {diff['new_failures']}",
+        "",
+        "## Total-level changes",
+        "",
+    ]
+    if diff["totals_delta"]:
+        out += [
+            f"- {key}: {value['before']} -> {value['after']}"
+            for key, value in diff["totals_delta"].items()
+        ]
+    else:
+        out.append("- none")
+    out += ["", "## Classification count changes", ""]
+    if diff["classification_counts_delta"]:
+        out += [
+            f"- {cls}: {value['before']} -> {value['after']}"
+            for cls, value in diff["classification_counts_delta"].items()
+        ]
+    else:
+        out.append("- none")
+    out += ["", "## Per-device changes (pseudonymous keys)", ""]
+    if not diff["keyed_comparison"]:
+        out.append(
+            "- not available: one or both snapshots carry no pseudonymous device "
+            "keys (HMAC key unset), so this diff is aggregate-only."
+        )
+    else:
+        out.append(f"- new device keys: {len(diff['new_device_keys'])}")
+        out.append(f"- device keys no longer seen: {len(diff['gone_device_keys'])}")
+        if diff["device_changes"]:
+            for change in diff["device_changes"]:
+                parts = ", ".join(
+                    f"{f}: {change['before'][f]} -> {change['after'][f]}"
+                    for f in change["fields"]
+                )
+                out.append(f"- `{change['key']}` — {parts}")
+        else:
+            out.append("- no field changes on devices seen in both snapshots")
+    out += ["", limits_block(str(diff["new_snapshot_date"]))]
+    return "\n".join(out)
+
+
 def _sscp_str(value: dict[str, Any] | None) -> str:
     if not value:
         return "none"
     return ", ".join(f"{f}={value.get(f)}" for f in SSCP_FIELDS)
 
 
-def render_diff_markdown(diff: dict[str, Any]) -> str:
+def render_full_markdown(full: dict[str, Any]) -> str:
+    """Fully-named report for LOCAL/ATTENDED use only (--full-out). Never commit."""
     out = [
-        f"# EUDAMED watch diff: {diff['old_snapshot_date']} -> {diff['new_snapshot_date']}",
+        "# EUDAMED watch — full named report (LOCAL USE ONLY — DO NOT PUBLISH)",
         "",
-        f"- Previous snapshot sha256: `{diff['old_sha256']}`",
-        f"- Current snapshot sha256: `{diff['new_sha256']}`",
-        f"- Recorded failures: previous {diff['old_failures']}, current {diff['new_failures']}",
-        "",
-    ]
-    if diff["entries_added"] or diff["entries_removed"]:
-        out.append("## Watchlist changes")
-        out.append("")
-        for label in diff["entries_added"]:
-            out.append(f"- Entry added: {label}")
-        for label in diff["entries_removed"]:
-            out.append(f"- Entry removed: {label}")
-        out.append("")
-
-    def section(title: str, items: list[dict[str, Any]], fmt) -> None:
-        out.append(f"## {title} ({len(items)})")
-        out.append("")
-        if not items:
-            out.append("- none")
-        for item in items:
-            out.append(fmt(item))
-        out.append("")
-
-    section(
-        "New devices seen",
-        diff["new_devices"],
-        lambda d: f"- [{d['label']}] `{d['basic_udi']}` — {d['manufacturer_name']} — class {d['risk_class']} — {d['classification']} — status {d['status']}",
-    )
-    section(
-        "Devices no longer seen",
-        diff["gone_devices"],
-        lambda d: (
-            f"- [{d['label']}] `{d['basic_udi']}` — {d['manufacturer_name']} — class {d['risk_class']} — was {d['classification']}"
-            + (" — POSSIBLE EXTRACTION ARTEFACT (recorded failure on this entry)" if d["possible_extraction_artefact"] else "")
-        ),
-    )
-    section(
-        "SS(C)P link changes",
-        diff["sscp_changes"],
-        lambda d: f"- [{d['label']}] `{d['basic_udi']}` — changed {', '.join(d['fields']) or '(presence)'}: before {_sscp_str(d['before'])}; after {_sscp_str(d['after'])}",
-    )
-    section(
-        "Status changes",
-        diff["status_changes"],
-        lambda d: f"- [{d['label']}] `{d['basic_udi']}` — {d['before']} -> {d['after']}",
-    )
-    section(
-        "Classification changes",
-        diff["classification_changes"],
-        lambda d: f"- [{d['label']}] `{d['basic_udi']}` — {d['before']} -> {d['after']}",
-    )
-    section(
-        "Entered 'SS(C)P expected but absent' (public record shows no link; not a compliance finding)",
-        diff["entered_sscp_expected_but_absent"],
-        lambda d: f"- [{d['label']}] `{d['basic_udi']}` — {d['manufacturer_name']} — class {d['risk_class']} — was {d['before'] or 'not previously seen'}",
-    )
-    section(
-        "Left 'SS(C)P expected but absent'",
-        diff["left_sscp_expected_but_absent"],
-        lambda d: f"- [{d['label']}] `{d['basic_udi']}` — {d['manufacturer_name']} — now {d['after']}",
-    )
-    out.append(limits_block(str(diff["new_snapshot_date"])))
-    return "\n".join(out)
-
-
-def render_latest_markdown(snapshot: dict[str, Any], diff_path: str | None) -> str:
-    out = [
-        "# EUDAMED watch — latest snapshot",
-        "",
-        f"- Snapshot date: {snapshot['snapshot_date']}",
-        f"- Extracted at (UTC): {snapshot['extracted_at_utc']}",
-        f"- Tool: {snapshot['tool']} {snapshot['tool_version']} (mode: {snapshot['mode']})",
-        f"- Snapshot sha256: `{snapshot['sha256']}`",
-        f"- Recorded failures: {len(snapshot['failures'])}",
-        f"- Diff against previous snapshot: {diff_path or 'none (first snapshot)'}",
+        f"- Snapshot date: {full['snapshot_date']}",
+        f"- Extracted at (UTC): {full['extracted_at_utc']}",
+        f"- Tool: {full['tool']} {full['tool_version']} (mode: {full['mode']})",
+        f"- Recorded failures: {len(full['failures'])}",
         "",
         "## Watchlist results",
         "",
         "| Entry | Query | Approx. total (API) | Rows seen | Filtered out | Distinct devices | Classification counts | Pages | Truncated |",
         "|---|---|---|---|---|---|---|---|---|",
     ]
-    for entry in snapshot["entries"]:
+    for entry in full["entries"]:
         counts = ", ".join(f"{k}={v}" for k, v in entry["classification_counts"].items()) or "-"
         approx = entry["total_elements_approximate"]
         out.append(
@@ -721,11 +856,9 @@ def render_latest_markdown(snapshot: dict[str, Any], diff_path: str | None) -> s
             f"| {counts} | {entry['pages_fetched']} ok / {entry['pages_failed']} failed "
             f"| {'yes' if entry['truncated_by_max_pages'] else 'no'} |"
         )
-    out.append("")
-    out.append("## Linked SS(C)P metadata seen")
-    out.append("")
+    out += ["", "## Linked SS(C)P metadata seen", ""]
     any_linked = False
-    for entry in snapshot["entries"]:
+    for entry in full["entries"]:
         for device in entry["devices"].values():
             if device.get("linked_sscp"):
                 any_linked = True
@@ -734,16 +867,15 @@ def render_latest_markdown(snapshot: dict[str, Any], diff_path: str | None) -> s
                 )
     if not any_linked:
         out.append("- none in this snapshot")
-    out.append("")
-    out.append("## SS(C)P expected but absent in the public record")
-    out.append("")
+    out += ["", "## SS(C)P expected but absent in the public record", ""]
     out.append(
-        "Derived screening population (class III or implantable, MDR, not legacy, not PR) "
-        "with no SS(C)P link visible at extraction. Not a compliance finding about any company."
+        "Derived screening population (class III or implantable, MDR, not legacy, "
+        "not PR) with no SS(C)P link visible at extraction. Not a compliance "
+        "finding about any company."
     )
     out.append("")
     any_expected_absent = False
-    for entry in snapshot["entries"]:
+    for entry in full["entries"]:
         for device in entry["devices"].values():
             if device.get("classification") == CLS_EXPECTED_ABSENT:
                 any_expected_absent = True
@@ -753,20 +885,17 @@ def render_latest_markdown(snapshot: dict[str, Any], diff_path: str | None) -> s
                 )
     if not any_expected_absent:
         out.append("- none in this snapshot")
-    out.append("")
-    out.append("## Recorded failures")
-    out.append("")
-    if not snapshot["failures"]:
+    out += ["", "## Recorded failures", ""]
+    if not full["failures"]:
         out.append("- none")
-    for failure in snapshot["failures"]:
+    for failure in full["failures"]:
         out.append(
             f"- [{failure['entry_label']}] {failure['kind']}"
             + (f" page {failure['page']}" if "page" in failure else "")
             + (f" basicUdi `{failure['basic_udi']}`" if failure.get("basic_udi") else "")
             + f": {failure['error']}"
         )
-    out.append("")
-    out.append(limits_block(str(snapshot["snapshot_date"])))
+    out += ["", limits_block(str(full["snapshot_date"]))]
     return "\n".join(out)
 
 
@@ -793,9 +922,10 @@ def cmd_run(args: argparse.Namespace) -> int:
         print(f"invalid --date {snapshot_date!r}, expected YYYY-MM-DD", file=sys.stderr)
         return 2
 
-    snapshot = build_snapshot(
-        fetcher, watchlist, max_pages=args.max_pages, snapshot_date=snapshot_date, watchlist_path=str(args.watchlist)
-    )
+    full = collect_full(fetcher, watchlist, max_pages=args.max_pages, snapshot_date=snapshot_date)
+    hmac_key = os.environ.get(HMAC_KEY_ENV) or None
+    snapshot = anonymise_snapshot(full, hmac_key)
+
     snapshot_path = snapshots_dir / f"{snapshot_date}.json"
     snapshot_path.write_text(json.dumps(snapshot, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
@@ -809,13 +939,32 @@ def cmd_run(args: argparse.Namespace) -> int:
         diff_rel = f"diffs/{snapshot_date}.md"
     (out_dir / "LATEST.md").write_text(render_latest_markdown(snapshot, diff_rel), encoding="utf-8")
 
+    if args.full_out:
+        full_dir = Path(args.full_out)
+        full_dir.mkdir(parents=True, exist_ok=True)
+        full_md = full_dir / f"{snapshot_date}_full.md"
+        full_md.write_text(render_full_markdown(full), encoding="utf-8")
+        (full_dir / "LATEST.md").write_text(render_full_markdown(full), encoding="utf-8")
+        print(f"full named report (LOCAL ONLY, not for publication): {full_md}")
+
+    # Stdout/stderr must stay aggregate-only: no labels, names, identifiers or
+    # URLs (search URLs embed trade names) — CI logs are public.
     print(f"snapshot: {snapshot_path}")
     print(f"diff: {diffs_dir / (snapshot_date + '.md') if diff_rel else 'none (no previous snapshot)'}")
     print(f"latest: {out_dir / 'LATEST.md'}")
-    print(f"failures recorded: {len(snapshot['failures'])}")
-    for failure in snapshot["failures"]:
-        print(f"  - [{failure['entry_label']}] {failure['kind']}: {failure['error']}", file=sys.stderr)
-    if args.strict and snapshot["failures"]:
+    print(f"anonymisation: {snapshot['anonymisation']}")
+    totals = snapshot["totals"]
+    print(
+        "totals: "
+        f"entries={totals['entries_queried']} rows={totals['rows_seen']} "
+        f"devices={totals['distinct_devices']} pages_failed={totals['pages_failed']}"
+    )
+    if snapshot["failures_recorded"]:
+        counts = ", ".join(f"{k}={v}" for k, v in snapshot["failure_counts"].items())
+        print(f"failures recorded: {snapshot['failures_recorded']} ({counts})", file=sys.stderr)
+    else:
+        print("failures recorded: 0")
+    if args.strict and snapshot["failures_recorded"]:
         return 1
     return 0
 
@@ -837,18 +986,23 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="eudamed_watch", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = parser.add_subparsers(dest="command", required=True)
 
-    run = sub.add_parser("run", help="Extract a snapshot, diff against the previous one, refresh LATEST.md")
-    run.add_argument("--watchlist", required=True, help="Path to watchlist.json")
-    run.add_argument("--out", required=True, help="Output directory (snapshots/, diffs/, LATEST.md)")
+    run = sub.add_parser("run", help="Extract an anonymised snapshot, diff against the previous one, refresh LATEST.md")
+    run.add_argument("--watchlist", required=True, help="Path to watchlist JSON (private; not committed)")
+    run.add_argument("--out", required=True, help="Output directory (snapshots/, diffs/, LATEST.md) — aggregate-only")
     run.add_argument("--max-pages", type=int, default=DEFAULT_MAX_PAGES, help="Max search pages per query (default 5)")
     run.add_argument("--sleep", type=float, default=DEFAULT_SLEEP, help="Seconds between live API calls (default 1.0)")
     run.add_argument("--timeout", type=float, default=DEFAULT_TIMEOUT, help="Per-request timeout in seconds")
     run.add_argument("--fetch-fixture", help="Offline mode: JSON file of responses keyed by URL")
     run.add_argument("--date", help="Override snapshot date (YYYY-MM-DD); default is today UTC")
     run.add_argument("--strict", action="store_true", help="Exit 1 if any page or lookup failed")
+    run.add_argument(
+        "--full-out",
+        help="ALSO write the fully-named report to this directory (LOCAL USE ONLY; "
+        "data/eudamed/full/ is gitignored). Default off; never use in CI.",
+    )
     run.set_defaults(func=cmd_run)
 
-    diff = sub.add_parser("diff", help="Diff two snapshot JSON files")
+    diff = sub.add_parser("diff", help="Diff two anonymised snapshot JSON files")
     diff.add_argument("old")
     diff.add_argument("new")
     diff.add_argument("--out", help="Write markdown here instead of stdout")
