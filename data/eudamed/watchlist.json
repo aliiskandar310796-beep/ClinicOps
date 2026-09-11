@@ -30,7 +30,7 @@
       "label": "Heraeus — PALACOS",
       "trade_name_query": "PALACOS",
       "manufacturer_contains": "Heraeus",
-      "note": "Bone cement family; one basicUdi can occupy many rows (dedupe applies)."
+      "note": "Bone cement family; one basicUdi can occupy many rows (dedupe applies). 2026-09-11: a PALACOS R+G row (class III, MDR) carried a linked SS(C)P in the public record; used as the realistic fixture case."
     },
     {
       "label": "phenox — flow diverter",
@@ -60,7 +60,7 @@
       "label": "BONESUPPORT — CERAMENT",
       "trade_name_query": "CERAMENT",
       "manufacturer_contains": "BONESUPPORT",
-      "note": "Unanchored substring; filtered by manufacturer."
+      "note": "2026-09-11: tradeName=CERAMENT returned content=[] (totalElements 0) — not findable under that string at that time; may be registered under another trade name. Zero results is not 'not registered'."
     },
     {
       "label": "Integrum — OPRA",

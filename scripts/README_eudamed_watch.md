@@ -30,8 +30,22 @@ For each entry in `data/eudamed/watchlist.json`
      detail lookup.
    - otherwise one detail lookup per distinct `basicUdi` via
      `GET /api/devices/basicUdiData/udiDiData/<uuid>` → `sscp_linked`
-     (records `referenceNumber`, `revisionNumber`, `issueDate`, `validated`)
-     or `sscp_link_absent`; a failed lookup is `lookup_failed`.
+     (records `referenceNumber`, `revisionNumber`, `issueDate`, `validated`,
+     `inactive`), `sscp_expected_but_absent` (see below) or `sscp_link_absent`;
+     a failed lookup is `lookup_failed`. The detail also yields `legislation`
+     (+ `legacyDirective`), `implantable`, NB decision reason/date and the
+     first `deviceCertificateInfoList` entry's type and number.
+   - `sscp_expected` (ClinicOps derived screening logic, MDR Art. 32
+     population): (class III or implantable) and MDR (not a legacy directive)
+     and not `B-` and not PR. Expected-but-absent means no link was *visible in
+     the public record* at extraction; it is not a finding that an obligation
+     is unmet.
+
+API code values (`riskClass`, `deviceStatusType`, `legislation`, …) arrive as
+`{"code": "refdata.<group>.<value>"}` objects; the tool records the raw code
+and a normalised form with the prefix stripped (`class-iii`, `on-the-market`,
+`mdr`). In the detail response `basicUdi` is an object; `basicUdi.code` is used
+(string fallback kept).
 5. Writes `data/eudamed/snapshots/<YYYY-MM-DD>.json` (UTC timestamp, tool
    version, per-entry results, approximate `totalElements`, explicit failure
    list, sha256 of the canonical payload), then
@@ -66,6 +80,16 @@ python -m pytest tests/test_eudamed_watch.py -q
 
 `--fetch-fixture` reads a JSON file shaped `{"responses": {"<url>": <body>}}`;
 `{"__error__": "..."}` or a missing URL simulates a failed call.
+
+Shape caveat: the listing and detail parsers were verified against two real
+public responses on 2026-09-11 (one `tradeName=PALACOS` listing page and one
+Basic UDI-DI detail for a PALACOS R+G row), plus one `tradeName=CERAMENT` page
+that returned zero rows. Only a handful of rows were seen; other risk-class,
+status and legislation code values, the `implantable` encoding on other
+devices, and certificate entries with non-null numbers are extrapolated from
+that sample. The parser tolerates missing keys, so an unrecognised shape shows
+up as `sscp_link_absent` / null fields rather than an error — check the first
+live snapshot by hand.
 
 The monthly GitHub Actions workflow is `.github/workflows/eudamed-watch.yml`
 (cron `17 6 1 * *`, also `workflow_dispatch`). It commits changed files under

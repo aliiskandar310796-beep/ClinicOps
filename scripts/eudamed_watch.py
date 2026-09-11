@@ -46,9 +46,14 @@ CLS_LEGACY = "legacy_no_sscp_possible"
 CLS_PR = "pr_no_sscp_duty"
 CLS_LINKED = "sscp_linked"
 CLS_ABSENT = "sscp_link_absent"
+CLS_EXPECTED_ABSENT = "sscp_expected_but_absent"
 CLS_LOOKUP_FAILED = "lookup_failed"
 
-SSCP_FIELDS = ("referenceNumber", "revisionNumber", "issueDate", "validated")
+SSCP_FIELDS = ("referenceNumber", "revisionNumber", "issueDate", "validated", "inactive")
+
+# API code values look like "refdata.risk-class.class-iii"; the group prefix is
+# stripped for the normalised form and the raw code is kept alongside.
+REFDATA_PREFIX_RE = re.compile(r"^refdata\.[^.]+\.")
 
 # Standing limits. These are written into every snapshot and every markdown.
 STANDING_LIMITS = [
@@ -74,6 +79,10 @@ STANDING_LIMITS = [
     "logic, not quoted Commission law).",
     "SRN role PR (system/procedure pack producer) records carry no SS(C)P duty "
     "and are not looked up.",
+    "sscp_expected is ClinicOps derived screening logic (class III or implantable, "
+    "MDR, not legacy, not PR). 'sscp_expected_but_absent' means no SS(C)P link was "
+    "visible in the public record at extraction; it is not a finding that any "
+    "obligation is unmet.",
     "Failed pages and lookups are recorded explicitly; a device 'no longer seen' "
     "next to a recorded failure may be an extraction artefact, not a registry "
     "change.",
@@ -201,17 +210,93 @@ def srn_role(srn: str | None) -> str | None:
     return match.group("role") if match else None
 
 
-def _risk_class(row: dict[str, Any]) -> str | None:
-    risk = row.get("riskClass")
-    if isinstance(risk, dict):
-        return risk.get("code")
-    return risk if isinstance(risk, str) else None
+def raw_code(value: Any) -> str | None:
+    """Return the raw code from a {"code": ...} object or a bare string."""
+    if isinstance(value, dict):
+        code = value.get("code")
+        return str(code) if code is not None else None
+    return str(value) if isinstance(value, str) and value else None
+
+
+def normalise_code(value: Any) -> str | None:
+    """'refdata.risk-class.class-iii' -> 'class-iii'; bare strings lower-cased."""
+    code = raw_code(value)
+    if code is None:
+        return None
+    return REFDATA_PREFIX_RE.sub("", code).strip().lower() or None
+
+
+def basic_udi_code(value: Any) -> str:
+    """basicUdi is a string in listing rows and a {code: ...} object in detail."""
+    if isinstance(value, dict):
+        return str(value.get("code") or "").strip()
+    return str(value or "").strip()
 
 
 def _normalise_sscp(value: Any) -> dict[str, Any] | None:
     if not isinstance(value, dict):
         return None
     return {field: value.get(field) for field in SSCP_FIELDS}
+
+
+def _truthy(value: Any) -> bool | None:
+    """implantable/active arrive 'boolean-ish'; map common encodings, else None."""
+    if value is None:
+        return None
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, (int, float)):
+        return bool(value)
+    text = str(value).strip().lower()
+    if text in {"true", "yes", "y", "1"}:
+        return True
+    if text in {"false", "no", "n", "0", ""}:
+        return False
+    return None
+
+
+def parse_detail(detail: Any) -> dict[str, Any]:
+    """Extract the fields this tool records from a Basic UDI-DI detail response."""
+    if not isinstance(detail, dict):
+        return {"detail_parse_note": "detail body was not a JSON object"}
+    legislation = detail.get("legislation")
+    nb = detail.get("nbDecision")
+    certs = detail.get("deviceCertificateInfoList")
+    first_cert = certs[0] if isinstance(certs, list) and certs and isinstance(certs[0], dict) else None
+    out: dict[str, Any] = {
+        "detail_basic_udi": basic_udi_code(detail.get("basicUdi")) or None,
+        "detail_uuid": detail.get("uuid"),
+        "linked_sscp": _normalise_sscp(detail.get("linkedSscp")),
+        "legislation": normalise_code(legislation),
+        "legislation_raw": raw_code(legislation),
+        "legacy_directive": _truthy(legislation.get("legacyDirective")) if isinstance(legislation, dict) else None,
+        "implantable": _truthy(detail.get("implantable")),
+        "active": _truthy(detail.get("active")),
+        "nb_decision_reason": normalise_code(nb.get("reason")) if isinstance(nb, dict) else None,
+        "nb_decision_date": nb.get("date") if isinstance(nb, dict) else None,
+        "certificates_count": len(certs) if isinstance(certs, list) else None,
+        "first_certificate_type": normalise_code(first_cert.get("certificateType")) if first_cert else None,
+        "first_certificate_number": first_cert.get("certificateNumber") if first_cert else None,
+        "device_name": detail.get("deviceName"),
+        "device_model": detail.get("deviceModel"),
+        "last_updated": detail.get("lastUpdated"),
+    }
+    return out
+
+
+def sscp_expected(record: dict[str, Any]) -> bool:
+    """ClinicOps derived screening logic for the MDR Art. 32 SS(C)P population.
+
+    True when (class III or implantable) and MDR (not a legacy directive) and
+    the record is neither a legacy B- DI nor a PR-role record.
+    """
+    if record.get("classification") in (CLS_LEGACY, CLS_PR):
+        return False
+    if str(record.get("basic_udi") or "").startswith("B-") or record.get("srn_role") == "PR":
+        return False
+    high_risk = record.get("risk_class") == "class-iii" or record.get("implantable") is True
+    is_mdr = record.get("legislation") == "mdr" and record.get("legacy_directive") is not True
+    return bool(high_risk and is_mdr)
 
 
 def manufacturer_matches(row: dict[str, Any], needle: str | None) -> bool:
@@ -280,7 +365,7 @@ def classify_devices(
     """Dedupe rows by basicUdi and classify each distinct device."""
     grouped: dict[str, list[dict[str, Any]]] = {}
     for row in rows:
-        basic_udi = str(row.get("basicUdi") or "").strip()
+        basic_udi = basic_udi_code(row.get("basicUdi"))
         if not basic_udi:
             basic_udi = f"(no basicUdi) uuid={row.get('uuid')}"
         grouped.setdefault(basic_udi, []).append(row)
@@ -299,11 +384,20 @@ def classify_devices(
             "manufacturer_name": first.get("manufacturerName"),
             "manufacturer_srn": srn,
             "srn_role": role,
-            "risk_class": _risk_class(first),
-            "status": first.get("deviceStatusType"),
-            "statuses_seen": sorted({str(r.get("deviceStatusType")) for r in family if r.get("deviceStatusType")}),
+            "risk_class": normalise_code(first.get("riskClass")),
+            "risk_class_raw": raw_code(first.get("riskClass")),
+            "status": normalise_code(first.get("deviceStatusType")),
+            "status_raw": raw_code(first.get("deviceStatusType")),
+            "statuses_seen": sorted(
+                {s for s in (normalise_code(r.get("deviceStatusType")) for r in family) if s}
+            ),
+            "manufacturer_status": normalise_code(first.get("manufacturerStatus")),
             "classification": None,
             "linked_sscp": None,
+            "legislation": None,
+            "legacy_directive": None,
+            "implantable": None,
+            "sscp_expected": False,
             "detail_lookup_done": False,
         }
         if entry.get("expected_srn") and srn:
@@ -343,13 +437,20 @@ def classify_devices(
                 )
             else:
                 record["detail_lookup_done"] = True
-                linked = _normalise_sscp(detail.get("linkedSscp") if isinstance(detail, dict) else None)
-                record["linked_sscp"] = linked
-                record["classification"] = CLS_LINKED if linked else CLS_ABSENT
-                if isinstance(detail, dict):
-                    record["nb_decision_present"] = detail.get("nbDecision") is not None
-                    certs = detail.get("certificates")
-                    record["certificates_count"] = len(certs) if isinstance(certs, list) else None
+                record.update(parse_detail(detail))
+                if record.get("detail_basic_udi") and record["detail_basic_udi"] != basic_udi:
+                    record["detail_basic_udi_mismatch"] = True
+                # Detail risk class is authoritative if the listing row lacked one.
+                if record["risk_class"] is None and isinstance(detail, dict):
+                    record["risk_class"] = normalise_code(detail.get("riskClass"))
+                    record["risk_class_raw"] = raw_code(detail.get("riskClass"))
+                record["sscp_expected"] = sscp_expected(record)
+                if record["linked_sscp"]:
+                    record["classification"] = CLS_LINKED
+                elif record["sscp_expected"]:
+                    record["classification"] = CLS_EXPECTED_ABSENT
+                else:
+                    record["classification"] = CLS_ABSENT
         devices[basic_udi] = record
     return devices
 
@@ -431,6 +532,7 @@ def compute_diff(old: dict[str, Any], new: dict[str, Any]) -> dict[str, Any]:
     old_fail, new_fail = _labels_with_failures(old), _labels_with_failures(new)
 
     new_devices, gone_devices, sscp_changes, status_changes, class_changes = [], [], [], [], []
+    entered_expected_absent, left_expected_absent = [], []
     for key in sorted(new_map.keys() - old_map.keys()):
         if key[0] in old_labels:
             new_devices.append({"label": key[0], "basic_udi": key[1], **_brief(new_map[key])})
@@ -466,13 +568,21 @@ def compute_diff(old: dict[str, Any], new: dict[str, Any]) -> dict[str, Any]:
                 {"label": key[0], "basic_udi": key[1], "before": before.get("status"), "after": after.get("status")}
             )
         if before.get("classification") != after.get("classification"):
-            class_changes.append(
-                {
-                    "label": key[0],
-                    "basic_udi": key[1],
-                    "before": before.get("classification"),
-                    "after": after.get("classification"),
-                }
+            change = {
+                "label": key[0],
+                "basic_udi": key[1],
+                "before": before.get("classification"),
+                "after": after.get("classification"),
+            }
+            class_changes.append(change)
+            if after.get("classification") == CLS_EXPECTED_ABSENT:
+                entered_expected_absent.append({**change, **_brief(after)})
+            elif before.get("classification") == CLS_EXPECTED_ABSENT:
+                left_expected_absent.append({**change, **_brief(after)})
+    for key in sorted(new_map.keys() - old_map.keys()):
+        if key[0] in old_labels and new_map[key].get("classification") == CLS_EXPECTED_ABSENT:
+            entered_expected_absent.append(
+                {"label": key[0], "basic_udi": key[1], "before": None, "after": CLS_EXPECTED_ABSENT, **_brief(new_map[key])}
             )
     return {
         "old_snapshot_date": old.get("snapshot_date"),
@@ -486,6 +596,8 @@ def compute_diff(old: dict[str, Any], new: dict[str, Any]) -> dict[str, Any]:
         "sscp_changes": sscp_changes,
         "status_changes": status_changes,
         "classification_changes": class_changes,
+        "entered_sscp_expected_but_absent": entered_expected_absent,
+        "left_sscp_expected_but_absent": left_expected_absent,
         "old_failures": len(old.get("failures", [])),
         "new_failures": len(new.get("failures", [])),
     }
@@ -570,6 +682,16 @@ def render_diff_markdown(diff: dict[str, Any]) -> str:
         diff["classification_changes"],
         lambda d: f"- [{d['label']}] `{d['basic_udi']}` — {d['before']} -> {d['after']}",
     )
+    section(
+        "Entered 'SS(C)P expected but absent' (public record shows no link; not a compliance finding)",
+        diff["entered_sscp_expected_but_absent"],
+        lambda d: f"- [{d['label']}] `{d['basic_udi']}` — {d['manufacturer_name']} — class {d['risk_class']} — was {d['before'] or 'not previously seen'}",
+    )
+    section(
+        "Left 'SS(C)P expected but absent'",
+        diff["left_sscp_expected_but_absent"],
+        lambda d: f"- [{d['label']}] `{d['basic_udi']}` — {d['manufacturer_name']} — now {d['after']}",
+    )
     out.append(limits_block(str(diff["new_snapshot_date"])))
     return "\n".join(out)
 
@@ -611,6 +733,25 @@ def render_latest_markdown(snapshot: dict[str, Any], diff_path: str | None) -> s
                     f"- [{entry['label']}] `{device['basic_udi']}` — class {device['risk_class']} — {_sscp_str(device['linked_sscp'])}"
                 )
     if not any_linked:
+        out.append("- none in this snapshot")
+    out.append("")
+    out.append("## SS(C)P expected but absent in the public record")
+    out.append("")
+    out.append(
+        "Derived screening population (class III or implantable, MDR, not legacy, not PR) "
+        "with no SS(C)P link visible at extraction. Not a compliance finding about any company."
+    )
+    out.append("")
+    any_expected_absent = False
+    for entry in snapshot["entries"]:
+        for device in entry["devices"].values():
+            if device.get("classification") == CLS_EXPECTED_ABSENT:
+                any_expected_absent = True
+                out.append(
+                    f"- [{entry['label']}] `{device['basic_udi']}` — {device['manufacturer_name']} — class {device['risk_class']}"
+                    f" — implantable={device.get('implantable')} — legislation={device.get('legislation')} — status {device.get('status')}"
+                )
+    if not any_expected_absent:
         out.append("- none in this snapshot")
     out.append("")
     out.append("## Recorded failures")
