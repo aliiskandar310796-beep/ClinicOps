@@ -1,17 +1,26 @@
 from __future__ import annotations
 
 import json
+import re
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
 from datetime import date
 from pathlib import Path
 
-PROOF_SCHEMA_VERSION = "1.0"
+PROOF_SCHEMA_VERSION = "1.1"
 PAID_PILOT = "paid_pilot"
 CONTROLLED_DRY_RUN = "controlled_dry_run"
 VALID_RUN_KINDS = {PAID_PILOT, CONTROLLED_DRY_RUN}
 PROVEN_STATUS = "FOUNDER-INDEPENDENT EXECUTION PROVEN"
 NOT_PROVEN_STATUS = "FOUNDER-INDEPENDENT EXECUTION NOT PROVEN"
+SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
+ARTIFACT_SHA256_FIELDS = (
+    "activation_record_sha256",
+    "review_record_sha256",
+    "bundle_manifest_sha256",
+    "bundle_verification_record_sha256",
+    "source_sha256",
+)
 
 
 @dataclass(frozen=True)
@@ -87,12 +96,27 @@ def _require_iso_date(
         reasons.append(message)
 
 
+def _require_sha256(
+    record: Mapping[str, object], key: str, message: str, reasons: list[str]
+) -> str:
+    value = record.get(key)
+    if not isinstance(value, str) or not SHA256_RE.fullmatch(value):
+        reasons.append(message)
+        return ""
+    return value
+
+
+def _artifact_fingerprint(record: Mapping[str, object]) -> tuple[str, ...]:
+    return tuple(str(record.get(key, "")) for key in ARTIFACT_SHA256_FIELDS)
+
+
 def evaluate_delegation_run(record: Mapping[str, object]) -> DelegationRunResult:
     """Evaluate one private proof run against the standard delegation proof policy.
 
-    This evaluator checks the recorded evidence and explicit attestations. It cannot prove
-    that a human performed a review truthfully or that a private record is genuine.
-    Real proof records must therefore remain controlled operational records, not CI output.
+    This evaluator checks recorded evidence, explicit attestations and immutable artifact
+    bindings. It cannot prove that a human performed a review truthfully or that a private
+    record is genuine. Real proof records must therefore remain controlled operational
+    records, not CI output.
     """
 
     reasons: list[str] = []
@@ -120,6 +144,14 @@ def evaluate_delegation_run(record: Mapping[str, object]) -> DelegationRunResult
     _require_nonempty_string(
         record, "human_reviewer", "human_reviewer must be identified", reasons
     )
+
+    for key in ARTIFACT_SHA256_FIELDS:
+        _require_sha256(
+            record,
+            key,
+            f"{key} must be a lowercase 64-character SHA-256 binding",
+            reasons,
+        )
 
     _require_true(
         record,
@@ -294,6 +326,18 @@ def evaluate_delegation_proof(
     if duplicate_ids:
         evidence_errors.append(
             "run_id values must be unique: " + ", ".join(duplicate_ids)
+        )
+
+    qualifying_records = [
+        record
+        for record, result in zip(records, results, strict=True)
+        if result.qualifies
+    ]
+    fingerprints = [_artifact_fingerprint(record) for record in qualifying_records]
+    if len(fingerprints) != len(set(fingerprints)):
+        evidence_errors.append(
+            "qualifying runs must have distinct controlled-artifact SHA-256 bindings; "
+            "copying one execution under a new run_id is not independent proof"
         )
 
     if evidence_errors:
