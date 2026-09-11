@@ -35,4 +35,6 @@ Negative conditions are fail-closed. Omitting `patient_identifiable_data`, `unsu
 
 A passing synthetic example or CI run is **not** a delegation proof run. Founder-independent execution remains unproven until the proof test in `sales/commercial-activation-gate.md` is satisfied by an eligible paid pilot or two complete controlled dry runs with the required human-review and closeout gates.
 
+`clinicops-pilot-dry-run` (see `sales/pilot-dry-run-harness.md`) runs the full preflight -> bundle -> human-review -> verify sequence against a synthetic fixture so the operator workflow can be exercised and its proof runs recorded; it is a test harness, not itself proof of founder-independent execution.
+
 The preflight also does not replace intake validation, evidence review, claim governance, human regulatory review, bundle integrity checks, or commercial closeout. It only answers whether the transaction is inside the already-approved standard operating envelope before material work begins.
