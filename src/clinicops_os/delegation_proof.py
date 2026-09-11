@@ -16,7 +16,9 @@ NOT_PROVEN_STATUS = "FOUNDER-INDEPENDENT EXECUTION NOT PROVEN"
 SHA256_RE = re.compile(r"^[0-9a-f]{64}$")
 ARTIFACT_SHA256_FIELDS = (
     "activation_record_sha256",
+    "preflight_result_sha256",
     "review_record_sha256",
+    "review_gate_result_sha256",
     "bundle_manifest_sha256",
     "bundle_verification_record_sha256",
     "source_sha256",
