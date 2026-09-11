@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<title>The published SS(C)P and the public EUDAMED record — what a reader can and cannot reconcile | ClinicOps</title>
+<meta name="description" content="Public-source scan, September 2026: what a published SS(C)P and the public EUDAMED record can and cannot reconcile — identifiers, revisions, legacy DIs and pack records.">
+<link rel="canonical" href="https://clinicops.dk/research/sscp-public-record-scan/">
+
+<meta property="og:title" content="The published SS(C)P and the public EUDAMED record — what a reader can and cannot reconcile | ClinicOps">
+<meta property="og:description" content="Public-source scan, September 2026: what a published SS(C)P and the public EUDAMED record can and cannot reconcile — identifiers, revisions, legacy DIs and pack records.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://clinicops.dk/research/sscp-public-record-scan/">
+<meta property="og:site_name" content="ClinicOps">
+
+<meta name="twitter:card" content="summary">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://clinicops.dk/research/sscp-public-record-scan/",
+      "name": "The published SS(C)P and the public EUDAMED record — what a reader can and cannot reconcile | ClinicOps",
+      "description": "Public-source scan, September 2026: what a published SS(C)P and the public EUDAMED record can and cannot reconcile — identifiers, revisions, legacy DIs and pack records.",
+      "url": "https://clinicops.dk/research/sscp-public-record-scan/",
+      "isPartOf": {"@type": "WebSite", "name": "ClinicOps", "url": "https://clinicops.dk/"},
+      "publisher": {"@type": "Organization", "name": "ClinicOps", "url": "https://clinicops.dk/"}
+    },
+    {
+      "@type": "Article",
+      "headline": "The published SS(C)P and the public EUDAMED record — what a reader can and cannot reconcile",
+      "description": "A public-source scan, September 2026. Aggregates only; names no manufacturer and no device.",
+      "mainEntityOfPage": {"@id": "https://clinicops.dk/research/sscp-public-record-scan/"},
+      "url": "https://clinicops.dk/research/sscp-public-record-scan/",
+      "inLanguage": "en",
+      "datePublished": "2026-09-11",
+      "dateModified": "2026-09-11",
+      "author": {"@type": "Person", "name": "Ali Iskandar", "email": "info@clinicops.dk"},
+      "publisher": {"@type": "Organization", "name": "ClinicOps", "url": "https://clinicops.dk/"}
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://clinicops.dk/"},
+        {"@type": "ListItem", "position": 2, "name": "Research", "item": "https://clinicops.dk/research.html"},
+        {"@type": "ListItem", "position": 3, "name": "SS(C)P and the public EUDAMED record", "item": "https://clinicops.dk/research/sscp-public-record-scan/"}
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+:root{color-scheme:light dark;
+--bg:#fbfaf8;--surface:#ffffff;--surface-2:#f3f1ec;--text:#1c2430;--muted:#5b6572;
+--border:#d8dee5;--accent:#0f5c52;--accent-strong:#0a413a;--accent-contrast:#ffffff;--accent-soft:#e4f2ef}
+@media (prefers-color-scheme:dark){:root{
+--bg:#11151b;--surface:#171d25;--surface-2:#1d242d;--text:#e7ebef;--muted:#9aa5b1;
+--border:#2a323c;--accent:#4fd8c4;--accent-strong:#8ff0e0;--accent-contrast:#08201c;--accent-soft:#132925}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+header.site{border-bottom:1px solid var(--border);background:var(--surface)}
+.site-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:16px 20px;max-width:900px;margin:0 auto}
+.brand{font-weight:800;font-size:1.15rem;color:var(--text);text-decoration:none;letter-spacing:-.01em}
+.brand span{color:var(--accent)}
+nav.primary{display:flex;flex-wrap:wrap;gap:4px 2px;font-size:.86rem}
+nav.primary a{color:var(--muted);text-decoration:none;padding:7px 10px;border-radius:7px;white-space:nowrap}
+nav.primary a:hover{color:var(--text);background:var(--surface-2)}
+nav.primary a[aria-current="page"]{color:var(--accent-contrast);background:var(--accent);font-weight:600}
+main{padding:44px 0 20px}
+h1{font-size:2rem;line-height:1.2;letter-spacing:-.01em;text-wrap:balance;margin:0 0 14px}
+h2{font-size:1.35rem;margin:2.2em 0 .6em;letter-spacing:-.01em}
+p{margin:.9em 0}
+.lede{font-size:1.12rem;color:var(--muted)}
+ul,ol{padding-left:1.3rem}
+li{margin:.5em 0}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.92em;background:var(--surface-2);padding:1px 5px;border-radius:5px}
+.eyebrow{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:4px 10px;border-radius:999px;margin-bottom:14px}
+.callout{border:1px solid var(--border);background:var(--surface-2);border-radius:12px;padding:16px 18px;margin:22px 0}
+.callout p{margin:.4em 0}
+.muted{color:var(--muted);font-size:.92rem}
+.crumbs{font-size:.86rem;color:var(--muted);margin-bottom:18px}
+.crumbs a{color:var(--muted)}
+.cta{display:inline-block;padding:12px 18px;border-radius:9px;border:1px solid var(--accent);text-decoration:none;font:inherit;font-weight:600}
+.cta.primary{background:var(--accent);color:var(--accent-contrast)}
+.cta.ghost{color:var(--accent);background:transparent}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0}
+footer.site{border-top:1px solid var(--border);margin-top:52px}
+.footer-inner{max-width:900px;margin:0 auto;padding:26px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--muted);font-size:.86rem}
+.footer-inner a{color:var(--muted)}
+</style>
+</head>
+<body>
+<!-- claim-use: research-note -->
+<!-- claim-ids: CO-CLM-0001,CO-CLM-0002,CO-CLM-0004,CO-CLM-0005,CO-CLM-0006,CO-CLM-0007,CO-CLM-0008,CO-CLM-0009,CO-CLM-0010,CO-CLM-0012,CO-CLM-0013,CO-CLM-0014,CO-CLM-0015,CO-CLM-0016,CO-CLM-0017 -->
+<!-- controlled source: website/research-sscp-public-record-scan.md -->
+<header class="site">
+<div class="site-inner">
+<a class="brand" href="/">Clinic<span>Ops</span></a>
+<nav class="primary" aria-label="Primary"><a href="/">Home</a><a href="/about.html">About</a><a href="/research.html" aria-current="page">Research</a><a href="/tools.html">Tools</a><a href="/eudamed-transition.html">EUDAMED Intelligence</a><a href="/class-iii-transition.html">MDR Transition</a><a href="/sscp-operations.html">SS(C)P Operations</a><a href="/authorised-representative-portfolio-intelligence.html">AR Intelligence</a><a href="/contact.html">Contact</a></nav>
+</div>
+</header>
+<main class="wrap">
+
+<nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> &rsaquo; <a href="/research.html">Research</a> &rsaquo; SS(C)P and the public EUDAMED record</nav>
+<span class="eyebrow">ClinicOps &middot; Research summary &middot; September 2026</span>
+<h1>The published SS(C)P and the public EUDAMED record &mdash; what a reader can and cannot reconcile</h1>
+<p class="lede">A public-source scan, September 2026</p>
+<p class="muted">Terminology: MDR Article 32 says &ldquo;summary of safety and clinical performance&rdquo; (SSCP). &ldquo;SS(C)P&rdquo; is used here as the shorthand that also covers the IVDR Article 29 summary of safety and performance. Extraction date for every figure in this document: 8 September 2026.</p>
+
+<h2>What we did</h2>
+<p>Public sources only: manufacturers&rsquo; openly published SS(C)P files, and the public EUDAMED device dataset read through its trade-name search and record-detail endpoints &mdash; read-only, no login, no scripted fetching. Three independently drawn convenience samples gave 69 device rows across roughly 42 manufacturers that publish national-language SS(C)Ps; candidates were found by searching the SS(C)P title phrase in Danish, Swedish, Norwegian, Finnish, German, Dutch, French and Spanish. For each row we compared the reference number, revision and Basic UDI-DI printed in the published document with what the EUDAMED record exposes. Separately, a systematic class III-restricted sample read 95 pages of the device listing at fixed intervals across the reachable part of the register (4,750 UDI-DI records examined; 213 class III rows collapsing to 98 distinct identifiers) and looked up the SS(C)P link on each distinct identifier.</p>
+
+<h2>What held up</h2>
+<ol>
+<li><strong>The published document and the registered record carry different identifiers.</strong> In 22 consecutive rows of the second sample, not one published SS(C)P and EUDAMED record carried the same reference number and revision. In the three of those rows where EUDAMED held an SS(C)P at all, it held a different document reference from the published file. A reader therefore cannot use either artefact to validate the other, in either direction.</li>
+<li><strong>The join key fails in a minority of cases.</strong> The Basic UDI-DI printed in the published SS(C)P did not match any Basic UDI-DI in EUDAMED in 6 of those 22 rows. The identifier that is meant to connect the document to the record is itself the thing that fails &mdash; a mechanism for the gap, not another symptom of it, and the single most checkable item on this list.</li>
+<li><strong>&ldquo;Latest published&rdquo; and &ldquo;latest validated&rdquo; are routinely different documents.</strong> Several manufacturers print this themselves, in revision-history tables that mark the current published revision as not validated. Under MDCG 2019-9 a revision may legitimately be published between validation cycles, so this is not a defect; but where a published revision was never eligible to appear in EUDAMED, the two systems cannot agree by construction. Any comparison therefore has to separate &ldquo;the record is behind&rdquo; from &ldquo;the published revision was never eligible&rdquo;, a distinction the public record cannot make on its own.</li>
+<li><strong>Where the SS(C)P is mandatory and the registration is a genuine MDR one, the public record was complete.</strong> In the systematic class III sample, every one of the 17 Basic UDI-DIs registered by a manufacturer under the MDR carried a linked SS(C)P marked validated, with issue dates from January 2022 to August 2026. The absences sit elsewhere: 0 of 70 legacy registrations, which carry a EUDAMED DI rather than a Basic UDI-DI, and 0 of 11 system/procedure-pack records, where no SS(C)P duty falls on the pack producer. The gap in the public record is a transition gap, not a diligence gap.</li>
+</ol>
+<p>A related observation on language versions: in 5 of 7 multi-language document sets examined, the versions were identical across languages. Where they differed, the cause was structural rather than drift &mdash; some manufacturers issue each language version as its own controlled document, with its own reference number and its own revision counter, so the versions were never on a shared revision scale.</p>
+
+<h2>Why it matters now</h2>
+<p>MDCG 2026-4 assigns the upload of the SS(C)P &mdash; master and translations &mdash; to the manufacturer, a task that sat with the notified body, with deployment in production planned for October 2026 and uploads due no later than 27 February 2027 for devices placed on the market before mandatory use. Separately, following Commission Decision (EU) 2025/2371, legacy devices still on the market must be registered in EUDAMED by 28 November 2026. Both are dated events that will attach many more SS(C)Ps and Basic UDI-DIs to public records, and the reconciliation questions above are the ones a manufacturer meets while doing it.</p>
+
+<h2>The one-glance rule</h2>
+<p>If the identifier in the Basic UDI-DI position of a EUDAMED record begins <code>B-</code>, it is a EUDAMED DI: the identifier EUDAMED assigns to a legacy device &mdash; one still on the market under a valid certificate issued under the earlier directives &mdash; in place of a Basic UDI-DI, built from the existing UDI-DI with <code>B-</code> prepended. In the systematic sample, 0 of 70 such records carried a linked SS(C)P. The identifier string alone tells you whether a currency check against the public record is possible, with no API call.</p>
+<p>Stated as a derivation, because that is what it is: no Commission or MDCG guidance says this outright, and it is our reading rather than a stated Commission position. It follows from Article 32(2)(a) MDR, which requires the SS(C)P to state the Basic UDI-DI, and from the way MDCG 2026-4 describes the linkage &mdash; the notified body indicating the validated SS(C)P by ticking the box corresponding to the relevant Basic UDI-DI(s). A legacy record has no Basic UDI-DI to tick; the Commission&rsquo;s EUDAMED guidance states that for a legacy device &ldquo;a EUDAMED DI will be assigned to the device instead of the Basic UDI-DI&rdquo;.</p>
+<p>Check the actor role in the SRN as well. A record registered under a <code>PR</code> role (system and procedure pack producer) must carry the highest risk class among its constituent devices, so a class III value there is inherited. A person placing a pack on the market under Article 22(1) or (3) MDR is not thereby the manufacturer of the constituent devices, and Article 32 places the SS(C)P duty on the manufacturer; on our reading, no SS(C)P duty arises for the pack. Article 22(4) is the exception: a combination outside 22(1) and (3) is treated as a device in its own right, and the person assumes the obligations of a manufacturer.</p>
+
+<h2>Limits</h2>
+<ul>
+<li><strong>Convenience sample, not random.</strong> EUDAMED has no &ldquo;has an SS(C)P&rdquo; filter and no Basic UDI-DI lookup, so candidates were found by searching SS(C)P title phrases. The <code>riskClass=</code> and <code>legislation=</code> query parameters are ignored by the public API (totals unchanged), so no filtered census is possible. None of the figures above are population rates; read them as &ldquo;in a sample of 69 devices across ~42 manufacturers&rdquo;.</li>
+<li><strong>The frames saturate.</strong> The Nordic and German frames returned the same manufacturers within about a dozen searches. That biases the sample toward smaller firms that publish openly, and likely over-states the gap for the market as a whole.</li>
+<li><strong>A zero-result trade-name search is not proof of absence.</strong> It means &ldquo;not findable under the trade name as printed&rdquo;; the search is an unanchored substring match.</li>
+<li><strong>Content is never retrievable.</strong> The public record exposes only a reference number, revision, issue date and validated flag. &ldquo;Match&rdquo; means matching identifiers, never matching text.</li>
+<li><strong>Revision schemes are often not comparable</strong> between manufacturer and record; where they are not, the comparison falls back to issue dates.</li>
+<li><strong>Totals are unstable.</strong> The same unfiltered query returned different <code>totalElements</code> values minutes apart; all counts are approximate. The systematic sample reads only the reachable lower ~47% of the listing &mdash; offset pages beyond roughly 30,000 time out &mdash; and pages are not independent, since class III rows arrive in single-manufacturer clusters. &ldquo;17 of 17&rdquo; is a clean signal in a small group, not a rate.</li>
+<li><strong>A null SS(C)P link means &ldquo;no SS(C)P visible in the public record&rdquo;</strong>, never &ldquo;no SS(C)P exists&rdquo;. Nothing here is a compliance statement about any named company; this document uses aggregates only and names no manufacturer and no device.</li>
+<li><strong>Absence of a manufacturer from the sample is not evidence it publishes nothing.</strong> Several were reached but offered request-only forms, model-number gates, or pages that redirect the reader to EUDAMED.</li>
+<li><strong>Extraction was performed by language-model agents reading JSON</strong>, with every detail lookup cross-checked against the identifier and risk class it was fetched for (103 of 103 clean). Residual extraction error cannot be excluded.</li>
+</ul>
+
+<h2>What this is and isn&rsquo;t</h2>
+<p>The scan is cheap and repeatable: public endpoints, one afternoon, and it scales to a whole portfolio. The judgement &mdash; which differences matter, on what regulatory basis, and what to do about them &mdash; needs an accountable regulatory professional who reads the language of the document, and that judgement is not something this summary supplies.</p>
+
+<div class="callout"><p class="muted">ClinicOps &middot; Ali Iskandar &middot; <a href="mailto:info@clinicops.dk">info@clinicops.dk</a> &middot; clinicops.dk &middot; September 2026 &middot; This document reports what the public record showed on the extraction dates stated; it is not regulatory advice.</p></div>
+
+<div class="cta-row"><a class="cta ghost" href="/research.html">Back to Research</a><a class="cta ghost" href="/sscp-operations.html">SS(C)P Operations</a><a class="cta ghost" href="/identifier-check.html">Identifier Check</a></div>
+
+</main>
+<footer class="site">
+<div class="footer-inner">
+<span>&copy; 2026 ClinicOps. Danish-based, EU-wide medical device regulatory intelligence.</span>
+<span><a href="mailto:info@clinicops.dk">info@clinicops.dk</a> &middot; <a href="https://www.linkedin.com/company/clinicops-danish-regulatory/">LinkedIn</a> &middot; <a href="/privacy-notice/">Privacy</a></span>
+</div>
+</footer>
+</body>
+</html>
