@@ -37,6 +37,16 @@ TARGETS = (
     ),
     Target("/assessment-intake.html", 200, "Build your assessment brief"),
     Target("/privacy-notice/", 200, "Your right to object"),
+    Target(
+        "/research/sscp-public-record-scan/",
+        200,
+        "The published SS(C)P and the public EUDAMED record",
+    ),
+    Target(
+        "/research/eudamed-watch/",
+        200,
+        "Continuous monitoring of the public EUDAMED record",
+    ),
     Target("/sitemap.xml", 200, "https://clinicops.dk/assessment-intake.html"),
     Target("/robots.txt", 200, "Sitemap: https://clinicops.dk/sitemap.xml"),
     Target(
