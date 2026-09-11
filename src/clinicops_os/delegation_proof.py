@@ -123,6 +123,12 @@ def evaluate_delegation_run(record: Mapping[str, object]) -> DelegationRunResult
 
     _require_true(
         record,
+        "private_operational_record",
+        "delegation proof must come from an approved private operational record",
+        reasons,
+    )
+    _require_true(
+        record,
         "proof_use_allowed",
         "record is not explicitly authorised for delegation-proof use",
         reasons,
@@ -140,6 +146,18 @@ def evaluate_delegation_run(record: Mapping[str, object]) -> DelegationRunResult
         reasons,
     )
 
+    _require_true(
+        record,
+        "qualification_stage_completed",
+        "run did not complete the qualified-conversation/qualification stage",
+        reasons,
+    )
+    _require_true(
+        record,
+        "written_scope_stage_completed",
+        "run did not complete the written-scope stage",
+        reasons,
+    )
     if record.get("preflight_status") != "ACTIVATED":
         reasons.append("preflight_status must be ACTIVATED")
     _require_true(
@@ -158,6 +176,12 @@ def evaluate_delegation_run(record: Mapping[str, object]) -> DelegationRunResult
         reasons.append("human_review_status must be REVIEW APPROVED")
     if record.get("bundle_integrity_status") != "VERIFIED":
         reasons.append("bundle_integrity_status must be VERIFIED")
+    _require_true(
+        record,
+        "delivery_stage_completed",
+        "run did not complete the controlled delivery/release stage",
+        reasons,
+    )
 
     _require_true(
         record,
@@ -301,7 +325,9 @@ def load_delegation_records(path: str | Path) -> list[dict[str, object]]:
     raw = json.loads(Path(path).read_text(encoding="utf-8"))
     rows = raw.get("runs") if isinstance(raw, dict) else raw
     if not isinstance(rows, list):
-        raise TypeError("delegation proof input must be a JSON list or an object with a 'runs' list")
+        raise TypeError(
+            "delegation proof input must be a JSON list or an object with a 'runs' list"
+        )
     if not all(isinstance(item, dict) for item in rows):
         raise TypeError("every delegation proof run must be a JSON object")
     return rows
