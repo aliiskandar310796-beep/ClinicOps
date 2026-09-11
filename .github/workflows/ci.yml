@@ -49,6 +49,15 @@ jobs:
         run: |
           clinicops-pilot-verify /tmp/clinicops-pilot examples/portfolio.csv > /tmp/clinicops-bundle-verify.json
           grep -q '"status": "VERIFIED"' /tmp/clinicops-bundle-verify.json
+      - name: Delegation proof must reject public CI example
+        run: |
+          set +e
+          clinicops-delegation-proof examples/delegation_proof.example.json > /tmp/clinicops-delegation-proof.json
+          status=$?
+          set -e
+          test "$status" -eq 2
+          grep -q '"status": "FOUNDER-INDEPENDENT EXECUTION NOT PROVEN"' /tmp/clinicops-delegation-proof.json
+          grep -q 'CI or automated smoke executions cannot count as delegation proof' /tmp/clinicops-delegation-proof.json
       - name: Custom-agent profile audit
         run: python scripts/audit_agent_profiles.py
       - name: Claim registry audit
