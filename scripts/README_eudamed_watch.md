@@ -53,6 +53,24 @@ never publish these files or paste them into public issues/logs.
    `openssl rand -hex 32`). Optional but recommended; keep it stable, because
    changing it changes every device key and breaks per-device diff continuity.
 
+### Exact-syntax secret copy rule
+
+Treat JSON, code, keys and other syntax-sensitive secret values as raw bytes.
+Do **not** open the watchlist in TextEdit, Word or another editor that may apply
+smart quotes or text substitutions before copying it into GitHub Settings.
+Validate and copy from the terminal instead:
+
+```bash
+python -m json.tool /path/to/private-watchlist.json >/dev/null
+pbcopy < /path/to/private-watchlist.json
+# equivalent: cat /path/to/private-watchlist.json | pbcopy
+```
+
+Then paste directly into the GitHub secret field. This rule exists because a
+2026-09-11 setup attempt failed safely when macOS TextEdit converted straight
+JSON quotes into smart quotes. The workflow's JSON-validation guard caught the
+problem before any API data was processed; keep that guard fail-closed.
+
 ## What it does per entry
 
 For each watchlist entry (`label`, `trade_name_query`, optional
@@ -113,10 +131,10 @@ The monthly workflow is `.github/workflows/eudamed-watch.yml` (cron
 `17 6 1 * *`, plus `workflow_dispatch`). It writes the watchlist from the
 secret, runs the tool with anonymised outputs, puts only the anonymised
 LATEST.md in the job summary, and commits changes under `data/eudamed/` with a
-bot identity. Open item: confirm the EUDAMED public-data reuse terms before
-relying on scheduled live runs. Note: earlier git history contains named
-outputs from the first live run; scrubbing history is a separate owner
-decision.
+bot identity. The public-API reuse due-diligence review was completed on
+2026-09-12 and is recorded in `research/eudamed-public-api-reuse-review.md`;
+re-review on the triggers listed there. Note: earlier git history contains named
+outputs from the first live run; scrubbing history is a separate owner decision.
 
 ## Limits block (written into every snapshot and markdown)
 
