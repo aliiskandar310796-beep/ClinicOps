@@ -13,6 +13,33 @@ Anything else remains **FOUNDER-INDEPENDENT EXECUTION NOT PROVEN**.
 
 The threshold comes from `sales/commercial-activation-gate.md`. Do not lower it transaction by transaction.
 
+## Primary execution path after PR #45
+
+For a new controlled dry run, use the executable harness as the primary operator entry point:
+
+```bash
+clinicops-pilot-dry-run \
+  /private/path/activation-record.json \
+  /private/path/portfolio.csv \
+  /private/path/output \
+  YYYY-MM-DD \
+  /private/path/human-review-confirmation.json
+```
+
+Operator guidance and boundaries are in `sales/pilot-dry-run-harness.md`.
+
+The harness exercises the real standard workflow code against a bounded synthetic scenario and fails closed at preflight, human review or final verification. It makes a complete rehearsal executable; it does **not** turn a canned or automated review record into qualifying founder-independence evidence.
+
+A run intended to count toward the two-dry-run proof route must still use a genuinely qualified human reviewer, retain the real private gate outputs and controlled artifacts, complete the standard closeout steps, and satisfy every requirement below. The harness result is therefore execution evidence, not the final proof decision.
+
+After qualifying runs are complete and their schema-1.1 proof records are assembled, evaluate them with the existing proof evaluator:
+
+```bash
+clinicops-delegation-proof /private/path/delegation-proof-runs.json
+```
+
+Keep both entry points. `clinicops-pilot-dry-run` executes a controlled rehearsal; `clinicops-delegation-proof` evaluates whether retained private run evidence meets the founder-independence threshold.
+
 ## What can never count
 
 The following are categorically ineligible:
@@ -85,10 +112,10 @@ For a controlled dry run, the record must explicitly state that it was **not** a
 A dry run exists to discover hidden founder decisions before a real client depends on the workflow. It is not a shortcut to commercial validation.
 
 1. Use a fresh bounded synthetic scenario that exercises the standard paid-pilot envelope without real buyer data.
-2. Have a trained operator execute the workflow as if it were a standard eligible paid pilot, beginning with qualification/scope simulation rather than jumping directly to bundle generation.
+2. Have a trained operator execute the workflow as if it were a standard eligible paid pilot, beginning with qualification/scope simulation rather than jumping directly to bundle generation. Prefer `clinicops-pilot-dry-run` for the controlled execution path rather than reconstructing the sequence manually.
 3. Use an approved private working location for the run record, activation record, saved gate results, review record and generated bundle. The public repository may contain sanitized templates only.
-4. Save the actual preflight output rather than relying only on memory or a copied status, for example: `clinicops-pilot-preflight /private/path/activation-record.json > /private/path/preflight-result.json`.
-5. Run intake validation and bundle generation under the normal controlled path.
+4. Save the actual preflight output rather than relying only on memory or a copied status. If the harness does not already preserve the exact required proof artifact in the private run location, run the underlying gate explicitly and save it, for example: `clinicops-pilot-preflight /private/path/activation-record.json > /private/path/preflight-result.json`.
+5. Run intake validation and bundle generation under the normal controlled path. The harness must call the same production workflow code; do not replace a failing step with a stub or handcrafted success result.
 6. Have the assigned qualified human reviewer actually perform the review, complete the private review record, and save the actual review-gate result: `clinicops-pilot-review-gate /private/path/activation-record.json /private/path/review-record.json /private/path/output > /private/path/review-gate-result.json`.
 7. Immediately run final integrity verification and save the exact result: `clinicops-pilot-verify /private/path/output /private/path/portfolio.csv > /private/path/bundle-verification.json`.
 8. Compute SHA-256 values from the exact final activation record, preflight result, completed review record, review-gate result, final manifest, final bundle-verification result and source portfolio. Record those values in the private proof record. Do not type substitute values from memory.
