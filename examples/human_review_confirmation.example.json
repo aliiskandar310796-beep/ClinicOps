@@ -1,0 +1,11 @@
+{
+  "review_schema_version": "1.0",
+  "reviewer": "Qualified Reviewer",
+  "confirmed_evidence_population_and_as_of": true,
+  "reviewed_derived_statements_against_evidence": true,
+  "separated_machine_output_from_interpretation": true,
+  "actor_role_distinctions_preserved": true,
+  "unresolved_facts_left_unresolved": true,
+  "internal_notes_removed": true,
+  "approved_for_release": true
+}

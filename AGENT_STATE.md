@@ -70,7 +70,7 @@ Material work starts only after written scope/acceptance plus an approved activa
 
 No open-ended unpaid work. A no-fee/reduced-fee design-partner pilot is outside the standard delegated workflow and requires a separately approved, time-bounded policy rather than an ad hoc transaction exception.
 
-Anything outside the standard envelope is **NON-STANDARD — NOT ACTIVATED** and is parked or declined rather than routed to Ali for transaction-level improvisation.
+Anything outside the standard envelope is **NON-STANDARD — NOT ACTIVATED** and is parked or declined rather than routed to Ali for transaction-level improvisation. A dry-run harness now exists to run and record a founder-independence proof run (`clinicops-pilot-dry-run`, `sales/pilot-dry-run-harness.md`) — it exercises the real preflight/bundle/human-review/verify path against a synthetic fixture. No proof runs have been logged against it yet; the harness makes the proof test executable, it does not itself satisfy it.
 
 ### Controlled paid-pilot gates
 
