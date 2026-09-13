@@ -273,7 +273,7 @@ Danish-domiciled organisations are never cold-emailed; public posting only.
 
 Issue #36 tracks branch protection and least-privilege credential hardening. Broad classic PAT scope remains security debt. Do not revoke/rotate credentials or change repository governance without explicit Ali approval because it can break authorized Claude/ChatGPT workflows.
 
-A large stale-branch set remains. D-24 identified about 28 merged/abandoned branches safe to delete, including `noop-test`; `pilot-dry-run-harness-20260911` can join the cleanup list now that PR #45 is merged. The current connector does not expose delete-ref, so do not claim cleanup occurred unless refs are actually removed.
+A large stale-branch set remains. D-24 identified about 28 merged/abandoned branches safe to delete, including `noop-test`. As of 2026-09-13, `pilot-dry-run-harness-20260911` is already absent from origin after PR #45 and needs no further cleanup. The current connector does not expose delete-ref, so do not claim other cleanup occurred unless refs are actually removed.
 
 ### Write-discipline incident — 2026-09-13
 
