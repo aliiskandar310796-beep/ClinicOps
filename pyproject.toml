@@ -29,6 +29,7 @@ clinicops-pilot-review-gate = "clinicops_os.review_cli:pilot_review_gate"
 clinicops-pilot-verify = "clinicops_os.cli:pilot_verify"
 clinicops-pilot-dry-run = "clinicops_os.cli:pilot_dry_run"
 clinicops-delegation-proof = "clinicops_os.delegation_cli:delegation_proof"
+clinicops-company-run = "clinicops_os.company_cli:company_run"
 clinicops-claims = "clinicops_os.cli:claims_status"
 clinicops-publication-pack = "clinicops_os.cli:publication_pack"
 

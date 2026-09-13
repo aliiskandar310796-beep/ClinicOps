@@ -15,6 +15,20 @@ Agents are capabilities, not replacements for accountability. The repository alr
 
 Do not create an additional profile when one of these six can absorb the capability.
 
+## Company operating layer
+
+`06_AGENTS/AI_COMPANY_OS.md` defines the AI-first company architecture. Its departments are workflow ownership lanes, not new agents. ChatGPT, Claude or another approved execution engine routes work through these six canonical roles and records the result in the company-run experiment.
+
+The company-level test is deliberately stricter than agent-output quality: it measures whether work closes across departments, produces externally evidenced commercial movement and reduces founder intervention outside reserved human decisions.
+
+Evaluate a private run with:
+
+```bash
+clinicops-company-run /private/path/company-run.json
+```
+
+The evaluator does not prove product-market fit, revenue, founder independence or professional review. It separates those questions so internal activity cannot be mistaken for commercial evidence.
+
 ## Phase 6 execution order
 
 When a workflow crosses several roles, route it in this order:
@@ -26,6 +40,8 @@ When a workflow crosses several roles, route it in this order:
 5. **Release Sentinel** — verify reproducibility/deployment state where software or public artifacts are involved.
 
 Portfolio Operator and Customer Discovery Agent enter whenever the task concerns a supplied portfolio or direct buyer learning.
+
+For company-wide execution, this role order sits inside the broader commercial loop defined in `06_AGENTS/AI_COMPANY_OS.md`: signal → qualification → experiment → buyer action → conversation → commitment → activation → delivery → review → payment/expansion → learning.
 
 ## Five mandatory gates
 
@@ -52,3 +68,5 @@ The gate resolves aliases to the canonical `.github/agents/*.agent.md` profile, 
 - Public/client publication still requires the repository claim gates and the applicable human approval path.
 - Private client/prospect data must not be placed in this public repository.
 - More agents are not the goal. Better decisions, faster learning and safer execution are the goal.
+- Department creation must not create a shadow fleet; departments route work to canonical profiles.
+- Company-run metrics must never relabel synthetic evidence, CI output or internal activity as external commercial proof.
