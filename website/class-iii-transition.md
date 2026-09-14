@@ -63,7 +63,7 @@ ClinicOps therefore uses identifier structure as a screening input, not as a sta
 
 ## Portfolio scale note
 
-A class III and implantable portfolio can hold a large number of devices across several registration models [VERIFY: source needed]. The Transition Map is most useful when the operational problem is portfolio-scale reconciliation rather than a single-record lookup.
+The Transition Map is designed for portfolio-scale reconciliation where devices may sit across different registration models, evidence sets and review queues. It does not turn a single public-record lookup into a portfolio conclusion.
 
 Best-fit users include:
 
