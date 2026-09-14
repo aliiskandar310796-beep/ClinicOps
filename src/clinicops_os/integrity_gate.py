@@ -656,9 +656,10 @@ def build_bundle(case_path: str | Path, output_dir: str | Path) -> dict[str, obj
     report = evaluate_case(case, input_sha256=input_hash)
     out = Path(output_dir)
     out.mkdir(parents=True, exist_ok=True)
-    stale_gate = out / "review_gate.json"
-    if stale_gate.exists():
-        stale_gate.unlink()
+    for stale_name in ("review_gate.json", "review_record.json"):
+        stale_path = out / stale_name
+        if stale_path.exists():
+            stale_path.unlink()
 
     report_json = out / "integrity_report.json"
     report_md = out / "integrity_report.md"
