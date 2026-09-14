@@ -81,6 +81,7 @@ def preflight_case_safety(path: str | Path) -> dict[str, Any]:
 
     source_ids: set[str] = set()
     surface_ids: set[str] = set()
+    field_types: dict[str, set[type[object]]] = {}
     for collection_name, collection, id_key, id_set in (
         ("controlled_sources", sources, "source_id", source_ids),
         ("surfaces", surfaces, "surface_id", surface_ids),
@@ -93,6 +94,8 @@ def preflight_case_safety(path: str | Path) -> dict[str, Any]:
                 _fail(f"{collection_name}[{index}].{id_key} must be a non-empty string")
             if len(item_id) > 200:
                 _fail(f"{collection_name}[{index}].{id_key} is too long")
+            if item_id in id_set:
+                _fail(f"duplicate {id_key}: {item_id}")
             id_set.add(item_id)
             evidence_ref = item.get("evidence_ref")
             if not isinstance(evidence_ref, str) or not evidence_ref.strip():
@@ -110,10 +113,23 @@ def preflight_case_safety(path: str | Path) -> dict[str, Any]:
                 if not isinstance(field, str) or not field.strip() or len(field) > 200:
                     _fail(f"{collection_name}[{index}] contains an invalid field name")
                 _check_scalar(value, label=f"{collection_name}[{index}].fields[{field!r}]")
+                if value is not None:
+                    field_types.setdefault(field, set()).add(type(value))
 
     overlap = source_ids.intersection(surface_ids)
     if overlap:
         _fail(f"source_id and surface_id values must not overlap: {sorted(overlap)}")
+
+    incompatible = {
+        field: sorted(kind.__name__ for kind in kinds)
+        for field, kinds in field_types.items()
+        if len(kinds) > 1
+    }
+    if incompatible:
+        _fail(
+            "declared field values use inconsistent JSON types; normalize before review: "
+            f"{incompatible}"
+        )
 
     for index, rule in enumerate(rules):
         if not isinstance(rule, dict):
@@ -134,6 +150,8 @@ def preflight_case_safety(path: str | Path) -> dict[str, Any]:
         _check_scalar(new_value, label=f"changes[{index}].new_value")
         if _typed_key(old_value) == _typed_key(new_value):
             _fail(f"changes[{index}] old_value and new_value must differ")
+        if old_value is not None and new_value is not None and type(old_value) is not type(new_value):
+            _fail(f"changes[{index}] old_value and new_value must use the same JSON type")
         expected = change.get("expected_surfaces")
         if not isinstance(expected, list):
             _fail(f"changes[{index}].expected_surfaces must be a list")
