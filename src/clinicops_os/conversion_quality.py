@@ -10,18 +10,32 @@ class ConversionRequirement:
     required_targets: tuple[str, ...]
 
 
+SPECIMEN_PDF = "specimen-register/ClinicOps_Regulatory_Integrity_Specimen_Register_v1.5.pdf"
+REQUIRED_FILES = (
+    "specimen-register/index.html",
+    SPECIMEN_PDF,
+)
+
 REQUIREMENTS = (
     ConversionRequirement(
         "index.html",
-        ("assessment-intake.html", "transition-map-sample/"),
+        ("assessment-intake.html?workstream=integrity-review", "specimen-register/"),
     ),
     ConversionRequirement(
         "tools.html",
-        ("transition-map-sample/",),
+        ("specimen-register/", "assessment-intake.html?workstream=integrity-review"),
+    ),
+    ConversionRequirement(
+        "integrity-gate.html",
+        ("specimen-register/", "assessment-intake.html?workstream=integrity-review"),
+    ),
+    ConversionRequirement(
+        "eu-mdr-regulatory-integrity.html",
+        ("specimen-register/", "assessment-intake.html?workstream=integrity-review"),
     ),
     ConversionRequirement(
         "assessment-intake.html",
-        ("transition-map-sample/", "readiness-score.html"),
+        ("specimen-register/", "readiness-score.html"),
     ),
     ConversionRequirement(
         "readiness-score.html",
@@ -35,17 +49,29 @@ REQUIREMENTS = (
         "transition-map-sample/index.html",
         ("/assessment-intake.html",),
     ),
+    ConversionRequirement(
+        "specimen-register/index.html",
+        (
+            "ClinicOps_Regulatory_Integrity_Specimen_Register_v1.5.pdf",
+            "../assessment-intake.html?workstream=integrity-gate",
+        ),
+    ),
 )
 
 
 def validate_conversion_paths(docs_root: Path) -> list[str]:
-    """Return broken high-intent conversion-path requirements.
+    """Return broken high-intent conversion and externally shared path contracts.
 
-    This deliberately checks only durable navigation contracts. It does not
-    enforce marketing copy, pricing, analytics, or third-party integrations.
+    This checks durable buyer-navigation and specimen availability invariants.
+    It intentionally does not enforce pricing, analytics, or third-party integrations.
     """
 
     errors: list[str] = []
+
+    for required_file in REQUIRED_FILES:
+        if not (docs_root / required_file).is_file():
+            errors.append(f"missing required public artifact: {required_file}")
+
     for requirement in REQUIREMENTS:
         path = docs_root / requirement.page
         if not path.exists():
