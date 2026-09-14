@@ -39,3 +39,6 @@ clinicops-integrity-verify = "clinicops_os.integrity_cli:integrity_verify"
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
+
+[tool.ruff.lint.per-file-ignores]
+"src/clinicops_os/integrity_gate.py" = ["ISC004"]
