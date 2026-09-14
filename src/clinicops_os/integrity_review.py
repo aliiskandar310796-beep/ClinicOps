@@ -12,6 +12,10 @@ REVIEW_RECORD_SCHEMA_VERSION = "1.0"
 REVIEW_GATE_SCHEMA_VERSION = "1.0"
 REVIEW_APPROVED = "REVIEW APPROVED"
 REVIEW_INCOMPLETE = "REVIEW INCOMPLETE"
+DELIVERY_SCOPE = (
+    "ClinicOps output bundle only; not device, controlled-document or submission release "
+    "authorization"
+)
 
 REQUIRED_ATTESTATIONS = (
     "evidence_population_reviewed",
@@ -123,7 +127,7 @@ def evaluate_review_gate(
             reasons.append("review_completed_on must be an ISO date (YYYY-MM-DD)")
 
     if review_record.get("decision") != "APPROVE":
-        reasons.append("decision must be APPROVE for external release")
+        reasons.append("decision must be APPROVE for external delivery of the ClinicOps output")
     for attestation in REQUIRED_ATTESTATIONS:
         if review_record.get(attestation) is not True:
             reasons.append(f"review attestation is not confirmed: {attestation}")
@@ -144,9 +148,12 @@ def evaluate_review_gate(
         "review_completed_on": completed_on,
         "automated_gate_status": manifest.get("gate_status"),
         "release_ready": True,
+        "release_ready_scope": DELIVERY_SCOPE,
         "limitations": (
-            "Approval records completion of the declared human review for this exact bundle. "
-            "It does not convert the automated screen into a legal or compliance determination."
+            "Approval records completion of the declared human review for this exact ClinicOps "
+            "output bundle. It does not authorize release of a device, controlled document or "
+            "regulatory submission, and it does not convert the automated screen into a legal "
+            "or compliance determination."
         ),
     }
     return IntegrityReviewResult(True, (), gate)
@@ -190,6 +197,8 @@ def verify_review_gate(output_dir: str | Path) -> tuple[bool, tuple[str, ...]]:
         reasons.append("review gate status is not REVIEW APPROVED")
     if gate.get("release_ready") is not True:
         reasons.append("review gate release_ready is not true")
+    if gate.get("release_ready_scope") != DELIVERY_SCOPE:
+        reasons.append("review gate release_ready_scope is missing or invalid")
     if gate.get("case_id") != manifest.get("case_id"):
         reasons.append("review gate case_id does not match manifest")
     if gate.get("source_sha256") != manifest.get("source_sha256"):
