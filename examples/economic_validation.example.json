@@ -1,0 +1,114 @@
+{
+  "schema_version": "1.0",
+  "offer_id": "SYNTHETIC-INTEGRITY-GATE",
+  "thresholds": {
+    "min_qualified_conversations": 3,
+    "min_pain_confirmations": 2,
+    "min_commitments": 1,
+    "min_paid_buyers": 1,
+    "min_paid_buyers_for_repeatability": 3,
+    "min_contribution_before_labor_eur": 0,
+    "min_revenue_per_delivery_hour_eur": 75
+  },
+  "events": [
+    {
+      "event_id": "MB-01",
+      "kind": "market-budget-signal",
+      "commercial_stage": "E1",
+      "buyer_key": null,
+      "evidence_refs": ["public:current-medtech-udi-data-hiring"],
+      "amount_eur": null,
+      "direct_cash_cost_eur": null,
+      "delivery_hours": null,
+      "notes": "Category plausibility only."
+    },
+    {
+      "event_id": "B1-E4",
+      "kind": "buyer-response",
+      "commercial_stage": "E4",
+      "buyer_key": "buyer-A",
+      "evidence_refs": ["private:buyer-A-conversation"],
+      "amount_eur": null,
+      "direct_cash_cost_eur": null,
+      "delivery_hours": null,
+      "notes": null
+    },
+    {
+      "event_id": "B1-E5",
+      "kind": "pain-confirmation",
+      "commercial_stage": "E5",
+      "buyer_key": "buyer-A",
+      "evidence_refs": ["private:buyer-A-workflow-pain"],
+      "amount_eur": null,
+      "direct_cash_cost_eur": null,
+      "delivery_hours": null,
+      "notes": null
+    },
+    {
+      "event_id": "B2-E4",
+      "kind": "buyer-response",
+      "commercial_stage": "E4",
+      "buyer_key": "buyer-B",
+      "evidence_refs": ["private:buyer-B-conversation"],
+      "amount_eur": null,
+      "direct_cash_cost_eur": null,
+      "delivery_hours": null,
+      "notes": null
+    },
+    {
+      "event_id": "B2-E5",
+      "kind": "pain-confirmation",
+      "commercial_stage": "E5",
+      "buyer_key": "buyer-B",
+      "evidence_refs": ["private:buyer-B-workflow-pain"],
+      "amount_eur": null,
+      "direct_cash_cost_eur": null,
+      "delivery_hours": null,
+      "notes": null
+    },
+    {
+      "event_id": "B3-E4",
+      "kind": "buyer-response",
+      "commercial_stage": "E4",
+      "buyer_key": "buyer-C",
+      "evidence_refs": ["private:buyer-C-conversation"],
+      "amount_eur": null,
+      "direct_cash_cost_eur": null,
+      "delivery_hours": null,
+      "notes": null
+    },
+    {
+      "event_id": "B1-E6",
+      "kind": "commercial-commitment",
+      "commercial_stage": "E6",
+      "buyer_key": "buyer-A",
+      "evidence_refs": ["private:buyer-A-priced-scope-request"],
+      "amount_eur": null,
+      "direct_cash_cost_eur": null,
+      "delivery_hours": null,
+      "notes": null
+    },
+    {
+      "event_id": "B1-E7",
+      "kind": "activation",
+      "commercial_stage": "E7",
+      "buyer_key": "buyer-A",
+      "evidence_refs": ["private:buyer-A-activation"],
+      "amount_eur": null,
+      "direct_cash_cost_eur": null,
+      "delivery_hours": null,
+      "notes": null
+    },
+    {
+      "event_id": "B1-E8P",
+      "kind": "payment",
+      "commercial_stage": "E8",
+      "buyer_key": "buyer-A",
+      "evidence_refs": ["private:buyer-A-payment"],
+      "amount_eur": 900,
+      "direct_cash_cost_eur": 50,
+      "delivery_hours": 6,
+      "notes": "Synthetic mechanics only."
+    }
+  ]
+}
