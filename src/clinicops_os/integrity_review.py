@@ -4,7 +4,7 @@ import json
 from collections import Counter
 from collections.abc import Mapping
 from dataclasses import dataclass
-from datetime import date
+from datetime import UTC, date, datetime
 from pathlib import Path
 
 from .integrity_gate import BUNDLE_SCHEMA_VERSION, sha256_path, verify_bundle_integrity
@@ -151,7 +151,7 @@ def evaluate_review_gate(
     else:
         try:
             completed = date.fromisoformat(completed_on)
-            if completed > date.today():
+            if completed > datetime.now(UTC).date():
                 reasons.append("review_completed_on cannot be in the future")
         except ValueError:
             reasons.append("review_completed_on must be an ISO date (YYYY-MM-DD)")
@@ -177,7 +177,7 @@ def evaluate_review_gate(
     if not isinstance(dispositions, dict):
         reasons.append("finding_dispositions must be a JSON object")
         dispositions = {}
-    supplied_ids = set(str(key) for key in dispositions)
+    supplied_ids = {str(key) for key in dispositions}
     missing_ids = sorted(expected_ids - supplied_ids)
     unknown_ids = sorted(supplied_ids - expected_ids)
     if missing_ids:
@@ -251,10 +251,6 @@ def write_review_gate(
     review_record_path: str | Path, output_dir: str | Path
 ) -> IntegrityReviewResult:
     source_path = Path(review_record_path)
-    review = load_review_record(source_path)
-    source_hash = sha256_path(source_path)
-    source_bytes = source_path.read_bytes()
-
     out = Path(output_dir)
     gate_path = out / "review_gate.json"
     bundled_review_path = out / "review_record.json"
@@ -262,13 +258,16 @@ def write_review_gate(
         if stale_path.exists():
             stale_path.unlink()
 
+    review = load_review_record(source_path)
+    source_hash = sha256_path(source_path)
     result = evaluate_review_gate(
         review,
-        out,
+        output_dir,
         review_record_sha256=source_hash,
     )
     if result.approved and result.review_gate is not None:
-        bundled_review_path.write_bytes(source_bytes)
+        if source_path.resolve() != bundled_review_path.resolve():
+            bundled_review_path.write_bytes(source_path.read_bytes())
         if sha256_path(bundled_review_path) != source_hash:
             raise ValueError("bundled review_record.json does not match approved review record")
         gate_path.write_text(
