@@ -1,18 +1,25 @@
 # ClinicOps
 
-ClinicOps provides EU medical-device regulatory intelligence, evidence reconciliation and change-propagation workflows for manufacturers, authorised representatives and regulatory partners worldwide that support the EU market.
+ClinicOps is an evidence-controlled clinical-operations practice. Its current commercial beachhead is EU medical-device regulatory information integrity, evidence reconciliation and change propagation for manufacturers, authorised representatives and regulatory partners worldwide that support the EU market.
 
-Primary services:
+Current medical-device services:
 - Regulatory Integrity Review: https://clinicops.dk/integrity-gate.html
 - Global EU-market regulatory integrity: https://clinicops.dk/eu-mdr-regulatory-integrity.html
 - Class III Transition Map: https://clinicops.dk/class-iii-transition.html
 - EUDAMED transition support: https://clinicops.dk/eudamed-transition.html
+
+Adjacent clinical-operations lanes being tested, not represented as validated:
+- Trial Change Integrity Review
+- QMS Change Integrity Review
+- Clinical AI Evidence Review
+- Overview and evidence boundaries: https://clinicops.dk/clinical-operations.html
 
 Free browser-local tools:
 - Regulatory Change Integrity Check: https://clinicops.dk/integrity-check.html
 - Regulatory Change Review Cost Calculator: https://clinicops.dk/integrity-economics.html
 - EUDAMED Identifier Check: https://clinicops.dk/identifier-check.html
 - Transition Readiness Score: https://clinicops.dk/readiness-score.html
+- Browser-local scope brief: https://clinicops.dk/assessment-intake.html
 
 Research:
 - https://clinicops.dk/research.html
@@ -20,10 +27,11 @@ Research:
 - https://clinicops.dk/research/sscp-public-record-scan/
 
 Important boundaries:
-- Machine findings are evidence-control signals, not legal or regulatory compliance determinations.
+- Machine findings are evidence-control signals, not legal, regulatory, clinical, safety or compliance determinations.
 - Missing public records or links do not by themselves establish non-compliance.
-- Source authority and regulatory judgement remain explicit human decisions.
+- Source authority and expert judgement remain explicit human decisions.
 - Public-source coverage is bounded by the stated method and must not be represented as a complete EUDAMED audit.
+- Adjacent TrialOps, QualityOps and Clinical AI Ops offers remain in market validation until real buyer evidence meets ClinicOps validation gates.
 
 Contact: info@clinicops.dk
 Canonical site: https://clinicops.dk/
