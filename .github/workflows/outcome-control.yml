@@ -1,0 +1,61 @@
+name: Outcome Control
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "06_AGENTS/**"
+      - "03_OPERATIONS/**"
+      - "src/clinicops_os/outcome_control.py"
+      - "src/clinicops_os/outcome_cli.py"
+      - "tests/test_outcome_control.py"
+      - "examples/outcome_control.example.json"
+      - "pyproject.toml"
+      - ".github/workflows/outcome-control.yml"
+  pull_request:
+    paths:
+      - "06_AGENTS/**"
+      - "03_OPERATIONS/**"
+      - "src/clinicops_os/outcome_control.py"
+      - "src/clinicops_os/outcome_cli.py"
+      - "tests/test_outcome_control.py"
+      - "examples/outcome_control.example.json"
+      - "pyproject.toml"
+      - ".github/workflows/outcome-control.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  outcome-control:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+      - run: pip install -e .[dev]
+      - name: Synthetic outcome mission must satisfy control contract
+        run: clinicops-outcome-control examples/outcome_control.example.json
+      - name: E4 without external evidence must fail closed
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          source = Path("examples/outcome_control.example.json")
+          payload = json.loads(source.read_text(encoding="utf-8"))
+          payload["commercial_stage"] = "E4"
+          payload["current"] = 4
+          payload["evidence_refs"] = []
+          target = Path("/tmp/outcome-control-invalid.json")
+          target.write_text(json.dumps(payload), encoding="utf-8")
+          PY
+          if clinicops-outcome-control /tmp/outcome-control-invalid.json; then
+            echo "expected fail-closed E4 evidence rejection"
+            exit 1
+          fi
+      - name: Focused outcome-control tests
+        run: pytest -q tests/test_outcome_control.py
