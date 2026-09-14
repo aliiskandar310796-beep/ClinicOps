@@ -43,7 +43,7 @@ class SalesCell:
     outcome: str
 
     @classmethod
-    def from_dict(cls, row: dict[str, object]) -> "SalesCell":
+    def from_dict(cls, row: dict[str, object]) -> SalesCell:
         channel = _required_string(row, "channel")
         if channel not in OUTBOUND_CHANNELS:
             raise ValueError(f"unsupported channel '{channel}'")
@@ -65,7 +65,7 @@ class SalesSwarm:
     cells: tuple[SalesCell, ...]
 
     @classmethod
-    def from_dict(cls, row: dict[str, object]) -> "SalesSwarm":
+    def from_dict(cls, row: dict[str, object]) -> SalesSwarm:
         raw = row.get("cells")
         if not isinstance(raw, list):
             raise TypeError("cells must be a list")
@@ -88,7 +88,7 @@ class LeadCandidate:
     route_verified: bool
 
     @classmethod
-    def from_dict(cls, row: dict[str, object]) -> "LeadCandidate":
+    def from_dict(cls, row: dict[str, object]) -> LeadCandidate:
         channel = _required_string(row, "channel")
         if channel not in OUTBOUND_CHANNELS:
             raise ValueError(f"unsupported channel '{channel}'")
