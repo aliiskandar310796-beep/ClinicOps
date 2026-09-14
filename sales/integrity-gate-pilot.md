@@ -52,7 +52,7 @@ clinicops-integrity-review-gate /private/review.json /private/output
 clinicops-integrity-verify /private/output /private/case.json --require-review
 ```
 
-External release requires `VERIFIED`, `REVIEW APPROVED`, and `release_ready=true`.
+External delivery of the **ClinicOps output bundle** requires `VERIFIED`, `REVIEW APPROVED`, and `release_ready=true`. The `release_ready` field applies only to delivery of that ClinicOps output. It is not authorization to release a device, controlled document or regulatory submission.
 
 ## Automated states
 
