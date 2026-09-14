@@ -1,6 +1,6 @@
 # ClinicOps Integrity Gate — paid pilot
 
-Status: **ACTIVE TEST / SOFTWARE-VALIDATED / COMMERCIALLY UNVALIDATED**
+Status: **PAID PILOT / SOFTWARE-VALIDATED / COMMERCIAL VALIDATION IN PROGRESS**
 
 ## The operational problem
 
@@ -46,8 +46,4 @@ Public browser-local calculator:
 
 `https://clinicops.dk/integrity-economics.html`
 
-Internal commercial protocol:
-
-`sales/integrity-gate-commercial-validation.md`
-
-Do not call Integrity Gate commercially validated until the protocol's buyer and activation thresholds are met.
+Do not call Integrity Gate commercially validated until buyer and activation evidence reaches the ClinicOps commercial-validation threshold.
