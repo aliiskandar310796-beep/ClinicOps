@@ -1,0 +1,29 @@
+# ClinicOps
+
+ClinicOps provides EU medical-device regulatory intelligence, evidence reconciliation and change-propagation workflows for manufacturers, authorised representatives and regulatory partners worldwide that support the EU market.
+
+Primary services:
+- Regulatory Integrity Review: https://clinicops.dk/integrity-gate.html
+- Global EU-market regulatory integrity: https://clinicops.dk/eu-mdr-regulatory-integrity.html
+- Class III Transition Map: https://clinicops.dk/class-iii-transition.html
+- EUDAMED transition support: https://clinicops.dk/eudamed-transition.html
+
+Free browser-local tools:
+- Regulatory Change Integrity Check: https://clinicops.dk/integrity-check.html
+- Regulatory Change Review Cost Calculator: https://clinicops.dk/integrity-economics.html
+- EUDAMED Identifier Check: https://clinicops.dk/identifier-check.html
+- Transition Readiness Score: https://clinicops.dk/readiness-score.html
+
+Research:
+- https://clinicops.dk/research.html
+- https://clinicops.dk/research/eudamed-watch/
+- https://clinicops.dk/research/sscp-public-record-scan/
+
+Important boundaries:
+- Machine findings are evidence-control signals, not legal or regulatory compliance determinations.
+- Missing public records or links do not by themselves establish non-compliance.
+- Source authority and regulatory judgement remain explicit human decisions.
+- Public-source coverage is bounded by the stated method and must not be represented as a complete EUDAMED audit.
+
+Contact: info@clinicops.dk
+Canonical site: https://clinicops.dk/

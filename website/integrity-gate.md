@@ -1,6 +1,6 @@
-# ClinicOps Integrity Gate — paid pilot
+# ClinicOps Integrity Gate — regulatory integrity review
 
-Status: **PAID PILOT / SOFTWARE-VALIDATED / COMMERCIAL VALIDATION IN PROGRESS**
+Status: **SOFTWARE-VALIDATED / COMMERCIAL VALIDATION IN PROGRESS**
 
 ## The operational problem
 
@@ -27,7 +27,7 @@ ClinicOps Integrity Gate is a bounded evidence-reconciliation and change-propaga
 
 All are operational evidence states, never automated compliance conclusions.
 
-## Typical first pilot
+## Typical first review
 
 - one device family / Basic UDI-DI group;
 - 1–3 client-approved controlled sources;
@@ -36,14 +36,15 @@ All are operational evidence states, never automated compliance conclusions.
 - optional approved change event;
 - one qualified human reviewer.
 
-The pilot output is a human-reviewed evidence/discrepancy pack. The review gate applies only to external delivery of the exact ClinicOps work product. It never authorises release of a device, controlled document or regulatory submission.
+The output is a human-reviewed evidence/discrepancy pack. The review gate applies only to external delivery of the exact ClinicOps work product. It never authorises release of a device, controlled document or regulatory submission.
 
 ## Economic validation
 
-Before claiming value, measure it. Every paid pilot should capture reviewer minutes, finding dispositions, false-positive rate, current-state manual review burden and the buyer's repeat/expand decision.
+Before claiming value, measure it. Every live review should capture reviewer minutes, finding dispositions, false-positive rate, current-state manual review burden and the buyer's repeat/expand decision.
 
-Public browser-local calculator:
+Public browser-local tools:
 
-`https://clinicops.dk/integrity-economics.html`
+- `https://clinicops.dk/integrity-check.html`
+- `https://clinicops.dk/integrity-economics.html`
 
 Do not call Integrity Gate commercially validated until buyer and activation evidence reaches the ClinicOps commercial-validation threshold.
