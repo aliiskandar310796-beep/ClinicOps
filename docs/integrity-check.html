@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>Free Regulatory Change Integrity Check | ClinicOps</title>
+<meta name="description" content="Run a browser-local check for regulatory information drift across controlled sources and downstream medical-device records. No data is uploaded to ClinicOps.">
+<link rel="canonical" href="https://clinicops.dk/integrity-check.html">
+<meta property="og:title" content="Free Regulatory Change Integrity Check | ClinicOps"><meta property="og:description" content="Compare one controlled regulatory value against downstream records locally in your browser. Nothing is uploaded."><meta property="og:type" content="website"><meta property="og:url" content="https://clinicops.dk/integrity-check.html"><meta property="og:site_name" content="ClinicOps"><meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Free Regulatory Change Integrity Check | ClinicOps","url":"https://clinicops.dk/integrity-check.html","isPartOf":{"@type":"WebSite","name":"ClinicOps","url":"https://clinicops.dk/"},"publisher":{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"ClinicOps Regulatory Change Integrity Check","url":"https://clinicops.dk/integrity-check.html","applicationCategory":"BusinessApplication","operatingSystem":"Any modern browser","isAccessibleForFree":true,"publisher":{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}</script>
+<style>:root{color-scheme:light dark;--bg:#fbfaf8;--surface:#fff;--surface2:#f3f1ec;--text:#1c2430;--muted:#5b6572;--border:#d8dee5;--accent:#0f5c52;--contrast:#fff;--soft:#e4f2ef}@media(prefers-color-scheme:dark){:root{--bg:#11151b;--surface:#171d25;--surface2:#1d242d;--text:#e7ebef;--muted:#9aa5b1;--border:#2a323c;--accent:#4fd8c4;--contrast:#08201c;--soft:#132925}}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55}.wrap{max-width:900px;margin:auto;padding:0 20px}header{border-bottom:1px solid var(--border);background:var(--surface)}.head{max-width:900px;margin:auto;padding:16px 20px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}.brand{font-weight:800;color:var(--text);text-decoration:none}.brand span{color:var(--accent)}nav a{color:var(--muted);margin-left:12px}main{padding:42px 0}h1{font-size:2rem;line-height:1.2;margin:.2em 0 .5em}h2{font-size:1.3rem;margin:2em 0 .6em}.lede,.hint{color:var(--muted)}.eyebrow{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);background:var(--soft);padding:4px 10px;border-radius:999px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}@media(max-width:680px){.grid{grid-template-columns:1fr}}label{display:block;font-weight:650;margin:0 0 6px}input{width:100%;font:inherit;padding:10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)}.field{margin:0 0 14px}.callout{border:1px solid var(--border);background:var(--surface2);border-radius:12px;padding:15px 17px;margin:18px 0}.btn,.cta{font:inherit;font-weight:650;border:1px solid var(--accent);border-radius:9px;padding:11px 16px;text-decoration:none;display:inline-block;cursor:pointer}.primary{background:var(--accent);color:var(--contrast)}.secondary{background:transparent;color:var(--accent)}.actions{display:flex;gap:10px;flex-wrap:wrap;margin:18px 0}table{width:100%;border-collapse:collapse;margin:14px 0}th,td{border:1px solid var(--border);padding:9px;text-align:left;vertical-align:top}.status{font-weight:700}.ok{color:#16814a}.review{color:#b66b00}.hold{color:#b33a3a}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px}footer{border-top:1px solid var(--border);padding:24px 0;color:var(--muted);font-size:.88rem}</style>
+</head>
+<body>
+<header><div class="head"><a class="brand" href="index.html">Clinic<span>Ops</span></a><nav><a href="eu-mdr-regulatory-integrity.html">Global EU-market service</a><a href="tools.html">Tools</a><a href="contact.html">Contact</a></nav></div></header>
+<main class="wrap">
+<span class="eyebrow">Free · browser-local · no upload</span>
+<h1>Check whether one regulated fact still agrees everywhere it should.</h1>
+<p class="lede">Enter a controlled value and up to four downstream values. The page runs entirely in your browser and returns a simple evidence-control signal. It does not determine regulatory compliance.</p>
+<div class="callout"><strong>Use placeholders for confidential work.</strong> Nothing is transmitted by this page, but do not enter patient-identifiable information, credentials or material you are not authorised to process.</div>
+
+<div class="grid">
+<div class="field"><label for="field">Field / fact name</label><input id="field" maxlength="120" value="IFU revision"></div>
+<div class="field"><label for="source1">Controlled source value</label><input id="source1" maxlength="200" value="IFU-12"></div>
+<div class="field"><label for="source2">Second controlled source value <span class="hint">(optional)</span></label><input id="source2" maxlength="200" placeholder="Leave blank if there is one authority"></div>
+<div class="field"><label for="source2name">Second source label <span class="hint">(optional)</span></label><input id="source2name" maxlength="120" placeholder="e.g. RIM master"></div>
+</div>
+
+<h2>Downstream surfaces</h2>
+<div class="grid">
+<div class="field"><label for="n1">Surface 1</label><input id="n1" value="IFU"><input id="v1" value="IFU-12" aria-label="Surface 1 value"></div>
+<div class="field"><label for="n2">Surface 2</label><input id="n2" value="EUDAMED export"><input id="v2" value="IFU-11" aria-label="Surface 2 value"></div>
+<div class="field"><label for="n3">Surface 3</label><input id="n3" value="SS(C)P"><input id="v3" placeholder="Value or leave blank" aria-label="Surface 3 value"></div>
+<div class="field"><label for="n4">Surface 4</label><input id="n4" value="Label / artwork"><input id="v4" value="IFU-12" aria-label="Surface 4 value"></div>
+</div>
+<div class="actions"><button class="btn primary" id="run" type="button">Run integrity check</button><button class="btn secondary" id="download" type="button">Download JSON result</button></div>
+<p id="summary" class="status" aria-live="polite"></p>
+<table><thead><tr><th>Surface</th><th>Observed</th><th>State</th></tr></thead><tbody id="rows"></tbody></table>
+<pre id="explain">Run the check to see the result.</pre>
+
+<div class="callout"><strong>Interpretation boundary.</strong> MATCH means the entered text equals the entered controlled value. DIFFERENT, MISSING and UNRESOLVED_AUTHORITY are review signals only. The tool does not know whether a field is legally required, whether a source is truly authoritative, or whether a difference is compliant.</div>
+
+<h2>Need a controlled review of a real workflow?</h2>
+<p>ClinicOps can scope the evidence population, preserve source references, reconcile declared fields and route unresolved authority to a named human reviewer.</p>
+<div class="actions"><a class="cta primary" href="assessment-intake.html?workstream=integrity-gate">Build a scope brief</a><a class="cta secondary" href="integrity-economics.html">Estimate current review burden</a></div>
+</main>
+<footer><div class="wrap">ClinicOps · Browser-local screening only · <a href="privacy-notice/">Privacy</a></div></footer>
+<script>
+(() => {
+  "use strict";
+  const $=id=>document.getElementById(id);
+  let last=null;
+  const norm=value=>value.trim();
+  function run(){
+    const field=norm($("field").value)||"Declared field",source=norm($("source1").value),source2=norm($("source2").value),source2name=norm($("source2name").value)||"Second controlled source";
+    const surfaces=[1,2,3,4].map(i=>({name:norm($(`n${i}`).value)||`Surface ${i}`,value:norm($(`v${i}`).value)}));
+    const unresolved=Boolean(source2&&source2!==source);
+    const results=surfaces.map(item=>({
+      ...item,
+      state:unresolved?"UNRESOLVED_AUTHORITY":(!item.value?"MISSING":item.value===source?"MATCH":"DIFFERENT")
+    }));
+    $("rows").innerHTML=results.map(item=>`<tr><td>${escapeHtml(item.name)}</td><td>${escapeHtml(item.value||"—")}</td><td>${escapeHtml(item.state)}</td></tr>`).join("");
+    const different=results.filter(r=>r.state==="DIFFERENT").length,missing=results.filter(r=>r.state==="MISSING").length;
+    const overall=unresolved?"UNRESOLVED_AUTHORITY":different||missing?"REVIEW_REQUIRED":"MATCH";
+    $("summary").textContent=`Overall signal: ${overall}`;
+    $("summary").className=`status ${overall==="MATCH"?"ok":overall==="UNRESOLVED_AUTHORITY"?"hold":"review"}`;
+    $("explain").textContent=unresolved?`${source2name} contains “${source2}” while the first controlled source contains “${source}”. Source authority must be resolved before downstream differences are interpreted.`:`${results.filter(r=>r.state!=="MATCH").length} of ${results.length} entered downstream surfaces need attention. This is a text-equality screening signal only.`;
+    last={schema_version:"1.0",generated_at:new Date().toISOString(),field,controlled_source_value:source,second_controlled_source_value:source2||null,overall_signal:overall,surfaces:results,boundary:"Evidence-control screening only; not a compliance determination."};
+  }
+  function escapeHtml(value){return value.replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[ch]));}
+  $("run").addEventListener("click",run);
+  $("download").addEventListener("click",()=>{if(!last)run();const blob=new Blob([JSON.stringify(last,null,2)+"\n"],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="clinicops-integrity-check.json";document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(url);});
+  run();
+})();
+</script>
+</body>
+</html>
