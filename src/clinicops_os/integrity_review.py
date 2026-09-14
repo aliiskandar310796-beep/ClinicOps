@@ -9,8 +9,8 @@ from pathlib import Path
 
 from .integrity_gate import BUNDLE_SCHEMA_VERSION, sha256_path, verify_bundle_integrity
 
-REVIEW_RECORD_SCHEMA_VERSION = "1.1"
-REVIEW_GATE_SCHEMA_VERSION = "1.1"
+REVIEW_RECORD_SCHEMA_VERSION = "1.2"
+REVIEW_GATE_SCHEMA_VERSION = "1.2"
 REVIEW_APPROVED = "REVIEW APPROVED"
 REVIEW_INCOMPLETE = "REVIEW INCOMPLETE"
 DELIVERY_SCOPE = (
@@ -250,14 +250,22 @@ def evaluate_review_gate(
 def write_review_gate(
     review_record_path: str | Path, output_dir: str | Path
 ) -> IntegrityReviewResult:
-    review = load_review_record(review_record_path)
+    source_path = Path(review_record_path)
+    review = load_review_record(source_path)
+    source_hash = sha256_path(source_path)
     result = evaluate_review_gate(
         review,
         output_dir,
-        review_record_sha256=sha256_path(review_record_path),
+        review_record_sha256=source_hash,
     )
     if result.approved and result.review_gate is not None:
-        gate_path = Path(output_dir) / "review_gate.json"
+        out = Path(output_dir)
+        bundled_review_path = out / "review_record.json"
+        if source_path.resolve() != bundled_review_path.resolve():
+            bundled_review_path.write_bytes(source_path.read_bytes())
+        if sha256_path(bundled_review_path) != source_hash:
+            raise ValueError("bundled review_record.json does not match approved review record")
+        gate_path = out / "review_gate.json"
         gate_path.write_text(
             json.dumps(result.review_gate, indent=2, ensure_ascii=False) + "\n",
             encoding="utf-8",
@@ -268,11 +276,15 @@ def write_review_gate(
 def verify_review_gate(output_dir: str | Path) -> tuple[bool, tuple[str, ...]]:
     out = Path(output_dir)
     gate_path = out / "review_gate.json"
+    review_path = out / "review_record.json"
     if not gate_path.is_file():
         return False, ("review_gate.json is missing",)
+    if not review_path.is_file():
+        return False, ("review_record.json is missing",)
     try:
         gate = _read_json(gate_path, label="review_gate.json")
         manifest = _read_json(out / "manifest.json", label="manifest.json")
+        review = _read_json(review_path, label="review_record.json")
     except (OSError, TypeError, ValueError, json.JSONDecodeError) as exc:
         return False, (str(exc),)
 
@@ -297,11 +309,25 @@ def verify_review_gate(output_dir: str | Path) -> tuple[bool, tuple[str, ...]]:
         out / "integrity_report.json"
     ):
         reasons.append("review gate report binding does not match")
-    if not isinstance(gate.get("review_record_sha256"), str) or not gate.get(
-        "review_record_sha256"
-    ):
-        reasons.append("review gate has no review_record_sha256")
+
+    bundled_review_hash = sha256_path(review_path)
+    if gate.get("review_record_sha256") != bundled_review_hash:
+        reasons.append("review gate review_record_sha256 does not match bundled review record")
+
     metrics = gate.get("review_metrics")
     if not isinstance(metrics, dict) or not isinstance(metrics.get("review_minutes"), int):
         reasons.append("review gate has no valid review_metrics")
+
+    reconstructed = evaluate_review_gate(
+        review,
+        out,
+        review_record_sha256=bundled_review_hash,
+    )
+    if not reconstructed.approved or reconstructed.review_gate is None:
+        reasons.extend(
+            f"bundled review record: {reason}" for reason in reconstructed.reasons
+        )
+    elif reconstructed.review_gate != gate:
+        reasons.append("review gate does not match bundled approved review record")
+
     return not reasons, tuple(reasons)
