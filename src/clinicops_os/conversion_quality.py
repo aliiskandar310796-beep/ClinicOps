@@ -68,6 +68,22 @@ REQUIREMENTS = (
 )
 
 
+def _validate_specimen_pdf(docs_root: Path) -> list[str]:
+    path = docs_root / SPECIMEN_PDF
+    if not path.is_file():
+        return []
+
+    data = path.read_bytes()
+    errors: list[str] = []
+    if len(data) < 5_000:
+        errors.append("specimen PDF is unexpectedly small")
+    if not data.startswith(b"%PDF-"):
+        errors.append("specimen PDF is missing the PDF file signature")
+    if b"%%EOF" not in data[-1_024:]:
+        errors.append("specimen PDF is missing a terminal PDF EOF marker")
+    return errors
+
+
 def validate_conversion_paths(docs_root: Path) -> list[str]:
     """Return broken high-intent conversion and externally shared path contracts.
 
@@ -82,6 +98,8 @@ def validate_conversion_paths(docs_root: Path) -> list[str]:
     for required_file in REQUIRED_FILES:
         if not (docs_root / required_file).is_file():
             errors.append(f"missing required public artifact: {required_file}")
+
+    errors.extend(_validate_specimen_pdf(docs_root))
 
     for requirement in REQUIREMENTS:
         path = docs_root / requirement.page
