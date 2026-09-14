@@ -50,7 +50,7 @@ Under MDR Article 32, the manufacturer is the duty holder for drawing up the SS(
 
 Public-register screening is an evidence input, not a compliance determination or a full-register audit. A B-prefixed EUDAMED DI signal, for example, is useful for structural screening but does not by itself establish a device's full regulatory or SS(C)P state. [CO-CLM-0004]
 
-Where a figure would help frame the scale of a portfolio or a device population, ClinicOps cites a verifiable source rather than asserting a count [VERIFY: source needed].
+When scale would help frame a portfolio or device population, ClinicOps only uses a figure when a verifiable source is available. Otherwise the scale remains unquantified rather than being guessed.
 
 ## Where regulatory intelligence applies
 
