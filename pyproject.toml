@@ -32,6 +32,10 @@ clinicops-delegation-proof = "clinicops_os.delegation_cli:delegation_proof"
 clinicops-company-run = "clinicops_os.company_cli:company_run"
 clinicops-claims = "clinicops_os.cli:claims_status"
 clinicops-publication-pack = "clinicops_os.cli:publication_pack"
+clinicops-integrity-gate = "clinicops_os.integrity_cli:integrity_gate"
+clinicops-integrity-review-prepare = "clinicops_os.integrity_cli:integrity_review_prepare"
+clinicops-integrity-review-gate = "clinicops_os.integrity_cli:integrity_review_gate"
+clinicops-integrity-verify = "clinicops_os.integrity_cli:integrity_verify"
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
