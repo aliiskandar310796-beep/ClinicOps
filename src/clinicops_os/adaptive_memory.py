@@ -16,9 +16,10 @@ memories are fail-closed unless the caller explicitly permits private scope.
 
 from __future__ import annotations
 
+from collections.abc import Iterable, Sequence
 from dataclasses import dataclass
 from math import exp
-from typing import Iterable, Literal, Sequence
+from typing import Literal
 
 MemoryLayer = Literal["L1", "L2", "L3"]
 MemoryScope = Literal["public", "internal", "private"]
