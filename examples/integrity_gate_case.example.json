@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0",
+  "case_id": "SYNTHETIC-IG-001",
+  "as_of": "2026-09-14",
+  "scope": {
+    "basic_udi_di": "SYN-BUDI-001",
+    "description": "Synthetic device-family reconciliation and change-propagation fixture"
+  },
+  "controlled_sources": [
+    {
+      "source_id": "client_master",
+      "source_type": "client_approved_controlled_source",
+      "evidence_ref": "synthetic://client-master/v3",
+      "fields": {
+        "device_name": "ApexFlow Catheter",
+        "ifu_revision": "IFU-12",
+        "sscp_revision": "SSCP-4.2"
+      }
+    }
+  ],
+  "surfaces": [
+    {
+      "surface_id": "eudamed",
+      "surface_type": "eudamed_dataset",
+      "evidence_ref": "synthetic://eudamed/export-2026-09-14",
+      "fields": {
+        "device_name": "ApexFlow Catheter",
+        "ifu_revision": "IFU-11",
+        "sscp_revision": "SSCP-4.2"
+      }
+    },
+    {
+      "surface_id": "ifu",
+      "surface_type": "ifu",
+      "evidence_ref": "synthetic://ifu/IFU-12",
+      "fields": {
+        "device_name": "ApexFlow Catheter",
+        "ifu_revision": "IFU-12"
+      }
+    },
+    {
+      "surface_id": "sscp",
+      "surface_type": "sscp",
+      "evidence_ref": "synthetic://sscp/SSCP-4.2",
+      "fields": {
+        "device_name": "ApexFlow Catheter",
+        "sscp_revision": "SSCP-4.2"
+      }
+    }
+  ],
+  "rules": [
+    {
+      "rule_id": "IG-001",
+      "field": "device_name",
+      "mode": "match_authority",
+      "targets": ["eudamed", "ifu", "sscp"]
+    },
+    {
+      "rule_id": "IG-002",
+      "field": "ifu_revision",
+      "mode": "match_authority",
+      "targets": ["eudamed", "ifu"]
+    },
+    {
+      "rule_id": "IG-003",
+      "field": "sscp_revision",
+      "mode": "match_authority",
+      "targets": ["eudamed", "sscp"]
+    },
+    {
+      "rule_id": "IG-004",
+      "field": "device_name",
+      "mode": "required_presence",
+      "targets": ["eudamed", "ifu", "sscp"]
+    }
+  ],
+  "changes": [
+    {
+      "change_id": "CHG-001",
+      "field": "ifu_revision",
+      "old_value": "IFU-11",
+      "new_value": "IFU-12",
+      "approved_source_id": "client_master",
+      "expected_surfaces": ["eudamed", "ifu"]
+    }
+  ]
+}
