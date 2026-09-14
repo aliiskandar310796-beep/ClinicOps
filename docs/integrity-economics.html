@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>Regulatory Change Review Cost Calculator | ClinicOps</title>
+<meta name="description" content="Estimate the current manual workload and labour cost of checking regulatory change propagation across EUDAMED, IFU, SS(C)P, labels and controlled systems. Runs locally in your browser.">
+<link rel="canonical" href="https://clinicops.dk/integrity-economics.html">
+<meta property="og:title" content="Regulatory Change Review Cost Calculator | ClinicOps">
+<meta property="og:description" content="Quantify your current manual regulatory change-review burden using your own inputs. No data is sent to ClinicOps.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://clinicops.dk/integrity-economics.html">
+<meta property="og:site_name" content="ClinicOps">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Regulatory Change Review Cost Calculator","url":"https://clinicops.dk/integrity-economics.html","applicationCategory":"BusinessApplication","operatingSystem":"Any modern browser","isAccessibleForFree":true,"publisher":{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebPage","name":"Regulatory Change Review Cost Calculator | ClinicOps","url":"https://clinicops.dk/integrity-economics.html","isPartOf":{"@type":"WebSite","name":"ClinicOps","url":"https://clinicops.dk/"},"publisher":{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}
+</script>
+<style>
+:root{color-scheme:light dark;--bg:#fbfaf8;--surface:#fff;--surface-2:#f3f1ec;--text:#1c2430;--muted:#5b6572;--border:#d8dee5;--accent:#0f5c52;--accent-contrast:#fff;--accent-soft:#e4f2ef}
+@media(prefers-color-scheme:dark){:root{--bg:#11151b;--surface:#171d25;--surface-2:#1d242d;--text:#e7ebef;--muted:#9aa5b1;--border:#2a323c;--accent:#4fd8c4;--accent-contrast:#08201c;--accent-soft:#132925}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}.wrap{max-width:900px;margin:0 auto;padding:0 20px}header{border-bottom:1px solid var(--border);background:var(--surface)}.head{max-width:900px;margin:0 auto;padding:16px 20px;display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap}.brand{font-weight:800;color:var(--text);text-decoration:none}.brand span{color:var(--accent)}nav a{color:var(--muted);margin-left:12px}main{padding:42px 0 24px}h1{font-size:2rem;line-height:1.2;margin:.2em 0 .5em}h2{font-size:1.32rem;margin:2em 0 .6em}.lede{font-size:1.1rem;color:var(--muted)}.eyebrow{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:4px 10px;border-radius:999px}.callout{border:1px solid var(--border);background:var(--surface-2);border-radius:12px;padding:15px 18px;margin:20px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}@media(max-width:680px){.grid{grid-template-columns:1fr}}.field{margin-bottom:16px}label{display:block;font-weight:650;margin-bottom:6px}input{width:100%;font:inherit;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 11px}.hint{color:var(--muted);font-size:.88rem}.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:18px 0}.metric{border:1px solid var(--border);background:var(--surface);border-radius:12px;padding:16px}.metric strong{display:block;font-size:1.45rem}.metric span{color:var(--muted);font-size:.88rem}.cta{display:inline-block;padding:12px 18px;border-radius:9px;border:1px solid var(--accent);text-decoration:none;font-weight:650}.primary{background:var(--accent);color:var(--accent-contrast)}.ghost{color:var(--accent)}.actions{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}footer{border-top:1px solid var(--border);margin-top:44px;padding:24px 0;color:var(--muted);font-size:.88rem}a{color:var(--accent)}
+</style>
+</head>
+<body>
+<header><div class="head"><a class="brand" href="index.html">Clinic<span>Ops</span></a><nav><a href="integrity-gate.html">Integrity Gate</a><a href="tools.html">Tools</a><a href="contact.html">Contact</a></nav></div></header>
+<main class="wrap">
+<span class="eyebrow">Browser-local calculator</span>
+<h1>What does manual regulatory change review cost today?</h1>
+<p class="lede">Use your own workload and labour assumptions to estimate the effort spent checking that a regulated change has propagated across the places where it is supposed to appear.</p>
+<div class="callout"><strong>No hidden benchmark.</strong> ClinicOps does not assume a savings rate. You enter the current workload and a hypothetical reduction in manual review time. This page sends nothing to ClinicOps and stores nothing remotely.</div>
+
+<div class="grid">
+<div class="field"><label for="changes">Change / release events per month</label><input id="changes" type="number" min="0" max="10000" step="1" value="8"><div class="hint">Events that trigger cross-surface checking.</div></div>
+<div class="field"><label for="surfaces">Surfaces checked per event</label><input id="surfaces" type="number" min="1" max="100" step="1" value="5"><div class="hint">For example EUDAMED, RIM/master, IFU, SS(C)P, label/artwork.</div></div>
+<div class="field"><label for="minutes">Manual minutes per surface check</label><input id="minutes" type="number" min="1" max="1440" step="1" value="12"></div>
+<div class="field"><label for="rate">Loaded RA/QA labour cost per hour (€)</label><input id="rate" type="number" min="1" max="1000" step="1" value="75"></div>
+<div class="field"><label for="reduction">Hypothetical reduction in manual review time (%)</label><input id="reduction" type="number" min="0" max="95" step="5" value="25"><div class="hint">Scenario only. A live pilot must measure the actual result.</div></div>
+<div class="field"><label for="pilot">Pilot fee to test (€)</label><input id="pilot" type="number" min="0" max="100000" step="10" value="750"><div class="hint">Use any fee you want to evaluate. This is not a published ClinicOps price.</div></div>
+</div>
+
+<h2>Current-state economics</h2>
+<div class="results">
+<div class="metric"><strong id="hours">—</strong><span>manual review hours / year</span></div>
+<div class="metric"><strong id="cost">—</strong><span>estimated labour cost / year</span></div>
+<div class="metric"><strong id="potential">—</strong><span>scenario labour capacity released / year</span></div>
+<div class="metric"><strong id="payback">—</strong><span>scenario pilot payback</span></div>
+</div>
+<p id="explain" class="hint"></p>
+
+<div class="callout"><strong>What a pilot should prove.</strong> Review minutes before/after, number of declared checks, findings confirmed by a qualified reviewer, false positives, unresolved source-authority cases, and whether the workflow prevented avoidable re-checking or handoff delay. Savings should be claimed only from measured client-specific evidence.</div>
+<div class="actions"><a class="cta primary" href="assessment-intake.html?workstream=integrity-gate">Request a paid Integrity Gate pilot scope</a><a class="cta ghost" href="integrity-gate.html">See how Integrity Gate works</a></div>
+</main>
+<footer><div class="wrap">ClinicOps · Scenario calculator only; not financial, legal or regulatory advice. · <a href="privacy-notice/">Privacy notice</a></div></footer>
+<script>
+(() => {
+  "use strict";
+  const ids = ["changes","surfaces","minutes","rate","reduction","pilot"];
+  const euro = new Intl.NumberFormat("en-IE",{style:"currency",currency:"EUR",maximumFractionDigits:0});
+  const number = new Intl.NumberFormat("en-IE",{maximumFractionDigits:1});
+  const el = id => document.getElementById(id);
+  function value(id){const n=Number(el(id).value);return Number.isFinite(n)?Math.max(0,n):0;}
+  function update(){
+    const changes=value("changes"),surfaces=value("surfaces"),minutes=value("minutes"),rate=value("rate"),reduction=Math.min(95,value("reduction")),pilot=value("pilot");
+    const annualHours=changes*surfaces*minutes*12/60;
+    const annualCost=annualHours*rate;
+    const released=annualCost*(reduction/100);
+    const monthlyReleased=released/12;
+    el("hours").textContent=number.format(annualHours);
+    el("cost").textContent=euro.format(annualCost);
+    el("potential").textContent=euro.format(released);
+    el("payback").textContent=monthlyReleased>0&&pilot>0?`${number.format(pilot/monthlyReleased)} months`:"n/a";
+    el("explain").textContent=`Scenario: ${changes} events/month × ${surfaces} surfaces × ${minutes} minutes, at ${euro.format(rate)}/hour. A ${reduction}% reduction is your hypothesis, not a ClinicOps performance claim.`;
+  }
+  ids.forEach(id=>el(id).addEventListener("input",update));
+  update();
+})();
+</script>
+</body>
+</html>
