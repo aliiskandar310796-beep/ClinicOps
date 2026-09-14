@@ -18,7 +18,7 @@ It does **not** determine legal or regulatory compliance.
 4. test declared approved changes against the downstream surfaces the client identifies as affected;
 5. classify discrepancies as review-required, unresolved authority, or hold-for-human-decision;
 6. package every finding with evidence references;
-7. require a named human reviewer before external release.
+7. require a named human reviewer before external delivery of the ClinicOps output.
 
 ## Automated gate states
 
@@ -27,7 +27,7 @@ It does **not** determine legal or regulatory compliance.
 - `UNRESOLVED_AUTHORITY` — supplied controlled evidence does not establish one authoritative value;
 - `HOLD_FOR_HUMAN_DECISION` — an approved change has not propagated, a declared change source does not match the new value, or a downstream surface contains a conflicting value.
 
-All four states remain human-review gated for external release.
+All four states remain human-review gated before the ClinicOps output can be delivered externally. Human approval of that output does not authorize release of a device, controlled document or regulatory submission.
 
 ## Synthetic example
 
@@ -51,7 +51,7 @@ Automated result:
 - `HOLD_FOR_HUMAN_DECISION`
 - finding code: `CHANGE_NOT_PROPAGATED`
 - evidence references: controlled source + EUDAMED export
-- external release: human review required
+- ClinicOps output delivery: human review required
 
 The example is synthetic and demonstrates mechanics only. It is not buyer validation or a compliance finding.
 
