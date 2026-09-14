@@ -19,11 +19,20 @@ REQUIRED_FILES = (
 REQUIREMENTS = (
     ConversionRequirement(
         "index.html",
-        ("assessment-intake.html?workstream=integrity-review", "specimen-register/"),
+        (
+            "assessment-intake.html",
+            "transition-map-sample/",
+            "assessment-intake.html?workstream=integrity-review",
+            "specimen-register/",
+        ),
     ),
     ConversionRequirement(
         "tools.html",
-        ("specimen-register/", "assessment-intake.html?workstream=integrity-review"),
+        (
+            "transition-map-sample/",
+            "specimen-register/",
+            "assessment-intake.html?workstream=integrity-review",
+        ),
     ),
     ConversionRequirement(
         "integrity-gate.html",
@@ -35,7 +44,7 @@ REQUIREMENTS = (
     ),
     ConversionRequirement(
         "assessment-intake.html",
-        ("specimen-register/", "readiness-score.html"),
+        ("transition-map-sample/", "readiness-score.html", "specimen-register/"),
     ),
     ConversionRequirement(
         "readiness-score.html",
@@ -62,8 +71,10 @@ REQUIREMENTS = (
 def validate_conversion_paths(docs_root: Path) -> list[str]:
     """Return broken high-intent conversion and externally shared path contracts.
 
-    This checks durable buyer-navigation and specimen availability invariants.
-    It intentionally does not enforce pricing, analytics, or third-party integrations.
+    The contract is additive: new commercial journeys may be introduced without
+    silently removing established entry routes that have already been published
+    or distributed. It intentionally does not enforce pricing, analytics, or
+    third-party integrations.
     """
 
     errors: list[str] = []
