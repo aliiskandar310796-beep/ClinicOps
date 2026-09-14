@@ -265,3 +265,31 @@ clinicops-company-run /private/path/company-run.json
 ```
 
 Only synthetic examples belong in the public repository. Real buyer names, messages, prices, activation records and commercial evidence references remain private.
+
+## Outcome control and temporary specialist workers
+
+The six canonical agents remain the permanent accountable fleet. They may recruit temporary specialist AI workers under `06_AGENTS/WORKER_RECRUITMENT_PROTOCOL.md`; those workers do not become departments and do not inherit broader authority than the parent agent.
+
+Material work should be expressed as an outcome mission under `06_AGENTS/OUTCOME_CONTROL_SYSTEM.md` before expanding the team. The mission defines one primary metric, baseline, target, current state, review point and stop condition.
+
+Company WIP limits:
+
+- maximum three top-level active missions unless an external deadline justifies an explicit exception;
+- default one to three temporary workers per mission;
+- maximum five active temporary workers per mission;
+- one accountable parent agent per worker;
+- one primary outcome metric per mission.
+
+Use temporary workers for independent bounded slices such as source verification, account research, buyer-signal classification, offer scoping, distribution execution, delivery reconciliation, adversarial QA, automation and metrics auditing. Parallel workers must not edit the same canonical artifact blindly, contact the same buyer independently or duplicate regulatory judgement.
+
+Every worker needs a bounded objective, success criteria, expected artifact/evidence, stop condition and handoff. Completed work without evidence/artifact is not complete. A worker cannot self-promote a commercial stage or cross a reserved-human approval boundary.
+
+Evaluate material private missions with:
+
+```bash
+clinicops-outcome-control /private/path/mission.json
+```
+
+The outcome-control pass measures whether ownership, worker caps, metric evidence, handoffs and control integrity are sound. It is separate from `clinicops-company-run`: the former governs one outcome mission; the latter evaluates company-level autonomy and commercial progression across events.
+
+The purpose of recruiting more AI is never to increase activity. Recruit only when it materially improves information gain, cycle time, evidence quality, buyer movement, delivery quality or resilience.

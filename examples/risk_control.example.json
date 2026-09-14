@@ -1,0 +1,48 @@
+{
+  "schema_version": "1.0",
+  "mission_id": "SYNTHETIC-INTEGRITY-GATE-MARKET-TEST",
+  "risks": [
+    {
+      "risk_id": "R-COMM-01",
+      "category": "commercial",
+      "description": "Buyers may agree the workflow is painful without paying for a separate Integrity Gate service.",
+      "likelihood": 4,
+      "impact": 4,
+      "owner_agent": "opportunity-architect",
+      "status": "mitigated",
+      "mitigation": "Require priced-scope, procurement or paid-pilot evidence before treating demand as validated.",
+      "trigger": "Three qualified conversations produce interest but no concrete commitment.",
+      "evidence_refs": ["artifact:06_AGENTS/AI_COMPANY_OS.md"],
+      "review_point": "after each qualified buyer conversation",
+      "reserved_human_decision": false
+    },
+    {
+      "risk_id": "R-DELIV-01",
+      "category": "delivery",
+      "description": "False positives or messy inputs may consume more expert review time than the service saves.",
+      "likelihood": 3,
+      "impact": 4,
+      "owner_agent": "portfolio-operator",
+      "status": "open",
+      "mitigation": "Measure review minutes, unresolved-authority rate and input-preparation time on every controlled pilot.",
+      "trigger": "Human review exceeds the baseline manual reconciliation time or repeated input normalization dominates delivery.",
+      "evidence_refs": [],
+      "review_point": "after the first controlled real or qualified dry-run case",
+      "reserved_human_decision": false
+    },
+    {
+      "risk_id": "R-REG-01",
+      "category": "regulatory",
+      "description": "A user may misread an automated PASS as regulatory approval or release authorization.",
+      "likelihood": 2,
+      "impact": 5,
+      "owner_agent": "regulatory-evidence-steward",
+      "status": "mitigated",
+      "mitigation": "Keep the human-review gate and explicit work-product-only release boundary in software and public copy.",
+      "trigger": "Any copy, output or buyer statement equates PASS with legal/regulatory compliance or release authority.",
+      "evidence_refs": ["artifact:docs/integrity-gate.html", "artifact:src/clinicops_os/integrity_gate.py"],
+      "review_point": "before every material public or client-facing Integrity Gate change",
+      "reserved_human_decision": false
+    }
+  ]
+}

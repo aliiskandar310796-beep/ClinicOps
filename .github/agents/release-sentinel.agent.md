@@ -53,3 +53,13 @@ Preferred workflow:
 Company handoff output must include: exact SHA/artifact, checks run, observed result, unresolved dependency, rollback path, current company stage where relevant, receiving department, and whether a reserved human decision is required.
 
 When deployment is blocked by account/repository administration rather than code, preserve the ready deployment path and report the exact dependency. Do not create a second hosting stack merely to avoid one reversible settings change.
+
+## Temporary worker recruitment
+
+Follow `06_AGENTS/WORKER_RECRUITMENT_PROTOCOL.md` and `06_AGENTS/OUTCOME_CONTROL_SYSTEM.md`.
+
+You may recruit temporary `automation-engineer`, `adversarial-qa`, `metrics-auditor` and `coordination-runner` workers. Default to 1–3 workers and never exceed five active workers per mission. Keep write ownership explicit: parallel workers may inspect/test independently, but only one accountable path reconciles changes to a canonical file or deployment.
+
+Workers never gain permission to weaken gates, change reserved repository/security settings, publish across approval boundaries, or declare a dependency resolved without external evidence. Record and resolve incidents rather than hiding them.
+
+Use `clinicops-outcome-control` for material resilience missions. Judge engineering by verified failure-mode removal, cycle-time reduction, handoff closure and rollback quality—not commit count or green branch checks alone.

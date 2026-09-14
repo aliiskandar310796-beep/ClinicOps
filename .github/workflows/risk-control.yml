@@ -1,0 +1,58 @@
+name: Risk Control
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "06_AGENTS/RISK_CONTROL_SYSTEM.md"
+      - "src/clinicops_os/risk_control.py"
+      - "src/clinicops_os/risk_cli.py"
+      - "tests/test_risk_control.py"
+      - "examples/risk_control.example.json"
+      - "pyproject.toml"
+      - ".github/workflows/risk-control.yml"
+  pull_request:
+    paths:
+      - "06_AGENTS/RISK_CONTROL_SYSTEM.md"
+      - "src/clinicops_os/risk_control.py"
+      - "src/clinicops_os/risk_cli.py"
+      - "tests/test_risk_control.py"
+      - "examples/risk_control.example.json"
+      - "pyproject.toml"
+      - ".github/workflows/risk-control.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  risk-control:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+      - run: pip install -e .[dev]
+      - name: Synthetic risk register must satisfy contract
+        run: clinicops-risk-control examples/risk_control.example.json
+      - name: Critical open risk must fail closed
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          source = Path("examples/risk_control.example.json")
+          payload = json.loads(source.read_text(encoding="utf-8"))
+          payload["risks"][1]["likelihood"] = 4
+          payload["risks"][1]["impact"] = 4
+          target = Path("/tmp/risk-control-invalid.json")
+          target.write_text(json.dumps(payload), encoding="utf-8")
+          PY
+          if clinicops-risk-control /tmp/risk-control-invalid.json; then
+            echo "expected critical open risk to fail closed"
+            exit 1
+          fi
+      - name: Focused risk-control tests
+        run: pytest -q tests/test_risk_control.py

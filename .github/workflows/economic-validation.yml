@@ -1,0 +1,41 @@
+name: Economic Validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "03_OPERATIONS/ECONOMIC_VALIDATION_PROTOCOL.md"
+      - "src/clinicops_os/economic_validation.py"
+      - "src/clinicops_os/economic_cli.py"
+      - "tests/test_economic_validation.py"
+      - "examples/economic_validation.example.json"
+      - "pyproject.toml"
+      - ".github/workflows/economic-validation.yml"
+  pull_request:
+    paths:
+      - "03_OPERATIONS/ECONOMIC_VALIDATION_PROTOCOL.md"
+      - "src/clinicops_os/economic_validation.py"
+      - "src/clinicops_os/economic_cli.py"
+      - "tests/test_economic_validation.py"
+      - "examples/economic_validation.example.json"
+      - "pyproject.toml"
+      - ".github/workflows/economic-validation.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  economic-validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+      - run: pip install -e .[dev]
+      - name: Synthetic ledger must satisfy control contract
+        run: clinicops-economic-validation examples/economic_validation.example.json
+      - name: Focused economic-validation tests
+        run: pytest -q tests/test_economic_validation.py

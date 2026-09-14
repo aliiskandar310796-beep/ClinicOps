@@ -13,7 +13,7 @@ Agents are capabilities, not replacements for accountability. The repository alr
 | Customer Discovery Agent | Structured buyer learning and product decisions | — |
 | Visibility Architect | Claim-governed SEO, research distribution and public-content drafting | Growth Agent, Content Engine |
 
-Do not create an additional profile when one of these six can absorb the capability.
+Do not create an additional permanent profile when one of these six can absorb accountability.
 
 ## Company operating layer
 
@@ -28,6 +28,30 @@ clinicops-company-run /private/path/company-run.json
 ```
 
 The evaluator does not prove product-market fit, revenue, founder independence or professional review. It separates those questions so internal activity cannot be mistaken for commercial evidence.
+
+## Temporary specialist workers
+
+A canonical agent may recruit bounded temporary workers under `06_AGENTS/WORKER_RECRUITMENT_PROTOCOL.md`. Temporary workers are execution capacity, **not** permanent GitHub custom-agent profiles, departments or new sources of authority.
+
+The parent agent remains accountable for:
+
+- the mission outcome and metric;
+- worker scope and tool/data boundary;
+- evidence quality;
+- commercial-stage truth;
+- approval boundaries;
+- reconciliation of parallel outputs;
+- the final handoff and worker termination.
+
+Default to 1–3 workers and never exceed five active workers on one mission. Recruit only when parallelism or specialty materially increases information gain, speed, evidence quality, delivery quality or resilience.
+
+Evaluate material outcome missions with:
+
+```bash
+clinicops-outcome-control /private/path/mission.json
+```
+
+A worker should disappear when its bounded job is done. Promote a recurring capability into a durable role only after repeated independent missions prove stable value, and prefer improving the parent agent or automating the workflow before enlarging the permanent fleet.
 
 ## Phase 6 execution order
 
@@ -69,4 +93,5 @@ The gate resolves aliases to the canonical `.github/agents/*.agent.md` profile, 
 - Private client/prospect data must not be placed in this public repository.
 - More agents are not the goal. Better decisions, faster learning and safer execution are the goal.
 - Department creation must not create a shadow fleet; departments route work to canonical profiles.
-- Company-run metrics must never relabel synthetic evidence, CI output or internal activity as external commercial proof.
+- Temporary workers must not become a shadow fleet; they are bounded mission resources under a canonical parent.
+- Company-run and outcome-control metrics must never relabel synthetic evidence, CI output or internal activity as external commercial proof.

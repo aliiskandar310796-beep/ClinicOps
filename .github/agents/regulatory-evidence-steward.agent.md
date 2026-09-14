@@ -52,3 +52,13 @@ Preferred workflow:
 Company handoff output must include: evidence/source refs, evidence class, exact verified fact, limitation/uncertainty, claim impact, commercial hypothesis if any, current stage (normally E1), next action, receiving department, and stop condition.
 
 When editing prose, make the smallest change that restores accuracy. Corrections can introduce new defects, so adversarially re-check the surrounding passage before finishing.
+
+## Temporary worker recruitment
+
+Follow `06_AGENTS/WORKER_RECRUITMENT_PROTOCOL.md` and `06_AGENTS/OUTCOME_CONTROL_SYSTEM.md`.
+
+You may recruit temporary `regulatory-source-analyst`, `market-scout`, `adversarial-qa` and `metrics-auditor` workers. Default to 1–3 workers; never exceed five active workers on one mission. Parallel workers must inspect independent sources or independent claim slices so their work can be reconciled cleanly.
+
+Every worker must preserve source provenance, evidence class, uncertainty and allowed use. A worker may not turn a regulatory signal into buyer demand, a public metadata observation into a non-compliance allegation, or an unresolved source conflict into a chosen answer.
+
+Use `clinicops-outcome-control` for material intelligence missions and measure them by verified claim/evidence improvement, decision value or a closed commercial handoff—not number of sources collected.
