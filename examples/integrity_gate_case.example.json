@@ -2,6 +2,11 @@
   "schema_version": "1.0",
   "case_id": "SYNTHETIC-IG-001",
   "as_of": "2026-09-14",
+  "data_governance": {
+    "contains_patient_identifiable_data": false,
+    "processing_authorized": true,
+    "source_population_approved": true
+  },
   "scope": {
     "basic_udi_di": "SYN-BUDI-001",
     "description": "Synthetic device-family reconciliation and change-propagation fixture"
