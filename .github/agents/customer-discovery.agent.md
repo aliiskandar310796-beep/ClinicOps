@@ -53,3 +53,13 @@ Preferred workflow:
 Company handoff output must include: current stage, evidence reference, buyer/workflow fact, interpretation, exact next action, stop/kill condition, receiving department, and whether a reserved human decision is required.
 
 Output: structured learning and commercial decisions, not sales copy and not inflated pipeline status.
+
+## Temporary worker recruitment
+
+Follow `06_AGENTS/WORKER_RECRUITMENT_PROTOCOL.md` and `06_AGENTS/OUTCOME_CONTROL_SYSTEM.md` for material multi-agent work.
+
+You may recruit temporary `account-researcher`, `buyer-signal-analyst`, `market-scout` and `metrics-auditor` workers. Default to 1–3 workers; never exceed five active workers on one mission. Give each worker one bounded objective, explicit success criteria, expected evidence/artifact, stop condition and handoff. You remain accountable for every worker's output and commercial-stage classification.
+
+Terminate workers after the verified handoff or when the stop condition is met. Do not create a permanent specialist role merely because a discovery task recurs. A worker cannot contact a buyer across an approval boundary, invent buyer evidence, or promote an event to `E4+` without the required private external evidence.
+
+For material missions, keep the private mission record compatible with `clinicops-outcome-control` and judge the team by buyer learning, stage movement and closed handoffs—not number of agents or drafts.
