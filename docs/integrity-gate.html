@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>Medical Device Regulatory Integrity Gate | ClinicOps</title>
+<meta name="description" content="Experimental evidence-reconciliation and change-propagation gate for medical-device regulatory information, with source traceability and human review.">
+<link rel="canonical" href="https://clinicops.dk/integrity-gate.html">
+<meta property="og:title" content="Medical Device Regulatory Integrity Gate | ClinicOps">
+<meta property="og:description" content="A human-reviewed pre-release integrity screen for declared regulatory data, documents and lifecycle changes.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://clinicops.dk/integrity-gate.html">
+<meta property="og:site_name" content="ClinicOps">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebPage",
+  "name":"Medical Device Regulatory Integrity Gate | ClinicOps",
+  "description":"Experimental evidence-reconciliation and change-propagation gate for medical-device regulatory information.",
+  "url":"https://clinicops.dk/integrity-gate.html",
+  "isPartOf":{"@type":"WebSite","name":"ClinicOps","url":"https://clinicops.dk/"},
+  "publisher":{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}
+}
+</script>
+<style>
+:root{color-scheme:light dark;--bg:#fbfaf8;--surface:#ffffff;--surface-2:#f3f1ec;--text:#1c2430;--muted:#5b6572;--border:#d8dee5;--accent:#0f5c52;--accent-contrast:#ffffff;--accent-soft:#e4f2ef}
+@media(prefers-color-scheme:dark){:root{--bg:#11151b;--surface:#171d25;--surface-2:#1d242d;--text:#e7ebef;--muted:#9aa5b1;--border:#2a323c;--accent:#4fd8c4;--accent-contrast:#08201c;--accent-soft:#132925}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}.wrap{max-width:900px;margin:0 auto;padding:0 20px}header.site{border-bottom:1px solid var(--border);background:var(--surface)}.site-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:16px 20px;max-width:900px;margin:0 auto}.brand{font-weight:800;font-size:1.15rem;color:var(--text);text-decoration:none}.brand span{color:var(--accent)}nav.primary{display:flex;flex-wrap:wrap;gap:4px 2px;font-size:.86rem}nav.primary a{color:var(--muted);text-decoration:none;padding:7px 10px;border-radius:7px}nav.primary a:hover{color:var(--text);background:var(--surface-2)}main{padding:44px 0 20px}h1{font-size:2rem;line-height:1.2;margin:0 0 14px}h2{font-size:1.35rem;margin:2.2em 0 .6em}h3{font-size:1.08rem;margin:1.4em 0 .45em}.lede{font-size:1.12rem;color:var(--muted)}.eyebrow{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:4px 10px;border-radius:999px;margin-bottom:14px}.cta{display:inline-block;padding:12px 18px;border-radius:9px;border:1px solid var(--accent);text-decoration:none;font-weight:600}.cta.primary{background:var(--accent);color:var(--accent-contrast)}.cta.ghost{color:var(--accent)}.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin:22px 0}.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin:20px 0}.card{border:1px solid var(--border);border-radius:14px;padding:18px;background:var(--surface)}.card h3{margin-top:0}.callout{border:1px solid var(--border);background:var(--surface-2);border-radius:12px;padding:16px 18px;margin:22px 0}.muted{color:var(--muted);font-size:.92rem}table{border-collapse:collapse;width:100%;margin:18px 0}td,th{border:1px solid var(--border);padding:9px 10px;text-align:left;font-size:.92rem;vertical-align:top}code{background:var(--surface-2);padding:2px 5px;border-radius:4px}footer.site{border-top:1px solid var(--border);margin-top:52px}.footer-inner{max-width:900px;margin:0 auto;padding:26px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--muted);font-size:.86rem}.footer-inner a{color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="site"><div class="site-inner"><a class="brand" href="index.html">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="index.html">Home</a><a href="about.html">About</a><a href="research.html">Research</a><a href="tools.html">Tools</a><a href="regulatory-intelligence.html">Regulatory Intelligence</a><a href="contact.html">Contact</a></nav></div></header>
+<main class="wrap">
+<span class="eyebrow">Experimental pilot</span>
+<h1>ClinicOps Integrity Gate</h1>
+<p class="lede">A pre-release evidence-reconciliation and change-propagation screen for supplied medical-device regulatory information. It checks declared controlled sources against declared downstream surfaces, preserves source traceability, and routes ambiguity to human RA/QA review.</p>
+<div class="callout"><strong>Boundary:</strong> Integrity Gate is an evidence-control workflow, not a legal, regulatory or compliance determination. A machine result never replaces RA/QA judgement.</div>
+<div class="cta-row"><a class="cta primary" href="assessment-intake.html">Discuss a bounded pilot</a><a class="cta ghost" href="medical-device-document-control.html">See document-control scope</a></div>
+
+<h2>The operational question</h2>
+<p>When a regulated fact changes, the hard question is often not whether one document changed. It is whether the approved information still agrees across every client-declared surface that is supposed to carry it.</p>
+<p>Integrity Gate turns that into a repeatable evidence check:</p>
+<ol>
+<li>load client-approved controlled sources and declared downstream surfaces;</li>
+<li>reconcile declared fields only where one supplied authoritative value exists;</li>
+<li>refuse to infer authority when supplied controlled sources disagree;</li>
+<li>check declared approved changes against the surfaces the client identifies as affected;</li>
+<li>package every discrepancy with evidence references;</li>
+<li>require named human review before external release.</li>
+</ol>
+
+<h2>Four fail-closed states</h2>
+<div class="card-grid">
+<div class="card"><h3>PASS</h3><p class="muted">No discrepancy found by the declared automated checks. Human review is still required for external release.</p></div>
+<div class="card"><h3>REVIEW_REQUIRED</h3><p class="muted">A supplied field is missing or differs from the single supplied controlled value.</p></div>
+<div class="card"><h3>UNRESOLVED_AUTHORITY</h3><p class="muted">The supplied controlled evidence does not establish one authoritative value. ClinicOps does not guess.</p></div>
+<div class="card"><h3>HOLD_FOR_HUMAN_DECISION</h3><p class="muted">A declared change has not propagated, its approved source does not match the declared new value, or a downstream surface contains a conflicting value.</p></div>
+</div>
+
+<h2>Synthetic example</h2>
+<p class="muted">The example below is synthetic and demonstrates software mechanics only. It is not buyer validation and it is not a finding about any real manufacturer or device.</p>
+<table>
+<thead><tr><th>Evidence surface</th><th>IFU revision</th><th>Declared role</th></tr></thead>
+<tbody>
+<tr><td>Client-approved controlled source</td><td><code>IFU-12</code></td><td>approved new value</td></tr>
+<tr><td>IFU</td><td><code>IFU-12</code></td><td>expected downstream surface</td></tr>
+<tr><td>EUDAMED export</td><td><code>IFU-11</code></td><td>expected downstream surface</td></tr>
+</tbody>
+</table>
+<p><strong>Automated result:</strong> <code>HOLD_FOR_HUMAN_DECISION</code> · <code>CHANGE_NOT_PROPAGATED</code></p>
+<p>The finding is bound to the supplied controlled-source reference and the supplied EUDAMED-export reference. External release remains human-review gated.</p>
+
+<h2>What is already executable</h2>
+<ul>
+<li>deterministic JSON input validation;</li>
+<li>cross-surface field reconciliation;</li>
+<li>unresolved-authority detection;</li>
+<li>declared change-propagation checks;</li>
+<li>JSON, Markdown and HTML evidence bundles;</li>
+<li>SHA-256 manifest binding and tamper detection;</li>
+<li>fail-closed human-review preparation and approval gate;</li>
+<li>final verification of the exact case, bundle and review state.</li>
+</ul>
+
+<h2>What is not yet proven</h2>
+<p>Software validation is separate from market validation. ClinicOps will not call Integrity Gate commercially validated until real buyer conversations show repeated pain and at least one concrete commercial commitment under the existing validation rules.</p>
+<p>The first live pilot should therefore stay bounded: one device family or Basic UDI-DI group, a small number of supplied controlled sources and downstream surfaces, explicit fields, explicit change expectations, and one qualified human reviewer.</p>
+
+<h2>Start with one controlled workflow</h2>
+<p>If your team already knows which sources and downstream surfaces should agree, ClinicOps can test whether this evidence-control model is useful before anyone commits to a platform project.</p>
+<div class="cta-row"><a class="cta primary" href="assessment-intake.html">Build a pilot brief</a><a class="cta ghost" href="contact.html">Contact ClinicOps</a></div>
+</main>
+<footer class="site"><div class="footer-inner"><span>&copy; 2026 ClinicOps. Danish-based, EU-wide medical device regulatory intelligence.</span><span><a href="mailto:info@clinicops.dk">info@clinicops.dk</a> · <a href="privacy-notice/">Privacy</a></span></div></footer>
+</body>
+</html>
