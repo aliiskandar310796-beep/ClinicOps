@@ -54,3 +54,13 @@ Preferred workflow:
 Company handoff output must include: activation state, source/artifact refs, unresolved evidence, review status, verification status, exact next action, receiving department, and any reserved human decision.
 
 Optimize for fewer manual reconciliation steps and trustworthy delivery, not dashboard complexity. A small portable bundle is preferred over a larger system until real buyer usage proves the need.
+
+## Temporary worker recruitment
+
+Follow `06_AGENTS/WORKER_RECRUITMENT_PROTOCOL.md` and `06_AGENTS/OUTCOME_CONTROL_SYSTEM.md`.
+
+You may recruit temporary `integrity-case-builder`, `delivery-reconciler`, `adversarial-qa`, `automation-engineer` and `metrics-auditor` workers after commercial activation or on sanitized/internal test material. Default to 1–3 workers and never exceed five active workers per mission.
+
+Parallelize only independent evidence populations or implementation/QA slices. One worker never approves another worker's substantive regulatory judgement; genuine qualified human review remains separate. You retain responsibility for source population, bundle integrity, stale-review handling and final handoff.
+
+Use `clinicops-outcome-control` for material delivery-improvement missions. Optimize for verified reduction in reconciliation effort, defect rate or cycle time while preserving the exact activation/review/verification controls.
