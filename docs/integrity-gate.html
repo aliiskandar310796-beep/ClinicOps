@@ -36,7 +36,7 @@
 <span class="eyebrow">Experimental pilot</span>
 <h1>ClinicOps Integrity Gate</h1>
 <p class="lede">A pre-release evidence-reconciliation and change-propagation screen for supplied medical-device regulatory information. It checks declared controlled sources against declared downstream surfaces, preserves source traceability, and routes ambiguity to human RA/QA review.</p>
-<div class="callout"><strong>Boundary:</strong> Integrity Gate is an evidence-control workflow, not a legal, regulatory or compliance determination. A machine result never replaces RA/QA judgement.</div>
+<div class="callout"><strong>Boundary:</strong> Integrity Gate is an evidence-control workflow, not a legal, regulatory or compliance determination. A machine result never replaces RA/QA judgement. Human approval in the ClinicOps workflow only clears the ClinicOps output for delivery; it never authorizes release of a device, controlled document or regulatory submission.</div>
 <div class="cta-row"><a class="cta primary" href="assessment-intake.html">Discuss a bounded pilot</a><a class="cta ghost" href="medical-device-document-control.html">See document-control scope</a></div>
 
 <h2>The operational question</h2>
@@ -48,12 +48,12 @@
 <li>refuse to infer authority when supplied controlled sources disagree;</li>
 <li>check declared approved changes against the surfaces the client identifies as affected;</li>
 <li>package every discrepancy with evidence references;</li>
-<li>require named human review before external release.</li>
+<li>require named human review before external delivery of the ClinicOps output.</li>
 </ol>
 
 <h2>Four fail-closed states</h2>
 <div class="card-grid">
-<div class="card"><h3>PASS</h3><p class="muted">No discrepancy found by the declared automated checks. Human review is still required for external release.</p></div>
+<div class="card"><h3>PASS</h3><p class="muted">No discrepancy found by the declared automated checks. Human review is still required before the ClinicOps output can be delivered externally.</p></div>
 <div class="card"><h3>REVIEW_REQUIRED</h3><p class="muted">A supplied field is missing or differs from the single supplied controlled value.</p></div>
 <div class="card"><h3>UNRESOLVED_AUTHORITY</h3><p class="muted">The supplied controlled evidence does not establish one authoritative value. ClinicOps does not guess.</p></div>
 <div class="card"><h3>HOLD_FOR_HUMAN_DECISION</h3><p class="muted">A declared change has not propagated, its approved source does not match the declared new value, or a downstream surface contains a conflicting value.</p></div>
@@ -70,7 +70,7 @@
 </tbody>
 </table>
 <p><strong>Automated result:</strong> <code>HOLD_FOR_HUMAN_DECISION</code> · <code>CHANGE_NOT_PROPAGATED</code></p>
-<p>The finding is bound to the supplied controlled-source reference and the supplied EUDAMED-export reference. External release remains human-review gated.</p>
+<p>The finding is bound to the supplied controlled-source reference and the supplied EUDAMED-export reference. Delivery of the ClinicOps output remains human-review gated; the gate itself does not authorize a regulatory or product release decision.</p>
 
 <h2>What is already executable</h2>
 <ul>
