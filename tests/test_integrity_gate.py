@@ -204,6 +204,23 @@ def test_failed_rereview_revokes_prior_approval(tmp_path: Path) -> None:
     assert "review_gate.json is missing" in reasons
 
 
+def test_rebuild_revokes_stale_review_evidence(tmp_path: Path) -> None:
+    case_path = _write_case(tmp_path, _case())
+    bundle = tmp_path / "bundle"
+    build_bundle(case_path, bundle)
+    _write_approved_review(tmp_path, bundle)
+    assert (bundle / "review_gate.json").is_file()
+    assert (bundle / "review_record.json").is_file()
+
+    build_bundle(case_path, bundle)
+
+    assert not (bundle / "review_gate.json").exists()
+    assert not (bundle / "review_record.json").exists()
+    ok, reasons = verify_review_gate(bundle)
+    assert ok is False
+    assert "review_gate.json is missing" in reasons
+
+
 def test_review_requires_disposition_for_every_current_finding(tmp_path: Path) -> None:
     case_path = _write_case(tmp_path, _case())
     bundle = tmp_path / "bundle"
