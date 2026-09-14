@@ -253,19 +253,24 @@ def write_review_gate(
     source_path = Path(review_record_path)
     review = load_review_record(source_path)
     source_hash = sha256_path(source_path)
+    source_bytes = source_path.read_bytes()
+
+    out = Path(output_dir)
+    gate_path = out / "review_gate.json"
+    bundled_review_path = out / "review_record.json"
+    for stale_path in (gate_path, bundled_review_path):
+        if stale_path.exists():
+            stale_path.unlink()
+
     result = evaluate_review_gate(
         review,
-        output_dir,
+        out,
         review_record_sha256=source_hash,
     )
     if result.approved and result.review_gate is not None:
-        out = Path(output_dir)
-        bundled_review_path = out / "review_record.json"
-        if source_path.resolve() != bundled_review_path.resolve():
-            bundled_review_path.write_bytes(source_path.read_bytes())
+        bundled_review_path.write_bytes(source_bytes)
         if sha256_path(bundled_review_path) != source_hash:
             raise ValueError("bundled review_record.json does not match approved review record")
-        gate_path = out / "review_gate.json"
         gate_path.write_text(
             json.dumps(result.review_gate, indent=2, ensure_ascii=False) + "\n",
             encoding="utf-8",
