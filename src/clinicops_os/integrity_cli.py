@@ -4,6 +4,7 @@ import json
 import sys
 
 from .integrity_gate import build_bundle, verify_bundle_integrity
+from .integrity_guard import preflight_case_safety
 from .integrity_review import (
     prepare_review_record,
     verify_review_gate,
@@ -15,6 +16,7 @@ def integrity_gate() -> None:
     if len(sys.argv) != 3:
         raise SystemExit("usage: clinicops-integrity-gate <case.json> <output-dir>")
     try:
+        preflight_case_safety(sys.argv[1])
         report = build_bundle(sys.argv[1], sys.argv[2])
     except (OSError, TypeError, ValueError, json.JSONDecodeError) as exc:
         raise SystemExit(str(exc)) from exc
@@ -55,7 +57,11 @@ def integrity_verify() -> None:
         raise SystemExit(
             "usage: clinicops-integrity-verify <output-dir> <case.json> [--require-review]"
         )
-    verified, reasons, manifest = verify_bundle_integrity(args[0], args[1])
+    try:
+        preflight_case_safety(args[1])
+        verified, reasons, manifest = verify_bundle_integrity(args[0], args[1])
+    except (OSError, TypeError, ValueError, json.JSONDecodeError) as exc:
+        raise SystemExit(str(exc)) from exc
     review_ok, review_reasons = verify_review_gate(args[0])
     if require_review and not review_ok:
         reasons = tuple(reasons) + tuple(
@@ -64,7 +70,7 @@ def integrity_verify() -> None:
         verified = False
     result = {
         "status": "VERIFIED" if verified else "NOT VERIFIED",
-        "release_ready": verified and review_ok,
+        "clinicops_output_delivery_ready": verified and review_ok,
         "case_id": manifest.get("case_id") if manifest else None,
         "automated_gate_status": manifest.get("gate_status") if manifest else None,
         "review_status": "REVIEW APPROVED" if review_ok else "REVIEW REQUIRED",
