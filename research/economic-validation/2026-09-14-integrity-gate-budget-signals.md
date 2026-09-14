@@ -13,7 +13,7 @@ Is there current public evidence that medical-device companies allocate real bud
 
 The European Commission's UDI/Device registration page states that manufacturers must submit UDI/Device information for devices placed on the EU market and that the UDI/Devices module became mandatory to use from 28 May 2026.
 
-Source: https://health.ec.europa.eu/medical-devices-eudamed/udidevice-registration_en
+Source: https://health.ec.europa.eu/medical-devices/eudamed/udidevice-registration_en
 
 Interpretation: this creates a current operational data-maintenance surface. It does **not** prove that manufacturers need or will buy ClinicOps.
 
@@ -63,6 +63,21 @@ Sources:
 
 Interpretation: buyers already allocate budget to adjacent controlled-document, traceability, QMS and regulatory-service workflows. This supports economic plausibility, not product-market fit for ClinicOps.
 
+### Public service-price anchors show material budget for bounded regulatory work
+
+The European Innovation Council Partner Services catalogue lists one medical-device regulatory support offer with an initial regulatory gap analysis at **€10,000–€20,000** depending on complexity, and another QARA service at **€150–€200/hour** with fixed packages available.
+
+Sources:
+
+- https://partnerservices.eismea.eu/consonance/medical-device-regulatory-support
+- https://partnerservices.eismea.eu/innokas-medical-oy/quality-and-regulatory-full-service
+
+A current boutique EUDAMED/MDR service page publishes **€2,500** for an EUDAMED registration service and **€1,800** for an MDR gap check.
+
+Source: https://azregulatory.pl/en/
+
+Interpretation: bounded regulatory data/review work can command prices materially above commodity translation or generic admin work. These are market anchors only; they do not justify an Integrity Gate price by themselves.
+
 ## What this evidence does and does not prove
 
 It supports:
@@ -70,6 +85,7 @@ It supports:
 - a current regulatory-data/change-control workload exists;
 - manufacturers allocate expert headcount to it;
 - adjacent vendors capture recurring software and service budgets;
+- bounded regulatory assessment/data services can command meaningful fixed or hourly fees;
 - an evidence-controlled pre-release/change-propagation workflow is economically plausible enough to test.
 
 It does **not** support:
@@ -77,10 +93,16 @@ It does **not** support:
 - a claim that Integrity Gate is commercially validated;
 - a claim that any specific manufacturer has the problem;
 - a claim that buyers prefer software over service;
-- a specific price;
+- a specific ClinicOps price;
 - a claim that ClinicOps reduces cost or risk in real customer use.
 
 Those require E4–E9 evidence in the private economic-validation ledger.
+
+## Pricing implication for the experiment
+
+Do not anchor ClinicOps to the highest public benchmark. Use the benchmarks only to reject the assumption that this category is necessarily low-value.
+
+The first real price test should be a bounded fixed-price scope tied to one workflow and one measurable output, with actual delivery/review hours captured. If a qualified buyer requests a price, record the offered scope, buyer objection/acceptance, and resulting E-stage; do not infer willingness from public benchmarks.
 
 ## Next falsification target
 
