@@ -4,7 +4,11 @@ import json
 import sys
 
 from .integrity_gate import build_bundle, verify_bundle_integrity
-from .integrity_review import prepare_review_record, verify_review_gate, write_review_gate
+from .integrity_review import (
+    prepare_review_record,
+    verify_review_gate,
+    write_review_gate,
+)
 
 
 def integrity_gate() -> None:
