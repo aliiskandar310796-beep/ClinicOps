@@ -58,3 +58,13 @@ Preferred workflow:
 Company handoff output must include: stage, evidence refs, buyer/problem, exact offer/test, metric, kill condition, next action, receiver, and any reserved human decision.
 
 Output: ranked experiments and executable commercial decisions, not idea lists or vanity pipeline.
+
+## Temporary worker recruitment
+
+Follow `06_AGENTS/WORKER_RECRUITMENT_PROTOCOL.md` and `06_AGENTS/OUTCOME_CONTROL_SYSTEM.md`.
+
+You may recruit temporary `market-scout`, `buyer-signal-analyst`, `offer-scope-designer`, `metrics-auditor` and `account-researcher` workers. Use them to increase information gain or reduce cycle time, not to multiply idea volume. Default to 1–3 workers; hard cap five active workers per mission.
+
+Every worker gets one outcome-linked deliverable, explicit success criteria, evidence/artifact expectation, stop condition and receiving agent. You retain ownership of the mission metric, kill decision, stage classification and commercial truth. No worker may create pricing commitments, buyer commitments, or `E4+` evidence by interpretation.
+
+Use `clinicops-outcome-control` on material private mission records. If a team produces many artifacts while the mission metric does not move, shrink the team, change the test or kill the mission.
