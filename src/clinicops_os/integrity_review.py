@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from collections import Counter
 from collections.abc import Mapping
 from dataclasses import dataclass
 from datetime import date
@@ -8,8 +9,8 @@ from pathlib import Path
 
 from .integrity_gate import BUNDLE_SCHEMA_VERSION, sha256_path, verify_bundle_integrity
 
-REVIEW_RECORD_SCHEMA_VERSION = "1.0"
-REVIEW_GATE_SCHEMA_VERSION = "1.0"
+REVIEW_RECORD_SCHEMA_VERSION = "1.1"
+REVIEW_GATE_SCHEMA_VERSION = "1.1"
 REVIEW_APPROVED = "REVIEW APPROVED"
 REVIEW_INCOMPLETE = "REVIEW INCOMPLETE"
 DELIVERY_SCOPE = (
@@ -24,6 +25,13 @@ REQUIRED_ATTESTATIONS = (
     "false_positive_risk_reviewed",
     "regulatory_judgement_not_automated",
     "release_interpretation_approved",
+)
+
+ALLOWED_FINDING_DISPOSITIONS = (
+    "CONFIRMED",
+    "RESOLVED_BY_CONTEXT",
+    "NOT_ACTIONABLE",
+    "FALSE_POSITIVE",
 )
 
 
@@ -56,6 +64,19 @@ def prepare_review_record(output_dir: str | Path) -> dict[str, object]:
         raise ValueError("bundle integrity failed: " + "; ".join(reasons))
     report_path = Path(output_dir) / "integrity_report.json"
     manifest_path = Path(output_dir) / "manifest.json"
+    report = _read_json(report_path, label="integrity_report.json")
+    findings = report.get("findings", [])
+    if not isinstance(findings, list):
+        raise TypeError("integrity_report findings must be a list")
+    dispositions: dict[str, str] = {}
+    for finding in findings:
+        if not isinstance(finding, dict):
+            raise TypeError("integrity_report finding must be a JSON object")
+        finding_id = finding.get("finding_id")
+        if not isinstance(finding_id, str) or not finding_id:
+            raise ValueError("integrity_report finding has no finding_id")
+        dispositions[finding_id] = ""
+
     record: dict[str, object] = {
         "record_schema_version": REVIEW_RECORD_SCHEMA_VERSION,
         "bundle_schema_version": BUNDLE_SCHEMA_VERSION,
@@ -66,8 +87,10 @@ def prepare_review_record(output_dir: str | Path) -> dict[str, object]:
         "human_reviewer": "",
         "reviewer_role": "",
         "review_completed_on": "",
+        "review_minutes": 0,
         "decision": "",
         "notes": "",
+        "finding_dispositions": dispositions,
     }
     for attestation in REQUIRED_ATTESTATIONS:
         record[attestation] = False
@@ -92,6 +115,11 @@ def evaluate_review_gate(
     out = Path(output_dir)
     manifest_path = out / "manifest.json"
     report_path = out / "integrity_report.json"
+    try:
+        report = _read_json(report_path, label="integrity_report.json")
+    except (OSError, TypeError, ValueError, json.JSONDecodeError) as exc:
+        reasons.append(f"report: {exc}")
+        report = {}
 
     if review_record.get("record_schema_version") != REVIEW_RECORD_SCHEMA_VERSION:
         reasons.append(f"record_schema_version must be {REVIEW_RECORD_SCHEMA_VERSION}")
@@ -122,9 +150,53 @@ def evaluate_review_gate(
         reasons.append("review_completed_on must be recorded")
     else:
         try:
-            date.fromisoformat(completed_on)
+            completed = date.fromisoformat(completed_on)
+            if completed > date.today():
+                reasons.append("review_completed_on cannot be in the future")
         except ValueError:
             reasons.append("review_completed_on must be an ISO date (YYYY-MM-DD)")
+
+    review_minutes = review_record.get("review_minutes")
+    if (
+        isinstance(review_minutes, bool)
+        or not isinstance(review_minutes, int)
+        or not 1 <= review_minutes <= 2880
+    ):
+        reasons.append("review_minutes must be an integer from 1 to 2880")
+
+    findings = report.get("findings", [])
+    expected_ids: set[str] = set()
+    if isinstance(findings, list):
+        for finding in findings:
+            if isinstance(finding, dict) and isinstance(finding.get("finding_id"), str):
+                expected_ids.add(str(finding["finding_id"]))
+    else:
+        reasons.append("integrity_report findings must be a list")
+
+    dispositions = review_record.get("finding_dispositions")
+    if not isinstance(dispositions, dict):
+        reasons.append("finding_dispositions must be a JSON object")
+        dispositions = {}
+    supplied_ids = set(str(key) for key in dispositions)
+    missing_ids = sorted(expected_ids - supplied_ids)
+    unknown_ids = sorted(supplied_ids - expected_ids)
+    if missing_ids:
+        reasons.append(f"finding_dispositions missing current findings: {missing_ids}")
+    if unknown_ids:
+        reasons.append(f"finding_dispositions contains unknown findings: {unknown_ids}")
+    for finding_id in sorted(expected_ids):
+        disposition = dispositions.get(finding_id)
+        if disposition not in ALLOWED_FINDING_DISPOSITIONS:
+            reasons.append(
+                f"{finding_id} disposition must be one of "
+                + ", ".join(ALLOWED_FINDING_DISPOSITIONS)
+            )
+
+    notes = review_record.get("notes")
+    if manifest.get("gate_status") != "PASS" and (
+        not isinstance(notes, str) or not notes.strip()
+    ):
+        reasons.append("notes are required when the automated gate status is not PASS")
 
     if review_record.get("decision") != "APPROVE":
         reasons.append("decision must be APPROVE for external delivery of the ClinicOps output")
@@ -134,6 +206,21 @@ def evaluate_review_gate(
 
     if reasons:
         return IntegrityReviewResult(False, tuple(reasons), None)
+
+    disposition_counts = Counter(str(dispositions[finding_id]) for finding_id in expected_ids)
+    total_findings = len(expected_ids)
+    false_positive_count = disposition_counts.get("FALSE_POSITIVE", 0)
+    review_metrics = {
+        "review_minutes": review_minutes,
+        "findings_reviewed": total_findings,
+        "confirmed": disposition_counts.get("CONFIRMED", 0),
+        "resolved_by_context": disposition_counts.get("RESOLVED_BY_CONTEXT", 0),
+        "not_actionable": disposition_counts.get("NOT_ACTIONABLE", 0),
+        "false_positive": false_positive_count,
+        "false_positive_rate": (
+            false_positive_count / total_findings if total_findings else None
+        ),
+    }
 
     gate = {
         "review_gate_schema_version": REVIEW_GATE_SCHEMA_VERSION,
@@ -147,8 +234,9 @@ def evaluate_review_gate(
         "reviewer_role": str(role).strip(),
         "review_completed_on": completed_on,
         "automated_gate_status": manifest.get("gate_status"),
-        "release_ready": True,
-        "release_ready_scope": DELIVERY_SCOPE,
+        "clinicops_output_delivery_ready": True,
+        "delivery_scope": DELIVERY_SCOPE,
+        "review_metrics": review_metrics,
         "limitations": (
             "Approval records completion of the declared human review for this exact ClinicOps "
             "output bundle. It does not authorize release of a device, controlled document or "
@@ -195,10 +283,10 @@ def verify_review_gate(output_dir: str | Path) -> tuple[bool, tuple[str, ...]]:
         )
     if gate.get("status") != REVIEW_APPROVED:
         reasons.append("review gate status is not REVIEW APPROVED")
-    if gate.get("release_ready") is not True:
-        reasons.append("review gate release_ready is not true")
-    if gate.get("release_ready_scope") != DELIVERY_SCOPE:
-        reasons.append("review gate release_ready_scope is missing or invalid")
+    if gate.get("clinicops_output_delivery_ready") is not True:
+        reasons.append("review gate clinicops_output_delivery_ready is not true")
+    if gate.get("delivery_scope") != DELIVERY_SCOPE:
+        reasons.append("review gate delivery_scope is missing or invalid")
     if gate.get("case_id") != manifest.get("case_id"):
         reasons.append("review gate case_id does not match manifest")
     if gate.get("source_sha256") != manifest.get("source_sha256"):
@@ -213,4 +301,7 @@ def verify_review_gate(output_dir: str | Path) -> tuple[bool, tuple[str, ...]]:
         "review_record_sha256"
     ):
         reasons.append("review gate has no review_record_sha256")
+    metrics = gate.get("review_metrics")
+    if not isinstance(metrics, dict) or not isinstance(metrics.get("review_minutes"), int):
+        reasons.append("review gate has no valid review_metrics")
     return not reasons, tuple(reasons)
