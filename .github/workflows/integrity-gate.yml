@@ -40,7 +40,9 @@ jobs:
               "human_reviewer": "Synthetic Reviewer",
               "reviewer_role": "RA/QA reviewer",
               "review_completed_on": "2026-09-14",
+              "review_minutes": 12,
               "decision": "APPROVE",
+              "notes": "Synthetic smoke review; finding disposition completed.",
               "evidence_population_reviewed": True,
               "authority_conflicts_reviewed": True,
               "change_propagation_findings_reviewed": True,
@@ -48,12 +50,15 @@ jobs:
               "regulatory_judgement_not_automated": True,
               "release_interpretation_approved": True,
           })
+          for finding_id in d.get("finding_dispositions", {}):
+              d["finding_dispositions"][finding_id] = "CONFIRMED"
           p.write_text(json.dumps(d, indent=2) + "\n")
           PY
           clinicops-integrity-review-gate /tmp/integrity-review.json /tmp/clinicops-integrity > /tmp/integrity-review-approved.json
           grep -q '"status": "REVIEW APPROVED"' /tmp/integrity-review-approved.json
+          grep -q '"review_minutes": 12' /tmp/integrity-review-approved.json
           clinicops-integrity-verify /tmp/clinicops-integrity examples/integrity_gate_case.example.json --require-review > /tmp/integrity-verify.json
           grep -q '"status": "VERIFIED"' /tmp/integrity-verify.json
-          grep -q '"release_ready": true' /tmp/integrity-verify.json
+          grep -q '"clinicops_output_delivery_ready": true' /tmp/integrity-verify.json
       - name: Integrity Gate focused tests
         run: pytest -q tests/test_integrity_gate.py
