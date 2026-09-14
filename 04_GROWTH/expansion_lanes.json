@@ -1,0 +1,80 @@
+{
+  "schema_version": "1.0",
+  "as_of": "2026-09-14",
+  "portfolio_thesis": "ClinicOps is an evidence-controlled operating layer for clinical work. EU MDR/EUDAMED is the current beachhead, not the brand boundary.",
+  "promotion_rule": "DISCOVER -> TEST -> SELL MANUALLY -> PROVE REPEATABILITY -> AUTOMATE",
+  "public_state_ceiling": "E1",
+  "lanes": [
+    {
+      "id": "trialops",
+      "name": "Clinical trial and site change integrity",
+      "name_fit": "very_high",
+      "public_evidence_stage": "E1",
+      "commercial_status": "TEST_NOW",
+      "entry_offer": "Trial Change Integrity Review",
+      "buyer_profiles": ["sponsor clinical operations", "CRO operations", "site quality/operations"],
+      "active_work": ["protocol-amendment propagation review", "site evidence reconciliation", "sponsor-CRO-site handoff review"],
+      "recurring_hypotheses": ["amendment impact register", "periodic study evidence review", "training/acknowledgement propagation review"],
+      "automation_allowed": false,
+      "validation_threshold": {
+        "qualified_conversations": 3,
+        "independent_repeated_pain_confirmations": 2,
+        "concrete_commercial_signals": 1,
+        "paid_or_activated_pilot_before_productization": 1
+      },
+      "primary_sources": [
+        "https://health.ec.europa.eu/medicinal-products/clinical-trials_en",
+        "https://www.ema.europa.eu/en/ich-e6-good-clinical-practice-scientific-guideline"
+      ]
+    },
+    {
+      "id": "qualityops",
+      "name": "Medical-device quality and QMS change integrity",
+      "name_fit": "high",
+      "public_evidence_stage": "E1",
+      "commercial_status": "TEST_NOW",
+      "entry_offer": "QMS Change Integrity Review",
+      "buyer_profiles": ["medical-device quality", "quality systems", "RA/QA consulting partner"],
+      "active_work": ["QMSR change evidence reconciliation", "CAPA/SOP/training propagation review", "supplier-quality evidence cleanup"],
+      "recurring_hypotheses": ["QMS drift review", "supplier evidence register maintenance", "periodic training/version propagation review"],
+      "automation_allowed": false,
+      "validation_threshold": {
+        "qualified_conversations": 3,
+        "independent_repeated_pain_confirmations": 2,
+        "concrete_commercial_signals": 1,
+        "paid_or_activated_pilot_before_productization": 1
+      },
+      "primary_sources": [
+        "https://www.fda.gov/medical-devices/postmarket-requirements-devices/quality-management-system-regulation-qmsr"
+      ]
+    },
+    {
+      "id": "clinical-ai-ops",
+      "name": "Clinical AI governance evidence operations",
+      "name_fit": "high",
+      "public_evidence_stage": "E1",
+      "commercial_status": "TEST_NOW",
+      "entry_offer": "Clinical AI Evidence Review",
+      "buyer_profiles": ["health-system AI governance", "clinical AI vendor", "digital health quality/operations"],
+      "active_work": ["AI system inventory sprint", "vendor/owner evidence review", "human-oversight and change-control mapping"],
+      "recurring_hypotheses": ["AI system register maintenance", "vendor/model change review", "periodic governance evidence packet"],
+      "automation_allowed": false,
+      "validation_threshold": {
+        "qualified_conversations": 3,
+        "independent_repeated_pain_confirmations": 2,
+        "concrete_commercial_signals": 1,
+        "paid_or_activated_pilot_before_productization": 1
+      },
+      "primary_sources": [
+        "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
+        "https://www.iso.org/standard/42001"
+      ]
+    }
+  ],
+  "guardrails": [
+    "E4+ buyer evidence remains private and must not be stored in this public registry.",
+    "No lane is a compliance, legal, clinical, safety or release decision service.",
+    "Automation remains blocked until repeatability is proven by real buyer and delivery evidence.",
+    "Adjacent lanes do not replace the current MDR/EUDAMED commercial beachhead until evidence earns the change."
+  ]
+}
