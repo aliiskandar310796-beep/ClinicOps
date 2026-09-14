@@ -53,7 +53,7 @@ REQUIREMENTS = (
         "specimen-register/index.html",
         (
             "ClinicOps_Regulatory_Integrity_Specimen_Register_v1.5.pdf",
-            "../assessment-intake.html?workstream=integrity-gate",
+            "../assessment-intake.html?workstream=integrity-review",
         ),
     ),
 )
