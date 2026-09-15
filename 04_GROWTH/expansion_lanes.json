@@ -1,80 +1,183 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "2.0",
   "as_of": "2026-09-14",
-  "portfolio_thesis": "ClinicOps is an evidence-controlled operating layer for clinical work. EU MDR/EUDAMED is the current beachhead, not the brand boundary.",
-  "promotion_rule": "DISCOVER -> TEST -> SELL MANUALLY -> PROVE REPEATABILITY -> AUTOMATE",
-  "public_state_ceiling": "E1",
+  "portfolio_thesis": "ClinicOps is an evidence-controlled operating layer for clinical work. EU medical-device regulatory integrity remains the beachhead, while adjacent clinical segments are live and ready for bounded engagement.",
+  "operating_rule": "RUN LIVE -> MEASURE -> REBALANCE -> PROVE -> STANDARDIZE -> AUTOMATE STABLE STEPS",
+  "status_model": {
+    "operational_status": "LIVE_READY",
+    "meaning": "The offer, intake route, delivery boundary and accountable human review path exist now.",
+    "commercial_validation": "Tracked separately from readiness; operational availability never implies proven demand, compliance or market validation."
+  },
+  "allocation_policy": {
+    "total_capacity_pct": 100,
+    "protected_floor_pct": 8,
+    "hard_ceiling_pct": 20,
+    "rebalance_frequency": "weekly",
+    "maximum_single_rebalance_points": 5,
+    "rebalance_inputs": {
+      "commercial_evidence_velocity_pct": 60,
+      "conversion_progress_pct": 25,
+      "portfolio_resilience_pct": 15
+    },
+    "rules": [
+      "No live segment may fall below its protected floor without a documented kill-switch condition.",
+      "No live segment may exceed the hard ceiling without an explicit portfolio decision supported by external evidence.",
+      "Do not equate equal capacity with fairness; use protected floors plus evidence-weighted increments.",
+      "No acquisition channel should represent more than half of a segment's planned activity units when alternatives exist.",
+      "Cold outbound is governed by the company-wide daily ceiling and suppression rules, not by segment ambition."
+    ]
+  },
+  "company_distribution_controls": {
+    "cold_email_daily_ceiling": 15,
+    "cold_email_denmark_allowed": false,
+    "shared_outbound_ledger_required": true,
+    "preferred_non_cold_channels": [
+      "warm follow-up",
+      "partner/referral development",
+      "inbound scope briefs",
+      "public evidence tools",
+      "research/content distribution",
+      "events and professional communities"
+    ]
+  },
   "lanes": [
+    {
+      "id": "regulatory-integrity",
+      "name": "Medical-device regulatory integrity",
+      "market_role": "BEACHHEAD",
+      "operational_status": "LIVE_READY",
+      "capacity_share_pct": 20,
+      "entry_offer": "Regulatory Integrity Review",
+      "service_route": "integrity-review",
+      "buyer_profiles": ["medical-device manufacturer RA/QA", "authorised representative", "regulatory/quality partner"],
+      "active_work": ["controlled-source reconciliation", "regulatory change propagation review", "EUDAMED/UDI/document evidence reconciliation"],
+      "recurring_streams": ["periodic change-integrity review", "portfolio evidence maintenance", "partner-delivered recurring reconciliation"],
+      "low_touch_streams": ["browser-local integrity check", "specimen/evidence packet formats", "change-control utilities"],
+      "distribution_channels": ["existing buyer/partner relationships", "inbound evidence tools", "research-led outreach", "partner ecosystem"],
+      "automation_support_allowed": true,
+      "automated_authority_allowed": false,
+      "public_evidence_stage": "E1",
+      "commercial_proof_public": "NOT_DISCLOSED"
+    },
     {
       "id": "trialops",
       "name": "Clinical trial and site change integrity",
-      "name_fit": "very_high",
-      "public_evidence_stage": "E1",
-      "commercial_status": "TEST_NOW",
+      "market_role": "ACTIVE_ADJACENCY",
+      "operational_status": "LIVE_READY",
+      "capacity_share_pct": 18,
       "entry_offer": "Trial Change Integrity Review",
+      "service_route": "trial-change",
       "buyer_profiles": ["sponsor clinical operations", "CRO operations", "site quality/operations"],
       "active_work": ["protocol-amendment propagation review", "site evidence reconciliation", "sponsor-CRO-site handoff review"],
-      "recurring_hypotheses": ["amendment impact register", "periodic study evidence review", "training/acknowledgement propagation review"],
-      "automation_allowed": false,
-      "validation_threshold": {
-        "qualified_conversations": 3,
-        "independent_repeated_pain_confirmations": 2,
-        "concrete_commercial_signals": 1,
-        "paid_or_activated_pilot_before_productization": 1
-      },
-      "primary_sources": [
-        "https://health.ec.europa.eu/medicinal-products/clinical-trials_en",
-        "https://www.ema.europa.eu/en/ich-e6-good-clinical-practice-scientific-guideline"
-      ]
+      "recurring_streams": ["amendment impact register", "periodic study evidence review", "training/acknowledgement propagation review"],
+      "low_touch_streams": ["amendment propagation mapper after repeatability proof", "study-change evidence packet template after repeatability proof"],
+      "distribution_channels": ["CRO/sponsor partnerships", "clinical-operations communities", "inbound scope brief", "research-led workflow comparisons"],
+      "automation_support_allowed": true,
+      "automated_authority_allowed": false,
+      "public_evidence_stage": "E1",
+      "commercial_proof_public": "NOT_DISCLOSED",
+      "primary_sources": ["https://health.ec.europa.eu/medicinal-products/clinical-trials_en", "https://www.ema.europa.eu/en/ich-e6-good-clinical-practice-scientific-guideline"]
     },
     {
       "id": "qualityops",
       "name": "Medical-device quality and QMS change integrity",
-      "name_fit": "high",
-      "public_evidence_stage": "E1",
-      "commercial_status": "TEST_NOW",
+      "market_role": "ACTIVE_ADJACENCY",
+      "operational_status": "LIVE_READY",
+      "capacity_share_pct": 18,
       "entry_offer": "QMS Change Integrity Review",
+      "service_route": "qms-change",
       "buyer_profiles": ["medical-device quality", "quality systems", "RA/QA consulting partner"],
       "active_work": ["QMSR change evidence reconciliation", "CAPA/SOP/training propagation review", "supplier-quality evidence cleanup"],
-      "recurring_hypotheses": ["QMS drift review", "supplier evidence register maintenance", "periodic training/version propagation review"],
-      "automation_allowed": false,
-      "validation_threshold": {
-        "qualified_conversations": 3,
-        "independent_repeated_pain_confirmations": 2,
-        "concrete_commercial_signals": 1,
-        "paid_or_activated_pilot_before_productization": 1
-      },
-      "primary_sources": [
-        "https://www.fda.gov/medical-devices/postmarket-requirements-devices/quality-management-system-regulation-qmsr"
-      ]
+      "recurring_streams": ["QMS drift review", "supplier evidence register maintenance", "periodic training/version propagation review"],
+      "low_touch_streams": ["controlled-change packet after repeatability proof", "supplier evidence register kit after repeatability proof"],
+      "distribution_channels": ["quality-system partners", "MedTech communities", "inbound scope brief", "QMSR research/content"],
+      "automation_support_allowed": true,
+      "automated_authority_allowed": false,
+      "public_evidence_stage": "E1",
+      "commercial_proof_public": "NOT_DISCLOSED",
+      "primary_sources": ["https://www.fda.gov/medical-devices/postmarket-requirements-devices/quality-management-system-regulation-qmsr"]
     },
     {
       "id": "clinical-ai-ops",
       "name": "Clinical AI governance evidence operations",
-      "name_fit": "high",
-      "public_evidence_stage": "E1",
-      "commercial_status": "TEST_NOW",
+      "market_role": "ACTIVE_ADJACENCY",
+      "operational_status": "LIVE_READY",
+      "capacity_share_pct": 15,
       "entry_offer": "Clinical AI Evidence Review",
+      "service_route": "clinical-ai",
       "buyer_profiles": ["health-system AI governance", "clinical AI vendor", "digital health quality/operations"],
       "active_work": ["AI system inventory sprint", "vendor/owner evidence review", "human-oversight and change-control mapping"],
-      "recurring_hypotheses": ["AI system register maintenance", "vendor/model change review", "periodic governance evidence packet"],
-      "automation_allowed": false,
-      "validation_threshold": {
-        "qualified_conversations": 3,
-        "independent_repeated_pain_confirmations": 2,
-        "concrete_commercial_signals": 1,
-        "paid_or_activated_pilot_before_productization": 1
-      },
-      "primary_sources": [
-        "https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai",
-        "https://www.iso.org/standard/42001"
-      ]
+      "recurring_streams": ["AI system register maintenance", "vendor/model change review", "periodic governance evidence packet"],
+      "low_touch_streams": ["AI evidence register kit after repeatability proof", "vendor/model change packet after repeatability proof"],
+      "distribution_channels": ["clinical AI vendors", "health-system governance networks", "digital-health partners", "inbound scope brief"],
+      "automation_support_allowed": true,
+      "automated_authority_allowed": false,
+      "public_evidence_stage": "E1",
+      "commercial_proof_public": "NOT_DISCLOSED",
+      "primary_sources": ["https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai", "https://www.iso.org/standard/42001"]
+    },
+    {
+      "id": "labops",
+      "name": "Diagnostic laboratory and point-of-care change operations",
+      "market_role": "LIVE_EMERGING",
+      "operational_status": "LIVE_READY",
+      "capacity_share_pct": 10,
+      "entry_offer": "Lab Change Integrity Review",
+      "service_route": "lab-change",
+      "buyer_profiles": ["medical laboratory quality", "diagnostic operations", "point-of-care quality"],
+      "active_work": ["method/document propagation review", "equipment/service evidence reconciliation", "competency/change evidence structuring"],
+      "recurring_streams": ["equipment/certificate evidence register", "competency/document change review", "periodic evidence completeness review"],
+      "low_touch_streams": ["lab change packet after repeatability proof", "equipment evidence register kit after repeatability proof"],
+      "distribution_channels": ["laboratory quality partners", "diagnostic networks", "professional communities", "inbound scope brief"],
+      "automation_support_allowed": true,
+      "automated_authority_allowed": false,
+      "public_evidence_stage": "E1",
+      "commercial_proof_public": "NOT_DISCLOSED",
+      "primary_sources": ["https://www.iso.org/standard/76677.html"]
+    },
+    {
+      "id": "clinic-ops",
+      "name": "Clinic vendor, SOP and operational evidence",
+      "market_role": "LIVE_EMERGING",
+      "operational_status": "LIVE_READY",
+      "capacity_share_pct": 11,
+      "entry_offer": "Clinic Operations Evidence Review",
+      "service_route": "clinic-ops",
+      "buyer_profiles": ["clinic operations", "healthcare quality", "care-delivery operations"],
+      "active_work": ["vendor onboarding/renewal evidence review", "SOP change propagation", "training/acknowledgement evidence reconciliation"],
+      "recurring_streams": ["vendor evidence register", "SOP propagation review", "monthly evidence-health packet"],
+      "low_touch_streams": ["clinic vendor evidence kit after repeatability proof", "SOP propagation checklist after repeatability proof"],
+      "distribution_channels": ["clinic-management partners", "healthcare quality networks", "local/international care-delivery communities", "inbound scope brief"],
+      "automation_support_allowed": true,
+      "automated_authority_allowed": false,
+      "public_evidence_stage": "E1",
+      "commercial_proof_public": "NOT_DISCLOSED"
+    },
+    {
+      "id": "medical-content-ops",
+      "name": "Controlled medical content and localization operations",
+      "market_role": "PARTNER_LED_LIVE",
+      "operational_status": "LIVE_READY",
+      "capacity_share_pct": 8,
+      "entry_offer": "Controlled Medical Content Change Review",
+      "service_route": "medical-content",
+      "buyer_profiles": ["medical-content operations", "localization/language partner", "medical-device or life-science document owner"],
+      "active_work": ["approved-source to derivative-content propagation review", "language/version evidence reconciliation", "partner/distributor change packet"],
+      "recurring_streams": ["terminology/version register", "source-to-language change review", "periodic controlled-content evidence review"],
+      "low_touch_streams": ["partner-ready change packet format after repeatability proof", "controlled terminology/version register after repeatability proof"],
+      "distribution_channels": ["language/localization partners", "AR/regulatory partners", "medical-content teams", "inbound scope brief"],
+      "automation_support_allowed": true,
+      "automated_authority_allowed": false,
+      "public_evidence_stage": "E1",
+      "commercial_proof_public": "NOT_DISCLOSED"
     }
   ],
   "guardrails": [
     "E4+ buyer evidence remains private and must not be stored in this public registry.",
+    "LIVE_READY describes operational availability, not market validation, compliance or buyer demand.",
     "No lane is a compliance, legal, clinical, safety or release decision service.",
-    "Automation remains blocked until repeatability is proven by real buyer and delivery evidence.",
-    "Adjacent lanes do not replace the current MDR/EUDAMED commercial beachhead until evidence earns the change."
+    "Automation may support stable evidence-handling steps but may not take reserved human authority.",
+    "Recurring and low-touch products graduate only after repeated real delivery or buyer evidence shows a stable structure.",
+    "Company-wide cold outbound controls apply across every segment and every agent concurrently."
   ]
 }
