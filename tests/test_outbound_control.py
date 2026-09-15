@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import date, datetime, timedelta, timezone
+from datetime import UTC, date, datetime, timedelta
 
 from clinicops_os.outbound_control import (
     OutboundCandidate,
@@ -11,7 +11,7 @@ from clinicops_os.outbound_control import (
 )
 
 DAY = date(2026, 9, 14)
-NOW = datetime(2026, 9, 14, 18, 0, tzinfo=timezone.utc)
+NOW = datetime(2026, 9, 14, 18, 0, tzinfo=UTC)
 
 
 def snapshot(
