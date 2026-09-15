@@ -38,7 +38,7 @@ def _norm(value: str | None) -> str:
 
 def _norm_domain(value: str | None) -> str:
     domain = _norm(value)
-    return domain[1:] if domain.startswith("@") else domain
+    return domain.removeprefix("@")
 
 
 @dataclass(frozen=True, slots=True)
