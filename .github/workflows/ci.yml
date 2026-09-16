@@ -32,6 +32,12 @@ jobs:
           grep -q '"status": "SWARM READY"' /tmp/clinicops-sales-swarm.json
       - name: Readiness score contract
         run: python scripts/validate_readiness_page.py
+      - name: Change Surface Mapper contract
+        run: python scripts/validate_change_surface_mapper.py
+      - name: Change Control Pack contract
+        run: |
+          python scripts/validate_change_control_packet.py examples/change_control_packet.example.json > /tmp/clinicops-change-control-packet.json
+          grep -q '"status": "VALID"' /tmp/clinicops-change-control-packet.json
       - name: Public Transition Map sample
         run: python scripts/render_public_demo.py --check
       - name: Site metadata contract
