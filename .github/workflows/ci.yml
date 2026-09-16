@@ -38,6 +38,10 @@ jobs:
         run: |
           python scripts/validate_change_control_packet.py examples/change_control_packet.example.json > /tmp/clinicops-change-control-packet.json
           grep -q '"status": "VALID"' /tmp/clinicops-change-control-packet.json
+      - name: Product extraction gate
+        run: |
+          python scripts/validate_product_opportunity_gate.py > /tmp/clinicops-product-opportunity-gate.json
+          grep -q '"status": "VALID"' /tmp/clinicops-product-opportunity-gate.json
       - name: Public Transition Map sample
         run: python scripts/render_public_demo.py --check
       - name: Site metadata contract
