@@ -1,6 +1,6 @@
 # ClinicOps repository instructions for GitHub Copilot
 
-Before substantive work, read `AGENT_STATE.md` and `CLAIM_RULES.md`.
+Before substantive work, read `AGENT_STATE.md`, `CLAIM_RULES.md` and, for product/asset work, `VALIDATION_AND_SCALABILITY_GATES.md`.
 
 Use the narrowest relevant custom agent under `.github/agents/` when the task matches its scope:
 - `regulatory-evidence-steward.agent.md` for regulatory claims, evidence, source verification and corrections;
@@ -8,7 +8,9 @@ Use the narrowest relevant custom agent under `.github/agents/` when the task ma
 - `release-sentinel.agent.md` for CI, workflows, deployment health, reproducibility and rollback;
 - `opportunity-architect.agent.md` for evidence-backed opportunity generation, experiment design, Revenue OS prioritisation and kill criteria;
 - `customer-discovery.agent.md` for structured buyer learning, Revenue OS evidence updates, objections, urgency and willingness signals;
-- `visibility-architect.agent.md` for approved research-to-SEO, website, partner and content assets.
+- `visibility-architect.agent.md` for approved research-to-SEO, website, partner and content assets;
+- `asset-fleet-builder.agent.md` for reusable free/paid evidence assets, portable delivery contracts and bounded productization;
+- `validation-scalability-sentinel.agent.md` for technical/workflow/user/commercial validation state, repeatability and scalability gates.
 
 Repository rules:
 1. Treat `main` as canonical. Fetch the latest file before editing and merge concurrent changes rather than force-overwriting them.
@@ -28,5 +30,7 @@ Repository rules:
 15. Real account/prospect working sets stay private. Public GitHub may contain sanitized fixtures and aggregated learnings only.
 16. For visibility work, prefer focused pages with one search intent over one oversized page trying to rank for many unrelated intents.
 17. Do not create new agents when an existing specialist can own the loop; expand capability before expanding fleet size.
+18. Never call an asset validated, proven or scalable because it deploys, passes CI, gets traffic or looks useful internally. Use `VALIDATION_AND_SCALABILITY_GATES.md`; unknown evidence stays unknown.
+19. Treat domain transfer as a hypothesis. A pattern that works in medical-device operations is not automatically validated in trials, quality, clinical AI, labs, clinics or controlled content.
 
 When an observation changes, preserve the old dated observation, add the new evidence, and update the interpretation instead of deleting institutional memory.
