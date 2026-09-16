@@ -4,6 +4,8 @@ Status: RUNNING.
 
 ClinicOps is operated as a multi-segment clinical-operations company, not a sequence of experiments waiting to begin. Operational readiness and commercial proof are tracked separately.
 
+Product extraction follows `PRODUCT_EXTRACTION_DOCTRINE_2026-09-16.md`: **sell the pain, standardize the repeated work, automate only what survives reality.** The portfolio exists to produce revenue and evidence. It does not force all segments toward software.
+
 ## Portfolio allocation
 
 | Segment | Capacity | Primary active offer |
@@ -31,6 +33,8 @@ Owns the sellable evidence outcome now:
 - unresolved queue;
 - accountable decision owner;
 - reviewer-ready closure packet.
+
+Delivery is also the primary source of product evidence. Privately capture the trigger, current workaround, common inputs, common outputs, manual/review steps, recurring failure modes, rework, turnaround, acceptance state, willingness-to-pay signal and repeat cadence where observable.
 
 ### 2. Distribution fleet
 
@@ -68,6 +72,8 @@ Converts only repeated delivery structures into lower-touch assets:
 - monitoring utilities.
 
 The productization fleet automates evidence handling, not reserved clinical, regulatory, legal, safety, quality or release decisions.
+
+It must not promote an idea into a core MVP because it appears broadly applicable. A core product candidate requires the hard paid-evidence gate in `PRODUCT_EXTRACTION_DOCTRINE_2026-09-16.md`.
 
 ## Weekly rebalancing algorithm
 
@@ -119,7 +125,8 @@ Do not collapse company health into one score. Track separately:
 - **distribution:** qualified reach by segment/channel, partner introductions, inbound briefs;
 - **recurring:** workflows with confirmed cadence, retention/renewal;
 - **technical:** CI, deterministic checks, portable fallback;
-- **governance:** human review, claim boundaries, privacy containment, suppression compliance.
+- **governance:** human review, claim boundaries, privacy containment, suppression compliance;
+- **product extraction:** repeated paid cases, independent buyers/workflows, common I/O share, repeat purchases, measurable value and documented competitor gaps.
 
 ## Revenue architecture
 
@@ -130,3 +137,5 @@ The portfolio continuously supports three income modes:
 3. **Lower-touch:** tools, templates, packet builders, licenses and research products only after repeated delivery proves the stable structure.
 
 The company is therefore always running at three horizons: deliver now, convert recurring work, and extract reusable product primitives without prematurely turning hypotheses into software.
+
+The preferred sequence is **service proof → standardized service → internal tooling → repeated buyer pull → core MVP candidate → software expansion**.
