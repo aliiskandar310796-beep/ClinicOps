@@ -1,6 +1,6 @@
 # ClinicOps repository instructions for GitHub Copilot
 
-Before substantive work, read `AGENT_STATE.md`, `CLAIM_RULES.md` and, for product/asset work, `VALIDATION_AND_SCALABILITY_GATES.md`.
+Before substantive work, read `AGENT_STATE.md`, `CLAIM_RULES.md` and, for product/asset work, `VALIDATION_AND_SCALABILITY_GATES.md` plus `04_GROWTH/PRODUCT_EXTRACTION_DOCTRINE_2026-09-16.md`.
 
 Use the narrowest relevant custom agent under `.github/agents/` when the task matches its scope:
 - `regulatory-evidence-steward.agent.md` for regulatory claims, evidence, source verification and corrections;
@@ -32,5 +32,9 @@ Repository rules:
 17. Do not create new agents when an existing specialist can own the loop; expand capability before expanding fleet size.
 18. Never call an asset validated, proven or scalable because it deploys, passes CI, gets traffic or looks useful internally. Use `VALIDATION_AND_SCALABILITY_GATES.md`; unknown evidence stays unknown.
 19. Treat domain transfer as a hypothesis. A pattern that works in medical-device operations is not automatically validated in trials, quality, clinical AI, labs, clinics or controlled content.
+20. Product strategy follows: **sell the pain, standardize the repeated work, automate only what survives reality**. Do not promote idea-first horizontal software merely because the market sounds large.
+21. A concept may be called `CORE_MVP_CANDIDATE` only when every hard gate in `04_GROWTH/PRODUCT_EXTRACTION_DOCTRINE_2026-09-16.md` is evidenced. Missing evidence blocks promotion. Rejected ideas require a documented kill reason and stay rejected until materially new evidence appears.
+22. Use paid delivery as product discovery. Extract reusable primitives from repeated independent work; do not redesign real engagements around an unproven software concept.
+23. Public commercial copy should state buyer problem, scope, deliverable, accountable boundary and next step. Keep internal validation machinery, CI status and product-extraction gates internal unless disclosure is necessary for accurate buyer understanding.
 
 When an observation changes, preserve the old dated observation, add the new evidence, and update the interpretation instead of deleting institutional memory.
