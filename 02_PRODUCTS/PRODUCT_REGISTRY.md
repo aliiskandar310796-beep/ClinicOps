@@ -1,6 +1,11 @@
 # ClinicOps Product Registry
 
-ClinicOps separates **availability**, **technical verification**, **real-world validation** and **scalability**. Product-state language must follow `VALIDATION_AND_SCALABILITY_GATES.md`.
+ClinicOps separates **availability**, **technical verification**, **real-world validation**, **repeatable delivery**, **scalability** and **core-product candidacy**.
+
+- Product-state language follows `VALIDATION_AND_SCALABILITY_GATES.md`.
+- Whether repeated work deserves to become a core product follows `04_GROWTH/PRODUCT_EXTRACTION_DOCTRINE_2026-09-16.md`.
+
+A product can be technically sound and commercially useful without being a core-product candidate. Core-product promotion requires repeated paid evidence, independent buyers/workflows, a stable input/output contract, repeat demand, measurable value and a documented competitor gap.
 
 ## Free entry products
 
@@ -14,6 +19,8 @@ Target users: regulatory, quality, trial, AI, laboratory, clinic and controlled-
 Primary output: browser-local change-surface brief + JSON handoff.
 
 Validation requirement: independent representative external workflow evidence is required before any real-world validated or scalable claim.
+
+Core-product state: not promoted. Treat it as an acquisition/delivery asset unless repeated paid work independently satisfies the product-extraction gate.
 
 ### Regulatory Change Integrity Check
 Status: PUBLIC.
@@ -43,15 +50,17 @@ Purpose: make the ClinicOps evidence-control method inspectable before a paid en
 ## Paid products / delivery formats
 
 ### Evidence Change Control Pack
-Status: AVAILABLE FOR BOUNDED SCOPING — NOT YET DESCRIBED AS REAL-WORLD VALIDATED OR SCALABLE.
+Status: AVAILABLE FOR FOCUSED SCOPING.
 
-Input: one declared approved/authoritative change, bounded evidence population, available evidence and accountable owner.
+Input: one declared approved/authoritative change, defined evidence population, available evidence and accountable owner.
 
 Output: source register, change-surface matrix, unresolved queue, reviewer-ready closure packet and portable handoff.
 
 Target customer: medical-device regulatory/quality teams, ARs/consultancies, sponsors/CROs/sites, quality owners, clinical-AI operations, laboratory/clinic operations and controlled medical-content teams.
 
 Evidence required before stronger product claims: independent completed external cases under `VALIDATION_AND_SCALABILITY_GATES.md`.
+
+Core-product state: not promoted. Use real paid delivery to test whether a stable primitive survives across independent cases.
 
 ### Transition Intelligence Scan
 Input: device portfolio and evidence.
@@ -62,6 +71,16 @@ Recurring service for repeated regulatory/evidence signals and controlled change
 
 ### Regulatory Operations Training
 Structured learning products where source validity and learning scope are explicit.
+
+## Product extraction rule
+
+ClinicOps follows:
+
+**Sell the pain. Standardize the repeated work. Automate only what survives reality.**
+
+Do not create a core MVP merely because a problem appears horizontal or large. Prefer a painful niche with clear budget, repeated manual work, observable failure and measurable value. The product may become horizontal after the invariant primitive survives multiple independent real contexts.
+
+A concept may enter `CORE_MVP_CANDIDATE` only when the hard gate in `04_GROWTH/PRODUCT_EXTRACTION_DOCTRINE_2026-09-16.md` is fully evidenced. The machine-readable fixture and CI validator are `examples/product_opportunity_gate.example.json` and `scripts/validate_product_opportunity_gate.py`.
 
 ## Product rule
 
@@ -77,8 +96,9 @@ Each product must define:
 - technical test contract;
 - real-world validation state;
 - repeatability/scalability state;
+- product-extraction / core-candidacy state;
 - success metric;
 - kill condition;
 - next improvement loop.
 
-Do not promote a product state because a page exists, CI is green, or an internal agent judges it useful. Unknown evidence remains unknown.
+Do not promote a product state because a page exists, CI is green, traffic exists, or an internal agent judges it useful. Unknown evidence remains unknown.
