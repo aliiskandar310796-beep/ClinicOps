@@ -1,0 +1,96 @@
+{
+  "schema_version": "1.0",
+  "packet_id": "SYNTHETIC-CHANGE-001",
+  "status": "review_ready",
+  "workstream": "medical-device regulatory integrity",
+  "change": {
+    "title": "Synthetic approved source value update",
+    "source_reference": "SYNTHETIC-MASTER-RECORD-001",
+    "source_version": "v2",
+    "effective_date": "2026-09-01",
+    "summary": "A fictional controlled source value changed and the declared downstream evidence population is being reconciled."
+  },
+  "scope": {
+    "population_basis": "Sanitized fictional demonstration only",
+    "included_surfaces": 5,
+    "exclusions": [
+      "No live client records",
+      "No compliance determination",
+      "No patient-identifiable data"
+    ]
+  },
+  "surfaces": [
+    {
+      "surface_id": "SURF-001",
+      "name": "Regulatory master record",
+      "evidence_state": "aligned",
+      "observed_evidence": "Synthetic record reflects v2 value",
+      "owner": "Regulatory operations owner",
+      "closure_evidence": "Approved record snapshot",
+      "decision_required": false
+    },
+    {
+      "surface_id": "SURF-002",
+      "name": "External registry record",
+      "evidence_state": "missing_evidence",
+      "observed_evidence": "No evidence supplied in the fictional packet",
+      "owner": "Regulatory data owner",
+      "closure_evidence": "Current registry evidence or documented non-applicability",
+      "decision_required": true
+    },
+    {
+      "surface_id": "SURF-003",
+      "name": "Controlled user information",
+      "evidence_state": "mismatch_signal",
+      "observed_evidence": "Synthetic derivative still shows prior value",
+      "owner": "Document control owner",
+      "closure_evidence": "Qualified review and approved replacement or documented rationale",
+      "decision_required": true
+    },
+    {
+      "surface_id": "SURF-004",
+      "name": "Training record",
+      "evidence_state": "not_applicable",
+      "observed_evidence": "Fictional scope owner marked training impact out of scope",
+      "owner": "Quality owner",
+      "closure_evidence": "Recorded scope decision",
+      "decision_required": false
+    },
+    {
+      "surface_id": "SURF-005",
+      "name": "Change-control record",
+      "evidence_state": "unresolved",
+      "observed_evidence": "Closure approval is not yet present",
+      "owner": "Change owner",
+      "closure_evidence": "Approved closure record",
+      "decision_required": true
+    }
+  ],
+  "unresolved_queue": [
+    {
+      "surface_id": "SURF-002",
+      "question": "What evidence establishes the current external record state?",
+      "next_owner": "Regulatory data owner"
+    },
+    {
+      "surface_id": "SURF-003",
+      "question": "Does the mismatch require controlled content change, or is there a documented reason it does not?",
+      "next_owner": "Qualified regulatory/document owner"
+    },
+    {
+      "surface_id": "SURF-005",
+      "question": "What evidence closes the declared change event?",
+      "next_owner": "Change owner"
+    }
+  ],
+  "review_boundary": {
+    "automation_role": "Evidence structuring and deterministic signal packaging only",
+    "human_role": "Qualified owners interpret domain significance, approve decisions and close unresolved items",
+    "compliance_finding": false
+  },
+  "validation": {
+    "fixture_type": "sanitized_synthetic",
+    "real_world_validation_evidence": false,
+    "scalability_evidence": false
+  }
+}
