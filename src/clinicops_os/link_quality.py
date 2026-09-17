@@ -108,7 +108,7 @@ def _intake_contract(intake_html: str) -> tuple[dict[str, str], set[str]]:
     preset_match = re.search(r'presets=({"[^}]+})', intake_html)
     presets: dict[str, str] = json.loads(preset_match.group(1)) if preset_match else {}
     select_match = re.search(
-        r'<select id="workstream"[^>]*>(.*?)</select>', intake_html, re.S
+        r'<select id="workstream"[^>]*>(.*?)</select>', intake_html, re.DOTALL
     )
     options: set[str] = set()
     if select_match:
