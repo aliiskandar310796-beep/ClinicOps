@@ -3,7 +3,11 @@ from __future__ import annotations
 import json
 import sys
 
-from .outcome_control import load_outcome_mission, render_evaluation, evaluate_outcome_mission
+from .outcome_control import (
+    evaluate_outcome_mission,
+    load_outcome_mission,
+    render_evaluation,
+)
 
 
 def outcome_control() -> None:

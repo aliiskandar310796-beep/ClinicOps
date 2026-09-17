@@ -4,7 +4,6 @@ import copy
 
 from clinicops_os.risk_control import RiskRegister, evaluate_risk_register
 
-
 BASE_REGISTER = {
     "schema_version": "1.0",
     "mission_id": "TEST-RISK",

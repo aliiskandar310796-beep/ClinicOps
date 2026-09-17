@@ -6,7 +6,6 @@ import pytest
 
 from clinicops_os.outcome_control import OutcomeMission, evaluate_outcome_mission
 
-
 BASE_MISSION = {
     "schema_version": "1.0",
     "mission_id": "TEST-MISSION",

@@ -4,7 +4,6 @@ import copy
 
 from clinicops_os.economic_validation import EconomicLedger, evaluate_economic_ledger
 
-
 BASE_LEDGER = {
     "schema_version": "1.0",
     "offer_id": "TEST-OFFER",
