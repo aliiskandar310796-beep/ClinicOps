@@ -17,6 +17,9 @@ DESCRIPTION = (
     "Sanitized fictional sample of the ClinicOps Class III Transition Map "
     "work-plan format."
 )
+# Fictional records must not carry fake evidence URLs. A sanitized fixture row
+# either has a real, reachable source or a blank source_url rendered as "—".
+FORBIDDEN_PLACEHOLDER_DOMAINS = ("example.com", "example.org", "example.net", "test.invalid")
 
 
 def render_public_demo() -> str:
@@ -48,6 +51,13 @@ def render_public_demo() -> str:
 </body>''',
         1,
     )
+    for domain in FORBIDDEN_PLACEHOLDER_DOMAINS:
+        if domain in html:
+            raise SystemExit(
+                f"public Transition Map sample contains placeholder domain "
+                f"'{domain}'; fix examples/portfolio.csv (blank source_url for "
+                "fictional records) instead of publishing fake evidence links"
+            )
     return html
 
 

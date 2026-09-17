@@ -18,9 +18,9 @@
 
 | Priority | Company | Device | Role | Registration | Certificate expiry | Danish market | Workstream |
 |---:|---|---|---|---|---|---|---|
-| 98 | Example MedTech A | Example Class III Device | MF | legacy | 2027-02-15 | confirmed | Legacy → MDR transition: urgent work-plan review |
-| 33 | Example MedTech B | Example MDR Device | MF | MDR | 2028-06-30 | yes | MDR manufacturer record — monitor document/market-language controls |
-| 8 | Example Pack Producer | Example Procedure Pack | PR | MDR | — | unknown | Separate PR/system-procedure-pack review |
+| 95 | Example MedTech A | Example Class III Device | MF | legacy | 2027-02-15 | confirmed | Legacy → MDR transition: urgent work-plan review |
+| 30 | Example MedTech B | Example MDR Device | MF | MDR | 2028-06-30 | yes | MDR manufacturer record — monitor document/market-language controls |
+| 5 | Example Pack Producer | Example Procedure Pack | PR | MDR | — | unknown | Separate PR/system-procedure-pack review |
 
 ## Interpretation constraints
 
