@@ -45,7 +45,7 @@ def test_privacy_notice_is_part_of_the_public_surface() -> None:
     assert "Your right to object" in html
     assert "ClinicOps itself sets no cookies, runs no analytics" in html
     assert "https://clinicops.dk/privacy-notice/" in sitemap
-    assert 'Target("/privacy-notice/", 200, "Your right to object")' in live_check
+    assert 'Target("/privacy-notice/", 200, "<title>Privacy Notice | ClinicOps</title>")' in live_check
 
 
 def test_every_sitemap_html_page_links_to_privacy_notice() -> None:
