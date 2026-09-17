@@ -25,18 +25,49 @@ class Result:
     marker_found: bool
 
 
+# Markers are stable page-identity strings (title/canonical fragments), not
+# promotional sentences: copy changes should not break the health check unless
+# the page's identity actually changed.
 TARGETS = (
-    Target("/", 200, "Turn EUDAMED transition evidence into an actionable work plan."),
-    Target("/tools.html", 200, "Free intelligence tools"),
-    Target("/identifier-check.html", 200, "EUDAMED Identifier Check"),
-    Target("/readiness-score.html", 200, "Transition Readiness Score"),
+    Target("/", 200, "<title>ClinicOps | "),
+    Target("/services.html", 200, "<title>Services | ClinicOps</title>"),
+    Target(
+        "/denmark-market-access.html",
+        200,
+        "<title>Denmark Market Access | ClinicOps</title>",
+    ),
+    Target(
+        "/integrity-gate.html",
+        200,
+        "<title>Regulatory Integrity Review for MedTech | ClinicOps</title>",
+    ),
+    Target(
+        "/assessment-intake.html",
+        200,
+        "<title>Scope a ClinicOps Review | ClinicOps</title>",
+    ),
+    Target("/tools.html", 200, "<title>Tools & Evidence | ClinicOps</title>"),
+    Target(
+        "/identifier-check.html",
+        200,
+        "<title>EUDAMED Identifier Check | ClinicOps</title>",
+    ),
+    Target(
+        "/readiness-score.html",
+        200,
+        "<title>Transition Readiness Score | ClinicOps</title>",
+    ),
     Target(
         "/transition-map-sample/",
         200,
         "ClinicOps Class III Transition Map — Sanitized Sample",
     ),
-    Target("/assessment-intake.html", 200, "Build your assessment brief"),
-    Target("/privacy-notice/", 200, "Your right to object"),
+    Target(
+        "/expert-network.html",
+        200,
+        "<title>Independent Expert Network | ClinicOps</title>",
+    ),
+    Target("/privacy-notice/", 200, "<title>Privacy Notice | ClinicOps</title>"),
     Target(
         "/research/sscp-public-record-scan/",
         200,

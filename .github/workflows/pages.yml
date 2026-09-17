@@ -1,11 +1,17 @@
 name: Deploy ClinicOps Site
+# Production deploys only from a main-branch commit that CI has fully validated.
+# The deploy checks out the EXACT SHA that CI tested (workflow_run.head_sha),
+# never the moving tip of main, so a broken or stale generated site state can
+# no longer reach production while CI is red (incident: 554463c deployed with
+# failing render_public_demo --check on 2026-09-17).
 on:
-  push:
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
     branches: [main]
-    paths:
-      - 'docs/**'
-      - '.github/workflows/pages.yml'
   workflow_dispatch:
+    # Manual deploys stay possible but must be deliberate: the run deploys the
+    # current tip of main without a CI guarantee, and says so in the run name.
 
 permissions:
   contents: read
@@ -18,12 +24,20 @@ concurrency:
 
 jobs:
   deploy:
+    # workflow_run fires on failure too — only deploy on CI success.
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.head_branch == 'main')
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          # Deploy the exact commit CI validated; manual dispatch uses main tip.
+          ref: ${{ github.event_name == 'workflow_run' && github.event.workflow_run.head_sha || github.ref }}
       - uses: actions/configure-pages@v6
         with:
           enablement: true
@@ -33,3 +47,8 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
+      - name: Post-deploy live smoke
+        run: |
+          sleep 45  # allow Pages CDN to serve the new deployment
+          pip install requests
+          python scripts/check_live_site.py
