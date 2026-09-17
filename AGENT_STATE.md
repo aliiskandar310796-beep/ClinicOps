@@ -194,28 +194,21 @@ Proof schema 1.1 requires SHA-256 bindings to the exact activation record, saved
 
 No qualifying founder-independence proof has yet been recorded merely by merging tooling.
 
+## Agent taxonomy (canonical, 2026-09-17)
+
+Three layers, not three competing fleets:
+
+1. **Core accountable business agents (6, canonical)** — the named agents in `06_AGENTS`/department mapping (Regulatory Evidence Steward, Opportunity Architect, Customer Discovery Agent, Visibility Architect, Portfolio Operator, Release Sentinel). Accountability and department ownership live here.
+2. **Specialist profiles (`.github/agents/*.agent.md`, currently 8)** — sentinels/builders operating *under* the core agents (the 6 above plus specialist additions such as validation-scalability-sentinel and asset-fleet-builder). They add capability, not accountability.
+3. **Operational loops (`agents/fleet.json`, currently 16)** — bounded recurring tasks/automation roles (radars, canaries, miners, triage). These are legacy-named automation loops, **not** accountable agents; they run under a core agent's remit and their sends/posts always route through the top-level session per E-007.
+
+`competitor-radar` is renamed **`peer-market-radar`** (2026-09-17): ClinicOps treats Visiana/BoneXpert, consultancies, CROs and QA/RA teams as peers, benchmarks, partners and possible buyers — never adversaries. It observes public hiring, buying patterns, operational pain and tooling adoption to find white space; it never uses non-public information, and hiring demand counts as E1 market evidence only, never buyer validation.
+
 ## Public production surface
 
 `clinicops.dk` is served from `docs/**` via GitHub Pages. GoDaddy is DNS only. HTTPS is enforced.
 
-The deterministic production sitemap contains **16 canonical URLs**:
-
-- `/`
-- `/about.html`
-- `/assessment-intake.html`
-- `/authorised-representative-portfolio-intelligence.html`
-- `/class-iii-transition.html`
-- `/contact.html`
-- `/eudamed-transition.html`
-- `/identifier-check.html`
-- `/privacy-notice/`
-- `/readiness-score.html`
-- `/research.html`
-- `/research/eudamed-watch/`
-- `/research/sscp-public-record-scan/`
-- `/sscp-operations.html`
-- `/tools.html`
-- `/transition-map-sample/`
+The deterministic sitemap is the canonical list of production URLs — **derive it, do not hard-code it here** (this file previously said 16 while production had 29; transient counts belong in generated artifacts, not shared state). Source of truth: `docs/sitemap.xml`, generated and checked by `scripts/render_sitemap.py --check` (29 URLs as of 2026-09-17). The public surface spans the umbrella home, the three lanes (Denmark market access, MedTech/regulatory, clinical operations), the specialist service pages, tools, research, specimens, expert network, about/contact and privacy.
 
 Do not mass-produce thin SEO pages while current production pages are still being discovered.
 
