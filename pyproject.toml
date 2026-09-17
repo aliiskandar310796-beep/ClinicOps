@@ -10,7 +10,7 @@ requires-python = ">=3.11"
 dependencies = ["requests>=2.32"]
 
 [project.optional-dependencies]
-dev = ["pytest>=8", "ruff>=0.6"]
+dev = ["pytest>=8", "ruff==0.16.8", "pyyaml>=6"]
 
 [project.scripts]
 clinicops-id-check = "clinicops_eudamed.cli:id_check"

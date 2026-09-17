@@ -6,11 +6,13 @@ Last reconciled: 2026-09-17 after the expanded-portfolio stabilisation pass (fix
 
 GitHub `main` is the shared source of truth. Fetch current `main`, open PRs/branches and current Actions before substantive work. Preserve concurrent Claude/ChatGPT work and never force-overwrite a newer change. Chat transcripts, local copies and project-side control files are secondary until their changes land here.
 
-Do **not** hard-code a self-referential “current main SHA” as permanent truth in this file because its own merge changes `main`. The verified PR #48 merge SHA was `eeee68d8f9fcc4fbaae72fda8e13be57af936494`, and exact-main CI run #512 passed on that SHA. Always fetch live state again before acting.
+Do **not** hard-code a self-referential “current main SHA” as permanent truth in this file because its own merge changes `main`. Historical anchor only: PR #48 merged as `eeee68d8…` with exact-main CI run #512 green (2026-09-13); many merges have landed since — always fetch live state again before acting. PR #54 was closed 2026-09-17 as superseded: its outcome/risk/economic controls were selectively ported onto current main (with a fail-closed fix to the economic evaluator) and its stale shared-state changes dropped.
 
 ## Current business thesis
 
 ClinicOps is an evidence-controlled, human-reviewed operating layer for high-value expert work: it controls how regulated evidence moves across documents, systems, markets and accountable human owners.
+
+**Long-term category (2026-09-17): QA/RA Operations Engineering for regulated healthcare/MedTech**, with Regulatory Information Integrity as the proven first wedge. Quality Operations (change control → CAPA/NC evidence integrity → regulatory change impact → technical-file integrity → QA data integrity → PMS/complaints → SaMD verification operations) is the internal capability frontier — developed in that adjacency order, internal-only until each capability earns a public offer via the progression rule: learn → primary-source model → internal schema → sanitized prototype → design partner → controlled delivery → delivery evidence → repeat demand → public offer.
 
 **Current portfolio (deliberate, 2026-09-17): multiple live service lanes.** Do not "correct" the site back to a single-offer state — the breadth is intentional. The lanes are:
 

@@ -78,6 +78,86 @@ TARGETS = (
         200,
         "Continuous monitoring of the public EUDAMED record",
     ),
+    Target(
+        "/about.html",
+        200,
+        "<title>About ClinicOps | Danish-Led, EU-Wide Clinical Operations</title>",
+    ),
+    Target(
+        "/authorised-representative-portfolio-intelligence.html",
+        200,
+        "<title>EU Authorised Representative Portfolio Intelligence | ClinicOps</title>",
+    ),
+    Target(
+        "/change-surface-mapper.html",
+        200,
+        "<title>Change Surface Mapper | ClinicOps</title>",
+    ),
+    Target(
+        "/class-iii-transition.html",
+        200,
+        "<title>Class III and Implantable MDR Transition Intelligence | ClinicOps</title>",
+    ),
+    Target(
+        "/contact.html",
+        200,
+        "<title>Contact ClinicOps | Danish-Led, EU-Wide Clinical Operations</title>",
+    ),
+    Target(
+        "/eu-mdr-regulatory-integrity.html",
+        200,
+        "<title>EU MDR Regulatory Data Integrity for Global MedTech | ClinicOps</title>",
+    ),
+    Target(
+        "/eudamed-transition.html",
+        200,
+        "<title>EUDAMED Transition Work Plans for MedTech | ClinicOps</title>",
+    ),
+    Target(
+        "/evidence-change-control-pack.html",
+        200,
+        "<title>Evidence Change Control Pack | ClinicOps</title>",
+    ),
+    Target(
+        "/integrity-check.html",
+        200,
+        "<title>Free Regulatory Change Integrity Check | ClinicOps</title>",
+    ),
+    Target(
+        "/integrity-economics.html",
+        200,
+        "<title>Regulatory Change Review Cost Calculator | ClinicOps</title>",
+    ),
+    Target(
+        "/medical-device-document-control.html",
+        200,
+        "<title>Medical Device Regulatory Document Control | ClinicOps</title>",
+    ),
+    Target(
+        "/primary-sources.html",
+        200,
+        "<title>Primary Public Sources | ClinicOps</title>",
+    ),
+    Target(
+        "/regulatory-intelligence.html",
+        200,
+        "<title>EU Medical Device Regulatory Intelligence | ClinicOps</title>",
+    ),
+    Target(
+        "/research.html",
+        200,
+        "<title>Research & Methodology | ClinicOps</title>",
+    ),
+    Target(
+        "/specimen-register/",
+        200,
+        "<title>Interactive Regulatory Integrity Specimen Register | ClinicOps</title>",
+    ),
+    Target(
+        "/sscp-operations.html",
+        200,
+        "<title>SS(C)P Operations and Evidence Workflows | ClinicOps</title>",
+    ),
     Target("/sitemap.xml", 200, "https://clinicops.dk/assessment-intake.html"),
     Target("/robots.txt", 200, "Sitemap: https://clinicops.dk/sitemap.xml"),
     Target(
