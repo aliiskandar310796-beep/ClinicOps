@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0",
+  "mission_id": "SYNTHETIC-INTEGRITY-GATE-MARKET-TEST",
+  "owner_agent": "opportunity-architect",
+  "outcome_class": "commercial-evidence",
+  "objective": "Move a synthetic Integrity Gate experiment from internal hypothesis toward a delivered demand test without claiming buyer validation.",
+  "status": "active",
+  "metric_name": "commercial_evidence_stage_number",
+  "metric_direction": "increase",
+  "baseline": 1,
+  "target": 6,
+  "current": 3,
+  "unit": "E-stage number",
+  "commercial_stage": "E3",
+  "evidence_refs": [],
+  "artifact_refs": [
+    "artifact:examples/integrity_gate_case.synthetic.json",
+    "artifact:docs/integrity-gate.html"
+  ],
+  "review_point": "after the next qualified buyer response or after ten qualified conversations, whichever comes first",
+  "stop_condition": "pause expansion if ten qualified conversations produce no repeated pain or concrete commercial commitment",
+  "workers": [
+    {
+      "worker_id": "W-MARKET-01",
+      "specialty": "market-scout",
+      "parent_agent": "opportunity-architect",
+      "objective": "Map the bounded workflow hypothesis and buyer roles for the synthetic demand test.",
+      "status": "completed",
+      "success_criteria": [
+        "buyer roles are explicit",
+        "workflow pain hypothesis is bounded",
+        "no buyer validation is claimed"
+      ],
+      "stop_condition": "stop when the demand-test hypothesis is specific enough for customer discovery",
+      "evidence_refs": [],
+      "artifact_refs": ["artifact:synthetic/market-hypothesis"],
+      "handoff_to": "customer-discovery",
+      "handoff_completed": true,
+      "reserved_human_action": false,
+      "control_violation": false,
+      "violation_resolved": false,
+      "notes": "Synthetic contract example only."
+    },
+    {
+      "worker_id": "W-SCOPE-01",
+      "specialty": "offer-scope-designer",
+      "parent_agent": "opportunity-architect",
+      "objective": "Define the smallest bounded Integrity Gate pilot scope for discovery conversations.",
+      "status": "completed",
+      "success_criteria": [
+        "scope is bounded",
+        "human review remains explicit",
+        "pricing is not invented"
+      ],
+      "stop_condition": "stop when the discovery scope can be explained without platform assumptions",
+      "evidence_refs": [],
+      "artifact_refs": ["artifact:sales/integrity-gate-pilot.md"],
+      "handoff_to": "customer-discovery",
+      "handoff_completed": true,
+      "reserved_human_action": false,
+      "control_violation": false,
+      "violation_resolved": false,
+      "notes": null
+    },
+    {
+      "worker_id": "W-BUYER-01",
+      "specialty": "buyer-signal-analyst",
+      "parent_agent": "customer-discovery",
+      "objective": "Classify the next real buyer response against E4-E6 rules without inflating the stage.",
+      "status": "waiting",
+      "success_criteria": [
+        "explicit buyer statements are separated from interpretation",
+        "E4+ is supported by private evidence",
+        "next action is concrete"
+      ],
+      "stop_condition": "stop after one decision-grade response is classified and handed back",
+      "evidence_refs": [],
+      "artifact_refs": [],
+      "handoff_to": "opportunity-architect",
+      "handoff_completed": false,
+      "reserved_human_action": false,
+      "control_violation": false,
+      "violation_resolved": false,
+      "notes": "Waiting is honest; no buyer response is fabricated."
+    }
+  ]
+}

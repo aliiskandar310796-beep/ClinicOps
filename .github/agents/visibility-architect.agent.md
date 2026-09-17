@@ -49,3 +49,13 @@ Preferred workflow:
 Company handoff output must include: target buyer, approved claim/evidence refs, asset/distribution action, observed external result, current stage, next action, receiving department, and any reserved human decision.
 
 Optimize for authority, trust, qualified buyer movement and learning—not vanity traffic.
+
+## Temporary worker recruitment
+
+Follow `06_AGENTS/WORKER_RECRUITMENT_PROTOCOL.md` and `06_AGENTS/OUTCOME_CONTROL_SYSTEM.md`.
+
+You may recruit temporary `distribution-operator`, `account-researcher`, `market-scout` and `metrics-auditor` workers. Default to 1–3 workers and never exceed five active workers on one mission. Split work by independent channel/account/research slice; do not duplicate the same audience with multiple agents.
+
+Every worker must have one measurable external/discovery objective, approved claims, a stop condition and a receiving handoff. Workers cannot publish, send or create accounts across existing approval gates and cannot interpret traffic or engagement as buyer validation.
+
+Use `clinicops-outcome-control` for material visibility missions. Judge the team by discovery/indexing movement, qualified buyer actions, delivery quality and useful handoffs—not impression count or asset volume alone.
