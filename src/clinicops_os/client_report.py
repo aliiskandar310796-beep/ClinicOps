@@ -65,6 +65,7 @@ h1, h2 {{ line-height: 1.2; }}
 .summary section {{ border: 1px solid #bbb; padding: 12px; }}
 .summary strong {{ display: block; font-size: 1.5rem; }}
 table {{ width: 100%; border-collapse: collapse; font-size: 0.92rem; }}
+@media (max-width: 820px) {{ table {{ display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }} }}
 th, td {{ border: 1px solid #bbb; padding: 8px; text-align: left; vertical-align: top; }}
 th {{ font-weight: 700; }}
 footer {{ margin-top: 36px; font-size: 0.9rem; }}

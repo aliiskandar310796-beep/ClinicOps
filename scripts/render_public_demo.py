@@ -26,7 +26,8 @@ def render_public_demo() -> str:
     rows = load_portfolio(SOURCE)
     html = render_client_html(rows, as_of=DEMO_DATE, title=TITLE)
 
-    metadata = f'''<link rel="canonical" href="{CANONICAL}">
+    metadata = f'''<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="canonical" href="{CANONICAL}">
 <meta name="description" content="{DESCRIPTION}">
 <meta property="og:title" content="Class III Transition Map Sample | ClinicOps">
 <meta property="og:description" content="{DESCRIPTION}">
