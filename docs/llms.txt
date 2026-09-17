@@ -5,6 +5,7 @@ ClinicOps is a Danish-led, EU-wide evidence-controlled clinical and life-science
 Service architecture:
 - Services directory: https://clinicops.dk/services.html
 - Denmark market access: https://clinicops.dk/denmark-market-access.html
+- Danish pharmacovigilance operations (GVP Module VI literature screening, ICSR translation, DHPC review): https://clinicops.dk/denmark-market-access.html
 - EU medical-device regulatory integrity: https://clinicops.dk/eu-mdr-regulatory-integrity.html
 - EUDAMED operations: https://clinicops.dk/eudamed-transition.html
 - Class III / implantable transition: https://clinicops.dk/class-iii-transition.html
