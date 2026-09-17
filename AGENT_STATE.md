@@ -1,6 +1,6 @@
 # ClinicOps shared agent state
 
-Last reconciled: 2026-09-17 after the expanded-portfolio stabilisation pass (fixture/deploy-gating/routing fixes on top of 554463c). The public site now presents 29 canonical URLs and multiple service lanes; this file's thesis section reflects that deliberately.
+Last reconciled: 2026-09-17 after the QA/RA prototype expansion (two sanitized-prototype tools on top of bc9d504). The public site presents the canonical URL set in `docs/sitemap.xml` (derive the count from that file; do not hard-code it here) across multiple service lanes; this file's thesis section reflects that deliberately.
 
 ## Canonical truth
 
@@ -19,6 +19,7 @@ ClinicOps is an evidence-controlled, human-reviewed operating layer for high-val
 - **Default cross-domain commercial entry:** Regulatory Integrity Review / Evidence Change Control Pack around one bounded real workflow. Every lane funnels into this one paid entry.
 - **Strongest existing wedges (most buyer evidence so far):** MedTech / EUDAMED / Class III transition; Denmark market access / Danish PV / localisation.
 - **Adjacent service lanes (live, less validated):** TrialOps, QualityOps, Clinical AI evidence review, LabOps, Clinic Operations, controlled medical content.
+- **QA/RA capability-ladder prototypes (2026-09-17, sanitized-prototype stage):** Regulatory Change Impact Mapper (`regulatory-change-impact.html`) and Technical File Consistency Check (`technical-file-consistency.html`), with intake presets `regulatory-change-impact` and `technical-file-consistency`. These are public *method demonstrations* under the progression rule — never present them as delivered services or claim CAPA/audit/62304 breadth from them. CAPA/NC evidence integrity, QA data dashboards and SaMD verification automation remain LEARNING-STAGE and internal-only (specs live in the business project, not this repo).
 
 **Validation rule: availability ≠ proven demand.** Each lane earns stronger investment only through real buyer evidence (the EXP-001 ladder below applies per lane). Do not claim all lanes are equally validated, and do not let breadth become confusion: one umbrella operating model, one obvious default paid entry.
 

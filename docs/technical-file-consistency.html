@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>Technical File Consistency Check | ClinicOps</title>
+<meta name="description" content="Paste the same key fact as it appears in up to five technical-documentation sources and get a deterministic, severity-banded divergence report with an evidence queue. Browser-local; nothing is uploaded.">
+<link rel="canonical" href="https://clinicops.dk/technical-file-consistency.html">
+<meta property="og:title" content="Technical File Consistency Check | ClinicOps"><meta property="og:description" content="Cross-document consistency check for technical documentation: paste each key value per source, get deterministic divergence findings, severity bands and an evidence queue. Browser-local."><meta property="og:type" content="website"><meta property="og:url" content="https://clinicops.dk/technical-file-consistency.html"><meta property="og:site_name" content="ClinicOps"><meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Technical File Consistency Check | ClinicOps","url":"https://clinicops.dk/technical-file-consistency.html","isPartOf":{"@type":"WebSite","name":"ClinicOps","url":"https://clinicops.dk/"},"publisher":{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"ClinicOps Technical File Consistency Check","url":"https://clinicops.dk/technical-file-consistency.html","applicationCategory":"BusinessApplication","operatingSystem":"Any modern browser","isAccessibleForFree":true,"publisher":{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}</script>
+<style>
+:root{color-scheme:light dark;--bg:#f8f7f4;--surface:#fff;--surface2:#f0eee8;--text:#17202b;--muted:#5e6874;--border:#d7dde2;--accent:#0d6559;--contrast:#fff;--soft:#e0f1ed;--ok:#157847;--warn:#a55b00;--hold:#b03333}@media(prefers-color-scheme:dark){:root{--bg:#101419;--surface:#171d24;--surface2:#1d252d;--text:#e8edf1;--muted:#a1aab4;--border:#303943;--accent:#52d7c3;--contrast:#08221d;--soft:#142b27;--ok:#69d79d;--warn:#efb05c;--hold:#ff9191}}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55}.wrap{max-width:1120px;margin:auto;padding:0 22px}main{padding:54px 0 64px}h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.04;letter-spacing:-.04em;margin:.16em 0 .36em;max-width:850px}h2{font-size:1.42rem;margin:2.1em 0 .65em}h3{font-size:1.03rem;margin:.1em 0 .4em}.lede{font-size:1.12rem;max-width:790px;color:var(--muted)}.muted,.hint{color:var(--muted)}.eyebrow{display:inline-flex;font-size:.75rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);background:var(--soft);padding:5px 11px;border-radius:999px}.trust,.actions{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0}.chip{font-size:.82rem;border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:6px 10px;color:var(--muted)}.panel,.callout,.result{border:1px solid var(--border);border-radius:16px;background:var(--surface);padding:19px;margin:18px 0}.callout{background:var(--surface2)}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}@media(max-width:760px){.grid2{grid-template-columns:1fr}}label{display:block;font-weight:700;margin:0 0 6px;font-size:.92rem}input,select{width:100%;font:inherit;padding:9px 10px;border:1px solid var(--border);border-radius:9px;background:var(--surface);color:var(--text)}.field{margin:0 0 13px}.btn,.cta{font:inherit;font-weight:720;border:1px solid var(--accent);border-radius:9px;padding:10px 15px;text-decoration:none;display:inline-block;cursor:pointer}.primary{background:var(--accent);color:var(--contrast)}.secondary{background:transparent;color:var(--accent)}.result-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap}.badge{display:inline-block;font-size:.8rem;font-weight:850;padding:6px 10px;border-radius:999px;background:var(--surface2)}.badge.ok{color:var(--ok)}.badge.review{color:var(--warn)}.badge.hold{color:var(--hold)}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:15px 0}.metric{border:1px solid var(--border);border-radius:11px;padding:11px}.metric strong{display:block;font-size:1.28rem}.metric small{color:var(--muted)}@media(max-width:650px){.metrics{grid-template-columns:repeat(2,1fr)}}table{width:100%;border-collapse:separate;border-spacing:0;margin:14px 0;border:1px solid var(--border);border-radius:11px;overflow:hidden}th,td{padding:8px;text-align:left;vertical-align:top;border-bottom:1px solid var(--border)}th{font-size:.8rem;color:var(--muted);background:var(--surface2)}tr:last-child td{border-bottom:0}#gridwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}#grid{min-width:940px}#grid td{min-width:150px}#grid td:first-child{min-width:190px;font-weight:650;font-size:.88rem}.na{display:flex;gap:5px;align-items:center;font-size:.74rem;color:var(--muted);margin-top:4px;font-weight:500}.na input{width:auto;margin:0}.sev{font-weight:800;font-size:.8rem}.sevCritical{color:var(--hold)}.sevMajor{color:var(--warn)}.sevMinor{color:var(--accent)}.sevInfo{color:var(--muted)}.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}.principle{border-top:2px solid var(--accent);padding-top:10px}.principle span{display:block;font-size:.9rem;color:var(--muted)}@media(max-width:720px){.principles{grid-template-columns:1fr}}footer{border-top:1px solid var(--border);padding:25px 0;color:var(--muted);font-size:.88rem}.fictional{border:1px dashed var(--border);border-radius:9px;padding:9px 12px;background:var(--surface2);font-size:.85rem;color:var(--muted);margin:10px 0}
+</style>
+<link rel="stylesheet" href="site.css"></head>
+<body>
+<header class="site"><div class="site-inner"><a class="brand" href="index.html">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="index.html">Home</a><a href="services.html">Services</a><a href="denmark-market-access.html">Denmark Market Access</a><a href="integrity-gate.html">Integrity Review</a><a href="primary-sources.html">Sources</a><a href="tools.html" aria-current="page">Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header>
+<main class="wrap">
+<span class="eyebrow">Sanitized prototype · browser-local</span>
+<h1>Does your technical documentation agree with itself?</h1>
+<p class="lede">The same fact — device name, UDI-DI, intended purpose, shelf life, software version — appears in the Declaration of Conformity, label, IFU, technical file summary, SS(C)P and registration data. When those copies drift apart, reviews stall. Paste each key value as it appears in up to five sources and get a deterministic, severity-banded divergence report with an evidence queue.</p>
+<div class="trust"><span class="chip">Runs locally</span><span class="chip">Deterministic normalization rules</span><span class="chip">Verbatim values preserved</span><span class="chip">Portable JSON</span><span class="chip">Human authority preserved</span></div>
+<div class="callout"><strong>Method boundary.</strong> This is a sanitized demonstration of a working method using fictional example data. It compares only the values you paste, exactly as you paste them — it does not review your documents, it never decides which value is correct, and it is not a compliance determination or regulatory advice. Deciding which source is authoritative and whether a divergence matters is a human decision for your regulatory reviewer.</div>
+<h2>1 · Name the sources</h2>
+<div class="panel"><div class="grid2">
+<div class="field"><label for="worklabel">Working label for this comparison <span class="hint">(optional, stays in your browser)</span></label><input id="worklabel" maxlength="120" placeholder="e.g. Model X technical file, rev set 2026-09"></div>
+<div class="field"><label for="framework">Framework</label><select id="framework"><option>EU MDR 2017/745</option><option>EU IVDR 2017/746 (field list is MDR-derived)</option></select></div>
+</div><div class="grid2" id="srcsel"></div><p class="hint">Columns set to "— none —" are excluded. Mark a cell "n/a" when that document legitimately does not carry the fact; leave it empty only when the value should exist but you have not observed it.</p></div>
+<h2>2 · Paste each value as printed</h2>
+<div id="gridwrap" class="panel"><table id="grid"><thead><tr id="gridhead"></tr></thead><tbody id="gridbody"></tbody></table></div>
+<div class="actions"><button class="btn primary" id="run" type="button">Run consistency check</button><button class="btn secondary" id="example" type="button">Load fictional example</button><button class="btn secondary" id="clear" type="button">Clear grid</button></div>
+<div id="fictionalNote" class="fictional" hidden>Fictional example — the device, manufacturer, identifiers and every value are invented for demonstration. "Nyrelia", the Nyrelia N-200 and Nyrelia Medical ApS do not exist; any resemblance to a real product is coincidental.</div>
+<div class="result" aria-live="polite"><div class="result-head"><div><h2 style="margin:0" id="resultTitle">Consistency report</h2><p id="summary" class="muted">Run the check to see divergences, severity bands and the evidence queue.</p></div><span id="badge" class="badge">NOT RUN</span></div>
+<div class="metrics"><div class="metric"><strong id="cCritical">0</strong><small>critical conflicts</small></div><div class="metric"><strong id="cMajor">0</strong><small>major findings</small></div><div class="metric"><strong id="cMinor">0</strong><small>minor / cosmetic</small></div><div class="metric"><strong id="cInfo">0</strong><small>informational</small></div></div>
+<table><thead><tr><th>Field</th><th>Finding</th><th>Severity</th><th>Detail</th></tr></thead><tbody id="frows"><tr><td colspan="4" class="muted">No check run yet.</td></tr></tbody></table>
+<div class="grid2"><div><h3>Evidence queue</h3><ol id="queue"><li class="muted">No queue generated yet.</li></ol><p class="muted" style="font-size:.84rem">The tool never says which value is correct. For each divergence: identify the controlled source-of-truth document, confirm the approved value with its owner, route the correction through change control, correct every divergent instance, then re-run the check.</p></div><div><h3>Export &amp; handoff</h3><div class="actions" style="margin-top:6px"><button class="btn secondary" id="copy" type="button">Copy summary</button><button class="btn secondary" id="download" type="button">Download JSON</button></div><p class="muted" style="font-size:.84rem">The copied summary carries only the band, counts and divergent field names — never your pasted values, which may be confidential. The downloaded JSON contains the full grid for your own records.</p></div></div>
+</div>
+<div class="principles"><div class="principle"><strong>Verbatim preserved</strong><span>Normalization ("N-200" vs "N200", "(01)" wrappers, "2 years" vs "24 months") only classifies; your pasted text is never altered in the report.</span></div><div class="principle"><strong>Fail-closed</strong><span>One source cannot corroborate itself. Different unit families are flagged for manual verification, never auto-equated across families.</span></div><div class="principle"><strong>Human-owned</strong><span>Findings route review work. Which value is correct — and whether it matters under MDR/IVDR — stays with your qualified owner.</span></div></div>
+<h2>From pasted values to a reviewed technical file</h2><p>This check demonstrates the smallest unit of the method: one fact, several documents, a deterministic verdict on whether the copies agree. A scoped review applies the same discipline across a full technical-documentation set with named owners, evidence references and a reviewer-ready closure packet.</p>
+<div class="actions"><a class="cta primary" href="assessment-intake.html?workstream=technical-file-consistency">Scope a consistency review</a><a class="cta secondary" href="integrity-check.html">Check one change's propagation</a><a class="cta secondary" href="regulatory-change-impact.html">Map a regulatory change's impact</a><a class="cta secondary" href="mailto:info@clinicops.dk?subject=Technical%20file%20consistency">Email info@clinicops.dk</a></div>
+</main>
+<footer><div class="wrap">ClinicOps · Evidence-first regulatory operations · <a href="privacy-notice/">Privacy</a></div></footer>
+<script>
+(()=>{"use strict";const $=id=>document.getElementById(id),esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));let last=null;
+const SRC_OPTS=["— none —","EU Declaration of Conformity","Label","IFU","Technical file summary (device description)","SSCP / SSP","Registration / UDI data"];
+const SRC_DEFAULT=["EU Declaration of Conformity","Label","IFU","Technical file summary (device description)","SSCP / SSP"];
+const FIELDS=[
+ {id:"device_trade_name",label:"Device trade name / model designation",tier:1,type:"name"},
+ {id:"model_ref",label:"Model / catalogue / reference number",tier:2,type:"name"},
+ {id:"basic_udi_di",label:"Basic UDI-DI",tier:1,type:"identifier"},
+ {id:"udi_di",label:"UDI-DI",tier:1,type:"identifier",mod10:true},
+ {id:"intended_purpose",label:"Intended purpose statement",tier:1,type:"generic"},
+ {id:"risk_class",label:"Risk class (and rule, if stated)",tier:1,type:"class"},
+ {id:"manufacturer",label:"Manufacturer legal name (and SRN if stated)",tier:2,type:"generic"},
+ {id:"shelf_life",label:"Shelf life / expiry period",tier:2,type:"duration"},
+ {id:"storage",label:"Storage & handling conditions",tier:2,type:"generic"},
+ {id:"sterility",label:"Sterility status / sterilization method",tier:1,type:"generic"},
+ {id:"single_use",label:"Single use / reprocessing statement",tier:1,type:"generic"},
+ {id:"contraindications",label:"Contraindications (key statements)",tier:2,type:"generic"},
+ {id:"software_version",label:"Software version / release identifier",tier:1,type:"version"}];
+// build source selects + grid
+const srcsel=$("srcsel");for(let c=1;c<=5;c++){const d=document.createElement("div");d.className="field";d.innerHTML=`<label for="src${c}">Document source ${c}${c>2?' <span class="hint">(optional)</span>':""}</label><select id="src${c}">${SRC_OPTS.map(o=>`<option${o===SRC_DEFAULT[c-1]?" selected":""}${c<=2&&o==="— none —"?" disabled":""}>${o}</option>`).join("")}</select>`;srcsel.appendChild(d)}
+function activeCols(){const cols=[];for(let c=1;c<=5;c++){const v=$(`src${c}`).value;if(v!=="— none —")cols.push({col:c,label:v})}return cols}
+function renderGrid(){const cols=activeCols();$("gridhead").innerHTML=`<th>Field</th>${cols.map(s=>`<th>${esc(s.label)}<div class="muted" style="font-weight:500">source ${s.col}</div></th>`).join("")}`;
+ $("gridbody").innerHTML=FIELDS.map(f=>`<tr><td>${esc(f.label)}</td>${cols.map(s=>`<td><input id="v_${f.id}_${s.col}" aria-label="${esc(f.label)} — ${esc(s.label)}"><label class="na"><input id="na_${f.id}_${s.col}" type="checkbox"> n/a for this source</label></td>`).join("")}</tr>`).join("")}
+function keepValues(fn){const saved={};for(const f of FIELDS)for(let c=1;c<=5;c++){const v=$(`v_${f.id}_${c}`),n=$(`na_${f.id}_${c}`);if(v)saved[`${f.id}_${c}`]={v:v.value,n:n.checked}}fn();for(const k in saved){const[fid,c]=[k.slice(0,k.lastIndexOf("_")),k.slice(k.lastIndexOf("_")+1)];const v=$(`v_${fid}_${c}`),n=$(`na_${fid}_${c}`);if(v){v.value=saved[k].v;n.checked=saved[k].n}}}
+for(let c=1;c<=5;c++)$(`src${c}`).addEventListener("change",()=>keepValues(renderGrid));
+renderGrid();
+// normalization
+const DASHES=/[‐-―−]/g,SQ=/[‘’]/g,DQ=/[“”]/g;
+function generic(v){return v.normalize("NFKC").toLowerCase().replace(DASHES,"-").replace(SQ,"'").replace(DQ,'"').replace(/\s+/g," ").trim().replace(/[.,;]+$/,"")}
+function nameNorm(v){return generic(v).replace(/[\s-]/g,"")}
+function identNorm(v){return v.trim().replace(/^\(01\)\s*/,"").replace(/[^0-9A-Za-z]/g,"").toUpperCase()}
+const DUR=/^\s*(\d+(?:[.,]\d+)?)\s*(years?|yrs?|y|år|months?|mos?|m|måneder?|weeks?|w|uger?|uge|days?|d|dage?|dag)\s*\.?\s*$/i;
+function durParse(v){const m=DUR.exec(v);if(!m)return null;const n=parseFloat(m[1].replace(",","."));const u=m[2].toLowerCase();if(/^(years?|yrs?|y|år)$/.test(u))return{family:"months",canon:n*12};if(/^(months?|mos?|m|måneder|måneder?)$/.test(u))return{family:"months",canon:n};if(/^(weeks?|w|uger?|uge)$/.test(u))return{family:"days",canon:n*7};return{family:"days",canon:n}}
+function verNorm(v){let s=v.toLowerCase().trim().replace(/^(v|ver\.?|version|sw|rev\.?)\s*/,"");const seg=s.split(".").map(x=>x.trim());while(seg.length&&/^\d+$/.test(seg[seg.length-1])&&parseInt(seg[seg.length-1],10)===0)seg.pop();return seg.map(x=>/^\d+$/.test(x)?String(parseInt(x,10)):x).join(".")}
+function classParse(v){const g=generic(v).replace(/\bclass\b|\bklasse\b/g,"").trim();const rule=/\(([^)]*rule[^)]*)\)/i.exec(v);const main=g.replace(/\([^)]*\)/g,"").replace(/\s+/g,"");return{main,rule:rule?generic(rule[1]).replace(/\s+/g,""):null}}
+function mod10ok(d){let sum=0;for(let i=0;i<13;i++)sum+=parseInt(d[i],10)*(i%2===0?3:1);return((10-(sum%10))%10)===parseInt(d[13],10)}
+function normFor(f,v){switch(f.type){case"name":return nameNorm(v);case"identifier":return identNorm(v);case"version":return verNorm(v);default:return generic(v)}}
+// classification
+function classify(cols){const findings=[],fieldsOut=[];
+ for(const f of FIELDS){const cells=cols.map(s=>{const val=$(`v_${f.id}_${s.col}`).value,na=$(`na_${f.id}_${s.col}`).checked;return{source:s.label,col:s.col,value_verbatim:val,na}});
+  const present=cells.filter(c=>!c.na&&c.value_verbatim.trim());const missing=cells.filter(c=>!c.na&&!c.value_verbatim.trim());
+  const ffind=[];
+  if(present.length===0){fieldsOut.push({...f,cells,status:"UNUSED",findings:[]});continue}
+  if(present.length===1){ffind.push({type:"SINGLE_SOURCE",severity:"Info",detail:`Only ${present[0].source} carries a value — one source cannot corroborate itself.`})}
+  else{
+   const exact=present.every(c=>c.value_verbatim.trim()===present[0].value_verbatim.trim());
+   if(exact)ffind.push({type:"EXACT_MATCH",severity:"Info",detail:`${present.length} sources agree verbatim.`});
+   else if(f.type==="duration"){
+    const parsed=present.map(c=>({c,p:durParse(c.value_verbatim)}));
+    if(parsed.every(x=>x.p)){
+     const fams=[...new Set(parsed.map(x=>x.p.family))];
+     if(fams.length>1)ffind.push({type:"UNIT_FAMILY_MISMATCH",severity:"Major",detail:"Unit families differ ("+parsed.map(x=>`${x.c.source}: "${x.c.value_verbatim.trim()}"`).join("; ")+") — verify equivalence manually; families are never auto-equated."});
+     else if(parsed.every(x=>x.p.canon===parsed[0].p.canon))ffind.push({type:"NORMALIZED_MATCH",severity:"Minor",detail:"Values agree after unit normalization: "+parsed.map(x=>`${x.c.source}: "${x.c.value_verbatim.trim()}"`).join("; ")+". Cosmetic harmonization only."});
+     else{const groups={};for(const x of parsed){const k=x.p.family+":"+x.p.canon;(groups[k]=groups[k]||[]).push(x.c)}ffind.push({type:"CONFLICT",severity:f.tier===1?"Critical":"Major",detail:"Sources disagree after unit normalization: "+Object.values(groups).map(g=>`[${g.map(c=>c.source).join(", ")}] = "${g[0].value_verbatim.trim()}"`).join(" vs ")})}
+    }else genericCompare(f,present,ffind);
+   }
+   else if(f.type==="class"){
+    const ps=present.map(c=>({c,p:classParse(c.value_verbatim)}));
+    const mains=[...new Set(ps.map(x=>x.p.main))];
+    const rules=ps.filter(x=>x.p.rule);const ruleVals=[...new Set(rules.map(x=>x.p.rule))];
+    if(mains.length>1)ffind.push({type:"CONFLICT",severity:"Critical",detail:clusterDetail(f,present)});
+    else if(rules.length>=2&&ruleVals.length>1)ffind.push({type:"CONFLICT",severity:"Critical",detail:"Class agrees but stated classification rules differ: "+rules.map(x=>`${x.c.source}: "${x.c.value_verbatim.trim()}"`).join("; ")});
+    else ffind.push({type:"NORMALIZED_MATCH",severity:"Minor",detail:"Class agrees after normalization: "+present.map(c=>`${c.source}: "${c.value_verbatim.trim()}"`).join("; ")});
+   }
+   else genericCompare(f,present,ffind);
+  }
+  if(f.mod10){for(const c of present){const s=identNorm(c.value_verbatim);if(/^\d{14}$/.test(s)&&!mod10ok(s))ffind.push({type:"IDENTIFIER_CHECK_FAILED",severity:"Major",detail:`${c.source}: "${c.value_verbatim.trim()}" fails the GS1 mod-10 check digit. Non-14-digit identifiers (HIBCC/ICCBBA) are not validated by this prototype.`})}}
+  for(const m of missing)ffind.push({type:"MISSING",severity:f.tier===1?"Major":"Minor",detail:`${m.source}: no value observed (and not marked n/a). An empty observation is not proof the real record is missing.`});
+  const status=ffind.some(x=>x.type==="CONFLICT"||x.type==="UNIT_FAMILY_MISMATCH"||x.type==="IDENTIFIER_CHECK_FAILED")?"DIVERGENT":ffind.some(x=>x.type==="NORMALIZED_MATCH")?"NORMALIZED":ffind.some(x=>x.type==="MISSING")?"INCOMPLETE":present.length>1?"CONSISTENT":"SINGLE";
+  for(const x of ffind)findings.push({field:f.label,field_id:f.id,...x});
+  fieldsOut.push({id:f.id,label:f.label,tier:f.tier,cells,status,findings:ffind});
+ }
+ return{findings,fieldsOut}}
+function clusterDetail(f,present){const groups={};for(const c of present){const k=normFor(f,c.value_verbatim);(groups[k]=groups[k]||[]).push(c)}return"Sources disagree: "+Object.values(groups).map(g=>`[${g.map(c=>c.source).join(", ")}] = "${g[0].value_verbatim.trim()}"`).join(" vs ")}
+function genericCompare(f,present,ffind){const norms=[...new Set(present.map(c=>normFor(f,c.value_verbatim)))];
+ if(norms.length===1)ffind.push({type:"NORMALIZED_MATCH",severity:"Minor",detail:"Values agree after normalization (whitespace / case / punctuation drift): "+present.map(c=>`${c.source}: "${c.value_verbatim.trim()}"`).join("; ")});
+ else ffind.push({type:"CONFLICT",severity:f.tier===1?"Critical":"Major",detail:clusterDetail(f,present)})}
+const SEVR={Critical:0,Major:1,Minor:2,Info:3};
+function run(){const cols=activeCols();const{findings,fieldsOut}=classify(cols);
+ const counts={Critical:0,Major:0,Minor:0,Info:0};for(const x of findings)counts[x.severity]++;
+ $("cCritical").textContent=counts.Critical;$("cMajor").textContent=counts.Major;$("cMinor").textContent=counts.Minor;$("cInfo").textContent=counts.Info;
+ const band=counts.Critical?["Red","Conflicting critical values — adjudicate with the accountable owner","hold"]:counts.Major?["Amber","Divergences to adjudicate","review"]:counts.Minor?["Yellow","Cosmetic harmonization queue","review"]:["Green","No divergence detected in the compared values (not a statement of compliance)","ok"];
+ $("badge").textContent=band[0].toUpperCase();$("badge").className=`badge ${band[2]}`;
+ $("resultTitle").textContent=band[0]+" — "+band[1];
+ $("summary").textContent=`${cols.length} sources compared across ${fieldsOut.filter(f=>f.status!=="UNUSED").length} fields: ${counts.Critical} critical, ${counts.Major} major, ${counts.Minor} minor, ${counts.Info} informational.`;
+ const sorted=[...findings].sort((a,b)=>SEVR[a.severity]-SEVR[b.severity]);
+ $("frows").innerHTML=sorted.length?sorted.map(x=>`<tr><td>${esc(x.field)}</td><td>${esc(x.type.replaceAll("_"," "))}</td><td class="sev sev${x.severity}">${x.severity}</td><td>${esc(x.detail)}</td></tr>`).join(""):`<tr><td colspan="4" class="muted">No findings — no rows carried two or more comparable values.</td></tr>`;
+ const queue=sorted.filter(x=>x.severity!=="Info").map((x,i)=>`<li><strong>${esc(x.field)}</strong> — ${esc(x.type.replaceAll("_"," "))} (${x.severity}). Identify the controlled source of truth, confirm the approved value with its owner, route the correction through change control, then re-run the check.</li>`);
+ $("queue").innerHTML=queue.length?queue.join(""):`<li class="muted">No divergences to queue. Keep the exported JSON as the evidence row for this verification.</li>`;
+ last={tool:"technical-file-consistency-check",tool_version:"1.0",generated_at:new Date().toISOString(),working_label:$("worklabel").value.trim()||null,framework:$("framework").value,sources:cols,fields:fieldsOut.filter(f=>f.status!=="UNUSED"),summary:{band:band[0],caption:band[1],counts},disclaimer:"Sanitized method demonstration; compares only pasted values. Not a compliance determination, regulatory advice or a review of the documents themselves. Which value is correct is a human decision for the accountable regulatory owner. Browser-local: nothing entered is transmitted or stored."}}
+function summaryText(){if(!last)return"Run the consistency check first.";const div=[...new Set(last.fields.filter(f=>f.status==="DIVERGENT").map(f=>f.label))];return[`ClinicOps technical file consistency summary${last.working_label?` — ${last.working_label}`:""}`,`Band: ${last.summary.band} — ${last.summary.caption}`,`Findings: ${last.summary.counts.Critical} critical, ${last.summary.counts.Major} major, ${last.summary.counts.Minor} minor, ${last.summary.counts.Info} informational across ${last.sources.length} sources.`,div.length?`Divergent fields: ${div.join("; ")}`:"Divergent fields: none",`(Field values are deliberately not included — they may be confidential.)`,`Boundary: ${last.disclaimer}`].join("\n")}
+const EX={device_trade_name:{1:"Nyrelia N-200 Infusion Controller",2:"Nyrelia N-200 Infusion Controller",3:"Nyrelia N200 Infusion Controller",4:"Nyrelia N-200 Infusion Controller",5:"Nyrelia N-200 Infusion Controller"},
+ model_ref:{1:"REF N200-EU",2:"REF N200-EU",3:"REF N200-EU",4:"REF N200-EU",5:"NA"},
+ basic_udi_di:{1:"NYRB00N200CTRLXF",2:"NYRB00N200CTRLXF",3:"NYRB00N200CTRLXF",4:"NYRB00N200CTRLXF",5:"NYRB00N200CTRLXF"},
+ udi_di:{1:"(01)09506000134352",2:"(01)09506000134352",3:"NA",4:"09506000134352",5:"NA"},
+ intended_purpose:{1:"Controlled intravenous administration of infusion fluids to adult patients in clinical settings",2:"NA",3:"Controlled intravenous administration of infusion fluids and medication to adult and adolescent patients in clinical settings",4:"Controlled intravenous administration of infusion fluids to adult patients in clinical settings",5:"Controlled intravenous administration of infusion fluids to adult patients in clinical settings"},
+ risk_class:{1:"Class IIb (Rule 12)",2:"IIb",3:"Class IIb",4:"IIb (Rule 12)",5:"IIb"},
+ manufacturer:{1:"Nyrelia Medical ApS (fictional)",2:"Nyrelia Medical ApS (fictional)",3:"Nyrelia Medical ApS (fictional)",4:"Nyrelia Medical ApS (fictional)",5:"Nyrelia Medical ApS (fictional)"},
+ shelf_life:{1:"NA",2:"24 months",3:"2 years",4:"36 months",5:"NA"},
+ storage:{1:"NA",2:"Store between 5 °C and 40 °C",3:"Store between 5 °C and 40 °C",4:"Store between 5 °C and 40 °C",5:"NA"},
+ sterility:{1:"NA",2:"Non-sterile",3:"Non-sterile",4:"Non-sterile",5:"NA"},
+ single_use:{1:"NA",2:"Reusable device",3:"Reusable device",4:"",5:"NA"},
+ contraindications:{1:"NA",2:"NA",3:"Not for use with light-sensitive medicinal products",4:"Not for use with light-sensitive medicinal products",5:"Not for use with light-sensitive medicinal products"},
+ software_version:{1:"3.2",2:"NA",3:"v3.2.0",4:"3.2",5:"3.2"}};
+$("example").onclick=()=>{for(let c=1;c<=5;c++)$(`src${c}`).value=SRC_DEFAULT[c-1];renderGrid();$("worklabel").value="Fictional example — Nyrelia N-200 rev set";for(const f of FIELDS){const row=EX[f.id]||{};for(let c=1;c<=5;c++){const cell=row[c],vi=$(`v_${f.id}_${c}`),ni=$(`na_${f.id}_${c}`);if(!vi)continue;if(cell==="NA"){vi.value="";ni.checked=true}else{vi.value=cell||"";ni.checked=false}}}$("fictionalNote").hidden=false;run()};
+$("run").onclick=()=>{run()};
+$("clear").onclick=()=>{$("fictionalNote").hidden=true;$("worklabel").value="";for(const f of FIELDS)for(let c=1;c<=5;c++){const vi=$(`v_${f.id}_${c}`),ni=$(`na_${f.id}_${c}`);if(vi){vi.value="";ni.checked=false}}last=null;$("badge").textContent="NOT RUN";$("badge").className="badge";$("resultTitle").textContent="Consistency report";$("summary").textContent="Grid cleared. Paste values, then run the check.";$("frows").innerHTML='<tr><td colspan="4" class="muted">No check run yet.</td></tr>';$("queue").innerHTML='<li class="muted">No queue generated yet.</li>';["cCritical","cMajor","cMinor","cInfo"].forEach(i=>$(i).textContent="0")};
+$("copy").onclick=async()=>{if(!last)run();try{await navigator.clipboard.writeText(summaryText())}catch(_){}};
+$("download").onclick=()=>{if(!last)run();if(!last)return;const b=new Blob([JSON.stringify(last,null,2)+"\n"],{type:"application/json"}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download="clinicops-consistency-report.json";document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(u)};
+})();
+</script>
+</body>
+</html>

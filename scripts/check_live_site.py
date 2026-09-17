@@ -139,6 +139,11 @@ TARGETS = (
         "<title>Primary Public Sources | ClinicOps</title>",
     ),
     Target(
+        "/regulatory-change-impact.html",
+        200,
+        "<title>Regulatory Change Impact Mapper | ClinicOps</title>",
+    ),
+    Target(
         "/regulatory-intelligence.html",
         200,
         "<title>EU Medical Device Regulatory Intelligence | ClinicOps</title>",
@@ -157,6 +162,11 @@ TARGETS = (
         "/sscp-operations.html",
         200,
         "<title>SS(C)P Operations and Evidence Workflows | ClinicOps</title>",
+    ),
+    Target(
+        "/technical-file-consistency.html",
+        200,
+        "<title>Technical File Consistency Check | ClinicOps</title>",
     ),
     Target("/sitemap.xml", 200, "https://clinicops.dk/assessment-intake.html"),
     Target("/robots.txt", 200, "Sitemap: https://clinicops.dk/sitemap.xml"),
