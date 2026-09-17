@@ -156,3 +156,96 @@ def test_duplicate_event_ids_are_rejected() -> None:
         assert "unique" in str(exc)
     else:
         raise AssertionError("duplicate event IDs should be rejected")
+
+
+def test_synthetic_evidence_never_produces_real_commercial_proof() -> None:
+    run = _run(
+        [
+            _event(
+                "EVT-1",
+                commercial_stage="E8",
+                evidence_refs=["synthetic://acceptance-payment"],
+            )
+        ]
+    )
+
+    result = evaluate_company_run(run)
+
+    assert result.simulated_highest_stage == "E8"
+    assert result.simulated_end_to_end_traversal is True
+    assert result.real_highest_commercial_stage == "E0"
+    assert result.real_commercial_evidence_events == 0
+    assert result.end_to_end_commercial_proof is False
+    assert result.commercial_signal is False
+    assert result.activated_commercial_loop is False
+
+
+def test_example_fixture_cannot_produce_real_commercial_proof() -> None:
+    from pathlib import Path
+
+    from clinicops_os.company_run import load_company_run
+
+    fixture = Path(__file__).resolve().parents[1] / "examples" / "ai_company_run.example.json"
+    result = evaluate_company_run(load_company_run(fixture))
+
+    assert result.simulated_end_to_end_traversal is True
+    assert result.end_to_end_commercial_proof is False
+    assert result.real_highest_commercial_stage == "E0"
+    assert result.real_commercial_evidence_events == 0
+    assert result.synthetic_evidence_events > 0
+
+
+def test_e4_plus_real_evidence_requires_external_scheme() -> None:
+    run = _run(
+        [
+            _event(
+                "EVT-1",
+                commercial_stage="E4",
+                evidence_refs=["some-unscoped-note"],
+            )
+        ]
+    )
+
+    result = evaluate_company_run(run)
+
+    assert result.real_commercial_evidence_events == 0
+    assert result.real_highest_commercial_stage == "E0"
+    assert any(
+        finding.severity == "warning" and "unknown provenance" in finding.message
+        for finding in result.findings
+    )
+
+
+def test_external_scheme_evidence_counts_as_real() -> None:
+    run = _run(
+        [
+            _event(
+                "EVT-1",
+                commercial_stage="E8",
+                evidence_refs=["private://bank-transfer-2026-09-17"],
+            )
+        ]
+    )
+
+    result = evaluate_company_run(run)
+
+    assert result.real_highest_commercial_stage == "E8"
+    assert result.real_commercial_evidence_events == 1
+    assert result.end_to_end_commercial_proof is True
+
+
+def test_mixed_synthetic_and_external_evidence_counts_via_external_ref() -> None:
+    run = _run(
+        [
+            _event(
+                "EVT-1",
+                commercial_stage="E6",
+                evidence_refs=["synthetic://note", "private://buyer-email"],
+            )
+        ]
+    )
+
+    result = evaluate_company_run(run)
+
+    assert result.real_highest_commercial_stage == "E6"
+    assert result.commercial_signal is True

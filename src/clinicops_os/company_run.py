@@ -20,6 +20,29 @@ STATUSES = {"completed", "blocked", "failed", "waiting"}
 COMMERCIAL_STAGES = tuple(f"E{index}" for index in range(10))
 REAL_COMMERCIAL_STAGE_MIN = 4
 
+# Fail-closed evidence semantics: synthetic/example/test references exercise the
+# operating machinery, but must NEVER produce real commercial proof. Only a
+# reference carrying a non-synthetic scheme (e.g. private://, mail://) counts as
+# external evidence; an unscoped reference is treated as unknown provenance and
+# is likewise excluded from real commercial metrics.
+SYNTHETIC_EVIDENCE_SCHEMES = frozenset({"synthetic", "example", "test", "fixture", "demo"})
+
+
+def _evidence_scheme(ref: str) -> str | None:
+    head, sep, _ = ref.partition("://")
+    if not sep or not head:
+        return None
+    return head.lower()
+
+
+def is_external_evidence(ref: str) -> bool:
+    scheme = _evidence_scheme(ref)
+    return scheme is not None and scheme not in SYNTHETIC_EVIDENCE_SCHEMES
+
+
+def is_synthetic_evidence(ref: str) -> bool:
+    return _evidence_scheme(ref) in SYNTHETIC_EVIDENCE_SCHEMES
+
 
 def _required_string(row: dict[str, object], key: str) -> str:
     value = row.get(key)
@@ -117,6 +140,14 @@ class CompanyEvent:
     def stage_number(self) -> int:
         return int(self.commercial_stage[1:])
 
+    @property
+    def externally_evidenced(self) -> bool:
+        return any(is_external_evidence(ref) for ref in self.evidence_refs)
+
+    @property
+    def synthetically_evidenced(self) -> bool:
+        return any(is_synthetic_evidence(ref) for ref in self.evidence_refs)
+
 
 @dataclass(frozen=True)
 class CompanyRun:
@@ -166,8 +197,11 @@ class CompanyRunEvaluation:
     reserved_human_decisions: int
     handoffs: int
     completed_handoffs: int
-    highest_commercial_stage: str
+    simulated_highest_stage: str
+    real_highest_commercial_stage: str
+    simulated_end_to_end_traversal: bool
     real_commercial_evidence_events: int
+    synthetic_evidence_events: int
     findings: tuple[RunFinding, ...]
 
 
@@ -183,6 +217,32 @@ def evaluate_company_run(run: CompanyRun) -> CompanyRunEvaluation:
                     f"{event.commercial_stage} requires at least one external/private evidence reference",
                 )
             )
+
+        if (
+            event.stage_number >= REAL_COMMERCIAL_STAGE_MIN
+            and event.evidence_refs
+            and not event.externally_evidenced
+        ):
+            if event.synthetically_evidenced:
+                findings.append(
+                    RunFinding(
+                        event.event_id,
+                        "info",
+                        f"{event.commercial_stage} evidence is synthetic; the event "
+                        "exercises the operating machinery only and is excluded from "
+                        "real commercial proof",
+                    )
+                )
+            else:
+                findings.append(
+                    RunFinding(
+                        event.event_id,
+                        "warning",
+                        f"{event.commercial_stage} evidence references carry no scheme; "
+                        "unknown provenance is excluded from real commercial proof "
+                        "(use synthetic:// for simulation or e.g. private:// for real evidence)",
+                    )
+                )
 
         if event.status == "completed" and not (event.artifact_refs or event.evidence_refs):
             findings.append(
@@ -256,10 +316,17 @@ def evaluate_company_run(run: CompanyRun) -> CompanyRunEvaluation:
     completed_handoffs = [event for event in handoffs if event.handoff_completed]
     handoff_closure_rate = len(completed_handoffs) / len(handoffs) if handoffs else 1.0
 
-    highest_stage_number = max((event.stage_number for event in run.events), default=0)
-    highest_stage = f"E{highest_stage_number}"
+    simulated_highest_number = max((event.stage_number for event in run.events), default=0)
+    real_highest_number = max(
+        (event.stage_number for event in run.events if event.externally_evidenced),
+        default=0,
+    )
     real_commercial_evidence_events = sum(
-        event.stage_number >= REAL_COMMERCIAL_STAGE_MIN for event in run.events
+        event.stage_number >= REAL_COMMERCIAL_STAGE_MIN and event.externally_evidenced
+        for event in run.events
+    )
+    synthetic_evidence_events = sum(
+        event.synthetically_evidenced for event in run.events
     )
 
     integrity_ok = not any(item.severity == "error" for item in findings)
@@ -270,9 +337,9 @@ def evaluate_company_run(run: CompanyRun) -> CompanyRunEvaluation:
     return CompanyRunEvaluation(
         run_id=run.run_id,
         operational_pass=operational_pass,
-        commercial_signal=highest_stage_number >= 6,
-        activated_commercial_loop=highest_stage_number >= 7,
-        end_to_end_commercial_proof=highest_stage_number >= 8,
+        commercial_signal=real_highest_number >= 6,
+        activated_commercial_loop=real_highest_number >= 7,
+        end_to_end_commercial_proof=real_highest_number >= 8,
         autonomy_rate=autonomy_rate,
         handoff_closure_rate=handoff_closure_rate,
         eligible_completed_events=len(eligible_completed),
@@ -284,8 +351,11 @@ def evaluate_company_run(run: CompanyRun) -> CompanyRunEvaluation:
         reserved_human_decisions=sum(event.reserved_human_decision for event in run.events),
         handoffs=len(handoffs),
         completed_handoffs=len(completed_handoffs),
-        highest_commercial_stage=highest_stage,
+        simulated_highest_stage=f"E{simulated_highest_number}",
+        real_highest_commercial_stage=f"E{real_highest_number}",
+        simulated_end_to_end_traversal=simulated_highest_number >= 8,
         real_commercial_evidence_events=real_commercial_evidence_events,
+        synthetic_evidence_events=synthetic_evidence_events,
         findings=tuple(findings),
     )
 
@@ -300,6 +370,7 @@ def evaluation_payload(evaluation: CompanyRunEvaluation) -> dict[str, object]:
         "schema_version": "1.0",
         "run_id": evaluation.run_id,
         "operational_pass": evaluation.operational_pass,
+        "simulated_end_to_end_traversal": evaluation.simulated_end_to_end_traversal,
         "commercial_signal": evaluation.commercial_signal,
         "activated_commercial_loop": evaluation.activated_commercial_loop,
         "end_to_end_commercial_proof": evaluation.end_to_end_commercial_proof,
@@ -312,8 +383,10 @@ def evaluation_payload(evaluation: CompanyRunEvaluation) -> dict[str, object]:
             "reserved_human_decisions": evaluation.reserved_human_decisions,
             "handoffs": evaluation.handoffs,
             "completed_handoffs": evaluation.completed_handoffs,
-            "highest_commercial_stage": evaluation.highest_commercial_stage,
+            "simulated_highest_stage": evaluation.simulated_highest_stage,
+            "real_highest_commercial_stage": evaluation.real_highest_commercial_stage,
             "real_commercial_evidence_events": evaluation.real_commercial_evidence_events,
+            "synthetic_evidence_events": evaluation.synthetic_evidence_events,
         },
         "findings": [
             {
@@ -325,8 +398,11 @@ def evaluation_payload(evaluation: CompanyRunEvaluation) -> dict[str, object]:
         ],
         "interpretation": (
             "Operational autonomy and commercial validation are separate. "
-            "A clean AI operating pass does not prove product-market fit, revenue, "
-            "founder independence or qualified professional review."
+            "Synthetic/example evidence exercises the machinery only: commercial_signal, "
+            "activated_commercial_loop, end_to_end_commercial_proof and all real_* metrics "
+            "derive exclusively from externally-evidenced events. A clean AI operating pass "
+            "does not prove product-market fit, revenue, founder independence or qualified "
+            "professional review."
         ),
     }
 

@@ -22,8 +22,13 @@ jobs:
         run: |
           clinicops-company-run examples/ai_company_run.example.json > /tmp/clinicops-company-run.json
           grep -q '"operational_pass": true' /tmp/clinicops-company-run.json
-          grep -q '"end_to_end_commercial_proof": true' /tmp/clinicops-company-run.json
-          grep -q '"highest_commercial_stage": "E8"' /tmp/clinicops-company-run.json
+          # The synthetic example must traverse the machinery mechanically...
+          grep -q '"simulated_end_to_end_traversal": true' /tmp/clinicops-company-run.json
+          grep -q '"simulated_highest_stage": "E8"' /tmp/clinicops-company-run.json
+          # ...but must NEVER register as real commercial proof (fail-closed).
+          grep -q '"end_to_end_commercial_proof": false' /tmp/clinicops-company-run.json
+          grep -q '"real_highest_commercial_stage": "E0"' /tmp/clinicops-company-run.json
+          grep -q '"real_commercial_evidence_events": 0' /tmp/clinicops-company-run.json
       - name: Global sales swarm contract
         run: |
           clinicops-sales-swarm sales/global-sales-swarm.json > /tmp/clinicops-sales-swarm.json
