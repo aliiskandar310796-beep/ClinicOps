@@ -1,6 +1,6 @@
 # ClinicOps
 
-ClinicOps is a Denmark-based, EU-wide evidence-controlled clinical and life-sciences operations company. Denmark is the local-market and localisation anchor; delivery is English-first and EU-wide, with Danish language, authority and professional expertise brought into scope when relevant.
+ClinicOps is a Danish-led, EU-wide evidence-controlled clinical and life-sciences operations company. Denmark is the local-market and localisation anchor; delivery is English-first and EU-wide, with Danish language, authority and professional expertise brought into scope when relevant.
 
 Service architecture:
 - Services directory: https://clinicops.dk/services.html
