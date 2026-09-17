@@ -1,6 +1,6 @@
 # ClinicOps shared agent state
 
-Last reconciled: 2026-09-13 after PR #48, exact-main CI verification and launch of AI-COMPANY-001.
+Last reconciled: 2026-09-17 after the expanded-portfolio stabilisation pass (fixture/deploy-gating/routing fixes on top of 554463c). The public site now presents 29 canonical URLs and multiple service lanes; this file's thesis section reflects that deliberately.
 
 ## Canonical truth
 
@@ -10,9 +10,15 @@ Do **not** hard-code a self-referential “current main SHA” as permanent trut
 
 ## Current business thesis
 
-ClinicOps is an evidence-controlled, human-reviewed operating layer for high-value expert work. The current commercial beachhead is MDR / EUDAMED transition operations, especially Class III / implantable portfolios.
+ClinicOps is an evidence-controlled, human-reviewed operating layer for high-value expert work: it controls how regulated evidence moves across documents, systems, markets and accountable human owners.
 
-The **Class III Transition Map Pilot remains the only default `DO NOW` offer**. Adjacent opportunities may be researched and tested, but must not silently replace the core offer or trigger speculative platform build-out.
+**Current portfolio (deliberate, 2026-09-17): multiple live service lanes.** Do not "correct" the site back to a single-offer state — the breadth is intentional. The lanes are:
+
+- **Default cross-domain commercial entry:** Regulatory Integrity Review / Evidence Change Control Pack around one bounded real workflow. Every lane funnels into this one paid entry.
+- **Strongest existing wedges (most buyer evidence so far):** MedTech / EUDAMED / Class III transition; Denmark market access / Danish PV / localisation.
+- **Adjacent service lanes (live, less validated):** TrialOps, QualityOps, Clinical AI evidence review, LabOps, Clinic Operations, controlled medical content.
+
+**Validation rule: availability ≠ proven demand.** Each lane earns stronger investment only through real buyer evidence (the EXP-001 ladder below applies per lane). Do not claim all lanes are equally validated, and do not let breadth become confusion: one umbrella operating model, one obvious default paid entry.
 
 Commercial validation outranks speculative product development.
 

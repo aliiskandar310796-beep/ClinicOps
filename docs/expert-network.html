@@ -40,6 +40,7 @@
 <p>If you are an independent specialist &mdash; Danish medical or life-science language, pharmacovigilance, regulatory affairs, clinical research or quality &mdash; build a short introduction below. It stays in your browser until you choose <em>Create email draft</em>; this page has no form endpoint and sends nothing on its own.</p>
 <form id="join-form" novalidate>
 <div class="grid">
+<div class="field"><label for="name">Name</label><input id="name" maxlength="80" autocomplete="name" required></div>
 <div class="field"><label for="specialty">Primary specialty</label><select id="specialty" required><option value="">Choose one</option><option>Danish medical / regulatory language</option><option>Pharmacovigilance</option><option>Regulatory affairs (MDR / IVDR / pharma)</option><option>Clinical research / medical writing</option><option>Quality / QMS</option><option>Other life-science specialty</option></select></div>
 <div class="field"><label for="langs">Working languages</label><input id="langs" maxlength="80" placeholder="e.g. Danish (native), English" required></div>
 <div class="field"><label for="country">Country of practice</label><input id="country" maxlength="60" required></div>
@@ -48,7 +49,7 @@
 <div class="field"><label for="profile">Public profile link <span class="hint">(optional &mdash; LinkedIn or similar)</span></label><input id="profile" maxlength="200" autocomplete="url"></div>
 <div class="field"><label for="exp">One paragraph on your experience <span class="hint">(optional)</span></label><textarea id="exp" maxlength="600" placeholder="For example: 8 years in PV case processing; native Danish; comfortable with literature screening and narrative QC."></textarea><p class="hint">Maximum 600 characters. Do not include client-confidential information.</p></div>
 <label class="check"><input id="safe" type="checkbox" required><span>I will not include client-confidential information, patient-identifiable data, passwords or credentials in this introduction.</span></label>
-<div class="actions"><button class="btn secondary" type="button" id="preview">Preview introduction</button><button class="btn secondary" type="button" id="copy">Copy introduction</button><button class="btn primary" type="submit">Create email draft</button></div>
+<div class="actions"><button class="btn secondary-btn" type="button" id="preview">Preview introduction</button><button class="btn secondary-btn" type="button" id="copy">Copy introduction</button><button class="btn primary-btn" type="submit">Create email draft</button></div>
 <p id="status" class="status" aria-live="polite"></p>
 </form>
 <h2>Introduction preview</h2><pre id="output">Complete the required fields, then choose Preview introduction.</pre>
@@ -57,13 +58,13 @@
 <h2>Looking to hire the work, not join it?</h2>
 <p><a class="cta primary" href="assessment-intake.html?workstream=integrity-review">Scope one real engagement</a><a class="cta ghost" href="services.html">See the services</a><a class="cta ghost" href="about.html">Who does the work</a></p>
 </main>
-<footer><div class="wrap">ClinicOps · Browser-local introduction only. Sending the generated email is always an explicit user action. · <a href="privacy-notice/">Privacy notice</a></div></footer>
+<footer class="site"><div class="footer-inner"><span>ClinicOps · Browser-local introduction only. Sending the generated email is always an explicit user action.</span><span><a href="privacy-notice/">Privacy notice</a></span></div></footer>
 <script>
 (() => {
   "use strict";
   const form=document.getElementById("join-form"),output=document.getElementById("output"),status=document.getElementById("status"),byId=id=>document.getElementById(id);
   function valid(){if(!form.checkValidity()){form.reportValidity();status.textContent="Complete the required fields before creating the introduction.";return false}return true}
-  function build(){return ["Independent specialist introduction — ClinicOps expert network","",`Primary specialty: ${byId("specialty").value}`,`Working languages: ${byId("langs").value.trim()}`,`Country of practice: ${byId("country").value.trim()}`,`Typical availability: ${byId("avail").value}`,`Public profile: ${byId("profile").value.trim()||"Not provided"}`,"","Experience:",byId("exp").value.trim()||"Not provided","","Confirmation: no client-confidential information, patient-identifiable data, passwords or credentials included","","Generated locally at clinicops.dk/expert-network.html"].join("\n")}
+  function build(){return ["Independent specialist introduction — ClinicOps expert network","",`Name: ${byId("name").value.trim()}`,`Primary specialty: ${byId("specialty").value}`,`Working languages: ${byId("langs").value.trim()}`,`Country of practice: ${byId("country").value.trim()}`,`Typical availability: ${byId("avail").value}`,`Public profile: ${byId("profile").value.trim()||"Not provided"}`,"","Experience:",byId("exp").value.trim()||"Not provided","","Confirmation: no client-confidential information, patient-identifiable data, passwords or credentials included","","Generated locally at clinicops.dk/expert-network.html"].join("\n")}
   function preview(){if(!valid())return null;const text=build();output.textContent=text;status.textContent="Introduction ready. Nothing has been sent.";return text}
   byId("preview").addEventListener("click",preview);
   byId("copy").addEventListener("click",async()=>{const text=preview();if(!text)return;try{await navigator.clipboard.writeText(text);status.textContent="Introduction copied to your clipboard. Nothing has been sent."}catch(_){const helper=document.createElement("textarea");helper.value=text;helper.setAttribute("readonly","");helper.style.position="fixed";helper.style.opacity="0";document.body.appendChild(helper);helper.select();document.execCommand("copy");helper.remove();status.textContent="Introduction copied to your clipboard. Nothing has been sent."}});
