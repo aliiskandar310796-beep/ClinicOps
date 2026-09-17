@@ -10,7 +10,7 @@ DOCS = ROOT / "docs"
 HEADER_RE = re.compile(r"<header\b[^>]*>.*?</header>", re.IGNORECASE | re.DOTALL)
 HEAD_CLOSE_RE = re.compile(r"</head>", re.IGNORECASE)
 SITE_CSS_RE = re.compile(r"href=[\"'][^\"']*site\.css[\"']", re.IGNORECASE)
-EXCLUDED = {"404.html", "expert-network.html", "clinical-operations.html"}
+EXCLUDED = {"404.html", "clinical-operations.html"}
 
 NAV_ITEMS = (
     ("Home", "index.html"),
@@ -50,7 +50,7 @@ def _current_section(relative: str) -> str:
         return "Sources"
     if relative in TOOLS_PAGES:
         return "Tools"
-    if relative == "about.html":
+    if relative in {"about.html", "expert-network.html"}:
         return "About"
     if relative == "contact.html":
         return "Contact"

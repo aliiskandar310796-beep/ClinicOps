@@ -9,7 +9,7 @@ from clinicops_os.site_quality import parse_metadata
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 SITEMAP = DOCS / "sitemap.xml"
-EXCLUDED_HTML = {"404.html", "expert-network.html", "clinical-operations.html"}
+EXCLUDED_HTML = {"404.html", "clinical-operations.html"}
 
 
 def discover_urls() -> list[str]:
