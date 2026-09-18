@@ -87,3 +87,25 @@ Consultants sell judgement and execution. RIM/QMS/PLM/ERP store and manage recor
 | expert-network.html | DEMOTED — internal delivery mechanism; off primary journeys |
 | about.html, contact.html, research pages, specimens, privacy | KEEP (nav updated) |
 | clinical-operations.html | Legacy stub, out of sitemap (unchanged) |
+
+---
+
+## Appendix A — Master Execution Directive adoption (2026-09-18, second cycle)
+
+The CLINICOPS MASTER EXECUTION DIRECTIVE (2026-09-18) is adopted and supersedes earlier directives where they conflict. Deltas it adds to this file:
+
+**North star restated:** regulated product information, change and evidence integrity. The longer-term internal category is *Regulated Product Information Integrity for Life Sciences* — NOT public until Pharma independently demonstrates repeatable use (≥3 representative Pharma workflows, ≥2 independent organisations, repeated pain, common I/O structure, ≥1 real commercial activation, no rebuild required).
+
+**Domain-pack architecture:** one shared integrity kernel (Source · Object · Observation · Relationship · Change · Evidence · Exception · Owner · Decision · Closure) with attachable domain packs — MedTech Pack (ACTIVE: MDR/IVDR/EUDAMED/UDI/certificates/SS(C)P/labeling/IFU/MDSW), Pharma Information Pack (RESEARCH: SmPC/leaflet/labeling/ePI/IDMP/SPOR/variations), PV Pack (ACTIVE-SECONDARY: literature/language/translation/reviewer routing), Combination Product Pack (RESEARCH ONLY — prefilled syringes, pens, inhalers, drug-device combinations, companion diagnostics; strategic Pharma↔MedTech bridge; no public product before buyer evidence). No separate software product per domain.
+
+**MedTech wedge explicitly includes:** MDSW/SaMD, AI-enabled MDSW, connected devices, implantables/Class III, diagnostics, combination-product device components.
+
+**Segmentation model:** client role × company size × product modality × workflow × therapeutic/medical area × regulatory geography. Mid-market EU manufacturers = strongest initial ICP (RIM/QMS exist but disconnected; portfolios big enough to hurt; no appetite for another enterprise implementation). Enterprise = workflow evidence/partnerships only. Therapeutic area = research/targeting metadata, never a product family and never a claimed specialist expertise. Priority research intersections: oncology/CDx, diabetes (pens/pumps/CGM/apps), cardiology (Class III/implantables), imaging/radiology (SaMD), lab diagnostics/IVD, respiratory (inhalers), rare disease/ATMP, neurology, ophthalmology.
+
+**WIP guardrail (directional):** ~40% product/delivery · 25% demand/buyer evidence · 15% trust/quality · 10% visual/UX · 10% resilience/capability. Live-customer value outranks the ratio.
+
+**Visual communication is a core capability:** design tokens (see `design/DESIGN_TOKENS.md`), diagram-as-code preferred, real product screenshots only (Playwright, sanitized fixtures), evidence figures only from real data with figure governance. No fake dashboards, no generated imagery presented as evidence.
+
+**Capability registry:** `03_OPERATIONS/CAPABILITY_REGISTRY.md` tracks major capabilities (PROPOSED/PILOT/ACTIVE/DEGRADED/DISABLED/RETIRED). Experimental infrastructure (semantic memory, Headroom, OmniRoute, deck.gl, Storybook, backend) stays PROPOSED until evidence.
+
+**Final rule (verbatim):** flagship workflow over another idea; test the primitive over a new market; less user friction over more technology; external evidence over internal confidence.

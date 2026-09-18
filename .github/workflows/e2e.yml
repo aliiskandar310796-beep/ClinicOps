@@ -1,0 +1,29 @@
+name: E2E Scanner Journey
+# Real-browser operator journey against PRODUCTION (Master Directive §67):
+# homepage -> solution -> scanner -> fixture import -> mapping -> reconciliation
+# -> exception queue -> export, plus keyboard and mobile checks.
+# Deliberately NON-GATING: it runs on a schedule and on demand, never blocks CI
+# or deploys, and its failures are journey regressions to investigate.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '41 6 * * 2'  # weekly, Tuesday 06:41 UTC
+
+permissions:
+  contents: read
+
+jobs:
+  journey:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+      - name: Install Playwright chromium
+        run: |
+          npm init -y >/dev/null
+          npm install --no-fund --no-audit playwright@1
+          npx playwright install --with-deps chromium
+      - name: Run operator journey against production
+        run: node e2e/scanner_journey.mjs

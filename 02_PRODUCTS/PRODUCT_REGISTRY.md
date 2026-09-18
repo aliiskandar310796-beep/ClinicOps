@@ -52,9 +52,18 @@ Interactive Integrity Specimen, Transition Map sample. Purpose: make the method 
 ### Demoted utilities
 Transition Readiness Score and Regulatory Change Review Cost calculator remain reachable as sales support but are out of primary navigation prominence. No black-box score becomes a core product.
 
+## Domain packs (one shared integrity kernel, attachable packs — never separate software products)
+
+- **MedTech Pack — ACTIVE.** MDR / IVDR / EUDAMED / UDI / certificates / SS(C)P / SSP / labeling / IFU / MDSW-SaMD (incl. AI-enabled MDSW, connected devices, implantables, combination-product device components).
+- **Pharma Information Pack — RESEARCH.** SmPC / package leaflet / labeling / ePI / IDMP / SPOR / Art. 57 where relevant / variations and post-authorisation change propagation. Built as a domain pack only; no public Pharma consultancy positioning until the reassessment evidence in the positioning file §Appendix A exists.
+- **PV Pack — ACTIVE (secondary lane).** Danish literature monitoring support, medically informed Danish/English translation, DHPC language workflows, terminology/version control, reviewer evidence. Deterministic software never performs causality/medical assessment or QPPV decisions.
+- **Combination Product Pack — RESEARCH ONLY.** Prefilled syringes, pens, inhalers, drug-device combinations, companion diagnostics. Strategic Pharma↔MedTech bridge; research before any public product.
+
+Kernel entities: Source · Object · Observation · Relationship · Change · Evidence · Exception · Owner · Decision · Closure.
+
 ## Specialized use cases (landing routes, not identities)
 
-Class III / implantable MDR transition · EUDAMED transition · SS(C)P operations · AR portfolio intelligence · medical-device document control · language-version integrity / Danish linguistic validation · Denmark market access incl. Danish pharmacovigilance support (retained on real buyer evidence; see positioning §5). Each routes to the three products above.
+Class III / implantable MDR transition · EUDAMED transition · SS(C)P operations · AR portfolio intelligence · medical-device document control · MDSW/SaMD version-and-verification records · language-version integrity / Danish linguistic validation · Denmark market access incl. Danish pharmacovigilance support (retained on real buyer evidence; see positioning §5). Each routes to the three products above.
 
 ## Archived / experimental (no public product status)
 

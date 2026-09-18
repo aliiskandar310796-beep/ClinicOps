@@ -44,7 +44,7 @@
 <h2>1 · Import the portfolio</h2>
 <div class="panel">
 <div class="field"><label for="b_input">Paste CSV (with a header row) or a JSON array of objects — or choose a file</label><textarea id="b_input" spellcheck="false" placeholder="basic_udi_di,udi_di,trade_name,model,risk_class,source_system,source_role,evidence_ref,evidence_date,owner&#10;..."></textarea></div>
-<div class="actions"><input id="b_file" type="file" accept=".csv,.json,application/json,text/csv" hidden><button class="btn secondary" id="b_choose" type="button">Choose CSV/JSON file</button><button class="btn secondary" id="b_parse" type="button">Parse &amp; map columns</button><button class="btn secondary" id="b_example" type="button">Load fictional example portfolio</button></div>
+<div class="actions"><input id="b_file" type="file" accept=".csv,.json,.xlsx,application/json,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden><button class="btn secondary" id="b_choose" type="button">Choose CSV/JSON file</button><button class="btn secondary" id="b_parse" type="button">Parse &amp; map columns</button><button class="btn secondary" id="b_example" type="button">Load fictional example portfolio</button></div>
 <p class="hint">The file is read locally by your browser. Nothing is uploaded, stored or transmitted. Avoid pasting confidential data you are not authorised to process on this machine.</p>
 </div>
 <div id="b_mapping" hidden><h2>2 · Map columns to regulatory objects</h2><div class="panel"><p class="hint" id="b_parseinfo"></p><div id="b_maprows"></div><div class="actions"><button class="btn primary" id="b_run" type="button">Run portfolio scan</button></div></div></div>
@@ -141,7 +141,7 @@ function parseInput(text){
  if(t[0]==="["||t[0]==="{"){try{let j=JSON.parse(t);if(!Array.isArray(j))j=[j];const headers=[...new Set(j.flatMap(o=>Object.keys(o)))];return{headers,rows:j.map(o=>{const r={};headers.forEach(h=>r[h]=tr(T(o[h]??"")));return r})}}catch(e){return{error:"JSON parse failed: "+e.message}}}
  return parseCSV(t)||{error:"No rows found"};
 }
-const GUESS={basic_udi_di:/basic/i,udi_di:/^(?!.*basic).*udi/i,trade_name:/trade|device.*name|product.*name/i,model_ref:/model|catalog|reference|ref\b/i,risk_class:/class/i,manufacturer_srn:/(manufacturer|mf).*srn|^srn$/i,ar_srn:/ar.*srn|authori/i,emdn:/emdn|nomencl/i,certificate_no:/cert/i,sscp_ref:/sscp|ssp/i,doc_version:/version|revision|rev\b/i,language:/lang/i,record_status:/status/i,source_system:/system|source(?!.*role)(?!.*url)(?!.*date)/i,source_role:/role/i,evidence_ref:/evidence(?!.*date)|url|link|proof/i,evidence_date:/date|as.?of/i,owner:/owner|responsible/i};
+const GUESS={basic_udi_di:/basic/i,udi_di:/^(?!.*basic).*udi/i,trade_name:/trade|device.*name|product.*name/i,model_ref:/model|catalog(?:ue)?|article|^ref(?:erence)?(?:_?(?:no|number|nr))?$/i,risk_class:/class/i,manufacturer_srn:/(manufacturer|mf).*srn|^srn$/i,ar_srn:/ar.*srn|authori/i,emdn:/emdn|nomencl/i,certificate_no:/cert/i,sscp_ref:/sscp|ssp/i,doc_version:/version|revision|rev\b/i,language:/lang/i,record_status:/status/i,source_system:/system|source(?!.*role)(?!.*url)(?!.*date)/i,source_role:/role/i,evidence_ref:/evidence(?!.*date)|url|link|proof/i,evidence_date:/date|as.?of/i,owner:/owner|responsible/i};
 function showMapping(){
  $("b_maprows").innerHTML=OBJECTS.map(([id,label])=>{
   const guess=bData.headers.find(h=>GUESS[id]&&GUESS[id].test(h))||"";
@@ -150,7 +150,7 @@ function showMapping(){
  $("b_mapping").hidden=false;
 }
 $("b_choose").onclick=()=>$("b_file").click();
-$("b_file").onchange=async ev=>{const f=ev.target.files?.[0];if(!f)return;$("b_input").value=await f.text();ev.target.value="";};
+$("b_file").onchange=async ev=>{const f=ev.target.files?.[0];if(!f)return;if(/\.xlsx?$/i.test(f.name)){$("b_parseinfo").textContent="XLSX import is planned but not yet supported in the browser tool. Export the sheet as CSV (File \u2192 Save as \u2192 CSV) and choose that file \u2014 nothing is lost: the scan works on the same columns.";$("b_mapping").hidden=false;$("b_maprows").innerHTML="";ev.target.value="";return}$("b_input").value=await f.text();ev.target.value="";};
 $("b_parse").onclick=()=>{const r=parseInput($("b_input").value);if(!r||r.error){$("b_parseinfo").textContent=r?r.error:"Nothing to parse.";$("b_mapping").hidden=false;$("b_maprows").innerHTML="";bData=null;return}bData=r;showMapping()};
 function ident(v){return T(v).trim().replace(/^\(01\)\s*/,"").replace(/[^0-9A-Za-z]/g,"").toUpperCase()}
 function mod10ok(d){let s=0;for(let i=0;i<13;i++)s+=parseInt(d[i],10)*(i%2===0?3:1);return((10-(s%10))%10)===parseInt(d[13],10)}
