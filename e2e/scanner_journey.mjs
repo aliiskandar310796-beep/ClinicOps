@@ -53,6 +53,7 @@ try {
   const queue = await page.$$eval("#queue li", (ls) => ls.map((l) => l.textContent));
   ok("Danish-character mismatch surfaced", queue.some((q) => q.includes("Device trade name") && q.includes("mismatch signal")), queue.join(" | ").slice(0, 200));
   ok("missing evidence date surfaced", queue.some((q) => q.includes("Evidence date")));
+  await page.waitForSelector("#grid .tabulator-row", { timeout: 15000 }).catch(() => {});
   const findingsText = (await page.textContent("#grid").catch(() => "")) || (await page.textContent("#rows"));
   ok("verbatim Danish preserved", findingsText.includes("Blåbær") && findingsText.includes("Blaabær"));
 
