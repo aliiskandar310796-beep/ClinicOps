@@ -56,6 +56,33 @@ def test_broad_ops_categories_stay_archived() -> None:
     assert not offenders, "archived Ops category on public page: " + ", ".join(offenders)
 
 
+LEGACY_IDENTITY_PHRASES = (
+    "Danish-Led, EU-Wide Clinical Operations",
+    "clinical operations practice",
+    "clinic operations",
+    "Clinical Ops",
+)
+
+
+def test_head_metadata_carries_no_legacy_identity() -> None:
+    """Titles, descriptions, OG and JSON-LD must never resurrect the old
+    multi-lane identity — a smoke marker once protected the OLD About/Contact
+    titles, so this pins the head of every canonical page (QA Cycle 3 P0A)."""
+    offenders: list[str] = []
+    for page in _pages():
+        html = page.read_text(encoding="utf-8")
+        head = html.split("</head>", 1)[0]
+        for phrase in LEGACY_IDENTITY_PHRASES:
+            if phrase.lower() in head.lower():
+                offenders.append(f"{page.name}: {phrase}")
+    assert not offenders, "legacy identity in page head: " + ", ".join(offenders)
+
+
+def test_live_smoke_markers_carry_no_legacy_identity() -> None:
+    checker = (ROOT / "scripts" / "check_live_site.py").read_text(encoding="utf-8")
+    assert "Clinical Operations" not in checker
+
+
 def test_no_reserved_validation_language() -> None:
     offenders: list[str] = []
     for page in _pages():

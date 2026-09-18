@@ -34,7 +34,7 @@ try {
   page.on("pageerror", (e) => pageErrors.push(String(e).slice(0, 160)));
 
   // 1. homepage → solution → scanner
-  await page.goto(BASE + "/", { waitUntil: "load" });
+  await page.goto(BASE.startsWith("file:") ? BASE + "/index.html" : BASE + "/", { waitUntil: "load" });
   ok("homepage states the job", (await page.textContent("h1")).includes("EUDAMED"));
   await page.click('nav.primary a:has-text("Solution")');
   ok("solution page is flagship-first", (await page.textContent("h1")).includes("Regulatory Change Integrity Review"));
@@ -53,8 +53,8 @@ try {
   const queue = await page.$$eval("#queue li", (ls) => ls.map((l) => l.textContent));
   ok("Danish-character mismatch surfaced", queue.some((q) => q.includes("Device trade name") && q.includes("mismatch signal")), queue.join(" | ").slice(0, 200));
   ok("missing evidence date surfaced", queue.some((q) => q.includes("Evidence date")));
-  const rows = await page.textContent("#rows");
-  ok("verbatim Danish preserved", rows.includes("Blåbær") && rows.includes("Blaabær"));
+  const findingsText = (await page.textContent("#grid").catch(() => "")) || (await page.textContent("#rows"));
+  ok("verbatim Danish preserved", findingsText.includes("Blåbær") && findingsText.includes("Blaabær"));
 
   // 4. export round-trip
   const [dl] = await Promise.all([page.waitForEvent("download", { timeout: 8000 }), page.click("#x_json")]);
@@ -62,6 +62,33 @@ try {
   const fs = await import("fs");
   const packet = JSON.parse(fs.readFileSync(path, "utf8"));
   ok("export carries findings + boundary", Array.isArray(packet.findings) && packet.findings.length > 0 && /not compliance determinations/i.test(packet.boundary || ""));
+
+  // 4b. XLSX: real workbook fixture (Danish sheet name, date serials, formula cell)
+  await page.goto(BASE + "/integrity-scanner.html", { waitUntil: "load" });
+  await page.click("#modeB");
+  await page.setInputFiles("#b_file", new URL("./fixtures/portfolio.xlsx", import.meta.url).pathname);
+  await page.waitForTimeout(800);
+  const pinfo = await page.textContent("#b_parseinfo");
+  ok("xlsx parsed locally", /Portefølje.*3 rows/.test(pinfo), pinfo.slice(0, 120));
+  ok("xlsx formulas never evaluated", /never evaluated/.test(pinfo));
+  ok("xlsx date serials normalized", /Excel date serial/.test(pinfo));
+  await page.click("#b_run");
+  await page.waitForTimeout(900);
+  ok("xlsx scan produced findings", /Portfolio scan/.test(await page.textContent("#summary")));
+  // workbench grid interactions
+  const gridRows = await page.$$eval("#grid .tabulator-row", (rs) => rs.length).catch(() => 0);
+  ok("workbench grid rendered", gridRows > 0, `rows=${gridRows}`);
+  await page.selectOption("#wb_status", "mismatch signal");
+  await page.waitForTimeout(250);
+  const filtered = await page.$$eval("#grid .tabulator-row", (rs) => rs.length).catch(() => 0);
+  ok("status filter narrows the queue", filtered >= 1 && filtered < gridRows, `filtered=${filtered}`);
+  await page.selectOption("#wb_status", "");
+  await page.click('#grid .tabulator-header input[type="checkbox"]');
+  await page.fill("#wb_owner", "RA Review Board");
+  await page.click("#wb_apply_owner");
+  const [dsel] = await Promise.all([page.waitForEvent("download", { timeout: 8000 }), page.click("#wb_export_sel")]);
+  const selCsv = (await import("fs")).readFileSync(await dsel.path(), "utf8");
+  ok("bulk owner lands in selected export", selCsv.includes("RA Review Board") && selCsv.includes("review_state"));
 
   // 5. keyboard reaches the mode switch; no JS errors anywhere
   await page.goto(BASE + "/integrity-scanner.html", { waitUntil: "load" });

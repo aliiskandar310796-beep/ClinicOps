@@ -12,6 +12,7 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"ClinicOps Regulatory Integrity Scanner","url":"https://clinicops.dk/integrity-scanner.html","applicationCategory":"BusinessApplication","operatingSystem":"Any modern browser","isAccessibleForFree":true,"publisher":{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}</script>
 <style>
 :root{color-scheme:light dark;--bg:#f8f7f4;--surface:#fff;--surface2:#f0eee8;--text:#17202b;--muted:#5e6874;--border:#d7dde2;--accent:#0d6559;--contrast:#fff;--soft:#e0f1ed;--ok:#157847;--warn:#a55b00;--hold:#b03333}@media(prefers-color-scheme:dark){:root{--bg:#101419;--surface:#171d24;--surface2:#1d252d;--text:#e8edf1;--muted:#a1aab4;--border:#303943;--accent:#52d7c3;--contrast:#08221d;--soft:#142b27;--ok:#69d79d;--warn:#efb05c;--hold:#ff9191}}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55}.wrap{max-width:1100px;margin:auto;padding:0 22px}main{padding:54px 0 64px}h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.04;letter-spacing:-.04em;margin:.16em 0 .36em;max-width:880px}h2{font-size:1.42rem;margin:2.1em 0 .65em}h3{font-size:1.03rem;margin:.1em 0 .4em}.lede{font-size:1.12rem;max-width:800px;color:var(--muted)}.muted,.hint{color:var(--muted)}.eyebrow{display:inline-flex;font-size:.75rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);background:var(--soft);padding:5px 11px;border-radius:999px}.trust,.actions{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0}.chip{font-size:.82rem;border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:6px 10px;color:var(--muted)}.panel,.callout,.result{border:1px solid var(--border);border-radius:16px;background:var(--surface);padding:19px;margin:18px 0}.callout{background:var(--surface2)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}@media(max-width:760px){.grid{grid-template-columns:1fr}}label{display:block;font-weight:700;margin:0 0 6px;font-size:.92rem}input,select,textarea{width:100%;font:inherit;padding:10px 11px;border:1px solid var(--border);border-radius:9px;background:var(--surface);color:var(--text)}textarea{min-height:120px;resize:vertical;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.84rem}.field{margin:0 0 13px}.btn,.cta{font:inherit;font-weight:720;border:1px solid var(--accent);border-radius:9px;padding:10px 15px;text-decoration:none;display:inline-block;cursor:pointer}.primary{background:var(--accent);color:var(--contrast)}.secondary{background:transparent;color:var(--accent)}.mode{display:flex;gap:9px;flex-wrap:wrap;margin:20px 0}.mode button{font:inherit;font-weight:750;border:1px solid var(--border);background:var(--surface);color:var(--muted);border-radius:999px;padding:10px 18px;cursor:pointer}.mode button[aria-pressed="true"]{border-color:var(--accent);background:var(--soft);color:var(--accent)}.result-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap}.badge{display:inline-block;font-size:.8rem;font-weight:850;padding:6px 10px;border-radius:999px;background:var(--surface2)}.badge.ok{color:var(--ok)}.badge.review{color:var(--warn)}.badge.hold{color:var(--hold)}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:15px 0}.metric{border:1px solid var(--border);border-radius:11px;padding:11px}.metric strong{display:block;font-size:1.28rem}.metric small{color:var(--muted)}@media(max-width:650px){.metrics{grid-template-columns:repeat(2,1fr)}}table{width:100%;border-collapse:separate;border-spacing:0;margin:14px 0;border:1px solid var(--border);border-radius:11px;overflow:hidden}th,td{padding:9px;text-align:left;vertical-align:top;border-bottom:1px solid var(--border)}th{font-size:.8rem;color:var(--muted);background:var(--surface2)}tr:last-child td{border-bottom:0}.tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}.st{font-weight:800;font-size:.8rem;white-space:nowrap}.stAligned{color:var(--ok)}.stMismatch{color:var(--hold)}.stMissing{color:var(--warn)}.stConflict{color:var(--hold)}.stReview{color:var(--warn)}.stNA{color:var(--muted)}.record{border:1px solid var(--border);border-radius:13px;padding:14px;background:var(--surface2)}.record-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:10px}.scope{font-size:.8rem;color:var(--muted);display:flex;gap:6px;align-items:center}.scope input{width:auto}.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}.principle{border-top:2px solid var(--accent);padding-top:10px}.principle span{display:block;font-size:.9rem;color:var(--muted)}@media(max-width:720px){.principles{grid-template-columns:1fr}}footer{border-top:1px solid var(--border);padding:25px 0;color:var(--muted);font-size:.88rem}.fictional{border:1px dashed var(--border);border-radius:9px;padding:9px 12px;background:var(--surface2);font-size:.85rem;color:var(--muted);margin:10px 0}.maprow{display:grid;grid-template-columns:minmax(150px,1fr) minmax(150px,1.4fr);gap:8px;align-items:center;margin:0 0 8px}
+#grid .tabulator{background:var(--surface);border:1px solid var(--border);border-radius:11px;font-size:.85rem}#grid .tabulator .tabulator-header,#grid .tabulator .tabulator-header .tabulator-col{background:var(--surface2);color:var(--muted);border-color:var(--border)}#grid .tabulator .tabulator-tableholder{background:var(--surface)}#grid .tabulator-row{background:var(--surface);color:var(--text);border-color:var(--border)}#grid .tabulator-row.tabulator-row-even{background:var(--surface)}#grid .tabulator-row .tabulator-cell{border-color:var(--border)}#grid .tabulator-row.tabulator-selected{background:var(--soft)}#grid .tabulator .tabulator-group{background:var(--surface2);color:var(--text);border-color:var(--border)}#grid .tabulator .tabulator-footer{background:var(--surface2);color:var(--muted);border-color:var(--border)}
 </style>
 <link rel="stylesheet" href="site.css"></head>
 <body>
@@ -19,10 +20,10 @@
 <main class="wrap">
 <span class="eyebrow">Browser-local · deterministic</span>
 <h1>Regulatory Integrity Scanner</h1>
-<p class="lede">Check whether regulated facts remain consistent. Run a <strong>single-change check</strong> — one approved source against the downstream records that should reflect it — or a <strong>portfolio scan</strong> over a CSV/JSON export. Deterministic comparison, bounded statuses, an exception queue with owners, and portable exports. Everything runs in this browser page; nothing you enter or import leaves it.</p>
-<div class="trust"><span class="chip">Runs locally — no upload</span><span class="chip">Deterministic rules</span><span class="chip">Bounded status vocabulary</span><span class="chip">CSV + JSON export</span><span class="chip">Human authority preserved</span></div>
+<p class="lede">Check whether regulated facts remain consistent. Run a <strong>single-change check</strong> — one approved source against the downstream records that should reflect it — or a <strong>portfolio scan</strong> over a CSV, XLSX or JSON export. Deterministic comparison, bounded statuses, an exception queue with owners, and portable exports. Everything runs in this browser page; nothing you enter or import leaves it.</p>
+<div class="trust"><span class="chip">Runs locally — no upload</span><span class="chip">Deterministic rules</span><span class="chip">Bounded status vocabulary</span><span class="chip">CSV · XLSX · JSON import</span><span class="chip">CSV + JSON export</span><span class="chip">Human authority preserved</span></div>
 <div class="callout"><strong>Boundary.</strong> The scanner compares the values you provide and structures review work. It does not decide which source is legally authoritative, does not make compliance determinations, and reports <em>mismatch signals</em> and <em>missing evidence</em> — never a compliance verdict in either direction. Interpretation and disposition stay with your qualified owner.</div>
-<div class="mode" role="group" aria-label="Scanner mode"><button id="modeA" aria-pressed="true" type="button">Single change</button><button id="modeB" aria-pressed="false" type="button">Portfolio scan (CSV / JSON)</button></div>
+<div class="mode" role="group" aria-label="Scanner mode"><button id="modeA" aria-pressed="true" type="button">Single change</button><button id="modeB" aria-pressed="false" type="button">Portfolio scan (CSV / XLSX / JSON)</button></div>
 
 <section id="paneA">
 <h2>1 · Anchor the approved source</h2>
@@ -43,18 +44,25 @@
 <section id="paneB" hidden>
 <h2>1 · Import the portfolio</h2>
 <div class="panel">
-<div class="field"><label for="b_input">Paste CSV (with a header row) or a JSON array of objects — or choose a file</label><textarea id="b_input" spellcheck="false" placeholder="basic_udi_di,udi_di,trade_name,model,risk_class,source_system,source_role,evidence_ref,evidence_date,owner&#10;..."></textarea></div>
-<div class="actions"><input id="b_file" type="file" accept=".csv,.json,.xlsx,application/json,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden><button class="btn secondary" id="b_choose" type="button">Choose CSV/JSON file</button><button class="btn secondary" id="b_parse" type="button">Parse &amp; map columns</button><button class="btn secondary" id="b_example" type="button">Load fictional example portfolio</button></div>
+<div class="field"><label for="b_input">Paste CSV (with a header row) or a JSON array of objects — or choose a CSV / XLSX / JSON file</label><textarea id="b_input" spellcheck="false" placeholder="basic_udi_di,udi_di,trade_name,model,risk_class,source_system,source_role,evidence_ref,evidence_date,owner&#10;..."></textarea></div>
+<div class="actions"><input id="b_file" type="file" accept=".csv,.json,.xlsx,application/json,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden><button class="btn secondary" id="b_choose" type="button">Choose CSV/XLSX/JSON file</button><button class="btn secondary" id="b_parse" type="button">Parse &amp; map columns</button><button class="btn secondary" id="b_example" type="button">Load fictional example portfolio</button></div>
 <p class="hint">The file is read locally by your browser. Nothing is uploaded, stored or transmitted. Avoid pasting confidential data you are not authorised to process on this machine.</p>
 </div>
-<div id="b_mapping" hidden><h2>2 · Map columns to regulatory objects</h2><div class="panel"><p class="hint" id="b_parseinfo"></p><div id="b_maprows"></div><div class="actions"><button class="btn primary" id="b_run" type="button">Run portfolio scan</button></div></div></div>
+<div id="b_mapping" hidden><h2>2 · Map columns to regulatory objects</h2><div class="panel"><p class="hint" id="b_parseinfo"></p>
+<div id="b_sheetwrap" class="field" hidden style="max-width:340px"><label for="b_sheet">Worksheet</label><select id="b_sheet"></select></div>
+<div id="b_maprows"></div>
+<div class="actions" style="align-items:center"><input id="prof_name" placeholder="Mapping profile name (e.g. RIM export)" style="max-width:250px"><button class="btn secondary" id="prof_save" type="button">Save profile</button><select id="prof_list" style="max-width:200px"><option value="">— saved profiles —</option></select><button class="btn secondary" id="prof_apply" type="button">Apply</button><button class="btn secondary" id="prof_delete" type="button">Delete</button><button class="btn secondary" id="prof_export" type="button">Export profiles</button><input id="prof_file" type="file" accept=".json,application/json" hidden><button class="btn secondary" id="prof_import" type="button">Import profiles</button></div>
+<p class="hint">Profiles are stored only in this browser (and in files you export). They are convenience configuration, not regulatory evidence.</p>
+<div class="actions"><button class="btn primary" id="b_run" type="button">Run portfolio scan</button></div></div></div>
 </section>
 
 <div id="fictionalNote" class="fictional" hidden>Fictional example — every value is invented for demonstration. No real company, device, identifier or record is referenced.</div>
 
 <div class="result" aria-live="polite"><div class="result-head"><div><h2 style="margin:0" id="resultTitle">Scan result</h2><p id="summary" class="muted">Run a check or scan to see statuses, exceptions and the review queue.</p></div><span id="badge" class="badge">NOT RUN</span></div>
 <div class="metrics"><div class="metric"><strong id="mAligned">0</strong><small>aligned</small></div><div class="metric"><strong id="mMismatch">0</strong><small>mismatch signals</small></div><div class="metric"><strong id="mMissing">0</strong><small>missing evidence</small></div><div class="metric"><strong id="mReview">0</strong><small>requires qualified review</small></div></div>
-<div class="tablewrap"><table><thead><tr><th>Object / record</th><th>Field</th><th>Expected</th><th>Observed</th><th>Status</th><th>Evidence</th><th>Owner</th><th>Next action</th></tr></thead><tbody id="rows"><tr><td colspan="8" class="muted">Nothing scanned yet.</td></tr></tbody></table></div>
+<div id="wb_toolbar" class="actions" style="margin:6px 0 0" hidden><input id="wb_search" placeholder="Search all columns" aria-label="Search findings" style="max-width:220px"><select id="wb_status" aria-label="Filter by status" style="max-width:210px"><option value="">All statuses</option><option>aligned</option><option>mismatch signal</option><option>conflicting evidence</option><option>missing evidence</option><option>unresolved</option><option>requires qualified review</option></select><select id="wb_group" aria-label="Group findings" style="max-width:190px"><option value="">No grouping</option><option value="status">Group: status</option><option value="object">Group: object / record</option><option value="owner">Group: owner</option><option value="field">Group: field</option></select><input id="wb_owner" placeholder="Owner for selected rows" aria-label="Owner for selected rows" style="max-width:190px"><button class="btn secondary" id="wb_apply_owner" type="button">Assign owner</button><button class="btn secondary" id="wb_export_sel" type="button">Export selected CSV</button></div>
+<div id="grid" style="margin:14px 0"></div>
+<div class="tablewrap" id="plainwrap"><table><thead><tr><th>Object / record</th><th>Field</th><th>Expected</th><th>Observed</th><th>Status</th><th>Evidence</th><th>Owner</th><th>Next action</th></tr></thead><tbody id="rows"><tr><td colspan="8" class="muted">Nothing scanned yet.</td></tr></tbody></table></div>
 <div class="grid"><div><h3>Exception queue</h3><ol id="queue"><li class="muted">No exceptions yet.</li></ol></div><div><h3>Export</h3><div class="actions" style="margin-top:6px"><button class="btn secondary" id="x_csv" type="button">Download exception CSV</button><button class="btn secondary" id="x_json" type="button">Download JSON</button><button class="btn secondary" id="x_copy" type="button">Copy reviewer summary</button></div><p class="muted" style="font-size:.84rem">Exports are generated locally. The JSON repeats the boundary statement and carries every finding for your own change-control or review record.</p></div></div>
 </div>
 
@@ -70,26 +78,70 @@ let last=null;
 const BOUNDARY="Deterministic comparison aid only; statuses are bounded operator signals (aligned / mismatch signal / missing evidence / conflicting evidence / unresolved / not applicable / requires qualified review), not compliance determinations. Source authority, materiality and disposition stay with the accountable qualified owner. Browser-local: nothing entered or imported is transmitted or stored.";
 const STCLS={"aligned":"stAligned","mismatch signal":"stMismatch","missing evidence":"stMissing","conflicting evidence":"stConflict","requires qualified review":"stReview","not applicable":"stNA","unresolved":"stReview"};
 function stCell(s){return `<td class="st ${STCLS[s]||""}">${esc(s)}</td>`}
-// ---------- shared result rendering ----------
+// ---------- shared result rendering (plain table + Tabulator workbench) ----------
+let table=null,gridReady=null,rowsStore=[];
+function ensureGrid(){if(window.Tabulator)return Promise.resolve(true);if(gridReady)return gridReady;
+ gridReady=new Promise(res=>{const l=document.createElement("link");l.rel="stylesheet";l.href="vendor/tabulator-6.5.3.min.css";document.head.appendChild(l);
+ const sc=document.createElement("script");sc.src="vendor/tabulator-6.5.3.min.js";sc.onload=()=>res(!!window.Tabulator);sc.onerror=()=>res(false);document.head.appendChild(sc)});return gridReady}
+const tf=c=>{const v=c.getValue();return document.createTextNode(v==null||v===""?"—":String(v))};
+function statusFmt(c){const v=String(c.getValue()||"");const sp=document.createElement("span");sp.className="st "+(STCLS[v]||"");sp.textContent=v;return sp}
+function applyFilters(){if(!table)return;const q=($("wb_search").value||"").toLowerCase(),st=$("wb_status").value;
+ table.setFilter((d)=>{if(st&&d.status!==st)return false;if(!q)return true;
+  return ["object","field","expected","observed","status","evidence","owner","next_action","note"].some(k=>String(d[k]??"").toLowerCase().includes(q))})}
+function buildGrid(rows){
+ if(table){try{table.destroy()}catch(_){/*noop*/}table=null}
+ table=new Tabulator("#grid",{data:rows,layout:"fitDataStretch",height:rows.length>9?480:null,reactiveData:false,
+  selectableRows:true,placeholder:"No findings in the current filter.",
+  columns:[
+   {formatter:"rowSelection",titleFormatter:"rowSelection",hozAlign:"center",headerSort:false,width:44,frozen:true},
+   {title:"Object / record",field:"object",formatter:tf,minWidth:170},
+   {title:"Field",field:"field",formatter:tf,minWidth:130},
+   {title:"Expected",field:"expected",formatter:tf,minWidth:110},
+   {title:"Observed",field:"observed",formatter:tf,minWidth:110},
+   {title:"Status",field:"status",formatter:statusFmt,minWidth:150},
+   {title:"Evidence",field:"evidence",formatter:tf,minWidth:120},
+   {title:"Owner",field:"owner",editor:"input",formatter:tf,minWidth:110},
+   {title:"Next action",field:"next_action",editor:"input",formatter:tf,minWidth:200},
+   {title:"Review state",field:"review_state",editor:"list",editorParams:{values:["open","in review","closed with evidence"]},formatter:tf,minWidth:130},
+   {title:"Reviewer note",field:"note",editor:"input",formatter:tf,minWidth:160},
+  ]});
+ table.on("cellEdited",cell=>{const d=cell.getData();const r=rowsStore[d._i];if(r)r[cell.getField()]=cell.getValue()});
+ $("wb_toolbar").hidden=false;$("plainwrap").hidden=true;
+ const g=$("wb_group").value;if(g)table.setGroupBy(g);applyFilters();
+}
+function renderPlain(rows){
+ const shown=rows.filter(r=>r.status!=="not applicable");
+ $("rows").innerHTML=shown.length?shown.map(r=>`<tr><td>${esc(r.object)}</td><td>${esc(r.field)}</td><td>${esc(r.expected??"—")}</td><td>${esc(r.observed??"—")}</td>${stCell(r.status)}<td>${esc(r.evidence||"—")}</td><td>${esc(r.owner||"—")}</td><td>${esc(r.next_action||"none")}</td></tr>`).join(""):`<tr><td colspan="8" class="muted">No comparable rows.</td></tr>`;
+ $("plainwrap").hidden=false;$("wb_toolbar").hidden=true;$("grid").innerHTML="";
+}
 function render(mode,rows,meta){
+ rows.forEach((r,i)=>{r._i=i;if(!r.review_state)r.review_state="open";if(r.note==null)r.note=""});
+ rowsStore=rows;
  const counts={aligned:0,"mismatch signal":0,"missing evidence":0,"conflicting evidence":0,"requires qualified review":0,"not applicable":0,unresolved:0};
  for(const r of rows)counts[r.status]=(counts[r.status]||0)+1;
  $("mAligned").textContent=counts.aligned;$("mMismatch").textContent=counts["mismatch signal"]+counts["conflicting evidence"];$("mMissing").textContent=counts["missing evidence"];$("mReview").textContent=counts["requires qualified review"]+counts.unresolved;
  const shown=rows.filter(r=>r.status!=="not applicable");
- $("rows").innerHTML=shown.length?shown.map(r=>`<tr><td>${esc(r.object)}</td><td>${esc(r.field)}</td><td>${esc(r.expected??"—")}</td><td>${esc(r.observed??"—")}</td>${stCell(r.status)}<td>${esc(r.evidence||"—")}</td><td>${esc(r.owner||"—")}</td><td>${esc(r.next_action||"none")}</td></tr>`).join(""):`<tr><td colspan="8" class="muted">No comparable rows.</td></tr>`;
  const exceptions=rows.filter(r=>r.status!=="aligned"&&r.status!=="not applicable");
- $("queue").innerHTML=exceptions.length?exceptions.map((r,i)=>`<li><strong>${esc(r.object)} — ${esc(r.field)}</strong>: ${esc(r.status)}. ${esc(r.next_action)}${r.owner?` <span class="muted">(owner: ${esc(r.owner)})</span>`:' <span class="muted">(assign an owner)</span>'}</li>`).join(""):`<li class="muted">No exceptions in the entered scope. Keep the export as the evidence row for this verification.</li>`;
+ $("queue").innerHTML=exceptions.length?exceptions.map(r=>`<li><strong>${esc(r.object)} — ${esc(r.field)}</strong>: ${esc(r.status)}. ${esc(r.next_action)}${r.owner?` <span class="muted">(owner: ${esc(r.owner)})</span>`:' <span class="muted">(assign an owner)</span>'}</li>`).join(""):`<li class="muted">No exceptions in the entered scope. Keep the export as the evidence row for this verification.</li>`;
  const bad=counts["mismatch signal"]+counts["conflicting evidence"],miss=counts["missing evidence"],rev=counts["requires qualified review"]+counts.unresolved;
  const badge=$("badge");
  if(bad){badge.textContent="MISMATCH SIGNALS";badge.className="badge hold";$("resultTitle").textContent="Exceptions to adjudicate"}
  else if(miss||rev){badge.textContent="INCOMPLETE";badge.className="badge review";$("resultTitle").textContent=miss?"Evidence incomplete":"Qualified review needed"}
  else{badge.textContent="NO ENTERED DIFFERENCE";badge.className="badge ok";$("resultTitle").textContent="No difference in the entered scope"}
  $("summary").textContent=`${mode==="A"?"Single-change check":"Portfolio scan"}: ${shown.length} comparisons — ${counts.aligned} aligned, ${bad} mismatch/conflict signals, ${miss} missing evidence, ${rev} for qualified review.`;
- last={tool:"clinicops-regulatory-integrity-scanner",tool_version:"1.0",mode:mode==="A"?"single-change":"portfolio-scan",generated_at:new Date().toISOString(),...meta,findings:rows,summary:{...counts},boundary:BOUNDARY};
+ last={tool:"clinicops-regulatory-integrity-scanner",tool_version:"1.2",mode:mode==="A"?"single-change":"portfolio-scan",generated_at:new Date().toISOString(),...meta,findings:rows,summary:{...counts},boundary:BOUNDARY};
+ const visible=shown.map(r=>r);
+ ensureGrid().then(ok=>{if(ok)buildGrid(visible);else renderPlain(rows)});
 }
 function dl(name,content,type){const b=new Blob([content],{type}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(u)}
 $("x_json").onclick=()=>{if(!last)return;dl("clinicops-integrity-scan.json",JSON.stringify(last,null,2)+"\n","application/json")};
-$("x_csv").onclick=()=>{if(!last)return;const ex=last.findings.filter(r=>r.status!=="aligned"&&r.status!=="not applicable");const head=["object","field","expected","observed","status","evidence","owner","next_action"];const q=v=>`"${T(v).replaceAll('"','""')}"`;dl("clinicops-integrity-exceptions.csv",head.join(",")+"\n"+ex.map(r=>head.map(h=>q(r[h])).join(",")).join("\n")+"\n","text/csv")};
+const CSV_HEAD=["object","field","expected","observed","status","evidence","owner","next_action","review_state","note"];
+function csvOf(rows){const q=v=>`"${T(v).replaceAll('"','""')}"`;return CSV_HEAD.join(",")+"\n"+rows.map(r=>CSV_HEAD.map(h=>q(r[h])).join(",")).join("\n")+"\n"}
+$("x_csv").onclick=()=>{if(!last)return;dl("clinicops-integrity-exceptions.csv",csvOf(rowsStore.filter(r=>r.status!=="aligned"&&r.status!=="not applicable")),"text/csv")};
+$("wb_export_sel").onclick=()=>{if(!table)return;const sel=table.getSelectedData();if(!sel.length)return;dl("clinicops-integrity-selected.csv",csvOf(sel.map(d=>rowsStore[d._i]||d)),"text/csv")};
+$("wb_apply_owner").onclick=()=>{if(!table)return;const v=tr($("wb_owner").value);if(!v)return;table.getSelectedRows().forEach(row=>{row.update({owner:v});const d=row.getData();if(rowsStore[d._i])rowsStore[d._i].owner=v})};
+$("wb_search").addEventListener("input",applyFilters);$("wb_status").addEventListener("change",applyFilters);
+$("wb_group").addEventListener("change",()=>{if(table){const g=$("wb_group").value;g?table.setGroupBy(g):table.setGroupBy(false)}});
 $("x_copy").onclick=async()=>{if(!last)return;const s=last.summary;const ex=last.findings.filter(r=>r.status!=="aligned"&&r.status!=="not applicable");const text=[`ClinicOps integrity scan (${last.mode})`,`Aligned: ${s.aligned} | Mismatch signals: ${s["mismatch signal"]+s["conflicting evidence"]} | Missing evidence: ${s["missing evidence"]} | Qualified review: ${s["requires qualified review"]+s.unresolved}`,"Exception queue:",...ex.map((r,i)=>`${i+1}. ${r.object} — ${r.field}: ${r.status}. ${r.next_action}${r.owner?` (owner: ${r.owner})`:""}`),`Boundary: ${BOUNDARY}`].join("\n");try{await navigator.clipboard.writeText(text)}catch(_){}};
 // ---------- Mode switching ----------
 function setMode(m){$("modeA").setAttribute("aria-pressed",m==="A");$("modeB").setAttribute("aria-pressed",m==="B");$("paneA").hidden=m!=="A";$("paneB").hidden=m!=="B"}
@@ -148,10 +200,105 @@ function showMapping(){
   return `<div class="maprow"><label for="map_${id}" style="margin:0">${esc(label)}</label><select id="map_${id}"><option value="">— not present —</option>${bData.headers.map(h=>`<option${h===guess?" selected":""}>${esc(h)}</option>`).join("")}</select></div>`}).join("");
  $("b_parseinfo").textContent=`Parsed ${bData.rows.length} rows × ${bData.headers.length} columns locally. Map the columns that exist; unmapped objects are skipped, never guessed. Mapping "Source role" lets the scan compare observed records against your declared authoritative source instead of only flagging differences.`;
  $("b_mapping").hidden=false;
+ try{profRefresh()}catch(_){/*not yet defined*/}
 }
 $("b_choose").onclick=()=>$("b_file").click();
-$("b_file").onchange=async ev=>{const f=ev.target.files?.[0];if(!f)return;if(/\.xlsx?$/i.test(f.name)){$("b_parseinfo").textContent="XLSX import is planned but not yet supported in the browser tool. Export the sheet as CSV (File \u2192 Save as \u2192 CSV) and choose that file \u2014 nothing is lost: the scan works on the same columns.";$("b_mapping").hidden=false;$("b_maprows").innerHTML="";ev.target.value="";return}$("b_input").value=await f.text();ev.target.value="";};
-$("b_parse").onclick=()=>{const r=parseInput($("b_input").value);if(!r||r.error){$("b_parseinfo").textContent=r?r.error:"Nothing to parse.";$("b_mapping").hidden=false;$("b_maprows").innerHTML="";bData=null;return}bData=r;showMapping()};
+let bXW=null,bXName="";
+async function handleXlsx(f){
+ $("b_parseinfo").textContent="Parsing workbook locally…";$("b_mapping").hidden=false;$("b_maprows").innerHTML="";bData=null;
+ try{
+  const buf=await f.arrayBuffer();
+  bXW=await parseXLSX(buf);bXName=f.name;
+  const sel=$("b_sheet");sel.innerHTML=bXW.sheets.map((n,i)=>`<option value="${i}">${esc(n)}</option>`).join("");
+  $("b_sheetwrap").hidden=bXW.sheets.length<2;
+  await extractSheet(0);
+ }catch(e){bXW=null;$("b_sheetwrap").hidden=true;$("b_parseinfo").textContent="Could not read this workbook: "+(e&&e.message?e.message:e)+" Nothing was uploaded; the file was only read locally. Exporting the sheet as CSV also works."}
+}
+async function extractSheet(i){
+ const r=await bXW.extract(i);
+ bData={headers:r.headers,rows:r.rows};
+ showMapping();
+ $("b_parseinfo").textContent=`Workbook "${bXName}", sheet "${bXW.sheets[i]}": ${r.rows.length} rows × ${r.headers.length} columns parsed locally.`+(r.formulas?` ${r.formulas} formula cell(s) use their cached values — formulas are never evaluated.`:"")+(r.datesConverted?` ${r.datesConverted} Excel date serial(s) in date-named columns converted to ISO dates.`:"")+" Nothing was uploaded. Map the columns that exist; mapping \"Source role\" lets the scan compare observed records against your declared authoritative source.";
+}
+$("b_sheet").addEventListener("change",async ev=>{if(bXW)await extractSheet(parseInt(ev.target.value,10)||0)});
+$("b_file").onchange=async ev=>{const f=ev.target.files?.[0];if(!f)return;ev.target.value="";
+ if(/\.xlsx$/i.test(f.name)){await handleXlsx(f);return}
+ if(/\.xls$/i.test(f.name)){$("b_parseinfo").textContent="Legacy .xls (BIFF) is not supported — save the sheet as .xlsx or CSV first.";$("b_mapping").hidden=false;$("b_maprows").innerHTML="";bData=null;return}
+ bXW=null;$("b_sheetwrap").hidden=true;$("b_input").value=await f.text();};
+// ---- minimal fail-closed XLSX reader: ZIP + DecompressionStream + DOMParser.
+// Reads cached cell values only; formulas are counted, never evaluated.
+// Guardrails: 60MB file, 400 zip entries, 90MB per entry / 150MB total expanded, 20k rows.
+async function parseXLSX(buf){
+ const size=buf.byteLength;if(size<100)throw new Error("File too small to be a workbook.");
+ if(size>60*1024*1024)throw new Error("File exceeds the 60 MB local guardrail.");
+ const dv=new DataView(buf),td=new TextDecoder();
+ let eocd=-1;const scanStart=Math.max(0,size-65557);
+ for(let i=size-22;i>=scanStart;i--){if(dv.getUint32(i,true)===0x06054b50){eocd=i;break}}
+ if(eocd<0)throw new Error("Not a valid .xlsx (zip directory not found).");
+ const count=dv.getUint16(eocd+10,true),cdOff=dv.getUint32(eocd+16,true);
+ if(count>400)throw new Error("Workbook has too many internal parts (guardrail).");
+ const entries={};let p=cdOff,totalUnc=0;
+ for(let i=0;i<count;i++){
+  if(dv.getUint32(p,true)!==0x02014b50)throw new Error("Corrupt zip central directory.");
+  const method=dv.getUint16(p+10,true),csize=dv.getUint32(p+20,true),usize=dv.getUint32(p+24,true),
+   nlen=dv.getUint16(p+28,true),elen=dv.getUint16(p+30,true),clen=dv.getUint16(p+32,true),
+   lho=dv.getUint32(p+42,true),name=td.decode(new Uint8Array(buf,p+46,nlen));
+  totalUnc+=usize;
+  if(usize>90*1024*1024||totalUnc>150*1024*1024)throw new Error("Workbook expands beyond local guardrails (possible zip bomb).");
+  entries[name]={method,csize,lho};p+=46+nlen+elen+clen;
+ }
+ async function readEntry(name){const e=entries[name];if(!e)return null;
+  const nlen=dv.getUint16(e.lho+26,true),elen=dv.getUint16(e.lho+28,true);
+  const start=e.lho+30+nlen+elen,comp=new Uint8Array(buf,start,e.csize);
+  if(e.method===0)return td.decode(comp);
+  if(e.method!==8)throw new Error("Unsupported compression method in workbook.");
+  if(typeof DecompressionStream==="undefined")throw new Error("This browser lacks DecompressionStream — export the sheet as CSV instead.");
+  const out=await new Response(new Blob([comp]).stream().pipeThrough(new DecompressionStream("deflate-raw"))).arrayBuffer();
+  if(out.byteLength>90*1024*1024)throw new Error("Workbook entry expands beyond guardrail.");
+  return td.decode(out)}
+ const dp=new DOMParser();
+ const parseXml=(x,what)=>{const d=dp.parseFromString(x,"application/xml");if(d.getElementsByTagName("parsererror").length)throw new Error("Malformed XML in "+what+".");return d};
+ const wbXml=await readEntry("xl/workbook.xml");if(!wbXml)throw new Error("No xl/workbook.xml — not an Excel workbook.");
+ const wb=parseXml(wbXml,"workbook");
+ const rels={};const relsXml=await readEntry("xl/_rels/workbook.xml.rels");
+ if(relsXml){for(const r of parseXml(relsXml,"workbook relationships").getElementsByTagName("Relationship"))rels[r.getAttribute("Id")]=r.getAttribute("Target")}
+ const RNS="http://schemas.openxmlformats.org/officeDocument/2006/relationships";
+ const sheets=[...wb.getElementsByTagName("sheet")].map(sh=>({name:sh.getAttribute("name")||"Sheet",rid:sh.getAttributeNS(RNS,"id")||sh.getAttribute("r:id")}));
+ if(!sheets.length)throw new Error("Workbook contains no sheets.");
+ let shared=[];const ssXml=await readEntry("xl/sharedStrings.xml");
+ if(ssXml){shared=[...parseXml(ssXml,"shared strings").getElementsByTagName("si")].map(si=>[...si.getElementsByTagName("t")].map(t=>t.textContent).join(""))}
+ const exSerial=n=>{const ms=Math.round((n-25569)*86400000);const d=new Date(ms);return isFinite(ms)?d.toISOString().slice(0,10):String(n)};
+ async function extract(idx){
+  let target=rels[sheets[idx].rid]||("worksheets/sheet"+(idx+1)+".xml");
+  target=target.startsWith("/")?target.slice(1):(target.startsWith("xl/")?target:"xl/"+target);
+  const xml=await readEntry(target);if(!xml)throw new Error("Worksheet part missing: "+target);
+  const sh=parseXml(xml,"worksheet");
+  const rowsRaw=[];let formulas=0,maxc=0;
+  const rowEls=sh.getElementsByTagName("row");
+  if(rowEls.length>20001)throw new Error("More than 20,000 rows — split the export (local guardrail).");
+  for(const r of rowEls){const cells={};
+   for(const c of r.getElementsByTagName("c")){
+    const ref=c.getAttribute("r")||"",m=/^([A-Z]+)/.exec(ref);if(!m)continue;
+    let col=0;for(const ch of m[1])col=col*26+(ch.charCodeAt(0)-64);col--;
+    if(c.getElementsByTagName("f").length)formulas++;
+    const t=c.getAttribute("t")||"n";let v="";
+    if(t==="inlineStr"){const is=c.getElementsByTagName("is")[0];v=is?[...is.getElementsByTagName("t")].map(x=>x.textContent).join(""):""}
+    else{const ve=c.getElementsByTagName("v")[0];const raw=ve?ve.textContent:"";
+     v=t==="s"?(shared[parseInt(raw,10)]??""):t==="b"?(raw==="1"?"TRUE":"FALSE"):raw}
+    cells[col]=String(v);if(col+1>maxc)maxc=col+1}
+   rowsRaw.push(cells)}
+  const hi=rowsRaw.findIndex(rr=>Object.values(rr).some(x=>String(x).trim()));
+  if(hi<0)throw new Error("Sheet is empty.");
+  const headers=[];for(let cix=0;cix<maxc;cix++)headers.push(String(rowsRaw[hi][cix]??"").trim()||("column_"+(cix+1)));
+  const dateCols=headers.map((h,cix)=>/date|as.?of/i.test(h)?cix:-1).filter(x=>x>=0);
+  let datesConverted=0;
+  const data=rowsRaw.slice(hi+1).filter(rr=>Object.values(rr).some(x=>String(x).trim())).map(rr=>{
+   const o={};headers.forEach((h,cix)=>{let v=String(rr[cix]??"").trim();
+    if(dateCols.includes(cix)&&/^\d{5}(\.\d+)?$/.test(v)){const n=parseFloat(v);if(n>20000&&n<80000){v=exSerial(n);datesConverted++}}
+    o[h]=v});return o});
+  return{headers,rows:data,formulas,datesConverted}}
+ return{sheets:sheets.map(x=>x.name),extract}}
+$("b_parse").onclick=()=>{bXW=null;$("b_sheetwrap").hidden=true;const r=parseInput($("b_input").value);if(!r||r.error){$("b_parseinfo").textContent=r?r.error:"Nothing to parse.";$("b_mapping").hidden=false;$("b_maprows").innerHTML="";bData=null;return}bData=r;showMapping()};
 function ident(v){return T(v).trim().replace(/^\(01\)\s*/,"").replace(/[^0-9A-Za-z]/g,"").toUpperCase()}
 function mod10ok(d){let s=0;for(let i=0;i<13;i++)s+=parseInt(d[i],10)*(i%2===0?3:1);return((10-(s%10))%10)===parseInt(d[13],10)}
 const CLASSVOCAB=new Set(["i","is","im","ir","iia","iib","iii","a","b","c","d"]);
@@ -214,6 +361,25 @@ function bRun(){
   for(const[key,idx]of Object.entries(seen))if(idx.length>1){const d=key.split("|")[0];rows.push({object:`UDI-DI ${d}`,field:"Duplicate records",expected:"one record per UDI-DI per source",observed:`${idx.length} rows (${idx.map(i=>i+2).join(", ")})`,status:"conflicting evidence",evidence:null,owner:null,next_action:"Determine which record is current; merge or retire duplicates through change control."})}}
  render("B",rows,{row_count:bData.rows.length,mapped_objects:Object.keys(map)});
 }
+// ---- local mapping profiles (convenience configuration, not regulatory evidence) ----
+const PROF_KEY="clinicops.scanner.mappingProfiles";
+function profRead(){try{return JSON.parse(localStorage.getItem(PROF_KEY)||"{}")||{}}catch(_){return{}}}
+function profWrite(o){try{localStorage.setItem(PROF_KEY,JSON.stringify(o))}catch(_){/*storage unavailable*/}}
+function profRefresh(){const o=profRead();const sel=$("prof_list");const cur=sel.value;
+ sel.innerHTML='<option value="">— saved profiles —</option>'+Object.keys(o).sort().map(n=>`<option${n===cur?" selected":""}>${esc(n)}</option>`).join("")}
+function currentMap(){const m={};for(const[id]of OBJECTS){const v=$(`map_${id}`)?.value;if(v)m[id]=v}return m}
+$("prof_save").onclick=()=>{const n=tr($("prof_name").value);if(!n||!bData)return;const o=profRead();const now=new Date().toISOString();
+ o[n]={name:n,schema_version:1,created:o[n]?.created||now,updated:now,source_system:n,map:currentMap()};profWrite(o);profRefresh();$("prof_list").value=n};
+$("prof_apply").onclick=()=>{const n=$("prof_list").value;if(!n||!bData)return;const p=profRead()[n];if(!p||!p.map)return;
+ for(const[id]of OBJECTS){const el=$(`map_${id}`);if(!el)continue;const want=p.map[id]||"";el.value=bData.headers.includes(want)?want:""}};
+$("prof_delete").onclick=()=>{const n=$("prof_list").value;if(!n)return;const o=profRead();delete o[n];profWrite(o);profRefresh()};
+$("prof_export").onclick=()=>{dl("clinicops-mapping-profiles.json",JSON.stringify({tool:"clinicops-regulatory-integrity-scanner",kind:"mapping-profiles",schema_version:1,exported_at:new Date().toISOString(),profiles:profRead()},null,2)+"\n","application/json")};
+$("prof_import").onclick=()=>$("prof_file").click();
+$("prof_file").onchange=async ev=>{const f=ev.target.files?.[0];ev.target.value="";if(!f)return;
+ try{const j=JSON.parse(await f.text());const inc=j&&j.kind==="mapping-profiles"&&j.profiles?j.profiles:null;if(!inc)throw 0;
+  const o=profRead();for(const[n,p]of Object.entries(inc)){if(p&&p.map&&typeof p.map==="object")o[String(n).slice(0,80)]={name:String(n).slice(0,80),schema_version:1,created:p.created||new Date().toISOString(),updated:new Date().toISOString(),map:Object.fromEntries(Object.entries(p.map).filter(([k,v])=>typeof v==="string").slice(0,64))}}
+  profWrite(o);profRefresh()}catch(_){$("b_parseinfo").textContent="That file is not a ClinicOps mapping-profile export."}};
+try{profRefresh()}catch(_){/*noop*/}
 $("b_run").onclick=()=>{$("fictionalNote").hidden=true;bRun()};
 $("b_example").onclick=()=>{
  $("b_input").value=[

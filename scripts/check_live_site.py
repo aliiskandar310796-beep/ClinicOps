@@ -81,7 +81,7 @@ TARGETS = (
     Target(
         "/about.html",
         200,
-        "<title>About ClinicOps | Danish-Led, EU-Wide Clinical Operations</title>",
+        "<title>About ClinicOps | EU MedTech Regulatory Data Integrity</title>",
     ),
     Target(
         "/authorised-representative-portfolio-intelligence.html",
@@ -101,7 +101,7 @@ TARGETS = (
     Target(
         "/contact.html",
         200,
-        "<title>Contact ClinicOps | Danish-Led, EU-Wide Clinical Operations</title>",
+        "<title>Contact ClinicOps | EU MedTech Regulatory Data Integrity</title>",
     ),
     Target(
         "/eu-mdr-regulatory-integrity.html",

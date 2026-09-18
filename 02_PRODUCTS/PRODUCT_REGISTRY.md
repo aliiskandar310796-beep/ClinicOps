@@ -39,7 +39,7 @@ Status: PILOT-STAGE / BUILD-ON-DEMAND. Scheduled evidence checks, public-record 
 ## Public acquisition utilities
 
 ### Regulatory Integrity Scanner (`docs/integrity-scanner.html`)
-Status: PUBLIC — TECHNICALLY VERIFIED FOR DEFINED CASES. Browser-local. Two modes: **Single Change** (approved source → downstream observations → deterministic comparison → owner/queue export) and **Portfolio Scan** (CSV/JSON import, column mapping, normalization, missing/duplicate/conflict detection, exception queue, export). The free on-ramp to the flagship.
+Status: PUBLIC — TECHNICALLY VERIFIED FOR DEFINED CASES. Browser-local. Two modes: **Single Change** (approved source → downstream observations → deterministic comparison → owner/queue export) and **Portfolio Scan** (CSV/XLSX/JSON import with saveable mapping profiles, normalization, missing/duplicate/conflict detection, and a filterable exception workbench with bulk owner assignment, review states and exports). The free on-ramp to the flagship.
 
 Component/supporting pages kept for URL continuity and focused jobs: Regulatory Change Integrity Check (`integrity-check.html`), Change Surface Mapper (`change-surface-mapper.html`), Regulatory Change Impact Mapper (`regulatory-change-impact.html`), Technical File Consistency Check (`technical-file-consistency.html`).
 

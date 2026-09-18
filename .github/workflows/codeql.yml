@@ -1,0 +1,28 @@
+name: CodeQL
+# Static code scanning for the public repo (Master Directive P1I / QA Cycle 3).
+# Non-gating for deploys; findings surface in the Security tab.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '17 5 * * 3'
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [python, javascript-typescript]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: github/codeql-action/init@v4
+        with:
+          languages: ${{ matrix.language }}
+      - uses: github/codeql-action/analyze@v4

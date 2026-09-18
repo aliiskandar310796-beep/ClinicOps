@@ -1,0 +1,22 @@
+name: OSV Scan
+# Dependency vulnerability scan (osv.dev database). Non-gating.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '29 5 * * 3'
+
+permissions:
+  contents: read
+
+jobs:
+  osv:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Run OSV-Scanner
+        uses: google/osv-scanner-action/osv-scanner-action@v2
+        with:
+          scan-args: |-
+            --recursive
+            ./
+        continue-on-error: false
