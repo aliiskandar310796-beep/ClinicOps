@@ -10,11 +10,13 @@ Do **not** hard-code a self-referential “current main SHA” as permanent trut
 
 ## Current business thesis
 
+**Public identity (2026-09-18, supersedes the multi-lane portfolio): ClinicOps — EU MedTech Regulatory Data Integrity.** One flagship MVP — the **Regulatory Change Integrity Review** — entered via the free Regulatory Integrity Scanner and the Portfolio Integrity Scan, extended by Continuous Portfolio Integrity Monitoring. EUDAMED, UDI, SS(C)P, certificates, Class III transition, AR portfolios, document control and language-version integrity are use cases/surfaces, not identities. Danish PV and Danish linguistic validation stay visible as secondary demand-evidenced entries (positioning §5). Broad Ops lanes (TrialOps, LabOps, Clinic Ops, Clinical AI, broad QualityOps, generic controlled content) are archived from public architecture; internal methods remain. Source of truth: `01_STRATEGY/POSITIONING_2026-09-18_REGULATORY_DATA_INTEGRITY.md` — where the lane text below conflicts with it, the positioning file wins.
+
 ClinicOps is an evidence-controlled, human-reviewed operating layer for high-value expert work: it controls how regulated evidence moves across documents, systems, markets and accountable human owners.
 
 **Long-term category (2026-09-17): QA/RA Operations Engineering for regulated healthcare/MedTech**, with Regulatory Information Integrity as the proven first wedge. Quality Operations (change control → CAPA/NC evidence integrity → regulatory change impact → technical-file integrity → QA data integrity → PMS/complaints → SaMD verification operations) is the internal capability frontier — developed in that adjacency order, internal-only until each capability earns a public offer via the progression rule: learn → primary-source model → internal schema → sanitized prototype → design partner → controlled delivery → delivery evidence → repeat demand → public offer.
 
-**Current portfolio (deliberate, 2026-09-17): multiple live service lanes.** Do not "correct" the site back to a single-offer state — the breadth is intentional. The lanes are:
+**Portfolio history (2026-09-17, SUPERSEDED 2026-09-18 by the deliberate narrowing above):** the site briefly presented multiple equal service lanes. That breadth was reversed by the repositioning directive; do not restore it. The lane list below is kept as history and as the internal capability map:
 
 - **Default cross-domain commercial entry:** Regulatory Integrity Review / Evidence Change Control Pack around one bounded real workflow. Every lane funnels into this one paid entry.
 - **Strongest existing wedges (most buyer evidence so far):** MedTech / EUDAMED / Class III transition; Denmark market access / Danish PV / localisation.

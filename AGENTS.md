@@ -9,6 +9,8 @@ Read these files before substantive work:
 
 Use the repository custom agents under `.github/agents/` when their scope matches the task.
 
+Specialization gate (2026-09-18): before creating any new product, tool, service, page, workflow, agent, report or research program, ask **"does this strengthen EU MedTech Regulatory Data Integrity?"** If no — do not build it by default. If adjacent — record as backlog. If yes — it must serve a validated user problem, a core workflow, evidence, sales, delivery or reliability. Positioning source of truth: `01_STRATEGY/POSITIONING_2026-09-18_REGULATORY_DATA_INTEGRITY.md`. Customer-facing language uses the integrity/evidence/reconciliation taxonomy; OS/engine/fleet/swarm terms stay internal.
+
 Non-negotiables:
 - preserve dated corrections and rejected hypotheses as institutional memory;
 - distinguish primary rule, observation, derivation and hypothesis;

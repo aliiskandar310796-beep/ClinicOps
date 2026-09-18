@@ -1,12 +1,16 @@
-# ClinicOps EUDAMED OS
+# ClinicOps
 
-A reproducible research, screening, commercial-learning and regulatory-operations toolkit for ClinicOps' public-source EUDAMED work.
+ClinicOps is an **EU MedTech regulatory-data integrity** toolkit and delivery system.
+
+It helps medical-device regulatory teams reconcile approved product information against EUDAMED, UDI/device data, certificates, SS(C)P and controlled regulatory records, identify discrepancies or missing evidence, and produce reviewer-ready closure queues.
 
 ## Operating thesis
 
-Use machines for repeatable public-data screening, evidence capture, portfolio triage and commercial learning. Sell the accountable human judgement required to turn those signals into a regulatory work plan.
+An approved regulatory or product fact changes in one place. ClinicOps determines which downstream regulated records should reflect it, compares available evidence deterministically, and turns exceptions into an evidence-backed reviewer queue. **Machines compare; qualified humans interpret and decide.** ClinicOps is not a RIM, QMS, PLM or ERP replacement and never makes regulatory determinations.
 
-The current commercial focus is the **legacy-to-MDR transition and SS(C)P/document-operations workload**, not a manufacturer-diligence allegation.
+The flagship offering is the **Regulatory Change Integrity Review** (one approved change → reviewer-ready closure packet), entered via the free browser-local **Regulatory Integrity Scanner** and the bounded **Portfolio Integrity Scan**. EUDAMED, UDI, SS(C)P, certificates, Class III transition, AR portfolios and language-version integrity are data surfaces and use cases of this one discipline, not separate businesses. Positioning source of truth: `01_STRATEGY/POSITIONING_2026-09-18_REGULATORY_DATA_INTEGRITY.md`.
+
+Validation stage: browser-local tools are technically verified for defined cases; delivery formats are available for bounded scoping. Stronger claims are gated by `VALIDATION_AND_SCALABILITY_GATES.md`. Client regulatory exports are sensitive commercial information: browser-local processing where practical, no telemetry, nothing client-confidential in this public repository or its CI.
 
 ## Design principles
 

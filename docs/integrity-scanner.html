@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<title>Regulatory Integrity Scanner | ClinicOps</title>
+<meta name="description" content="Browser-local regulatory data integrity scanner: check one approved change against downstream records, or scan a portfolio export (CSV/JSON) for missing fields, duplicates and conflicting values. Deterministic, exportable, nothing uploaded.">
+<link rel="canonical" href="https://clinicops.dk/integrity-scanner.html">
+<meta property="og:title" content="Regulatory Integrity Scanner | ClinicOps"><meta property="og:description" content="Single-change integrity check and portfolio scan for EU MedTech regulatory data — deterministic comparison, bounded statuses, exception queue with owners, CSV/JSON export. Browser-local."><meta property="og:type" content="website"><meta property="og:url" content="https://clinicops.dk/integrity-scanner.html"><meta property="og:site_name" content="ClinicOps"><meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Regulatory Integrity Scanner | ClinicOps","url":"https://clinicops.dk/integrity-scanner.html","isPartOf":{"@type":"WebSite","name":"ClinicOps","url":"https://clinicops.dk/"},"publisher":{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"ClinicOps Regulatory Integrity Scanner","url":"https://clinicops.dk/integrity-scanner.html","applicationCategory":"BusinessApplication","operatingSystem":"Any modern browser","isAccessibleForFree":true,"publisher":{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}</script>
+<style>
+:root{color-scheme:light dark;--bg:#f8f7f4;--surface:#fff;--surface2:#f0eee8;--text:#17202b;--muted:#5e6874;--border:#d7dde2;--accent:#0d6559;--contrast:#fff;--soft:#e0f1ed;--ok:#157847;--warn:#a55b00;--hold:#b03333}@media(prefers-color-scheme:dark){:root{--bg:#101419;--surface:#171d24;--surface2:#1d252d;--text:#e8edf1;--muted:#a1aab4;--border:#303943;--accent:#52d7c3;--contrast:#08221d;--soft:#142b27;--ok:#69d79d;--warn:#efb05c;--hold:#ff9191}}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55}.wrap{max-width:1100px;margin:auto;padding:0 22px}main{padding:54px 0 64px}h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.04;letter-spacing:-.04em;margin:.16em 0 .36em;max-width:880px}h2{font-size:1.42rem;margin:2.1em 0 .65em}h3{font-size:1.03rem;margin:.1em 0 .4em}.lede{font-size:1.12rem;max-width:800px;color:var(--muted)}.muted,.hint{color:var(--muted)}.eyebrow{display:inline-flex;font-size:.75rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);background:var(--soft);padding:5px 11px;border-radius:999px}.trust,.actions{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0}.chip{font-size:.82rem;border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:6px 10px;color:var(--muted)}.panel,.callout,.result{border:1px solid var(--border);border-radius:16px;background:var(--surface);padding:19px;margin:18px 0}.callout{background:var(--surface2)}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}@media(max-width:760px){.grid{grid-template-columns:1fr}}label{display:block;font-weight:700;margin:0 0 6px;font-size:.92rem}input,select,textarea{width:100%;font:inherit;padding:10px 11px;border:1px solid var(--border);border-radius:9px;background:var(--surface);color:var(--text)}textarea{min-height:120px;resize:vertical;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.84rem}.field{margin:0 0 13px}.btn,.cta{font:inherit;font-weight:720;border:1px solid var(--accent);border-radius:9px;padding:10px 15px;text-decoration:none;display:inline-block;cursor:pointer}.primary{background:var(--accent);color:var(--contrast)}.secondary{background:transparent;color:var(--accent)}.mode{display:flex;gap:9px;flex-wrap:wrap;margin:20px 0}.mode button{font:inherit;font-weight:750;border:1px solid var(--border);background:var(--surface);color:var(--muted);border-radius:999px;padding:10px 18px;cursor:pointer}.mode button[aria-pressed="true"]{border-color:var(--accent);background:var(--soft);color:var(--accent)}.result-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap}.badge{display:inline-block;font-size:.8rem;font-weight:850;padding:6px 10px;border-radius:999px;background:var(--surface2)}.badge.ok{color:var(--ok)}.badge.review{color:var(--warn)}.badge.hold{color:var(--hold)}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:15px 0}.metric{border:1px solid var(--border);border-radius:11px;padding:11px}.metric strong{display:block;font-size:1.28rem}.metric small{color:var(--muted)}@media(max-width:650px){.metrics{grid-template-columns:repeat(2,1fr)}}table{width:100%;border-collapse:separate;border-spacing:0;margin:14px 0;border:1px solid var(--border);border-radius:11px;overflow:hidden}th,td{padding:9px;text-align:left;vertical-align:top;border-bottom:1px solid var(--border)}th{font-size:.8rem;color:var(--muted);background:var(--surface2)}tr:last-child td{border-bottom:0}.tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}.st{font-weight:800;font-size:.8rem;white-space:nowrap}.stAligned{color:var(--ok)}.stMismatch{color:var(--hold)}.stMissing{color:var(--warn)}.stConflict{color:var(--hold)}.stReview{color:var(--warn)}.stNA{color:var(--muted)}.record{border:1px solid var(--border);border-radius:13px;padding:14px;background:var(--surface2)}.record-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:10px}.scope{font-size:.8rem;color:var(--muted);display:flex;gap:6px;align-items:center}.scope input{width:auto}.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}.principle{border-top:2px solid var(--accent);padding-top:10px}.principle span{display:block;font-size:.9rem;color:var(--muted)}@media(max-width:720px){.principles{grid-template-columns:1fr}}footer{border-top:1px solid var(--border);padding:25px 0;color:var(--muted);font-size:.88rem}.fictional{border:1px dashed var(--border);border-radius:9px;padding:9px 12px;background:var(--surface2);font-size:.85rem;color:var(--muted);margin:10px 0}.maprow{display:grid;grid-template-columns:minmax(150px,1fr) minmax(150px,1.4fr);gap:8px;align-items:center;margin:0 0 8px}
+</style>
+<link rel="stylesheet" href="site.css"></head>
+<body>
+<header class="site"><div class="site-inner"><a class="brand" href="index.html">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="index.html">Home</a><a href="services.html">Solution</a><a href="use-cases.html">Use cases</a><a href="research.html">Research</a><a href="tools.html" aria-current="page">Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header>
+<main class="wrap">
+<span class="eyebrow">Browser-local · deterministic</span>
+<h1>Regulatory Integrity Scanner</h1>
+<p class="lede">Check whether regulated facts remain consistent. Run a <strong>single-change check</strong> — one approved source against the downstream records that should reflect it — or a <strong>portfolio scan</strong> over a CSV/JSON export. Deterministic comparison, bounded statuses, an exception queue with owners, and portable exports. Everything runs in this browser page; nothing you enter or import leaves it.</p>
+<div class="trust"><span class="chip">Runs locally — no upload</span><span class="chip">Deterministic rules</span><span class="chip">Bounded status vocabulary</span><span class="chip">CSV + JSON export</span><span class="chip">Human authority preserved</span></div>
+<div class="callout"><strong>Boundary.</strong> The scanner compares the values you provide and structures review work. It does not decide which source is legally authoritative, does not make compliance determinations, and reports <em>mismatch signals</em> and <em>missing evidence</em> — never a compliance verdict in either direction. Interpretation and disposition stay with your qualified owner.</div>
+<div class="mode" role="group" aria-label="Scanner mode"><button id="modeA" aria-pressed="true" type="button">Single change</button><button id="modeB" aria-pressed="false" type="button">Portfolio scan (CSV / JSON)</button></div>
+
+<section id="paneA">
+<h2>1 · Anchor the approved source</h2>
+<div class="panel"><div class="grid">
+<div class="field"><label for="a_field">Regulated field / fact</label><input id="a_field" maxlength="120" value="IFU revision"></div>
+<div class="field"><label for="a_ref">Approved reference value</label><input id="a_ref" maxlength="200" value="IFU-12"></div>
+<div class="field"><label for="a_reflabel">Reference source</label><input id="a_reflabel" maxlength="120" value="Approved change record"></div>
+<div class="field"><label for="a_refev">Reference evidence <span class="hint">(recommended)</span></label><input id="a_refev" maxlength="180" placeholder="e.g. ECO-2026-041 §3.2"></div>
+<div class="field"><label for="a_change">Change / review ID <span class="hint">(optional)</span></label><input id="a_change" maxlength="100" placeholder="e.g. CHG-2417"></div>
+<div class="field"><label for="a_mode">Comparison rule</label><select id="a_mode"><option value="trim">Trim outer spaces</option><option value="relaxed">Ignore case + repeated spaces</option><option value="exact">Exact text</option></select></div>
+</div></div>
+<h2>2 · Declare the expected downstream surfaces</h2>
+<p class="muted">Mark a record in scope only when your team expects it to reflect this change. An empty observation is <strong>missing evidence</strong>, not proof the real record is wrong.</p>
+<div class="grid" id="a_records"></div>
+<div class="actions"><button class="btn primary" id="a_run" type="button">Run integrity check</button><button class="btn secondary" id="a_example" type="button">Load fictional example</button><button class="btn secondary" id="a_clear" type="button">Clear observations</button></div>
+</section>
+
+<section id="paneB" hidden>
+<h2>1 · Import the portfolio</h2>
+<div class="panel">
+<div class="field"><label for="b_input">Paste CSV (with a header row) or a JSON array of objects — or choose a file</label><textarea id="b_input" spellcheck="false" placeholder="basic_udi_di,udi_di,trade_name,model,risk_class,source_system,source_role,evidence_ref,evidence_date,owner&#10;..."></textarea></div>
+<div class="actions"><input id="b_file" type="file" accept=".csv,.json,application/json,text/csv" hidden><button class="btn secondary" id="b_choose" type="button">Choose CSV/JSON file</button><button class="btn secondary" id="b_parse" type="button">Parse &amp; map columns</button><button class="btn secondary" id="b_example" type="button">Load fictional example portfolio</button></div>
+<p class="hint">The file is read locally by your browser. Nothing is uploaded, stored or transmitted. Avoid pasting confidential data you are not authorised to process on this machine.</p>
+</div>
+<div id="b_mapping" hidden><h2>2 · Map columns to regulatory objects</h2><div class="panel"><p class="hint" id="b_parseinfo"></p><div id="b_maprows"></div><div class="actions"><button class="btn primary" id="b_run" type="button">Run portfolio scan</button></div></div></div>
+</section>
+
+<div id="fictionalNote" class="fictional" hidden>Fictional example — every value is invented for demonstration. No real company, device, identifier or record is referenced.</div>
+
+<div class="result" aria-live="polite"><div class="result-head"><div><h2 style="margin:0" id="resultTitle">Scan result</h2><p id="summary" class="muted">Run a check or scan to see statuses, exceptions and the review queue.</p></div><span id="badge" class="badge">NOT RUN</span></div>
+<div class="metrics"><div class="metric"><strong id="mAligned">0</strong><small>aligned</small></div><div class="metric"><strong id="mMismatch">0</strong><small>mismatch signals</small></div><div class="metric"><strong id="mMissing">0</strong><small>missing evidence</small></div><div class="metric"><strong id="mReview">0</strong><small>requires qualified review</small></div></div>
+<div class="tablewrap"><table><thead><tr><th>Object / record</th><th>Field</th><th>Expected</th><th>Observed</th><th>Status</th><th>Evidence</th><th>Owner</th><th>Next action</th></tr></thead><tbody id="rows"><tr><td colspan="8" class="muted">Nothing scanned yet.</td></tr></tbody></table></div>
+<div class="grid"><div><h3>Exception queue</h3><ol id="queue"><li class="muted">No exceptions yet.</li></ol></div><div><h3>Export</h3><div class="actions" style="margin-top:6px"><button class="btn secondary" id="x_csv" type="button">Download exception CSV</button><button class="btn secondary" id="x_json" type="button">Download JSON</button><button class="btn secondary" id="x_copy" type="button">Copy reviewer summary</button></div><p class="muted" style="font-size:.84rem">Exports are generated locally. The JSON repeats the boundary statement and carries every finding for your own change-control or review record.</p></div></div>
+</div>
+
+<div class="principles"><div class="principle"><strong>Deterministic</strong><span>Identical inputs always produce identical statuses and queues. No scoring model, no inference, no black-box number.</span></div><div class="principle"><strong>Fail-closed</strong><span>No reference means no interpretation. An empty observation is missing evidence, never an invented conclusion. Unknown vocabulary routes to qualified review.</span></div><div class="principle"><strong>Human-owned</strong><span>Every exception carries an owner and a bounded next action. Which value is correct — and whether it matters — is your qualified reviewer's decision.</span></div></div>
+
+<h2>From free scan to reviewed closure</h2><p>The scanner structures the first pass. When it exposes cross-system reconciliation work, unclear ownership or records that no longer match their sources, that is the bounded problem the paid formats resolve: the <a href="services.html#portfolio-scan">Portfolio Integrity Scan</a> and the flagship <a href="evidence-change-control-pack.html">Regulatory Change Integrity Review</a>.</p>
+<div class="actions"><a class="cta primary" href="assessment-intake.html?workstream=integrity-review">Scope a review</a><a class="cta secondary" href="integrity-check.html">Single-change deep packet (SHA-256 fingerprint)</a><a class="cta secondary" href="change-surface-mapper.html">Map change surfaces first</a><a class="cta secondary" href="mailto:info@clinicops.dk?subject=Regulatory%20Integrity%20Scanner">Email info@clinicops.dk</a></div>
+</main>
+<footer><div class="wrap">ClinicOps · EU MedTech regulatory data integrity · <a href="privacy-notice/">Privacy</a></div></footer>
+<script>
+(()=>{"use strict";const $=id=>document.getElementById(id),T=v=>String(v??""),tr=v=>T(v).trim(),esc=v=>T(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+let last=null;
+const BOUNDARY="Deterministic comparison aid only; statuses are bounded operator signals (aligned / mismatch signal / missing evidence / conflicting evidence / unresolved / not applicable / requires qualified review), not compliance determinations. Source authority, materiality and disposition stay with the accountable qualified owner. Browser-local: nothing entered or imported is transmitted or stored.";
+const STCLS={"aligned":"stAligned","mismatch signal":"stMismatch","missing evidence":"stMissing","conflicting evidence":"stConflict","requires qualified review":"stReview","not applicable":"stNA","unresolved":"stReview"};
+function stCell(s){return `<td class="st ${STCLS[s]||""}">${esc(s)}</td>`}
+// ---------- shared result rendering ----------
+function render(mode,rows,meta){
+ const counts={aligned:0,"mismatch signal":0,"missing evidence":0,"conflicting evidence":0,"requires qualified review":0,"not applicable":0,unresolved:0};
+ for(const r of rows)counts[r.status]=(counts[r.status]||0)+1;
+ $("mAligned").textContent=counts.aligned;$("mMismatch").textContent=counts["mismatch signal"]+counts["conflicting evidence"];$("mMissing").textContent=counts["missing evidence"];$("mReview").textContent=counts["requires qualified review"]+counts.unresolved;
+ const shown=rows.filter(r=>r.status!=="not applicable");
+ $("rows").innerHTML=shown.length?shown.map(r=>`<tr><td>${esc(r.object)}</td><td>${esc(r.field)}</td><td>${esc(r.expected??"—")}</td><td>${esc(r.observed??"—")}</td>${stCell(r.status)}<td>${esc(r.evidence||"—")}</td><td>${esc(r.owner||"—")}</td><td>${esc(r.next_action||"none")}</td></tr>`).join(""):`<tr><td colspan="8" class="muted">No comparable rows.</td></tr>`;
+ const exceptions=rows.filter(r=>r.status!=="aligned"&&r.status!=="not applicable");
+ $("queue").innerHTML=exceptions.length?exceptions.map((r,i)=>`<li><strong>${esc(r.object)} — ${esc(r.field)}</strong>: ${esc(r.status)}. ${esc(r.next_action)}${r.owner?` <span class="muted">(owner: ${esc(r.owner)})</span>`:' <span class="muted">(assign an owner)</span>'}</li>`).join(""):`<li class="muted">No exceptions in the entered scope. Keep the export as the evidence row for this verification.</li>`;
+ const bad=counts["mismatch signal"]+counts["conflicting evidence"],miss=counts["missing evidence"],rev=counts["requires qualified review"]+counts.unresolved;
+ const badge=$("badge");
+ if(bad){badge.textContent="MISMATCH SIGNALS";badge.className="badge hold";$("resultTitle").textContent="Exceptions to adjudicate"}
+ else if(miss||rev){badge.textContent="INCOMPLETE";badge.className="badge review";$("resultTitle").textContent=miss?"Evidence incomplete":"Qualified review needed"}
+ else{badge.textContent="NO ENTERED DIFFERENCE";badge.className="badge ok";$("resultTitle").textContent="No difference in the entered scope"}
+ $("summary").textContent=`${mode==="A"?"Single-change check":"Portfolio scan"}: ${shown.length} comparisons — ${counts.aligned} aligned, ${bad} mismatch/conflict signals, ${miss} missing evidence, ${rev} for qualified review.`;
+ last={tool:"clinicops-regulatory-integrity-scanner",tool_version:"1.0",mode:mode==="A"?"single-change":"portfolio-scan",generated_at:new Date().toISOString(),...meta,findings:rows,summary:{...counts},boundary:BOUNDARY};
+}
+function dl(name,content,type){const b=new Blob([content],{type}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(u)}
+$("x_json").onclick=()=>{if(!last)return;dl("clinicops-integrity-scan.json",JSON.stringify(last,null,2)+"\n","application/json")};
+$("x_csv").onclick=()=>{if(!last)return;const ex=last.findings.filter(r=>r.status!=="aligned"&&r.status!=="not applicable");const head=["object","field","expected","observed","status","evidence","owner","next_action"];const q=v=>`"${T(v).replaceAll('"','""')}"`;dl("clinicops-integrity-exceptions.csv",head.join(",")+"\n"+ex.map(r=>head.map(h=>q(r[h])).join(",")).join("\n")+"\n","text/csv")};
+$("x_copy").onclick=async()=>{if(!last)return;const s=last.summary;const ex=last.findings.filter(r=>r.status!=="aligned"&&r.status!=="not applicable");const text=[`ClinicOps integrity scan (${last.mode})`,`Aligned: ${s.aligned} | Mismatch signals: ${s["mismatch signal"]+s["conflicting evidence"]} | Missing evidence: ${s["missing evidence"]} | Qualified review: ${s["requires qualified review"]+s.unresolved}`,"Exception queue:",...ex.map((r,i)=>`${i+1}. ${r.object} — ${r.field}: ${r.status}. ${r.next_action}${r.owner?` (owner: ${r.owner})`:""}`),`Boundary: ${BOUNDARY}`].join("\n");try{await navigator.clipboard.writeText(text)}catch(_){}};
+// ---------- Mode switching ----------
+function setMode(m){$("modeA").setAttribute("aria-pressed",m==="A");$("modeB").setAttribute("aria-pressed",m==="B");$("paneA").hidden=m!=="A";$("paneB").hidden=m!=="B"}
+$("modeA").onclick=()=>setMode("A");$("modeB").onclick=()=>setMode("B");
+// ---------- MODE A: single change ----------
+const A_DEFAULT=[["IFU","IFU-12","","Document Control"],["EUDAMED export","IFU-11","","Regulatory Affairs"],["SS(C)P","","",""],["Label / artwork","IFU-12","",""]];
+$("a_records").innerHTML=A_DEFAULT.map((d,j)=>{const i=j+1;return `<div class="record"><div class="record-head"><strong>Record ${i}</strong><label class="scope"><input id="as${i}" type="checkbox" checked> in scope</label></div><div class="field"><label for="an${i}">Record / surface</label><input id="an${i}" value="${esc(d[0])}"></div><div class="field"><label for="av${i}">Observed value</label><input id="av${i}" value="${esc(d[1])}" placeholder="enter observation"></div><div class="field"><label for="ae${i}">Evidence reference</label><input id="ae${i}" value="${esc(d[2])}" placeholder="file, section, export date, ticket…"></div><div class="field"><label for="ao${i}">Owner if review is needed</label><input id="ao${i}" value="${esc(d[3])}" placeholder="role or team"></div></div>`}).join("");
+function aNorm(v,m){const s=tr(v);return m==="relaxed"?s.replace(/\s+/g," ").toLowerCase():m==="exact"?T(v):s}
+function aRun(){
+ const field=tr($("a_field").value)||"Declared field",ref=tr($("a_ref").value),mode=$("a_mode").value,refev=tr($("a_refev").value)||null,change=tr($("a_change").value)||null;
+ if(!ref){$("badge").textContent="REFERENCE NEEDED";$("badge").className="badge hold";$("resultTitle").textContent="Reference needed";$("summary").textContent="Choose an approved reference before interpreting downstream records.";return}
+ const rn=aNorm(ref,mode),rows=[];
+ for(let i=1;i<=4;i++){
+  const inScope=$(`as${i}`).checked,name=tr($(`an${i}`).value)||`Record ${i}`,obs=tr($(`av${i}`).value),ev=tr($(`ae${i}`).value)||null,owner=tr($(`ao${i}`).value)||null;
+  let status,next;
+  if(!inScope){status="not applicable";next="none"}
+  else if(!obs){status="missing evidence";next="Obtain an observation with an evidence reference before interpreting propagation."}
+  else if(aNorm(obs,mode)===rn){status="aligned";next=ev?"none":"Attach or cite the observation evidence for the closure record."}
+  else{status="mismatch signal";next="Reconcile against the approved reference and record the disposition through change control."}
+  rows.push({object:name,field,expected:ref,observed:obs||null,status,evidence:ev,owner,next_action:next});
+ }
+ if(!refev)rows.push({object:$("a_reflabel").value||"Approved reference",field,expected:ref,observed:ref,status:"requires qualified review",evidence:null,owner:null,next_action:"Attach or cite evidence for the approved reference itself."});
+ render("A",rows,{change_id:change,reference:{label:tr($("a_reflabel").value)||"Approved reference",value:ref,evidence_ref:refev},comparison_rule:mode});
+}
+$("a_run").onclick=()=>{$("fictionalNote").hidden=true;aRun()};
+$("a_example").onclick=()=>{$("a_field").value="IFU revision";$("a_ref").value="IFU-12";$("a_reflabel").value="Approved ECO";$("a_refev").value="ECO-2026-041 §3.2";$("a_change").value="CHG-2417";$("a_mode").value="trim";
+ [["IFU","IFU-12","DMS/IFU-12.pdf rev 12","Document Control"],["EUDAMED export","IFU-11","Export 2026-09-14 row 188","Regulatory Affairs"],["SS(C)P","IFU-12","SSCP-v7 §1.1","Regulatory Affairs"],["Label / artwork","IFU-12","ART-8812 rev C","Artwork Control"]].forEach((v,j)=>{const i=j+1;$(`as${i}`).checked=true;$(`an${i}`).value=v[0];$(`av${i}`).value=v[1];$(`ae${i}`).value=v[2];$(`ao${i}`).value=v[3]});
+ $("fictionalNote").hidden=false;aRun()};
+$("a_clear").onclick=()=>{for(let i=1;i<=4;i++){$(`av${i}`).value="";$(`ae${i}`).value="";$(`ao${i}`).value=""}$("a_refev").value="";$("fictionalNote").hidden=true};
+// ---------- MODE B: portfolio scan (device/UDI reconciliation v1) ----------
+const OBJECTS=[["basic_udi_di","Basic UDI-DI"],["udi_di","UDI-DI"],["trade_name","Device trade name"],["model_ref","Model / catalogue no."],["risk_class","Risk class"],["manufacturer_srn","Manufacturer SRN"],["ar_srn","AR SRN"],["emdn","EMDN code"],["certificate_no","Certificate number"],["sscp_ref","SS(C)P reference"],["doc_version","Document version"],["language","Language"],["record_status","Record status"],["source_system","Source system"],["source_role","Source role (authoritative / observed)"],["evidence_ref","Evidence reference"],["evidence_date","Evidence date / as-of"],["owner","Accountable owner"]];
+const COMPARE_FIELDS=["trade_name","model_ref","risk_class","manufacturer_srn","ar_srn","emdn","certificate_no","sscp_ref","doc_version"];
+let bData=null;
+function parseCSV(text){
+ const rows=[];let row=[],cell="",q=false;
+ for(let i=0;i<text.length;i++){const c=text[i];
+  if(q){if(c==='"'){if(text[i+1]==='"'){cell+='"';i++}else q=false}else cell+=c}
+  else if(c==='"')q=true;
+  else if(c===","){row.push(cell);cell=""}
+  else if(c==="\n"||c==="\r"){if(c==="\r"&&text[i+1]==="\n")i++;row.push(cell);cell="";if(row.length>1||tr(row[0]))rows.push(row);row=[]}
+  else cell+=c}
+ if(cell.length||row.length){row.push(cell);if(row.length>1||tr(row[0]))rows.push(row)}
+ if(!rows.length)return null;
+ const headers=rows[0].map(h=>tr(h));
+ return{headers,rows:rows.slice(1).map(r=>{const o={};headers.forEach((h,i)=>o[h]=tr(r[i]??""));return o})}
+}
+function parseInput(text){
+ const t=tr(text);if(!t)return null;
+ if(t[0]==="["||t[0]==="{"){try{let j=JSON.parse(t);if(!Array.isArray(j))j=[j];const headers=[...new Set(j.flatMap(o=>Object.keys(o)))];return{headers,rows:j.map(o=>{const r={};headers.forEach(h=>r[h]=tr(T(o[h]??"")));return r})}}catch(e){return{error:"JSON parse failed: "+e.message}}}
+ return parseCSV(t)||{error:"No rows found"};
+}
+const GUESS={basic_udi_di:/basic/i,udi_di:/^(?!.*basic).*udi/i,trade_name:/trade|device.*name|product.*name/i,model_ref:/model|catalog|reference|ref\b/i,risk_class:/class/i,manufacturer_srn:/(manufacturer|mf).*srn|^srn$/i,ar_srn:/ar.*srn|authori/i,emdn:/emdn|nomencl/i,certificate_no:/cert/i,sscp_ref:/sscp|ssp/i,doc_version:/version|revision|rev\b/i,language:/lang/i,record_status:/status/i,source_system:/system|source(?!.*role)(?!.*url)(?!.*date)/i,source_role:/role/i,evidence_ref:/evidence(?!.*date)|url|link|proof/i,evidence_date:/date|as.?of/i,owner:/owner|responsible/i};
+function showMapping(){
+ $("b_maprows").innerHTML=OBJECTS.map(([id,label])=>{
+  const guess=bData.headers.find(h=>GUESS[id]&&GUESS[id].test(h))||"";
+  return `<div class="maprow"><label for="map_${id}" style="margin:0">${esc(label)}</label><select id="map_${id}"><option value="">— not present —</option>${bData.headers.map(h=>`<option${h===guess?" selected":""}>${esc(h)}</option>`).join("")}</select></div>`}).join("");
+ $("b_parseinfo").textContent=`Parsed ${bData.rows.length} rows × ${bData.headers.length} columns locally. Map the columns that exist; unmapped objects are skipped, never guessed. Mapping "Source role" lets the scan compare observed records against your declared authoritative source instead of only flagging differences.`;
+ $("b_mapping").hidden=false;
+}
+$("b_choose").onclick=()=>$("b_file").click();
+$("b_file").onchange=async ev=>{const f=ev.target.files?.[0];if(!f)return;$("b_input").value=await f.text();ev.target.value="";};
+$("b_parse").onclick=()=>{const r=parseInput($("b_input").value);if(!r||r.error){$("b_parseinfo").textContent=r?r.error:"Nothing to parse.";$("b_mapping").hidden=false;$("b_maprows").innerHTML="";bData=null;return}bData=r;showMapping()};
+function ident(v){return T(v).trim().replace(/^\(01\)\s*/,"").replace(/[^0-9A-Za-z]/g,"").toUpperCase()}
+function mod10ok(d){let s=0;for(let i=0;i<13;i++)s+=parseInt(d[i],10)*(i%2===0?3:1);return((10-(s%10))%10)===parseInt(d[13],10)}
+const CLASSVOCAB=new Set(["i","is","im","ir","iia","iib","iii","a","b","c","d"]);
+function normVal(id,v){if(id==="udi_di"||id==="basic_udi_di")return ident(v);if(id==="risk_class")return v.toLowerCase().replace(/\bclass\b|\bklasse\b|\s+/g,"");return v.normalize("NFKC").replace(/\s+/g," ").trim().toLowerCase()}
+function bRun(){
+ if(!bData){$("b_parseinfo").textContent="Parse the data first.";return}
+ const map={};for(const[id]of OBJECTS){const v=$(`map_${id}`)?.value;if(v)map[id]=v}
+ const get=(r,id)=>map[id]?tr(r[map[id]]):null;
+ const fl=id=>OBJECTS.find(o=>o[0]===id)[1];
+ const rows=[];
+ const label=(r,i)=>{const sys=get(r,"source_system");const t=get(r,"trade_name")||get(r,"udi_di")||`Row ${i+2}`;return sys?`${t} [${sys}]`:t};
+ const roleOf=r=>{if(!map.source_role)return null;const v=(get(r,"source_role")||"").toLowerCase();return v?(/^auth/.test(v)?"authoritative":"observed"):null};
+ // per-row presence & structure checks
+ bData.rows.forEach((r,i)=>{
+  const obj=label(r,i),owner=get(r,"owner")||null,ev=get(r,"evidence_ref")||null,evd=get(r,"evidence_date")||null;
+  for(const[id,fname]of OBJECTS){
+   if(!map[id]||["owner","evidence_ref","evidence_date","source_role","source_system","record_status"].includes(id))continue;
+   const v=tr(r[map[id]]);
+   if(!v){rows.push({object:obj,field:fname,expected:"value present",observed:null,status:"missing evidence",evidence:ev,owner,next_action:"Obtain the value or record why it is not applicable for this record."});continue}
+   if(id==="udi_di"){const d=ident(v);if(/^\d{14}$/.test(d)&&!mod10ok(d))rows.push({object:obj,field:fname,expected:"valid GS1 check digit",observed:v,status:"mismatch signal",evidence:ev,owner,next_action:"Verify the UDI-DI against the issuing-agency record; correct through change control."})}
+   if(id==="risk_class"){const c=normVal(id,v);if(!CLASSVOCAB.has(c))rows.push({object:obj,field:fname,expected:"recognised class notation",observed:v,status:"requires qualified review",evidence:ev,owner,next_action:"Confirm the class notation with the regulatory owner; unrecognised vocabulary is never auto-corrected."})}
+  }
+  if(map.evidence_ref&&!ev)rows.push({object:obj,field:"Evidence reference",expected:"evidence reference present",observed:null,status:"missing evidence",evidence:null,owner,next_action:"Attach or cite the evidence source for this record."});
+  if(map.evidence_date&&!evd)rows.push({object:obj,field:"Evidence date / as-of",expected:"evidence date present",observed:null,status:"missing evidence",evidence:ev,owner,next_action:"Record when this evidence was exported or observed — comparisons without an as-of date are not defensible."});
+ });
+ // value alignment
+ if(map.basic_udi_di){
+  const groups={};
+  bData.rows.forEach((r,i)=>{const k=ident(r[map.basic_udi_di]||"");if(!k)return;(groups[k]=groups[k]||[]).push({r,i})});
+  for(const[k,members]of Object.entries(groups)){
+   const gname=`Basic UDI-DI ${k}`;
+   if(map.source_role){
+    const auth=members.filter(m=>roleOf(m.r)==="authoritative"),obs=members.filter(m=>roleOf(m.r)!=="authoritative");
+    if(!auth.length){rows.push({object:gname,field:"Authoritative source",expected:"one declared authoritative record",observed:"none declared",status:"unresolved",evidence:null,owner:null,next_action:"Declare which source system is authoritative for this Basic UDI-DI before differences can be dispositioned."});continue}
+    for(const fid of COMPARE_FIELDS){
+     if(!map[fid])continue;
+     const refVals=[...new Set(auth.map(m=>normVal(fid,tr(m.r[map[fid]]||""))).filter(Boolean))];
+     if(refVals.length>1){rows.push({object:gname,field:fl(fid),expected:"one authoritative value",observed:auth.map(m=>tr(m.r[map[fid]])).filter(Boolean).join(" vs "),status:"conflicting evidence",evidence:null,owner:null,next_action:"Authoritative sources disagree — resolve the source of truth with the accountable owner before downstream comparison."});continue}
+     if(!refVals.length)continue;
+     const refShown=auth.map(m=>tr(m.r[map[fid]])).find(Boolean);
+     for(const m of obs){
+      const v=tr(m.r[map[fid]]||"");if(!v)continue;
+      const ok=normVal(fid,v)===refVals[0];
+      rows.push({object:label(m.r,m.i),field:fl(fid),expected:refShown,observed:v,status:ok?"aligned":"mismatch signal",evidence:get(m.r,"evidence_ref"),owner:get(m.r,"owner"),next_action:ok?"none":"Reconcile the observed record against the authoritative value and record the disposition through change control."});
+     }
+    }
+   }else{
+    for(const fid of COMPARE_FIELDS){
+     if(!map[fid])continue;
+     const vals={};members.forEach(m=>{const v=tr(m.r[map[fid]]||"");if(v)(vals[normVal(fid,v)]=vals[normVal(fid,v)]||[]).push(v)});
+     const keys=Object.keys(vals);
+     if(keys.length>1)rows.push({object:gname,field:fl(fid),expected:"one value per Basic UDI-DI",observed:keys.map(k2=>vals[k2][0]).join(" vs "),status:"conflicting evidence",evidence:null,owner:null,next_action:"No source role declared, so neither value can be treated as the reference. Identify the controlled source of truth and align every divergent record."});
+     else if(keys.length===1&&members.length>1)rows.push({object:gname,field:fl(fid),expected:vals[keys[0]][0],observed:vals[keys[0]][0],status:"aligned",evidence:null,owner:null,next_action:"none"});
+    }
+   }
+  }
+ }
+ // duplicate UDI-DI within the same system/role
+ if(map.udi_di){const seen={};bData.rows.forEach((r,i)=>{const d=ident(r[map.udi_di]);if(!d)return;const key=d+"|"+(get(r,"source_system")||"")+"|"+(roleOf(r)||"");(seen[key]=seen[key]||[]).push(i)});
+  for(const[key,idx]of Object.entries(seen))if(idx.length>1){const d=key.split("|")[0];rows.push({object:`UDI-DI ${d}`,field:"Duplicate records",expected:"one record per UDI-DI per source",observed:`${idx.length} rows (${idx.map(i=>i+2).join(", ")})`,status:"conflicting evidence",evidence:null,owner:null,next_action:"Determine which record is current; merge or retire duplicates through change control."})}}
+ render("B",rows,{row_count:bData.rows.length,mapped_objects:Object.keys(map)});
+}
+$("b_run").onclick=()=>{$("fictionalNote").hidden=true;bRun()};
+$("b_example").onclick=()=>{
+ $("b_input").value=[
+"basic_udi_di,udi_di,trade_name,model,risk_class,manufacturer_srn,certificate_no,source_system,source_role,evidence_ref,evidence_date,owner",
+"FICBU0AAX01,09506000134352,Exempla Flow Monitor,EX-100,IIb,DK-MF-000099999,CERT-1001,RIM,authoritative,RIM export r441,2026-09-10,RA Ops",
+"FICBU0AAX01,09506000134352,Exempla Flow Monitor,EX-100,IIb,DK-MF-000099999,CERT-1001,EUDAMED,observed,Public record extract,2026-09-12,RA Ops",
+"FICBU0AAX02,09506000134369,Exempla Flow Monitor Pro,EX-200,IIb,DK-MF-000099999,CERT-1001,RIM,authoritative,RIM export r441,2026-09-10,RA Ops",
+"FICBU0AAX02,09506000134369,Exempla Flow Monitor Plus,EX-200,IIb,DK-MF-000099999,CERT-1001,EUDAMED,observed,Public record extract,2026-09-12,RA Ops",
+"FICBU0AAX03,09506000134390,Exempla Sense Patch,EX-300,Class 2b,DK-MF-000099999,CERT-1002,Label register,observed,Row 44,,QA",
+"FICBU0AAX04,09506000134412,Exempla Dose Assist,EX-500,IIb,DK-MF-000099999,CERT-1003,RIM,authoritative,RIM export r441,2026-09-10,RA Ops"].join("\n");
+ const r=parseInput($("b_input").value);bData=r;showMapping();$("fictionalNote").hidden=false;bRun();
+};
+})();
+</script>
+</body>
+</html>

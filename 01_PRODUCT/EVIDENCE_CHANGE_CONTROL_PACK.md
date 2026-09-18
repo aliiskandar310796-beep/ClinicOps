@@ -1,6 +1,8 @@
-# Evidence Change Control Pack
+# Regulatory Change Integrity Review (Evidence Change Control Pack)
 
 Status: AVAILABLE FOR BOUNDED SCOPING — not yet described as real-world validated or scalable.
+
+This specification underlies the flagship commercial offer **Regulatory Change Integrity Review** (see `02_PRODUCTS/PRODUCT_REGISTRY.md` and `01_STRATEGY/POSITIONING_2026-09-18_REGULATORY_DATA_INTEGRITY.md`). "Evidence Change Control Pack" remains the internal name of the delivery format.
 
 ## Purpose
 
@@ -10,16 +12,10 @@ This is a paid ClinicOps delivery format, not an automated compliance verdict.
 
 ## Intended buyers / users
 
-- medical-device regulatory / quality teams;
-- authorised representatives and specialist consultancies;
-- sponsor / CRO / site operations teams;
-- quality-system owners;
-- clinical AI / digital-health operations owners;
-- diagnostic / laboratory operations;
-- clinic operations teams;
-- controlled medical-content / localisation teams.
+- medical-device regulatory / quality (RA/QA) teams — the primary market;
+- EU authorised representatives and specialist regulatory consultancies managing manufacturer portfolios — the partner channel.
 
-The exact evidence sources and qualified decision owner differ by domain.
+Narrowed 2026-09-18: earlier horizontal buyer lists (trials, labs, clinics, clinical AI, generic controlled content) are removed from the target market until real delivery evidence proves an expansion; the method remains domain-portable internally.
 
 ## Minimum input contract
 

@@ -1,5 +1,7 @@
 # ClinicOps Product Registry
 
+This file is the source of truth for what ClinicOps actually sells. Positioning source of truth: `01_STRATEGY/POSITIONING_2026-09-18_REGULATORY_DATA_INTEGRITY.md`.
+
 ClinicOps separates **availability**, **technical verification**, **real-world validation**, **repeatable delivery**, **scalability** and **core-product candidacy**.
 
 - Product-state language follows `VALIDATION_AND_SCALABILITY_GATES.md`.
@@ -7,98 +9,67 @@ ClinicOps separates **availability**, **technical verification**, **real-world v
 
 A product can be technically sound and commercially useful without being a core-product candidate. Core-product promotion requires repeated paid evidence, independent buyers/workflows, a stable input/output contract, repeat demand, measurable value and a documented competitor gap.
 
-## Free entry products
+## Core commercial architecture
 
-### Change Surface Mapper
-Status: PUBLIC CANDIDATE — TECHNICAL VERIFICATION REQUIRED BEFORE MERGE/DEPLOY.
+**One flagship MVP, two satellites. Every public journey routes here.**
 
-Purpose: help a user structure one approved/authoritative change across potentially affected systems, records, documents and owners without uploading inputs to ClinicOps.
+### 1. Regulatory Change Integrity Review — FLAGSHIP MVP
+Status: AVAILABLE FOR FOCUSED SCOPING (formerly presented as the "Evidence Change Control Pack"; specification in `01_PRODUCT/EVIDENCE_CHANGE_CONTROL_PACK.md`).
 
-Target users: regulatory, quality, trial, AI, laboratory, clinic and controlled-content operations owners.
+Input: one declared approved/authoritative regulatory or product change, a bounded downstream evidence population, available evidence and an accountable owner.
 
-Primary output: browser-local change-surface brief + JSON handoff.
+Workflow: establish authoritative source → identify declared downstream surfaces → normalize identifiers/versions → collect evidence → compare deterministically → identify mismatches, missing evidence and ownership ambiguity → route unresolved interpretation to qualified humans → produce closure queue → capture closure evidence.
 
-Validation requirement: independent representative external workflow evidence is required before any real-world validated or scalable claim.
+Output: reviewer-ready regulatory change closure packet (source register, change-surface matrix, exception queue, owner routing, closure evidence, portable handoff). Core schema: Source · Expected · Observed · Status · Evidence · Owner · Next Action · Closure.
 
-Core-product state: not promoted. Treat it as an acquisition/delivery asset unless repeated paid work independently satisfies the product-extraction gate.
+Target customer: EU-market medical-device RA/QA teams (primary); ARs and specialist regulatory consultancies managing manufacturer portfolios (secondary/partner channel).
 
-### Regulatory Change Integrity Check
-Status: PUBLIC.
+Evidence required before stronger claims: independent completed external cases under the gates file.
 
-Purpose: structure one regulatory change event into a portable evidence packet and reviewer queue.
+### 2. Portfolio Integrity Scan — ENTRY PRODUCT
+Status: AVAILABLE FOR BOUNDED SCOPING (pilot format; machinery exists in `src/clinicops_os` portfolio/transition/intake tooling and the client bundle generator).
 
-### EUDAMED Identifier Check
-Status: PUBLIC.
+Input: a defined device portfolio or regulatory export (CSV/XLSX/JSON, RIM/UDI/product-master exports, declared document registers, public EUDAMED evidence where available).
 
-Purpose: create trust and demonstrate bounded structural regulatory intelligence.
+Output: portfolio evidence map, missing fields, conflicting values, missing evidence, certificate/device and AR/manufacturer relationships, SS(C)P relationships where relevant, source provenance, unresolved queue, owner/action queue, human-readable report and machine-readable export. No automated regulatory conclusions.
 
-### Transition Readiness Score
-Status: PUBLIC.
+### 3. Continuous Portfolio Integrity Monitoring — RECURRING LAYER
+Status: PILOT-STAGE / BUILD-ON-DEMAND. Scheduled evidence checks, public-record change detection, record-drift comparison, exception queues, closure history, recurring reporting. Built only as far as repeated real use proves valuable.
 
-Purpose: help users identify self-reported transition work-plan gaps and potential customer needs.
+## Public acquisition utilities
 
-### Regulatory Change Review Cost
-Status: PUBLIC.
+### Regulatory Integrity Scanner (`docs/integrity-scanner.html`)
+Status: PUBLIC — TECHNICALLY VERIFIED FOR DEFINED CASES. Browser-local. Two modes: **Single Change** (approved source → downstream observations → deterministic comparison → owner/queue export) and **Portfolio Scan** (CSV/JSON import, column mapping, normalization, missing/duplicate/conflict detection, exception queue, export). The free on-ramp to the flagship.
 
-Purpose: let users estimate their own manual workload/economics assumptions without claiming ClinicOps savings.
+Component/supporting pages kept for URL continuity and focused jobs: Regulatory Change Integrity Check (`integrity-check.html`), Change Surface Mapper (`change-surface-mapper.html`), Regulatory Change Impact Mapper (`regulatory-change-impact.html`), Technical File Consistency Check (`technical-file-consistency.html`).
 
-### Interactive Integrity Specimen / Transition Map sample
-Status: PUBLIC SANITIZED EXAMPLES.
+### EUDAMED Identifier Check (`identifier-check.html`)
+Status: PUBLIC utility. Structural screening only.
 
-Purpose: make the ClinicOps evidence-control method inspectable before a paid engagement.
+### Sanitized examples
+Interactive Integrity Specimen, Transition Map sample. Purpose: make the method inspectable before an engagement.
 
-## Paid products / delivery formats
+### Demoted utilities
+Transition Readiness Score and Regulatory Change Review Cost calculator remain reachable as sales support but are out of primary navigation prominence. No black-box score becomes a core product.
 
-### Evidence Change Control Pack
-Status: AVAILABLE FOR FOCUSED SCOPING.
+## Specialized use cases (landing routes, not identities)
 
-Input: one declared approved/authoritative change, defined evidence population, available evidence and accountable owner.
+Class III / implantable MDR transition · EUDAMED transition · SS(C)P operations · AR portfolio intelligence · medical-device document control · language-version integrity / Danish linguistic validation · Denmark market access incl. Danish pharmacovigilance support (retained on real buyer evidence; see positioning §5). Each routes to the three products above.
 
-Output: source register, change-surface matrix, unresolved queue, reviewer-ready closure packet and portable handoff.
+## Archived / experimental (no public product status)
 
-Target customer: medical-device regulatory/quality teams, ARs/consultancies, sponsors/CROs/sites, quality owners, clinical-AI operations, laboratory/clinic operations and controlled medical-content teams.
-
-Evidence required before stronger product claims: independent completed external cases under `VALIDATION_AND_SCALABILITY_GATES.md`.
-
-Core-product state: not promoted. Use real paid delivery to test whether a stable primitive survives across independent cases.
-
-### Transition Intelligence Scan
-Input: device portfolio and evidence.
-Output: bounded portfolio evidence map, priorities and reviewer questions. Any risk terminology must remain governed and must not imply an automated compliance or enforcement determination.
-
-### Portfolio Intelligence Monitoring
-Recurring service for repeated regulatory/evidence signals and controlled change where cadence is demonstrated.
-
-### Regulatory Operations Training
-Structured learning products where source validity and learning scope are explicit.
+TrialOps, broad QualityOps, Clinical AI Ops, LabOps, Clinic Operations and generic controlled-content operations as *service categories*: archived from public architecture 2026-09-18. Internal methods and intake-form granularity remain. Regulatory Operations Training: experimental, unbuilt. The QA/RA Operations Engineering capability ladder (CAPA/NC evidence, QA data dashboards, SaMD verification) is INTERNAL-ONLY under the progression rule — specs live in the business project, not here.
 
 ## Product extraction rule
 
-ClinicOps follows:
-
 **Sell the pain. Standardize the repeated work. Automate only what survives reality.**
 
-Do not create a core MVP merely because a problem appears horizontal or large. Prefer a painful niche with clear budget, repeated manual work, observable failure and measurable value. The product may become horizontal after the invariant primitive survives multiple independent real contexts.
+Do not create a core MVP merely because a problem appears horizontal or large. A concept may enter `CORE_MVP_CANDIDATE` only when the hard gate in `04_GROWTH/PRODUCT_EXTRACTION_DOCTRINE_2026-09-16.md` is fully evidenced (fixture: `examples/product_opportunity_gate.example.json`; validator: `scripts/validate_product_opportunity_gate.py`).
 
-A concept may enter `CORE_MVP_CANDIDATE` only when the hard gate in `04_GROWTH/PRODUCT_EXTRACTION_DOCTRINE_2026-09-16.md` is fully evidenced. The machine-readable fixture and CI validator are `examples/product_opportunity_gate.example.json` and `scripts/validate_product_opportunity_gate.py`.
+New-product rule: any new concept must state target user, exact job, pain, current workaround, input, output, buyer, economic signal, validation evidence, smallest test and kill condition — and the default answer is "extend the core product", not "create another product".
 
 ## Product rule
 
-Each product must define:
-
-- target customer / intended user;
-- problem solved / intended task;
-- evidence required;
-- minimum input contract;
-- delivery method;
-- decision boundary / unsupported uses;
-- accountable human owner;
-- technical test contract;
-- real-world validation state;
-- repeatability/scalability state;
-- product-extraction / core-candidacy state;
-- success metric;
-- kill condition;
-- next improvement loop.
+Each product must define: target customer; problem/task; evidence required; minimum input contract; delivery method; decision boundary / unsupported uses; accountable human owner; technical test contract; real-world validation state; repeatability/scalability state; extraction/core-candidacy state; success metric; kill condition; next improvement loop.
 
 Do not promote a product state because a page exists, CI is green, traffic exists, or an internal agent judges it useful. Unknown evidence remains unknown.
