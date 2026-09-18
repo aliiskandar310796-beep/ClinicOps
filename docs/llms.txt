@@ -13,7 +13,7 @@ Service architecture:
 - Authorised Representative intelligence: https://clinicops.dk/authorised-representative-portfolio-intelligence.html
 - Medical-device document control: https://clinicops.dk/medical-device-document-control.html
 - Clinical operations across TrialOps, QualityOps, Clinical AI, LabOps, Clinic Operations and Controlled Medical Content: https://clinicops.dk/clinical-operations.html
-- Project-based expert network: https://clinicops.dk/expert-network.html
+- Specialist clinical review (independent, per-engagement): https://clinicops.dk/expert-network.html
 
 Free browser-local tools and examples:
 - Regulatory Change Integrity Check: https://clinicops.dk/integrity-check.html

@@ -38,6 +38,10 @@ FORBIDDEN_PHRASES = (
     "notified-body expert",
     "ISO-certified",
     "ISO certified",
+    # Specialist Expertise directive §2/§5: the capability is public, the
+    # network is not — no roster-shaped or recruitment language anywhere.
+    "growing bench",
+    "join our network",
 )
 FORBIDDEN_ACRONYMS = (re.compile(r"\bRAC\b"), re.compile(r"\bCCRA\b"))
 

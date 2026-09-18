@@ -65,7 +65,7 @@ TARGETS = (
     Target(
         "/expert-network.html",
         200,
-        "<title>Independent Expert Network | ClinicOps</title>",
+        "<title>Specialist Clinical Review | ClinicOps</title>",
     ),
     Target("/privacy-notice/", 200, "<title>Privacy Notice | ClinicOps</title>"),
     Target(
