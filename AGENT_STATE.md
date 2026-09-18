@@ -27,6 +27,24 @@ ClinicOps is an evidence-controlled, human-reviewed operating layer for high-val
 
 Commercial validation outranks speculative product development.
 
+
+## Active outcome fleets — 2026-09-19
+
+Two temporary mission fleets are active under the canonical-agent / worker-recruitment model:
+
+1. **DISCOVERY-8** — accountable owner: Visibility Architect. Objective: raise search/discoverability to an evidence-backed 8/10 under `04_GROWTH/DISCOVERABILITY_COMMERCIAL_EVIDENCE_FLEETS_2026-09-19.md`. An 8/10 state requires current entity consistency, priority indexing, non-branded discovery and a qualified discovery action; impressions/page count cannot award the score.
+2. **COMMERCIAL-8** — accountable owner: Customer Discovery Agent, with Opportunity Architect / Visibility Architect / Release Sentinel handoffs. Objective: raise flagship commercial evidence to an evidence-backed 8/10. The score is capped below 8 until a real **E7 activated paid engagement** exists.
+
+These are two of the maximum three top-level active missions. Preserve the third slot for live delivery, urgent resilience or a time-sensitive external event.
+
+Public-safe machine-contract examples:
+- `examples/discoverability_fleet_mission.example.json`
+- `examples/commercial_evidence_fleet_mission.example.json`
+
+Real account, search-console, buyer-response, commercial-stage and activation evidence stays private.
+
+Initial P0 discoverability defect: externally visible ClinicOps company/profile surfaces are not fully reconciled and stale/duplicate identity signals can appear in search. Treat canonical entity reconciliation and current indexing baseline as acquisition work, not cosmetic brand cleanup.
+
 ### EXP-001 validation threshold
 
 Do not call the core offer validated until all of the following occur:
