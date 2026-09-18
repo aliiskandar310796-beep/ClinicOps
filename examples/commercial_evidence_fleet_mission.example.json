@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "mission_id": "SYNTHETIC-COMMERCIAL-8",
+  "owner_agent": "customer-discovery",
+  "outcome_class": "commercial-evidence",
+  "objective": "Move the Regulatory Change Integrity Review toward an evidence-backed 8/10 commercial state, which requires a real E7 activated paid engagement.",
+  "status": "active",
+  "metric_name": "commercial_evidence_gate_score",
+  "metric_direction": "increase",
+  "baseline": 1,
+  "target": 8,
+  "current": 1,
+  "unit": "verified gates out of 10",
+  "commercial_stage": "E1",
+  "evidence_refs": [],
+  "artifact_refs": [
+    "artifact:04_GROWTH/DISCOVERABILITY_COMMERCIAL_EVIDENCE_FLEETS_2026-09-19.md",
+    "artifact:02_PRODUCTS/PRODUCT_REGISTRY.md",
+    "artifact:docs/services.html"
+  ],
+  "review_point": "after each qualified buyer response, commitment or activation event",
+  "stop_condition": "change buyer/problem/offer/packaging/distribution if ten qualified conversations produce no repeated pain or concrete commercial commitment",
+  "workers": [
+    {
+      "worker_id": "COMM-ACCOUNT-01",
+      "specialty": "account-researcher",
+      "parent_agent": "customer-discovery",
+      "objective": "Prepare bounded qualified-account briefs for the current primary ICP without treating qualification as demand.",
+      "status": "active",
+      "success_criteria": [
+        "accounts fit the explicit ICP",
+        "buyer role is identifiable",
+        "workflow-fit evidence is cited",
+        "duplicate/prohibited routes are suppressed"
+      ],
+      "stop_condition": "stop when the current experiment has enough qualified routes or the segment is shown to be poor fit",
+      "evidence_refs": [],
+      "artifact_refs": [],
+      "handoff_to": "visibility-architect",
+      "handoff_completed": false,
+      "reserved_human_action": false,
+      "control_violation": false,
+      "violation_resolved": false,
+      "notes": "Real prospect data stays outside public GitHub."
+    },
+    {
+      "worker_id": "COMM-SIGNAL-01",
+      "specialty": "buyer-signal-analyst",
+      "parent_agent": "customer-discovery",
+      "objective": "Classify real buyer responses into E4-E6 evidence without inflating stage.",
+      "status": "waiting",
+      "success_criteria": [
+        "buyer statements are separated from interpretation",
+        "E4+ has private evidence refs",
+        "pain/workaround/consequence/owner are captured",
+        "next action is concrete"
+      ],
+      "stop_condition": "stop after each response is classified and handed off",
+      "evidence_refs": [],
+      "artifact_refs": [],
+      "handoff_to": "opportunity-architect",
+      "handoff_completed": false,
+      "reserved_human_action": false,
+      "control_violation": false,
+      "violation_resolved": false,
+      "notes": "Waiting is honest until a real response exists."
+    },
+    {
+      "worker_id": "COMM-SCOPE-01",
+      "specialty": "offer-scope-designer",
+      "parent_agent": "customer-discovery",
+      "objective": "Convert confirmed E5 workflow pain into the smallest concrete Regulatory Change Integrity Review scope capable of reaching E6/E7.",
+      "status": "waiting",
+      "success_criteria": [
+        "input population is bounded",
+        "output and review boundary are explicit",
+        "commercial next step is concrete",
+        "pricing authority and buyer commitment are not invented"
+      ],
+      "stop_condition": "stop when the scope is ready for commercial-control review or the buyer rejects the test",
+      "evidence_refs": [],
+      "artifact_refs": [],
+      "handoff_to": "opportunity-architect",
+      "handoff_completed": false,
+      "reserved_human_action": false,
+      "control_violation": false,
+      "violation_resolved": false,
+      "notes": null
+    }
+  ]
+}
