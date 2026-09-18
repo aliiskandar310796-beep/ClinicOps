@@ -1,0 +1,120 @@
+{
+  "$schema_note": "Approved PUBLIC professional-proof wordings. Canonical register (private, with evidence refs and client names) lives in the business project: 00_CONTROL/PROFESSIONAL_PROOF_REGISTER.md, subordinate to 00_CONTROL/VERIFIED_PROFILE_FACTS.md. Rules: public wording may only narrow the evidence; no client names, LSP names, job IDs or system names on ClinicOps surfaces; no certifications; never 'cand.med.' or physician/licensure implication; QPPV mentioned only inside the boundary statement.",
+  "person": {
+    "name": "Ali Iskandar",
+    "role": "Founder, ClinicOps",
+    "sameAs": "https://www.linkedin.com/in/ali-iskandar"
+  },
+  "proofs": [
+    {
+      "id": "proof-edu-msc",
+      "domain": "credential",
+      "evidence_type": "P1-documentary",
+      "public_wording": "MSc in Medicine (Translational Medicine), Aalborg University",
+      "named_client_allowed": false,
+      "status": "verified"
+    },
+    {
+      "id": "proof-lang-danish",
+      "domain": "credential",
+      "evidence_type": "P1-documentary",
+      "public_wording": "Native Danish, professional English",
+      "named_client_allowed": false,
+      "status": "verified"
+    },
+    {
+      "id": "proof-background",
+      "domain": "cross",
+      "evidence_type": "P1-documentary",
+      "public_wording": "Professional background across regulatory consulting, CRO clinical monitoring and pharmacovigilance",
+      "named_client_allowed": false,
+      "status": "verified"
+    },
+    {
+      "id": "proof-pv-handson",
+      "domain": "pharma-pv",
+      "evidence_type": "P1-documentary",
+      "public_wording": "Hands-on pharmacovigilance experience: ICSR case processing, MedDRA coding and safety-database work in a specialist PV provider setting",
+      "named_client_allowed": false,
+      "status": "verified"
+    },
+    {
+      "id": "proof-volume",
+      "domain": "cross",
+      "evidence_type": "P1-P2",
+      "public_wording": "More than 500 regulated documentation assignments delivered — from single-page labels to 60,000+-word SS(C)P reviews — with a 100% on-time record",
+      "named_client_allowed": false,
+      "status": "verified"
+    },
+    {
+      "id": "proof-years",
+      "domain": "cross",
+      "evidence_type": "P1-documentary",
+      "public_wording": "6+ years supporting regulated healthcare documentation",
+      "named_client_allowed": false,
+      "status": "verified"
+    },
+    {
+      "id": "proof-medtech-docs",
+      "domain": "medtech-documentation",
+      "evidence_type": "P1-project-records",
+      "public_wording": "Hands-on work with controlled medical-device documentation — IFUs, labels, eIFU content, implant-card and surgical-technique material — for international manufacturers across orthopaedic, surgical-instrument, wound-care and respiratory, cardiac-monitoring, dental/orthodontic, aesthetic and digital-health portfolios",
+      "named_client_allowed": false,
+      "status": "verified"
+    },
+    {
+      "id": "proof-medtech-quality",
+      "domain": "medtech-documentation",
+      "evidence_type": "P2-acknowledgement",
+      "public_wording": "100% quality score across every completed labelling and marketing localization job in the most recent production batch",
+      "named_client_allowed": false,
+      "status": "verified"
+    },
+    {
+      "id": "proof-samd-strings",
+      "domain": "medtech-software",
+      "evidence_type": "P1-project-records",
+      "public_wording": "Localisation QA of regulated device-software user-interface content, checked for consistency with the IFU",
+      "named_client_allowed": false,
+      "status": "verified"
+    },
+    {
+      "id": "proof-pharma-docs",
+      "domain": "pharma-documentation",
+      "evidence_type": "P1-documentary",
+      "public_wording": "Clinical-trial and safety documentation experience in pharmaceutical settings, including CTD Module 5 work and familiarity with PSUR, DSUR and RMP structures",
+      "named_client_allowed": false,
+      "status": "verified"
+    },
+    {
+      "id": "proof-standards",
+      "domain": "standards",
+      "evidence_type": "P1-confirmed",
+      "public_wording": "Documentation work delivered within clients' ISO 13485-governed document-control processes; ICH-GCP trained; IFU and labelling reviewed against ISO 14971 risk-communication outputs, EN ISO 20417, ISO 15223-1 and IEC 62366-1; documentation and verification records within IEC 62304-governed software lifecycles; ALCOA+ data-integrity principles applied to clinical and safety documentation",
+      "named_client_allowed": false,
+      "status": "verified"
+    },
+    {
+      "id": "proof-tooling",
+      "domain": "tooling",
+      "evidence_type": "P3-work-product",
+      "public_wording": "Purpose-built, publicly inspectable regulatory-data tooling",
+      "named_client_allowed": false,
+      "status": "verified"
+    },
+    {
+      "id": "proof-boundary",
+      "domain": "boundary",
+      "evidence_type": "policy",
+      "public_wording": "Work is performed within demonstrated competence and agreed scope. Formal statutory roles — QPPV and deputies, PRRC, authorised-representative duties, conformity decisions — are held only where explicitly appointed, and medical and regulatory sign-off stays with the formally responsible person or organisation.",
+      "named_client_allowed": false,
+      "status": "verified"
+    }
+  ],
+  "pending_verification": [
+    {
+      "id": "proof-pharma-qsr",
+      "note": "QSR appears as a CV service word; exact meaning, organisation and scope unverified — no public wording until the founder documents what the QSR work was."
+    }
+  ]
+}
