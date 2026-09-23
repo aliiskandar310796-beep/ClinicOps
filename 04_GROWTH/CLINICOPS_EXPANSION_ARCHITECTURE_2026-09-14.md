@@ -278,6 +278,10 @@ Do not automate the lane until at least one manual delivery demonstrates repeata
 
 A lane should be paused or reframed if ten qualified buyer conversations produce no concrete willingness to sponsor a pilot, no priced-scope request and no repeated evidence of budgeted urgency.
 
+## Fleet execution topology
+
+The temporary fleet that carries each lane through discovery and scoring (defined in `04_GROWTH/EXPANSION_FLEET_EXECUTION_2026-09-14.md`) does not run as one fixed serial queue. Regulatory Evidence Steward's bounded-claims output is a genuine upstream prerequisite for every other function, so it still runs first. Visibility Architect, Customer Discovery Agent and Portfolio Operator do not depend on one another's output and now run as a parallel discovery/scoring group once Evidence Steward's output exists. Opportunity Architect converges that group's outputs into one sellable entry offer, and Release Sentinel remains the final serial release gate over the converged result. See that file's "Execution topology" section and `opportunity_pipeline` in `04_GROWTH/expansion_lanes.json` for the full rationale and the machine-readable form.
+
 ## Reusable product spine
 
 Every successful lane should reuse one common ClinicOps product spine rather than spawn a separate platform:

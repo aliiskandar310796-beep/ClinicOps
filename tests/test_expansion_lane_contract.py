@@ -72,3 +72,48 @@ def test_registry_keeps_high_grade_buyer_evidence_private_and_outbound_global() 
     assert controls["cold_email_daily_ceiling"] == 15
     assert controls["cold_email_denmark_allowed"] is False
     assert controls["shared_outbound_ledger_required"] is True
+
+
+def test_opportunity_pipeline_topology_reflects_parallel_convergence() -> None:
+    data = load_registry()
+    pipeline = data["opportunity_pipeline"]
+    stages = pipeline["stages"]
+    stage_ids = {stage["stage_id"] for stage in stages}
+
+    assert pipeline["model"] == "parallel_discovery_converge"
+    assert pipeline["changed_from"] == "fixed_serial"
+    assert len(stage_ids) == len(stages)
+
+    prerequisite = [s for s in stages if s["parallel_group"] == "prerequisite"]
+    discovery_scoring = [s for s in stages if s["parallel_group"] == "discovery-scoring"]
+    convergence = [s for s in stages if s["parallel_group"] == "convergence"]
+    gate = [s for s in stages if s["parallel_group"] == "gate"]
+
+    # Regulatory Evidence Steward: the one genuine upstream prerequisite, no dependencies.
+    assert len(prerequisite) == 1
+    assert prerequisite[0]["stage_id"] == "regulatory-evidence-steward"
+    assert prerequisite[0]["depends_on"] == []
+
+    # Visibility Architect, Customer Discovery Agent and Portfolio Operator: mutually
+    # independent, each depending only on the prerequisite stage (never on each other).
+    assert {s["stage_id"] for s in discovery_scoring} == {
+        "visibility-architect",
+        "customer-discovery",
+        "portfolio-operator",
+    }
+    for stage in discovery_scoring:
+        assert stage["depends_on"] == [prerequisite[0]["stage_id"]]
+
+    # Opportunity Architect: the convergence point, depending on the full parallel group.
+    assert len(convergence) == 1
+    assert convergence[0]["stage_id"] == "opportunity-architect"
+    assert set(convergence[0]["depends_on"]) == {s["stage_id"] for s in discovery_scoring}
+
+    # Release Sentinel: unchanged final serial gate over the converged output.
+    assert len(gate) == 1
+    assert gate[0]["stage_id"] == "release-sentinel"
+    assert gate[0]["depends_on"] == [convergence[0]["stage_id"]]
+
+    # Every declared dependency must reference a real stage in this pipeline.
+    for stage in stages:
+        assert set(stage["depends_on"]) <= stage_ids

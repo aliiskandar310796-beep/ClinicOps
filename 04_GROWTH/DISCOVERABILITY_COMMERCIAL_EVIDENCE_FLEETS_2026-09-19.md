@@ -2,6 +2,12 @@
 
 Status: **ACTIVE execution architecture**
 
+Amendment (2026-09-23, approved by Ali): Section 6a adds a middle confidence
+tier to the D1–D10 gate-evidence workflow, routing medium-ambiguity
+evidentiary checks to the existing Discoverability Metrics Auditor instead of
+leaving them unchecked. It does not remove or loosen any existing Ali-reserved
+decision. See Section 6a for the full rule.
+
 Purpose: raise two currently underpowered external outcomes toward an honest **8/10** without creating permanent agent sprawl:
 
 1. **Search / Discoverability**
@@ -248,6 +254,144 @@ Activate at review points, not continuously.
 
 Objective:
 score D1–D10 from evidence and reject vanity substitutions.
+
+---
+
+## 6a. Discoverability confidence tiers (added 2026-09-23, approved by Ali)
+
+### Why this exists
+
+D1–D10 evidence today effectively has two outcomes: an item is either
+verifiable by an existing deterministic check (CI/Ops Watch/site-metadata/
+claim-registry gates), or — if it is not — it either silently gets asserted
+with no independent check at all, or it lands on Ali because nothing else in
+this file routes it anywhere. The fruit-fly-connectome review that prompted
+this amendment observed that the fast-reflex-vs-slow-deliberation split in
+that system is graded, not binary, and proposed the same shape here: most
+ambiguity is not high-stakes ambiguity, and ClinicOps already has a role built
+for the middle case — the Discoverability Metrics Auditor (Section 6), whose
+standing objective is "score D1–D10 from evidence and reject vanity
+substitutions." This section makes that role's involvement mandatory, not
+optional, for a defined slice of evidence that previously had no check at
+all. It does not touch anything that already reaches Ali.
+
+### Rule
+
+Every D1–D10 evidence item a fleet worker produces is classified into exactly
+one of three tiers before it can be recorded as gate-satisfying evidence.
+Classification is done by the producing worker and is subject to override by
+the Discoverability Metrics Auditor or Ali at any time. When classification is
+unclear, use the higher tier (auditor over auto-clear; Ali over auditor).
+
+#### Tier 1 — Low-ambiguity: auto-clear (unchanged from today)
+
+An item auto-clears, exactly as today, only when **all** of the following
+hold:
+
+- the evidence is produced by an existing deterministic mechanism with a
+  binary pass/fail result — the live-check/Ops Watch contract, sitemap/
+  robots/canonical validation, the site-metadata gate, the claim-registry/
+  reference gate, the public-copy claim gate, or a directly-queried indexed/
+  impression status;
+- the item repeats an already-approved pattern (the same query family, the
+  same page, the same identity fix already reconciled once) rather than
+  introducing a first-of-kind claim, page or external source;
+- nothing about the item touches a reserved External-action boundary
+  (`AGENT_STATE.md` "External-action boundaries" / `06_AGENTS/AI_COMPANY_OS.md`
+  "Reserved human decisions": LinkedIn publishing or company-profile edits,
+  third-party accounts/live endpoints, analytics/tracking, pricing,
+  credentials, branch protection, git history);
+- the item is not the first verified closure of a capped gate (D1, D2, D3,
+  D5, D6 or D10 — the gates named in Section 5's score-cap rules).
+
+Applies most often to: D1 (production identity — deterministic live-check),
+D3 (priority-URL indexing status), D6 (impression presence on an already
+recognized landing page), and the mechanical run of D9's propagation
+checklist. No escalation and no mandatory auditor pass are required beyond
+the auditor's normal periodic sampling of Section 6.
+
+#### Tier 2 — Medium-ambiguity: existing auditor spot-check (the new tier)
+
+An item routes to the Discoverability Metrics Auditor, at the worker's
+handoff, rather than only at a scheduled fleet review, when it needs an
+evidentiary-quality judgment and none of the Tier 3 triggers below apply.
+Typical cases:
+
+- D8 — whether an external link/citation clears the "meaningful reference"
+  bar versus being the low-quality directory link Section 4 already excludes;
+- D5 — whether an observed query family reflects real buyer/search language
+  versus keyword-volume theatre;
+- D7 — whether a search-landing route actually reaches a proof object versus
+  an informational dead end;
+- D9 — whether a freshness/reconciliation record is actually complete, for a
+  claim change that has already been through its own approval;
+- an incremental (non-first) instance of D2/D4 evidence confirming an
+  identity/positioning fix that Ali or the auditor already approved once, and
+  the check is now "does the evidence still match," not "should we make this
+  claim."
+
+The auditor either (a) confirms the evidence clears the gate's bar and
+records the evidence ref, (b) rejects it under Section 8's kill rules as a
+vanity substitution, or (c) — if it cannot resolve the item itself, evidence
+is contradictory or missing, or it detects an undeclared reserved-boundary
+trigger — returns a decision packet to its parent agent per
+`06_AGENTS/WORKER_RECRUITMENT_PROTOCOL.md`, which routes the item to Tier 3.
+The auditor has no authority to downgrade a Tier 3 item to Tier 1/2 or to
+close an item it cannot resolve; per that protocol, a worker "encountering a
+reserved action returns a decision packet to the parent agent; it does not
+broaden its own authority," and the auditor is bound by the same rule.
+
+#### Tier 3 — High-ambiguity / high-stakes: still reaches Ali directly (unchanged)
+
+An item goes straight to Ali, exactly as today, when **any** of the
+following hold:
+
+- it is, or depends on, a reserved human decision under
+  `06_AGENTS/AI_COMPANY_OS.md` "Reserved human decisions" or
+  `AGENT_STATE.md` "External-action boundaries" — LinkedIn publishing or
+  company-profile edits (feeds D2, D4, D8), third-party account/live-endpoint
+  creation, analytics/tracking activation, pricing changes, or credential/
+  branch-protection/git-history changes;
+- it would be the first verified closure of a capped gate (D1, D2, D3, D5,
+  D6 or D10) — a wrong first closure directly misstates the headline score,
+  which Section 20's 8/10 rule already forbids awarding on anything less
+  than fully accountable evidence;
+- it is a first-of-kind item: a new non-branded query family (D5), a newly
+  proposed canonical landing page (D6/D7), a newly proposed external
+  citation/authority source (D8), or any content carrying external claim
+  risk under `CLAIM_RULES.md` (registration/coverage/class claims, entity
+  representation, etc.);
+- the Discoverability Metrics Auditor escalates it per Tier 2(c).
+
+Routing and packet contents are unchanged: the worker or auditor prepares the
+evidence, recommendation, exact action and rollback path per
+`06_AGENTS/AI_COMPANY_OS.md`'s AI-first execution rule, and Ali makes the
+call. Section 21's review packet still applies.
+
+### Non-negotiable guarantees
+
+- **No auto-clearing of anything currently Ali-gated.** Tier 3 is defined as
+  exactly the union of today's reserved-decision/external-action-boundary
+  list, the score-cap-defining gates on their first closure, and first-of-kind/
+  claim-risk items. Nothing moves out of that union into Tier 1 or Tier 2 by
+  this amendment.
+- **Only redistribution, never removal.** Tier 2 exists solely to give a
+  defined check to evidentiary judgment calls that today have no check at
+  all (they are neither deterministically verified nor explicitly routed to
+  Ali) — it uses the Discoverability Metrics Auditor role that already
+  exists in Section 6 rather than inventing a new one.
+- Ali's aggregate review load can only fall or stay flat: Tier 2 removes
+  silently-unchecked closures by adding a mandatory auditor pass; Tier 3 is
+  unchanged in scope.
+- Section 5's score caps and Section 20's 8/10 rule are unaffected. This tier
+  changes who verifies a piece of evidence, never what counts as satisfying a
+  gate.
+- Ambiguity about tier placement resolves upward (auto-clear → auditor →
+  Ali), never downward.
+- Scope: this amendment covers Fleet A (Discoverability, D1–D10) only. Fleet
+  B's Commercial Metrics Auditor and the C1–C10 gates (Section 10) are
+  unchanged pending a separate proposal, and should not be assumed to follow
+  the same tiering without one.
 
 ---
 
@@ -671,6 +815,9 @@ At each fleet review produce:
 - workers terminated
 - exact next action
 - any reserved human decision
+- for Fleet A: count of Tier 2 items the Discoverability Metrics Auditor
+  spot-checked since the last review, and any Tier 2 item it escalated to
+  Tier 3 (Section 6a)
 - continue / modify / kill
 
 Maximum one page per fleet unless a material incident requires detail.
