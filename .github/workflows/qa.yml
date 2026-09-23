@@ -1,0 +1,39 @@
+name: Frontend QA
+# Browser QA of docs/ (overflow, console, focus, targets, axe, Lighthouse). See qa/README.md.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 5 * * 1'  # weekly, Monday 05:17 UTC
+  pull_request:
+    paths:
+      - 'docs/**'
+      - 'qa/**'
+
+permissions:
+  contents: read
+
+jobs:
+  qa:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Install Playwright and chromium
+        run: |
+          npm install -g playwright@1
+          npx playwright install --with-deps chromium
+      - name: Run QA
+        run: |
+          MODE=fast
+          if [ "${{ github.event_name }}" != "pull_request" ]; then MODE=full; fi
+          qa/run.sh "$MODE"
+      - uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: qa-out
+          path: qa/out/
