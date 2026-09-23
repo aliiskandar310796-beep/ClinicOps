@@ -358,7 +358,6 @@ figure.shot img{border:1px solid var(--border-strong);border-radius:var(--r);bac
   .run,.bounds,.tags.spec{grid-template-columns:1fr}
   .brand{font-size:1.05rem}
   nav.primary{-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent);padding-right:24px}
-  nav.primary a[aria-current="page"]{order:-1}
   .ledger.n>section::before{font-size:1.5rem}
   .ledger.n>section>h3{padding-left:48px}
 }
@@ -392,3 +391,22 @@ figure.shot img{border:1px solid var(--border-strong);border-radius:var(--r);bac
 .cta-row{align-items:center}
 .cta-links a{display:inline-flex;align-items:center;min-height:44px}
 @media(max-width:960px){.split.rev{grid-template-columns:1fr}}
+
+/* ---------- Final sweep fixes ---------- */
+main:focus{outline:none}
+input[type=checkbox],input[type=radio]{width:1.375rem;height:1.375rem;accent-color:var(--accent);flex:none}
+.check{min-height:44px;align-items:center;padding:4px 0}
+.footer-inner a{display:inline-block;padding:.55rem .1rem;white-space:nowrap}
+.footer-inner span{display:flex;flex-wrap:wrap;column-gap:16px;align-items:center}
+.footer-inner span a{margin-right:0}
+.callout{max-width:none}
+.callout>*{max-width:78em}
+.rail .callout,.lede+.callout{max-width:none}
+figure.shot{overflow-x:auto}
+figure.shot:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+@media(max-width:640px){figure.shot picture,figure.shot img{min-width:760px}}
+@media coarse-pointer{nav.primary a,a.brand{min-height:44px;display:inline-flex;align-items:center}}
+.steps li,.run li{border-top-style:solid}
+.run li.machine,.run li.human{border-top-color:var(--accent)}
+.run li.human{border-top-style:solid}
+@media print{img{content-visibility:visible}body{font-family:var(--font)}}

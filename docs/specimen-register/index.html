@@ -46,14 +46,14 @@ main.wrap{padding-top:clamp(40px,6vw,72px)}
 .register td:first-child{white-space:nowrap}
 .register:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .register tbody tr:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;background:var(--surface-2);border-radius:0}
-.register tbody tr[aria-expanded="true"]{background:var(--surface-2)}
-@media(forced-colors:active){.filter.active{background:Highlight;color:HighlightText;forced-color-adjust:none}.register tbody tr[aria-expanded="true"]{outline:2px solid Highlight;outline-offset:-2px}}
+.register tbody tr[aria-selected="true"]{background:var(--surface-2)}
+@media(forced-colors:active){.filter.active{background:Highlight;color:HighlightText;forced-color-adjust:none}.register tbody tr[aria-selected="true"]{outline:2px solid Highlight;outline-offset:-2px}}
 @media print{.filters,.hero-actions{display:none!important}.register{overflow:visible}.register table{min-width:0;font-size:8.5pt}.register td,.register th{padding-right:6px}.register td:first-child{white-space:normal}.detail{display:block}.principles,.chain,.metrics{break-inside:avoid}}
 </style>
 <link rel="preload" href="../assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="../assets/fonts/geist-mono-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="../site.css"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f6f7f5" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0d1211" media="(prefers-color-scheme: dark)"></head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="../index.html">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="../index.html">Home</a><a href="../services.html">Solution</a><a href="../use-cases.html">Use cases</a><a href="../research.html">Research</a><a href="../tools.html" aria-current="page">Tools</a><a href="../about.html">About</a><a href="../contact.html">Contact</a></nav></div></header>
-<main id="main" class="wrap">
+<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="../index.html">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="../index.html">Home</a><a href="../services.html">Solution</a><a href="../use-cases.html">Use cases</a><a href="../research.html">Research</a><a href="../tools.html" aria-current="page">Tools</a><a href="../about.html">About</a><a href="../contact.html">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");if(a&&n.scrollWidth>n.clientWidth)n.scrollLeft=Math.max(0,a.offsetLeft-32)})()</script>
+<main id="main" tabindex="-1" class="wrap">
 <span class="eyebrow">Live synthetic specimen · version 2</span>
 <h1>A discrepancy register should show the evidence chain—not just the red flags.</h1>
 <p class="lede">Explore a fictional ClinicOps review output. Each row keeps the approved reference, observation, evidence basis, machine signal, owner and human decision separate so a reviewer can see what is known, what is inferred and what still needs authority.</p>
@@ -70,12 +70,12 @@ main.wrap{padding-top:clamp(40px,6vw,72px)}
 <table aria-label="Synthetic findings register">
 <thead><tr><th scope="col">ID</th><th scope="col">Field</th><th scope="col">Reference</th><th scope="col">Observed surface</th><th scope="col">Observed</th><th scope="col">Signal</th><th scope="col">Owner / decision</th></tr></thead>
 <tbody id="rows">
-<tr data-id="F-01" data-state="DIFFERENT" tabindex="0" aria-controls="detail" aria-expanded="false"><td>F-01</td><td>IFU revision</td><td>IFU-12</td><td>EUDAMED export</td><td>IFU-11</td><td class="signal st different">DIFFERENT</td><td>Regulatory Affairs · review open</td></tr>
-<tr data-id="F-02" data-state="MATCH" tabindex="0" aria-controls="detail" aria-expanded="false"><td>F-02</td><td>Manufacturer name</td><td>Example MedTech GmbH</td><td>SS(C)P</td><td>Example MedTech GmbH</td><td class="signal st match">MATCH</td><td>Evidence preserved · no discrepancy action</td></tr>
-<tr data-id="F-03" data-state="UNRESOLVED" tabindex="0" aria-controls="detail" aria-expanded="false"><td>F-03</td><td>Storage upper limit</td><td>25 °C / 30 °C conflict</td><td>Label artwork</td><td>25 °C</td><td class="signal st unresolved">UNRESOLVED</td><td>RA/QA owner · authority decision required</td></tr>
-<tr data-id="F-04" data-state="DIFFERENT" tabindex="0" aria-controls="detail" aria-expanded="false"><td>F-04</td><td>Basic UDI-DI</td><td>BUDI-ALPHA-001</td><td>Distributor master</td><td>BUDI-ALPHA-01</td><td class="signal st different">DIFFERENT</td><td>Master Data · correction candidate</td></tr>
-<tr data-id="F-05" data-state="CLOSED" tabindex="0" aria-controls="detail" aria-expanded="false"><td>F-05</td><td>Sterile status</td><td>Sterile EO</td><td>ERP product text</td><td>Sterile</td><td class="signal st closed">CLOSED</td><td>QA decision · wording accepted in context</td></tr>
-<tr data-id="F-06" data-state="DIFFERENT" tabindex="0" aria-controls="detail" aria-expanded="false"><td>F-06</td><td>Contraindication phrase</td><td>Reference phrase v4</td><td>Local IFU</td><td>Reference phrase v3</td><td class="signal st different">DIFFERENT</td><td>Medical / RA review · propagation check</td></tr>
+<tr data-id="F-01" data-state="DIFFERENT" tabindex="0" aria-controls="detail" aria-selected="false"><td>F-01</td><td>IFU revision</td><td>IFU-12</td><td>EUDAMED export</td><td>IFU-11</td><td class="signal st different">DIFFERENT</td><td>Regulatory Affairs · review open</td></tr>
+<tr data-id="F-02" data-state="MATCH" tabindex="0" aria-controls="detail" aria-selected="false"><td>F-02</td><td>Manufacturer name</td><td>Example MedTech GmbH</td><td>SS(C)P</td><td>Example MedTech GmbH</td><td class="signal st match">MATCH</td><td>Evidence preserved · no discrepancy action</td></tr>
+<tr data-id="F-03" data-state="UNRESOLVED" tabindex="0" aria-controls="detail" aria-selected="false"><td>F-03</td><td>Storage upper limit</td><td>25 °C / 30 °C conflict</td><td>Label artwork</td><td>25 °C</td><td class="signal st unresolved">UNRESOLVED</td><td>RA/QA owner · authority decision required</td></tr>
+<tr data-id="F-04" data-state="DIFFERENT" tabindex="0" aria-controls="detail" aria-selected="false"><td>F-04</td><td>Basic UDI-DI</td><td>BUDI-ALPHA-001</td><td>Distributor master</td><td>BUDI-ALPHA-01</td><td class="signal st different">DIFFERENT</td><td>Master Data · correction candidate</td></tr>
+<tr data-id="F-05" data-state="CLOSED" tabindex="0" aria-controls="detail" aria-selected="false"><td>F-05</td><td>Sterile status</td><td>Sterile EO</td><td>ERP product text</td><td>Sterile</td><td class="signal st closed">CLOSED</td><td>QA decision · wording accepted in context</td></tr>
+<tr data-id="F-06" data-state="DIFFERENT" tabindex="0" aria-controls="detail" aria-selected="false"><td>F-06</td><td>Contraindication phrase</td><td>Reference phrase v4</td><td>Local IFU</td><td>Reference phrase v3</td><td class="signal st different">DIFFERENT</td><td>Medical / RA review · propagation check</td></tr>
 </tbody>
 </table>
 </div>
@@ -103,9 +103,9 @@ const details={
 "F-06":{title:"F-06 · Change-propagation lag candidate",ref:"Approved contraindication phrase v4",obs:"Local IFU → reference phrase v3",rule:"Version-aware declared comparison → DIFFERENT",decision:"Medical / RA review confirms whether the local IFU was in scope for the change, then assigns remediation or closes with rationale."}
 };
 const detail=document.getElementById("detail"), rows=[...document.querySelectorAll("tbody tr")];
-function show(id){const d=details[id];if(!d)return;detail.innerHTML=`<h3>${d.title}</h3><div class="chain"><div class="node"><small>Reference evidence</small>${d.ref}</div><div class="node"><small>Observation</small>${d.obs}</div><div class="node"><small>Rule / signal</small>${d.rule}</div><div class="node"><small>Human decision boundary</small>${d.decision}</div></div>`;detail.classList.add("open");rows.forEach(x=>x.setAttribute("aria-expanded",String(x.dataset.id===id)))}
+function show(id){const d=details[id];if(!d)return;detail.innerHTML=`<h3>${d.title}</h3><div class="chain"><div class="node"><small>Reference evidence</small>${d.ref}</div><div class="node"><small>Observation</small>${d.obs}</div><div class="node"><small>Rule / signal</small>${d.rule}</div><div class="node"><small>Human decision boundary</small>${d.decision}</div></div>`;detail.classList.add("open");rows.forEach(x=>x.setAttribute("aria-selected",String(x.dataset.id===id)))}
 rows.forEach(r=>{r.addEventListener("click",()=>show(r.dataset.id));r.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();show(r.dataset.id)}})});
-document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.querySelectorAll(".filter").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));const f=b.dataset.filter;rows.forEach(r=>{r.hidden=f!=="all"&&r.dataset.state!==f;r.setAttribute("aria-expanded","false")});detail.classList.remove("open")}));
+document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.querySelectorAll(".filter").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));const f=b.dataset.filter;rows.forEach(r=>{r.hidden=f!=="all"&&r.dataset.state!==f;r.setAttribute("aria-selected","false")});detail.classList.remove("open")}));
 show("F-01");
 })();
 </script>
