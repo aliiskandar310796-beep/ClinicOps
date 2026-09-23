@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 376" role="img" aria-labelledby="t d">
+<title id="t">Evidence relationships</title>
+<desc id="d">Seven numbered steps on a horizontal rail: approved source, EUDAMED, UDI, certificate, SS(C)P, labelling, controlled records. Each caption says what is compared at that step.</desc>
+<style>
+svg{font-family:Geist,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.s{font-size:18px;fill:#0f1a17}.m{font-size:16px;fill:#556360}.x{font-family:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:17px;fill:#0f1a17}
+.xm{font-family:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:16px;fill:#556360}
+.a{fill:#0f5c52}.ab{stroke:#0f5c52}.bd{stroke:#cdd6d1;fill:none;stroke-width:1}.bf{stroke:#cdd6d1;stroke-width:1;fill:#f6f7f5}.ln{stroke:#556360;stroke-width:1.5;fill:none}
+.wn{fill:#a55b00}.wb{stroke:#a55b00}.hd{fill:#b03333}.hb{stroke:#b03333}.bold{font-weight:600}
+@media (prefers-color-scheme:dark){.s,.x{fill:#e6ece9}.m,.xm{fill:#98a6a1}.a{fill:#4fd8c4}.ab{stroke:#4fd8c4}.bd{stroke:#374541}.bf{stroke:#374541;fill:#0d1211}.ln{stroke:#98a6a1}.wn{fill:#efb05c}.wb{stroke:#efb05c}.hd{fill:#ff9191}.hb{stroke:#ff9191}}
+</style>
+<text x="16" y="34" class="xm">EVIDENCE CHAIN · each link is compared to the one before</text>
+<line x1="96" y1="120" x2="864" y2="120" class="ln"/>
+<circle cx="96" cy="120" r="22" class="bf" style="stroke:none"/><circle cx="96" cy="120" r="22" class="bd ab" stroke-width="1.5"/><text x="96" y="127" text-anchor="middle" class="x a bold">01</text>
+<text x="96" y="188" text-anchor="middle" class="s bold">Approved</text><text x="96" y="212" text-anchor="middle" class="s bold">source</text>
+<line x1="40" y1="236" x2="152" y2="236" class="bd"/><text x="96" y="266" text-anchor="middle" class="m">approved</text><text x="96" y="288" text-anchor="middle" class="m">baseline</text><text x="96" y="310" text-anchor="middle" class="m">values</text>
+<circle cx="224" cy="120" r="22" class="bf" style="stroke:none"/><circle cx="224" cy="120" r="22" class="bd ab" stroke-width="1.5"/><text x="224" y="127" text-anchor="middle" class="x a bold">02</text>
+<text x="224" y="200" text-anchor="middle" class="s bold">EUDAMED</text>
+<line x1="168" y1="236" x2="280" y2="236" class="bd"/><text x="224" y="266" text-anchor="middle" class="m">record vs</text><text x="224" y="288" text-anchor="middle" class="m">approved</text><text x="224" y="310" text-anchor="middle" class="m">source</text>
+<circle cx="352" cy="120" r="22" class="bf" style="stroke:none"/><circle cx="352" cy="120" r="22" class="bd ab" stroke-width="1.5"/><text x="352" y="127" text-anchor="middle" class="x a bold">03</text>
+<text x="352" y="200" text-anchor="middle" class="s bold">UDI</text>
+<line x1="296" y1="236" x2="408" y2="236" class="bd"/><text x="352" y="266" text-anchor="middle" class="m">identifiers</text><text x="352" y="288" text-anchor="middle" class="m">and device</text><text x="352" y="310" text-anchor="middle" class="m">data</text>
+<circle cx="480" cy="120" r="22" class="bf" style="stroke:none"/><circle cx="480" cy="120" r="22" class="bd ab" stroke-width="1.5"/><text x="480" y="127" text-anchor="middle" class="x a bold">04</text>
+<text x="480" y="200" text-anchor="middle" class="s bold">Certificate</text>
+<line x1="424" y1="236" x2="536" y2="236" class="bd"/><text x="480" y="266" text-anchor="middle" class="m">scope and</text><text x="480" y="288" text-anchor="middle" class="m">validity vs</text><text x="480" y="310" text-anchor="middle" class="m">record</text>
+<circle cx="608" cy="120" r="22" class="bf" style="stroke:none"/><circle cx="608" cy="120" r="22" class="bd ab" stroke-width="1.5"/><text x="608" y="127" text-anchor="middle" class="x a bold">05</text>
+<text x="608" y="200" text-anchor="middle" class="s bold">SS(C)P</text>
+<line x1="552" y1="236" x2="664" y2="236" class="bd"/><text x="608" y="266" text-anchor="middle" class="m">summary vs</text><text x="608" y="288" text-anchor="middle" class="m">source and</text><text x="608" y="310" text-anchor="middle" class="m">certificate</text>
+<circle cx="736" cy="120" r="22" class="bf" style="stroke:none"/><circle cx="736" cy="120" r="22" class="bd ab" stroke-width="1.5"/><text x="736" y="127" text-anchor="middle" class="x a bold">06</text>
+<text x="736" y="200" text-anchor="middle" class="s bold">Labelling</text>
+<line x1="680" y1="236" x2="792" y2="236" class="bd"/><text x="736" y="266" text-anchor="middle" class="m">label and</text><text x="736" y="288" text-anchor="middle" class="m">IFU vs</text><text x="736" y="310" text-anchor="middle" class="m">source</text>
+<circle cx="864" cy="120" r="22" class="bf" style="stroke:none"/><circle cx="864" cy="120" r="22" class="bd ab" stroke-width="1.5"/><text x="864" y="127" text-anchor="middle" class="x a bold">07</text>
+<text x="864" y="188" text-anchor="middle" class="s bold">Controlled</text><text x="864" y="212" text-anchor="middle" class="s bold">records</text>
+<line x1="808" y1="236" x2="920" y2="236" class="bd"/><text x="864" y="266" text-anchor="middle" class="m">revision and</text><text x="864" y="288" text-anchor="middle" class="m">owner</text><text x="864" y="310" text-anchor="middle" class="m">status</text>
+<text x="16" y="358" class="xm">what is compared</text><line x1="190" y1="353" x2="944" y2="353" class="bd"/>
+
+</svg>
