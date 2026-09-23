@@ -1,0 +1,6 @@
+basic_udi_di,udi_di,trade_name,model,risk_class,manufacturer_srn,certificate_no,sscp_ref,doc_version,source_system,source_role,evidence_ref,evidence_date,owner
+FICBU00031,09506000000312,Exempla Valve A,EX-31,IIb,DK-MF-000000001,CERT-A-1001,SSCP-A-v3,IFU-12,RIM,authoritative,RIM export r12,2026-09-10,RA Ops
+FICBU00031,09506000000312,Exempla Valve A,EX-31,IIb,DK-MF-000000001,CERT-A-1001,SSCP-A-v3,IFU-12,EUDAMED,observed,,2026-09-12,RA Ops
+FICBU00032,09506000000329,,EX-32,,DK-MF-000000001,CERT-A-1001,SSCP-A-v3,IFU-12,RIM,authoritative,RIM export r12,2026-09-10,RA Ops
+FICBU00032,09506000000329,Exempla Valve B,EX-32,Class 2b,DK-MF-000000001,CERT-A-1001,SSCP-A-v3,IFU-12,EUDAMED,observed,RIM export r12,,RA Ops
+FICBU00033,09506000000336,Exempla Valve C,EX-33,IIb,DK-MF-000000001,,,IFU-12,RIM,authoritative,RIM export r12,2026-09-10,

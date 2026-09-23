@@ -1,0 +1,3 @@
+basic_udi_di,udi_di,trade_name,model,risk_class,manufacturer_srn,certificate_no,sscp_ref,doc_version,source_system,source_role,evidence_ref,evidence_date,owner
+FICBU00061,09506000000619,Exempla Ragged,EX-61,IIb,DK-MF-000000001,CERT-A-1001,SSCP-A-v3,IFU-12
+FICBU00061,09506000000619,Exempla Ragged,EX-61,IIb,DK-MF-000000001,CERT-A-1001,SSCP-A-v3,IFU-12,EUDAMED,observed,RIM export r12,2026-09-10,RA Ops,extra,cells

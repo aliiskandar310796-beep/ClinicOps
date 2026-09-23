@@ -35,7 +35,7 @@ textarea{min-height:150px;resize:vertical;font-family:var(--mono);font-size:.84r
 .mode button[aria-pressed="true"]{background:var(--accent);color:var(--accent-contrast)}
 .mode button:focus-visible{outline-offset:-3px}
 #paneA>h2:first-child,#paneB>h2:first-child{margin-top:clamp(36px,5vw,56px)}
-.result{border-top:2px solid var(--accent);padding:20px 0 0;margin:36px 0 18px}
+.result{border-top:2px solid var(--accent);padding:20px 0 0;margin:36px 0 18px;scroll-margin-top:80px}
 .result h2{border-top:0;padding-top:0}
 .result-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap}
 .badge{font-size:.74rem;font-weight:600;padding:5px 9px;color:var(--muted);border-color:var(--border-strong)}
@@ -89,6 +89,7 @@ ol#queue{padding-left:1.3rem;max-width:42.43em}#queue li{margin:.5em 0}
 #grid.tabulator .tabulator-tableholder .tabulator-table .tabulator-row .tabulator-cell{color:inherit}
 #grid.tabulator .tabulator-row .tabulator-row-header,#grid.tabulator .tabulator-header .tabulator-col.tabulator-row-header{background:transparent;border-right:0}
 #grid{overflow-x:auto}
+#grid .tabulator-row .tabulator-cell{white-space:normal;overflow-wrap:anywhere}
 #grid.tabulator{background:var(--surface);border:0;border-top:1px solid var(--border-strong);border-radius:0;font-family:var(--font);font-size:.88rem;font-variant-numeric:tabular-nums;color:var(--text)}
 #grid.tabulator .tabulator-header{background:transparent;color:var(--muted);border:0;border-bottom:1px solid var(--border-strong)}
 #grid.tabulator .tabulator-header .tabulator-col{background:transparent;border-right:0;color:var(--muted)}
@@ -116,7 +117,7 @@ ol#queue{padding-left:1.3rem;max-width:42.43em}#queue li{margin:.5em 0}
 </style>
 <link rel="preload" href="assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/fonts/geist-mono-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="site.css"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f6f7f5" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0d1211" media="(prefers-color-scheme: dark)"></head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="index.html">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="index.html">Home</a><a href="services.html">Solution</a><a href="use-cases.html">Use cases</a><a href="research.html">Research</a><a href="tools.html" aria-current="page">Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");if(a&&n.scrollWidth>n.clientWidth)n.scrollLeft=Math.max(0,a.offsetLeft-32)})()</script>
+<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="index.html">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="index.html">Home</a><a href="services.html">Solution</a><a href="use-cases.html">Use cases</a><a href="research.html">Research</a><a href="tools.html" aria-current="page">Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");var r=a?a.offsetLeft+a.offsetWidth+16-n.clientWidth:0;if(r>0)n.scrollLeft=r})()</script>
 <main id="main" tabindex="-1" class="wrap">
 <span class="eyebrow">Browser-local · deterministic</span>
 <h1>Regulatory Integrity Scanner</h1>
@@ -148,8 +149,9 @@ ol#queue{padding-left:1.3rem;max-width:42.43em}#queue li{margin:.5em 0}
 <div class="field"><label for="b_input">Paste CSV (with a header row) or a JSON array of objects — or choose a CSV / XLSX / JSON file</label><textarea id="b_input" spellcheck="false" placeholder="basic_udi_di,udi_di,trade_name,model,risk_class,source_system,source_role,evidence_ref,evidence_date,owner&#10;..."></textarea></div>
 <div class="actions"><input id="b_file" type="file" accept=".csv,.json,.xlsx,application/json,text/csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" hidden><button class="btn secondary" id="b_choose" type="button">Choose CSV/XLSX/JSON file</button><button class="btn secondary" id="b_parse" type="button">Parse &amp; map columns</button><button class="btn secondary" id="b_example" type="button">Load fictional example portfolio</button></div>
 <p class="hint">The file is read locally by your browser. Nothing is uploaded, stored or transmitted. Avoid pasting confidential data you are not authorised to process on this machine.</p>
+<p class="hint" id="b_delimhint">Semicolon- or tab-separated CSV is not auto-supported: save the file as comma-separated CSV or XLSX.</p>
 </div>
-<div id="b_mapping" hidden><h2>2 · Map columns to regulatory objects</h2><div class="panel"><p class="hint" id="b_parseinfo"></p>
+<div id="b_mapping" hidden><h2>2 · Map columns to regulatory objects</h2><div class="panel"><p class="hint" id="b_parseinfo" role="status"></p>
 <div id="b_sheetwrap" class="field sheetwrap" hidden><label for="b_sheet">Worksheet</label><select id="b_sheet"></select></div>
 <div id="b_maprows"></div>
 <div class="actions profbar"><input id="prof_name" name="profile_name" autocomplete="off" spellcheck="false" aria-label="Mapping profile name" placeholder="Mapping profile name (e.g. RIM export)"><button class="btn secondary" id="prof_save" type="button">Save profile</button><select id="prof_list" aria-label="Saved profiles"><option value="">— saved profiles —</option></select><button class="btn secondary" id="prof_apply" type="button">Apply</button><button class="btn secondary" id="prof_delete" type="button">Delete</button><button class="btn secondary" id="prof_export" type="button">Export profiles</button><input id="prof_file" type="file" accept=".json,application/json" hidden><button class="btn secondary" id="prof_import" type="button">Import profiles</button></div>
@@ -161,7 +163,7 @@ ol#queue{padding-left:1.3rem;max-width:42.43em}#queue li{margin:.5em 0}
 
 <div class="result" aria-live="polite"><div class="result-head"><div><h2 class="rt" id="resultTitle">Scan result</h2><p id="summary" class="muted">Run a check or scan to see statuses, exceptions and the review queue.</p></div><span id="badge" class="badge">NOT RUN</span></div>
 <div class="metrics"><div class="metric"><strong id="mAligned">0</strong><small>aligned</small></div><div class="metric"><strong id="mMismatch">0</strong><small>mismatch signals</small></div><div class="metric"><strong id="mMissing">0</strong><small>missing evidence</small></div><div class="metric"><strong id="mReview">0</strong><small>requires qualified review</small></div></div>
-<div id="wb_toolbar" hidden><input id="wb_search" name="search" autocomplete="off" spellcheck="false" placeholder="Search all columns" aria-label="Search findings"><select id="wb_status" aria-label="Filter by status"><option value="">All statuses</option><option>aligned</option><option>mismatch signal</option><option>conflicting evidence</option><option>missing evidence</option><option>unresolved</option><option>requires qualified review</option></select><select id="wb_group" aria-label="Group findings"><option value="">No grouping</option><option value="status">Group: status</option><option value="object">Group: object / record</option><option value="owner">Group: owner</option><option value="field">Group: field</option></select><span class="tb-owner"><input id="wb_owner" name="owner" autocomplete="off" placeholder="Owner for selected rows" aria-label="Owner for selected rows"><button class="btn secondary" id="wb_apply_owner" type="button">Assign owner</button></span><button class="btn secondary tb-export" id="wb_export_sel" type="button">Export selected CSV</button></div>
+<div id="wb_toolbar" hidden><input id="wb_search" name="search" autocomplete="off" spellcheck="false" placeholder="Search all columns" aria-label="Search findings"><select id="wb_status" aria-label="Filter by status"><option value="">All statuses</option><option>aligned</option><option>mismatch signal</option><option>conflicting evidence</option><option>missing evidence</option><option>unresolved</option><option>requires qualified review</option></select><select id="wb_group" aria-label="Group findings"><option value="">No grouping</option><option value="status">Group: status</option><option value="object">Group: object / record</option><option value="owner">Group: owner</option><option value="field">Group: field</option></select><span class="tb-owner"><input id="wb_owner" name="owner" autocomplete="off" placeholder="Owner for selected rows" aria-label="Owner for selected rows"><button class="btn secondary" id="wb_apply_owner" type="button">Assign owner</button></span><button class="btn secondary tb-export" id="wb_export_sel" type="button">Export selected CSV</button><span id="wb_msg" class="muted small-note" role="status"></span></div>
 <div id="grid"></div>
 <div class="tablewrap" id="plainwrap" tabindex="0" role="region" aria-label="Findings table"><table aria-label="Scan findings"><thead><tr><th scope="col">Object / record</th><th scope="col">Field</th><th scope="col">Expected</th><th scope="col">Observed</th><th scope="col">Status</th><th scope="col">Evidence</th><th scope="col">Owner</th><th scope="col">Next action</th></tr></thead><tbody id="rows"><tr><td colspan="8" class="muted">Nothing scanned yet.</td></tr></tbody></table></div>
 <div class="grid"><div><h3>Exception queue</h3><ol id="queue"><li class="muted">No exceptions yet.</li></ol></div><div><h3>Export</h3><div class="actions tight"><button class="btn secondary" id="x_csv" type="button">Download exception CSV</button><button class="btn secondary" id="x_json" type="button">Download JSON</button><button class="btn secondary" id="x_copy" type="button">Copy reviewer summary</button></div><p class="muted small-note">Exports are generated locally. The JSON repeats the boundary statement and carries every finding for your own change-control or review record.</p></div></div>
@@ -192,21 +194,22 @@ function applyFilters(){if(!table)return;const q=($("wb_search").value||"").toLo
   return ["object","field","expected","observed","status","evidence","owner","next_action","note"].some(k=>String(d[k]??"").toLowerCase().includes(q))})}
 function buildGrid(rows){
  if(table){try{table.destroy()}catch(_){/*noop*/}table=null}
- table=new Tabulator("#grid",{data:rows,layout:"fitDataStretch",height:rows.length>9?480:null,reactiveData:false,
+ table=new Tabulator("#grid",{data:rows,layout:"fitColumns",height:rows.length>9?480:null,reactiveData:false,
   selectableRows:true,placeholder:"No findings in the current filter.",
   columns:[
    {formatter:"rowSelection",titleFormatter:"rowSelection",hozAlign:"center",headerSort:false,width:44,frozen:true},
-   {title:"Object / record",field:"object",formatter:tf,minWidth:170},
-   {title:"Field",field:"field",formatter:tf,minWidth:130},
-   {title:"Expected",field:"expected",formatter:tf,minWidth:110},
-   {title:"Observed",field:"observed",formatter:tf,minWidth:110},
-   {title:"Status",field:"status",formatter:statusFmt,minWidth:150},
-   {title:"Evidence",field:"evidence",formatter:tf,minWidth:120},
+   {title:"Object / record",field:"object",formatter:tf,minWidth:150},
+   {title:"Field",field:"field",formatter:tf,minWidth:110},
+   {title:"Expected",field:"expected",formatter:tf,minWidth:90},
+   {title:"Observed",field:"observed",formatter:tf,minWidth:90},
+   {title:"Status",field:"status",formatter:statusFmt,minWidth:130},
+   {title:"Evidence",field:"evidence",formatter:tf,minWidth:100},
    {title:"Owner",field:"owner",editor:"input",formatter:tf,minWidth:110},
-   {title:"Next action",field:"next_action",editor:"input",formatter:tf,minWidth:200},
-   {title:"Review state",field:"review_state",editor:"list",editorParams:{values:["open","in review","closed with evidence"]},formatter:tf,minWidth:130},
-   {title:"Reviewer note",field:"note",editor:"input",formatter:tf,minWidth:160},
+   {title:"Next action",field:"next_action",editor:"input",formatter:tf,minWidth:180},
+   {title:"Review state",field:"review_state",editor:"list",editorParams:{values:["open","in review","closed with evidence"]},formatter:tf,minWidth:110},
+   {title:"Reviewer note",field:"note",editor:"input",formatter:tf,minWidth:120},
   ]});
+ try{const ed=table.modules&&table.modules.edit;if(ed&&!ed._guarded){const o=ed.clearEditor.bind(ed);ed.clearEditor=(...a)=>{try{return o(...a)}catch(_){/*cell element already recycled by virtual scrolling*/}};ed._guarded=true}}catch(_){/*noop*/}
  table.on("cellEdited",cell=>{const d=cell.getData();const r=rowsStore[d._i];if(r)r[cell.getField()]=cell.getValue()});
  $("wb_toolbar").hidden=false;$("plainwrap").hidden=true;$("rows").innerHTML=plainRows(rows);
  const g=$("wb_group").value;if(g)table.setGroupBy(g);applyFilters();
@@ -235,14 +238,16 @@ function render(mode,rows,meta){
  last={tool:"clinicops-regulatory-integrity-scanner",tool_version:"1.2",mode:mode==="A"?"single-change":"portfolio-scan",generated_at:new Date().toISOString(),...meta,findings:rows,summary:{...counts},boundary:BOUNDARY};
  const visible=shown.map(r=>r);
  ensureGrid().then(ok=>{if(ok)buildGrid(visible);else renderPlain(rows)});
+ try{$("resultTitle").scrollIntoView({block:"start",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"})}catch(_){/*noop*/}
 }
 function dl(name,content,type){const b=new Blob([content],{type}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(u)}
 $("x_json").onclick=()=>{if(!last)return;dl("clinicops-integrity-scan.json",JSON.stringify(last,null,2)+"\n","application/json")};
 const CSV_HEAD=["object","field","expected","observed","status","evidence","owner","next_action","review_state","note"];
 function csvOf(rows){const q=v=>`"${T(v).replaceAll('"','""')}"`;return CSV_HEAD.join(",")+"\n"+rows.map(r=>CSV_HEAD.map(h=>q(r[h])).join(",")).join("\n")+"\n"}
 $("x_csv").onclick=()=>{if(!last)return;dl("clinicops-integrity-exceptions.csv",csvOf(rowsStore.filter(r=>r.status!=="aligned"&&r.status!=="not applicable")),"text/csv")};
-$("wb_export_sel").onclick=()=>{if(!table)return;const sel=table.getSelectedData();if(!sel.length)return;dl("clinicops-integrity-selected.csv",csvOf(sel.map(d=>rowsStore[d._i]||d)),"text/csv")};
-$("wb_apply_owner").onclick=()=>{if(!table)return;const v=tr($("wb_owner").value);if(!v)return;table.getSelectedRows().forEach(row=>{row.update({owner:v});const d=row.getData();if(rowsStore[d._i])rowsStore[d._i].owner=v})};
+function wbMsg(t){$("wb_msg").textContent=t}
+$("wb_export_sel").onclick=()=>{if(!table)return;const sel=table.getSelectedData();if(!sel.length){wbMsg("No rows selected. Tick the checkbox on one or more rows (or the header checkbox) first.");return}wbMsg("");dl("clinicops-integrity-selected.csv",csvOf(sel.map(d=>rowsStore[d._i]||d)),"text/csv")};
+$("wb_apply_owner").onclick=()=>{if(!table)return;const v=tr($("wb_owner").value);if(!v){wbMsg("Enter an owner name first.");return}const selRows=table.getSelectedRows();if(!selRows.length){wbMsg("No rows selected. Tick the checkbox on one or more rows (or the header checkbox) first.");return}wbMsg(`Owner set on ${selRows.length} row(s).`);selRows.forEach(row=>{row.update({owner:v});const d=row.getData();if(rowsStore[d._i])rowsStore[d._i].owner=v})};
 $("wb_search").addEventListener("input",applyFilters);$("wb_status").addEventListener("change",applyFilters);
 $("wb_group").addEventListener("change",()=>{if(table){const g=$("wb_group").value;g?table.setGroupBy(g):table.setGroupBy(false)}});
 $("x_copy").onclick=async()=>{if(!last)return;const s=last.summary;const ex=last.findings.filter(r=>r.status!=="aligned"&&r.status!=="not applicable");const text=[`ClinicOps integrity scan (${last.mode})`,`Aligned: ${s.aligned} | Mismatch signals: ${s["mismatch signal"]+s["conflicting evidence"]} | Missing evidence: ${s["missing evidence"]} | Qualified review: ${s["requires qualified review"]+s.unresolved}`,"Exception queue:",...ex.map((r,i)=>`${i+1}. ${r.object} — ${r.field}: ${r.status}. ${r.next_action}${r.owner?` (owner: ${r.owner})`:""}`),`Boundary: ${BOUNDARY}`].join("\n");try{await navigator.clipboard.writeText(text)}catch(_){}};
@@ -291,7 +296,14 @@ function parseCSV(text){
  if(cell.length||row.length){row.push(cell);if(row.length>1||tr(row[0]))rows.push(row)}
  if(!rows.length)return null;
  const headers=rows[0].map(h=>tr(h));
- return{headers,rows:rows.slice(1).map(r=>{const o={};headers.forEach((h,i)=>o[h]=tr(r[i]??""));return o})}
+ const warnings=[];
+ const dups=[...new Set(headers.filter((h,i)=>headers.indexOf(h)!==i))];
+ if(dups.length)warnings.push(`Duplicate column header(s): ${dups.map(d=>'"'+d+'"').join(", ")}. Only the last column of each name is read; rename them in the source file so no value is silently dropped.`);
+ const ragged=rows.slice(1).map((r,i)=>r.length!==headers.length?i+2:0).filter(Boolean);
+ if(ragged.length)warnings.push(`${ragged.length} row(s) do not have ${headers.length} cells (file rows ${ragged.slice(0,8).join(", ")}${ragged.length>8?", …":""}). Missing cells are treated as empty and extra cells are ignored; check the source file.`);
+ if(headers.length===1&&/[;\t|]/.test(headers[0]))warnings.push("Only one column was detected. The file looks semicolon-, tab- or pipe-delimited; this tool reads comma-separated CSV. Re-save it as comma-separated CSV (or XLSX) and parse again.");
+ if(rows.length===1)warnings.push("The file has a header row but no data rows, so there is nothing to compare.");
+ return{headers,warnings,rows:rows.slice(1).map(r=>{const o={};headers.forEach((h,i)=>o[h]=tr(r[i]??""));return o})}
 }
 function parseInput(text){
  const t=tr(text);if(!t)return null;
@@ -304,6 +316,9 @@ function showMapping(){
   const guess=bData.headers.find(h=>GUESS[id]&&GUESS[id].test(h))||"";
   return `<div class="maprow"><label for="map_${id}" style="margin:0">${esc(label)}</label><select id="map_${id}"><option value="">— not present —</option>${bData.headers.map(h=>`<option${h===guess?" selected":""}>${esc(h)}</option>`).join("")}</select></div>`}).join("");
  $("b_parseinfo").textContent=`Parsed ${bData.rows.length} rows × ${bData.headers.length} columns locally. Map the columns that exist; unmapped objects are skipped, never guessed. Mapping "Source role" lets the scan compare observed records against your declared authoritative source instead of only flagging differences.`;
+ const warns=[...(bData.warnings||[])];
+ if(bData.headers.some(h=>h.includes("\uFFFD"))||bData.rows.some(r=>Object.values(r).some(v=>v.includes("\uFFFD"))))warns.push("Some characters could not be decoded (shown as �). The file is probably not UTF-8 (for example Windows-1252 or Latin-1). Re-save it as UTF-8 CSV or XLSX so names such as æ, ø and å are compared correctly.");
+ if(warns.length)$("b_parseinfo").textContent+=" Check before running: "+warns.join(" ");
  $("b_mapping").hidden=false;
  try{profRefresh()}catch(_){/*not yet defined*/}
 }
@@ -329,7 +344,7 @@ $("b_sheet").addEventListener("change",async ev=>{if(bXW)await extractSheet(pars
 $("b_file").onchange=async ev=>{const f=ev.target.files?.[0];if(!f)return;ev.target.value="";
  if(/\.xlsx$/i.test(f.name)){await handleXlsx(f);return}
  if(/\.xls$/i.test(f.name)){$("b_parseinfo").textContent="Legacy .xls (BIFF) is not supported — save the sheet as .xlsx or CSV first.";$("b_mapping").hidden=false;$("b_maprows").innerHTML="";bData=null;return}
- bXW=null;$("b_sheetwrap").hidden=true;$("b_input").value=await f.text();};
+ bXW=null;$("b_sheetwrap").hidden=true;$("b_input").value=await f.text();$("b_parse").click()};
 // ---- minimal fail-closed XLSX reader: ZIP + DecompressionStream + DOMParser.
 // Reads cached cell values only; formulas are counted, never evaluated.
 // Guardrails: 60MB file, 400 zip entries, 90MB per entry / 150MB total expanded, 20k rows.
@@ -465,6 +480,9 @@ function bRun(){
  if(map.udi_di){const seen={};bData.rows.forEach((r,i)=>{const d=ident(r[map.udi_di]);if(!d)return;const key=d+"|"+(get(r,"source_system")||"")+"|"+(roleOf(r)||"");(seen[key]=seen[key]||[]).push(i)});
   for(const[key,idx]of Object.entries(seen))if(idx.length>1){const d=key.split("|")[0];rows.push({object:`UDI-DI ${d}`,field:"Duplicate records",expected:"one record per UDI-DI per source",observed:`${idx.length} rows (${idx.map(i=>i+2).join(", ")})`,status:"conflicting evidence",evidence:null,owner:null,next_action:"Determine which record is current; merge or retire duplicates through change control."})}}
  render("B",rows,{row_count:bData.rows.length,mapped_objects:Object.keys(map)});
+ if(!rows.length){const badge=$("badge");badge.textContent="NOTHING COMPARED";badge.className="badge review";$("resultTitle").textContent="Nothing was compared";
+  $("summary").textContent=!bData.rows.length?"The file has no data rows, so nothing was compared. This is not a result about your records.":"No comparisons could be made from the mapped columns (map Basic UDI-DI plus at least one field to compare, and check the file has values). This is not a result about your records.";
+  $("queue").innerHTML='<li class="muted">Nothing was compared, so there is no queue.</li>';last=null}
 }
 // ---- local mapping profiles (convenience configuration, not regulatory evidence) ----
 const PROF_KEY="clinicops.scanner.mappingProfiles";

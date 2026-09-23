@@ -27,3 +27,8 @@ jobs:
           npx playwright install --with-deps chromium
       - name: Run operator journey against production
         run: node e2e/scanner_journey.mjs
+      - name: Run full scanner journey against the checked-out site (fixtures, failure paths, network audit)
+        run: |
+          (cd docs && python3 -m http.server 8103 >/dev/null 2>&1 &)
+          sleep 2
+          E2E_BASE_URL=http://localhost:8103 node e2e/scanner_full_journey.mjs
