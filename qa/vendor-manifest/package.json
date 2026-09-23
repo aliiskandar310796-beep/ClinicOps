@@ -1,0 +1,1 @@
+{"name":"clinicops-vendored-manifest","private":true,"description":"Lockfile manifest mirroring assets vendored in docs/vendor so dependency scanners can see them (not deployed; keep in sync with docs/vendor/README.md)","dependencies":{"tabulator-tables":"6.5.3"}}
