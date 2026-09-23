@@ -40,6 +40,58 @@
       "events and professional communities"
     ]
   },
+  "opportunity_pipeline": {
+    "schema_version": "1.0",
+    "model": "parallel_discovery_converge",
+    "changed_from": "fixed_serial",
+    "effective_date": "2026-09-23",
+    "rationale": "Opportunity Architect already converges multiple upstream outputs into one packaged offer, so the stages feeding it should not wait on each other serially unless one stage's output is a genuine input to another. Only Regulatory Evidence Steward (upstream prerequisite) and Release Sentinel (final release gate) have real sequential dependencies; Visibility Architect, Customer Discovery Agent and Portfolio Operator are mutually independent and now run concurrently.",
+    "spec_ref": "04_GROWTH/EXPANSION_FLEET_EXECUTION_2026-09-14.md#execution-topology-parallel-discoveryscoring-lanes-converge-at-opportunity-architect",
+    "stages": [
+      {
+        "stage_id": "regulatory-evidence-steward",
+        "agent": "Regulatory Evidence Steward",
+        "parallel_group": "prerequisite",
+        "depends_on": [],
+        "rationale": "Bounded claims and the primary-source pack are a genuine input dependency for every downstream stage; no lane may publicize, validate demand for, design delivery for, or package an offer against unbounded claims."
+      },
+      {
+        "stage_id": "visibility-architect",
+        "agent": "Visibility Architect",
+        "parallel_group": "discovery-scoring",
+        "depends_on": ["regulatory-evidence-steward"],
+        "rationale": "Public-surface and distribution-hook preparation needs bounded claims but not Customer Discovery Agent's target profile or Portfolio Operator's delivery design."
+      },
+      {
+        "stage_id": "customer-discovery",
+        "agent": "Customer Discovery Agent",
+        "parallel_group": "discovery-scoring",
+        "depends_on": ["regulatory-evidence-steward"],
+        "rationale": "Discovery questions and target profile are derived from bounded claims and the lane's name-fit criteria, not from the public surface or the delivery design."
+      },
+      {
+        "stage_id": "portfolio-operator",
+        "agent": "Portfolio Operator",
+        "parallel_group": "discovery-scoring",
+        "depends_on": ["regulatory-evidence-steward"],
+        "rationale": "Evidence-packet structure and owner routing reuse the shared product spine and bounded claims; they do not require the finished public surface or discovery questions."
+      },
+      {
+        "stage_id": "opportunity-architect",
+        "agent": "Opportunity Architect",
+        "parallel_group": "convergence",
+        "depends_on": ["visibility-architect", "customer-discovery", "portfolio-operator"],
+        "rationale": "Commercial packaging is the convergence point: it consumes distribution hooks, the validated target profile/evidence path and the delivery boundary from the parallel group to produce one sellable entry offer."
+      },
+      {
+        "stage_id": "release-sentinel",
+        "agent": "Release Sentinel",
+        "parallel_group": "gate",
+        "depends_on": ["opportunity-architect"],
+        "rationale": "Claim, privacy, scope, automation and human-authority checks run against the converged, packaged offer; there is nothing to gate before convergence."
+      }
+    ]
+  },
   "lanes": [
     {
       "id": "regulatory-integrity",

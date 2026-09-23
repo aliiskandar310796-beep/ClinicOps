@@ -25,6 +25,23 @@ ClinicOps does not create a second permanent agent fleet. The existing canonical
 
 No lane may invent buyer evidence. Prospect identities, direct emails, commercial replies and E4+ evidence remain private.
 
+## Execution topology: parallel discovery/scoring lanes converge at Opportunity Architect
+
+**Approved 2026-09-23.** The fleet previously ran the six functions above as an implicit fixed serial chain per lane (Regulatory Evidence Steward, then Visibility Architect, then Opportunity Architect, then Release Sentinel, with Customer Discovery Agent and Portfolio Operator slotted into the same queue). An architecture review modeled on sparse, parallel biological sensory pathways converging on one associative decision point found that most of that ordering was a scheduling habit, not a data dependency. Opportunity Architect already reads from multiple upstream outputs to produce one packaged offer, so it already functions as a convergence point; the stages feeding it should not have to wait on each other serially unless one stage's required output is genuinely another stage's required input.
+
+Reviewing each function's required output against what the next function actually consumes:
+
+- **Regulatory Evidence Steward stays a hard upstream prerequisite (serial, first).** Its required output — the primary-source pack, bounded claims and unresolved-interpretation list — is a genuine input dependency for every other function. No lane may build a public surface, validate demand, design delivery or package an offer against claims that have not yet been bounded; this is a claim-safety dependency, not a habit, and it is unchanged by this proposal.
+- **Visibility Architect, Customer Discovery Agent and Portfolio Operator are mutually independent once Evidence Steward's bounded claims exist, and now run as a parallel discovery/scoring group.** None of their required outputs is an input to either of the other two:
+  - Visibility Architect's public surface and distribution hooks are built from the bounded claims, not from Customer Discovery's target profile or Portfolio Operator's evidence-packet design.
+  - Customer Discovery Agent's discovery questions, target profile and E4/E5/E6 capture path are derived from the bounded claims and the lane's name-fit criteria (see `CLINICOPS_EXPANSION_ARCHITECTURE_2026-09-14.md`), not from the public surface or the delivery design.
+  - Portfolio Operator's evidence-packet structure, owner routing and closure definition reuse the shared product spine below and the bounded claims; they do not require the finished public surface or discovery questions to be drafted.
+  There was no documented reason for these three to queue behind one another, so they now start as soon as Evidence Steward's output for that lane is available and proceed concurrently.
+- **Opportunity Architect converges the parallel group (unchanged role, now an explicit convergence gate).** Its required output — one sellable entry offer, buyer hypothesis and recurring-revenue hypothesis — genuinely draws on all three parallel outputs (distribution hooks, validated target profile/evidence path, and delivery boundary). Opportunity Architect must therefore wait for the parallel group's outputs, but not for any ordering among them, and does not itself need to run before them.
+- **Release Sentinel stays serial and last (unchanged).** Its checks (claim, privacy, scope, automation, human-authority) are run against the converged, packaged offer. There is nothing to gate until Opportunity Architect has converged the parallel outputs, so this dependency is real and this stage is not parallelized.
+
+Net effect: the pipeline changes from four/six sequential handoffs to `Evidence Steward -> {Visibility Architect, Customer Discovery Agent, Portfolio Operator run concurrently} -> Opportunity Architect (convergence) -> Release Sentinel (gate)`. Lane-level parallelism (TrialOps / QualityOps / Clinical AI Ops running side by side) is unchanged and unaffected by this change; this is a within-lane stage-ordering change only. The machine-readable version of this topology is recorded in `04_GROWTH/expansion_lanes.json` under `opportunity_pipeline`.
+
 ## Shared product spine
 
 Every lane must reuse the same primitives:
@@ -207,3 +224,4 @@ If ten qualified lane conversations produce no E6 signal, change buyer/problem/o
 - Public multi-lane acquisition surface: implemented in the companion expansion execution PR.
 - Browser-local scope intake: expanded for TrialOps, QualityOps and Clinical AI Ops in the companion expansion execution PR.
 - External validation: must be recorded privately from real outreach/conversations; no public artifact may manufacture E4+ evidence.
+- Fleet execution topology: changed 2026-09-23 from an implicit fixed serial chain to parallel discovery/scoring lanes (Visibility Architect, Customer Discovery Agent, Portfolio Operator) converging at Opportunity Architect, with Regulatory Evidence Steward and Release Sentinel unchanged as the upstream prerequisite and final release gate respectively. See "Execution topology" above and `opportunity_pipeline` in `04_GROWTH/expansion_lanes.json`.
