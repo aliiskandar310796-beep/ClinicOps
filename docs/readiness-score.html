@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <title>Transition Readiness Score | ClinicOps</title>
 <meta name="description" content="A private, browser-only screening aid for organising EUDAMED transition work-plan evidence before a human regulatory review.">
 <link rel="canonical" href="https://clinicops.dk/readiness-score.html">
@@ -14,7 +14,7 @@
 <meta property="og:url" content="https://clinicops.dk/readiness-score.html">
 <meta property="og:site_name" content="ClinicOps">
 
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://clinicops.dk/assets/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://clinicops.dk/assets/og-image.png">
 
 <script type="application/ld+json">
 {
@@ -50,11 +50,12 @@ button.cta{font:inherit;font-size:.95rem;font-weight:600}
 .score{font-family:var(--mono);font-weight:500;font-size:clamp(2.6rem,6vw,4rem);letter-spacing:-.04em;line-height:1;margin:14px 0 6px;font-variant-numeric:tabular-nums}
 .result h2{margin:0 0 .3em;padding-top:0;border-top:0;font-size:1.4rem}
 .result h3{margin-top:1.4em}
-#gaps{list-style:none;margin:8px 0 18px;padding:0;max-width:72ch}
+#gaps{list-style:none;margin:8px 0 18px;padding:0;max-width:47.74em}
 .gap{margin:0;padding:11px 0 11px 22px;border-top:1px solid var(--border);position:relative;font-size:.95rem}
 .gap::before{content:"";position:absolute;left:0;top:1.15em;width:.5em;height:.5em;border-radius:1px;background:var(--warn)}
 .gap:last-child{border-bottom:1px solid var(--border)}
 .cta{white-space:normal;text-align:center}
+@media print{form,.cta-row{display:none!important}.result{break-inside:avoid}}
 </style>
 <link rel="preload" href="assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/fonts/geist-mono-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="site.css"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f6f7f5" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0d1211" media="(prefers-color-scheme: dark)"></head>
 <body>
@@ -68,11 +69,12 @@ button.cta{font:inherit;font-size:.95rem;font-weight:600}
 <p class="muted"><a href="identifier-check.html">Try the EUDAMED Identifier Check &rarr;</a></p>
 <p class="muted">This is a screening aid for operational readiness, not a regulatory determination, compliance score, legal conclusion, or live EUDAMED verification.</p>
 
+<noscript><div class="callout boundary"><p>This tool runs in your browser and needs JavaScript enabled.</p></div></noscript>
 <form id="readiness-form">
 <fieldset>
 <legend>1. Registration path</legend>
 <label for="registration">How clearly is the device's current registration / transition path understood?</label>
-<select id="registration" name="registration" required>
+<select id="registration" name="registration" autocomplete="off" required>
 <option value="">Select…</option>
 <option value="controlled">MDR / transition path is known and documented</option>
 <option value="legacy">Legacy / transition-related path is known, but work remains</option>
@@ -83,7 +85,7 @@ button.cta{font:inherit;font-size:.95rem;font-weight:600}
 <fieldset>
 <legend>2. Basic UDI-DI / identifier control</legend>
 <label for="basic_udi">How controlled is the relevant identifier information?</label>
-<select id="basic_udi" name="basic_udi" required>
+<select id="basic_udi" name="basic_udi" autocomplete="off" required>
 <option value="">Select…</option>
 <option value="controlled">Confirmed and controlled in the working evidence set</option>
 <option value="in_progress">Known but reconciliation or transition work is still open</option>
@@ -94,7 +96,7 @@ button.cta{font:inherit;font-size:.95rem;font-weight:600}
 <fieldset>
 <legend>3. SS(C)P workstream</legend>
 <label for="sscp">If SS(C)P applies to this device, how controlled is the current evidence and workflow?</label>
-<select id="sscp" name="sscp" required>
+<select id="sscp" name="sscp" autocomplete="off" required>
 <option value="">Select…</option>
 <option value="controlled">Applicability and current evidence/workflow are controlled</option>
 <option value="not_applicable">Not applicable, confirmed by the responsible RA/QA team</option>
@@ -106,7 +108,7 @@ button.cta{font:inherit;font-size:.95rem;font-weight:600}
 <fieldset>
 <legend>4. Certificate / transition timing</legend>
 <label for="timing">How well controlled are the dates and timing evidence that drive the work plan?</label>
-<select id="timing" name="timing" required>
+<select id="timing" name="timing" autocomplete="off" required>
 <option value="">Select…</option>
 <option value="controlled">Verified dates are controlled and have an owner</option>
 <option value="partial">Some timing evidence is known but incomplete</option>
@@ -117,7 +119,7 @@ button.cta{font:inherit;font-size:.95rem;font-weight:600}
 <fieldset>
 <legend>5. Target-market document control</legend>
 <label for="market_docs">How controlled are target-market / language document requirements and ownership?</label>
-<select id="market_docs" name="market_docs" required>
+<select id="market_docs" name="market_docs" autocomplete="off" required>
 <option value="">Select…</option>
 <option value="controlled">Markets, language/document controls, and owners are confirmed</option>
 <option value="partial">Partially mapped / some ownership is unresolved</option>

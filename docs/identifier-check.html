@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <title>EUDAMED Identifier Check | ClinicOps</title>
 <meta name="description" content="Free, browser-only EUDAMED Identifier Check: B-prefix legacy screening, SRN actor-role decoding, and GS1 Mod-10 validation. Nothing is sent to ClinicOps.">
 <link rel="canonical" href="https://clinicops.dk/identifier-check.html">
@@ -14,7 +14,7 @@
 <meta property="og:url" content="https://clinicops.dk/identifier-check.html">
 <meta property="og:site_name" content="ClinicOps">
 
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://clinicops.dk/assets/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://clinicops.dk/assets/og-image.png">
 
 <script type="application/ld+json">
 {
@@ -44,7 +44,6 @@ main.wrap{padding-top:clamp(40px,6vw,72px)}
 .tool-embed pre{grid-column:1/-1;margin:6px 0 0;min-height:150px;background:var(--surface-2);border:0;border-left:2px solid var(--accent);border-radius:0 var(--r) var(--r) 0;padding:18px 20px}
 @media(max-width:560px){.tool-embed{grid-template-columns:1fr}.tool-embed button{width:100%}}
 td:first-child,th:first-child{padding-right:28px}
-main p>.cta{margin:0 8px 8px 0}
 .cta{white-space:normal;text-align:center}
 </style>
 <link rel="preload" href="assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/fonts/geist-mono-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="site.css"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f6f7f5" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0d1211" media="(prefers-color-scheme: dark)"></head>
@@ -58,20 +57,21 @@ main p>.cta{margin:0 8px 8px 0}
 <h1>EUDAMED Identifier Check</h1>
 <p>Paste a Basic UDI-DI, UDI-DI candidate, or SRN. The check runs entirely in your browser. <strong>Nothing is sent to ClinicOps.</strong></p>
 <p class="muted"><a href="readiness-score.html">Try the Transition Readiness Score &rarr;</a></p>
+<noscript><div class="callout boundary"><p>This tool runs in your browser and needs JavaScript enabled.</p></div></noscript>
 <div class="tool-embed">
-<input id="value" autocomplete="off" placeholder="e.g. B-... or DK-MF-123456789">
-<button id="check" class="cta primary">Check</button>
-<pre id="result">No identifier checked yet.</pre>
+<input id="value" name="identifier" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" enterkeyhint="go" aria-label="Identifier to check: Basic UDI-DI, UDI-DI candidate or SRN" placeholder="e.g. B-... or DK-MF-123456789">
+<button id="check" type="button" class="cta primary" aria-label="Check identifier">Check</button>
+<pre id="result" aria-live="polite">No identifier checked yet.</pre>
 </div>
 <p class="muted">This is a screening aid, not regulatory advice and not a live EUDAMED verification.</p>
 
 <h2>What this tool can and cannot tell you</h2>
-<table>
-<tr><th>Can</th><th>Cannot</th></tr>
+<table aria-label="What this tool can and cannot tell you">
+<thead><tr><th scope="col">Can</th><th scope="col">Cannot</th></tr></thead><tbody>
 <tr><td>Recognise a B-prefix as a legacy-style EUDAMED identifier signal.</td><td>Prove a device's current regulatory status.</td></tr>
 <tr><td>Decode the structural role in a common SRN shape (MF/AR/IM/PR).</td><td>Verify that an actor is active or responsible for a specific device.</td></tr>
 <tr><td>Check numeric GS1 Mod-10 check digits.</td><td>Audit the EUDAMED public register end-to-end.</td></tr>
-</table>
+</tbody></table>
 
 <script>
 const roles={MF:'Manufacturer',AR:'Authorised representative',IM:'Importer',PR:'System and procedure pack producer'};
@@ -81,7 +81,7 @@ document.getElementById('check').onclick=()=>document.getElementById('result').t
 document.getElementById('value').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('check').click();});
 </script>
 
-<h2>Take the next step</h2><p><a class="cta primary" href="integrity-check.html">Run the free browser-local check</a><a class="cta ghost" href="specimen-register/">View the synthetic specimen</a><a class="cta ghost" href="assessment-intake.html?workstream=integrity-review">Scope one real review</a></p>
+<h2>Take the next step</h2><div class="cta-row"><a class="cta primary" href="integrity-check.html">Run the free browser-local check</a><a class="cta ghost" href="specimen-register/">View the synthetic specimen</a><a class="cta ghost" href="assessment-intake.html?workstream=integrity-review">Scope one real review</a></div>
 </main>
 <footer class="site">
 <div class="footer-inner">

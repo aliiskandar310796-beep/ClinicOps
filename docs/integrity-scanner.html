@@ -3,16 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <title>Regulatory Integrity Scanner | ClinicOps</title>
 <meta name="description" content="Browser-local regulatory data integrity scanner: check one approved change against downstream records, or scan a portfolio export (CSV/JSON) for missing fields, duplicates and conflicting values. Deterministic, exportable, nothing uploaded.">
 <link rel="canonical" href="https://clinicops.dk/integrity-scanner.html">
-<meta property="og:title" content="Regulatory Integrity Scanner | ClinicOps"><meta property="og:description" content="Single-change integrity check and portfolio scan for EU MedTech regulatory data — deterministic comparison, bounded statuses, exception queue with owners, CSV/JSON export. Browser-local."><meta property="og:type" content="website"><meta property="og:url" content="https://clinicops.dk/integrity-scanner.html"><meta property="og:site_name" content="ClinicOps"><meta name="twitter:card" content="summary">
+<meta property="og:title" content="Regulatory Integrity Scanner | ClinicOps"><meta property="og:description" content="Single-change integrity check and portfolio scan for EU MedTech regulatory data — deterministic comparison, bounded statuses, exception queue with owners, CSV/JSON export. Browser-local."><meta property="og:type" content="website"><meta property="og:url" content="https://clinicops.dk/integrity-scanner.html"><meta property="og:site_name" content="ClinicOps"><meta property="og:image" content="https://clinicops.dk/assets/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://clinicops.dk/assets/og-image.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Regulatory Integrity Scanner | ClinicOps","url":"https://clinicops.dk/integrity-scanner.html","isPartOf":{"@type":"WebSite","name":"ClinicOps","url":"https://clinicops.dk/"},"publisher":{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"ClinicOps Regulatory Integrity Scanner","url":"https://clinicops.dk/integrity-scanner.html","applicationCategory":"BusinessApplication","operatingSystem":"Any modern browser","isAccessibleForFree":true,"publisher":{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}</script>
 <style>
 main.wrap{padding-top:clamp(40px,6vw,72px)}
-.trust{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0}
 .panel{border-top:1px solid var(--border-strong);padding-top:18px;margin:8px 0 18px}
 main .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(20px,3vw,40px);margin:16px 0}
 @media(max-width:760px){main .grid{grid-template-columns:1fr}}
@@ -26,6 +25,8 @@ textarea{min-height:150px;resize:vertical;font-family:var(--mono);font-size:.84r
 .btn.secondary{background:transparent;color:var(--text);border-color:var(--border-strong)}
 .btn.secondary:hover{border-color:var(--accent);color:var(--accent)}
 .actions{margin:22px 0}
+.callout{margin:22px 0}
+@media(forced-colors:active){.mode button[aria-pressed="true"]{background:Highlight;color:HighlightText;forced-color-adjust:none}}
 .actions a.cta{white-space:normal;text-align:center}
 .mode{display:flex;gap:0;flex-wrap:wrap;margin:26px 0 8px;border:1px solid var(--border-strong);border-radius:var(--r);width:fit-content;max-width:100%;overflow:hidden}
 .mode button{font:inherit;font-size:.92rem;font-weight:560;min-height:46px;padding:0 20px;border:0;border-right:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:background-color .2s var(--ease),color .2s var(--ease)}
@@ -57,15 +58,28 @@ td.muted{padding:22px 0}
 .maprow{display:grid;grid-template-columns:minmax(150px,1fr) minmax(150px,1.4fr);gap:8px 16px;align-items:center;margin:0 0 8px;border-top:1px solid var(--border);padding-top:8px}
 .maprow label{margin:0;font-size:.88rem;font-weight:500}
 @media(max-width:560px){.maprow{grid-template-columns:1fr}}
-#wb_toolbar{gap:10px;align-items:center;padding:14px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin:6px 0 0!important}
-#wb_toolbar input,#wb_toolbar select{width:auto;flex:0 1 auto}
-@media(max-width:640px){#wb_toolbar input,#wb_toolbar select,#wb_toolbar button{max-width:none!important;width:100%;flex:1 1 100%}}
-ol#queue{padding-left:1.3rem;max-width:64ch}#queue li{margin:.5em 0}
+#wb_toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:14px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin:6px 0 14px}
+#wb_toolbar[hidden]{display:none}
+#wb_toolbar input,#wb_toolbar select{width:auto;min-width:0}
+#wb_search{flex:1 1 200px}
+#wb_status{flex:0 1 210px}#wb_group{flex:0 1 190px}
+.tb-owner{display:flex;flex:1 1 300px;gap:10px;min-width:0}
+.tb-owner input{flex:1 1 200px;min-width:0}
+.tb-export{margin-left:auto}
+@media(max-width:640px){#wb_toolbar>*{flex:1 1 100%}#wb_toolbar input,#wb_toolbar select,#wb_toolbar button{width:100%}.tb-owner{flex-direction:column}.tb-export{margin-left:0}}
+#grid{margin:14px 0}
+.cta-links{max-width:none}
+.rt{margin:0}.tight{margin-top:6px}.small-note{font-size:.84rem}
+.profbar{align-items:center}.profbar #prof_name{max-width:250px}.profbar #prof_list{max-width:200px}
+.sheetwrap{max-width:340px}
+.tablewrap:focus-visible,#grid:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+ol#queue li.muted:only-child{list-style:none;margin-left:-1.3rem}
+ol#queue{padding-left:1.3rem;max-width:42.43em}#queue li{margin:.5em 0}
 .principles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,40px);margin:32px 0}
 .principle{border-top:1px solid var(--border-strong);padding-top:14px}
 .principle strong{display:block;margin-bottom:4px}
 .principle span{display:block;font-size:.93rem;color:var(--muted)}
-.fictional{border-left:2px solid var(--warn);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:10px 14px;background:var(--surface-2);font-size:.88rem;color:var(--muted);margin:14px 0;max-width:78ch}
+.fictional{border-left:2px solid var(--warn);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:10px 14px;background:var(--surface-2);font-size:.88rem;color:var(--muted);margin:14px 0;max-width:51.71em}
 @media(max-width:720px){.principles{grid-template-columns:1fr}.btn{width:100%}}
 /* Tabulator (vendor CSS untouched): themed with shared tokens */
 #grid.tabulator .tabulator-tableholder .tabulator-table{background-color:transparent;color:var(--text)}
@@ -98,6 +112,7 @@ ol#queue{padding-left:1.3rem;max-width:64ch}#queue li{margin:.5em 0}
 #grid.tabulator .tabulator-footer .tabulator-page.active{background:var(--accent);color:var(--accent-contrast);border-color:var(--accent)}
 #grid.tabulator .tabulator-footer .tabulator-page:disabled{opacity:.45}
 #grid.tabulator .tabulator-placeholder span{color:var(--muted);font-family:var(--font);font-size:.95rem;font-weight:450}
+@media print{.mode,.actions,#wb_toolbar,#grid{display:none!important}#plainwrap[hidden]{display:block!important}.tablewrap{overflow:visible}.tablewrap table{min-width:0;width:100%;table-layout:fixed;font-size:8pt}.tablewrap td,.tablewrap th{overflow-wrap:anywhere}.tablewrap .st{white-space:normal}.tablewrap th,.tablewrap td{padding-right:6px}thead{display:table-header-group}.principles,.grid{break-inside:avoid}}
 </style>
 <link rel="preload" href="assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/fonts/geist-mono-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="site.css"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f6f7f5" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0d1211" media="(prefers-color-scheme: dark)"></head>
 <body>
@@ -106,8 +121,9 @@ ol#queue{padding-left:1.3rem;max-width:64ch}#queue li{margin:.5em 0}
 <span class="eyebrow">Browser-local · deterministic</span>
 <h1>Regulatory Integrity Scanner</h1>
 <p class="lede">Check whether regulated facts remain consistent. Run a <strong>single-change check</strong> — one approved source against the downstream records that should reflect it — or a <strong>portfolio scan</strong> over a CSV, XLSX or JSON export. Deterministic comparison, bounded statuses, an exception queue with owners, and portable exports. Everything runs in this browser page; nothing you enter or import leaves it.</p>
-<div class="trust"><span class="chip">Runs locally — no upload</span><span class="chip">Deterministic rules</span><span class="chip">Bounded status vocabulary</span><span class="chip">CSV · XLSX · JSON import</span><span class="chip">CSV + JSON export</span><span class="chip">Human authority preserved</span></div>
+<ul class="tags spec"><li>Runs locally — no upload</li><li>Deterministic rules</li><li>Bounded status vocabulary</li><li>CSV · XLSX · JSON import</li><li>CSV + JSON export</li><li>Human authority preserved</li></ul>
 <div class="callout"><strong>Boundary.</strong> The scanner compares the values you provide and structures review work. It does not decide which source is legally authoritative, does not make compliance determinations, and reports <em>mismatch signals</em> and <em>missing evidence</em> — never a compliance verdict in either direction. Interpretation and disposition stay with your qualified owner.</div>
+<noscript><div class="callout boundary"><p>This tool runs in your browser and needs JavaScript enabled.</p></div></noscript>
 <div class="mode" role="group" aria-label="Scanner mode"><button id="modeA" aria-pressed="true" type="button">Single change</button><button id="modeB" aria-pressed="false" type="button">Portfolio scan (CSV / XLSX / JSON)</button></div>
 
 <section id="paneA">
@@ -134,27 +150,28 @@ ol#queue{padding-left:1.3rem;max-width:64ch}#queue li{margin:.5em 0}
 <p class="hint">The file is read locally by your browser. Nothing is uploaded, stored or transmitted. Avoid pasting confidential data you are not authorised to process on this machine.</p>
 </div>
 <div id="b_mapping" hidden><h2>2 · Map columns to regulatory objects</h2><div class="panel"><p class="hint" id="b_parseinfo"></p>
-<div id="b_sheetwrap" class="field" hidden style="max-width:340px"><label for="b_sheet">Worksheet</label><select id="b_sheet"></select></div>
+<div id="b_sheetwrap" class="field sheetwrap" hidden><label for="b_sheet">Worksheet</label><select id="b_sheet"></select></div>
 <div id="b_maprows"></div>
-<div class="actions" style="align-items:center"><input id="prof_name" placeholder="Mapping profile name (e.g. RIM export)" style="max-width:250px"><button class="btn secondary" id="prof_save" type="button">Save profile</button><select id="prof_list" style="max-width:200px"><option value="">— saved profiles —</option></select><button class="btn secondary" id="prof_apply" type="button">Apply</button><button class="btn secondary" id="prof_delete" type="button">Delete</button><button class="btn secondary" id="prof_export" type="button">Export profiles</button><input id="prof_file" type="file" accept=".json,application/json" hidden><button class="btn secondary" id="prof_import" type="button">Import profiles</button></div>
+<div class="actions profbar"><input id="prof_name" name="profile_name" autocomplete="off" spellcheck="false" aria-label="Mapping profile name" placeholder="Mapping profile name (e.g. RIM export)"><button class="btn secondary" id="prof_save" type="button">Save profile</button><select id="prof_list" aria-label="Saved profiles"><option value="">— saved profiles —</option></select><button class="btn secondary" id="prof_apply" type="button">Apply</button><button class="btn secondary" id="prof_delete" type="button">Delete</button><button class="btn secondary" id="prof_export" type="button">Export profiles</button><input id="prof_file" type="file" accept=".json,application/json" hidden><button class="btn secondary" id="prof_import" type="button">Import profiles</button></div>
 <p class="hint">Profiles are stored only in this browser (and in files you export). They are convenience configuration, not regulatory evidence.</p>
 <div class="actions"><button class="btn primary" id="b_run" type="button">Run portfolio scan</button></div></div></div>
 </section>
 
 <div id="fictionalNote" class="fictional" hidden>Fictional example — every value is invented for demonstration. No real company, device, identifier or record is referenced.</div>
 
-<div class="result" aria-live="polite"><div class="result-head"><div><h2 style="margin:0" id="resultTitle">Scan result</h2><p id="summary" class="muted">Run a check or scan to see statuses, exceptions and the review queue.</p></div><span id="badge" class="badge">NOT RUN</span></div>
+<div class="result" aria-live="polite"><div class="result-head"><div><h2 class="rt" id="resultTitle">Scan result</h2><p id="summary" class="muted">Run a check or scan to see statuses, exceptions and the review queue.</p></div><span id="badge" class="badge">NOT RUN</span></div>
 <div class="metrics"><div class="metric"><strong id="mAligned">0</strong><small>aligned</small></div><div class="metric"><strong id="mMismatch">0</strong><small>mismatch signals</small></div><div class="metric"><strong id="mMissing">0</strong><small>missing evidence</small></div><div class="metric"><strong id="mReview">0</strong><small>requires qualified review</small></div></div>
-<div id="wb_toolbar" class="actions" style="margin:6px 0 0" hidden><input id="wb_search" placeholder="Search all columns" aria-label="Search findings" style="max-width:220px"><select id="wb_status" aria-label="Filter by status" style="max-width:210px"><option value="">All statuses</option><option>aligned</option><option>mismatch signal</option><option>conflicting evidence</option><option>missing evidence</option><option>unresolved</option><option>requires qualified review</option></select><select id="wb_group" aria-label="Group findings" style="max-width:190px"><option value="">No grouping</option><option value="status">Group: status</option><option value="object">Group: object / record</option><option value="owner">Group: owner</option><option value="field">Group: field</option></select><input id="wb_owner" placeholder="Owner for selected rows" aria-label="Owner for selected rows" style="max-width:190px"><button class="btn secondary" id="wb_apply_owner" type="button">Assign owner</button><button class="btn secondary" id="wb_export_sel" type="button">Export selected CSV</button></div>
-<div id="grid" style="margin:14px 0"></div>
-<div class="tablewrap" id="plainwrap"><table><thead><tr><th>Object / record</th><th>Field</th><th>Expected</th><th>Observed</th><th>Status</th><th>Evidence</th><th>Owner</th><th>Next action</th></tr></thead><tbody id="rows"><tr><td colspan="8" class="muted">Nothing scanned yet.</td></tr></tbody></table></div>
-<div class="grid"><div><h3>Exception queue</h3><ol id="queue"><li class="muted">No exceptions yet.</li></ol></div><div><h3>Export</h3><div class="actions" style="margin-top:6px"><button class="btn secondary" id="x_csv" type="button">Download exception CSV</button><button class="btn secondary" id="x_json" type="button">Download JSON</button><button class="btn secondary" id="x_copy" type="button">Copy reviewer summary</button></div><p class="muted" style="font-size:.84rem">Exports are generated locally. The JSON repeats the boundary statement and carries every finding for your own change-control or review record.</p></div></div>
+<div id="wb_toolbar" hidden><input id="wb_search" name="search" autocomplete="off" spellcheck="false" placeholder="Search all columns" aria-label="Search findings"><select id="wb_status" aria-label="Filter by status"><option value="">All statuses</option><option>aligned</option><option>mismatch signal</option><option>conflicting evidence</option><option>missing evidence</option><option>unresolved</option><option>requires qualified review</option></select><select id="wb_group" aria-label="Group findings"><option value="">No grouping</option><option value="status">Group: status</option><option value="object">Group: object / record</option><option value="owner">Group: owner</option><option value="field">Group: field</option></select><span class="tb-owner"><input id="wb_owner" name="owner" autocomplete="off" placeholder="Owner for selected rows" aria-label="Owner for selected rows"><button class="btn secondary" id="wb_apply_owner" type="button">Assign owner</button></span><button class="btn secondary tb-export" id="wb_export_sel" type="button">Export selected CSV</button></div>
+<div id="grid"></div>
+<div class="tablewrap" id="plainwrap" tabindex="0" role="region" aria-label="Findings table"><table aria-label="Scan findings"><thead><tr><th scope="col">Object / record</th><th scope="col">Field</th><th scope="col">Expected</th><th scope="col">Observed</th><th scope="col">Status</th><th scope="col">Evidence</th><th scope="col">Owner</th><th scope="col">Next action</th></tr></thead><tbody id="rows"><tr><td colspan="8" class="muted">Nothing scanned yet.</td></tr></tbody></table></div>
+<div class="grid"><div><h3>Exception queue</h3><ol id="queue"><li class="muted">No exceptions yet.</li></ol></div><div><h3>Export</h3><div class="actions tight"><button class="btn secondary" id="x_csv" type="button">Download exception CSV</button><button class="btn secondary" id="x_json" type="button">Download JSON</button><button class="btn secondary" id="x_copy" type="button">Copy reviewer summary</button></div><p class="muted small-note">Exports are generated locally. The JSON repeats the boundary statement and carries every finding for your own change-control or review record.</p></div></div>
 </div>
 
 <div class="principles"><div class="principle"><strong>Deterministic</strong><span>Identical inputs always produce identical statuses and queues. No scoring model, no inference, no black-box number.</span></div><div class="principle"><strong>Fail-closed</strong><span>No reference means no interpretation. An empty observation is missing evidence, never an invented conclusion. Unknown vocabulary routes to qualified review.</span></div><div class="principle"><strong>Human-owned</strong><span>Every exception carries an owner and a bounded next action. Which value is correct — and whether it matters — is your qualified reviewer's decision.</span></div></div>
 
 <h2>From free scan to reviewed closure</h2><p>The scanner structures the first pass. When it exposes cross-system reconciliation work, unclear ownership or records that no longer match their sources, that is the bounded problem the paid formats resolve: the <a href="services.html#portfolio-scan">Portfolio Integrity Scan</a> and the flagship <a href="evidence-change-control-pack.html">Regulatory Change Integrity Review</a>.</p>
-<div class="actions"><a class="cta primary" href="assessment-intake.html?workstream=integrity-review">Scope a review</a><a class="cta secondary" href="integrity-check.html">Single-change deep packet (SHA-256 fingerprint)</a><a class="cta secondary" href="change-surface-mapper.html">Map change surfaces first</a><a class="cta secondary" href="mailto:info@clinicops.dk?subject=Regulatory%20Integrity%20Scanner">Email info@clinicops.dk</a></div>
+<div class="cta-row"><a class="cta primary" href="assessment-intake.html?workstream=integrity-review">Scope a review</a></div>
+<p class="cta-links"><a href="integrity-check.html">Single-change deep packet (SHA-256 fingerprint)</a><a href="change-surface-mapper.html">Map change surfaces first</a><a href="mailto:info@clinicops.dk?subject=Regulatory%20Integrity%20Scanner">Email info@clinicops.dk</a></p>
 </main>
 <footer class="site"><div class="footer-inner"><span>ClinicOps · EU MedTech regulatory data integrity · <a href="privacy-notice/">Privacy</a></span></div></footer>
 <script>
@@ -191,12 +208,13 @@ function buildGrid(rows){
    {title:"Reviewer note",field:"note",editor:"input",formatter:tf,minWidth:160},
   ]});
  table.on("cellEdited",cell=>{const d=cell.getData();const r=rowsStore[d._i];if(r)r[cell.getField()]=cell.getValue()});
- $("wb_toolbar").hidden=false;$("plainwrap").hidden=true;
+ $("wb_toolbar").hidden=false;$("plainwrap").hidden=true;$("rows").innerHTML=plainRows(rows);
  const g=$("wb_group").value;if(g)table.setGroupBy(g);applyFilters();
 }
+function plainRows(shown){return shown.length?shown.map(r=>`<tr><td>${esc(r.object)}</td><td>${esc(r.field)}</td><td>${esc(r.expected??"—")}</td><td>${esc(r.observed??"—")}</td>${stCell(r.status)}<td>${esc(r.evidence||"—")}</td><td>${esc(r.owner||"—")}</td><td>${esc(r.next_action||"none")}</td></tr>`).join(""):`<tr><td colspan="8" class="muted">No comparable rows.</td></tr>`}
 function renderPlain(rows){
  const shown=rows.filter(r=>r.status!=="not applicable");
- $("rows").innerHTML=shown.length?shown.map(r=>`<tr><td>${esc(r.object)}</td><td>${esc(r.field)}</td><td>${esc(r.expected??"—")}</td><td>${esc(r.observed??"—")}</td>${stCell(r.status)}<td>${esc(r.evidence||"—")}</td><td>${esc(r.owner||"—")}</td><td>${esc(r.next_action||"none")}</td></tr>`).join(""):`<tr><td colspan="8" class="muted">No comparable rows.</td></tr>`;
+ $("rows").innerHTML=plainRows(shown);
  $("plainwrap").hidden=false;$("wb_toolbar").hidden=true;$("grid").innerHTML="";
 }
 function render(mode,rows,meta){
@@ -228,12 +246,14 @@ $("wb_apply_owner").onclick=()=>{if(!table)return;const v=tr($("wb_owner").value
 $("wb_search").addEventListener("input",applyFilters);$("wb_status").addEventListener("change",applyFilters);
 $("wb_group").addEventListener("change",()=>{if(table){const g=$("wb_group").value;g?table.setGroupBy(g):table.setGroupBy(false)}});
 $("x_copy").onclick=async()=>{if(!last)return;const s=last.summary;const ex=last.findings.filter(r=>r.status!=="aligned"&&r.status!=="not applicable");const text=[`ClinicOps integrity scan (${last.mode})`,`Aligned: ${s.aligned} | Mismatch signals: ${s["mismatch signal"]+s["conflicting evidence"]} | Missing evidence: ${s["missing evidence"]} | Qualified review: ${s["requires qualified review"]+s.unresolved}`,"Exception queue:",...ex.map((r,i)=>`${i+1}. ${r.object} — ${r.field}: ${r.status}. ${r.next_action}${r.owner?` (owner: ${r.owner})`:""}`),`Boundary: ${BOUNDARY}`].join("\n");try{await navigator.clipboard.writeText(text)}catch(_){}};
+// Print: show the plain findings table (prints fully and fits A4) instead of the virtualised grid.
+window.addEventListener("beforeprint",()=>{if(table)$("rows").innerHTML=plainRows(rowsStore.filter(r=>r.status!=="not applicable"))});
 // ---------- Mode switching ----------
 function setMode(m){$("modeA").setAttribute("aria-pressed",m==="A");$("modeB").setAttribute("aria-pressed",m==="B");$("paneA").hidden=m!=="A";$("paneB").hidden=m!=="B"}
 $("modeA").onclick=()=>setMode("A");$("modeB").onclick=()=>setMode("B");
 // ---------- MODE A: single change ----------
 const A_DEFAULT=[["IFU","IFU-12","","Document Control"],["EUDAMED export","IFU-11","","Regulatory Affairs"],["SS(C)P","","",""],["Label / artwork","IFU-12","",""]];
-$("a_records").innerHTML=A_DEFAULT.map((d,j)=>{const i=j+1;return `<div class="record"><div class="record-head"><strong>Record ${i}</strong><label class="scope"><input id="as${i}" type="checkbox" checked> in scope</label></div><div class="field"><label for="an${i}">Record / surface</label><input id="an${i}" value="${esc(d[0])}"></div><div class="field"><label for="av${i}">Observed value</label><input id="av${i}" value="${esc(d[1])}" placeholder="enter observation"></div><div class="field"><label for="ae${i}">Evidence reference</label><input id="ae${i}" value="${esc(d[2])}" placeholder="file, section, export date, ticket…"></div><div class="field"><label for="ao${i}">Owner if review is needed</label><input id="ao${i}" value="${esc(d[3])}" placeholder="role or team"></div></div>`}).join("");
+$("a_records").innerHTML=A_DEFAULT.map((d,j)=>{const i=j+1;return `<div class="record"><div class="record-head"><strong>Record ${i}</strong><label class="scope"><input id="as${i}" type="checkbox" aria-label="Record ${i} in scope" checked> in scope</label></div><div class="field"><label for="an${i}">Record / surface</label><input id="an${i}" value="${esc(d[0])}"></div><div class="field"><label for="av${i}">Observed value</label><input id="av${i}" value="${esc(d[1])}" placeholder="enter observation"></div><div class="field"><label for="ae${i}">Evidence reference</label><input id="ae${i}" value="${esc(d[2])}" placeholder="file, section, export date, ticket…"></div><div class="field"><label for="ao${i}">Owner if review is needed</label><input id="ao${i}" value="${esc(d[3])}" placeholder="role or team"></div></div>`}).join("");
 function aNorm(v,m){const s=tr(v);return m==="relaxed"?s.replace(/\s+/g," ").toLowerCase():m==="exact"?T(v):s}
 function aRun(){
  const field=tr($("a_field").value)||"Declared field",ref=tr($("a_ref").value),mode=$("a_mode").value,refev=tr($("a_refev").value)||null,change=tr($("a_change").value)||null;

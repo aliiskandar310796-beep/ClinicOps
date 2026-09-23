@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <title>Technical File Consistency Check | ClinicOps</title>
 <meta name="description" content="Paste the same key fact as it appears in up to five technical-documentation sources and get a deterministic, severity-banded divergence report with an evidence queue. Browser-local; nothing is uploaded.">
 <link rel="canonical" href="https://clinicops.dk/technical-file-consistency.html">
-<meta property="og:title" content="Technical File Consistency Check | ClinicOps"><meta property="og:description" content="Cross-document consistency check for technical documentation: paste each key value per source, get deterministic divergence findings, severity bands and an evidence queue. Browser-local."><meta property="og:type" content="website"><meta property="og:url" content="https://clinicops.dk/technical-file-consistency.html"><meta property="og:site_name" content="ClinicOps"><meta name="twitter:card" content="summary">
+<meta property="og:title" content="Technical File Consistency Check | ClinicOps"><meta property="og:description" content="Cross-document consistency check for technical documentation: paste each key value per source, get deterministic divergence findings, severity bands and an evidence queue. Browser-local."><meta property="og:type" content="website"><meta property="og:url" content="https://clinicops.dk/technical-file-consistency.html"><meta property="og:site_name" content="ClinicOps"><meta property="og:image" content="https://clinicops.dk/assets/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://clinicops.dk/assets/og-image.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Technical File Consistency Check | ClinicOps","url":"https://clinicops.dk/technical-file-consistency.html","isPartOf":{"@type":"WebSite","name":"ClinicOps","url":"https://clinicops.dk/"},"publisher":{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"ClinicOps Technical File Consistency Check","url":"https://clinicops.dk/technical-file-consistency.html","applicationCategory":"BusinessApplication","operatingSystem":"Any modern browser","isAccessibleForFree":true,"publisher":{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}</script>
 <style>
@@ -36,26 +36,29 @@ input[type=checkbox]{min-height:0;width:20px;height:20px;accent-color:var(--acce
 .metric strong{display:block;font-family:var(--mono);font-weight:500;font-size:clamp(1.5rem,2.6vw,2rem);letter-spacing:-.03em;line-height:1.1;font-variant-numeric:tabular-nums}
 .metric small{display:block;margin-top:6px;color:var(--muted);font-size:.85rem}
 td.muted{padding:22px 0}
-ol#queue{padding-left:1.3rem;max-width:64ch}#queue li{margin:.5em 0}
+ol#queue{padding-left:1.3rem;max-width:42.43em}#queue li{margin:.5em 0}
 .principles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,40px);margin:32px 0}
 .principle{border-top:1px solid var(--border-strong);padding-top:14px}
 .principle strong{display:block;margin-bottom:4px}
 .principle span{display:block;font-size:.93rem;color:var(--muted)}
-.fictional{border-left:2px solid var(--warn);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:10px 14px;background:var(--surface-2);font-size:.88rem;color:var(--muted);margin:14px 0;max-width:78ch}
+.fictional{border-left:2px solid var(--warn);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:10px 14px;background:var(--surface-2);font-size:.88rem;color:var(--muted);margin:14px 0;max-width:51.71em}
 .sev{font-family:var(--mono);font-size:.74rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
 .sev::before{content:"";display:inline-block;width:.5em;height:.5em;margin-right:.55em;border-radius:1px;background:currentColor}
 @media(max-width:720px){.principles{grid-template-columns:1fr}.btn{width:100%}}
 .sevCritical{color:var(--hold)}.sevMajor{color:var(--warn)}.sevMinor{color:var(--accent)}.sevInfo{color:var(--muted)}
 @media(max-width:650px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.metric:nth-child(2){border-right:0;margin-right:0}.metric:nth-child(-n+2){border-bottom:1px solid var(--border)}}
+.rt{margin:0}.small-note{font-size:.84rem}.tight{margin-top:6px}
+#gridwrap:focus-visible,.table-scroll:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 #gridwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
 #grid{min-width:940px;display:table;margin:0}
 #grid input,#grid select{min-height:40px;font-size:.92rem;padding:7px 9px}
 #grid td{min-width:150px;padding-right:12px}
 #grid td:first-child{min-width:190px;font-weight:600;font-size:.88rem}
-.na{display:flex;gap:6px;align-items:center;font-size:.76rem;color:var(--muted);margin-top:4px;font-weight:500;min-height:28px}
+.na{display:flex;gap:8px;align-items:center;font-size:.8rem;color:var(--muted);margin-top:2px;font-weight:500;min-height:44px;cursor:pointer}
 .na input{width:16px;height:16px;margin:0}
 .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .table-scroll table{display:table;min-width:680px;margin:14px 0}
+@media print{#gridwrap,.table-scroll{overflow:visible}#grid,.table-scroll table{min-width:0;font-size:8pt}#grid td{min-width:0;padding-right:6px}#grid input,#grid select{min-height:0;font-size:8pt;padding:2px 4px}.actions{display:none!important}}
 </style>
 <link rel="preload" href="assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/fonts/geist-mono-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="site.css"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f6f7f5" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0d1211" media="(prefers-color-scheme: dark)"></head>
 <body>
@@ -66,19 +69,20 @@ ol#queue{padding-left:1.3rem;max-width:64ch}#queue li{margin:.5em 0}
 <p class="lede">The same fact — device name, UDI-DI, intended purpose, shelf life, software version — appears in the Declaration of Conformity, label, IFU, technical file summary, SS(C)P and registration data. When those copies drift apart, reviews stall. Paste each key value as it appears in up to five sources and get a deterministic, severity-banded divergence report with an evidence queue.</p>
 <div class="trust"><span class="chip">Runs locally</span><span class="chip">Deterministic normalization rules</span><span class="chip">Verbatim values preserved</span><span class="chip">Portable JSON</span><span class="chip">Human authority preserved</span></div>
 <div class="callout"><strong>Method boundary.</strong> This is a sanitized demonstration of a working method using fictional example data. It compares only the values you paste, exactly as you paste them — it does not review your documents, it never decides which value is correct, and it is not a compliance determination or regulatory advice. Deciding which source is authoritative and whether a divergence matters is a human decision for your regulatory reviewer.</div>
+<noscript><div class="callout boundary"><p>This tool runs in your browser and needs JavaScript enabled.</p></div></noscript>
 <h2>1 · Name the sources</h2>
 <div class="panel"><div class="grid2">
-<div class="field"><label for="worklabel">Working label for this comparison <span class="hint">(optional, stays in your browser)</span></label><input id="worklabel" maxlength="120" placeholder="e.g. Model X technical file, rev set 2026-09"></div>
+<div class="field"><label for="worklabel">Working label for this comparison <span class="hint">(optional, stays in your browser)</span></label><input id="worklabel" name="worklabel" autocomplete="off" maxlength="120" placeholder="e.g. Model X technical file, rev set 2026-09"></div>
 <div class="field"><label for="framework">Framework</label><select id="framework"><option>EU MDR 2017/745</option><option>EU IVDR 2017/746 (field list is MDR-derived)</option></select></div>
 </div><div class="grid2" id="srcsel"></div><p class="hint">Columns set to "— none —" are excluded. Mark a cell "n/a" when that document legitimately does not carry the fact; leave it empty only when the value should exist but you have not observed it.</p></div>
 <h2>2 · Paste each value as printed</h2>
-<div id="gridwrap" class="panel"><table id="grid"><thead><tr id="gridhead"></tr></thead><tbody id="gridbody"></tbody></table></div>
+<div id="gridwrap" class="panel" tabindex="0" role="region" aria-label="Values by source grid"><table id="grid" aria-label="Values by source"><thead><tr id="gridhead"></tr></thead><tbody id="gridbody"></tbody></table></div>
 <div class="actions"><button class="btn primary" id="run" type="button">Run consistency check</button><button class="btn secondary" id="example" type="button">Load fictional example</button><button class="btn secondary" id="clear" type="button">Clear grid</button></div>
 <div id="fictionalNote" class="fictional" hidden>Fictional example — the device, manufacturer, identifiers and every value are invented for demonstration. "Nyrelia", the Nyrelia N-200 and Nyrelia Medical ApS do not exist; any resemblance to a real product is coincidental.</div>
-<div class="result" aria-live="polite"><div class="result-head"><div><h2 style="margin:0" id="resultTitle">Consistency report</h2><p id="summary" class="muted">Run the check to see divergences, severity bands and the evidence queue.</p></div><span id="badge" class="badge">NOT RUN</span></div>
+<div class="result" aria-live="polite"><div class="result-head"><div><h2 class="rt" id="resultTitle">Consistency report</h2><p id="summary" class="muted">Run the check to see divergences, severity bands and the evidence queue.</p></div><span id="badge" class="badge">NOT RUN</span></div>
 <div class="metrics"><div class="metric"><strong id="cCritical">0</strong><small>critical conflicts</small></div><div class="metric"><strong id="cMajor">0</strong><small>major findings</small></div><div class="metric"><strong id="cMinor">0</strong><small>minor / cosmetic</small></div><div class="metric"><strong id="cInfo">0</strong><small>informational</small></div></div>
-<div class="table-scroll"><table><thead><tr><th>Field</th><th>Finding</th><th>Severity</th><th>Detail</th></tr></thead><tbody id="frows"><tr><td colspan="4" class="muted">No check run yet.</td></tr></tbody></table></div>
-<div class="grid2"><div><h3>Evidence queue</h3><ol id="queue"><li class="muted">No queue generated yet.</li></ol><p class="muted" style="font-size:.84rem">The tool never says which value is correct. For each divergence: identify the controlled source-of-truth document, confirm the approved value with its owner, route the correction through change control, correct every divergent instance, then re-run the check.</p></div><div><h3>Export &amp; handoff</h3><div class="actions" style="margin-top:6px"><button class="btn secondary" id="copy" type="button">Copy summary</button><button class="btn secondary" id="download" type="button">Download JSON</button></div><p class="muted" style="font-size:.84rem">The copied summary carries only the band, counts and divergent field names — never your pasted values, which may be confidential. The downloaded JSON contains the full grid for your own records.</p></div></div>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Consistency findings table"><table aria-label="Consistency findings"><thead><tr><th scope="col">Field</th><th scope="col">Finding</th><th scope="col">Severity</th><th scope="col">Detail</th></tr></thead><tbody id="frows"><tr><td colspan="4" class="muted">No check run yet.</td></tr></tbody></table></div>
+<div class="grid2"><div><h3>Evidence queue</h3><ol id="queue"><li class="muted">No queue generated yet.</li></ol><p class="muted small-note">The tool never says which value is correct. For each divergence: identify the controlled source-of-truth document, confirm the approved value with its owner, route the correction through change control, correct every divergent instance, then re-run the check.</p></div><div><h3>Export &amp; handoff</h3><div class="actions tight"><button class="btn secondary" id="copy" type="button">Copy summary</button><button class="btn secondary" id="download" type="button">Download JSON</button></div><p class="muted small-note">The copied summary carries only the band, counts and divergent field names — never your pasted values, which may be confidential. The downloaded JSON contains the full grid for your own records.</p></div></div>
 </div>
 <div class="principles"><div class="principle"><strong>Verbatim preserved</strong><span>Normalization ("N-200" vs "N200", "(01)" wrappers, "2 years" vs "24 months") only classifies; your pasted text is never altered in the report.</span></div><div class="principle"><strong>Fail-closed</strong><span>One source cannot corroborate itself. Different unit families are flagged for manual verification, never auto-equated across families.</span></div><div class="principle"><strong>Human-owned</strong><span>Findings route review work. Which value is correct — and whether it matters under MDR/IVDR — stays with your qualified owner.</span></div></div>
 <h2>From pasted values to a reviewed technical file</h2><p>This check demonstrates the smallest unit of the method: one fact, several documents, a deterministic verdict on whether the copies agree. A scoped review applies the same discipline across a full technical-documentation set with named owners, evidence references and a reviewer-ready closure packet.</p>
@@ -106,8 +110,8 @@ const FIELDS=[
 // build source selects + grid
 const srcsel=$("srcsel");for(let c=1;c<=5;c++){const d=document.createElement("div");d.className="field";d.innerHTML=`<label for="src${c}">Document source ${c}${c>2?' <span class="hint">(optional)</span>':""}</label><select id="src${c}">${SRC_OPTS.map(o=>`<option${o===SRC_DEFAULT[c-1]?" selected":""}${c<=2&&o==="— none —"?" disabled":""}>${o}</option>`).join("")}</select>`;srcsel.appendChild(d)}
 function activeCols(){const cols=[];for(let c=1;c<=5;c++){const v=$(`src${c}`).value;if(v!=="— none —")cols.push({col:c,label:v})}return cols}
-function renderGrid(){const cols=activeCols();$("gridhead").innerHTML=`<th>Field</th>${cols.map(s=>`<th>${esc(s.label)}<div class="muted" style="font-weight:500">source ${s.col}</div></th>`).join("")}`;
- $("gridbody").innerHTML=FIELDS.map(f=>`<tr><td>${esc(f.label)}</td>${cols.map(s=>`<td><input id="v_${f.id}_${s.col}" aria-label="${esc(f.label)} — ${esc(s.label)}"><label class="na"><input id="na_${f.id}_${s.col}" type="checkbox"> n/a for this source</label></td>`).join("")}</tr>`).join("")}
+function renderGrid(){const cols=activeCols();$("gridhead").innerHTML=`<th scope="col">Field</th>${cols.map(s=>`<th scope="col">${esc(s.label)}<div class="muted" style="font-weight:500">source ${s.col}</div></th>`).join("")}`;
+ $("gridbody").innerHTML=FIELDS.map(f=>`<tr><td>${esc(f.label)}</td>${cols.map(s=>`<td><input id="v_${f.id}_${s.col}" autocomplete="off" spellcheck="false" aria-label="${esc(f.label)} — ${esc(s.label)}"><label class="na"><input id="na_${f.id}_${s.col}" type="checkbox" aria-label="n/a for ${esc(f.label)} — ${esc(s.label)}"> n/a for this source</label></td>`).join("")}</tr>`).join("")}
 function keepValues(fn){const saved={};for(const f of FIELDS)for(let c=1;c<=5;c++){const v=$(`v_${f.id}_${c}`),n=$(`na_${f.id}_${c}`);if(v)saved[`${f.id}_${c}`]={v:v.value,n:n.checked}}fn();for(const k in saved){const[fid,c]=[k.slice(0,k.lastIndexOf("_")),k.slice(k.lastIndexOf("_")+1)];const v=$(`v_${fid}_${c}`),n=$(`na_${fid}_${c}`);if(v){v.value=saved[k].v;n.checked=saved[k].n}}}
 for(let c=1;c<=5;c++)$(`src${c}`).addEventListener("change",()=>keepValues(renderGrid));
 renderGrid();

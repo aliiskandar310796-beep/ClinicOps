@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml"><link rel="icon" href="../assets/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
 <title>Interactive Regulatory Integrity Specimen Register | ClinicOps</title>
 <meta name="description" content="Explore a synthetic ClinicOps integrity register: traceable reference evidence, observations, discrepancy states, review owners and explicit human decisions. No client data.">
 <link rel="canonical" href="https://clinicops.dk/specimen-register/">
-<meta property="og:title" content="Interactive Regulatory Integrity Specimen Register | ClinicOps"><meta property="og:description" content="Explore how ClinicOps structures regulatory change evidence, discrepancies, routing and human decisions before scoping a real review."><meta property="og:type" content="website"><meta property="og:url" content="https://clinicops.dk/specimen-register/"><meta property="og:site_name" content="ClinicOps"><meta name="twitter:card" content="summary">
+<meta property="og:title" content="Interactive Regulatory Integrity Specimen Register | ClinicOps"><meta property="og:description" content="Explore how ClinicOps structures regulatory change evidence, discrepancies, routing and human decisions before scoping a real review."><meta property="og:type" content="website"><meta property="og:url" content="https://clinicops.dk/specimen-register/"><meta property="og:site_name" content="ClinicOps"><meta property="og:image" content="https://clinicops.dk/assets/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://clinicops.dk/assets/og-image.png">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Interactive Regulatory Integrity Specimen Register | ClinicOps","url":"https://clinicops.dk/specimen-register/","isPartOf":{"@type":"WebSite","name":"ClinicOps","url":"https://clinicops.dk/"},"publisher":{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}</script>
 <style>
 main.wrap{padding-top:clamp(40px,6vw,72px)}
@@ -44,6 +44,11 @@ main.wrap{padding-top:clamp(40px,6vw,72px)}
 .archive{font-size:.92rem;color:var(--muted)}
 .cta{white-space:normal;text-align:center}
 .register td:first-child{white-space:nowrap}
+.register:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.register tbody tr:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;background:var(--surface-2);border-radius:0}
+.register tbody tr[aria-expanded="true"]{background:var(--surface-2)}
+@media(forced-colors:active){.filter.active{background:Highlight;color:HighlightText;forced-color-adjust:none}.register tbody tr[aria-expanded="true"]{outline:2px solid Highlight;outline-offset:-2px}}
+@media print{.filters,.hero-actions{display:none!important}.register{overflow:visible}.register table{min-width:0;font-size:8.5pt}.register td,.register th{padding-right:6px}.register td:first-child{white-space:normal}.detail{display:block}.principles,.chain,.metrics{break-inside:avoid}}
 </style>
 <link rel="preload" href="../assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="../assets/fonts/geist-mono-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="../site.css"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f6f7f5" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0d1211" media="(prefers-color-scheme: dark)"></head>
 <body>
@@ -59,17 +64,18 @@ main.wrap{padding-top:clamp(40px,6vw,72px)}
 
 <h2>Explore the register</h2>
 <p class="muted">Filter the synthetic findings, then select any row to inspect its evidence chain and decision boundary.</p>
-<div class="filters"><button class="filter active" data-filter="all">All</button><button class="filter" data-filter="DIFFERENT">Different</button><button class="filter" data-filter="UNRESOLVED">Authority unresolved</button><button class="filter" data-filter="MATCH">Match</button><button class="filter" data-filter="CLOSED">Closed after review</button></div>
-<div class="register">
-<table>
-<thead><tr><th>ID</th><th>Field</th><th>Reference</th><th>Observed surface</th><th>Observed</th><th>Signal</th><th>Owner / decision</th></tr></thead>
+<noscript><div class="callout boundary"><p>This tool runs in your browser and needs JavaScript enabled.</p></div></noscript>
+<div class="filters" role="group" aria-label="Filter findings"><button type="button" class="filter active" aria-pressed="true" data-filter="all">All</button><button type="button" class="filter" aria-pressed="false" data-filter="DIFFERENT">Different</button><button type="button" class="filter" aria-pressed="false" data-filter="UNRESOLVED">Authority unresolved</button><button type="button" class="filter" aria-pressed="false" data-filter="MATCH">Match</button><button type="button" class="filter" aria-pressed="false" data-filter="CLOSED">Closed after review</button></div>
+<div class="register" tabindex="0" role="region" aria-label="Synthetic findings register">
+<table aria-label="Synthetic findings register">
+<thead><tr><th scope="col">ID</th><th scope="col">Field</th><th scope="col">Reference</th><th scope="col">Observed surface</th><th scope="col">Observed</th><th scope="col">Signal</th><th scope="col">Owner / decision</th></tr></thead>
 <tbody id="rows">
-<tr data-id="F-01" data-state="DIFFERENT"><td>F-01</td><td>IFU revision</td><td>IFU-12</td><td>EUDAMED export</td><td>IFU-11</td><td class="signal st different">DIFFERENT</td><td>Regulatory Affairs · review open</td></tr>
-<tr data-id="F-02" data-state="MATCH"><td>F-02</td><td>Manufacturer name</td><td>Example MedTech GmbH</td><td>SS(C)P</td><td>Example MedTech GmbH</td><td class="signal st match">MATCH</td><td>Evidence preserved · no discrepancy action</td></tr>
-<tr data-id="F-03" data-state="UNRESOLVED"><td>F-03</td><td>Storage upper limit</td><td>25 °C / 30 °C conflict</td><td>Label artwork</td><td>25 °C</td><td class="signal st unresolved">UNRESOLVED</td><td>RA/QA owner · authority decision required</td></tr>
-<tr data-id="F-04" data-state="DIFFERENT"><td>F-04</td><td>Basic UDI-DI</td><td>BUDI-ALPHA-001</td><td>Distributor master</td><td>BUDI-ALPHA-01</td><td class="signal st different">DIFFERENT</td><td>Master Data · correction candidate</td></tr>
-<tr data-id="F-05" data-state="CLOSED"><td>F-05</td><td>Sterile status</td><td>Sterile EO</td><td>ERP product text</td><td>Sterile</td><td class="signal st closed">CLOSED</td><td>QA decision · wording accepted in context</td></tr>
-<tr data-id="F-06" data-state="DIFFERENT"><td>F-06</td><td>Contraindication phrase</td><td>Reference phrase v4</td><td>Local IFU</td><td>Reference phrase v3</td><td class="signal st different">DIFFERENT</td><td>Medical / RA review · propagation check</td></tr>
+<tr data-id="F-01" data-state="DIFFERENT" tabindex="0" aria-controls="detail" aria-expanded="false"><td>F-01</td><td>IFU revision</td><td>IFU-12</td><td>EUDAMED export</td><td>IFU-11</td><td class="signal st different">DIFFERENT</td><td>Regulatory Affairs · review open</td></tr>
+<tr data-id="F-02" data-state="MATCH" tabindex="0" aria-controls="detail" aria-expanded="false"><td>F-02</td><td>Manufacturer name</td><td>Example MedTech GmbH</td><td>SS(C)P</td><td>Example MedTech GmbH</td><td class="signal st match">MATCH</td><td>Evidence preserved · no discrepancy action</td></tr>
+<tr data-id="F-03" data-state="UNRESOLVED" tabindex="0" aria-controls="detail" aria-expanded="false"><td>F-03</td><td>Storage upper limit</td><td>25 °C / 30 °C conflict</td><td>Label artwork</td><td>25 °C</td><td class="signal st unresolved">UNRESOLVED</td><td>RA/QA owner · authority decision required</td></tr>
+<tr data-id="F-04" data-state="DIFFERENT" tabindex="0" aria-controls="detail" aria-expanded="false"><td>F-04</td><td>Basic UDI-DI</td><td>BUDI-ALPHA-001</td><td>Distributor master</td><td>BUDI-ALPHA-01</td><td class="signal st different">DIFFERENT</td><td>Master Data · correction candidate</td></tr>
+<tr data-id="F-05" data-state="CLOSED" tabindex="0" aria-controls="detail" aria-expanded="false"><td>F-05</td><td>Sterile status</td><td>Sterile EO</td><td>ERP product text</td><td>Sterile</td><td class="signal st closed">CLOSED</td><td>QA decision · wording accepted in context</td></tr>
+<tr data-id="F-06" data-state="DIFFERENT" tabindex="0" aria-controls="detail" aria-expanded="false"><td>F-06</td><td>Contraindication phrase</td><td>Reference phrase v4</td><td>Local IFU</td><td>Reference phrase v3</td><td class="signal st different">DIFFERENT</td><td>Medical / RA review · propagation check</td></tr>
 </tbody>
 </table>
 </div>
@@ -97,9 +103,9 @@ const details={
 "F-06":{title:"F-06 · Change-propagation lag candidate",ref:"Approved contraindication phrase v4",obs:"Local IFU → reference phrase v3",rule:"Version-aware declared comparison → DIFFERENT",decision:"Medical / RA review confirms whether the local IFU was in scope for the change, then assigns remediation or closes with rationale."}
 };
 const detail=document.getElementById("detail"), rows=[...document.querySelectorAll("tbody tr")];
-function show(id){const d=details[id];if(!d)return;detail.innerHTML=`<h3>${d.title}</h3><div class="chain"><div class="node"><small>Reference evidence</small>${d.ref}</div><div class="node"><small>Observation</small>${d.obs}</div><div class="node"><small>Rule / signal</small>${d.rule}</div><div class="node"><small>Human decision boundary</small>${d.decision}</div></div>`;detail.classList.add("open")}
-rows.forEach(r=>r.addEventListener("click",()=>show(r.dataset.id)));
-document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");const f=b.dataset.filter;rows.forEach(r=>r.hidden=f!=="all"&&r.dataset.state!==f);detail.classList.remove("open")}));
+function show(id){const d=details[id];if(!d)return;detail.innerHTML=`<h3>${d.title}</h3><div class="chain"><div class="node"><small>Reference evidence</small>${d.ref}</div><div class="node"><small>Observation</small>${d.obs}</div><div class="node"><small>Rule / signal</small>${d.rule}</div><div class="node"><small>Human decision boundary</small>${d.decision}</div></div>`;detail.classList.add("open");rows.forEach(x=>x.setAttribute("aria-expanded",String(x.dataset.id===id)))}
+rows.forEach(r=>{r.addEventListener("click",()=>show(r.dataset.id));r.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();show(r.dataset.id)}})});
+document.querySelectorAll(".filter").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.querySelectorAll(".filter").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));const f=b.dataset.filter;rows.forEach(r=>{r.hidden=f!=="all"&&r.dataset.state!==f;r.setAttribute("aria-expanded","false")});detail.classList.remove("open")}));
 show("F-01");
 })();
 </script>

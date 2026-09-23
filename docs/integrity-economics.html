@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <title>Regulatory Change Review Cost Calculator | ClinicOps</title>
 <meta name="description" content="Estimate the current manual workload and labour cost of checking regulatory change propagation across EUDAMED, IFU, SS(C)P, labels and controlled systems. Runs locally in your browser.">
 <link rel="canonical" href="https://clinicops.dk/integrity-economics.html">
@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://clinicops.dk/integrity-economics.html">
 <meta property="og:site_name" content="ClinicOps">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://clinicops.dk/assets/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://clinicops.dk/assets/og-image.png">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"Regulatory Change Review Cost Calculator","url":"https://clinicops.dk/integrity-economics.html","applicationCategory":"BusinessApplication","operatingSystem":"Any modern browser","isAccessibleForFree":true,"publisher":{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}
 </script>
@@ -33,7 +33,7 @@ input[type=number]{font-family:var(--mono);font-variant-numeric:tabular-nums;min
 .metric strong{display:block;font-family:var(--mono);font-weight:500;font-size:clamp(1.5rem,2.6vw,2.1rem);letter-spacing:-.03em;line-height:1.1;font-variant-numeric:tabular-nums}
 .metric span{display:block;margin-top:8px;color:var(--muted);font-size:.85rem;line-height:1.35}
 @media(max-width:900px){.results{grid-template-columns:repeat(2,minmax(0,1fr))}.metric:nth-child(2){border-right:0;margin-right:0}.metric:nth-child(-n+2){border-bottom:1px solid var(--border)}}
-#explain{max-width:68ch}
+#explain{max-width:45.08em}
 footer.site .footer-inner{padding-top:24px}
 .cta{white-space:normal;text-align:center}
 </style>
@@ -46,13 +46,14 @@ footer.site .footer-inner{padding-top:24px}
 <p class="lede">Use your own workload and labour assumptions to estimate the effort spent checking that a regulated change has propagated across the places where it is supposed to appear.</p>
 <div class="callout"><strong>No hidden benchmark.</strong> ClinicOps does not assume a savings rate. You enter the current workload and a hypothetical reduction in manual review time. This page sends nothing to ClinicOps and stores nothing remotely.</div>
 
+<noscript><div class="callout boundary"><p>This tool runs in your browser and needs JavaScript enabled.</p></div></noscript>
 <div class="grid">
-<div class="field"><label for="changes">Change / release events per month</label><input id="changes" type="number" min="0" max="10000" step="1" value="8"><div class="hint">Events that trigger cross-surface checking.</div></div>
-<div class="field"><label for="surfaces">Surfaces checked per event</label><input id="surfaces" type="number" min="1" max="100" step="1" value="5"><div class="hint">For example EUDAMED, RIM/master, IFU, SS(C)P, label/artwork.</div></div>
-<div class="field"><label for="minutes">Manual minutes per surface check</label><input id="minutes" type="number" min="1" max="1440" step="1" value="12"></div>
-<div class="field"><label for="rate">Loaded RA/QA labour cost per hour (€)</label><input id="rate" type="number" min="1" max="1000" step="1" value="75"></div>
-<div class="field"><label for="reduction">Hypothetical reduction in manual review time (%)</label><input id="reduction" type="number" min="0" max="95" step="5" value="25"><div class="hint">Scenario only. A live pilot must measure the actual result.</div></div>
-<div class="field"><label for="pilot">Pilot fee to test (€)</label><input id="pilot" type="number" min="0" max="100000" step="10" value="750"><div class="hint">Use any fee you want to evaluate. This is not a published ClinicOps price.</div></div>
+<div class="field"><label for="changes">Change / release events per month</label><input id="changes" name="changes" autocomplete="off" inputmode="decimal" type="number" min="0" max="10000" step="1" value="8"><div class="hint">Events that trigger cross-surface checking.</div></div>
+<div class="field"><label for="surfaces">Surfaces checked per event</label><input id="surfaces" name="surfaces" autocomplete="off" inputmode="decimal" type="number" min="1" max="100" step="1" value="5"><div class="hint">For example EUDAMED, RIM/master, IFU, SS(C)P, label/artwork.</div></div>
+<div class="field"><label for="minutes">Manual minutes per surface check</label><input id="minutes" name="minutes" autocomplete="off" inputmode="decimal" type="number" min="1" max="1440" step="1" value="12"></div>
+<div class="field"><label for="rate">Loaded RA/QA labour cost per hour (€)</label><input id="rate" name="rate" autocomplete="off" inputmode="decimal" type="number" min="1" max="1000" step="1" value="75"></div>
+<div class="field"><label for="reduction">Hypothetical reduction in manual review time (%)</label><input id="reduction" name="reduction" autocomplete="off" inputmode="decimal" type="number" min="0" max="95" step="5" value="25"><div class="hint">Scenario only. A live pilot must measure the actual result.</div></div>
+<div class="field"><label for="pilot">Pilot fee to test (€)</label><input id="pilot" name="pilot" autocomplete="off" inputmode="decimal" type="number" min="0" max="100000" step="10" value="750"><div class="hint">Use any fee you want to evaluate. This is not a published ClinicOps price.</div></div>
 </div>
 
 <h2>Current-state economics</h2>
@@ -62,7 +63,7 @@ footer.site .footer-inner{padding-top:24px}
 <div class="metric"><strong id="potential">—</strong><span>scenario labour capacity released / year</span></div>
 <div class="metric"><strong id="payback">—</strong><span>scenario pilot payback</span></div>
 </div>
-<p id="explain" class="hint"></p>
+<p id="explain" class="hint" aria-live="polite"></p>
 
 <div class="callout"><strong>What a pilot should prove.</strong> Review minutes before/after, number of declared checks, findings confirmed by a qualified reviewer, false positives, unresolved source-authority cases, and whether the workflow prevented avoidable re-checking or handoff delay. Savings should be claimed only from measured client-specific evidence.</div>
 <div class="actions"><a class="cta primary" href="assessment-intake.html?workstream=integrity-review">Request a paid Integrity Review pilot scope</a><a class="cta ghost" href="integrity-gate.html">See how Integrity Review works</a></div>
