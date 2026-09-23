@@ -17,3 +17,6 @@ data/eudamed/full/
 qa/out/
 qa/node_modules/
 node_modules/
+
+# root symlink used by local QA runs
+/node_modules
