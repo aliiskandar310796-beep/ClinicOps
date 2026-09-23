@@ -8,3 +8,11 @@ updates:
     directory: /
     schedule:
       interval: weekly
+  - package-ecosystem: npm
+    directory: /qa
+    schedule:
+      interval: weekly
+  - package-ecosystem: npm
+    directory: /qa/vendor-manifest
+    schedule:
+      interval: weekly
