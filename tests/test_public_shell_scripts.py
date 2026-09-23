@@ -13,6 +13,7 @@ def _run(script: str, *args: str) -> subprocess.CompletedProcess[str]:
         cwd=ROOT,
         capture_output=True,
         text=True,
+        check=False,
         env={"PYTHONPATH": str(ROOT / "src"), "PATH": ""},
     )
 
