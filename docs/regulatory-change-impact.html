@@ -27,6 +27,11 @@ input[type=checkbox]{min-height:0;width:20px;height:20px;accent-color:var(--acce
 .actions a.cta{white-space:normal;text-align:center}
 .result{border-top:2px solid var(--accent);padding:20px 0 0;margin:36px 0 18px}
 .result h2{border-top:0;padding-top:0}
+.result h2::before{display:none}
+.field{display:flex;flex-direction:column}
+.field select,.field input{margin-top:auto}
+.field .hint{margin-top:6px}
+select:user-invalid,input:user-invalid{border-color:var(--hold)}
 .result-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap}
 .badge{font-size:.74rem;font-weight:600;padding:5px 9px;color:var(--muted);border-color:var(--border-strong)}
 .badge.ok{color:var(--ok);border-color:currentColor}.badge.review{color:var(--warn);border-color:currentColor}.badge.hold{color:var(--hold);border-color:currentColor}
@@ -54,7 +59,7 @@ ol#queue{padding-left:1.3rem;max-width:42.43em}#queue li{margin:.5em 0}
 </style>
 <link rel="preload" href="assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/fonts/geist-mono-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="site.css"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f6f7f5" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0d1211" media="(prefers-color-scheme: dark)"></head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="index.html">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="index.html">Home</a><a href="services.html">Solution</a><a href="use-cases.html">Use cases</a><a href="research.html">Research</a><a href="tools.html" aria-current="page">Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");if(a&&n.scrollWidth>n.clientWidth)n.scrollLeft=Math.max(0,a.offsetLeft-32)})()</script>
+<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="index.html">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="index.html">Home</a><a href="services.html">Solution</a><a href="use-cases.html">Use cases</a><a href="research.html">Research</a><a href="tools.html" aria-current="page">Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");var r=a?a.offsetLeft+a.offsetWidth+16-n.clientWidth:0;if(r>0)n.scrollLeft=r})()</script>
 <main id="main" tabindex="-1" class="wrap">
 <span class="eyebrow">Sanitized prototype · browser-local</span>
 <h1>A regulation changed. Which of your documents does it touch?</h1>

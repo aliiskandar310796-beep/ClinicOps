@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" role="img" aria-labelledby="t d">
+<title id="t">Change propagation</title>
+<desc id="d">One approved change fans out into six downstream items, each marked to verify: UDI or EUDAMED record, certificate, SS(C)P, labelling and IFU, controlled document records, and the owner queue. States are review prompts, not determinations.</desc>
+<style>
+svg{font-family:Geist,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.s{font-size:18px;fill:#0f1a17}.m{font-size:16px;fill:#556360}.x{font-family:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:17px;fill:#0f1a17}
+.xm{font-family:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:16px;fill:#556360}
+.a{fill:#0f5c52}.ab{stroke:#0f5c52}.bd{stroke:#cdd6d1;fill:none;stroke-width:1}.bf{stroke:#cdd6d1;stroke-width:1;fill:#f6f7f5}.ln{stroke:#556360;stroke-width:1.5;fill:none}
+.wn{fill:#a55b00}.wb{stroke:#a55b00}.hd{fill:#b03333}.hb{stroke:#b03333}.bold{font-weight:600}
+@media (prefers-color-scheme:dark){.s,.x{fill:#e6ece9}.m,.xm{fill:#98a6a1}.a{fill:#4fd8c4}.ab{stroke:#4fd8c4}.bd{stroke:#374541}.bf{stroke:#374541;fill:#0d1211}.ln{stroke:#98a6a1}.wn{fill:#efb05c}.wb{stroke:#efb05c}.hd{fill:#ff9191}.hb{stroke:#ff9191}}
+</style>
+<rect x="16" y="150" width="230" height="130" rx="5" class="bf ab"/>
+<text x="32" y="184" class="xm">APPROVED CHANGE</text><text x="32" y="216" class="s bold">One approved</text><text x="32" y="240" class="s bold">change</text><text x="32" y="266" class="xm">CHG-EXAMPLE</text>
+<line x1="246" y1="215" x2="300" y2="215" class="ln"/><line x1="300" y1="46" x2="300" y2="384" class="ln"/>
+<line x1="300" y1="46" x2="340" y2="46" class="ln"/><rect x="340" y="22" width="604" height="48" rx="5" class="bf"/>
+<text x="356" y="52" class="s bold">UDI / EUDAMED record</text><text x="690" y="52" class="xm">UDI-EX-01</text>
+<rect x="810" y="31" width="120" height="30" rx="4" class="bd wb"/><text x="870" y="51" text-anchor="middle" class="x wn">to verify</text>
+<line x1="300" y1="108" x2="340" y2="108" class="ln"/><rect x="340" y="84" width="604" height="48" rx="5" class="bf"/>
+<text x="356" y="114" class="s bold">Certificate</text><text x="690" y="114" class="xm">CERT-EX-02</text>
+<rect x="810" y="93" width="120" height="30" rx="4" class="bd wb"/><text x="870" y="113" text-anchor="middle" class="x wn">to verify</text>
+<line x1="300" y1="170" x2="340" y2="170" class="ln"/><rect x="340" y="146" width="604" height="48" rx="5" class="bf"/>
+<text x="356" y="176" class="s bold">SS(C)P</text><text x="690" y="176" class="xm">SSCP-EX-03</text>
+<rect x="810" y="155" width="120" height="30" rx="4" class="bd wb"/><text x="870" y="175" text-anchor="middle" class="x wn">to verify</text>
+<line x1="300" y1="232" x2="340" y2="232" class="ln"/><rect x="340" y="208" width="604" height="48" rx="5" class="bf"/>
+<text x="356" y="238" class="s bold">Labelling / IFU</text><text x="690" y="238" class="xm">LBL-EX-04</text>
+<rect x="810" y="217" width="120" height="30" rx="4" class="bd wb"/><text x="870" y="237" text-anchor="middle" class="x wn">to verify</text>
+<line x1="300" y1="294" x2="340" y2="294" class="ln"/><rect x="340" y="270" width="604" height="48" rx="5" class="bf"/>
+<text x="356" y="300" class="s bold">Controlled document records</text><text x="690" y="300" class="xm">DOC-EX-05</text>
+<rect x="810" y="279" width="120" height="30" rx="4" class="bd wb"/><text x="870" y="299" text-anchor="middle" class="x wn">to verify</text>
+<line x1="300" y1="356" x2="340" y2="356" class="ln"/><rect x="340" y="332" width="604" height="48" rx="5" class="bf"/>
+<text x="356" y="362" class="s bold">Owner queue</text><text x="690" y="362" class="xm">OWN-EX-06</text>
+<rect x="810" y="341" width="120" height="30" rx="4" class="bd wb"/><text x="870" y="361" text-anchor="middle" class="x wn">to verify</text>
+<text x="16" y="420" class="m">Each state is a prompt for review. It is not a determination.</text>
+
+</svg>

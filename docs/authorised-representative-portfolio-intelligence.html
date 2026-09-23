@@ -36,10 +36,10 @@
 }
 </script>
 
-<style>main.wrap{padding-top:clamp(40px,7vw,88px);padding-bottom:24px}.rows{list-style:none;margin:20px 0;padding:0;max-width:68ch}.rows li{margin:0;padding:11px 0;border-top:1px solid var(--border)}.rows li:last-child{border-bottom:1px solid var(--border)}.rail{margin-top:clamp(56px,7vw,96px)}.cta-row{align-items:center}.cta-links a{display:inline-flex;align-items:center;min-height:44px}.hero+p{margin-top:clamp(28px,4vw,44px)}</style>
+<style>.rail{margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--border-strong);padding-top:1.35rem;position:relative}.rail::before{content:"";position:absolute;top:-1px;left:0;width:48px;height:2px;background:var(--accent)}.rail>h2{border-top:0;padding-top:0}.rail>h2::before{display:none}.rail .callout{max-width:none;margin-top:0}@media(max-width:960px){.rail{row-gap:14px}}@media(forced-colors:active){.rail::before{background:Highlight}}.cta-row{align-items:center}.cta-links a{display:inline-flex;align-items:center;min-height:44px}.hero+p{margin-top:clamp(28px,4vw,44px)}.rail>.cta-links{margin-top:6px}</style>
 <link rel="preload" href="assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/fonts/geist-mono-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="site.css"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f6f7f5" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0d1211" media="(prefers-color-scheme: dark)"></head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="index.html">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="index.html">Home</a><a href="services.html">Solution</a><a href="use-cases.html" aria-current="page">Use cases</a><a href="research.html">Research</a><a href="tools.html">Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");if(a&&n.scrollWidth>n.clientWidth)n.scrollLeft=Math.max(0,a.offsetLeft-32)})()</script>
+<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="index.html">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="index.html">Home</a><a href="services.html">Solution</a><a href="use-cases.html" aria-current="page">Use cases</a><a href="research.html">Research</a><a href="tools.html">Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");var r=a?a.offsetLeft+a.offsetWidth+16-n.clientWidth:0;if(r>0)n.scrollLeft=r})()</script>
 <main id="main" tabindex="-1" class="wrap">
 <section class="hero">
 <span class="eyebrow">Authorised Representative Intelligence</span>
@@ -49,28 +49,26 @@
 </section>
 <p>ClinicOps provides a partner-friendly evidence and prioritisation layer that can sit beside existing representation and registration services.</p>
 
-<h2>What the partner layer does</h2>
-<ul class="tags"><li>normalises portfolio intake into a consistent review shape;</li><li>separates manufacturer, AR, importer and system/procedure-pack context;</li><li>surfaces missing or contradictory evidence before review begins;</li><li>organises transition and document-operation questions into a work queue;</li><li>returns Markdown and machine-readable JSON handoffs where useful;</li><li>keeps human regulatory judgement explicit.</li></ul>
+<section class="rail"><h2>What the partner layer does</h2>
+<ul class="rows num"><li>normalises portfolio intake into a consistent review shape;</li><li>separates manufacturer, AR, importer and system/procedure-pack context;</li><li>surfaces missing or contradictory evidence before review begins;</li><li>organises transition and document-operation questions into a work queue;</li><li>returns Markdown and machine-readable JSON handoffs where useful;</li><li>keeps human regulatory judgement explicit.</li></ul></section>
 
 <section class="rail"><h2>What it does not do</h2>
 <div class="callout boundary"><p>ClinicOps is not positioned as a replacement for the authorised representative relationship, a notified body or the manufacturer's RA/QA function. The value is in reducing repeated manual reconciliation and making portfolio-scale evidence easier to review, hand off and revisit.</p></div></section>
 
-<h2>White-label / partner use</h2>
-<p>The operating model can support one-off portfolio pilots, white-label evidence reconciliation, recurring transition work-plan updates, and structured handoffs into an existing consultancy or AR workflow. Client-specific regulatory conclusions remain human-reviewed and within the responsible party's process.</p>
+<section class="rail"><h2>White-label / partner use</h2>
+<p>The operating model can support one-off portfolio pilots, white-label evidence reconciliation, recurring transition work-plan updates, and structured handoffs into an existing consultancy or AR workflow. Client-specific regulatory conclusions remain human-reviewed and within the responsible party's process.</p></section>
 
 <section class="rail"><h2>Pilot shape</h2>
-<p>Start with one supplied portfolio export. ClinicOps can return intake diagnostics, role-aware segmentation, a prioritised operational queue, an evidence-gap ledger, and a human-review handoff.</p></section>
+<p>Start with one supplied portfolio export. ClinicOps can return intake diagnostics, role-aware segmentation, a prioritised operational queue, an evidence-gap ledger, and a human-review handoff.</p><div class="cta-links"><a href="mailto:info@clinicops.dk?subject=Partner%20workflow">Discuss a small portfolio pilot</a></div></section>
 
 <div class="ledger"><section><h3>Related</h3><div><p><a href="eudamed-transition.html">EUDAMED Intelligence</a> &middot; <a href="sscp-operations.html">SS(C)P Operations</a></p></div></section></div>
-
-<div class="cta-links"><a href="mailto:info@clinicops.dk?subject=Partner%20workflow">Discuss a small portfolio pilot</a></div>
 
 <section class="closing"><h2>Take the next step</h2><div class="cta-row"><a class="cta primary" href="integrity-check.html">Run the free browser-local check</a><div class="cta-links"><a href="specimen-register/">View the synthetic specimen</a><a href="assessment-intake.html?workstream=integrity-review">Scope one real review</a></div></div></section>
 </main>
 <footer class="site">
 <div class="footer-inner">
 <span>&copy; 2026 ClinicOps. Danish-led, EU-wide medical device regulatory intelligence.</span>
-<span><a href="mailto:info@clinicops.dk">info@clinicops.dk</a> &middot; <a href="https://www.linkedin.com/company/clinicops-danish-regulatory/">LinkedIn</a> &middot; <a href="privacy-notice/">Privacy</a></span>
+<span><a href="mailto:info@clinicops.dk">info@clinicops.dk</a> &middot; <a href="https://www.linkedin.com/company/clinicops-dk/">LinkedIn</a> &middot; <a href="privacy-notice/">Privacy</a></span>
 </div>
 </footer>
 </body>

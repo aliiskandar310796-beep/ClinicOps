@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400" role="img" aria-labelledby="t"><title id="t">ClinicOps</title>
+<rect width="400" height="400" fill="#0d1211"/>
+<rect x="24" y="24" width="352" height="352" rx="6" fill="none" stroke="#374541" stroke-width="1"/>
+<text x="200" y="226" text-anchor="middle" font-family="Geist,ui-sans-serif,system-ui,sans-serif" font-size="150" font-weight="600" letter-spacing="-6" fill="#e6ece9">C<tspan fill="#4fd8c4">O</tspan></text>
+<line x1="110" y1="266" x2="290" y2="266" stroke="#4fd8c4" stroke-width="3"/>
+</svg>

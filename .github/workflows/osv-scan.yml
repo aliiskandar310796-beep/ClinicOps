@@ -2,7 +2,10 @@ name: OSV Scan
 # Dependency vulnerability scan (osv.dev database). Scheduled and manual only; not a
 # merge gate. Uses the officially documented OSV-Scanner reusable workflow pinned to an
 # existing release tag (the floating "@v2" action ref does not exist, which is why the
-# previous scheduled run failed to resolve). A run that fails because it found a
+# previous scheduled run failed to resolve). Targets are explicit lockfiles:
+# requirements-lock.txt (uv pip compile pyproject.toml --extra dev --python-version 3.11
+# --generate-hashes), qa/package-lock.json (dev-only QA tooling) and
+# qa/vendor-manifest/package-lock.json (mirrors docs/vendor). A run that fails because it found a
 # vulnerability is a genuine finding to triage, not a workflow defect.
 on:
   workflow_dispatch:
@@ -19,5 +22,6 @@ jobs:
     uses: google/osv-scanner-action/.github/workflows/osv-scanner-reusable.yml@v2.6.0
     with:
       scan-args: |-
-        --recursive
-        ./
+        --lockfile=requirements-lock.txt
+        --lockfile=qa/package-lock.json
+        --lockfile=qa/vendor-manifest/package-lock.json

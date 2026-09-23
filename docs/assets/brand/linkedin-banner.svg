@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1584 396" width="1584" height="396" role="img" aria-labelledby="t"><title id="t">ClinicOps - EU MedTech regulatory data integrity</title>
+<rect width="1584" height="396" fill="#0d1211"/>
+<line x1="120" y1="86" x2="1464" y2="86" stroke="#374541" stroke-width="1"/><line x1="120" y1="310" x2="1464" y2="310" stroke="#374541" stroke-width="1"/>
+<circle cx="132" cy="198" r="9" fill="#4fd8c4"/><line x1="141" y1="198" x2="210" y2="198" stroke="#4fd8c4" stroke-width="2"/>
+<text x="240" y="222" font-family="Geist,ui-sans-serif,system-ui,sans-serif" font-size="88" font-weight="600" letter-spacing="-2" fill="#e6ece9">Clinic<tspan fill="#4fd8c4">Ops</tspan></text>
+<text x="1464" y="204" text-anchor="end" font-family="Geist,ui-sans-serif,system-ui,sans-serif" font-size="30" fill="#98a6a1">EU MedTech regulatory data integrity</text>
+</svg>

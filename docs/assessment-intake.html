@@ -25,10 +25,13 @@ select,input:not([type=checkbox]){min-height:44px}
 pre#output{min-height:140px;border-left:2px solid var(--accent);border-radius:0 var(--r) var(--r) 0;background:var(--surface-2);border-top:0;border-right:0;border-bottom:0}
 .field label .hint{font-weight:450}
 .cta{white-space:normal;text-align:center}
+select:user-invalid,input:user-invalid,textarea:user-invalid{border-color:var(--hold);box-shadow:inset 3px 0 0 var(--hold)}
+.check input:user-invalid{outline:2px solid var(--hold);outline-offset:2px}
+select:focus-visible,input:focus-visible,textarea:focus-visible{outline-offset:2px}
 </style>
 <link rel="preload" href="assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/fonts/geist-mono-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="site.css"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f6f7f5" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0d1211" media="(prefers-color-scheme: dark)"></head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="index.html">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="index.html">Home</a><a href="services.html" aria-current="page">Solution</a><a href="use-cases.html">Use cases</a><a href="research.html">Research</a><a href="tools.html">Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");if(a&&n.scrollWidth>n.clientWidth)n.scrollLeft=Math.max(0,a.offsetLeft-32)})()</script>
+<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="index.html">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="index.html">Home</a><a href="services.html" aria-current="page">Solution</a><a href="use-cases.html">Use cases</a><a href="research.html">Research</a><a href="tools.html">Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");var r=a?a.offsetLeft+a.offsetWidth+16-n.clientWidth:0;if(r>0)n.scrollLeft=r})()</script>
 <main id="main" tabindex="-1" class="wrap">
 <span class="eyebrow">Browser-local scope brief</span>
 <h1>Scope one live ClinicOps engagement.</h1><p class="lede">Most teams start with a Regulatory Integrity Review. Briefs go directly to the founder and are answered personally.</p>

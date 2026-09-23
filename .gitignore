@@ -12,3 +12,11 @@ build/
 data/eudamed/full/
 # Playwright CLI output (may contain credentials)
 .playwright-cli/
+
+# Frontend QA (qa/)
+qa/out/
+qa/node_modules/
+node_modules/
+
+# root symlink used by local QA runs
+/node_modules

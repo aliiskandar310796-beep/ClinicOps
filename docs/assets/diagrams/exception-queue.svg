@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 470" role="img" aria-labelledby="t d">
+<title id="t">Exception row anatomy</title>
+<desc id="d">Annotated sample of one exception row with eight parts: field, source value, expected, observed, provenance, owner, next action, and status shown as colour plus the words mismatch signal, to verify. All values are fictional (Example MedTech A).</desc>
+<style>
+svg{font-family:Geist,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.s{font-size:18px;fill:#0f1a17}.m{font-size:16px;fill:#556360}.x{font-family:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:17px;fill:#0f1a17}
+.xm{font-family:"Geist Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:16px;fill:#556360}
+.a{fill:#0f5c52}.ab{stroke:#0f5c52}.bd{stroke:#cdd6d1;fill:none;stroke-width:1}.bf{stroke:#cdd6d1;stroke-width:1;fill:#f6f7f5}.ln{stroke:#556360;stroke-width:1.5;fill:none}
+.wn{fill:#a55b00}.wb{stroke:#a55b00}.hd{fill:#b03333}.hb{stroke:#b03333}.bold{font-weight:600}
+@media (prefers-color-scheme:dark){.s,.x{fill:#e6ece9}.m,.xm{fill:#98a6a1}.a{fill:#4fd8c4}.ab{stroke:#4fd8c4}.bd{stroke:#374541}.bf{stroke:#374541;fill:#0d1211}.ln{stroke:#98a6a1}.wn{fill:#efb05c}.wb{stroke:#efb05c}.hd{fill:#ff9191}.hb{stroke:#ff9191}}
+</style>
+<text x="16" y="30" class="xm">ONE EXCEPTION ROW · fictional sample values</text>
+<rect x="16" y="46" width="600" height="404" rx="5" class="bf"/>
+<text x="32" y="77" class="m">Field</text>
+<text x="176" y="77" class="x">Manufacturer name</text>
+<line x1="616" y1="71" x2="650" y2="71" class="ln"/><circle cx="650" cy="71" r="3" class="a"/><text x="664" y="77" class="m">what is being compared</text>
+<line x1="16" y1="96" x2="616" y2="96" class="bd"/>
+<text x="32" y="127" class="m">Source value</text>
+<text x="176" y="127" class="x">Example MedTech A GmbH</text>
+<line x1="616" y1="121" x2="650" y2="121" class="ln"/><circle cx="650" cy="121" r="3" class="a"/><text x="664" y="127" class="m">value in the approved source</text>
+<line x1="16" y1="146" x2="616" y2="146" class="bd"/>
+<text x="32" y="177" class="m">Expected</text>
+<text x="176" y="177" class="x">Same as source value</text>
+<line x1="616" y1="171" x2="650" y2="171" class="ln"/><circle cx="650" cy="171" r="3" class="a"/><text x="664" y="177" class="m">the rule for a match</text>
+<line x1="16" y1="196" x2="616" y2="196" class="bd"/>
+<text x="32" y="227" class="m">Observed</text>
+<text x="176" y="227" class="x">Example MedTech A Ltd</text>
+<line x1="616" y1="221" x2="650" y2="221" class="ln"/><circle cx="650" cy="221" r="3" class="a"/><text x="664" y="227" class="m">value found in the record</text>
+<line x1="16" y1="246" x2="616" y2="246" class="bd"/>
+<text x="32" y="277" class="m">Provenance</text>
+<text x="176" y="277" class="x">SRC-001 p.2 → REC-014</text>
+<line x1="616" y1="271" x2="650" y2="271" class="ln"/><circle cx="650" cy="271" r="3" class="a"/><text x="664" y="277" class="m">file, page, record ID</text>
+<line x1="16" y1="296" x2="616" y2="296" class="bd"/>
+<text x="32" y="327" class="m">Owner</text>
+<text x="176" y="327" class="x">Regulatory affairs lead</text>
+<line x1="616" y1="321" x2="650" y2="321" class="ln"/><circle cx="650" cy="321" r="3" class="a"/><text x="664" y="327" class="m">a role, so it can be routed</text>
+<line x1="16" y1="346" x2="616" y2="346" class="bd"/>
+<text x="32" y="377" class="m">Next action</text>
+<text x="176" y="377" class="x">Confirm which value is correct</text>
+<line x1="616" y1="371" x2="650" y2="371" class="ln"/><circle cx="650" cy="371" r="3" class="a"/><text x="664" y="377" class="m">one concrete step</text>
+<line x1="16" y1="396" x2="616" y2="396" class="bd"/>
+<text x="32" y="427" class="m">Status</text>
+<circle cx="184" cy="421" r="7" style="fill:none" class="hb" stroke-width="2"/><circle cx="184" cy="421" r="3.5" class="hd"/><text x="202" y="427" class="x bold hd">Mismatch signal</text><text x="376" y="427" class="xm">· to verify</text>
+<line x1="616" y1="421" x2="650" y2="421" class="ln"/><circle cx="650" cy="421" r="3" class="a"/><text x="664" y="427" class="m">colour and word together</text>
+
+</svg>

@@ -44,15 +44,19 @@ main.wrap{padding-top:clamp(40px,6vw,72px)}
 .archive{font-size:.92rem;color:var(--muted)}
 .cta{white-space:normal;text-align:center}
 .register td:first-child{white-space:nowrap}
+.register tbody tr[aria-selected="true"] td:first-child{color:var(--text);font-weight:600;padding-left:12px}
+.register th:first-child{padding-left:12px}
+.register td:first-child{padding-left:12px}
+.detail h3{margin-top:0}
 .register:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .register tbody tr:focus-visible{outline:2px solid var(--accent);outline-offset:-2px;background:var(--surface-2);border-radius:0}
-.register tbody tr[aria-selected="true"]{background:var(--surface-2)}
+.register tbody tr[aria-selected="true"]{background:var(--surface-2);box-shadow:inset 3px 0 0 var(--accent)}
 @media(forced-colors:active){.filter.active{background:Highlight;color:HighlightText;forced-color-adjust:none}.register tbody tr[aria-selected="true"]{outline:2px solid Highlight;outline-offset:-2px}}
 @media print{.filters,.hero-actions{display:none!important}.register{overflow:visible}.register table{min-width:0;font-size:8.5pt}.register td,.register th{padding-right:6px}.register td:first-child{white-space:normal}.detail{display:block}.principles,.chain,.metrics{break-inside:avoid}}
 </style>
 <link rel="preload" href="../assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="../assets/fonts/geist-mono-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="../site.css"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f6f7f5" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0d1211" media="(prefers-color-scheme: dark)"></head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="../index.html">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="../index.html">Home</a><a href="../services.html">Solution</a><a href="../use-cases.html">Use cases</a><a href="../research.html">Research</a><a href="../tools.html" aria-current="page">Tools</a><a href="../about.html">About</a><a href="../contact.html">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");if(a&&n.scrollWidth>n.clientWidth)n.scrollLeft=Math.max(0,a.offsetLeft-32)})()</script>
+<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="../index.html">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="../index.html">Home</a><a href="../services.html">Solution</a><a href="../use-cases.html">Use cases</a><a href="../research.html">Research</a><a href="../tools.html" aria-current="page">Tools</a><a href="../about.html">About</a><a href="../contact.html">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");var r=a?a.offsetLeft+a.offsetWidth+16-n.clientWidth:0;if(r>0)n.scrollLeft=r})()</script>
 <main id="main" tabindex="-1" class="wrap">
 <span class="eyebrow">Live synthetic specimen · version 2</span>
 <h1>A discrepancy register should show the evidence chain—not just the red flags.</h1>

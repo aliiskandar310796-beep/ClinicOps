@@ -1,0 +1,9 @@
+basic_udi_di,udi_di,trade_name,model,risk_class,manufacturer_srn,certificate_no,sscp_ref,doc_version,source_system,source_role,evidence_ref,evidence_date,owner
+FICBU00021,09506000000213,Exempla Pump A,EX-21,IIb,DK-MF-000000001,CERT-A-3001,SSCP-A-v4,IFU-7,RIM,authoritative,RIM export r12,2026-09-10,RA Ops
+FICBU00021,09506000000213,Exempla Pump A,EX-21,IIb,DK-MF-000000001,CERT-A-3009,SSCP-A-v3,IFU-6,EUDAMED,observed,Public record extract,2026-09-10,RA Ops
+FICBU00021,09506000000213,Exempla Pump A,EX-21,IIb,DK-MF-000000001,CERT-A-3001,SSCP-A-v4,IFU-7,Label register,observed,Row 8,2026-09-10,QA
+FICBU00022,09506000000220,Exempla Pump B,EX-22,IIb,DK-MF-000000001,CERT-A-3100,SSCP-A-v2,IFU-3,RIM,authoritative,RIM export r12,2026-09-10,RA Ops
+FICBU00022,09506000000220,Exempla Pump B,EX-22,IIb,DK-MF-000000001,CERT-A-3101,SSCP-A-v2,IFU-3,QMS,authoritative,QMS export,2026-09-10,RA Ops
+FICBU00023,09506000000237,Exempla Pump C,EX-23,IIb,DK-MF-000000001,CERT-A-1001,SSCP-A-v3,IFU-12,EUDAMED,observed,Public record extract,2026-09-10,RA Ops
+FICBU00024,09506000000244,Exempla Pump D,EX-24,IIb,DK-MF-000000001,CERT-A-1001,SSCP-A-v3,IFU-12,RIM,authoritative,RIM export r12,2026-09-10,RA Ops
+FICBU00024,09506000000244,Exempla Pump D,EX-24,IIb,DK-MF-000000001,CERT-A-1001,SSCP-A-v3,IFU-12,RIM,authoritative,RIM export r12,2026-09-10,RA Ops

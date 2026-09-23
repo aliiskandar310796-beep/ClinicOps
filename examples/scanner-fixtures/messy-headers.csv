@@ -1,0 +1,5 @@
+Owner / Responsible,Extra: internal note,Product Name,Basic UDI-DI,Catalogue No,Device Class,UDI-DI,Source,Source Role,Evidence URL/Ref,As-of Date,Certificate,SSCP,Document Revision,Unused column
+RA Ops,ignore me,Exempla Airflow Sensor,FICBU00011,EX-11,IIa,09506000000114,RIM,authoritative,Export r3,2026-09-01,CERT-B-2002,SSCP-B-v1,IFU-4,
+RA Ops,ignore me,Exempla Airflow Sensor,FICBU00011,EX-11,IIa,09506000000114,EUDAMED,observed,Export r3,2026-09-03,CERT-B-2002,SSCP-B-v1,IFU-4,
+RA Ops,ignore me,Exempla Airflow Sensor Kit,FICBU00012,EX-12,IIa,09506000000121,RIM,authoritative,Export r3,2026-09-01,CERT-B-2002,SSCP-B-v1,IFU-4,
+RA Ops,ignore me,Exempla Airflow Sensor Kit,FICBU00012,EX-12,IIa,09506000000121,EUDAMED,observed,Export r3,2026-09-03,CERT-B-2002,SSCP-B-v1,IFU-4,

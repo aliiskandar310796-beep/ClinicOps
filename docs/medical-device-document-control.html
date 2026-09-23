@@ -24,12 +24,12 @@
   "publisher":{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}
 }
 </script>
-<style>main.wrap{padding-top:clamp(40px,7vw,88px);padding-bottom:24px}.rows{list-style:none;margin:20px 0;padding:0;max-width:68ch}.rows li{margin:0;padding:11px 0;border-top:1px solid var(--border)}.rows li:last-child{border-bottom:1px solid var(--border)}.rail{margin-top:clamp(56px,7vw,96px)}.cta-row{align-items:center}.cta-links a{display:inline-flex;align-items:center;min-height:44px}.hero+p{margin-top:clamp(28px,4vw,44px)}</style>
+<style>.rail{margin-top:clamp(56px,7vw,96px);border-top:1px solid var(--border-strong);padding-top:1.35rem;position:relative}.rail::before{content:"";position:absolute;top:-1px;left:0;width:48px;height:2px;background:var(--accent)}.rail>h2{border-top:0;padding-top:0}.rail>h2::before{display:none}.rail .callout{max-width:none;margin-top:0}@media(max-width:960px){.rail{row-gap:14px}}@media(forced-colors:active){.rail::before{background:Highlight}}.cta-row{align-items:center}.cta-links a{display:inline-flex;align-items:center;min-height:44px}.hero+p{margin-top:clamp(28px,4vw,44px)}.rail>.cta-links{margin-top:6px}</style>
 <link rel="preload" href="assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/fonts/geist-mono-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="site.css"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f6f7f5" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0d1211" media="(prefers-color-scheme: dark)"></head>
 <body>
 <!-- claim-use: website -->
 <!-- claim-ids: CO-CLM-0004 -->
-<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="index.html">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="index.html">Home</a><a href="services.html">Solution</a><a href="use-cases.html" aria-current="page">Use cases</a><a href="research.html">Research</a><a href="tools.html">Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");if(a&&n.scrollWidth>n.clientWidth)n.scrollLeft=Math.max(0,a.offsetLeft-32)})()</script>
+<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="index.html">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="index.html">Home</a><a href="services.html">Solution</a><a href="use-cases.html" aria-current="page">Use cases</a><a href="research.html">Research</a><a href="tools.html">Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");var r=a?a.offsetLeft+a.offsetWidth+16-n.clientWidth:0;if(r>0)n.scrollLeft=r})()</script>
 <main id="main" tabindex="-1" class="wrap">
 <section class="hero">
 <span class="eyebrow">Document control</span>
@@ -51,18 +51,18 @@
 <section><h3>Decision boundary</h3><div><p>Where supplied sources conflict, record the issue as unresolved for RA/QA rather than silently choosing an authoritative value.</p></div></section>
 </div>
 
-<h2>Reconciliation-as-evidence</h2>
-<p>ClinicOps documents inconsistencies and evidence gaps and shows the provenance of each value. It does not arbitrarily select an authoritative value where the supplied sources conflict. Reconciliation is the evidence; the final decision remains with the responsible regulatory or quality function.</p>
+<section class="rail"><h2>Reconciliation-as-evidence</h2>
+<p>ClinicOps documents inconsistencies and evidence gaps and shows the provenance of each value. It does not arbitrarily select an authoritative value where the supplied sources conflict. Reconciliation is the evidence; the final decision remains with the responsible regulatory or quality function.</p></section>
 
 <section class="rail"><h2>RA/QA retains sign-off</h2>
 <p>ClinicOps does not replace the manufacturer's or RA/QA function's approval responsibility. Which value is authoritative, and whether a difference matters, stays with the responsible team. The value is in reducing repeated manual cross-checking and making version-level differences easy to review, hand off and revisit.</p></section>
 
-<h2>Identifier screening boundary</h2>
-<div class="callout boundary"><p>Where a review touches EUDAMED identifiers, the EUDAMED DI uses the B- prefix for the legacy registration model and stands in place of a Basic UDI-DI there. Identifier structure alone does not establish the complete regulatory state of a device.</p></div>
+<section class="rail"><h2>Identifier screening boundary</h2>
+<div class="callout boundary"><p>Where a review touches EUDAMED identifiers, the EUDAMED DI uses the B- prefix for the legacy registration model and stands in place of a Basic UDI-DI there. Identifier structure alone does not establish the complete regulatory state of a device.</p></div></section>
 
-<h2>Typical output</h2>
-<div class="split"><ul class="rows"><li>source and revision inventory;</li><li>inconsistency register with provenance;</li><li>unresolved-evidence list;</li><li>recommended review sequence;</li><li>closure fields for the responsible team.</li></ul>
-<p>No missing or mismatched field is treated as a standalone non-compliance finding.</p></div>
+<section class="rail"><h2>Typical output</h2>
+<ul class="rows num"><li>source and revision inventory;</li><li>inconsistency register with provenance;</li><li>unresolved-evidence list;</li><li>recommended review sequence;</li><li>closure fields for the responsible team.</li></ul>
+<p>No missing or mismatched field is treated as a standalone non-compliance finding.</p></section>
 
 <div class="ledger"><section><h3>Related workflows</h3><div><p><a href="regulatory-intelligence.html">Regulatory Intelligence</a> &middot; <a href="eudamed-transition.html">EUDAMED Intelligence</a> &middot; <a href="sscp-operations.html">SS(C)P Operations</a> &middot; <a href="class-iii-transition.html">MDR Transition</a></p></div></section></div>
 
@@ -70,6 +70,6 @@
 <p>Send a small set of controlled sources, or discuss the workflow first. ClinicOps will identify what can be reconciled reproducibly, what remains unresolved and where authoritative evidence and RA/QA judgement are still required.</p>
 <div class="cta-row"><a class="cta primary" href="assessment-intake.html">Build an assessment brief</a><div class="cta-links"><a href="contact.html">Contact ClinicOps</a></div></div></section>
 </main>
-<footer class="site"><div class="footer-inner"><span>&copy; 2026 ClinicOps. Danish-led, EU-wide medical device regulatory intelligence.</span><span><a href="mailto:info@clinicops.dk">info@clinicops.dk</a> &middot; <a href="https://www.linkedin.com/company/clinicops-danish-regulatory/">LinkedIn</a> &middot; <a href="privacy-notice/">Privacy</a></span></div></footer>
+<footer class="site"><div class="footer-inner"><span>&copy; 2026 ClinicOps. Danish-led, EU-wide medical device regulatory intelligence.</span><span><a href="mailto:info@clinicops.dk">info@clinicops.dk</a> &middot; <a href="https://www.linkedin.com/company/clinicops-dk/">LinkedIn</a> &middot; <a href="privacy-notice/">Privacy</a></span></div></footer>
 </body>
 </html>

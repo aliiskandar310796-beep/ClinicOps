@@ -1,0 +1,10 @@
+basic_udi_di,udi_di,trade_name,model,risk_class,manufacturer_srn,certificate_no,sscp_ref,doc_version,source_system,source_role,evidence_ref,evidence_date,owner
+FICBU00001,09506000000015,Exempla Flow Monitor,EX-1,IIb,DK-MF-000000001,CERT-A-1001,SSCP-A-v3,IFU-12,RIM,authoritative,RIM export r12,2026-09-10,RA Ops
+FICBU00001,09506000000015,Exempla Flow Monitor,EX-1,IIb,DK-MF-000000001,CERT-A-1001,SSCP-A-v3,IFU-12,EUDAMED,observed,Public record extract,2026-09-12,RA Ops
+FICBU00001,09506000000015,Exempla Flow Monitor,EX-1,IIb,DK-MF-000000001,CERT-A-1001,SSCP-A-v3,IFU-12,Label register,observed,Label register row 1,2026-09-11,QA
+FICBU00002,09506000000022,Exempla Sense Patch,EX-2,IIa,DK-MF-000000001,CERT-A-1001,SSCP-A-v3,IFU-12,RIM,authoritative,RIM export r12,2026-09-10,RA Ops
+FICBU00002,09506000000022,Exempla Sense Patch,EX-2,IIa,DK-MF-000000001,CERT-A-1001,SSCP-A-v3,IFU-12,EUDAMED,observed,Public record extract,2026-09-12,RA Ops
+FICBU00002,09506000000022,Exempla Sense Patch,EX-2,IIa,DK-MF-000000001,CERT-A-1001,SSCP-A-v3,IFU-12,Label register,observed,Label register row 2,2026-09-11,QA
+FICBU00003,09506000000039,Exempla Dose Assist,EX-3,IIb,DK-MF-000000001,CERT-A-1001,SSCP-A-v3,IFU-12,RIM,authoritative,RIM export r12,2026-09-10,RA Ops
+FICBU00003,09506000000039,Exempla Dose Assist,EX-3,IIb,DK-MF-000000001,CERT-A-1001,SSCP-A-v3,IFU-12,EUDAMED,observed,Public record extract,2026-09-12,RA Ops
+FICBU00003,09506000000039,Exempla Dose Assist,EX-3,IIb,DK-MF-000000001,CERT-A-1001,SSCP-A-v3,IFU-12,Label register,observed,Label register row 3,2026-09-11,QA
