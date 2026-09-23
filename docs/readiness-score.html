@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <title>Transition Readiness Score | ClinicOps</title>
 <meta name="description" content="A private, browser-only screening aid for organising EUDAMED transition work-plan evidence before a human regulatory review.">
 <link rel="canonical" href="https://clinicops.dk/readiness-score.html">
@@ -14,7 +14,7 @@
 <meta property="og:url" content="https://clinicops.dk/readiness-score.html">
 <meta property="og:site_name" content="ClinicOps">
 
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://clinicops.dk/assets/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://clinicops.dk/assets/og-image.png">
 
 <script type="application/ld+json">
 {
@@ -37,64 +37,44 @@
 </script>
 
 <style>
-:root{color-scheme:light dark;
---bg:#fbfaf8;--surface:#ffffff;--surface-2:#f3f1ec;--text:#1c2430;--muted:#5b6572;
---border:#d8dee5;--accent:#0f5c52;--accent-strong:#0a413a;--accent-contrast:#ffffff;--accent-soft:#e4f2ef}
-@media (prefers-color-scheme:dark){:root{
---bg:#11151b;--surface:#171d25;--surface-2:#1d242d;--text:#e7ebef;--muted:#9aa5b1;
---border:#2a323c;--accent:#4fd8c4;--accent-strong:#8ff0e0;--accent-contrast:#08201c;--accent-soft:#132925}}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}
-.wrap{max-width:900px;margin:0 auto;padding:0 20px}
-header.site{border-bottom:1px solid var(--border);background:var(--surface)}
-.site-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:16px 20px;max-width:900px;margin:0 auto}
-.brand{font-weight:800;font-size:1.15rem;color:var(--text);text-decoration:none;letter-spacing:-.01em}
-.brand span{color:var(--accent)}
-nav.primary{display:flex;flex-wrap:wrap;gap:4px 2px;font-size:.86rem}
-nav.primary a{color:var(--muted);text-decoration:none;padding:7px 10px;border-radius:7px;white-space:nowrap}
-nav.primary a:hover{color:var(--text);background:var(--surface-2)}
-nav.primary a[aria-current="page"]{color:var(--accent-contrast);background:var(--accent);font-weight:600}
-main{padding:44px 0 20px}
-h1{font-size:2rem;line-height:1.2;letter-spacing:-.01em;text-wrap:balance;margin:0 0 14px}
-h2{font-size:1.35rem;margin:1.1em 0 .5em}
-h3{font-size:1.08rem;margin:1.2em 0 .4em}
-p{margin:.9em 0}
-.lede{font-size:1.12rem;color:var(--muted)}
-.eyebrow{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:4px 10px;border-radius:999px;margin-bottom:14px}
-fieldset{border:1px solid var(--border);background:var(--surface);border-radius:12px;margin:16px 0;padding:16px 18px}
-legend{font-weight:700;padding:0 6px}
-label{display:block;margin:8px 0}
-select{width:100%;padding:11px;font-size:1rem;box-sizing:border-box;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text)}
-button,.cta{display:inline-block;margin-top:12px;padding:11px 18px;border-radius:9px;border:1px solid var(--accent);text-decoration:none;font:inherit;font-weight:600;cursor:pointer;background:transparent;color:var(--accent)}
-button[type="submit"],.cta.primary{background:var(--accent);color:var(--accent-contrast);border-color:var(--accent)}
-.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin:14px 0}
-.result{margin-top:24px;padding:18px;border:1px solid var(--border);background:var(--surface-2);border-radius:12px}
-.score{font-size:2rem;font-weight:800}
-.muted{color:var(--muted);font-size:.92rem}
-.gap{margin:.55rem 0}
-.badge{display:inline-block;padding:3px 9px;border:1px solid var(--border);border-radius:999px;font-size:.8rem;color:var(--muted)}
-ul{padding-left:1.2rem}
-footer.site{border-top:1px solid var(--border);margin-top:52px}
-.footer-inner{max-width:900px;margin:0 auto;padding:26px 20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--muted);font-size:.86rem}
-.footer-inner a{color:var(--muted)}
+main.wrap{padding-top:clamp(40px,6vw,72px)}
+fieldset{border:0;border-top:1px solid var(--border-strong);margin:0;padding:18px 0 22px;min-width:0}
+legend{font-family:var(--mono);font-size:.76rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);padding:0 12px 0 0;float:left;width:100%;margin-bottom:8px}
+legend+label{clear:both}
+fieldset label{font-weight:500;margin:0 0 8px}
+select{min-height:44px}
+button.cta{font:inherit;font-size:.95rem;font-weight:600}
+.cta-row{margin:22px 0}
+.result{margin-top:32px;padding:24px 0 8px;border-top:2px solid var(--accent)}
+.result[hidden]{display:none}
+.score{font-family:var(--mono);font-weight:500;font-size:clamp(2.6rem,6vw,4rem);letter-spacing:-.04em;line-height:1;margin:14px 0 6px;font-variant-numeric:tabular-nums}
+.result h2{margin:0 0 .3em;padding-top:0;border-top:0;font-size:1.4rem}
+.result h3{margin-top:1.4em}
+#gaps{list-style:none;margin:8px 0 18px;padding:0;max-width:47.74em}
+.gap{margin:0;padding:11px 0 11px 22px;border-top:1px solid var(--border);position:relative;font-size:.95rem}
+.gap::before{content:"";position:absolute;left:0;top:1.15em;width:.5em;height:.5em;border-radius:1px;background:var(--warn)}
+.gap:last-child{border-bottom:1px solid var(--border)}
+.cta{white-space:normal;text-align:center}
+@media print{form,.cta-row{display:none!important}.result{break-inside:avoid}}
 </style>
-<link rel="stylesheet" href="site.css"></head>
+<link rel="preload" href="assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/fonts/geist-mono-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="site.css"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f6f7f5" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0d1211" media="(prefers-color-scheme: dark)"></head>
 <body>
 <!-- claim-use: website -->
 <!-- claim-ids: CO-CLM-0001 -->
-<header class="site"><div class="site-inner"><a class="brand" href="index.html">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="index.html">Home</a><a href="services.html">Solution</a><a href="use-cases.html">Use cases</a><a href="research.html">Research</a><a href="tools.html" aria-current="page">Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header>
-<main class="wrap">
+<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="index.html">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="index.html">Home</a><a href="services.html">Solution</a><a href="use-cases.html">Use cases</a><a href="research.html">Research</a><a href="tools.html" aria-current="page">Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");if(a&&n.scrollWidth>n.clientWidth)n.scrollLeft=Math.max(0,a.offsetLeft-32)})()</script>
+<main id="main" tabindex="-1" class="wrap">
 <span class="eyebrow">Free tool</span>
 <h1>Transition Readiness Score</h1>
 <p class="lede">Answer five self-reported work-plan questions. The tool runs entirely in your browser. <strong>Nothing is sent to ClinicOps.</strong></p>
 <p class="muted"><a href="identifier-check.html">Try the EUDAMED Identifier Check &rarr;</a></p>
 <p class="muted">This is a screening aid for operational readiness, not a regulatory determination, compliance score, legal conclusion, or live EUDAMED verification.</p>
 
+<noscript><div class="callout boundary"><p>This tool runs in your browser and needs JavaScript enabled.</p></div></noscript>
 <form id="readiness-form">
 <fieldset>
 <legend>1. Registration path</legend>
 <label for="registration">How clearly is the device's current registration / transition path understood?</label>
-<select id="registration" name="registration" required>
+<select id="registration" name="registration" autocomplete="off" required>
 <option value="">Select…</option>
 <option value="controlled">MDR / transition path is known and documented</option>
 <option value="legacy">Legacy / transition-related path is known, but work remains</option>
@@ -105,7 +85,7 @@ footer.site{border-top:1px solid var(--border);margin-top:52px}
 <fieldset>
 <legend>2. Basic UDI-DI / identifier control</legend>
 <label for="basic_udi">How controlled is the relevant identifier information?</label>
-<select id="basic_udi" name="basic_udi" required>
+<select id="basic_udi" name="basic_udi" autocomplete="off" required>
 <option value="">Select…</option>
 <option value="controlled">Confirmed and controlled in the working evidence set</option>
 <option value="in_progress">Known but reconciliation or transition work is still open</option>
@@ -116,7 +96,7 @@ footer.site{border-top:1px solid var(--border);margin-top:52px}
 <fieldset>
 <legend>3. SS(C)P workstream</legend>
 <label for="sscp">If SS(C)P applies to this device, how controlled is the current evidence and workflow?</label>
-<select id="sscp" name="sscp" required>
+<select id="sscp" name="sscp" autocomplete="off" required>
 <option value="">Select…</option>
 <option value="controlled">Applicability and current evidence/workflow are controlled</option>
 <option value="not_applicable">Not applicable, confirmed by the responsible RA/QA team</option>
@@ -128,7 +108,7 @@ footer.site{border-top:1px solid var(--border);margin-top:52px}
 <fieldset>
 <legend>4. Certificate / transition timing</legend>
 <label for="timing">How well controlled are the dates and timing evidence that drive the work plan?</label>
-<select id="timing" name="timing" required>
+<select id="timing" name="timing" autocomplete="off" required>
 <option value="">Select…</option>
 <option value="controlled">Verified dates are controlled and have an owner</option>
 <option value="partial">Some timing evidence is known but incomplete</option>
@@ -139,7 +119,7 @@ footer.site{border-top:1px solid var(--border);margin-top:52px}
 <fieldset>
 <legend>5. Target-market document control</legend>
 <label for="market_docs">How controlled are target-market / language document requirements and ownership?</label>
-<select id="market_docs" name="market_docs" required>
+<select id="market_docs" name="market_docs" autocomplete="off" required>
 <option value="">Select…</option>
 <option value="controlled">Markets, language/document controls, and owners are confirmed</option>
 <option value="partial">Partially mapped / some ownership is unresolved</option>
@@ -149,7 +129,7 @@ footer.site{border-top:1px solid var(--border);margin-top:52px}
 
 <div class="cta-row">
 <button type="submit" class="cta primary">Calculate readiness signal</button>
-<button type="reset" class="cta">Reset</button>
+<button type="reset" class="cta ghost">Reset</button>
 </div>
 </form>
 
@@ -163,7 +143,7 @@ footer.site{border-top:1px solid var(--border);margin-top:52px}
 <p><strong>Next step:</strong> Resolve unresolved points against EUDAMED and your RA/QA team before relying on the result externally.</p>
 <div class="cta-row">
 <a class="cta primary" id="continue-brief" href="assessment-intake.html">Continue to the assessment brief</a>
-<a class="cta" href="mailto:info@clinicops.dk?subject=Regulatory%20Intelligence%20Assessment">Request a Regulatory Intelligence Assessment by email</a>
+<a class="cta ghost" href="mailto:info@clinicops.dk?subject=Regulatory%20Intelligence%20Assessment">Request a Regulatory Intelligence Assessment by email</a>
 </div>
 <p class="muted">Continuing carries only this score, band and gap list into the brief page &mdash; locally, in this browser tab. Nothing is sent to ClinicOps.</p>
 </section>

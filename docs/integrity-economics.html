@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <title>Regulatory Change Review Cost Calculator | ClinicOps</title>
 <meta name="description" content="Estimate the current manual workload and labour cost of checking regulatory change propagation across EUDAMED, IFU, SS(C)P, labels and controlled systems. Runs locally in your browser.">
 <link rel="canonical" href="https://clinicops.dk/integrity-economics.html">
@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://clinicops.dk/integrity-economics.html">
 <meta property="og:site_name" content="ClinicOps">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://clinicops.dk/assets/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://clinicops.dk/assets/og-image.png">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"Regulatory Change Review Cost Calculator","url":"https://clinicops.dk/integrity-economics.html","applicationCategory":"BusinessApplication","operatingSystem":"Any modern browser","isAccessibleForFree":true,"publisher":{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}
 </script>
@@ -20,26 +20,40 @@
 {"@context":"https://schema.org","@type":"WebPage","name":"Regulatory Change Review Cost Calculator | ClinicOps","url":"https://clinicops.dk/integrity-economics.html","isPartOf":{"@type":"WebSite","name":"ClinicOps","url":"https://clinicops.dk/"},"publisher":{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}
 </script>
 <style>
-:root{color-scheme:light dark;--bg:#fbfaf8;--surface:#fff;--surface-2:#f3f1ec;--text:#1c2430;--muted:#5b6572;--border:#d8dee5;--accent:#0f5c52;--accent-contrast:#fff;--accent-soft:#e4f2ef}
-@media(prefers-color-scheme:dark){:root{--bg:#11151b;--surface:#171d25;--surface-2:#1d242d;--text:#e7ebef;--muted:#9aa5b1;--border:#2a323c;--accent:#4fd8c4;--accent-contrast:#08201c;--accent-soft:#132925}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}.wrap{max-width:900px;margin:0 auto;padding:0 20px}header{border-bottom:1px solid var(--border);background:var(--surface)}.head{max-width:900px;margin:0 auto;padding:16px 20px;display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap}.brand{font-weight:800;color:var(--text);text-decoration:none}.brand span{color:var(--accent)}nav a{color:var(--muted);margin-left:12px}main{padding:42px 0 24px}h1{font-size:2rem;line-height:1.2;margin:.2em 0 .5em}h2{font-size:1.32rem;margin:2em 0 .6em}.lede{font-size:1.1rem;color:var(--muted)}.eyebrow{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:4px 10px;border-radius:999px}.callout{border:1px solid var(--border);background:var(--surface-2);border-radius:12px;padding:15px 18px;margin:20px 0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}@media(max-width:680px){.grid{grid-template-columns:1fr}}.field{margin-bottom:16px}label{display:block;font-weight:650;margin-bottom:6px}input{width:100%;font:inherit;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 11px}.hint{color:var(--muted);font-size:.88rem}.results{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin:18px 0}.metric{border:1px solid var(--border);background:var(--surface);border-radius:12px;padding:16px}.metric strong{display:block;font-size:1.45rem}.metric span{color:var(--muted);font-size:.88rem}.cta{display:inline-block;padding:12px 18px;border-radius:9px;border:1px solid var(--accent);text-decoration:none;font-weight:650}.primary{background:var(--accent);color:var(--accent-contrast)}.ghost{color:var(--accent)}.actions{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}footer{border-top:1px solid var(--border);margin-top:44px;padding:24px 0;color:var(--muted);font-size:.88rem}a{color:var(--accent)}
+main.wrap{padding-top:clamp(40px,6vw,72px)}
+main .grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:4px clamp(20px,3vw,40px);margin:28px 0 8px}
+@media(max-width:900px){main .grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){main .grid{grid-template-columns:1fr}}
+input[type=number]{font-family:var(--mono);font-variant-numeric:tabular-nums;min-height:44px}
+.field{border-top:1px solid var(--border);padding-top:14px}
+.field label{font-size:.9rem}
+.results{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:24px 0 12px;border-top:1px solid var(--border-strong);border-bottom:1px solid var(--border)}
+.metric{padding:18px 18px 16px 0;margin-right:18px;border-right:1px solid var(--border)}
+.metric:last-child{border-right:0;margin-right:0}
+.metric strong{display:block;font-family:var(--mono);font-weight:500;font-size:clamp(1.5rem,2.6vw,2.1rem);letter-spacing:-.03em;line-height:1.1;font-variant-numeric:tabular-nums}
+.metric span{display:block;margin-top:8px;color:var(--muted);font-size:.85rem;line-height:1.35}
+@media(max-width:900px){.results{grid-template-columns:repeat(2,minmax(0,1fr))}.metric:nth-child(2){border-right:0;margin-right:0}.metric:nth-child(-n+2){border-bottom:1px solid var(--border)}}
+#explain{max-width:45.08em}
+footer.site .footer-inner{padding-top:24px}
+.cta{white-space:normal;text-align:center}
 </style>
-<link rel="stylesheet" href="site.css"></head>
+<link rel="preload" href="assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/fonts/geist-mono-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="site.css"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f6f7f5" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0d1211" media="(prefers-color-scheme: dark)"></head>
 <body>
-<header class="site"><div class="site-inner"><a class="brand" href="index.html">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="index.html">Home</a><a href="services.html">Solution</a><a href="use-cases.html">Use cases</a><a href="research.html">Research</a><a href="tools.html" aria-current="page">Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header>
-<main class="wrap">
+<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="index.html">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="index.html">Home</a><a href="services.html">Solution</a><a href="use-cases.html">Use cases</a><a href="research.html">Research</a><a href="tools.html" aria-current="page">Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");if(a&&n.scrollWidth>n.clientWidth)n.scrollLeft=Math.max(0,a.offsetLeft-32)})()</script>
+<main id="main" tabindex="-1" class="wrap">
 <span class="eyebrow">Browser-local calculator</span>
 <h1>What does manual regulatory change review cost today?</h1>
 <p class="lede">Use your own workload and labour assumptions to estimate the effort spent checking that a regulated change has propagated across the places where it is supposed to appear.</p>
 <div class="callout"><strong>No hidden benchmark.</strong> ClinicOps does not assume a savings rate. You enter the current workload and a hypothetical reduction in manual review time. This page sends nothing to ClinicOps and stores nothing remotely.</div>
 
+<noscript><div class="callout boundary"><p>This tool runs in your browser and needs JavaScript enabled.</p></div></noscript>
 <div class="grid">
-<div class="field"><label for="changes">Change / release events per month</label><input id="changes" type="number" min="0" max="10000" step="1" value="8"><div class="hint">Events that trigger cross-surface checking.</div></div>
-<div class="field"><label for="surfaces">Surfaces checked per event</label><input id="surfaces" type="number" min="1" max="100" step="1" value="5"><div class="hint">For example EUDAMED, RIM/master, IFU, SS(C)P, label/artwork.</div></div>
-<div class="field"><label for="minutes">Manual minutes per surface check</label><input id="minutes" type="number" min="1" max="1440" step="1" value="12"></div>
-<div class="field"><label for="rate">Loaded RA/QA labour cost per hour (€)</label><input id="rate" type="number" min="1" max="1000" step="1" value="75"></div>
-<div class="field"><label for="reduction">Hypothetical reduction in manual review time (%)</label><input id="reduction" type="number" min="0" max="95" step="5" value="25"><div class="hint">Scenario only. A live pilot must measure the actual result.</div></div>
-<div class="field"><label for="pilot">Pilot fee to test (€)</label><input id="pilot" type="number" min="0" max="100000" step="10" value="750"><div class="hint">Use any fee you want to evaluate. This is not a published ClinicOps price.</div></div>
+<div class="field"><label for="changes">Change / release events per month</label><input id="changes" name="changes" autocomplete="off" inputmode="decimal" type="number" min="0" max="10000" step="1" value="8"><div class="hint">Events that trigger cross-surface checking.</div></div>
+<div class="field"><label for="surfaces">Surfaces checked per event</label><input id="surfaces" name="surfaces" autocomplete="off" inputmode="decimal" type="number" min="1" max="100" step="1" value="5"><div class="hint">For example EUDAMED, RIM/master, IFU, SS(C)P, label/artwork.</div></div>
+<div class="field"><label for="minutes">Manual minutes per surface check</label><input id="minutes" name="minutes" autocomplete="off" inputmode="decimal" type="number" min="1" max="1440" step="1" value="12"></div>
+<div class="field"><label for="rate">Loaded RA/QA labour cost per hour (€)</label><input id="rate" name="rate" autocomplete="off" inputmode="decimal" type="number" min="1" max="1000" step="1" value="75"></div>
+<div class="field"><label for="reduction">Hypothetical reduction in manual review time (%)</label><input id="reduction" name="reduction" autocomplete="off" inputmode="decimal" type="number" min="0" max="95" step="5" value="25"><div class="hint">Scenario only. A live pilot must measure the actual result.</div></div>
+<div class="field"><label for="pilot">Pilot fee to test (€)</label><input id="pilot" name="pilot" autocomplete="off" inputmode="decimal" type="number" min="0" max="100000" step="10" value="750"><div class="hint">Use any fee you want to evaluate. This is not a published ClinicOps price.</div></div>
 </div>
 
 <h2>Current-state economics</h2>
@@ -49,12 +63,12 @@
 <div class="metric"><strong id="potential">—</strong><span>scenario labour capacity released / year</span></div>
 <div class="metric"><strong id="payback">—</strong><span>scenario pilot payback</span></div>
 </div>
-<p id="explain" class="hint"></p>
+<p id="explain" class="hint" aria-live="polite"></p>
 
 <div class="callout"><strong>What a pilot should prove.</strong> Review minutes before/after, number of declared checks, findings confirmed by a qualified reviewer, false positives, unresolved source-authority cases, and whether the workflow prevented avoidable re-checking or handoff delay. Savings should be claimed only from measured client-specific evidence.</div>
 <div class="actions"><a class="cta primary" href="assessment-intake.html?workstream=integrity-review">Request a paid Integrity Review pilot scope</a><a class="cta ghost" href="integrity-gate.html">See how Integrity Review works</a></div>
 </main>
-<footer><div class="wrap">ClinicOps · Scenario calculator only; not financial, legal or regulatory advice. · <a href="privacy-notice/">Privacy notice</a></div></footer>
+<footer class="site"><div class="footer-inner"><span>ClinicOps · Scenario calculator only; not financial, legal or regulatory advice. · <a href="privacy-notice/">Privacy notice</a></span></div></footer>
 <script>
 (() => {
   "use strict";

@@ -125,8 +125,8 @@ def validate_page_metadata(html: str, expected_url: str) -> list[str]:
         errors.append("og:type must be 'website'")
     if parser.meta.get("og:site_name") != "ClinicOps":
         errors.append("og:site_name must be 'ClinicOps'")
-    if parser.meta.get("twitter:card") != "summary":
-        errors.append("twitter:card must be 'summary'")
+    if parser.meta.get("twitter:card") not in {"summary", "summary_large_image"}:
+        errors.append("twitter:card must be 'summary' or 'summary_large_image'")
 
     if not parser.json_ld_blocks:
         errors.append("missing application/ld+json structured data")

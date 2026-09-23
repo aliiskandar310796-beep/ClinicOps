@@ -71,6 +71,7 @@ def _header(page: Path) -> str:
         f'<a class="brand" href="{prefix}index.html">Clinic<span>Ops</span></a>'
         f'<nav class="primary" aria-label="Primary">{nav}</nav>'
         f"</div></header>"
+        '<script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");if(a&&n.scrollWidth>n.clientWidth)n.scrollLeft=Math.max(0,a.offsetLeft-32)})()</script>'
     )
 
 
@@ -81,6 +82,13 @@ def transform(page: Path, text: str) -> str:
     if not HEADER_RE.search(text):
         raise ValueError(f"{relative}: public page has no replaceable <header>")
     transformed = HEADER_RE.sub(_header(page), text, count=1)
+    if "skip-link" not in transformed:
+        transformed = transformed.replace(
+            '<header class="site"',
+            '<a class="skip-link" href="#main">Skip to content</a><header class="site"',
+            1,
+        )
+    transformed = re.sub(r"<main(?![^>]*\bid=)([^>]*)>", r'<main id="main" tabindex="-1"\1>', transformed, count=1)
     if not SITE_CSS_RE.search(transformed):
         prefix = _prefix(page)
         stylesheet = f'<link rel="stylesheet" href="{prefix}site.css">'

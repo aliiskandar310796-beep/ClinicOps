@@ -10,3 +10,5 @@ build/
 
 # EUDAMED watch: fully-named local reports (never commit)
 data/eudamed/full/
+# Playwright CLI output (may contain credentials)
+.playwright-cli/
