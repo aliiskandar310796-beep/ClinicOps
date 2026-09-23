@@ -11,7 +11,51 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Technical File Consistency Check | ClinicOps","url":"https://clinicops.dk/technical-file-consistency.html","isPartOf":{"@type":"WebSite","name":"ClinicOps","url":"https://clinicops.dk/"},"publisher":{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"ClinicOps Technical File Consistency Check","url":"https://clinicops.dk/technical-file-consistency.html","applicationCategory":"BusinessApplication","operatingSystem":"Any modern browser","isAccessibleForFree":true,"publisher":{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}</script>
 <style>
-:root{color-scheme:light dark;--bg:#f8f7f4;--surface:#fff;--surface2:#f0eee8;--text:#17202b;--muted:#5e6874;--border:#d7dde2;--accent:#0d6559;--contrast:#fff;--soft:#e0f1ed;--ok:#157847;--warn:#a55b00;--hold:#b03333}@media(prefers-color-scheme:dark){:root{--bg:#101419;--surface:#171d24;--surface2:#1d252d;--text:#e8edf1;--muted:#a1aab4;--border:#303943;--accent:#52d7c3;--contrast:#08221d;--soft:#142b27;--ok:#69d79d;--warn:#efb05c;--hold:#ff9191}}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.55}.wrap{max-width:1120px;margin:auto;padding:0 22px}main{padding:54px 0 64px}h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.04;letter-spacing:-.04em;margin:.16em 0 .36em;max-width:850px}h2{font-size:1.42rem;margin:2.1em 0 .65em}h3{font-size:1.03rem;margin:.1em 0 .4em}.lede{font-size:1.12rem;max-width:790px;color:var(--muted)}.muted,.hint{color:var(--muted)}.eyebrow{display:inline-flex;font-size:.75rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);background:var(--soft);padding:5px 11px;border-radius:999px}.trust,.actions{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0}.chip{font-size:.82rem;border:1px solid var(--border);background:var(--surface);border-radius:999px;padding:6px 10px;color:var(--muted)}.panel,.callout,.result{border:1px solid var(--border);border-radius:16px;background:var(--surface);padding:19px;margin:18px 0}.callout{background:var(--surface2)}.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}@media(max-width:760px){.grid2{grid-template-columns:1fr}}label{display:block;font-weight:700;margin:0 0 6px;font-size:.92rem}input,select{width:100%;font:inherit;padding:9px 10px;border:1px solid var(--border);border-radius:9px;background:var(--surface);color:var(--text)}.field{margin:0 0 13px}.btn,.cta{font:inherit;font-weight:720;border:1px solid var(--accent);border-radius:9px;padding:10px 15px;text-decoration:none;display:inline-block;cursor:pointer}.primary{background:var(--accent);color:var(--contrast)}.secondary{background:transparent;color:var(--accent)}.result-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap}.badge{display:inline-block;font-size:.8rem;font-weight:850;padding:6px 10px;border-radius:999px;background:var(--surface2)}.badge.ok{color:var(--ok)}.badge.review{color:var(--warn)}.badge.hold{color:var(--hold)}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:15px 0}.metric{border:1px solid var(--border);border-radius:11px;padding:11px}.metric strong{display:block;font-size:1.28rem}.metric small{color:var(--muted)}@media(max-width:650px){.metrics{grid-template-columns:repeat(2,1fr)}}table{width:100%;border-collapse:separate;border-spacing:0;margin:14px 0;border:1px solid var(--border);border-radius:11px;overflow:hidden}th,td{padding:8px;text-align:left;vertical-align:top;border-bottom:1px solid var(--border)}th{font-size:.8rem;color:var(--muted);background:var(--surface2)}tr:last-child td{border-bottom:0}#gridwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}#grid{min-width:940px}#grid td{min-width:150px}#grid td:first-child{min-width:190px;font-weight:650;font-size:.88rem}.na{display:flex;gap:5px;align-items:center;font-size:.74rem;color:var(--muted);margin-top:4px;font-weight:500}.na input{width:auto;margin:0}.sev{font-weight:800;font-size:.8rem}.sevCritical{color:var(--hold)}.sevMajor{color:var(--warn)}.sevMinor{color:var(--accent)}.sevInfo{color:var(--muted)}.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}.principle{border-top:2px solid var(--accent);padding-top:10px}.principle span{display:block;font-size:.9rem;color:var(--muted)}@media(max-width:720px){.principles{grid-template-columns:1fr}}footer{border-top:1px solid var(--border);padding:25px 0;color:var(--muted);font-size:.88rem}.fictional{border:1px dashed var(--border);border-radius:9px;padding:9px 12px;background:var(--surface2);font-size:.85rem;color:var(--muted);margin:10px 0}
+main.wrap{padding-top:clamp(40px,6vw,72px)}
+.trust{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0}
+.panel{border-top:1px solid var(--border-strong);padding-top:18px;margin:8px 0 18px}
+.grid,.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 clamp(20px,3vw,40px);margin:16px 0}
+@media(max-width:760px){.grid,.grid2{grid-template-columns:1fr}}
+input,select{min-height:44px}
+input[type=checkbox]{min-height:0;width:20px;height:20px;accent-color:var(--accent)}
+.field label{font-size:.9rem}
+.btn.primary{background:var(--accent);color:var(--accent-contrast)}
+.btn.primary:hover{background:var(--accent-strong);border-color:var(--accent-strong)}
+.btn.secondary{background:transparent;color:var(--text);border-color:var(--border-strong)}
+.btn.secondary:hover{border-color:var(--accent);color:var(--accent)}
+.actions{margin:22px 0}
+.actions a.cta{white-space:normal;text-align:center}
+.result{border-top:2px solid var(--accent);padding:20px 0 0;margin:36px 0 18px}
+.result h2{border-top:0;padding-top:0}
+.result-head{display:flex;justify-content:space-between;gap:14px;align-items:flex-start;flex-wrap:wrap}
+.badge{font-size:.74rem;font-weight:600;padding:5px 9px;color:var(--muted);border-color:var(--border-strong)}
+.badge.ok{color:var(--ok);border-color:currentColor}.badge.review{color:var(--warn);border-color:currentColor}.badge.hold{color:var(--hold);border-color:currentColor}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:20px 0;border-top:1px solid var(--border-strong);border-bottom:1px solid var(--border)}
+.metric{padding:16px 16px 14px 0;margin-right:16px;border-right:1px solid var(--border)}
+.metric:last-child{border-right:0;margin-right:0}
+.metric strong{display:block;font-family:var(--mono);font-weight:500;font-size:clamp(1.5rem,2.6vw,2rem);letter-spacing:-.03em;line-height:1.1;font-variant-numeric:tabular-nums}
+.metric small{display:block;margin-top:6px;color:var(--muted);font-size:.85rem}
+td.muted{padding:22px 0}
+ol#queue{padding-left:1.3rem;max-width:64ch}#queue li{margin:.5em 0}
+.principles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,40px);margin:32px 0}
+.principle{border-top:1px solid var(--border-strong);padding-top:14px}
+.principle strong{display:block;margin-bottom:4px}
+.principle span{display:block;font-size:.93rem;color:var(--muted)}
+.fictional{border-left:2px solid var(--warn);border-radius:0 var(--r-sm) var(--r-sm) 0;padding:10px 14px;background:var(--surface-2);font-size:.88rem;color:var(--muted);margin:14px 0;max-width:78ch}
+.sev{font-family:var(--mono);font-size:.74rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.sev::before{content:"";display:inline-block;width:.5em;height:.5em;margin-right:.55em;border-radius:1px;background:currentColor}
+@media(max-width:720px){.principles{grid-template-columns:1fr}.btn{width:100%}}
+.sevCritical{color:var(--hold)}.sevMajor{color:var(--warn)}.sevMinor{color:var(--accent)}.sevInfo{color:var(--muted)}
+@media(max-width:650px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.metric:nth-child(2){border-right:0;margin-right:0}.metric:nth-child(-n+2){border-bottom:1px solid var(--border)}}
+#gridwrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+#grid{min-width:940px;display:table;margin:0}
+#grid input,#grid select{min-height:40px;font-size:.92rem;padding:7px 9px}
+#grid td{min-width:150px;padding-right:12px}
+#grid td:first-child{min-width:190px;font-weight:600;font-size:.88rem}
+.na{display:flex;gap:6px;align-items:center;font-size:.76rem;color:var(--muted);margin-top:4px;font-weight:500;min-height:28px}
+.na input{width:16px;height:16px;margin:0}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.table-scroll table{display:table;min-width:680px;margin:14px 0}
 </style>
 <link rel="stylesheet" href="site.css"></head>
 <body>
@@ -33,14 +77,14 @@
 <div id="fictionalNote" class="fictional" hidden>Fictional example — the device, manufacturer, identifiers and every value are invented for demonstration. "Nyrelia", the Nyrelia N-200 and Nyrelia Medical ApS do not exist; any resemblance to a real product is coincidental.</div>
 <div class="result" aria-live="polite"><div class="result-head"><div><h2 style="margin:0" id="resultTitle">Consistency report</h2><p id="summary" class="muted">Run the check to see divergences, severity bands and the evidence queue.</p></div><span id="badge" class="badge">NOT RUN</span></div>
 <div class="metrics"><div class="metric"><strong id="cCritical">0</strong><small>critical conflicts</small></div><div class="metric"><strong id="cMajor">0</strong><small>major findings</small></div><div class="metric"><strong id="cMinor">0</strong><small>minor / cosmetic</small></div><div class="metric"><strong id="cInfo">0</strong><small>informational</small></div></div>
-<table><thead><tr><th>Field</th><th>Finding</th><th>Severity</th><th>Detail</th></tr></thead><tbody id="frows"><tr><td colspan="4" class="muted">No check run yet.</td></tr></tbody></table>
+<div class="table-scroll"><table><thead><tr><th>Field</th><th>Finding</th><th>Severity</th><th>Detail</th></tr></thead><tbody id="frows"><tr><td colspan="4" class="muted">No check run yet.</td></tr></tbody></table></div>
 <div class="grid2"><div><h3>Evidence queue</h3><ol id="queue"><li class="muted">No queue generated yet.</li></ol><p class="muted" style="font-size:.84rem">The tool never says which value is correct. For each divergence: identify the controlled source-of-truth document, confirm the approved value with its owner, route the correction through change control, correct every divergent instance, then re-run the check.</p></div><div><h3>Export &amp; handoff</h3><div class="actions" style="margin-top:6px"><button class="btn secondary" id="copy" type="button">Copy summary</button><button class="btn secondary" id="download" type="button">Download JSON</button></div><p class="muted" style="font-size:.84rem">The copied summary carries only the band, counts and divergent field names — never your pasted values, which may be confidential. The downloaded JSON contains the full grid for your own records.</p></div></div>
 </div>
 <div class="principles"><div class="principle"><strong>Verbatim preserved</strong><span>Normalization ("N-200" vs "N200", "(01)" wrappers, "2 years" vs "24 months") only classifies; your pasted text is never altered in the report.</span></div><div class="principle"><strong>Fail-closed</strong><span>One source cannot corroborate itself. Different unit families are flagged for manual verification, never auto-equated across families.</span></div><div class="principle"><strong>Human-owned</strong><span>Findings route review work. Which value is correct — and whether it matters under MDR/IVDR — stays with your qualified owner.</span></div></div>
 <h2>From pasted values to a reviewed technical file</h2><p>This check demonstrates the smallest unit of the method: one fact, several documents, a deterministic verdict on whether the copies agree. A scoped review applies the same discipline across a full technical-documentation set with named owners, evidence references and a reviewer-ready closure packet.</p>
 <div class="actions"><a class="cta primary" href="assessment-intake.html?workstream=technical-file-consistency">Scope a consistency review</a><a class="cta secondary" href="integrity-check.html">Check one change's propagation</a><a class="cta secondary" href="regulatory-change-impact.html">Map a regulatory change's impact</a><a class="cta secondary" href="mailto:info@clinicops.dk?subject=Technical%20file%20consistency">Email info@clinicops.dk</a></div>
 </main>
-<footer><div class="wrap">ClinicOps · Evidence-first regulatory operations · <a href="privacy-notice/">Privacy</a></div></footer>
+<footer class="site"><div class="footer-inner"><span>ClinicOps · Evidence-first regulatory operations · <a href="privacy-notice/">Privacy</a></span></div></footer>
 <script>
 (()=>{"use strict";const $=id=>document.getElementById(id),esc=v=>String(v??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));let last=null;
 const SRC_OPTS=["— none —","EU Declaration of Conformity","Label","IFU","Technical file summary (device description)","SSCP / SSP","Registration / UDI data"];

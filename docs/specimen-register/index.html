@@ -10,8 +10,40 @@
 <meta property="og:title" content="Interactive Regulatory Integrity Specimen Register | ClinicOps"><meta property="og:description" content="Explore how ClinicOps structures regulatory change evidence, discrepancies, routing and human decisions before scoping a real review."><meta property="og:type" content="website"><meta property="og:url" content="https://clinicops.dk/specimen-register/"><meta property="og:site_name" content="ClinicOps"><meta name="twitter:card" content="summary">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Interactive Regulatory Integrity Specimen Register | ClinicOps","url":"https://clinicops.dk/specimen-register/","isPartOf":{"@type":"WebSite","name":"ClinicOps","url":"https://clinicops.dk/"},"publisher":{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}</script>
 <style>
-:root{color-scheme:light dark;--bg:#f8f7f4;--surface:#fff;--surface2:#f0eee8;--text:#17202b;--muted:#5e6874;--border:#d7dde2;--accent:#0d6559;--contrast:#fff;--soft:#e0f1ed;--ok:#157847;--warn:#a55b00;--hold:#b03333;--blue:#315f9c}@media(prefers-color-scheme:dark){:root{--bg:#101419;--surface:#171d24;--surface2:#1d252d;--text:#e8edf1;--muted:#a1aab4;--border:#303943;--accent:#52d7c3;--contrast:#08221d;--soft:#142b27;--ok:#69d79d;--warn:#efb05c;--hold:#ff9191;--blue:#8bb6ef}}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.58}.wrap{max-width:1080px;margin:auto;padding:0 22px}header{border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--surface) 94%,transparent);position:sticky;top:0;z-index:5;backdrop-filter:blur(10px)}.head{max-width:1080px;margin:auto;padding:15px 22px;display:flex;justify-content:space-between;gap:14px;align-items:center;flex-wrap:wrap}.brand{font-weight:850;color:var(--text);text-decoration:none;letter-spacing:-.02em}.brand span{color:var(--accent)}nav a{color:var(--muted);margin-left:14px;text-decoration:none}nav a:hover{color:var(--accent)}main{padding:54px 0 65px}h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.02;letter-spacing:-.04em;margin:.15em 0 .35em;max-width:900px}h2{font-size:1.42rem;margin:2.15em 0 .65em}h3{font-size:1rem;margin:.1em 0 .4em}.lede{font-size:1.12rem;max-width:820px;color:var(--muted)}.muted{color:var(--muted)}.eyebrow{display:inline-flex;align-items:center;font-size:.75rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--accent);background:var(--soft);padding:5px 11px;border-radius:999px}.hero-actions,.filters{display:flex;gap:9px;flex-wrap:wrap;margin:20px 0}.cta,.filter{display:inline-block;padding:10px 15px;border:1px solid var(--accent);border-radius:9px;text-decoration:none;font:inherit;font-weight:720;cursor:pointer}.primary{background:var(--accent);color:var(--contrast)}.ghost,.filter{color:var(--accent);background:transparent}.filter.active{background:var(--soft)}.callout,.panel{border:1px solid var(--border);border-radius:16px;padding:18px;background:var(--surface);margin:18px 0}.callout{background:var(--surface2)}.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin:22px 0}.metric{border:1px solid var(--border);border-radius:13px;padding:15px;background:var(--surface)}.metric strong{font-size:1.45rem;display:block;line-height:1.1}.metric span{color:var(--muted);font-size:.88rem}@media(max-width:720px){.metrics{grid-template-columns:repeat(2,1fr)}}.register{overflow-x:auto;border:1px solid var(--border);border-radius:14px;background:var(--surface)}table{width:100%;border-collapse:collapse;min-width:880px}th,td{padding:12px 11px;text-align:left;vertical-align:top;border-bottom:1px solid var(--border)}th{font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);background:var(--surface2)}tbody tr{cursor:pointer}tbody tr:hover{background:color-mix(in srgb,var(--soft) 35%,transparent)}tbody tr:last-child td{border-bottom:0}.signal{font-weight:850;font-size:.8rem}.match{color:var(--ok)}.different{color:var(--warn)}.unresolved{color:var(--hold)}.closed{color:var(--blue)}.detail{display:none;margin-top:16px;border-left:3px solid var(--accent);padding:4px 0 4px 16px}.detail.open{display:block}.chain{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:14px 0}.node{border:1px solid var(--border);border-radius:11px;padding:11px;background:var(--surface2)}.node small{display:block;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-weight:750;font-size:.69rem}.arrow{color:var(--muted);font-weight:800}@media(max-width:800px){.chain{grid-template-columns:1fr}}.principles{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}.principle{border-top:2px solid var(--accent);padding-top:10px}.principle span{display:block;color:var(--muted);font-size:.9rem}@media(max-width:720px){.principles{grid-template-columns:1fr}}.archive{font-size:.92rem;color:var(--muted)}footer{border-top:1px solid var(--border);padding:25px 0;color:var(--muted);font-size:.88rem}
+main.wrap{padding-top:clamp(40px,6vw,72px)}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));margin:28px 0;border-top:1px solid var(--border-strong);border-bottom:1px solid var(--border)}
+.metric{padding:18px 18px 16px 0;margin-right:18px;border-right:1px solid var(--border)}
+.metric:last-child{border-right:0;margin-right:0}
+.metric strong{display:block;font-family:var(--mono);font-weight:500;font-size:clamp(1.6rem,3vw,2.3rem);letter-spacing:-.03em;line-height:1.1;font-variant-numeric:tabular-nums}
+.metric span{display:block;margin-top:8px;color:var(--muted);font-size:.85rem;line-height:1.35}
+@media(max-width:720px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.metric:nth-child(2){border-right:0;margin-right:0}.metric:nth-child(-n+2){border-bottom:1px solid var(--border)}}
+.filters{display:flex;gap:0;flex-wrap:wrap;margin:18px 0 0;border:1px solid var(--border-strong);border-radius:var(--r);width:fit-content;max-width:100%;overflow:hidden}
+.filter{font:inherit;font-size:.9rem;font-weight:560;min-height:44px;padding:0 16px;background:transparent;color:var(--muted);border:0;border-right:1px solid var(--border);cursor:pointer;transition:background-color .2s var(--ease),color .2s var(--ease)}
+.filter:last-child{border-right:0}
+.filter:hover{color:var(--text);background:var(--surface-2)}
+.filter.active{background:var(--accent);color:var(--accent-contrast)}
+.filter:focus-visible{outline-offset:-3px}
+.register{overflow-x:auto;-webkit-overflow-scrolling:touch;border-top:1px solid var(--border-strong);margin-top:16px}
+.register table{min-width:880px;margin:0;display:table}
+.register tbody tr{cursor:pointer;transition:background-color .15s var(--ease)}
+.register tbody tr:hover{background:var(--surface-2)}
+.register td:first-child{font-family:var(--mono);font-size:.85rem;color:var(--muted)}
+.signal.match{color:var(--ok)}.signal.different{color:var(--hold)}.signal.unresolved{color:var(--warn)}.signal.closed{color:var(--accent)}
+.detail{display:none;margin-top:24px;border-top:2px solid var(--accent);padding-top:14px}
+.detail.open{display:block}
+.chain{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:14px 0}
+.node{border-top:1px solid var(--border-strong);padding:12px 18px 8px 0;font-size:.93rem}
+.node small{display:block;margin-bottom:6px;font-family:var(--mono);color:var(--accent);text-transform:uppercase;letter-spacing:.04em;font-weight:500;font-size:.7rem}
+@media(max-width:800px){.chain{grid-template-columns:1fr}}
+.panel{border-top:1px solid var(--border-strong);padding-top:16px;margin:28px 0}
+.principles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,3vw,40px);margin:24px 0}
+.principle{border-top:1px solid var(--border-strong);padding-top:14px}
+.principle strong{display:block;font-size:1.05rem;margin-bottom:4px}
+.principle span{display:block;color:var(--muted);font-size:.93rem}
+@media(max-width:720px){.principles{grid-template-columns:1fr}}
+.archive{font-size:.92rem;color:var(--muted)}
+.cta{white-space:normal;text-align:center}
+.register td:first-child{white-space:nowrap}
 </style>
 <link rel="stylesheet" href="../site.css"></head>
 <body>
@@ -32,12 +64,12 @@
 <table>
 <thead><tr><th>ID</th><th>Field</th><th>Reference</th><th>Observed surface</th><th>Observed</th><th>Signal</th><th>Owner / decision</th></tr></thead>
 <tbody id="rows">
-<tr data-id="F-01" data-state="DIFFERENT"><td>F-01</td><td>IFU revision</td><td>IFU-12</td><td>EUDAMED export</td><td>IFU-11</td><td class="signal different">DIFFERENT</td><td>Regulatory Affairs · review open</td></tr>
-<tr data-id="F-02" data-state="MATCH"><td>F-02</td><td>Manufacturer name</td><td>Example MedTech GmbH</td><td>SS(C)P</td><td>Example MedTech GmbH</td><td class="signal match">MATCH</td><td>Evidence preserved · no discrepancy action</td></tr>
-<tr data-id="F-03" data-state="UNRESOLVED"><td>F-03</td><td>Storage upper limit</td><td>25 °C / 30 °C conflict</td><td>Label artwork</td><td>25 °C</td><td class="signal unresolved">UNRESOLVED</td><td>RA/QA owner · authority decision required</td></tr>
-<tr data-id="F-04" data-state="DIFFERENT"><td>F-04</td><td>Basic UDI-DI</td><td>BUDI-ALPHA-001</td><td>Distributor master</td><td>BUDI-ALPHA-01</td><td class="signal different">DIFFERENT</td><td>Master Data · correction candidate</td></tr>
-<tr data-id="F-05" data-state="CLOSED"><td>F-05</td><td>Sterile status</td><td>Sterile EO</td><td>ERP product text</td><td>Sterile</td><td class="signal closed">CLOSED</td><td>QA decision · wording accepted in context</td></tr>
-<tr data-id="F-06" data-state="DIFFERENT"><td>F-06</td><td>Contraindication phrase</td><td>Reference phrase v4</td><td>Local IFU</td><td>Reference phrase v3</td><td class="signal different">DIFFERENT</td><td>Medical / RA review · propagation check</td></tr>
+<tr data-id="F-01" data-state="DIFFERENT"><td>F-01</td><td>IFU revision</td><td>IFU-12</td><td>EUDAMED export</td><td>IFU-11</td><td class="signal st different">DIFFERENT</td><td>Regulatory Affairs · review open</td></tr>
+<tr data-id="F-02" data-state="MATCH"><td>F-02</td><td>Manufacturer name</td><td>Example MedTech GmbH</td><td>SS(C)P</td><td>Example MedTech GmbH</td><td class="signal st match">MATCH</td><td>Evidence preserved · no discrepancy action</td></tr>
+<tr data-id="F-03" data-state="UNRESOLVED"><td>F-03</td><td>Storage upper limit</td><td>25 °C / 30 °C conflict</td><td>Label artwork</td><td>25 °C</td><td class="signal st unresolved">UNRESOLVED</td><td>RA/QA owner · authority decision required</td></tr>
+<tr data-id="F-04" data-state="DIFFERENT"><td>F-04</td><td>Basic UDI-DI</td><td>BUDI-ALPHA-001</td><td>Distributor master</td><td>BUDI-ALPHA-01</td><td class="signal st different">DIFFERENT</td><td>Master Data · correction candidate</td></tr>
+<tr data-id="F-05" data-state="CLOSED"><td>F-05</td><td>Sterile status</td><td>Sterile EO</td><td>ERP product text</td><td>Sterile</td><td class="signal st closed">CLOSED</td><td>QA decision · wording accepted in context</td></tr>
+<tr data-id="F-06" data-state="DIFFERENT"><td>F-06</td><td>Contraindication phrase</td><td>Reference phrase v4</td><td>Local IFU</td><td>Reference phrase v3</td><td class="signal st different">DIFFERENT</td><td>Medical / RA review · propagation check</td></tr>
 </tbody>
 </table>
 </div>
@@ -53,7 +85,7 @@
 <div class="hero-actions"><a class="cta primary" href="../integrity-check.html">Try the free integrity check</a><a class="cta ghost" href="../assessment-intake.html?workstream=integrity-review">Build a scope brief</a><a class="cta ghost" href="mailto:info@clinicops.dk?subject=Regulatory%20integrity%20specimen">Email info@clinicops.dk</a></div>
 <p class="archive">Need the earlier static artifact? <a href="ClinicOps_Regulatory_Integrity_Specimen_Register_v1.5.pdf">Open archived PDF specimen v1.5</a>. The interactive page above is the current specimen experience.</p>
 </main>
-<footer><div class="wrap">ClinicOps · Evidence-first regulatory operations · <a href="../privacy-notice/">Privacy</a></div></footer>
+<footer class="site"><div class="footer-inner"><span>ClinicOps · Evidence-first regulatory operations · <a href="../privacy-notice/">Privacy</a></span></div></footer>
 <script>
 (()=>{
 const details={
