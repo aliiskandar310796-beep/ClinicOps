@@ -18,6 +18,7 @@
 main.wrap{padding-top:clamp(40px,6vw,72px)}
 .notice{border:0;border-left:2px solid var(--warn);border-radius:0 var(--r) var(--r) 0;background:var(--surface-2);padding:18px 22px;margin:24px 0;max-width:53.04em}
 .notice h2{margin:0 0 .5em;padding-top:0;border-top:0;font-size:1.3rem}
+.notice h2::before{display:none}
 .notice p:last-child{margin-bottom:0}
 .summary{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin:24px 0;border-top:1px solid var(--border-strong);border-bottom:1px solid var(--border)}
 .summary section{padding:16px 14px 14px 0;margin-right:14px;border-right:1px solid var(--border);font-size:.85rem;color:var(--muted);line-height:1.35}
@@ -36,7 +37,7 @@ main li{margin:.4em 0}
 <link rel="preload" href="../assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="../assets/fonts/geist-mono-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="../site.css">
 <meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f6f7f5" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0d1211" media="(prefers-color-scheme: dark)"></head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="../index.html">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="../index.html">Home</a><a href="../services.html">Solution</a><a href="../use-cases.html">Use cases</a><a href="../research.html">Research</a><a href="../tools.html" aria-current="page">Tools</a><a href="../about.html">About</a><a href="../contact.html">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");if(a&&n.scrollWidth>n.clientWidth)n.scrollLeft=Math.max(0,a.offsetLeft-32)})()</script>
+<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="../index.html">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="../index.html">Home</a><a href="../services.html">Solution</a><a href="../use-cases.html">Use cases</a><a href="../research.html">Research</a><a href="../tools.html" aria-current="page">Tools</a><a href="../about.html">About</a><a href="../contact.html">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");var r=a?a.offsetLeft+a.offsetWidth+16-n.clientWidth:0;if(r>0)n.scrollLeft=r})()</script>
 <main id="main" tabindex="-1" class="wrap">
 <div class="notice"><strong>Sanitized fictional sample.</strong> This page illustrates the ClinicOps portfolio transition work-plan format. It is not a compliance determination, legal conclusion, or full-register audit.</div><div class="report-head">
 <h1>ClinicOps Class III Transition Map — Sanitized Sample</h1>

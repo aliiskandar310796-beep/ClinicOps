@@ -38,7 +38,7 @@ SHELL_HEADER = (
     '<a href="../tools.html" aria-current="page">Tools</a><a href="../about.html">About</a>'
     '<a href="../contact.html">Contact</a></nav></div></header>'
     '<script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");'
-    'if(a&&n.scrollWidth>n.clientWidth)n.scrollLeft=Math.max(0,a.offsetLeft-32)})()</script>\n'
+    'var r=a?a.offsetLeft+a.offsetWidth+16-n.clientWidth:0;if(r>0)n.scrollLeft=r})()</script>\n'
 )
 
 
