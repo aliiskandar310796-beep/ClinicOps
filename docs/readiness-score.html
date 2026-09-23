@@ -48,6 +48,7 @@ button.cta{font:inherit;font-size:.95rem;font-weight:600}
 .result{margin-top:32px;padding:24px 0 8px;border-top:2px solid var(--accent)}
 .result[hidden]{display:none}
 .score{font-family:var(--mono);font-weight:500;font-size:clamp(2.6rem,6vw,4rem);letter-spacing:-.04em;line-height:1;margin:14px 0 6px;font-variant-numeric:tabular-nums}
+.result h2::before{display:none}
 .result h2{margin:0 0 .3em;padding-top:0;border-top:0;font-size:1.4rem}
 .result h3{margin-top:1.4em}
 #gaps{list-style:none;margin:8px 0 18px;padding:0;max-width:47.74em}
@@ -61,7 +62,7 @@ button.cta{font:inherit;font-size:.95rem;font-weight:600}
 <body>
 <!-- claim-use: website -->
 <!-- claim-ids: CO-CLM-0001 -->
-<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="index.html">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="index.html">Home</a><a href="services.html">Solution</a><a href="use-cases.html">Use cases</a><a href="research.html">Research</a><a href="tools.html" aria-current="page">Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");if(a&&n.scrollWidth>n.clientWidth)n.scrollLeft=Math.max(0,a.offsetLeft-32)})()</script>
+<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="index.html">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="index.html">Home</a><a href="services.html">Solution</a><a href="use-cases.html">Use cases</a><a href="research.html">Research</a><a href="tools.html" aria-current="page">Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");var r=a?a.offsetLeft+a.offsetWidth+16-n.clientWidth:0;if(r>0)n.scrollLeft=r})()</script>
 <main id="main" tabindex="-1" class="wrap">
 <span class="eyebrow">Free tool</span>
 <h1>Transition Readiness Score</h1>
@@ -249,7 +250,7 @@ document.getElementById('continue-brief').addEventListener('click',()=>{
 <footer class="site">
 <div class="footer-inner">
 <span>&copy; 2026 ClinicOps. Danish-led, EU-wide medical device regulatory intelligence.</span>
-<span><a href="mailto:info@clinicops.dk">info@clinicops.dk</a> &middot; <a href="https://www.linkedin.com/company/clinicops-danish-regulatory/">LinkedIn</a> &middot; <a href="privacy-notice/">Privacy</a></span>
+<span><a href="mailto:info@clinicops.dk">info@clinicops.dk</a> &middot; <a href="https://www.linkedin.com/company/clinicops-dk/">LinkedIn</a> &middot; <a href="privacy-notice/">Privacy</a></span>
 </div>
 </footer>
 </body>

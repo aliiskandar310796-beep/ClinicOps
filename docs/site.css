@@ -143,7 +143,8 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 .card.link-card{transition:border-color .25s var(--ease)}
 .card.link-card::before{content:"";position:absolute;left:0;right:100%;top:-1px;height:2px;background:var(--accent);transition:right .45s var(--ease)}
 .card.link-card:hover::before{right:0}
-.card.link-card a{font-weight:560}
+.card.link-card a{font-weight:560;display:inline-block;padding:.3rem 0}
+main p>a:only-child,main li>a:only-child{display:inline-block;padding:.25rem 0}
 .callout{border:0;border-left:2px solid var(--accent);border-radius:0 var(--r) var(--r) 0;background:var(--surface-2);padding:20px 24px;box-shadow:none;max-width:51.71em}
 .callout.boundary,.boundary{border-left:2px solid var(--warn)}
 .card.boundary{border-left:0;border-top:1px solid var(--warn)}
@@ -394,7 +395,7 @@ figure.shot img{border:1px solid var(--border-strong);border-radius:var(--r);bac
 
 /* ---------- Final sweep fixes ---------- */
 main:focus{outline:none}
-input[type=checkbox],input[type=radio]{width:1.375rem;height:1.375rem;accent-color:var(--accent);flex:none}
+input[type=checkbox],input[type=radio]{width:1.5rem;height:1.5rem;accent-color:var(--accent);flex:none}
 .check{min-height:44px;align-items:center;padding:4px 0}
 .footer-inner a{display:inline-block;padding:.55rem .1rem;white-space:nowrap}
 .footer-inner span{display:flex;flex-wrap:wrap;column-gap:16px;align-items:center}
@@ -410,3 +411,17 @@ figure.shot:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
 .run li.machine,.run li.human{border-top-color:var(--accent)}
 .run li.human{border-top-style:solid}
 @media print{img{content-visibility:visible}body{font-family:var(--font)}}
+
+/* Shared: stray h2 accent tick inside result/notice blocks; invalid-field state (colour + native message) */
+.result h2::before,.notice h2::before{display:none}
+select:user-invalid,input:user-invalid,textarea:user-invalid{border-color:var(--hold)}
+
+/* Phone header: nothing clipped or hidden behind a scroll. Brand on its own row, the seven
+   destinations wrap beneath it, and the header stops being sticky so it never eats the viewport. */
+@media(max-width:600px){
+  header.site{position:static}
+  .site-inner{height:auto;flex-direction:column;align-items:flex-start;gap:0;padding-top:8px;padding-bottom:0}
+  nav.primary{flex-wrap:wrap;overflow:visible;height:auto;width:calc(100% + 18px);margin-left:-9px;padding-right:0;-webkit-mask-image:none;mask-image:none}
+  nav.primary a{min-height:40px;padding:0 9px}
+  nav.primary a::after{left:9px;right:9px}
+}

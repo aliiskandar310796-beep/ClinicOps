@@ -33,6 +33,7 @@ SITE_SHELL_CSS = "main.wrap{padding-top:clamp(40px,6vw,72px)}\n"
 
 COMPONENT_CSS = """.notice{border:0;border-left:2px solid var(--warn);border-radius:0 var(--r) var(--r) 0;background:var(--surface-2);padding:18px 22px;margin:24px 0;max-width:53.04em}
 .notice h2{margin:0 0 .5em;padding-top:0;border-top:0;font-size:1.3rem}
+.notice h2::before{display:none}
 .notice p:last-child{margin-bottom:0}
 .summary{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin:24px 0;border-top:1px solid var(--border-strong);border-bottom:1px solid var(--border)}
 .summary section{padding:16px 14px 14px 0;margin-right:14px;border-right:1px solid var(--border);font-size:.85rem;color:var(--muted);line-height:1.35}
