@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="site.css"><title>Danish DHPC Submission Checker | ClinicOps</title><meta name="description" content="Free, browser-local checklist for preparing a Direct Healthcare Professional Communication (DHPC) for Denmark to the Danish Medicines Agency's documented requirements: submission pack, format, plain-Danish translation rules, multi-MAH coordination and evidence. Nordic notes for Norway, Sweden and Finland. Nothing is sent to ClinicOps."><link rel="canonical" href="https://clinicops.dk/danish-dhpc-checker.html"><meta property="og:title" content="Danish DHPC Submission Checker | ClinicOps"><meta property="og:description" content="Prepare a Danish DHPC to the Danish Medicines Agency's documented rules — submission pack, format, plain-Danish translation, coordination, evidence — with a readiness summary."><meta property="og:type" content="website"><meta property="og:url" content="https://clinicops.dk/danish-dhpc-checker.html"><meta property="og:site_name" content="ClinicOps"><meta name="twitter:card" content="summary"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"Danish DHPC Submission Checker | ClinicOps","description":"Free, browser-local checklist for preparing a DHPC for Denmark to the Danish Medicines Agency's documented requirements, with a readiness summary and Nordic notes.","url":"https://clinicops.dk/danish-dhpc-checker.html","isPartOf":{"@type":"WebSite","name":"ClinicOps","url":"https://clinicops.dk/"},"publisher":{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}</script>
+<style>
+.chk{border-top:1px solid var(--border);padding:11px 0;display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.chk:last-child{border-bottom:1px solid var(--border)}
+.chk input{width:auto;margin-top:5px}
+.chk label{margin:0;font-weight:600}
+.chk p{margin:2px 0 0;font-size:.85rem;color:var(--muted)}
+.group{margin:26px 0 6px}
+.nordic td{font-size:.86rem}
+details{border:1px solid var(--border);border-radius:12px;padding:12px 16px;background:var(--surface);margin:14px 0}summary{cursor:pointer;font-weight:700}
+.summary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:16px 0}
+.summary-grid .card{padding:14px;text-align:center}.summary-grid strong{font-size:1.6rem;display:block;font-variant-numeric:tabular-nums}
+@media(max-width:800px){.summary-grid{grid-template-columns:1fr}}
+</style></head><body>
+<header class="site"><div class="site-inner"><a class="brand" href="index.html">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="index.html">Home</a><a href="services.html">Solution</a><a href="use-cases.html">Use cases</a><a href="research.html">Research</a><a href="tools.html" aria-current="page">Tools</a><a href="about.html">About</a><a href="contact.html">Contact</a></nav></div></header>
+<main class="wrap">
+<section class="hero"><span class="eyebrow">Free tool · Danish safety communication</span><h1>Danish DHPC submission checker</h1><p class="lede">The Danish market issues roughly ten DHPCs a year, so no company does one often enough to remember the Danish Medicines Agency's specifics. Denmark is unusual: the MAH supplies the Danish draft, the Agency quality-assures it — and can send it back "if the quality of the translation is poor" — and the Agency, not the MAH, distributes it (e-Boks, Digital Post, regional hospital mailboxes, pro.medicin.dk for six months). This checklist follows the Agency's own published process. Runs in your browser; <strong>nothing is sent to ClinicOps</strong>.</p></section>
+
+<div class="callout boundary"><strong>Boundary.</strong> Built from the Danish Medicines Agency's "Preparing, translating and distributing safety information (DHPC)" page (last updated 1 May 2024, checked 2026-09-24) and GVP Module XV. Requirements change; confirm against the live page before submitting. The MAH and its QPPV own the content, the timeline and the submission.</div>
+
+<form id="f" onsubmit="return false">
+<div class="grid two">
+<div class="field"><label for="prod">Product(s) / active substance</label><input id="prod" autocomplete="off" placeholder="e.g. Examplemab 100 mg"></div>
+<div class="field"><label for="due">Agreed EU dissemination date</label><input id="due" type="date"></div>
+</div>
+
+<h2 class="group">A. Submission pack to the Agency</h2>
+<div id="A"></div>
+<h2 class="group">B. Format rules</h2>
+<div id="B"></div>
+<h2 class="group">C. Plain-Danish translation rules</h2>
+<div id="C"></div>
+<h2 class="group">D. Content integrity (GVP Module XV)</h2>
+<div id="D"></div>
+<h2 class="group">E. Multi-MAH coordination</h2>
+<div id="E"></div>
+<h2 class="group">F. Distribution and evidence</h2>
+<div id="F"></div>
+
+<div class="field" style="margin-top:20px"><label for="notes">Open questions / notes for the QPPV</label><textarea id="notes" placeholder="e.g. Danish specialty list for recipients agreed with medical affairs? Co-MAH contacts confirmed?"></textarea></div>
+<div class="actions"><button class="btn primary-btn" id="make">Build readiness summary</button><button class="btn secondary-btn" id="copy" disabled>Copy summary</button><button class="btn secondary-btn" id="dl" disabled>Download summary (.txt)</button></div>
+<p class="status" id="status"></p>
+</form>
+<div class="summary-grid" id="sum"></div>
+<pre id="out">No summary built yet.</pre>
+
+<h2>Nordic notes — same letter, different mechanics</h2>
+<p class="small muted">Verified on the respective agency pages on 2026-09-24 unless marked otherwise. Use as orientation; each agency's live guidance governs.</p>
+<table class="nordic"><thead><tr><th>Country</th><th>Who distributes</th><th>What the MAH submits</th><th>Distinctive rules</th></tr></thead><tbody>
+<tr><td><strong>Denmark</strong> (Lægemiddelstyrelsen)</td><td>The Agency (e-Boks/Digital Post to HCPs by authorisation register and specialty; regional hospital mailboxes; website; pro.medicin.dk for 6 months). MAH does not post letters.</td><td>Draft Danish + final English + Danish-adapted recipient proposal + CVR numbers + MAH contact, by email within the agreed timeframe.</td><td>No logo at top; PI updates linked, not attached; Agency may return poor translations; parallel importers generally not required to participate.</td></tr>
+<tr><td><strong>Norway</strong> (DMP / NOMA)</td><td>Split: NOMA to GPs via EHR and publishes; MAH still emails pharmacies and posts to other groups.</td><td>English + Norwegian + recipient proposal to the agency's ADR mailbox.</td><td>NOMA safety-information logo required; mandatory Norwegian ADR-reporting text block. (Guidance updated Sep 2026.)</td></tr>
+<tr><td><strong>Sweden</strong> (Läkemedelsverket)</td><td>MAH postal distribution remains the requirement; a digital-mailbox pilot ran 2024–2025.</td><td>Swedish DHPC agreed with the agency; publication via agency channels / Fass.</td><td>Roughly 20–30 DHPCs a year — the highest Nordic volume.</td></tr>
+<tr><td><strong>Finland</strong> (Fimea)</td><td>Fimea publishes MAH DHPCs on its site; MAH distributes.</td><td>Finnish DHPC (Swedish-language rule not verified on the review date).</td><td>Fimea recommends nominating a local PV contact person (not mandatory).</td></tr>
+</tbody></table>
+
+<h2>Tool assessment (documented-tool record)</h2>
+<details><summary>Purpose, requirements, test evidence, limitations, change log</summary>
+<p><strong>Purpose.</strong> Structure the preparation of a Danish DHPC against the Danish Medicines Agency's documented process and GVP Module XV, and produce a readiness summary listing open items for the QPPV. A structuring aid; never the system of record.</p>
+<p><strong>Requirements.</strong> R1 Every checklist item traces to the Agency's DHPC page or GVP Module XV. R2 The summary lists every unticked item as open, grouped by section, and every ticked item as confirmed. R3 The summary carries product, agreed date and the notes field verbatim. R4 All processing is local; no network calls after page load. R5 Version and change log shown.</p>
+<p><strong>Test evidence (v1.0, 2026-09-24).</strong> T1 Nothing ticked → summary lists all items open; counts equal the item total. Pass. T2 All ticked → zero open, "ready for internal QPPV sign-off" line shown. Pass. T3 Notes text present → reproduced verbatim in the summary. Pass.</p>
+<p><strong>Known limitations.</strong> Does not translate, does not check readability automatically, does not know the agreed EU timeline. Nordic notes are orientation only. The Agency's page may change after the review date.</p>
+<p><strong>Change log.</strong> v1.0 (2026-09-24): first release; 26 items in six sections; Nordic notes for NO/SE/FI.</p>
+</details>
+
+<h2>When the open items are Danish-language work</h2>
+<p>A draft that reads like a translation gets returned. If the open items are the Danish draft itself — plain Danish, active voice, short sentences, the Agency's translation guideline — or a Danish recipient proposal nobody in the hub can build, that is the bounded work ClinicOps takes on, reviewed by a medically trained native Danish speaker under your QPPV. <a href="denmark-market-access.html#danish-pv">See the Danish pharmacovigilance capability &rarr;</a></p>
+<div class="cta-row"><a class="cta primary" href="assessment-intake.html?workstream=danish-pv">Scope Danish PV capacity</a><a class="cta ghost" href="danish-pv-literature-register.html">Danish literature register</a><a class="cta ghost" href="sdea-clause-checker.html">SDEA clause checker</a></div>
+
+<script>
+const ITEMS={
+A:[["Final English DHPC (PRAC/CHMP-agreed text) attached","The Agency compares the Danish draft against the agreed English version."],
+["Draft Danish translation attached","Prepared as a Danish text, not a word-for-word rendering (see section C)."],
+["Proposed Danish-adapted recipient list by specialty / HCP group","The Agency targets distribution via the authorisation register and specialty; the MAH proposes which groups. A 2025 Danish study found 55% of physicians receive DHPCs for drugs they do not prescribe — targeting is the quality lever."],
+["CVR numbers of all involved companies listed","Required for Digital Post distribution and for identifying every MAH concerned."],
+["MAH contact person (name, phone, e-mail) stated","The Agency's point of contact for questions and return of the draft."],
+["Submitted by e-mail to the Agency within the agreed timeframe","Submission is by e-mail to the Agency's general mailbox; the EU-agreed dissemination date drives the deadline."]],
+B:[["No company logo at the top of the letter","Agency rule: a small logo may appear only in the signature block."],
+["Product-information updates linked, not attached","Do not attach SmPC/PIL updates; refer to where they are published."],
+["No advertising or commercial content","The DHPC is safety communication only (GVP XV)."],
+["Signature block: MAH name, small logo (optional), contact details","Keeps the letter identifiable without a promotional header."]],
+C:[["Not a word-for-word translation","The Agency asks for a Danish text that reads naturally to a Danish clinician."],
+["Rare loanwords replaced with common Danish terms","Per the Agency's translation guideline ('Skriv dansk')."],
+["Passive constructions turned active","('Skriv klart') — improves readability for the clinician."],
+["Long sentences split","('Skriv til læseren') — brevity is the second most cited complaint in the Danish DHPC study (13%)."],
+["Reviewed by one or two additional readers before submission","The Agency recommends extra reviewers; a returned draft costs the timeline."],
+["Terminology consistent with the Danish SmPC / PIL","Use the approved Danish product-information terms for reactions and indications."]],
+D:[["Reason for the communication and key safety messages stated up front","GVP XV template structure."],
+["Recommended actions are numbered and mutually consistent","In Feb 2026 the Agency had to publish a clarification because two points of a DHPC were 'partially contradictory' — check the numbered recommendations against each other."],
+["Call for reporting of suspected adverse reactions included","Standard DHPC element; Danish HCPs report via meldenbivirkning.dk or the Agency."],
+["References and dates correct; no content beyond the agreed EU text","Additions must be agreed; the Agency compares to the English version."]],
+E:[["All MAHs with Danish-registered products (marketed or not) identified","One joint DHPC covers all of them."],
+["Coordinating MAH agreed (originator, or the generic with the largest share)","Agency rule for joint DHPCs."],
+["All co-MAH contacts listed in the submission","Each company's contact appears; parallel importers are generally not required to participate."]],
+F:[["Understood: the Agency distributes; the MAH does not mail HCPs","Distribution cost is within the annual MAH fee."],
+["Evidence kept: submission e-mail, Agency acknowledgement, published version and date","For the PSMF, the PSUR and inspection. The Agency publishes the DHPC on its site and on pro.medicin.dk for six months."],
+["Effectiveness follow-up planned where the DHPC is a risk-minimisation measure","PSUR section 16.5 expects evaluation of RMM effectiveness (IR 520/2012 Art 34 as amended)."]]};
+const names={A:"Submission pack",B:"Format",C:"Plain-Danish translation",D:"Content integrity",E:"Multi-MAH coordination",F:"Distribution and evidence"};
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+for(const g in ITEMS){document.getElementById(g).innerHTML=ITEMS[g].map((it,i)=>`<div class="chk"><input type="checkbox" id="${g}${i}"><div><label for="${g}${i}">${esc(it[0])}</label><p>${esc(it[1])}</p></div></div>`).join('');}
+let txt='';
+function dl(name,text,type){const b=new Blob([text],{type});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
+document.getElementById('make').onclick=()=>{const prod=document.getElementById('prod').value.trim()||'[product]';const due=document.getElementById('due').value||'[agreed date]';const notes=document.getElementById('notes').value.trim();let open=0,done=0,total=0;let o=`DANISH DHPC — SUBMISSION READINESS SUMMARY\nProduct: ${prod}\nAgreed EU dissemination date: ${due}\nDate: ${new Date().toISOString().slice(0,10)} · Checker v1.0 (2026-09-24) · Basis: Lægemiddelstyrelsen DHPC page (updated 1 May 2024) and GVP Module XV\n`;
+ for(const g in ITEMS){const op=[],dn=[];ITEMS[g].forEach((it,i)=>{total++;(document.getElementById(g+i).checked?dn:op).push(it[0]);});open+=op.length;done+=dn.length;o+=`\n${g}. ${names[g].toUpperCase()} — ${dn.length}/${ITEMS[g].length} confirmed\n`;if(op.length)o+='OPEN:\n'+op.map(x=>'  [ ] '+x).join('\n')+'\n';if(dn.length)o+='CONFIRMED:\n'+dn.map(x=>'  [x] '+x).join('\n')+'\n';}
+ o+=`\nSTATUS: ${open===0?'All items confirmed — ready for internal QPPV sign-off and submission.':open+' open item(s) before submission.'}\n`;if(notes)o+=`\nNOTES FOR THE QPPV\n${notes}\n`;o+=`\nThis summary is a structuring aid. Content, timeline and submission remain with the MAH and its QPPV.\n`;
+ txt=o;document.getElementById('out').textContent=o;document.getElementById('sum').innerHTML=[['Confirmed',done],['Open',open],['Total',total]].map(x=>`<div class="card"><strong>${x[1]}</strong><span class="muted small">${x[0]}</span></div>`).join('');document.getElementById('copy').disabled=false;document.getElementById('dl').disabled=false;document.getElementById('status').textContent='Summary built. Nothing left your browser.';};
+document.getElementById('copy').onclick=()=>navigator.clipboard.writeText(txt).then(()=>document.getElementById('status').textContent='Summary copied.');
+document.getElementById('dl').onclick=()=>dl('danish-dhpc-readiness-summary.txt',txt,'text/plain');
+</script>
+</main>
+<footer class="site"><div class="footer-inner"><span>ClinicOps · Browser-local evidence tools.</span><span><a href="services.html">Solution</a><a href="primary-sources.html">Sources</a><a href="privacy-notice/">Privacy</a></span></div></footer>
+</body></html>
