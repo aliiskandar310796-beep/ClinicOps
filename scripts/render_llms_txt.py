@@ -32,6 +32,7 @@ SECTIONS = (
         "identifier-check.html", "readiness-score.html", "change-surface-mapper.html",
         "regulatory-change-impact.html", "technical-file-consistency.html",
         "specimen-register/index.html", "transition-map-sample/index.html",
+        "danish-pv-literature-register.html", "sdea-clause-checker.html", "danish-dhpc-checker.html",
     }),
     ("Research and primary sources", lambda r: r in {"research.html", "primary-sources.html"} or r.startswith("research/")),
     ("Policies", lambda r: r.startswith("privacy-notice/")),
