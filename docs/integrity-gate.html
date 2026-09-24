@@ -21,19 +21,19 @@
 <p class="lede">ClinicOps reconciles the client-approved sources and downstream surfaces you place in scope, preserves the evidence behind each finding, and routes ambiguity to named human review.</p>
 <div class="cta-row"><a class="cta primary" href="specimen-register/">See the specimen register</a><div class="cta-links"><a href="integrity-check.html">Try the free check</a><a href="assessment-intake.html?workstream=integrity-review">Scope a review</a></div></div>
 </section>
-<p>The review is designed for real operational questions: a regulated fact changed, several records or documents depend on it, and your team needs a clear discrepancy register before deciding what to correct.</p>
+<p>The review answers one operational question: a regulated fact changed, several records or documents depend on it, and your team needs a discrepancy register before deciding what to correct.</p>
 
 <h2>What the review checks</h2>
 <div class="ledger">
 <section><h3>Source authority</h3><div><p>If supplied controlled sources disagree, the case becomes <code>UNRESOLVED_AUTHORITY</code>. ClinicOps does not silently choose the winner.</p></div></section>
 <section><h3>Cross-surface reconciliation</h3><div><p>Declared fields are compared only across the evidence population the client explicitly approves.</p></div></section>
 <section><h3>Change propagation</h3><div><p>Approved old/new values are checked against the downstream surfaces the client declares as affected.</p></div></section>
-<section><h3>Human review</h3><div><p>External ClinicOps outputs remain behind named review, finding dispositions and exact artifact binding.</p></div></section>
+<section><h3>Human review</h3><div><p>Nothing leaves ClinicOps without a named reviewer, a disposition on each finding and a record of the exact files it was reviewed against.</p></div></section>
 </div>
 
 <h2>What one first review looks like</h2>
 <ul class="bounds"><li><b>one</b> device family or Basic UDI-DI group;</li><li><b>1&ndash;3</b> client-approved controlled sources;</li><li><b>2&ndash;6</b> downstream surfaces;</li><li><b>3&ndash;10</b> declared fields;</li><li><b>optional</b> approved change event with explicit old/new values;</li><li><b>one</b> named qualified reviewer.</li></ul>
-<p>The output is a human-reviewed evidence and discrepancy pack with source references, findings, unresolved-authority cases, reviewer dispositions and documented next-action ownership.</p>
+<p>The output is a human-reviewed evidence and discrepancy pack with source references, findings, unresolved-authority cases, reviewer dispositions and a named owner for each next action.</p>
 
 <h2>Four fail-closed machine states</h2>
 <div class="table-scroll" tabindex="0" role="region" aria-label="Four fail-closed machine states"><table class="states"><thead><tr><th scope="col">State</th><th scope="col">Meaning</th></tr></thead><tbody>
@@ -49,7 +49,7 @@
 <div class="card"><h3>Maintain</h3><p>For recurring change, ClinicOps can map affected surfaces, coordinate propagation, verify implementation and document closure.</p></div>
 </div>
 
-<div class="callout boundary"><strong>Boundary.</strong> This is evidence control, reconciliation and change-propagation support&mdash;not a legal, regulatory, clinical, safety or compliance determination. Human approval clears only the exact ClinicOps work product for delivery; it never authorizes release of a device, controlled document or regulatory submission.</div>
+<div class="callout boundary"><strong>Boundary.</strong> This is evidence control, reconciliation and change-propagation support &mdash; not a legal, regulatory, clinical, safety or compliance determination. Human approval clears only the exact ClinicOps work product for delivery; it never authorises release of a device, controlled document or regulatory submission.</div>
 
 <section class="closing band"><h2>Start with proof, then scope the live case</h2>
 <div class="cta-row"><a class="cta primary" href="specimen-register/">View the synthetic specimen</a><div class="cta-links"><a href="integrity-economics.html">Estimate current review burden</a><a href="assessment-intake.html?workstream=integrity-review">Build a scope brief</a></div></div></section>

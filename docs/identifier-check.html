@@ -55,12 +55,12 @@ td:first-child,th:first-child{padding-right:28px}
 
 <span class="eyebrow">Free tool</span>
 <h1>EUDAMED Identifier Check</h1>
-<p>Paste a Basic UDI-DI, UDI-DI candidate, or SRN. The check runs entirely in your browser. <strong>Nothing is sent to ClinicOps.</strong></p>
+<p>Paste a Basic UDI-DI, UDI-DI candidate or SRN and get a structural read: prefix shape, actor role, check digit. The check runs in your browser. <strong>Nothing is sent to ClinicOps.</strong></p>
 <p class="muted"><a href="readiness-score.html">Try the Transition Readiness Score &rarr;</a></p>
 <noscript><div class="callout boundary"><p>This tool runs in your browser and needs JavaScript enabled.</p></div></noscript>
 <div class="tool-embed">
 <input id="value" name="identifier" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" enterkeyhint="go" aria-label="Identifier to check: Basic UDI-DI, UDI-DI candidate or SRN" placeholder="e.g. B-... or DK-MF-123456789">
-<button id="check" type="button" class="cta primary" aria-label="Check identifier">Check</button>
+<button id="check" type="button" class="cta primary" aria-label="Check identifier">Check identifier</button>
 <pre id="result" aria-live="polite">No identifier checked yet.</pre>
 </div>
 <p class="muted">This is a screening aid, not regulatory advice and not a live EUDAMED verification.</p>
@@ -70,7 +70,7 @@ td:first-child,th:first-child{padding-right:28px}
 <thead><tr><th scope="col">Can</th><th scope="col">Cannot</th></tr></thead><tbody>
 <tr><td>Recognise a B-prefix as a legacy-style EUDAMED identifier signal.</td><td>Prove a device's current regulatory status.</td></tr>
 <tr><td>Decode the structural role in a common SRN shape (MF/AR/IM/PR).</td><td>Verify that an actor is active or responsible for a specific device.</td></tr>
-<tr><td>Check numeric GS1 Mod-10 check digits.</td><td>Audit the EUDAMED public register end-to-end.</td></tr>
+<tr><td>Check numeric GS1 Mod-10 check digits.</td><td>Tell you what the live EUDAMED register currently shows.</td></tr>
 </tbody></table>
 
 <script>
@@ -81,7 +81,7 @@ document.getElementById('check').onclick=()=>document.getElementById('result').t
 document.getElementById('value').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('check').click();});
 </script>
 
-<h2>Take the next step</h2><div class="cta-row"><a class="cta primary" href="integrity-check.html">Run the free browser-local check</a><a class="cta ghost" href="specimen-register/">View the synthetic specimen</a><a class="cta ghost" href="assessment-intake.html?workstream=integrity-review">Scope one real review</a></div>
+<h2>Take the next step</h2><div class="cta-row"><a class="cta primary" href="integrity-check.html">Build a single-change evidence packet</a><a class="cta ghost" href="specimen-register/">Explore the specimen register</a><a class="cta ghost" href="assessment-intake.html?workstream=integrity-review">Scope a review</a></div>
 </main>
 <footer class="site">
 <div class="footer-inner">
