@@ -23,3 +23,6 @@ Non-negotiables:
 - do not autonomously publish external regulatory content or send outbound communications.
 
 Optimize for durable, composable assets that reduce repeated human reconciliation. Avoid agent sprawl, dashboard sprawl and recurring jobs without a demonstrated operational need.
+
+## YAGNI / build-less rule (Ponytail-lite)
+Before writing new code, check in this order: (1) is this feature actually needed now? (2) does the standard library or the platform already do it? (3) can an existing dependency do it? Only build if all three are no. Prefer deleting code over adding it; the smallest correct change wins. This rule applies to every subagent too.

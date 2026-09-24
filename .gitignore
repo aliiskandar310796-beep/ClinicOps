@@ -20,3 +20,13 @@ node_modules/
 
 # root symlink used by local QA runs
 /node_modules
+
+# Claude-generated outputs & the private intelligence vault — never commit to the public repo
+Claude outputs/
+ClinicOps-Vault/
+*.obsidian/
+
+# Local archives and macOS metadata
+.DS_Store
+/*.bundle
+/*.tar.gz
