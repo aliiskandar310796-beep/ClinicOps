@@ -130,6 +130,8 @@ code,kbd,samp{font-family:var(--mono);font-size:.88em}
 .cta.ghost:hover,.secondary-btn:hover{border-color:var(--accent);color:var(--accent)}
 .cta:active,.btn:active{transform:translateY(1px) scale(.985)}
 a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible,.cta:focus-visible,.btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:var(--r-sm)}
+/* Date inputs: Chromium stops :focus-visible matching on the calendar-picker icon, which dropped the indicator on that tab stop. */
+input[type=date]:focus-within{outline:2px solid var(--accent);outline-offset:3px;border-radius:var(--r-sm)}
 
 /* ---------- Grids and items (rules instead of boxes) ---------- */
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:clamp(24px,3vw,40px);margin:24px 0}
