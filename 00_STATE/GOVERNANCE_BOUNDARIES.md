@@ -45,6 +45,18 @@ Permanent `DO_NOT_CONTACT`:
 
 Danish-domiciled organisations are never cold-emailed; public posting only.
 
+## Tier-0 autonomy layer — 2026-09-25
+
+`autonomy/` holds the control plane for the unattended Tier-0 jobs (`autonomy/README.md`, `autonomy/rules.json`, `autonomy/jobs/`). The jobs run as claude.ai scheduled tasks, not as GitHub Actions; the only workflow added, `.github/workflows/autonomy-gate.yml`, is compute-only with `permissions: contents: read`, a timeout and no schedule.
+
+Standing boundaries, encoded in `rules.json` and asserted by `clinicops-autonomy-policy selftest` in CI:
+
+- Tier 0 (research, monitoring, drafts, verification, data building, hygiene reports, invoice preparation, backups) is autonomous; Tier 1 (standing orders) is not enabled; Tier 2 (sends, publishing, site changes, PR merges) is prepared and parked for Ali; Tier 3 (money, contracts, accounts, credentials, CAPTCHAs, compliance-status statements, Danish e-marketing, pushes to `main`, deletions) is never automated and no approval flag releases it.
+- Jobs read `main` and open pull requests; they never push to `main`, never force-push, never rewrite history, never change repository settings.
+- Kill switch, any one of three: `autonomy/HALT.md` on `main` (create to stop, delete to resume; it must not exist on the committed tree otherwise — `tests/test_autonomy_contract.py`), a Drive file named `CLINICOPS_HALT`, a project doc `00_CONTROL/HALT.md` or `20_AUTONOMY/HALT.md`.
+- Private outputs (named EUDAMED research, pipeline, finance, mailbox-derived items) stay in Drive `ClinicOps-Autonomy` and the private project; the `DO_NOT_CONTACT` list stays private (the two permanent exclusions above are the only public entries).
+- `.github/CODEOWNERS` names Ali for `autonomy/rules.json`, `autonomy/jobs/` and `.github/workflows/`; it is advisory until branch protection exists (issue #36).
+
 ## Repository governance / security
 
 `main` remains unprotected. Green CI is an operating convention rather than an enforced merge rule.
