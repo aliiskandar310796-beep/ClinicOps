@@ -1,0 +1,383 @@
+{
+  "schema_version": "1.0",
+  "generated_from": "autonomy/jobs/*.md front matter",
+  "generated_on": "2026-09-25",
+  "timezone": "Europe/Madrid",
+  "description": "Machine-readable policy for the ClinicOps Tier-0 autonomy layer. The job registry below is derived from the YAML front matter of autonomy/jobs/*.md; tests/test_autonomy_rules.py fails when the two drift apart. Everything here is a ceiling, never a target.",
+  "tiers": {
+    "0": {
+      "label": "autonomous",
+      "enabled": true,
+      "description": "Research, monitoring, drafting, verification, terminology data building, EUDAMED research, SEO/content drafts, pipeline hygiene reports, invoice preparation and backups. Nothing outward-facing, nothing irreversible.",
+      "allow": [
+        "research",
+        "monitor",
+        "draft_email",
+        "draft_document",
+        "draft_post",
+        "crm_read",
+        "backup_write",
+        "open_pr",
+        "create_calendar_event",
+        "write_log",
+        "write_private_report"
+      ],
+      "deny": [],
+      "guardrails": [
+        "drafts only; an Outlook or Gmail draft is allowed, sending is not",
+        "calendar events carry no external attendees and no invitations",
+        "pull requests only; never a push to main",
+        "private outputs stay in Drive ClinicOps-Autonomy and the private project"
+      ]
+    },
+    "1": {
+      "label": "autonomous within standing orders",
+      "enabled": false,
+      "description": "Actions Ali has pre-authorised by a written standing order. Not yet enabled: while enabled is false every Tier-1 action is parked as Tier 2 and released only with explicit human approval.",
+      "allow": [
+        "crm_write",
+        "send_followup_within_standing_order"
+      ],
+      "deny": [],
+      "guardrails": [
+        "HubSpot writes require Ali to re-authorise the connector; until then jobs report and propose only"
+      ]
+    },
+    "2": {
+      "label": "prepared and parked for Ali",
+      "enabled": true,
+      "description": "Prepared by automation, released only by Ali. The job produces the draft, the evidence and a NEEDS_ALI item; the action itself waits.",
+      "park": [
+        "send_email",
+        "cold_email",
+        "send_dm",
+        "publish_post",
+        "publish_comment",
+        "reply_external",
+        "site_change",
+        "merge_pr"
+      ],
+      "release_requires": "human_approved",
+      "guardrails": [
+        "LinkedIn publishing, site changes and outbound sends need Ali's case-by-case approval (00_STATE/GOVERNANCE_BOUNDARIES.md)"
+      ]
+    },
+    "3": {
+      "label": "never automated",
+      "enabled": false,
+      "description": "Done by Ali himself, never by automation, and never releasable by a human_approved flag: money, contracts, accounts, credentials, CAPTCHAs, compliance-status statements about a named party, Danish e-marketing, and anything that rewrites or deletes shared state.",
+      "deny": [
+        "payment",
+        "sign_contract",
+        "create_account",
+        "enter_credentials",
+        "credential_rotation",
+        "solve_captcha",
+        "change_price",
+        "compliance_statement",
+        "danish_e_marketing",
+        "push_main",
+        "force_push",
+        "rewrite_history",
+        "change_github_settings",
+        "delete_file",
+        "move_file",
+        "delete_crm_record",
+        "merge_crm_records"
+      ]
+    }
+  },
+  "policy_defaults": {
+    "unknown_action": "deny",
+    "note": "An action that appears in no tier list is denied (fail closed). human_approved releases Tier-1 and Tier-2 parks; it never releases a Tier-3 denial, a jurisdiction denial or a cap denial."
+  },
+  "standing_caps": {
+    "cold_email": {
+      "daily_cap": 50,
+      "cap_is_ceiling_not_target": true,
+      "sub_batch_size": 5,
+      "ndr_check_between_sub_batches": true,
+      "format": "plain-text only",
+      "opt_out_line_required": true,
+      "dedupe_against": "authoritative private outreach master plus live Sent history"
+    },
+    "linkedin": {
+      "posts_per_week_max": 3,
+      "post_days": "weekdays",
+      "post_time_local": "08:30",
+      "timezone": "Europe/Madrid",
+      "comments_per_week_min": 3,
+      "comments_per_week_max": 5,
+      "publish_tier": 2
+    }
+  },
+  "jurisdictions": {
+    "DK": {
+      "cold_email": "deny",
+      "cold_dm": "deny",
+      "public_posting": "allow",
+      "note": "Danish-domiciled organisations are never cold-emailed or cold-messaged under any framing; public posting only."
+    },
+    "DE": {
+      "cold_email": "restricted",
+      "legal_basis": "UWG §7",
+      "note": "German recipients: UWG §7 applies; a cold email is parked with the legal basis named and released only by Ali."
+    },
+    "AT": {
+      "cold_email": "restricted",
+      "legal_basis": "TKG §174",
+      "note": "Austrian recipients: TKG §174 applies; a cold email is parked with the legal basis named and released only by Ali."
+    },
+    "default": {
+      "cold_email": "park",
+      "note": "Every send is Tier 2: prepared, parked, released by Ali."
+    }
+  },
+  "post_gate": [
+    {
+      "item": 1,
+      "rule": "Sits in the whole value chain, not a Danish-only framing."
+    },
+    {
+      "item": 2,
+      "rule": "Teaches a real structure or failure mode."
+    },
+    {
+      "item": 3,
+      "rule": "Anchored to a real asset (a figure, a document, a dataset) with its source."
+    },
+    {
+      "item": 4,
+      "rule": "Verified at source: the primary source is quoted in a footnote; claim IDs come from research/claims.jsonl and respect allowed_uses."
+    },
+    {
+      "item": 5,
+      "rule": "Ali's confirmation. Every draft starts with 'DRAFT — requires user confirmation before publishing.' Automation never clears this item."
+    }
+  ],
+  "do_not_contact": {
+    "pointer": "Private list: 00_CONTROL/DO_NOT_CONTACT.md in the private project, or Drive ClinicOps-Autonomy/00_CONTROL/DO_NOT_CONTACT.md. Never copied into this repository.",
+    "public_permanent_exclusions": [
+      "Ergomed Group",
+      "PrimeVigilance"
+    ],
+    "match_rule": "Match on entity names, obvious variants and subsidiaries. A match is flagged 'must never be worked'; nothing else happens."
+  },
+  "kill_switch": {
+    "check_order": "first, before any other work",
+    "locations": [
+      {
+        "kind": "repo_file",
+        "ref": "autonomy/HALT.md on main",
+        "url": "https://raw.githubusercontent.com/aliiskandar310796-beep/ClinicOps/main/autonomy/HALT.md",
+        "rule": "Create this file to stop every job; delete it to resume. Any content (not a 404) means HALT."
+      },
+      {
+        "kind": "drive_file",
+        "ref": "CLINICOPS_HALT",
+        "rule": "Google Drive search_files with query title = 'CLINICOPS_HALT'; any result means HALT."
+      },
+      {
+        "kind": "project_doc",
+        "ref": "00_CONTROL/HALT.md or 20_AUTONOMY/HALT.md",
+        "rule": "Projects tool, if present: either doc existing means HALT."
+      }
+    ]
+  },
+  "outputs": {
+    "drive_root": "ClinicOps-Autonomy",
+    "log_folder": "01_LOGS",
+    "private_project_prefix": "20_AUTONOMY/",
+    "needs_ali": "20_AUTONOMY/NEEDS_ALI.md",
+    "public_path": "Pull requests to aliiskandar310796-beep/ClinicOps on branches named autonomy/<topic>-<date>; never a push to main."
+  },
+  "jobs": [
+    {
+      "slug": "t0-monitor",
+      "name": "ClinicOps T0 Monitor",
+      "file": "autonomy/jobs/monitor.md",
+      "tier": 0,
+      "cron": "CRON_TZ=Europe/Madrid 3 6-23/3 * * *",
+      "cadence_minutes": 180,
+      "min_expected_duration_seconds": 60,
+      "outputs": [
+        "01_LOGS",
+        "NEEDS_ALI",
+        "Outlook reply drafts (never sent)",
+        "calendar deadline events"
+      ],
+      "notifications": "none"
+    },
+    {
+      "slug": "t0-research",
+      "name": "ClinicOps T0 Research",
+      "file": "autonomy/jobs/research.md",
+      "tier": 0,
+      "cron": "CRON_TZ=Europe/Madrid 56 4 * * *",
+      "cadence_minutes": 1440,
+      "min_expected_duration_seconds": 120,
+      "outputs": [
+        "02_RESEARCH/<date>_regulatory_radar.md",
+        "01_LOGS"
+      ],
+      "notifications": "none"
+    },
+    {
+      "slug": "t0-verification",
+      "name": "ClinicOps T0 Verification",
+      "file": "autonomy/jobs/verification.md",
+      "tier": 0,
+      "cron": "CRON_TZ=Europe/Madrid 52 9 * * *",
+      "cadence_minutes": 1440,
+      "min_expected_duration_seconds": 120,
+      "outputs": [
+        "03_VERIFICATION/<date>_claims_reverification.md",
+        "03_VERIFICATION/<date>_drafts_audit.md",
+        "pull request (best effort, never to main)",
+        "01_LOGS"
+      ],
+      "notifications": "none"
+    },
+    {
+      "slug": "t0-termbase",
+      "name": "ClinicOps T0 Termbase",
+      "file": "autonomy/jobs/termbase.md",
+      "tier": 0,
+      "cron": "CRON_TZ=Europe/Madrid 56 1 * * *",
+      "cadence_minutes": 1440,
+      "min_expected_duration_seconds": 120,
+      "outputs": [
+        "06_TERMBASE/termbase_<date>.csv (delta)",
+        "20_AUTONOMY/TERMBASE_MASTER.csv (project)",
+        "20_AUTONOMY/TERMBASE_PROGRESS.md",
+        "weekly PR to data/termbase/termbase_public.csv (public rows only)",
+        "01_LOGS"
+      ],
+      "notifications": "none"
+    },
+    {
+      "slug": "t0-eudamed",
+      "name": "ClinicOps T0 EUDAMED",
+      "file": "autonomy/jobs/eudamed.md",
+      "tier": 0,
+      "cron": "CRON_TZ=Europe/Madrid 57 3 * * 1-5",
+      "cadence_minutes": 1440,
+      "min_expected_duration_seconds": 120,
+      "outputs": [
+        "05_EUDAMED/<date>_watchlist_report.md (PRIVATE)",
+        "05_EUDAMED/<date>_sample.md",
+        "01_LOGS"
+      ],
+      "notifications": "none"
+    },
+    {
+      "slug": "t0-seo-content",
+      "name": "ClinicOps T0 SEO Content",
+      "file": "autonomy/jobs/seo-content.md",
+      "tier": 0,
+      "cron": "CRON_TZ=Europe/Madrid 54 10 * * 2",
+      "cadence_minutes": 10080,
+      "min_expected_duration_seconds": 180,
+      "outputs": [
+        "07_SEO_CONTENT/<date>_seo_audit.md",
+        "07_SEO_CONTENT/<date>_drafts.md",
+        "PR to content/drafts (best effort)",
+        "01_LOGS"
+      ],
+      "notifications": "none"
+    },
+    {
+      "slug": "t0-pipeline",
+      "name": "ClinicOps T0 Pipeline",
+      "file": "autonomy/jobs/pipeline.md",
+      "tier": 0,
+      "cron": "CRON_TZ=Europe/Madrid 56 11 * * *",
+      "cadence_minutes": 1440,
+      "min_expected_duration_seconds": 90,
+      "outputs": [
+        "08_PIPELINE/<date>_hygiene.md",
+        "01_LOGS"
+      ],
+      "notifications": "none"
+    },
+    {
+      "slug": "t0-invoice",
+      "name": "ClinicOps T0 Invoice",
+      "file": "autonomy/jobs/invoice.md",
+      "tier": 0,
+      "cron": "CRON_TZ=Europe/Madrid 57 8 * * 1",
+      "cadence_minutes": 10080,
+      "min_expected_duration_seconds": 120,
+      "outputs": [
+        "09_FINANCE/<date>_billable_statement.md",
+        "09_FINANCE/Invoice_DRAFT_<date>.docx",
+        "01_LOGS"
+      ],
+      "notifications": "none"
+    },
+    {
+      "slug": "t0-backup",
+      "name": "ClinicOps T0 Backup",
+      "file": "autonomy/jobs/backup.md",
+      "tier": 0,
+      "cron": "CRON_TZ=Europe/Madrid 58 2 * * *",
+      "cadence_minutes": 1440,
+      "min_expected_duration_seconds": 90,
+      "outputs": [
+        "10_BACKUPS/<date>/ (project docs, manifest, README)",
+        "weekly CRM export",
+        "restore test result",
+        "01_LOGS"
+      ],
+      "notifications": "none"
+    },
+    {
+      "slug": "t0-evening",
+      "name": "ClinicOps T0 Evening",
+      "file": "autonomy/jobs/evening.md",
+      "tier": 0,
+      "cron": "CRON_TZ=Europe/Madrid 57 19 * * *",
+      "cadence_minutes": 1440,
+      "min_expected_duration_seconds": 60,
+      "outputs": [
+        "00_DAILY/<date>_evening_summary.md",
+        "20_AUTONOMY/DAILY/<date>.md",
+        "01_LOGS"
+      ],
+      "notifications": "email"
+    },
+    {
+      "slug": "t0-watchdog",
+      "name": "ClinicOps T0 Watchdog",
+      "file": "autonomy/jobs/watchdog.md",
+      "tier": 0,
+      "cron": "CRON_TZ=Europe/Madrid 56 6,20 * * *",
+      "cadence_minutes": 720,
+      "min_expected_duration_seconds": 45,
+      "outputs": [
+        "11_WATCHDOG/<date>_<HHMM>_watchdog.md",
+        "calendar alert on CRITICAL",
+        "weekly fleet report on Sundays",
+        "01_LOGS"
+      ],
+      "notifications": "push+email"
+    }
+  ],
+  "watchdog": {
+    "missed_multiplier": 2,
+    "missed_rule": "A job that has not fired within 2x its cadence_minutes is ALERT missed.",
+    "short_run_rule": "A run whose finished_at - fired_at is below min_expected_duration_seconds is WARN short run (probable fail-fast).",
+    "scheduler_stall_hours": 2,
+    "scheduler_stall_rule": "next_run_at more than 2 hours in the past is ALERT scheduler stall.",
+    "failed_rule": "last_run.status FAILED is ALERT.",
+    "disabled_rule": "An expected job that is disabled or missing from the scheduler is ALERT.",
+    "stale_needs_ali_days": 7,
+    "max_calendar_alerts_per_day": 1
+  },
+  "claim_freshness": {
+    "registry": "research/claims.jsonl",
+    "reverify_days_before_review_after": 21,
+    "proposed_extension_days_on_verified": 90,
+    "status_change_to_verified": "Ali only; the verification job proposes, it never sets status to verified."
+  }
+}

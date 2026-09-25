@@ -40,6 +40,12 @@ clinicops-integrity-gate = "clinicops_os.integrity_cli:integrity_gate"
 clinicops-integrity-review-prepare = "clinicops_os.integrity_cli:integrity_review_prepare"
 clinicops-integrity-review-gate = "clinicops_os.integrity_cli:integrity_review_gate"
 clinicops-integrity-verify = "clinicops_os.integrity_cli:integrity_verify"
+clinicops-autonomy-policy = "clinicops_os.autonomy.policy:policy_cli"
+clinicops-autonomy-halt = "clinicops_os.autonomy.halt:halt_cli"
+clinicops-termbase = "clinicops_os.autonomy.termbase:termbase_cli"
+clinicops-backup-manifest = "clinicops_os.autonomy.backup_manifest:backup_manifest_cli"
+clinicops-autonomy-watchdog = "clinicops_os.autonomy.watchdog:watchdog_cli"
+clinicops-autonomy-jobs = "clinicops_os.autonomy.jobs:jobs_cli"
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
