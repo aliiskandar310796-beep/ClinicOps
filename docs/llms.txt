@@ -17,11 +17,13 @@ Solution and use cases:
 - EU MDR Regulatory Data Integrity for Global MedTech | ClinicOps: https://clinicops.dk/eu-mdr-regulatory-integrity.html - Evidence-controlled EU MDR regulatory information review, remediation and change operations for medical-device manufacturers worldwide supporting the EU market.
 - EUDAMED Transition Work Plans for MedTech | ClinicOps: https://clinicops.dk/eudamed-transition.html - Turn legacy and MDR portfolio evidence into a prioritised EUDAMED transition work plan with role-aware screening, evidence gaps and human regulatory review.
 - Regulatory Change Integrity Review | ClinicOps: https://clinicops.dk/evidence-change-control-pack.html - One declared change and evidence population turned into a source register, change-surface matrix, unresolved queue and closure packet.
+- Evidence pack checklist | ClinicOps: https://clinicops.dk/evidence-pack-checklist.html - What to gather before a ClinicOps review: exports, records, version-control expectations and what not to send.
 - Specialist Clinical Review | ClinicOps: https://clinicops.dk/expert-network.html - Independent clinical subject-matter review, across medicine and nursing, where a regulatory, safety or product-information question needs clinical context.
 - Regulatory Integrity Review for MedTech | ClinicOps: https://clinicops.dk/integrity-gate.html - Human-reviewed regulatory information reconciliation and change-propagation review across EUDAMED, IFU, SS(C)P, labels and client-controlled systems.
 - Medical Device Regulatory Document Control | ClinicOps: https://clinicops.dk/medical-device-document-control.html - Reconciliation-as-evidence review of consistency across EUDAMED records, IFU, labelling and market-language versions for MedTech, with RA/QA retaining sign-off.
 - EU Medical Device Regulatory Intelligence | ClinicOps: https://clinicops.dk/regulatory-intelligence.html - EU medical device regulatory intelligence with the evidence intact: capture signals, keep actor context, separate screening from conclusions.
 - SS(C)P Operations and Evidence Workflows | ClinicOps: https://clinicops.dk/sscp-operations.html - Organise SS(C)P evidence, Basic UDI-DI relationships, translations and operational handoffs with a human-reviewed MedTech regulatory work plan.
+- What a pilot looks like | ClinicOps: https://clinicops.dk/what-a-pilot-looks-like.html - What a ClinicOps pilot covers, how it runs, what you receive, and who decides.
 
 Free browser-local tools and examples:
 - Change Surface Mapper | ClinicOps: https://clinicops.dk/change-surface-mapper.html - Map one approved change across affected systems, records, documents and owners, in your browser. A portable evidence brief; nothing is uploaded.

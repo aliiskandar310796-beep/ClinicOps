@@ -36,6 +36,8 @@ SECTION_BY_PAGE = {
     "services.html": "Solution",
     "assessment-intake.html": "Solution",
     "evidence-change-control-pack.html": "Solution",
+    "what-a-pilot-looks-like.html": "Solution",
+    "evidence-pack-checklist.html": "Solution",
     "integrity-gate.html": "Solution",
     "use-cases.html": "Use cases",
     "authorised-representative-portfolio-intelligence.html": "Use cases",

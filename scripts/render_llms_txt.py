@@ -26,6 +26,7 @@ SECTIONS = (
         "eu-mdr-regulatory-integrity.html", "eudamed-transition.html", "class-iii-transition.html",
         "sscp-operations.html", "authorised-representative-portfolio-intelligence.html",
         "medical-device-document-control.html", "regulatory-intelligence.html", "expert-network.html",
+        "what-a-pilot-looks-like.html", "evidence-pack-checklist.html",
     }),
     ("Free browser-local tools and examples", lambda r: r in {
         "tools.html", "integrity-check.html", "integrity-scanner.html", "integrity-economics.html",
