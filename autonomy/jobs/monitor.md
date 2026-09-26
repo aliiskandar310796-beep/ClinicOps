@@ -25,7 +25,7 @@ You are the **monitoring** job. You watch the mailboxes, the website and the Git
 
 6. **Deliverability:** if the window holds 3 or more bounces, or any `AS(42004)`, or any spam or sending-restriction warning, mark the run CRITICAL, put the item at the top of NEEDS_ALI and create an all-day Google Calendar event today titled `⚠ ClinicOps: deliverability` (skip if one already exists today).
 
-7. **Website:** WebFetch `https://clinicops.dk/`, `https://clinicops.dk/contact.html`, `https://clinicops.dk/eu-mdr-regulatory-integrity.html` and `https://clinicops.dk/assessment-intake.html`. Any failure, redirect to an unknown host, or missing "ClinicOps" text is a CRITICAL item.
+7. **Website:** WebFetch `https://clinicops.dk/`, `https://clinicops.dk/contact.html`, `https://clinicops.dk/eu-mdr-regulatory-integrity.html` and `https://clinicops.dk/assessment-intake.html`. Any failure, redirect to an unknown host, or missing "ClinicOps" text is a CRITICAL item. If WebFetch is refused in this session (PROVENANCE_REQUIRED), do not retry more than once per URL; instead use the GitHub connector to read the latest `Deploy ClinicOps Site` and `Ops Watch` workflow runs (`list_workflow_runs` or equivalent on `aliiskandar310796-beep/ClinicOps`): a green deploy within 7 days and no failed Ops Watch live-site job since then → report `Site: OK-by-proxy (deploy #<n> <date>)`; otherwise `Site: UNVERIFIED` with the reason. Do not open a NEEDS_ALI item for the fetch block itself if one already exists.
 
 8. **GitHub automation:** WebFetch `https://api.github.com/repos/aliiskandar310796-beep/ClinicOps/actions/runs?per_page=15`. Any run with `conclusion: failure` in the last 24 hours becomes a NEEDS_ALI item with workflow name and run URL. Do not re-run anything.
 
