@@ -63,6 +63,12 @@ Zero rows means “not findable under the tested string at that time”, never �
 
 Current Public API use remains bounded GET-only, identifying User-Agent, one-second spacing and finite page cap. Re-review on endpoint/term changes, repeated 403/429, materially increased request volume or publication of raw named records. Never evade restrictions with proxies/identity rotation.
 
+## Autonomy Gate — 2026-09-25
+
+Workflow: `.github/workflows/autonomy-gate.yml` (name `Autonomy Gate`). Triggers: `push` and `pull_request` limited by `paths` to `autonomy/**`, `src/clinicops_os/autonomy/**`, the autonomy/termbase/backup-manifest tests, `data/termbase/**`, `pyproject.toml` and the workflow itself, plus `workflow_dispatch`. **No schedule.** `permissions: contents: read`, `concurrency: clinicops-autonomy-gate`, `timeout-minutes: 8`, Python 3.11. Steps: focused pytest, Ruff, `clinicops-termbase validate` and `qa` on `data/termbase/termbase_public.csv`, `clinicops-autonomy-jobs list`, `clinicops-autonomy-policy selftest`.
+
+The Tier-0 jobs themselves are claude.ai scheduled tasks (see `autonomy/README.md`); they are not part of the GitHub Actions surface. Their public-safe outputs reach the repository only as pull requests (`autonomy/<topic>-<date>` branches) and pass the existing CI gates like any other change. `data/termbase/termbase_public.csv` is the only new committed data surface; it holds public-source rows only.
+
 ### SS(C)P Playground workflow evidence — PR #44
 
 Commission Playground/help v3.31.2 documents manufacturer-side SS(C)P workflow concepts including new records, Basic UDI-DI linking, versions/master documents and translations. Treat this as Playground/help evidence, **not proof that planned Production deployment has already occurred**.

@@ -2,7 +2,7 @@
   "agents": [
     {
       "name": "regulatory-radar",
-      "mission": "Detect primary-source MDR/IVDR/EUDAMED changes before they become client surprises.",
+      "mission": "Detect primary-source MDR/IVDR/EUDAMED changes before they become client surprises. Implemented by the Tier-0 job t0-research (autonomy/jobs/research.md), daily.",
       "cadence": "daily",
       "inputs": [
         "European Commission medical-devices updates",
@@ -10,14 +10,18 @@
         "EUR-Lex"
       ],
       "outputs": [
-        "material-change brief",
-        "ClinicOps impact note",
-        "backlog update"
+        "02_RESEARCH/<date>_regulatory_radar.md (Drive)",
+        "candidate content angles",
+        "candidate claims (observation/derivation, with quotation)"
       ],
       "guardrails": [
         "primary sources first",
         "separate binding law from guidance",
-        "no alert for noise"
+        "no alert for noise",
+        "drafts only",
+        "never sends",
+        "never pushes to main",
+        "private outputs stay in Drive and the private project"
       ],
       "escalation": "Escalate changes affecting deadlines, duty holders, scope or service claims.",
       "leverage": 10
@@ -153,7 +157,7 @@
     },
     {
       "name": "content-synthesizer",
-      "mission": "Convert verified research into durable notes, tools and posts without weakening the evidence.",
+      "mission": "Convert verified research into durable notes, tools and posts without weakening the evidence. Drafting is implemented by the Tier-0 job t0-seo-content (autonomy/jobs/seo-content.md), weekly; every draft carries POST GATE items 1-4 and waits for Ali on item 5.",
       "cadence": "weekly",
       "inputs": [
         "verified findings",
@@ -161,15 +165,19 @@
         "method notes"
       ],
       "outputs": [
-        "research note",
-        "LinkedIn draft",
-        "tool CTA",
-        "FAQ"
+        "07_SEO_CONTENT/<date>_drafts.md (Drive)",
+        "research note draft",
+        "LinkedIn post drafts",
+        "PR to content/drafts (best effort)"
       ],
       "guardrails": [
         "aggregate-first",
         "method and limits stated",
-        "no engagement-bait distortion"
+        "no engagement-bait distortion",
+        "drafts only",
+        "never sends",
+        "never pushes to main",
+        "private outputs stay in Drive and the private project"
       ],
       "escalation": "Send all regulatory claims through claim-adversary.",
       "leverage": 8
@@ -285,7 +293,7 @@
     },
     {
       "name": "resilience-engineer",
-      "mission": "Continuously remove single points of failure from ClinicOps tools, data, channels and operating knowledge.",
+      "mission": "Continuously remove single points of failure from ClinicOps tools, data, channels and operating knowledge. The backup and restore-test part is implemented by the Tier-0 job t0-backup (autonomy/jobs/backup.md), nightly; fleet health by t0-watchdog (autonomy/jobs/watchdog.md).",
       "cadence": "weekly",
       "inputs": [
         "dependency map",
@@ -295,31 +303,42 @@
       "outputs": [
         "fragility ranking",
         "fallback plan",
-        "recovery drill"
+        "recovery drill",
+        "10_BACKUPS/<date>/ with SHA-256 manifest (Drive)",
+        "weekly restore-test result"
       ],
       "guardrails": [
         "portable formats",
         "document credentials without storing secrets",
-        "test restores"
+        "test restores",
+        "drafts only",
+        "never sends",
+        "never pushes to main",
+        "private outputs stay in Drive and the private project"
       ],
       "escalation": "Escalate any critical dependency with no fallback.",
       "leverage": 9
     },
     {
       "name": "inbox-signal-triage",
-      "mission": "Separate revenue/regulatory/partner signals from noise and convert important mail into next actions.",
+      "mission": "Separate revenue/regulatory/partner signals from noise and convert important mail into next actions. Implemented by the Tier-0 job t0-monitor (autonomy/jobs/monitor.md), every 3 hours 06:00-21:00 Europe/Madrid.",
       "cadence": "daily",
       "inputs": [
         "connected work mail"
       ],
       "outputs": [
-        "priority inbox brief",
-        "reply drafts",
-        "backlog entries"
+        "priority classification per window (counts by class in 01_LOGS)",
+        "Outlook reply drafts (never sent)",
+        "NEEDS_ALI items with response deadlines",
+        "vendor deadline calendar events"
       ],
       "guardrails": [
         "do not send without valid account/tool context",
-        "protect confidential data"
+        "protect confidential data",
+        "drafts only",
+        "never sends",
+        "never pushes to main",
+        "private outputs stay in Drive and the private project"
       ],
       "escalation": "Escalate complaints, legal notices, security incidents and client deadlines immediately.",
       "leverage": 8
@@ -349,6 +368,164 @@
       ],
       "escalation": "Escalate only material market shifts affecting positioning, partnerships or pricing.",
       "leverage": 7
+    },
+    {
+      "name": "tier0-verification",
+      "mission": "Adversarially re-verify registry claims before review_after expires and audit every draft before it could go external. Implemented by the Tier-0 job t0-verification (autonomy/jobs/verification.md).",
+      "cadence": "daily",
+      "inputs": [
+        "research/claims.jsonl",
+        "primary sources",
+        "drafts of the last 24 hours",
+        "yesterday's job logs"
+      ],
+      "outputs": [
+        "03_VERIFICATION/<date>_claims_reverification.md",
+        "03_VERIFICATION/<date>_drafts_audit.md",
+        "proposed review_after/limitations patch as a PR (best effort)",
+        "unverified-completion list"
+      ],
+      "guardrails": [
+        "quote the primary source",
+        "not verified is a valid outcome",
+        "never sets a claim to verified \u2014 Ali decides",
+        "drafts only",
+        "never sends",
+        "never pushes to main",
+        "private outputs stay in Drive and the private project"
+      ],
+      "escalation": "Every refuted claim and every FAIL draft becomes a NEEDS_ALI item 'Do not send'.",
+      "leverage": 9
+    },
+    {
+      "name": "termbase-builder",
+      "mission": "Build an EN-DA regulatory terminology database one aligned slice per night, every pair traceable to its source. Implemented by the Tier-0 job t0-termbase (autonomy/jobs/termbase.md).",
+      "cadence": "daily",
+      "inputs": [
+        "private bilingual corpus (Drive)",
+        "MDR/IVDR EN and DA on EUR-Lex",
+        "Danish national texts for usage validation"
+      ],
+      "outputs": [
+        "06_TERMBASE/termbase_<date>.csv delta",
+        "20_AUTONOMY/TERMBASE_MASTER.csv",
+        "Sunday PR of public rows to data/termbase/termbase_public.csv"
+      ],
+      "guardrails": [
+        "never invent a Danish term",
+        "verified only when both contexts are quoted from the same provision",
+        "private-corpus rows never reach GitHub",
+        "drafts only",
+        "never sends",
+        "never pushes to main",
+        "private outputs stay in Drive and the private project"
+      ],
+      "escalation": "Escalate inconsistencies between MDR-DA usage and Danish national usage as NOTE: rows, never as corrections.",
+      "leverage": 7
+    },
+    {
+      "name": "fleet-watchdog",
+      "mission": "Dead-man's switch for the whole scheduled fleet: confirm every task ran, worked and produced what it claimed. Implemented by the Tier-0 job t0-watchdog (autonomy/jobs/watchdog.md).",
+      "cadence": "twice daily",
+      "inputs": [
+        "kill-switch state",
+        "scheduler task list",
+        "01_LOGS evidence",
+        "NEEDS_ALI age"
+      ],
+      "outputs": [
+        "11_WATCHDOG/<date>_<HHMM>_watchdog.md with FLEET verdict",
+        "calendar alert on RED (max one per day)",
+        "Sunday fleet report"
+      ],
+      "guardrails": [
+        "never changes, disables or fires a task",
+        "missed = 2x cadence, short run = below minimum duration, stale NEEDS_ALI = 7 days",
+        "drafts only",
+        "never sends",
+        "never pushes to main",
+        "private outputs stay in Drive and the private project"
+      ],
+      "escalation": "RED verdict: one consolidated NEEDS_ALI item plus the only phone notification of the layer.",
+      "leverage": 9
+    },
+    {
+      "name": "pipeline-hygiene",
+      "mission": "Audit CRM and pipeline records and propose corrections; never write to the CRM. Implemented by the Tier-0 job t0-pipeline (autonomy/jobs/pipeline.md).",
+      "cadence": "daily",
+      "inputs": [
+        "HubSpot contacts, companies, deals (read-only)",
+        "private pipeline document",
+        "DO_NOT_CONTACT list"
+      ],
+      "outputs": [
+        "08_PIPELINE/<date>_hygiene.md with proposals table",
+        "overdue follow-up list",
+        "Friday pipeline snapshot"
+      ],
+      "guardrails": [
+        "proposals only \u2014 HubSpot writes are not authorised for automation",
+        "pseudonymous references where a record would identify a prospect",
+        "DO_NOT_CONTACT matches are flagged, never worked",
+        "drafts only",
+        "never sends",
+        "never pushes to main",
+        "private outputs stay in Drive and the private project"
+      ],
+      "escalation": "One consolidated NEEDS_ALI item per run plus a separate item for any DO_NOT_CONTACT match in the CRM.",
+      "leverage": 7
+    },
+    {
+      "name": "invoice-prep",
+      "mission": "Assemble billable work from evidence into a draft statement and a draft invoice document with placeholders; financial logic stays with Ali. Implemented by the Tier-0 job t0-invoice (autonomy/jobs/invoice.md).",
+      "cadence": "weekly",
+      "inputs": [
+        "vendor-portal and client messages of the last 35 days (read-only)",
+        "finance rules if present"
+      ],
+      "outputs": [
+        "09_FINANCE/<date>_billable_statement.md",
+        "09_FINANCE/Invoice_DRAFT_<date>.docx with [INVOICE NUMBER], [BANK DETAILS], [DUE DATE], [RATE] placeholders",
+        "open receivables list"
+      ],
+      "guardrails": [
+        "never sets or changes a rate, term, number or bank detail",
+        "never marks anything paid",
+        "unknown rate stays 'per agreement \u2014 not in evidence'",
+        "drafts only",
+        "never sends",
+        "never pushes to main",
+        "private outputs stay in Drive and the private project"
+      ],
+      "escalation": "NEEDS_ALI item with counts; separate item for any receivable older than the payment term.",
+      "leverage": 6
+    },
+    {
+      "name": "eudamed-private-research",
+      "mission": "Named EUDAMED watchlist and sample research that the public anonymised watch cannot do; measures what the public record shows, never what is true of a device. Implemented by the Tier-0 job t0-eudamed (autonomy/jobs/eudamed.md).",
+      "cadence": "weekdays",
+      "inputs": [
+        "private watchlist (Drive)",
+        "public EUDAMED API, read-only, at most 60 requests per run",
+        "data/eudamed/LATEST.md for cross-check"
+      ],
+      "outputs": [
+        "05_EUDAMED/<date>_watchlist_report.md (PRIVATE)",
+        "05_EUDAMED/<date>_sample.md aggregate statistics",
+        "candidate findings (max 3) as observations"
+      ],
+      "guardrails": [
+        "no compliance or conformity statement about any named party",
+        "separate populations before any aggregate",
+        "stop-and-review on any 403 or 429",
+        "named outputs never reach GitHub or any public surface",
+        "drafts only",
+        "never sends",
+        "never pushes to main",
+        "private outputs stay in Drive and the private project"
+      ],
+      "escalation": "Candidate public findings go to NEEDS_ALI with the public-finding format and the verify-regulatory-claims pass required first.",
+      "leverage": 8
     }
   ]
 }
