@@ -17,6 +17,26 @@
  const MAX_BYTES=40*1024*1024, MAX_PAGES=200, MAX_CHARS=3000000;
  let pdfjsPromise=null;
 
+ // pdf.js 6.3.289's page.render() path (used by ocr-extract.js to rasterize a page for OCR;
+ // extractPdfText() below never calls render() and is unaffected) calls the still-very-new
+ // Map/WeakMap.prototype.getOrInsertComputed (TC39 "upsert" proposal) unconditionally, with no
+ // internal feature check. That method is not yet shipped in every current browser, so without
+ // this small, spec-faithful polyfill, page.render() throws "... .getOrInsertComputed is not a
+ // function" on those browsers — a platform gap, not something pdf.js or this vendored file
+ // controls. Safe to apply unconditionally: a no-op where the method already exists natively.
+ if(typeof global.Map==="function"&&typeof global.Map.prototype.getOrInsertComputed!=="function"){
+  global.Map.prototype.getOrInsertComputed=function(key,callbackfn){
+   if(this.has(key))return this.get(key);
+   const v=callbackfn(key);this.set(key,v);return v;
+  };
+ }
+ if(typeof global.WeakMap==="function"&&typeof global.WeakMap.prototype.getOrInsertComputed!=="function"){
+  global.WeakMap.prototype.getOrInsertComputed=function(key,callbackfn){
+   if(this.has(key))return this.get(key);
+   const v=callbackfn(key);this.set(key,v);return v;
+  };
+ }
+
  function loadPdfjs(){
   if(pdfjsPromise)return pdfjsPromise;
   pdfjsPromise=import("../vendor/pdfjs/pdf.min.mjs").then(lib=>{
@@ -46,12 +66,14 @@
   return out;
  }
 
- // Returns {text, pageCount, pagesWithText, noTextLayer, truncated}.
- // noTextLayer:true means pdf.js found no text on any page — almost always
- // a scanned/image-only PDF, which this reads but cannot OCR (that is a
- // separate, not-yet-built phase); callers should say so plainly rather than
- // show an auto-fill pass that silently found nothing.
- async function extractPdfText(file){
+ // Validates a File and opens it as a live pdf.js document — the shared
+ // first step under both extractPdfText (text-layer reading) and OCR
+ // (ocr-extract.js's opt-in fallback for scans). Returns the open document;
+ // the caller owns it and must call doc.destroy() when done. Does not apply
+ // the page-count guardrail itself, since text extraction and OCR have
+ // different, independently-justified page caps (OCR is far slower per
+ // page) — each caller checks doc.numPages against its own limit.
+ async function openPdfDocument(file){
   if(!file)throw new Error("No file given.");
   if(!/\.pdf$/i.test(file.name)&&file.type&&file.type!=="application/pdf")throw new Error("This tool currently reads PDF files only. Convert or export the document as a PDF, or enter its values manually.");
   if(file.size>MAX_BYTES)throw new Error(`File exceeds the ${(MAX_BYTES/1024/1024)|0} MB local guardrail (${(file.size/1024/1024).toFixed(1)} MB). Split or compress the PDF, or enter values manually.`);
@@ -60,9 +82,17 @@
   let headStr="";for(let i=0;i<head.length;i++)headStr+=String.fromCharCode(head[i]);
   if(headStr!=="%PDF-")throw new Error("This does not look like a PDF file (missing %PDF header). Nothing was uploaded.");
   const pdfjsLib=await loadPdfjs();
-  let doc;
-  try{doc=await pdfjsLib.getDocument({data:buf,isEvalSupported:false,disableFontFace:true,useSystemFonts:false}).promise}
+  try{return await pdfjsLib.getDocument({data:buf,isEvalSupported:false,disableFontFace:true,useSystemFonts:false}).promise}
   catch(e){throw new Error("Could not parse this PDF locally: "+(e&&e.message?e.message:e)+". It may be encrypted, password-protected or corrupted — enter values manually instead.")}
+ }
+
+ // Returns {text, pageCount, pagesWithText, noTextLayer, truncated}.
+ // noTextLayer:true means pdf.js found no text on any page — almost always
+ // a scanned/image-only PDF. Callers should say so plainly rather than show
+ // an auto-fill pass that silently found nothing, and may offer the OCR
+ // fallback in ocr-extract.js as a separate, explicit, opt-in next step.
+ async function extractPdfText(file){
+  const doc=await openPdfDocument(file);
   const pageCount=doc.numPages;
   if(pageCount>MAX_PAGES){try{doc.destroy()}catch(_){}throw new Error(`PDF has ${pageCount} pages, over the ${MAX_PAGES}-page local guardrail. Split the file or enter values manually.`)}
   let text="",pagesWithText=0,truncated=false;
@@ -80,5 +110,5 @@
   return{text,pageCount,pagesWithText,noTextLayer:pagesWithText===0,truncated};
  }
 
- global.ClinicOpsPdfExtract={extractPdfText,MAX_BYTES,MAX_PAGES,MAX_CHARS};
+ global.ClinicOpsPdfExtract={extractPdfText,openPdfDocument,MAX_BYTES,MAX_PAGES,MAX_CHARS};
 })(window);

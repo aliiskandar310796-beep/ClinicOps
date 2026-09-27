@@ -325,6 +325,7 @@ h2.long{max-width:26.52em}
 .hero.axis{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.5fr);column-gap:clamp(24px,5vw,72px)}
 .hero.axis>.eyebrow,.hero.axis>h1{grid-column:1 / -1}
 .hero.axis>.lede{grid-column:2;margin-top:0}
+.hero.axis>.lede-note{grid-column:2;margin-top:12px}
 .ledger.n{counter-reset:u}
 .ledger.n>section{counter-increment:u;position:relative}
 .ledger.n>section::before{content:counter(u,decimal-leading-zero);position:absolute;left:0;top:18px;font:400 2rem/1 var(--mono);color:var(--border-strong);letter-spacing:-.04em;transition:color .25s var(--ease)}
@@ -353,7 +354,7 @@ figure.shot img{border:1px solid var(--border-strong);border-radius:var(--r);bac
 @media(max-width:960px){
   .rail,.hero.axis{grid-template-columns:1fr}
   .rail>h2{position:static;grid-row:auto}
-  .rail>:not(h2),.hero.axis>.lede{grid-column:1}
+  .rail>:not(h2),.hero.axis>.lede,.hero.axis>.lede-note{grid-column:1}
   .run,.bounds{grid-template-columns:repeat(2,minmax(0,1fr))}
   .tags.spec{grid-template-columns:repeat(2,minmax(0,1fr))}
 }

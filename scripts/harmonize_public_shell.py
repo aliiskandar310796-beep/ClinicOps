@@ -19,6 +19,21 @@ HEAD_CLOSE_RE = re.compile(r"</head>", re.IGNORECASE)
 SITE_CSS_RE = re.compile(r"href=[\"'][^\"']*site\.css[\"']", re.IGNORECASE)
 EXCLUDED = {"404.html", "clinical-operations.html"}
 
+# Company-level scope/liability boundary. Every tool page already carries its
+# own method-specific "what this tool is and isn't" callout (a different,
+# already-good pattern, left untouched) — this is the narrower, page-agnostic
+# statement of what ClinicOps itself is not, previously present verbatim on
+# only one page (index.html) and paraphrased on one other. Centralizing it
+# here means every page that ships a standard footer carries it, and any
+# future page automatically inherits it rather than needing a human to
+# remember to add it.
+FOOTER_BOUNDARY_TEXT = (
+    "ClinicOps is not a notified body or a competent authority, and does not "
+    "replace your RA/QA team, RIM, QMS, PLM or ERP."
+)
+FOOTER_RE = re.compile(r"<footer\b[^>]*>.*?</footer>", re.IGNORECASE | re.DOTALL)
+FOOTER_CLOSE_RE = re.compile(r"</footer>", re.IGNORECASE)
+
 NAV_ITEMS = (
     ("Home", "index.html"),
     ("Solution", "services.html"),
@@ -103,13 +118,31 @@ def _header(page: Path) -> str:
     )
 
 
+def _ensure_footer_boundary(text: str) -> str:
+    """Insert the shared boundary line into a standard <footer class="site">
+    block if the page has one and doesn't already carry that exact line.
+    Idempotent (safe to run repeatedly) and additive only: it never touches
+    a page's existing tagline or link set, so the deliberate per-page footer
+    copy already in place (e.g. tool pages read "Browser-local evidence
+    tools.") is preserved exactly."""
+    match = FOOTER_RE.search(text)
+    if not match or FOOTER_BOUNDARY_TEXT in match.group(0):
+        return text
+    addition = f'<div class="footer-inner"><span>{FOOTER_BOUNDARY_TEXT}</span></div>'
+    start, end = match.span()
+    footer_block = text[start:end]
+    footer_block = FOOTER_CLOSE_RE.sub(f"{addition}</footer>", footer_block, count=1)
+    return text[:start] + footer_block + text[end:]
+
+
 def transform(page: Path, text: str) -> str:
     relative = page.relative_to(DOCS).as_posix()
     if relative in EXCLUDED:
-        return text
+        return _ensure_footer_boundary(text)
     if not HEADER_RE.search(text):
         raise ValueError(f"{relative}: public page has no replaceable <header>")
     transformed = HEADER_RE.sub(_header(page), text, count=1)
+    transformed = _ensure_footer_boundary(transformed)
     if "skip-link" not in transformed:
         transformed = transformed.replace(
             '<header class="site"',
