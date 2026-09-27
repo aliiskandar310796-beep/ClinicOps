@@ -37,7 +37,7 @@ Free browser-local tools and examples:
 - Regulatory Change Impact Mapper | ClinicOps: https://clinicops.dk/regulatory-change-impact.html - Pick a category of EU regulatory change, answer six portfolio questions, and get an impacted-surface checklist with severity bands. Browser-local.
 - SDEA / PV Agreement Clause Checker | ClinicOps: https://clinicops.dk/sdea-clause-checker.html - Screen a PV agreement or SDEA against the clause set required from 12 February 2026 by Implementing Regulation (EU) 2025/1466 and GVP. Browser-local.
 - Interactive Regulatory Integrity Specimen Register | ClinicOps: https://clinicops.dk/specimen-register/ - A synthetic integrity register: traceable reference evidence, observations, discrepancy states, review owners and explicit human decisions.
-- Technical File Consistency Check | ClinicOps: https://clinicops.dk/technical-file-consistency.html - Paste one key fact as it appears in up to five technical-documentation sources and get a severity-banded divergence report. Browser-local.
+- Technical File Consistency Check | ClinicOps: https://clinicops.dk/technical-file-consistency.html - Paste or upload a PDF for each of up to five technical-documentation sources and get a severity-banded divergence report. Browser-local.
 - Tools & Evidence | ClinicOps: https://clinicops.dk/tools.html - Browser-local regulatory data integrity tools: the Regulatory Integrity Scanner, identifier check, change and consistency utilities, PV utilities and specimens.
 - ClinicOps Class III Transition Map — Sanitized Sample: https://clinicops.dk/transition-map-sample/ - Sanitized fictional sample of the ClinicOps Class III Transition Map work-plan format.
 
