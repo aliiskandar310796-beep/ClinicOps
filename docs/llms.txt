@@ -23,7 +23,7 @@ Solution and use cases:
 - Medical Device Regulatory Document Control | ClinicOps: https://clinicops.dk/medical-device-document-control.html - Reconciliation-as-evidence review of consistency across EUDAMED records, IFU, labelling and market-language versions for MedTech, with RA/QA retaining sign-off.
 - EU Medical Device Regulatory Intelligence | ClinicOps: https://clinicops.dk/regulatory-intelligence.html - EU medical device regulatory intelligence with the evidence intact: capture signals, keep actor context, separate screening from conclusions.
 - SS(C)P Operations and Evidence Workflows | ClinicOps: https://clinicops.dk/sscp-operations.html - Organise SS(C)P evidence, Basic UDI-DI relationships, translations and operational handoffs with a human-reviewed MedTech regulatory work plan.
-- How a bounded review works | ClinicOps: https://clinicops.dk/what-a-pilot-looks-like.html - How a bounded Regulatory Change Integrity Review runs, what evidence it uses, what you receive, and who decides.
+- How a bounded Regulatory Change Integrity Review works | ClinicOps: https://clinicops.dk/what-a-pilot-looks-like.html - How a bounded ClinicOps Regulatory Change Integrity Review runs, what evidence it uses, what you receive, and who decides.
 
 Free browser-local tools and examples:
 - Change Surface Mapper | ClinicOps: https://clinicops.dk/change-surface-mapper.html - Map one approved change across affected systems, records, documents and owners, in your browser. A portable evidence brief; nothing is uploaded.
