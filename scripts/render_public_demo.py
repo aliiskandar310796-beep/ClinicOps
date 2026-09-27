@@ -40,6 +40,19 @@ SHELL_HEADER = (
     '<script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");'
     'var r=a?a.offsetLeft+a.offsetWidth+16-n.clientWidth:0;if(r>0)n.scrollLeft=r})()</script>\n'
 )
+# Same company-level scope/liability line that harmonize_public_shell.py
+# injects into every other docs/ page's footer (its FOOTER_BOUNDARY_TEXT).
+# This page's footer is the distinct <footer class="report-foot"> block
+# client_report.py renders, not the shared <footer class="site"> shell —
+# but harmonize's footer regex matches any <footer>, so it still adds the
+# line to the committed file. This render function has to add it too, or
+# `--check` sees the harmonized, committed file as drifted from a fresh
+# render that doesn't carry it. Keep this string identical to
+# harmonize_public_shell.FOOTER_BOUNDARY_TEXT.
+FOOTER_BOUNDARY_TEXT = (
+    "ClinicOps is not a notified body or a competent authority, and does not "
+    "replace your RA/QA team, RIM, QMS, PLM or ERP."
+)
 
 
 def render_public_demo() -> str:
@@ -68,6 +81,11 @@ def render_public_demo() -> str:
         1,
     )
     html = html.replace("<body>\n", "<body>\n" + SHELL_HEADER, 1)
+    html = html.replace(
+        "</footer>",
+        f'<div class="footer-inner"><span>{FOOTER_BOUNDARY_TEXT}</span></div></footer>',
+        1,
+    )
     html = html.replace(
         "</main>",
         '''<section class="notice"><h2>Want this applied to a real portfolio?</h2><p><strong>What to bring:</strong> start with a small portfolio export or agreed record set. Known identifiers, certificate timing and target-market context help; missing evidence can stay explicit rather than being guessed.</p><p><strong>What a scoped pilot produces:</strong> a prioritised work plan, evidence-gap queue and human-reviewed next steps grounded in the supplied or reachable evidence. The responsible regulatory team retains final judgement.</p><p><a href="/assessment-intake.html"><strong>Build an assessment brief</strong></a> · <a href="mailto:info@clinicops.dk?subject=Class%20III%20Transition%20Map%20Assessment">Email ClinicOps directly</a> · <a href="/readiness-score.html">Use the free readiness score</a> · <a href="/privacy-notice/">Privacy</a> · <a href="/">Back to ClinicOps</a></p></section>
