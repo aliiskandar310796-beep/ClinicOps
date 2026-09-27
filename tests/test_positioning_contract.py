@@ -14,13 +14,23 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 
-# Broad Ops categories archived from the public architecture. They may keep
-# living inside the intake form's option list (form granularity, not
-# positioning), but must not reappear as named categories in page copy.
+# Broad Ops categories archived from the public architecture. They must not
+# reappear as named public categories or intake choices; legacy deep links may
+# map silently to the bounded current offer for backwards compatibility.
 ARCHIVED_CATEGORIES = ("TrialOps", "QualityOps", "Clinical AI Ops", "LabOps")
 
 # Words the validation gates reserve until external evidence exists.
 BANNED_VALIDATION_WORDS = ("production-proven", "market-tested", "battle-tested")
+
+DEPRECATED_PUBLIC_STRINGS = (
+    "ClinicOps Clinical Operations Scope Brief",
+    "Danish-led, EU-wide evidence-controlled clinical operations.",
+    "Trial Change Integrity Review",
+    "Clinical AI Evidence Review",
+    "Lab Change Integrity Review",
+    "Clinic Operations Evidence Review",
+    "Controlled Medical Content Change Review",
+)
 
 
 def _pages() -> list[Path]:
@@ -81,6 +91,16 @@ def test_head_metadata_carries_no_legacy_identity() -> None:
 def test_live_smoke_markers_carry_no_legacy_identity() -> None:
     checker = (ROOT / "scripts" / "check_live_site.py").read_text(encoding="utf-8")
     assert "Clinical Operations" not in checker
+
+
+def test_no_deprecated_public_positioning_strings() -> None:
+    offenders: list[str] = []
+    for page in _pages():
+        html = page.read_text(encoding="utf-8")
+        for phrase in DEPRECATED_PUBLIC_STRINGS:
+            if phrase in html:
+                offenders.append(f"{page.name}: {phrase}")
+    assert not offenders, "deprecated public positioning: " + ", ".join(offenders)
 
 
 def test_no_reserved_validation_language() -> None:
