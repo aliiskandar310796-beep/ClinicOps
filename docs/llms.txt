@@ -1,11 +1,11 @@
 # ClinicOps
 
-ClinicOps is a Danish-led, EU-wide evidence-controlled clinical and life-sciences operations company. Denmark is the local-market and localisation anchor; delivery is English-first and EU-wide, with Danish language, authority and professional expertise brought into scope when relevant.
+ClinicOps is an EU MedTech regulatory data integrity practice. It reconciles approved regulatory facts across EUDAMED, UDI data, certificates, SS(C)P and controlled records, producing source-linked exception queues for qualified human review. Denmark market access, Danish localisation and pharmacovigilance remain secondary specialist capabilities.
 
 Core pages:
 - ClinicOps | EU MedTech Regulatory Data Integrity: https://clinicops.dk/ - Keep EUDAMED, UDI, certificates, SS(C)P and controlled records aligned when products change. Deterministic comparison, a reviewer-ready closure queue.
 - About ClinicOps | EU MedTech Regulatory Data Integrity: https://clinicops.dk/about.html - A one-person EU MedTech regulatory data integrity practice: MSc in Medicine, pharmacovigilance and CRO background, 500+ regulated assignments, native Danish.
-- Scope a ClinicOps Review | ClinicOps: https://clinicops.dk/assessment-intake.html - Build a concise ClinicOps clinical-operations review scope brief in your browser, then open it in your email client. No form data is transmitted by this page.
+- Scope a ClinicOps Review | ClinicOps: https://clinicops.dk/assessment-intake.html - Build a concise scope brief for a Regulatory Change Integrity Review or portfolio integrity scan in your browser. No form data is transmitted by this page.
 - Contact ClinicOps | EU MedTech Regulatory Data Integrity: https://clinicops.dk/contact.html - Contact ClinicOps to scope a Regulatory Change Integrity Review, a portfolio integrity scan, Denmark market access or Danish pharmacovigilance support.
 - Solution | ClinicOps: https://clinicops.dk/services.html - The Regulatory Change Integrity Review: one approved change reconciled against EUDAMED, UDI, certificates, SS(C)P and controlled records, with closure evidence.
 - Use Cases | ClinicOps: https://clinicops.dk/use-cases.html - Where the discipline is applied: EUDAMED and UDI data, SS(C)P operations, class III MDR transition, AR portfolios, document control, language versions, Denmark.
@@ -23,7 +23,7 @@ Solution and use cases:
 - Medical Device Regulatory Document Control | ClinicOps: https://clinicops.dk/medical-device-document-control.html - Reconciliation-as-evidence review of consistency across EUDAMED records, IFU, labelling and market-language versions for MedTech, with RA/QA retaining sign-off.
 - EU Medical Device Regulatory Intelligence | ClinicOps: https://clinicops.dk/regulatory-intelligence.html - EU medical device regulatory intelligence with the evidence intact: capture signals, keep actor context, separate screening from conclusions.
 - SS(C)P Operations and Evidence Workflows | ClinicOps: https://clinicops.dk/sscp-operations.html - Organise SS(C)P evidence, Basic UDI-DI relationships, translations and operational handoffs with a human-reviewed MedTech regulatory work plan.
-- What a pilot looks like | ClinicOps: https://clinicops.dk/what-a-pilot-looks-like.html - What a ClinicOps pilot covers, how it runs, what you receive, and who decides.
+- How a bounded review works | ClinicOps: https://clinicops.dk/what-a-pilot-looks-like.html - How a bounded Regulatory Change Integrity Review runs, what evidence it uses, what you receive, and who decides.
 
 Free browser-local tools and examples:
 - Change Surface Mapper | ClinicOps: https://clinicops.dk/change-surface-mapper.html - Map one approved change across affected systems, records, documents and owners, in your browser. A portable evidence brief; nothing is uploaded.
@@ -43,7 +43,7 @@ Free browser-local tools and examples:
 
 Research and primary sources:
 - Primary Public Sources | ClinicOps: https://clinicops.dk/primary-sources.html - The public authorities and official source systems ClinicOps works from: EUDAMED, MDR/IVDR, UDI, SS(C)P, Danish authorities and the EU health-data framework.
-- Research & Methodology | ClinicOps: https://clinicops.dk/research.html - ClinicOps research and methodology for evidence-controlled medical-device, market-access and clinical operations.
+- Research & Methodology | ClinicOps: https://clinicops.dk/research.html - ClinicOps research and methodology for evidence-controlled EU MedTech regulatory data integrity, market access and related evidence workflows.
 - Continuous monitoring of the public EUDAMED record | ClinicOps: https://clinicops.dk/research/eudamed-watch/ - How ClinicOps continuously monitors the public EUDAMED record: monthly versioned snapshots of SS(C)P linkage for a private watchlist, diffed, aggregates only.
 - The published SS(C)P and the public EUDAMED record — what a reader can and cannot reconcile | ClinicOps: https://clinicops.dk/research/sscp-public-record-scan/ - Public-source scan, September 2026: what a published SS(C)P and the public EUDAMED record can and cannot reconcile — identifiers, revisions, legacy DIs and pack records.
 
