@@ -5,7 +5,7 @@ ClinicOps is an EU MedTech regulatory data integrity practice. It reconciles app
 Core pages:
 - ClinicOps | EU MedTech Regulatory Data Integrity: https://clinicops.dk/ - Keep EUDAMED, UDI, certificates, SS(C)P and controlled records aligned when products change. Deterministic comparison, a reviewer-ready closure queue.
 - About ClinicOps | EU MedTech Regulatory Data Integrity: https://clinicops.dk/about.html - A one-person EU MedTech regulatory data integrity practice: MSc in Medicine, pharmacovigilance and CRO background, 500+ regulated assignments, native Danish.
-- Scope a ClinicOps Review | ClinicOps: https://clinicops.dk/assessment-intake.html - Build a concise scope brief for a Regulatory Change Integrity Review or portfolio integrity scan in your browser. No form data is transmitted by this page.
+- Scope a ClinicOps Review | ClinicOps: https://clinicops.dk/assessment-intake.html - Build a concise scope brief for a ClinicOps Regulatory Change Integrity Review or portfolio integrity scan in your browser. No form data is transmitted by this page.
 - Contact ClinicOps | EU MedTech Regulatory Data Integrity: https://clinicops.dk/contact.html - Contact ClinicOps to scope a Regulatory Change Integrity Review, a portfolio integrity scan, Denmark market access or Danish pharmacovigilance support.
 - Solution | ClinicOps: https://clinicops.dk/services.html - The Regulatory Change Integrity Review: one approved change reconciled against EUDAMED, UDI, certificates, SS(C)P and controlled records, with closure evidence.
 - Use Cases | ClinicOps: https://clinicops.dk/use-cases.html - Where the discipline is applied: EUDAMED and UDI data, SS(C)P operations, class III MDR transition, AR portfolios, document control, language versions, Denmark.
