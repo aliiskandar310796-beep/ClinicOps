@@ -1,12 +1,27 @@
 # Production Surface
 
-> Migrated verbatim from the pre-2026-09-23 `AGENT_STATE.md` monolith as part of the connectome-lens shard proposal (draft, not yet reconciled against live `main`). Content below this line is unedited from the original section.
+Status: CURRENT as of 2026-09-27. This file records operating invariants and verified production architecture. Generated artifacts remain the source of truth for transient counts.
 
 ## Public production surface
 
 `clinicops.dk` is served from `docs/**` via GitHub Pages. GoDaddy is DNS only. HTTPS is enforced.
 
-The deterministic sitemap is the canonical list of production URLs — **derive it, do not hard-code it here** (this file previously said 16 while production had 29; transient counts belong in generated artifacts, not shared state). Source of truth: `docs/sitemap.xml`, generated and checked by `scripts/render_sitemap.py --check` (29 URLs as of 2026-09-17). The public surface spans the umbrella home, the three lanes (Denmark market access, MedTech/regulatory, clinical operations), the specialist service pages, tools, research, specimens, expert network, about/contact and privacy.
+Current production release: `b956b85def6b3bd6bbabb974e8fae4a1234c4567` (merged PR #82). Main CI, Integrity Gate, CodeQL and the Pages deployment all passed for this SHA. The post-deploy live smoke fetched the homepage, sitemap, robots and every critical production page through `https://clinicops.dk/` successfully.
+
+The deterministic sitemap is the canonical list of indexable production URLs — derive it, do not hard-code it in operational logic. Source of truth: `docs/sitemap.xml`, generated and checked by `scripts/render_sitemap.py --check`. As of this reconciliation it contains 38 URLs.
+
+Public architecture is now deliberately narrow:
+
+- company identity: **EU MedTech Regulatory Data Integrity**;
+- flagship: **Regulatory Change Integrity Review**;
+- low-friction entry: **Portfolio Integrity Scan**;
+- recurring extension: **Continuous Portfolio Integrity Monitoring** only as real recurrence warrants it;
+- public utilities: Regulatory Integrity Scanner, Identifier Check and bounded supporting tools;
+- secondary specialist lanes: Denmark market access / Danish localisation and Danish pharmacovigilance.
+
+EUDAMED, UDI, certificates, SS(C)P, Class III/implantable transition, authorised-representative portfolios, controlled documents and language versions are use cases of one discipline, not separate company identities.
+
+Broad clinical-operations lanes are archived from the public architecture. Do not reintroduce TrialOps, LabOps, Clinic Operations, Clinical AI Ops, generic QualityOps or a multi-lane services portfolio without new buyer evidence and explicit strategy change.
 
 Do not mass-produce thin SEO pages while current production pages are still being discovered.
 
@@ -14,27 +29,47 @@ Do not mass-produce thin SEO pages while current production pages are still bein
 
 Current low-infrastructure path:
 
-`public site / free tool / sanitized sample → browser-local assessment brief → user's email client → controlled private scope/intake`
+`public site / research / free tool / sanitized sample → browser-local assessment brief → user's email client → controlled private scope/intake`
 
-`docs/assessment-intake.html` has no backend form action, analytics, tracking, `fetch`, XHR, `sendBeacon` or WebSocket submission. User input stays local until the user explicitly creates an email draft to `info@clinicops.dk`. The page warns against patient-identifiable data.
+`docs/assessment-intake.html` has no backend form action, analytics, tracking, `fetch`, XHR, `sendBeacon` or WebSocket submission. User input stays local until the user explicitly creates an email draft to `info@clinicops.dk`.
 
-The Readiness Score → assessment handoff uses one-shot tab-scoped `sessionStorage` containing score/band/gaps/timestamp only; no company/customer data.
+Optional `src`, `campaign` and `segment` URL parameters remain local and are included in the generated scope brief only when the visitor explicitly creates the draft. ClinicOps receives them only if the visitor chooses to send that email. Keep this attribution model privacy-preserving unless Ali explicitly approves a privacy-posture change.
 
-Keep the EUDAMED Identifier Check and Transition Readiness Score free.
+The Readiness Score → assessment handoff may use one-shot tab-scoped `sessionStorage` containing bounded screening context only; do not use browser storage for client-confidential evidence.
+
+Keep the EUDAMED Identifier Check and core integrity utilities free.
 
 ## Search / indexing
 
-Production canonical sitemap:
+Canonical sitemap:
 
 `https://clinicops.dk/sitemap.xml`
 
-Fresh GSC verification on 2026-09-13 confirms the Search Console property `https://clinicops.dk/` exists and is connected. The obsolete submitted sitemap `https://clinicops.dk/sitemap.website.xml` reports 7 submitted URLs, 0 indexed URLs, 1 warning and 1 error.
+Robots:
 
-Issue #28 tracks the actual action: submit the current 16-URL `sitemap.xml`, confirm acceptance/fetch, diagnose warning/error state and remove the obsolete entry only if appropriate afterward. Sitemap acceptance and indexing are separate facts.
+`https://clinicops.dk/robots.txt`
 
-The canonical sitemap itself is fetchable and contains the expected 16 URLs. Do not modify healthy XML merely because the obsolete GSC submission is red.
+Verified 2026-09-27 production facts:
 
-No current connector can submit the sitemap into the GSC UI; this remains a manual browser action.
+- live `clinicops.dk` serves the current GitHub Pages build and passes post-deploy smoke;
+- sitemap and robots both return HTTP 200 in the live smoke;
+- external search/index caches can still surface the obsolete 2025 Danish clinic-compliance homepage and duplicate LinkedIn identities;
+- therefore the current P0 discoverability problem is **stale/fragmented external indexing and entity resolution**, not the live origin;
+- the canonical LinkedIn company identity referenced by website structured data is `https://www.linkedin.com/company/clinicops-dk/`;
+- the older `clinicops-danish-regulatory` company page remains externally indexable and should be retired, redirected or made clearly non-canonical through LinkedIn account administration when access permits.
+
+Search Console property access was previously verified, but the currently installed GSC Wizard connector is blocked behind its own expired subscription and is not authoritative evidence of present GSC state. Do not repeat old 7/16/19/29 URL counts or obsolete sitemap status as current facts.
+
+Required next indexing work when direct Search Console access is available:
+
+1. inspect the `https://clinicops.dk/` property;
+2. verify `https://clinicops.dk/sitemap.xml` is the active submitted sitemap;
+3. inspect indexed/non-indexed counts and reasons;
+4. inspect canonical selection for priority URLs;
+5. request recrawl/indexing only where appropriate;
+6. remove obsolete sitemap submissions only after verifying the current sitemap is accepted.
+
+Sitemap acceptance, crawlability, indexing, impressions and qualified commercial discovery are separate facts.
 
 ## EUDAMED Watch — PRs #39–#41
 
