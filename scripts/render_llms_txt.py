@@ -15,7 +15,7 @@ NS = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
 
 INTRO = """# ClinicOps
 
-ClinicOps is a Danish-led, EU-wide evidence-controlled clinical and life-sciences operations company. Denmark is the local-market and localisation anchor; delivery is English-first and EU-wide, with Danish language, authority and professional expertise brought into scope when relevant.
+ClinicOps is an EU MedTech regulatory data integrity practice. It reconciles approved regulatory facts across EUDAMED, UDI data, certificates, SS(C)P and controlled records, producing source-linked exception queues for qualified human review. Denmark market access, Danish localisation and pharmacovigilance remain secondary specialist capabilities.
 """
 
 # Section title -> predicate on the path relative to the site root.
