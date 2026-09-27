@@ -29,6 +29,11 @@ def test_assessment_intake_is_browser_local_and_user_controlled() -> None:
     assert "readiness-score.html" in html
     assert "info@clinicops.dk" in html
     assert "mailto:info@clinicops.dk" in html
+    assert "ClinicOps Regulatory Data Integrity Scope Brief" in html
+    assert "Acquisition context (from the link you opened):" in html
+    assert 'safeCampaignParam("src")' in html
+    assert 'safeCampaignParam("campaign")' in html
+    assert 'safeCampaignParam("segment")' in html
 
     forbidden = ("fetch(", "xmlhttprequest", "sendbeacon", "websocket")
     assert not any(token in lower for token in forbidden)
