@@ -1,8 +1,8 @@
 # Active Fleets
 
-> Migrated verbatim from the pre-2026-09-23 `AGENT_STATE.md` monolith as part of the connectome-lens shard proposal (draft, not yet reconciled against live `main`). Content below this line is unedited from the original section.
+Status: CURRENT direction reconciled 2026-09-27. Private account, buyer-response and commercial evidence remains outside the public repository.
 
-## Active outcome fleets — 2026-09-19
+## Active outcome fleets — 2026-09-27
 
 Two temporary mission fleets are active under the canonical-agent / worker-recruitment model:
 
@@ -17,7 +17,7 @@ Public-safe machine-contract examples:
 
 Real account, search-console, buyer-response, commercial-stage and activation evidence stays private.
 
-Initial P0 discoverability defect: externally visible ClinicOps company/profile surfaces are not fully reconciled and stale/duplicate identity signals can appear in search. Treat canonical entity reconciliation and current indexing baseline as acquisition work, not cosmetic brand cleanup.
+P0 discoverability defect remains external rather than origin-side: production serves the current MedTech site and passes live smoke, while search caches still surface an obsolete 2025 Danish clinic-compliance homepage and two ClinicOps LinkedIn company identities. The canonical website schema points to `clinicops-dk`; the older `clinicops-danish-regulatory` page remains externally indexable. Treat Search Console indexing and LinkedIn duplicate retirement as acquisition infrastructure, not cosmetic brand cleanup.
 
 ### EXP-001 validation threshold
 
