@@ -118,7 +118,7 @@ jobs:
           node-version: '22'
       - name: Install isolated browser test runner
         run: |
-          npm install --prefix /tmp/clinicops-browser --no-fund --no-audit playwright@1
+          npm install --prefix /tmp/clinicops-browser --no-fund --no-audit playwright@1 @axe-core/playwright@4
           ln -s /tmp/clinicops-browser/node_modules node_modules
           /tmp/clinicops-browser/node_modules/.bin/playwright install --with-deps chromium
       - name: Verify scanner and reconciliation journeys against this exact source
@@ -131,4 +131,4 @@ jobs:
           E2E_BASE_URL=http://localhost:8103 node e2e/scanner_full_journey.mjs
           E2E_BASE_URL=http://localhost:8103 node e2e/reconciliation_journey.mjs
           E2E_BASE_URL=http://localhost:8103 node e2e/xlsx_xss_journey.mjs
-          E2E_BASE_URL=http://localhost:8103 node e2e/site_acceptance.mjs
+          E2E_BASE_URL=http://localhost:8103 node e2e/site_acceptance.mjs\n          E2E_BASE_URL=http://localhost:8103 node e2e/accessibility_journey.mjs\n          E2E_BASE_URL=http://localhost:8103 node e2e/performance_smoke.mjs
