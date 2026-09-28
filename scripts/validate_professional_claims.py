@@ -38,8 +38,13 @@ FORBIDDEN_PHRASES = (
     "notified-body expert",
     "ISO-certified",
     "ISO certified",
-    "MSc in Medicine (Translational Medicine)",
-    "Bachelor of Medicine, Aalborg University",
+    # Corrected 2026-09-28 (Ali, direct chat statement, live session):
+    # neither degree carries an "Industrial Specialisation" title. That
+    # phrase was fabricated by an earlier pass, published to the live site,
+    # and then wrongly locked in here as the "official programme title" —
+    # which also had the effect of forbidding the actually-correct wording
+    # below. See VERIFIED_PROFILE_FACTS_ADDENDUM_2026-09-28_DEGREE_TITLE_CORRECTION.md.
+    "Medicine with Industrial Specialisation",
     # Specialist Expertise directive §2/§5: the capability is public, the
     # network is not — no roster-shaped or recruitment language anywhere.
     "growing bench",
@@ -129,10 +134,10 @@ def main() -> int:
             )
 
     about = (DOCS / "about.html").read_text(encoding="utf-8")
-    if "Master of Science (MSc) in Medicine with Industrial Specialisation (Translational Medicine), Aalborg University" not in about:
+    if "Master of Science (MSc) in Medicine (Translational Medicine)" not in about:
         errors.append("about.html: verified credential line missing")
-    if "Bachelor of Science (BSc) in Medicine with Industrial Specialisation, Aalborg University" not in about:
-        errors.append("about.html: official bachelor programme title missing")
+    if "Bachelor of Medicine" not in about:
+        errors.append("about.html: bachelor's degree line missing")
     if "explicitly appointed" not in about:
         errors.append("about.html: professional boundary statement missing")
 

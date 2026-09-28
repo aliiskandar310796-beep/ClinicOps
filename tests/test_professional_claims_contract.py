@@ -32,15 +32,23 @@ def test_proof_data_keeps_qsr_unpublished() -> None:
     assert all(p["id"] != "proof-pharma-qsr" for p in proof["proofs"])
 
 
-def test_public_degree_wording_uses_official_program_titles() -> None:
+def test_public_degree_wording_uses_verified_titles() -> None:
+    """Neither degree carries an "Industrial Specialisation" title.
+
+    Corrected 2026-09-28: Ali confirmed directly, live in chat ("i took
+    master in medicine focusing on translational medicine"; "Bachelor in
+    Medicin") that this phrase — previously required by this very test —
+    was never accurate for either degree. See
+    VERIFIED_PROFILE_FACTS_ADDENDUM_2026-09-28_DEGREE_TITLE_CORRECTION.md
+    in the business project for the full record.
+    """
     docs = ROOT / "docs"
     public = "\n".join(
         path.read_text(encoding="utf-8")
         for path in docs.rglob("*.html")
         if path.name not in {"404.html", "clinical-operations.html"}
     )
-    assert "MSc in Medicine (Translational Medicine)" not in public
-    assert "Bachelor of Medicine, Aalborg University" not in public
+    assert "Medicine with Industrial Specialisation" not in public
     about = (docs / "about.html").read_text(encoding="utf-8")
-    assert "Master of Science (MSc) in Medicine with Industrial Specialisation (Translational Medicine), Aalborg University" in about
-    assert "Bachelor of Science (BSc) in Medicine with Industrial Specialisation, Aalborg University" in about
+    assert "Master of Science (MSc) in Medicine (Translational Medicine)" in about
+    assert "Bachelor of Medicine" in about
