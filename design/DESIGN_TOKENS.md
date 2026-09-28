@@ -40,7 +40,8 @@ values.
 Three self-hosted type families, each doing one job (`docs/assets/fonts/`, no third-party
 requests — Google Fonts and similar remain off-limits for this privacy-first audience):
 
-- `--font-display`: Fraunces (variable, optical sizing on) — h1–h4 only. A serif reads as an
+- `--font-display`: Fraunces (variable weight 500–700, optical size pinned at 36 to halve the file; the
+  full opsz axis cost ~45 KB on the mobile critical path) — h1–h4 only. A serif reads as an
   authored, archival document rather than software chrome; this is the single biggest visual
   break from the prior Geist-everywhere system.
 - `--font`: Public Sans (variable) — body copy, UI, nav.
