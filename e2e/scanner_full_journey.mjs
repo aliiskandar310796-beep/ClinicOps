@@ -180,8 +180,14 @@ for (const [tag, w, h, scheme] of COMBOS) {
   ok("[keyboard] Enter activates portfolio mode", (await p.getAttribute("#modeB", "aria-pressed")) === "true");
   n = await tabTo(p, focusedIs("b_choose"));
   ok("[keyboard] reach file chooser button", n >= 0);
-  const [fc] = await Promise.all([p.waitForEvent("filechooser"), p.keyboard.press("Enter")]);
-  await fc.setFiles(FX + "conflicting.csv");
+  await p.evaluate(() => {
+    window.__clinicopsKeyboardFileClick = 0;
+    document.getElementById("b_file").addEventListener("click", () => window.__clinicopsKeyboardFileClick++);
+  });
+  await p.keyboard.press("Enter");
+  await p.waitForFunction(() => window.__clinicopsKeyboardFileClick === 1);
+  ok("[keyboard] Enter activates file chooser control", true);
+  await p.setInputFiles("#b_file", FX + "conflicting.csv");
   await p.waitForFunction(() => /Parsed 8 rows/.test(document.getElementById("b_parseinfo").textContent));
   n = await tabTo(p, focusedIs("map_basic_udi_di"), 30);
   ok("[keyboard] reach mapping selects", n >= 0);
