@@ -130,3 +130,4 @@ jobs:
           E2E_BASE_URL=http://localhost:8103 node e2e/scanner_journey.mjs
           E2E_BASE_URL=http://localhost:8103 node e2e/scanner_full_journey.mjs
           E2E_BASE_URL=http://localhost:8103 node e2e/reconciliation_journey.mjs
+          E2E_BASE_URL=http://localhost:8103 node e2e/xlsx_xss_journey.mjs
