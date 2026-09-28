@@ -46,6 +46,7 @@ clinicops-termbase = "clinicops_os.autonomy.termbase:termbase_cli"
 clinicops-backup-manifest = "clinicops_os.autonomy.backup_manifest:backup_manifest_cli"
 clinicops-autonomy-watchdog = "clinicops_os.autonomy.watchdog:watchdog_cli"
 clinicops-autonomy-jobs = "clinicops_os.autonomy.jobs:jobs_cli"
+clinicops-expert-network-validate = "clinicops_os.expert_network:expert_network_validate"
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]

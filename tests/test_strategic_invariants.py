@@ -52,6 +52,7 @@ PINNED_TITLES = {
     "evidence-change-control-pack.html": "Regulatory Change Integrity Review | ClinicOps",
     "integrity-scanner.html": "Regulatory Integrity Scanner | ClinicOps",
     "about.html": "About ClinicOps | EU MedTech Regulatory Data Integrity",
+    "expert-network.html": "Specialist Expert Network | ClinicOps",
 }
 FLAGSHIP_URL = "https://clinicops.dk/evidence-change-control-pack"
 
@@ -225,3 +226,10 @@ def test_flagship_and_scanner_carry_the_human_decision_boundary() -> None:
     boundary = "ClinicOps is not a notified body or a competent authority"
     for name in ("index.html", "integrity-scanner.html", "evidence-change-control-pack.html"):
         assert boundary in (DOCS / name).read_text(encoding="utf-8"), name
+
+
+def test_expert_network_never_claims_standing_staff() -> None:
+    html = (DOCS / "expert-network.html").read_text(encoding="utf-8").lower()
+    assert "private, project-specific expert-network model" in html
+    assert "not represented as clinicops employees" in html
+    assert "permanently staffed" in html

@@ -96,3 +96,16 @@ Primary current sources for relevant Danish checks include:
 - Datatilsynet for personal-data and health-data processing requirements.
 
 Re-check current official sources before relying on a rule in a live engagement.
+
+
+## Operating-system implementation
+
+This governance is implemented through:
+
+- `03_OPERATIONS/EXPERT_NETWORK_OPERATING_SYSTEM.md` — network architecture and assignment model;
+- `03_OPERATIONS/EXPERT_NETWORK_SOURCING.md` — sourcing priorities and coverage rules;
+- `03_OPERATIONS/expert_network/qualification-checklist.md` — human qualification gate;
+- `src/clinicops_os/expert_network.py` — deterministic roster/assignment preflight;
+- `clinicops-expert-network-validate` — local CLI.
+
+The real roster remains private. Public repository examples must be fictional/synthetic.
