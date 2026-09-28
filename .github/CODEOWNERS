@@ -1,0 +1,6 @@
+# Code owners for the Tier-0 autonomy layer control plane.
+# Advisory until branch protection exists on main (a reserved decision for Ali, issue #36):
+# GitHub requests these reviews but does not enforce them without a protection rule.
+/autonomy/rules.json @aliiskandar310796-beep
+/autonomy/jobs/ @aliiskandar310796-beep
+/.github/workflows/ @aliiskandar310796-beep

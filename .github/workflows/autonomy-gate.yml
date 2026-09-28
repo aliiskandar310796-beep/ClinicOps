@@ -1,0 +1,59 @@
+name: Autonomy Gate
+
+# Compute-only gate for the Tier-0 autonomy layer control plane. The Tier-0
+# jobs themselves run as claude.ai scheduled tasks outside GitHub Actions;
+# this workflow has no schedule and never publishes, sends or pushes.
+
+on:
+  push:
+    paths:
+      - "autonomy/**"
+      - "src/clinicops_os/autonomy/**"
+      - "tests/test_autonomy*.py"
+      - "tests/test_termbase.py"
+      - "tests/test_backup_manifest.py"
+      - "data/termbase/**"
+      - "pyproject.toml"
+      - ".github/workflows/autonomy-gate.yml"
+  pull_request:
+    paths:
+      - "autonomy/**"
+      - "src/clinicops_os/autonomy/**"
+      - "tests/test_autonomy*.py"
+      - "tests/test_termbase.py"
+      - "tests/test_backup_manifest.py"
+      - "data/termbase/**"
+      - "pyproject.toml"
+      - ".github/workflows/autonomy-gate.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: clinicops-autonomy-gate
+  cancel-in-progress: false
+
+jobs:
+  autonomy-gate:
+    name: Autonomy control-plane gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+      - run: pip install -e .[dev]
+      - name: Focused autonomy tests
+        run: pytest -q tests/test_autonomy_rules.py tests/test_autonomy_policy.py tests/test_autonomy_halt.py tests/test_termbase.py tests/test_backup_manifest.py tests/test_autonomy_watchdog.py tests/test_autonomy_jobs.py tests/test_autonomy_contract.py
+      - name: Ruff
+        run: ruff check src tests
+      - name: Public termbase schema
+        run: clinicops-termbase validate data/termbase/termbase_public.csv
+      - name: Public termbase QA report
+        run: clinicops-termbase qa data/termbase/termbase_public.csv
+      - name: Job registry parses
+        run: clinicops-autonomy-jobs list
+      - name: Policy self-test (deny/park rules)
+        run: clinicops-autonomy-policy selftest

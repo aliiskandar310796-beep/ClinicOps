@@ -45,6 +45,7 @@ Validation stage: browser-local tools are technically verified for defined cases
 - Read-only EUDAMED API reachability canary with reviewed drift semantics.
 - CI gates for tests, Ruff, Revenue OS contracts, client-bundle smoke delivery, custom-agent profiles, claim-registry integrity, governed website copy, generated fixtures and public-facing copy.
 - Live client-side Identifier Check deployed from `docs/`.
+- Tier-0 autonomy control plane: action policy with tiers and caps, repository kill switch, EN↔DA termbase validation, backup manifests, offline fleet watchdog and job-prompt rendering (`autonomy/`, `src/clinicops_os/autonomy/`).
 
 ## Important limitations
 
@@ -92,7 +93,10 @@ Repository-scoped Copilot profiles under `.github/agents/` divide high-agency wo
 
 Use the narrowest agent that matches the work. The custom-agent files are execution profiles, not background daemons.
 
-Unattended recurring work lives in `.github/workflows/ops-watch.yml`. `Ops Watch` runs weekly and on relevant automation/canary changes. It checks evidence freshness and records a bounded EUDAMED reachability snapshot as a workflow artifact. It does not publish content, send communications or make compliance findings.
+Unattended work runs in two places, with a deliberate split:
+
+- **GitHub Actions stays compute-only.** The scheduled workflows are all low-frequency and bounded: `Ops Watch` (`.github/workflows/ops-watch.yml`, weekly: evidence freshness, live-site check, bounded EUDAMED reachability snapshot), `EUDAMED Watch` (`.github/workflows/eudamed-watch.yml`, monthly, anonymised), the weekly QA and E2E sweeps and the weekly CodeQL/OSV security scans. Everything else runs on push, pull request or manual dispatch, including the `Autonomy Gate` (`.github/workflows/autonomy-gate.yml`), which validates the autonomy control plane and has no schedule. No workflow publishes content, sends communications or makes compliance findings.
+- **The Tier-0 autonomy layer runs as claude.ai scheduled tasks, outside Actions.** `autonomy/` is its control plane: `autonomy/README.md` (tiers, kill switch, job table), `autonomy/rules.json` (machine-readable policy) and `autonomy/jobs/` (the eleven job specifications: monitor, research, verification, termbase, EUDAMED research, SEO/content drafts, pipeline hygiene, invoice preparation, backup, evening summary, watchdog). The jobs read `main`, write drafts and reports to private storage, and open pull requests for public-safe artefacts; they never send, never publish and never push to `main`. Three kill switches stop them, one of which is the repository file `autonomy/HALT.md`. `src/clinicops_os/autonomy/` provides the policy engine (`clinicops-autonomy-policy`), the termbase tools (`clinicops-termbase`), backup manifests (`clinicops-backup-manifest`), the offline watchdog (`clinicops-autonomy-watchdog`) and job rendering (`clinicops-autonomy-jobs`).
 
 GitHub Issue Forms include a commercial-experiment template for real Revenue OS tests. Use issues selectively for validated experiments, reproducible defects and genuine deployment blockers rather than turning GitHub into a noisy CRM.
 

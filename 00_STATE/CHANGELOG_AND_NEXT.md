@@ -21,6 +21,7 @@
 - #46 — dry-run harness made primary proof-run path while preserving final evaluator.
 - #47 — shared state and growth doctrine reconciled.
 - #48 — AI Company OS, 30-day operating experiment and executable commercial-evidence/autonomy evaluator.
+- 2026-09-25 (branch `claude/tier0-autonomy-layer`) — Tier-0 autonomy layer control plane: `autonomy/README.md`, `autonomy/rules.json`, 11 job specs under `autonomy/jobs/`, `clinicops_os.autonomy` package (policy, kill switch, termbase, backup manifest, watchdog, job rendering) with CLIs and tests, `data/termbase/termbase_public.csv` seed, `.github/workflows/autonomy-gate.yml` (compute-only, no schedule), `.github/CODEOWNERS`; `agents/fleet.json` grows to 22 loops. Jobs run as claude.ai scheduled tasks, draft only, and open pull requests — nothing pushes to `main`.
 
 ## Coordination protocol
 
