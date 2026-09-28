@@ -12,6 +12,11 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install -e .[dev]
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+      - name: Browser reconciliation rules
+        run: node --test tests/reconciliation.test.cjs
       - run: pytest -q
       - run: ruff check src tests scripts
       - name: Revenue OS experiment contract
@@ -103,3 +108,26 @@ jobs:
         run: python scripts/render_examples.py --check
       - name: Public-copy claim gate
         run: python scripts/claim_gate.py README.md PRIMARY_SOURCES.md docs website examples/portfolio_report.md offers sales research content
+
+  scanner-browser:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+      - name: Install isolated browser test runner
+        run: |
+          npm install --prefix /tmp/clinicops-browser --no-fund --no-audit playwright@1
+          ln -s /tmp/clinicops-browser/node_modules node_modules
+          /tmp/clinicops-browser/node_modules/.bin/playwright install --with-deps chromium
+      - name: Verify scanner and reconciliation journeys against this exact source
+        run: |
+          python3 -m http.server 8103 --directory docs >/tmp/clinicops-http.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid"' EXIT
+          for attempt in 1 2 3 4 5; do curl -fsS http://localhost:8103/integrity-scanner.html >/dev/null && break || sleep 1; done
+          E2E_BASE_URL=http://localhost:8103 node e2e/scanner_journey.mjs
+          E2E_BASE_URL=http://localhost:8103 node e2e/scanner_full_journey.mjs
+          E2E_BASE_URL=http://localhost:8103 node e2e/reconciliation_journey.mjs
+          E2E_BASE_URL=http://localhost:8103 node e2e/xlsx_xss_journey.mjs
