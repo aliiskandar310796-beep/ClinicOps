@@ -131,7 +131,7 @@ def test_scanner_exists_with_both_modes_and_boundary() -> None:
 
 
 def test_flagship_page_is_reframed() -> None:
-    html = (DOCS / "evidence-change-control-pack.html").read_text(encoding="utf-8")
+    html = (DOCS / "regulatory-change-integrity-review.html").read_text(encoding="utf-8")
     assert "<title>Regulatory Change Integrity Review | ClinicOps</title>" in html
     assert "Give ClinicOps one controlled change and the records that should reflect it." in html
     assert "who owns each open item, and what evidence closes it." in html
@@ -160,3 +160,16 @@ def test_use_cases_hub_routes_to_products() -> None:
     assert "services.html#change-review" in html or "services.html#portfolio-scan" in html
     for page in ("eudamed-transition.html", "sscp-operations.html", "class-iii-transition.html", "denmark-market-access.html"):
         assert page in html
+
+
+def test_public_pages_do_not_link_to_legacy_review_urls() -> None:
+    legacy = ("evidence-change-control-pack.html", "what-a-pilot-looks-like.html")
+    offenders: list[str] = []
+    for page in DOCS.rglob("*.html"):
+        if page.name in legacy:
+            continue
+        html = page.read_text(encoding="utf-8")
+        for old in legacy:
+            if f'href="{old}' in html:
+                offenders.append(f"{page.relative_to(DOCS)}: {old}")
+    assert not offenders, "legacy review URL linked internally: " + ", ".join(offenders)

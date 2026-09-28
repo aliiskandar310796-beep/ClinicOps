@@ -20,20 +20,16 @@ ClinicOps is an EU MedTech regulatory data integrity practice. It reconciles app
 
 # Section title -> predicate on the path relative to the site root.
 SECTIONS = (
-    ("Core pages", lambda r: r in {"index.html", "services.html", "use-cases.html", "about.html", "contact.html", "assessment-intake.html"}),
+    ("Core pages", lambda r: r in {"index.html", "services.html", "use-cases.html", "about.html", "contact.html"}),
     ("Solution and use cases", lambda r: r in {
-        "integrity-gate.html", "evidence-change-control-pack.html", "denmark-market-access.html",
+        "regulatory-change-integrity-review.html", "denmark-market-access.html",
         "eu-mdr-regulatory-integrity.html", "eudamed-transition.html", "class-iii-transition.html",
         "sscp-operations.html", "authorised-representative-portfolio-intelligence.html",
-        "medical-device-document-control.html", "regulatory-intelligence.html", "expert-network.html",
-        "what-a-pilot-looks-like.html", "evidence-pack-checklist.html",
+        "medical-device-document-control.html", "regulatory-intelligence.html",
     }),
     ("Free browser-local tools and examples", lambda r: r in {
-        "tools.html", "integrity-check.html", "integrity-scanner.html", "integrity-economics.html",
-        "identifier-check.html", "readiness-score.html", "change-surface-mapper.html",
-        "regulatory-change-impact.html", "technical-file-consistency.html",
-        "specimen-register/index.html", "transition-map-sample/index.html",
-        "danish-pv-literature-register.html", "sdea-clause-checker.html", "danish-dhpc-checker.html",
+        "tools.html", "integrity-scanner.html", "regulatory-change-impact.html",
+        "technical-file-consistency.html",
     }),
     ("Research and primary sources", lambda r: r in {"research.html", "primary-sources.html"} or r.startswith("research/")),
     ("Policies", lambda r: r.startswith("privacy-notice/")),

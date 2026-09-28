@@ -30,7 +30,7 @@ class Result:
 # the page's identity actually changed.
 TARGETS = (
     Target("/", 200, "<title>ClinicOps | "),
-    Target("/services.html", 200, "<title>Solution | ClinicOps</title>"),
+    Target("/services.html", 200, "<title>EU MedTech Regulatory Data Integrity Solution | ClinicOps</title>"),
     Target(
         "/denmark-market-access.html",
         200,
@@ -46,7 +46,7 @@ TARGETS = (
         200,
         "<title>Scope a ClinicOps Review | ClinicOps</title>",
     ),
-    Target("/tools.html", 200, "<title>Tools & Evidence | ClinicOps</title>"),
+    Target("/tools.html", 200, "<title>MedTech Regulatory Data Integrity Tools | ClinicOps</title>"),
     Target(
         "/identifier-check.html",
         200,
@@ -114,7 +114,7 @@ TARGETS = (
         "<title>EUDAMED Transition Work Plans for MedTech | ClinicOps</title>",
     ),
     Target(
-        "/evidence-change-control-pack.html",
+        "/regulatory-change-integrity-review.html",
         200,
         "<title>Regulatory Change Integrity Review | ClinicOps</title>",
     ),
@@ -126,7 +126,7 @@ TARGETS = (
     Target(
         "/use-cases.html",
         200,
-        "<title>Use Cases | ClinicOps</title>",
+        "<title>EU MedTech Regulatory Data Integrity Use Cases | ClinicOps</title>",
     ),
     Target(
         "/integrity-check.html",
@@ -178,7 +178,7 @@ TARGETS = (
         200,
         "<title>Technical File Consistency Check | ClinicOps</title>",
     ),
-    Target("/sitemap.xml", 200, "https://clinicops.dk/assessment-intake.html"),
+    Target("/sitemap.xml", 200, "https://clinicops.dk/regulatory-change-integrity-review.html"),
     Target("/robots.txt", 200, "Sitemap: https://clinicops.dk/sitemap.xml"),
     Target(
         "/__clinicops_healthcheck_missing__.html",
