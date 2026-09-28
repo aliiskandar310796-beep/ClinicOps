@@ -6,7 +6,7 @@ export NODE_PATH="${NODE_PATH:-$(npm root -g)}" QA_BASE_URL="${QA_BASE_URL:-http
 PORT="${QA_BASE_URL##*:}"
 [ -d qa/node_modules/axe-core ] || (cd qa && npm install --no-fund --no-audit) || exit 2
 mkdir -p qa/out
-python3 -m http.server "$PORT" -d docs >/dev/null 2>&1 & SRV=$!
+python3 scripts/serve_docs_like_pages.py docs "$PORT" >/dev/null 2>&1 & SRV=$!
 trap 'kill $SRV 2>/dev/null' EXIT
 for i in $(seq 1 30); do curl -fs "$QA_BASE_URL/" >/dev/null && break; sleep 0.3; done
 curl -fs "$QA_BASE_URL/" >/dev/null || { echo "server did not start"; exit 2; }
