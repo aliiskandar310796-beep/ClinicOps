@@ -2,10 +2,11 @@ from __future__ import annotations
 
 import json
 import sys
+from collections.abc import Iterable
 from dataclasses import dataclass
-from datetime import date
+from datetime import date, datetime, timezone
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any
 
 NETWORK_STATUSES = {
     "SOURCED",
@@ -77,7 +78,7 @@ def _days_old(value: date | None, as_of: date) -> int | None:
 
 
 def validate_expert(record: dict[str, Any], *, as_of: date | None = None) -> list[Finding]:
-    as_of = as_of or date.today()
+    as_of = as_of or datetime.now(timezone.utc).date()
     findings: list[Finding] = []
     expert_id = _require_string(record, "expert_id", findings, "<unknown>") or "<unknown>"
 
@@ -154,7 +155,7 @@ def validate_assignment(
     *,
     as_of: date | None = None,
 ) -> list[Finding]:
-    as_of = as_of or date.today()
+    as_of = as_of or datetime.now(timezone.utc).date()
     findings: list[Finding] = []
     assignment_id = _require_string(assignment, "assignment_id", findings, "<unknown-assignment>") or "<unknown-assignment>"
     expert_id = _require_string(assignment, "expert_id", findings, assignment_id)
@@ -231,18 +232,18 @@ def _load_json(path: str | Path) -> Any:
 def _collect_experts(raw: Any) -> list[dict[str, Any]]:
     rows = raw.get("experts") if isinstance(raw, dict) else raw
     if not isinstance(rows, list):
-        raise ValueError("expert roster must be a JSON list or an object with an 'experts' list")
+        raise TypeError("expert roster must be a JSON list or an object with an 'experts' list")
     if not all(isinstance(row, dict) for row in rows):
-        raise ValueError("every expert record must be a JSON object")
+        raise TypeError("every expert record must be a JSON object")
     return rows
 
 
 def _collect_assignments(raw: Any) -> list[dict[str, Any]]:
     rows = raw.get("assignments") if isinstance(raw, dict) else raw
     if not isinstance(rows, list):
-        raise ValueError("assignments must be a JSON list or an object with an 'assignments' list")
+        raise TypeError("assignments must be a JSON list or an object with an 'assignments' list")
     if not all(isinstance(row, dict) for row in rows):
-        raise ValueError("every assignment record must be a JSON object")
+        raise TypeError("every assignment record must be a JSON object")
     return rows
 
 
@@ -259,7 +260,7 @@ def expert_network_validate() -> None:
             "usage: clinicops-expert-network-validate <roster.json> "
             "[assignments.json] [YYYY-MM-DD]"
         )
-    as_of = date.fromisoformat(sys.argv[3]) if len(sys.argv) == 4 else date.today()
+    as_of = date.fromisoformat(sys.argv[3]) if len(sys.argv) == 4 else datetime.now(timezone.utc).date()
     try:
         experts = _collect_experts(_load_json(sys.argv[1]))
         findings: list[Finding] = []
