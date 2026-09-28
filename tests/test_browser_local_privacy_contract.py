@@ -31,10 +31,27 @@ BROWSER_LOCAL = (
 NETWORK_PRIMITIVES = ("fetch(", "xmlhttprequest", "sendbeacon", "websocket")
 
 
+def _page_source(name: str) -> str:
+    """The page plus every same-origin script it loads.
+
+    Page logic may live in <script src="assets/..."> files (the Scanner's was
+    moved out of an inline block on 2026-09-28 to get it off the mobile
+    critical path), and those files are part of the same privacy boundary.
+    Scanning only the HTML would silently stop covering them.
+    """
+    html = (DOCS / name).read_text(encoding="utf-8")
+    parts = [html]
+    for src in re.findall(r'<script[^>]+src=["\']([^"\']+)["\']', html, re.IGNORECASE):
+        if src.startswith(("http://", "https://", "//")):
+            continue
+        parts.append((DOCS / name).parent.joinpath(src).read_text(encoding="utf-8"))
+    return "\n".join(parts)
+
+
 def test_browser_local_utilities_have_no_submission_or_network_primitive() -> None:
     offenders: list[str] = []
     for name in BROWSER_LOCAL:
-        html = (DOCS / name).read_text(encoding="utf-8")
+        html = _page_source(name)
         lower = html.lower()
         for token in NETWORK_PRIMITIVES:
             if token in lower:
@@ -47,7 +64,7 @@ def test_browser_local_utilities_have_no_submission_or_network_primitive() -> No
 
 
 def test_persistent_storage_is_mapping_profiles_only() -> None:
-    scanner = (DOCS / "integrity-scanner.html").read_text(encoding="utf-8")
+    scanner = _page_source("integrity-scanner.html")
     assert 'const PROF_KEY="clinicops.scanner.mappingProfiles"' in scanner
     assert "localStorage.setItem(PROF_KEY" in scanner
     scrubbed = scanner.replace("localStorage.getItem(PROF_KEY)", "").replace(
@@ -58,7 +75,7 @@ def test_persistent_storage_is_mapping_profiles_only() -> None:
     for name in BROWSER_LOCAL:
         if name == "integrity-scanner.html":
             continue
-        html = (DOCS / name).read_text(encoding="utf-8")
+        html = _page_source(name)
         assert "localStorage" not in html, f"{name}: unexpected persistent storage"
 
 

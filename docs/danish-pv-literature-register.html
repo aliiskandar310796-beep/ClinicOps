@@ -83,9 +83,9 @@ const REG=[
 const tierLabel={core:"core",covered:"covered by global search",specialist:"specialist",awareness:"awareness",regulator:"regulator",hist:"historical"};
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
 function renderRegister(){
- let h='<table class="reg-table"><thead><tr><th>Source</th><th>Owner · language</th><th>ISSN</th><th>Cadence · audience</th><th>Peer review · indexing · access</th><th>Drug-safety content</th><th>Tier</th><th>Verified</th></tr></thead><tbody>';
+ let h='<div class="table-scroll" tabindex="0" role="region" aria-label="Source register, scrollable table"><table class="reg-table"><thead><tr><th>Source</th><th>Owner · language</th><th>ISSN</th><th>Cadence · audience</th><th>Peer review · indexing · access</th><th>Drug-safety content</th><th>Tier</th><th>Verified</th></tr></thead><tbody>';
  for(const r of REG){h+=`<tr><td><a href="${esc(r.url)}" rel="noopener">${esc(r.name)}</a></td><td>${esc(r.owner)}<br><span class="muted small">${esc(r.lang)}</span></td><td>${esc(r.issn)}</td><td>${esc(r.cad)}<br><span class="muted small">${esc(r.aud)}</span></td><td>${esc(r.peer)} · ${esc(r.idx)} · ${esc(r.access)}</td><td>${esc(r.adr)}</td><td><span class="tier ${r.tier==='core'?'core':r.tier==='hist'?'hist':''}">${esc(tierLabel[r.tier])}</span></td><td>${r.ver.startsWith('V')?'<span class="v">V</span>':'<span class="u">U</span>'} <span class="muted small">${esc(r.ver.replace(/^V |^U /,''))}</span></td></tr>`;}
- h+='</tbody></table>';document.getElementById('register').innerHTML=h;
+ h+='</tbody></table></div>';document.getElementById('register').innerHTML=h;
  let s='';for(const r of REG){s+=`<div class="src-row"><input type="checkbox" id="src_${r.id}" ${r.def?'checked':''}><div><label for="src_${r.id}" style="margin:0">${esc(r.name)} <span class="tier ${r.tier==='core'?'core':''}">${esc(tierLabel[r.tier])}</span></label><p class="why">${esc(r.why)}</p></div></div>`;}
  document.getElementById('sources').innerHTML=s;
 }
