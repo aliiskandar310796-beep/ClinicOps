@@ -23,7 +23,7 @@ def test_readiness_page_offers_explicit_continue_to_brief() -> None:
     html = READINESS.read_text(encoding="utf-8")
 
     assert 'id="continue-brief"' in html
-    assert 'href="assessment-intake.html"' in html
+    assert 'href="assessment-intake"' in html
     # The write happens on the explicit continue click, not automatically.
     assert "addEventListener('click'" in html
     assert HANDOFF_KEY in html

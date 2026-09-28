@@ -165,7 +165,7 @@ for (const [tag, w, h, scheme] of COMBOS) {
   await shot(p, `${tag}-review`);
   // scope request route
   await p.locator("a.cta.primary").last().scrollIntoViewIfNeeded();
-  await Promise.all([p.waitForURL(/assessment-intake\.html\?workstream=integrity-review/), p.click('a.cta.primary:has-text("Scope a review")')]);
+  await Promise.all([p.waitForURL(/assessment-intake(?:\.html)?\?workstream=integrity-review/), p.click('a.cta.primary:has-text("Scope a review")')]);
   ok(`[${tag}] scope-request route reaches intake with workstream`, (await p.textContent("h1")).length > 0 && p.url().includes("workstream=integrity-review"), p.url());
   ok(`[${tag}] no console/page errors`, p.errors.length === 0, p.errors.join(" | "));
 }

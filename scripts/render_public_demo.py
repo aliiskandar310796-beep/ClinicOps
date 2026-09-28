@@ -36,11 +36,11 @@ SHELL_HEAD = (
 )
 SHELL_HEADER = (
     '<a class="skip-link" href="#main">Skip to content</a>'
-    '<header class="site"><div class="site-inner"><a class="brand" href="../index.html">Clinic<span>Ops</span></a>'
-    '<nav class="primary" aria-label="Primary"><a href="../index.html">Home</a><a href="../services.html">Solution</a>'
-    '<a href="../use-cases.html">Use cases</a><a href="../research.html">Research</a>'
-    '<a href="../tools.html" aria-current="page">Tools</a><a href="../about.html">About</a>'
-    '<a href="../contact.html">Contact</a></nav></div></header>'
+    '<header class="site"><div class="site-inner"><a class="brand" href="../">Clinic<span>Ops</span></a>'
+    '<nav class="primary" aria-label="Primary"><a href="../">Home</a><a href="../services">Solution</a>'
+    '<a href="../use-cases">Use cases</a><a href="../research">Research</a>'
+    '<a href="../tools" aria-current="page">Tools</a><a href="../about">About</a>'
+    '<a href="../contact">Contact</a></nav></div></header>'
     '<script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");'
     'var r=a?a.offsetLeft+a.offsetWidth+16-n.clientWidth:0;if(r>0)n.scrollLeft=r})()</script>\n'
 )
@@ -92,7 +92,7 @@ def render_public_demo() -> str:
     )
     html = html.replace(
         "</main>",
-        '''<section class="notice"><h2>Want this applied to a real portfolio?</h2><p><strong>What to bring:</strong> start with a small portfolio export or agreed record set. Known identifiers, certificate timing and target-market context help; missing evidence can stay explicit rather than being guessed.</p><p><strong>What a scoped pilot produces:</strong> a prioritised work plan, evidence-gap queue and human-reviewed next steps grounded in the supplied or reachable evidence. The responsible regulatory team retains final judgement.</p><p><a href="/assessment-intake.html"><strong>Build an assessment brief</strong></a> · <a href="mailto:info@clinicops.dk?subject=Class%20III%20Transition%20Map%20Assessment">Email ClinicOps directly</a> · <a href="/readiness-score.html">Use the free readiness score</a> · <a href="/privacy-notice/">Privacy</a> · <a href="/">Back to ClinicOps</a></p></section>
+        '''<section class="notice"><h2>Want this applied to a real portfolio?</h2><p><strong>What to bring:</strong> start with a small portfolio export or agreed record set. Known identifiers, certificate timing and target-market context help; missing evidence can stay explicit rather than being guessed.</p><p><strong>What a scoped pilot produces:</strong> a prioritised work plan, evidence-gap queue and human-reviewed next steps grounded in the supplied or reachable evidence. The responsible regulatory team retains final judgement.</p><p><a href="/assessment-intake"><strong>Build an assessment brief</strong></a> · <a href="mailto:info@clinicops.dk?subject=Class%20III%20Transition%20Map%20Assessment">Email ClinicOps directly</a> · <a href="/readiness-score">Use the free readiness score</a> · <a href="/privacy-notice/">Privacy</a> · <a href="/">Back to ClinicOps</a></p></section>
 </main>''',
         1,
     )

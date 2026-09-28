@@ -34,9 +34,9 @@ def test_pages_exist_with_canonical_identity() -> None:
     impact = IMPACT.read_text(encoding="utf-8")
     consistency = CONSISTENCY.read_text(encoding="utf-8")
 
-    assert '<link rel="canonical" href="https://clinicops.dk/regulatory-change-impact.html">' in impact
+    assert '<link rel="canonical" href="https://clinicops.dk/regulatory-change-impact">' in impact
     assert "<title>Regulatory Change Impact Mapper | ClinicOps</title>" in impact
-    assert '<link rel="canonical" href="https://clinicops.dk/technical-file-consistency.html">' in consistency
+    assert '<link rel="canonical" href="https://clinicops.dk/technical-file-consistency">' in consistency
     assert "<title>Technical File Consistency Check | ClinicOps</title>" in consistency
 
 
@@ -61,8 +61,8 @@ def test_intake_presets_cover_both_tools() -> None:
 
     impact = IMPACT.read_text(encoding="utf-8")
     consistency = CONSISTENCY.read_text(encoding="utf-8")
-    assert "assessment-intake.html?workstream=regulatory-change-impact" in impact
-    assert "assessment-intake.html?workstream=technical-file-consistency" in consistency
+    assert "assessment-intake?workstream=regulatory-change-impact" in impact
+    assert "assessment-intake?workstream=technical-file-consistency" in consistency
 
 
 def test_impact_mapper_rule_table_is_complete() -> None:
@@ -84,5 +84,5 @@ def test_consistency_check_keeps_fictional_fixture_and_mod10() -> None:
 
 def test_tools_page_links_both_prototypes() -> None:
     tools = (DOCS / "tools.html").read_text(encoding="utf-8")
-    assert 'href="regulatory-change-impact.html"' in tools
-    assert 'href="technical-file-consistency.html"' in tools
+    assert 'href="regulatory-change-impact"' in tools
+    assert 'href="technical-file-consistency"' in tools

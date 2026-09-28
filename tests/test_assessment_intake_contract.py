@@ -21,12 +21,12 @@ def test_assessment_intake_is_browser_local_and_user_controlled() -> None:
     html = PAGE.read_text(encoding="utf-8")
     lower = html.lower()
 
-    assert 'rel="canonical" href="https://clinicops.dk/assessment-intake.html"' in html
+    assert 'rel="canonical" href="https://clinicops.dk/assessment-intake"' in html
     assert "No form data is transmitted by this page." in html
     assert "patient-identifiable data" in lower
     assert 'maxlength="1200"' in html
     assert "transition-map-sample/" in html
-    assert "readiness-score.html" in html
+    assert "readiness-score" in html
     assert "info@clinicops.dk" in html
     assert "mailto:info@clinicops.dk" in html
     assert "ClinicOps Regulatory Data Integrity Scope Brief" in html
