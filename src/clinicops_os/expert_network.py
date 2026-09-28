@@ -4,7 +4,7 @@ import json
 import sys
 from collections.abc import Iterable
 from dataclasses import dataclass
-from datetime import date, datetime, timezone
+from datetime import UTC, date, datetime
 from pathlib import Path
 from typing import Any
 
@@ -78,7 +78,7 @@ def _days_old(value: date | None, as_of: date) -> int | None:
 
 
 def validate_expert(record: dict[str, Any], *, as_of: date | None = None) -> list[Finding]:
-    as_of = as_of or datetime.now(timezone.utc).date()
+    as_of = as_of or datetime.now(UTC).date()
     findings: list[Finding] = []
     expert_id = _require_string(record, "expert_id", findings, "<unknown>") or "<unknown>"
 
@@ -155,7 +155,7 @@ def validate_assignment(
     *,
     as_of: date | None = None,
 ) -> list[Finding]:
-    as_of = as_of or datetime.now(timezone.utc).date()
+    as_of = as_of or datetime.now(UTC).date()
     findings: list[Finding] = []
     assignment_id = _require_string(assignment, "assignment_id", findings, "<unknown-assignment>") or "<unknown-assignment>"
     expert_id = _require_string(assignment, "expert_id", findings, assignment_id)
@@ -260,7 +260,7 @@ def expert_network_validate() -> None:
             "usage: clinicops-expert-network-validate <roster.json> "
             "[assignments.json] [YYYY-MM-DD]"
         )
-    as_of = date.fromisoformat(sys.argv[3]) if len(sys.argv) == 4 else datetime.now(timezone.utc).date()
+    as_of = date.fromisoformat(sys.argv[3]) if len(sys.argv) == 4 else datetime.now(UTC).date()
     try:
         experts = _collect_experts(_load_json(sys.argv[1]))
         findings: list[Finding] = []
