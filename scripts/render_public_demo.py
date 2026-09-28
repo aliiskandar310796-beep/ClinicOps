@@ -66,6 +66,7 @@ def render_public_demo() -> str:
     metadata = f'''<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="canonical" href="{CANONICAL}">
 <meta name="description" content="{DESCRIPTION}">
+<meta name="robots" content="noindex,follow">
 <meta property="og:title" content="{TITLE}">
 <meta property="og:description" content="{DESCRIPTION}">
 <meta property="og:type" content="website">
