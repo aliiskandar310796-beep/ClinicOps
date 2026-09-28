@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections import Counter
 from pathlib import Path
 
 import pytest
@@ -40,14 +41,33 @@ def row(**overrides: str) -> dict[str, str]:
     return base
 
 
-def test_public_seed_file_is_valid_and_all_unverified() -> None:
+def test_public_termbase_file_is_valid_and_matches_expected_state() -> None:
+    """State after the 2026-09-27 t0-termbase run (PR #81): the 22 seed rows
+    dated 2026-09-25 have been re-verified against MDR 2017/745 Art. 2 at
+    EUR-Lex -- 18 promoted to `verified`, 3 downgraded to `candidate`
+    (`subdomain = synonym-of:<id>` pointing at the official MDR-DA term),
+    and 1 (SSCP) left `unverified-seed` because it is not an Art. 2
+    definition -- plus 26 new `verified` rows for definitions (1)-(35) not
+    already covered by a seed. See data/termbase/README.md for the schema
+    and provenance rules this file must keep satisfying as later slices
+    (Art. 2(36)-(71) and beyond) are added; update the expected counts below
+    together with any future change to this file.
+    """
     assert validate(PUBLIC) == []
     rows = read_rows(PUBLIC)
-    assert len(rows) == 22
-    assert {r["status"] for r in rows} == {"unverified-seed"}
-    assert {r["confidence"] for r in rows} == {"0.4"}
-    assert {r["job_run"] for r in rows} == {"seed-2026-09-25"}
-    assert all(r["context_en"] == "" and r["context_da"] == "" for r in rows)
+    assert len(rows) == 48
+    assert Counter(r["status"] for r in rows) == {
+        "verified": 44,
+        "candidate": 3,
+        "unverified-seed": 1,
+    }
+    assert all(r["domain"] == "regulatory" for r in rows)
+    assert all(r["source_url"] for r in rows)
+    assert all(
+        r["context_en"] and r["context_da"]
+        for r in rows
+        if r["status"] in {"verified", "candidate"}
+    )
     assert PUBLIC.read_text(encoding="utf-8").splitlines()[0] == ",".join(HEADER)
 
 
