@@ -16,7 +16,17 @@ const failures = [];
 const browser = await chromium.launch({ headless: true });
 try {
   for (const vp of VIEWPORTS) {
-    const context = await browser.newContext({ viewport: { width: vp.width, height: vp.height } });
+    // reducedMotion: 'reduce' matches docs/site.css's own @media(prefers-reduced-motion:reduce)
+    // block, which disables the hero's one-time opacity "rise" entrance animation entirely.
+    // Without it, axe can sample the DOM mid-fade (e.g. an element at ~38% opacity blends its
+    // text color toward the page background) and report a transient, sub-threshold contrast
+    // that never actually reaches the user -- a test-timing race against a real, intentional,
+    // already-motion-gated animation, not a static defect in the shipped page. Testing the
+    // reduced-motion state is also the more conservative, accessibility-correct thing to do.
+    const context = await browser.newContext({
+      viewport: { width: vp.width, height: vp.height },
+      reducedMotion: "reduce",
+    });
     const page = await context.newPage();
     for (const path of PAGES) {
       await page.goto(BASE + path, { waitUntil: "load" });
