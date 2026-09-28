@@ -146,7 +146,6 @@ def test_noindex_pages_are_not_in_sitemap() -> None:
         "integrity-check.html",
         "integrity-economics.html",
         "integrity-gate.html",
-        "privacy-notice/",
         "readiness-score.html",
         "sdea-clause-checker.html",
         "specimen-register/",

@@ -30,11 +30,12 @@ Canonical sitemap:
 
 `https://clinicops.dk/sitemap.xml`
 
-This release intentionally reduces the sitemap from 38 discoverable URLs to **22 canonical index targets**. Support utilities, privacy/intake pages, specimens and legacy URLs remain accessible but carry `noindex,follow` and are excluded from the generated sitemap.
+This release intentionally reduces the sitemap from 38 discoverable URLs to **23 canonical index targets**. Support utilities, intake pages, specimens and legacy URLs remain accessible but carry `noindex,follow` and are excluded from the generated sitemap.
 
 The canonical index set concentrates search authority on:
 
 - company / solution / use-case pages;
+- the public privacy notice;
 - the flagship review;
 - the main Scanner;
 - high-value MedTech use cases;
