@@ -39,7 +39,7 @@ def _page(url: str, *, homepage: bool = False) -> str:
 <meta name="twitter:card" content="summary">
 {extra}
 <script type="application/ld+json">
-{{"@context":"https://schema.org","@type":"WebPage","name":"Example", "url":"{url}"}}
+{{"@context":"https://schema.org","@type":"WebPage","name":"Example | ClinicOps","description":"Example description","url":"{url}"}}
 </script>
 </head><body><h1>Example</h1></body></html>"""
 
@@ -73,6 +73,45 @@ def test_validate_page_metadata_rejects_canonical_drift() -> None:
     )
     assert any("canonical" in error for error in errors)
     assert any("og:url" in error for error in errors)
+
+
+def test_validate_page_metadata_rejects_og_title_drift() -> None:
+    page = _page("https://clinicops.dk/tools.html").replace(
+        '<meta property="og:title" content="Example | ClinicOps">',
+        '<meta property="og:title" content="A Different Title | ClinicOps">',
+    )
+    errors = validate_page_metadata(page, "https://clinicops.dk/tools.html")
+    assert any("og:title" in error for error in errors)
+
+
+def test_validate_page_metadata_rejects_og_description_drift() -> None:
+    page = _page("https://clinicops.dk/tools.html").replace(
+        '<meta property="og:description" content="Example description">',
+        '<meta property="og:description" content="A different description entirely">',
+    )
+    errors = validate_page_metadata(page, "https://clinicops.dk/tools.html")
+    assert any("og:description" in error for error in errors)
+
+
+def test_validate_page_metadata_rejects_json_ld_name_drift() -> None:
+    page = _page("https://clinicops.dk/tools.html").replace(
+        '"name":"Example | ClinicOps","description":"Example description"',
+        '"name":"A Different Title | ClinicOps","description":"Example description"',
+    )
+    errors = validate_page_metadata(page, "https://clinicops.dk/tools.html")
+    assert any("WebPage JSON-LD name" in error for error in errors)
+
+
+def test_validate_page_metadata_rejects_json_ld_description_drift() -> None:
+    # This is the exact failure mode that let a retired claim ("500+
+    # assignments, 100% on time") survive in the JSON-LD copy after being
+    # removed from the visible page and the meta description.
+    page = _page("https://clinicops.dk/tools.html").replace(
+        '"name":"Example | ClinicOps","description":"Example description"',
+        '"name":"Example | ClinicOps","description":"A retired claim that should have been removed everywhere"',
+    )
+    errors = validate_page_metadata(page, "https://clinicops.dk/tools.html")
+    assert any("WebPage JSON-LD description" in error for error in errors)
 
 
 def test_homepage_social_metadata_reuses_search_metadata() -> None:
