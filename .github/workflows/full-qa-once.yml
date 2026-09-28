@@ -3,8 +3,6 @@ on:
   push:
     branches:
       - chatgpt/indexing-conversion-20260928
-    paths:
-      - .github/workflows/full-qa-once.yml
 permissions:
   contents: read
 jobs:
