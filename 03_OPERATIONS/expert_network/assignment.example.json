@@ -1,0 +1,26 @@
+{
+  "assignments": [
+    {
+      "assignment_id": "ASN-SYN-001",
+      "expert_id": "EXP-SYN-DK-001",
+      "engagement_id": "ENG-SYN-001",
+      "scoped_question": "Review whether the Danish market version preserves the approved terminology in the supplied source packet.",
+      "work_type": "LOCAL_MARKET_REVIEW",
+      "markets": ["DK"],
+      "languages": ["da", "en"],
+      "accountable_owner": "ClinicOps engagement lead",
+      "role_type": "REVIEWER",
+      "credentials_checked_on": "2026-09-20",
+      "conflict_checked_on": "2026-09-25",
+      "insurance_checked_on": "2026-09-20",
+      "confidentiality_confirmed": true,
+      "contract_confirmed": true,
+      "compensation_confirmed": true,
+      "sensitive_data_access": "NONE",
+      "data_terms_confirmed": false,
+      "data_minimisation_note": "",
+      "authority_basis": "",
+      "governance_approval_id": ""
+    }
+  ]
+}

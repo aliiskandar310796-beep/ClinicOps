@@ -1,0 +1,45 @@
+{
+  "experts": [
+    {
+      "expert_id": "EXP-SYN-DK-001",
+      "preferred_name": "Fictional Danish RA Specialist",
+      "contact_route": "synthetic@example.invalid",
+      "country": "DK",
+      "jurisdictions": ["DK", "EU"],
+      "professional_role": "Independent regulatory affairs consultant",
+      "competency_domains": ["MDR", "EUDAMED", "UDI", "document control"],
+      "permitted_work_types": ["REGULATORY_DATA_REVIEW", "LOCAL_MARKET_REVIEW"],
+      "languages": ["da", "en"],
+      "network_status": "AVAILABLE",
+      "credentials_verified_on": "2026-09-01",
+      "conflict_checked_on": "2026-09-20",
+      "last_reviewed_on": "2026-09-20",
+      "nda_status": "SIGNED",
+      "contract_status": "READY",
+      "insurance_status": "VERIFIED",
+      "public_profile_consent": false,
+      "public_wording": "",
+      "availability_note": "Synthetic example only."
+    },
+    {
+      "expert_id": "EXP-SYN-SE-001",
+      "preferred_name": "Fictional Swedish Language Reviewer",
+      "contact_route": "synthetic2@example.invalid",
+      "country": "SE",
+      "jurisdictions": ["SE"],
+      "professional_role": "Medical language reviewer",
+      "competency_domains": ["medical-device localisation", "IFU review"],
+      "permitted_work_types": ["LANGUAGE_INTEGRITY_REVIEW"],
+      "languages": ["sv", "en"],
+      "network_status": "SCREENING",
+      "credentials_verified_on": "",
+      "conflict_checked_on": "",
+      "last_reviewed_on": "2026-09-20",
+      "nda_status": "PENDING",
+      "contract_status": "PENDING",
+      "insurance_status": "NOT_ASSESSED",
+      "public_profile_consent": false,
+      "public_wording": ""
+    }
+  ]
+}

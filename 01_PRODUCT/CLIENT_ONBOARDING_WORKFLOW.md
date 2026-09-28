@@ -34,7 +34,30 @@ Record:
 
 The scope must say explicitly that public-register screening and operator priority are evidence inputs, not legal or compliance determinations.
 
-## 3. Establish a controlled client workspace
+## 3. Expert-network gate
+
+If the scope requires competence beyond the core ClinicOps engagement team, define that need before sharing client evidence.
+
+Record:
+
+- required competency domain;
+- required jurisdiction / market;
+- required language;
+- permitted work type;
+- whether the specialist is advisory, reviewer or a separately governed decision owner;
+- whether personal or special-category data would be needed.
+
+Select only an expert whose private network record is `AVAILABLE` or `LIMITED` for the required scope, then complete the project-specific assignment gate in `03_OPERATIONS/EXPERT_NETWORK_OPERATING_SYSTEM.md`.
+
+Validate the private roster/assignment locally where appropriate:
+
+```bash
+clinicops-expert-network-validate <private-roster.json> <private-assignments.json>
+```
+
+The validator is a control check, not credential verification and not a professional-scope determination.
+
+## 4. Establish a controlled client workspace
 
 Do not ask clients to place confidential portfolios or documents in the public GitHub repository.
 
@@ -48,7 +71,7 @@ Use an approved access-controlled workspace for:
 
 The public repository contains code, schemas, sanitized fixtures and methodology only.
 
-## 4. Intake
+## 5. Intake
 
 Minimum portable portfolio shape is `examples/portfolio_intake_template.csv`.
 
@@ -60,7 +83,7 @@ clinicops-portfolio-validate <client-portfolio.csv>
 
 Resolve blocking structural errors before creating deliverables. Warnings and information gaps remain visible and are not silently filled with guesses.
 
-## 5. Analysis
+## 6. Analysis
 
 Generate the deterministic operator layer:
 
@@ -78,7 +101,7 @@ Bundle `1.1` includes:
 
 Do not run private client data through public GitHub Actions. Actions validate code and sanitized fixtures, not live engagements.
 
-## 6. Human regulatory review
+## 7. Human regulatory review
 
 Before client delivery, a ClinicOps reviewer should check at minimum:
 
@@ -93,7 +116,7 @@ Before client delivery, a ClinicOps reviewer should check at minimum:
 
 Automated priority is operator triage only.
 
-## 7. Deliver
+## 8. Deliver
 
 Primary client-facing artifact: `client_report.html` inside the controlled workspace.
 
@@ -106,7 +129,7 @@ Supporting deliverables:
 
 Do not host confidential client bundles on public GitHub Pages.
 
-## 8. Review meeting
+## 9. Review meeting
 
 Use the report to answer:
 
@@ -118,7 +141,7 @@ Use the report to answer:
 
 Capture client corrections as new evidence rather than overwriting the original source silently.
 
-## 9. Close the learning loop
+## 10. Close the learning loop
 
 After delivery, update the appropriate private commercial record and sanitized institutional learning:
 
@@ -133,7 +156,7 @@ After delivery, update the appropriate private commercial record and sanitized i
 
 Use `clinicops-experiments` for sanitized experiment state and the Revenue OS for commercial prioritisation.
 
-## 10. Expansion decision
+## 11. Expansion decision
 
 Only propose recurring monitoring, partner integration or a portal feature when the engagement demonstrates a repeated need.
 

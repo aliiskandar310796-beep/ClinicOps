@@ -153,6 +153,7 @@ SECTION_BY_PAGE = {
     "transition-map-sample/index.html": "Tools",
     "about.html": "About",
     "expert-network.html": "About",
+    "expert-network-interest.html": "About",
     "contact.html": "Contact",
     "privacy-notice/index.html": None,
 }
