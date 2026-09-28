@@ -32,7 +32,6 @@ Research and primary sources:
 - Continuous monitoring of the public EUDAMED record | ClinicOps: https://clinicops.dk/research/eudamed-watch/ - How ClinicOps continuously monitors the public EUDAMED record: monthly versioned snapshots of SS(C)P linkage for a private watchlist, diffed, aggregates only.
 - The published SS(C)P and the public EUDAMED record — what a reader can and cannot reconcile | ClinicOps: https://clinicops.dk/research/sscp-public-record-scan/ - Public-source scan, September 2026: what a published SS(C)P and the public EUDAMED record can and cannot reconcile — identifiers, revisions, legacy DIs and pack records.
 
-
 Policies:
 - Privacy Notice | ClinicOps: https://clinicops.dk/privacy-notice/ - How ClinicOps processes personal data: website, email enquiries, client engagements, and business-development outreach, including your right to object.
 
