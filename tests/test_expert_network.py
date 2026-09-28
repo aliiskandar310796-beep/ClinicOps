@@ -114,3 +114,19 @@ def test_decision_owner_requires_separate_authority_basis():
     )
     fields = {f.field for f in findings if f.severity == "error"}
     assert {"authority_basis", "governance_approval_id"} <= fields
+
+
+def test_public_example_roster_is_synthetic() -> None:
+    import json
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[1]
+    raw = json.loads(
+        (root / "03_OPERATIONS" / "expert_network" / "roster.example.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    assert raw["experts"]
+    for expert in raw["experts"]:
+        assert str(expert["expert_id"]).startswith("EXP-SYN-")
+        assert str(expert["contact_route"]).endswith(".invalid")

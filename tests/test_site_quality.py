@@ -130,3 +130,11 @@ def test_url_to_docs_path_maps_directory_and_file_urls(tmp_path: Path) -> None:
         url_to_docs_path(tmp_path, "https://clinicops.dk/tools.html")
         == tmp_path / "tools.html"
     )
+
+
+def test_expert_network_interest_is_noindex() -> None:
+    page = ROOT / "docs" / "expert-network-interest.html"
+    html = page.read_text(encoding="utf-8")
+    assert '<meta name="robots" content="noindex,follow">' in html
+    sitemap = (ROOT / "docs" / "sitemap.xml").read_text(encoding="utf-8")
+    assert "https://clinicops.dk/expert-network-interest" not in sitemap
