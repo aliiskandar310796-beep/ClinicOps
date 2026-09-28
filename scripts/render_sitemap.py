@@ -19,6 +19,9 @@ def discover_urls() -> list[str]:
         if relative in EXCLUDED_HTML:
             continue
         parser = parse_metadata(page.read_text(encoding="utf-8"))
+        robots = parser.meta.get("robots", "").lower()
+        if "noindex" in {token.strip() for token in robots.split(",")}:
+            continue
         canonical = parser.canonical
         if not canonical:
             raise SystemExit(f"{relative}: missing canonical URL")

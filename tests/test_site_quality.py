@@ -130,3 +130,28 @@ def test_url_to_docs_path_maps_directory_and_file_urls(tmp_path: Path) -> None:
         url_to_docs_path(tmp_path, "https://clinicops.dk/tools.html")
         == tmp_path / "tools.html"
     )
+
+
+def test_noindex_pages_are_not_in_sitemap() -> None:
+    sitemap = (ROOT / "docs" / "sitemap.xml").read_text(encoding="utf-8")
+    noindex_pages = (
+        "assessment-intake.html",
+        "change-surface-mapper.html",
+        "danish-dhpc-checker.html",
+        "danish-pv-literature-register.html",
+        "evidence-change-control-pack.html",
+        "evidence-pack-checklist.html",
+        "expert-network.html",
+        "identifier-check.html",
+        "integrity-check.html",
+        "integrity-economics.html",
+        "integrity-gate.html",
+        "privacy-notice/",
+        "readiness-score.html",
+        "sdea-clause-checker.html",
+        "specimen-register/",
+        "transition-map-sample/",
+        "what-a-pilot-looks-like.html",
+    )
+    for page in noindex_pages:
+        assert f"https://clinicops.dk/{page}" not in sitemap
