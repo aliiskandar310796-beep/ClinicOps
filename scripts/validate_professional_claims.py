@@ -38,6 +38,8 @@ FORBIDDEN_PHRASES = (
     "notified-body expert",
     "ISO-certified",
     "ISO certified",
+    "MSc in Medicine (Translational Medicine)",
+    "Bachelor of Medicine, Aalborg University",
     # Specialist Expertise directive §2/§5: the capability is public, the
     # network is not — no roster-shaped or recruitment language anywhere.
     "growing bench",
@@ -127,8 +129,10 @@ def main() -> int:
             )
 
     about = (DOCS / "about.html").read_text(encoding="utf-8")
-    if "MSc in Medicine (Translational Medicine), Aalborg University" not in about:
+    if "Master of Science (MSc) in Medicine with Industrial Specialisation (Translational Medicine), Aalborg University" not in about:
         errors.append("about.html: verified credential line missing")
+    if "Bachelor of Science (BSc) in Medicine with Industrial Specialisation, Aalborg University" not in about:
+        errors.append("about.html: official bachelor programme title missing")
     if "explicitly appointed" not in about:
         errors.append("about.html: professional boundary statement missing")
 

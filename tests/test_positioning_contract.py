@@ -42,6 +42,12 @@ def test_homepage_states_the_category_and_flagship() -> None:
     assert "EU MedTech Regulatory Data Integrity" in html
     assert "Regulatory Change Integrity Review" in html
     assert 'href="integrity-scanner.html"' in html
+    plain = "You changed something about a device. ClinicOps checks whether that change reached every regulatory record"
+    assert plain in html
+    assert html.index(plain) < html.index("Approved source")
+    assert '>Check a change free</a>' in html
+    assert '>Scope a review</a>' in html
+    assert "Runs in your browser. No upload. No sign-up." in html
     # no black-box score on the primary journey
     assert "readiness-score" not in html
 
@@ -127,6 +133,14 @@ def test_scanner_exists_with_both_modes_and_boundary() -> None:
 def test_flagship_page_is_reframed() -> None:
     html = (DOCS / "evidence-change-control-pack.html").read_text(encoding="utf-8")
     assert "<title>Regulatory Change Integrity Review | ClinicOps</title>" in html
+    assert "Give ClinicOps one controlled change and the records that should reflect it." in html
+    assert "who owns each open item, and what evidence closes it." in html
+
+
+def test_tools_keep_scanner_first() -> None:
+    html = (DOCS / "tools.html").read_text(encoding="utf-8")
+    assert "Not sure where to start?</strong> Use the Regulatory Integrity Scanner." in html
+    assert html.index("START HERE") < html.index("Focused utilities") < html.index("Pharmacovigilance utilities")
 
 
 def test_solution_page_is_flagship_first() -> None:
