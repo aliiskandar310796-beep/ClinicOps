@@ -4,7 +4,7 @@ const BASE = (process.env.E2E_BASE_URL || "http://localhost:8103").replace(/\/$/
 const WIDTHS = [320, 375, 390, 768, 1024, 1440];
 const PAGES = [
   "/", "/services.html", "/integrity-scanner.html", "/tools.html",
-  "/evidence-change-control-pack.html", "/about.html", "/contact.html",
+  "/regulatory-change-integrity-review.html", "/about.html", "/contact.html",
   "/assessment-intake.html?workstream=integrity-review", "/privacy-notice/",
 ];
 const LOCAL_UTILITIES = [
