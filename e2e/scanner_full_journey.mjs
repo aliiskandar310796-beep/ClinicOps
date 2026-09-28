@@ -148,7 +148,7 @@ for (const [tag, w, h, scheme] of COMBOS) {
   // exports
   const csvText = await saveDl(p, () => p.click("#x_csv"));
   const csv = parseCsv(csvText);
-  ok(`[${tag}] exception CSV well-formed with edited owner, action, state and note`, csv[0].join(",") === "object,field,expected,observed,status,evidence,owner,next_action,review_state,note" && csv.slice(1).every((r) => r.length === 10 || (r.length === 1 && r[0] === "")) && /RA Review Board/.test(csvText) && /Confirm source of truth with Certification Lead/.test(csvText) && /in review/.test(csvText) && /Reviewed by RA/.test(csvText), csvText.slice(0, 300));
+  ok(`[${tag}] exception CSV well-formed with edited owner, action, state and note`, csv[0].join(",") === "object,field,expected,observed,status,evidence,owner,next_action,review_state,note,closure_evidence,closed_at" && csv.slice(1).every((r) => r.length === 12 || (r.length === 1 && r[0] === "")) && /RA Review Board/.test(csvText) && /Confirm source of truth with Certification Lead/.test(csvText) && /in review/.test(csvText) && /Reviewed by RA/.test(csvText), csvText.slice(0, 300));
   ok(`[${tag}] exception CSV excludes aligned rows`, !csv.some((r) => r[4] === "aligned"));
   const json = JSON.parse(await saveDl(p, () => p.click("#x_json")));
   ok(`[${tag}] JSON export carries boundary, tool identity, summary and findings`, BOUNDARY_RE.test(json.boundary) && /Source authority, materiality and disposition stay with the accountable qualified owner/.test(json.boundary) && json.tool === "clinicops-regulatory-integrity-scanner" && json.mode === "portfolio-scan" && json.findings.length > 0 && typeof json.summary["conflicting evidence"] === "number" && !isNaN(Date.parse(json.generated_at)));
@@ -212,7 +212,7 @@ for (const [tag, w, h, scheme] of COMBOS) {
   await p.keyboard.press("Enter");
   n = await tabTo(p, focusedIs("wb_export_sel"), 4);
   const selCsv = await saveDl(p, () => p.keyboard.press("Enter"));
-  ok("[keyboard] bulk owner + selected export completed without a mouse", /QA Keyboard Owner/.test(selCsv) && parseCsv(selCsv)[0].length === 10, selCsv.slice(0, 200));
+  ok("[keyboard] bulk owner + selected export completed without a mouse", /QA Keyboard Owner/.test(selCsv) && parseCsv(selCsv)[0].length === 12, selCsv.slice(0, 200));
   ok("[keyboard] no console/page errors", p.errors.length === 0, p.errors.join(" | "));
   await shot(p, "keyboard-final");
 }
@@ -301,7 +301,7 @@ for (const [tag, w, h, scheme] of COMBOS) {
   await p.selectOption("#wb_status", "mismatch signal"); await p.waitForTimeout(400);
   ok("[large] status filter works on large data", (await p.$$eval("#grid .tabulator-row", (r) => r.length)) > 0);
   const csv = parseCsv(await saveDl(p, () => p.click("#x_csv")));
-  ok("[large] exception CSV well-formed", csv.length > 50 && csv.filter((r) => r.length > 1).every((r) => r.length === 10));
+  ok("[large] exception CSV well-formed", csv.length > 50 && csv.filter((r) => r.length > 1).every((r) => r.length === 12));
   os.platform() && fs.rmSync(big, { force: true });
   ok("[large] no console errors", p.errors.length === 0, p.errors.join(" | "));
 }

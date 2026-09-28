@@ -125,7 +125,7 @@ ol#queue{padding-left:1.3rem;max-width:42.43em}#queue li{margin:.5em 0}
 <ul class="tags spec"><li>Runs locally — no upload</li><li>Deterministic rules</li><li>Bounded status vocabulary</li><li>CSV · XLSX · JSON import</li><li>CSV + JSON export</li><li>Human authority preserved</li></ul>
 <div class="callout"><strong>Boundary.</strong> The scanner compares the values you provide and structures review work. It does not decide which source is legally authoritative, does not make compliance determinations, and reports <em>mismatch signals</em> and <em>missing evidence</em> — never a compliance verdict in either direction. Interpretation and disposition stay with your qualified owner.</div>
 <noscript><div class="callout boundary"><p>This tool runs in your browser and needs JavaScript enabled.</p></div></noscript>
-<div class="mode" role="group" aria-label="Scanner mode"><button id="modeA" aria-pressed="true" type="button">Single change</button><button id="modeB" aria-pressed="false" type="button">Portfolio scan (CSV / XLSX / JSON)</button></div>
+<div class="mode" role="group" aria-label="Scanner mode"><button id="modeA" aria-pressed="true" type="button">Single change</button><button id="modeB" aria-pressed="false" type="button">Portfolio scan (CSV / XLSX / JSON)</button><button id="modeC" aria-pressed="false" type="button">Evidence matrix (JSON)</button></div>
 
 <section id="paneA">
 <h2>1 · Anchor the approved source</h2>
@@ -159,6 +159,14 @@ ol#queue{padding-left:1.3rem;max-width:42.43em}#queue li{margin:.5em 0}
 <div class="actions"><button class="btn primary" id="b_run" type="button">Run portfolio scan</button></div></div></div>
 </section>
 
+<section id="paneC" hidden>
+<h2>Compare an approved source across a declared evidence matrix</h2>
+<p>Use this for several fields across several records. Start with the fictional example, replace the source and observations, then declare the field/surface pairs in scope. Without an explicit scope, every approved field is checked on every declared surface.</p>
+<div class="panel"><label for="c_input">Evidence matrix JSON</label><textarea id="c_input" spellcheck="false" style="min-height:18rem" aria-describedby="c_help"></textarea>
+<p id="c_help" class="hint">The approved source sets expected values. Missing observations remain visible. Exact comparison is the default; use a qualified rule for translations or statements needing interpretation. Evidence references are citations you supply; files and source authority are not independently verified.</p>
+<div class="actions"><button class="btn primary" id="c_run" type="button">Compare evidence matrix</button><button class="btn secondary" id="c_example" type="button">Load fictional matrix</button><button class="btn secondary" id="c_choose" type="button">Choose matrix JSON</button><input id="c_file" type="file" accept=".json,application/json" aria-label="Choose evidence matrix JSON" hidden></div><p id="c_message" role="status"></p></div>
+</section>
+
 <div id="fictionalNote" class="fictional" hidden>Fictional example — every value is invented for demonstration. No real company, device, identifier or record is referenced.</div>
 
 <div class="result" aria-live="polite"><div class="result-head"><div><h2 class="rt" id="resultTitle">Scan result</h2><p id="summary" class="muted">Run a check or scan to see statuses, exceptions and the review queue.</p></div><span id="badge" class="badge">NOT RUN</span></div>
@@ -166,7 +174,16 @@ ol#queue{padding-left:1.3rem;max-width:42.43em}#queue li{margin:.5em 0}
 <div id="wb_toolbar" hidden><input id="wb_search" name="search" autocomplete="off" spellcheck="false" placeholder="Search all columns" aria-label="Search findings"><select id="wb_status" aria-label="Filter by status"><option value="">All statuses</option><option>aligned</option><option>mismatch signal</option><option>conflicting evidence</option><option>missing evidence</option><option>unresolved</option><option>requires qualified review</option></select><select id="wb_group" aria-label="Group findings"><option value="">No grouping</option><option value="status">Group: status</option><option value="object">Group: object / record</option><option value="owner">Group: owner</option><option value="field">Group: field</option></select><span class="tb-owner"><input id="wb_owner" name="owner" autocomplete="off" placeholder="Owner for selected rows" aria-label="Owner for selected rows"><button class="btn secondary" id="wb_apply_owner" type="button">Assign owner</button></span><button class="btn secondary tb-export" id="wb_export_sel" type="button">Export selected CSV</button><span id="wb_msg" class="muted small-note" role="status"></span></div>
 <div id="grid"></div>
 <div class="tablewrap" id="plainwrap" tabindex="0" role="region" aria-label="Findings table"><table aria-label="Scan findings"><thead><tr><th scope="col">Object / record</th><th scope="col">Field</th><th scope="col">Expected</th><th scope="col">Observed</th><th scope="col">Status</th><th scope="col">Evidence</th><th scope="col">Owner</th><th scope="col">Next action</th></tr></thead><tbody id="rows"><tr><td colspan="8" class="muted">Nothing scanned yet.</td></tr></tbody></table></div>
-<div class="grid"><div><h3>Exception queue</h3><ol id="queue"><li class="muted">No exceptions yet.</li></ol></div><div><h3>Export</h3><div class="actions tight"><button class="btn secondary" id="x_csv" type="button">Download exception CSV</button><button class="btn secondary" id="x_json" type="button">Download JSON</button><button class="btn secondary" id="x_copy" type="button">Copy reviewer summary</button></div><p class="muted small-note">Exports are generated locally. The JSON repeats the boundary statement and carries every finding for your own change-control or review record.</p></div></div>
+<div class="grid"><div><h3>Exception queue</h3><ol id="queue"><li class="muted">No exceptions yet.</li></ol></div><div><h3>Export</h3><div class="actions tight"><button class="btn secondary" id="x_csv" type="button">Download exception CSV</button><button class="btn secondary" id="x_json" type="button">Download JSON</button><button class="btn secondary" id="x_html" type="button">Download review report</button><button class="btn secondary" id="x_copy" type="button">Copy reviewer summary</button></div><p class="muted small-note">Exports include every finding, the comparison input, rule version and full SHA-256 fingerprints. Review edits are local and self-reported; a fingerprint detects changes against a trusted copy but does not certify evidence or reviewer identity. Export before leaving this page.</p></div></div>
+<p id="packet_info" class="hint" style="overflow-wrap:anywhere" role="status"></p>
+<details><summary>Record a review disposition</summary><div class="panel"><p class="hint">The original comparison status is retained. Closing requires an accountable owner and closure evidence. This local record is not an authenticated approval or regulatory release.</p><div class="grid">
+<div class="field"><label for="review_row">Finding</label><select id="review_row"></select></div>
+<div class="field"><label for="review_owner">Accountable owner</label><input id="review_owner"></div>
+<div class="field"><label for="review_action">Next action</label><input id="review_action"></div>
+<div class="field"><label for="review_evidence">Closure evidence reference</label><input id="review_evidence"></div>
+<div class="field"><label for="review_note">Disposition / reviewer note</label><input id="review_note"></div>
+<div class="field"><label for="review_state">Review state</label><select id="review_state"><option>open</option><option>in review</option><option>closed with evidence</option></select></div>
+</div><button class="btn secondary" id="review_save" type="button">Save review disposition</button><p id="review_message" role="status"></p></div></details>
 </div>
 
 <div class="principles"><div class="principle"><strong>Deterministic</strong><span>Identical inputs always produce identical statuses and queues. No scoring model, no inference, no black-box number.</span></div><div class="principle"><strong>Fail-closed</strong><span>No reference means no interpretation. An empty observation is missing evidence, never an invented conclusion. Unknown vocabulary routes to qualified review.</span></div><div class="principle"><strong>Human-owned</strong><span>Every exception carries an owner and a bounded next action. Which value is correct — and whether it matters — is your qualified reviewer's decision.</span></div></div>
@@ -176,9 +193,11 @@ ol#queue{padding-left:1.3rem;max-width:42.43em}#queue li{margin:.5em 0}
 <p class="cta-links"><a href="integrity-check.html">Build a single-change evidence packet</a><a href="change-surface-mapper.html">Map a change&rsquo;s surfaces first</a><a href="mailto:info@clinicops.dk?subject=Regulatory%20Integrity%20Scanner">Email info@clinicops.dk</a></p>
 </main>
 <footer class="site"><div class="footer-inner"><span>ClinicOps · EU MedTech regulatory data integrity · <a href="privacy-notice/">Privacy</a></span></div><div class="footer-inner"><span>ClinicOps is not a notified body or a competent authority, and does not replace your RA/QA team, RIM, QMS, PLM or ERP.</span></div></footer>
+<script src="assets/reconciliation.js"></script>
 <script>
 (()=>{"use strict";const $=id=>document.getElementById(id),T=v=>String(v??""),tr=v=>T(v).trim(),esc=v=>T(v).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
-let last=null;
+let last=null,runEpoch=0,matrixRead=0,portfolioRead=0;
+const RE=window.ClinicOpsReconciliation;
 const BOUNDARY="Deterministic comparison aid only; statuses are bounded operator signals (aligned / mismatch signal / missing evidence / conflicting evidence / unresolved / not applicable / requires qualified review), not compliance determinations. Source authority, materiality and disposition stay with the accountable qualified owner. Browser-local: nothing entered or imported is transmitted or stored.";
 const STCLS={"aligned":"stAligned","mismatch signal":"stMismatch","missing evidence":"stMissing","conflicting evidence":"stConflict","requires qualified review":"stReview","not applicable":"stNA","unresolved":"stReview"};
 function stCell(s){return `<td class="st ${STCLS[s]||""}">${esc(s)}</td>`}
@@ -208,9 +227,12 @@ function buildGrid(rows){
    {title:"Next action",field:"next_action",editor:"input",formatter:tf,minWidth:180},
    {title:"Review state",field:"review_state",editor:"list",editorParams:{values:["open","in review","closed with evidence"]},formatter:tf,minWidth:110},
    {title:"Reviewer note",field:"note",editor:"input",formatter:tf,minWidth:120},
+   {title:"Closure evidence",field:"closure_evidence",editor:"input",formatter:tf,minWidth:160},
   ]});
  try{const ed=table.modules&&table.modules.edit;if(ed&&!ed._guarded){const o=ed.clearEditor.bind(ed);ed.clearEditor=(...a)=>{try{return o(...a)}catch(_){/*cell element already recycled by virtual scrolling*/}};ed._guarded=true}}catch(_){/*noop*/}
- table.on("cellEdited",cell=>{const d=cell.getData();const r=rowsStore[d._i];if(r)r[cell.getField()]=cell.getValue()});
+ table.on("cellEdited",cell=>{const d=cell.getData(),r=rowsStore[d._i];if(!r)return;
+  try{const patch={[cell.getField()]:cell.getValue()},next=RE.review({...r,[cell.getField()]:cell.getOldValue()},patch);Object.assign(r,next);cell.getRow().update(next);wbMsg("");syncReviewForm()}
+  catch(e){r[cell.getField()]=cell.getOldValue();cell.restoreOldValue();wbMsg(e.message)}});
  $("wb_toolbar").hidden=false;$("plainwrap").hidden=true;$("rows").innerHTML=plainRows(rows);
  table.on("tableBuilt",()=>{const g=$("wb_group").value;if(g)table.setGroupBy(g);applyFilters()});
 }
@@ -221,7 +243,8 @@ function renderPlain(rows){
  $("plainwrap").hidden=false;$("wb_toolbar").hidden=true;$("grid").innerHTML="";
 }
 function render(mode,rows,meta){
- rows.forEach((r,i)=>{r._i=i;if(!r.review_state)r.review_state="open";if(r.note==null)r.note=""});
+ const epoch=++runEpoch;
+ rows.forEach((r,i)=>{r._i=i;if(!r.id)r.id="finding-"+(i+1);if(!r.review_state)r.review_state="open";if(r.note==null)r.note=""});
  rowsStore=rows;
  const counts={aligned:0,"mismatch signal":0,"missing evidence":0,"conflicting evidence":0,"requires qualified review":0,"not applicable":0,unresolved:0};
  for(const r of rows)counts[r.status]=(counts[r.status]||0)+1;
@@ -234,16 +257,20 @@ function render(mode,rows,meta){
  if(bad){badge.textContent="MISMATCH SIGNALS";badge.className="badge hold";$("resultTitle").textContent="Exceptions to adjudicate"}
  else if(miss||rev){badge.textContent="INCOMPLETE";badge.className="badge review";$("resultTitle").textContent=miss?"Evidence incomplete":"Qualified review needed"}
  else{badge.textContent="NO ENTERED DIFFERENCE";badge.className="badge ok";$("resultTitle").textContent="No difference in the entered scope"}
- $("summary").textContent=`${mode==="A"?"Single-change check":"Portfolio scan"}: ${shown.length} comparisons — ${counts.aligned} aligned, ${bad} mismatch/conflict signals, ${miss} missing evidence, ${rev} for qualified review.`;
- last={tool:"clinicops-regulatory-integrity-scanner",tool_version:"1.2",mode:mode==="A"?"single-change":"portfolio-scan",generated_at:new Date().toISOString(),...meta,findings:rows,summary:{...counts},boundary:BOUNDARY};
- const visible=shown.map(r=>r);
- ensureGrid().then(ok=>{if(ok)buildGrid(visible);else renderPlain(rows)});
+ $("summary").textContent=`${mode==="A"?"Single-change check":mode==="C"?"Evidence matrix":"Portfolio scan"}: ${shown.length} comparisons — ${counts.aligned} aligned, ${bad} mismatch/conflict signals, ${miss} missing evidence, ${rev} for qualified review.`;
+ last={tool:"clinicops-regulatory-integrity-scanner",tool_version:"1.3",rules_version:RE.VERSION,mode:mode==="A"?"single-change":mode==="C"?"evidence-matrix":"portfolio-scan",generated_at:new Date().toISOString(),...meta,findings:rows,summary:{...counts},boundary:BOUNDARY};
+ $("review_row").innerHTML=rows.map((r,i)=>`<option value="${i}">${esc(r.object)} — ${esc(r.field)} (${esc(r.status)})</option>`).join("");syncReviewForm();
+ $("packet_info").textContent="Rule version "+RE.VERSION+". SHA-256 fingerprints are generated on export.";
+ const visible=shown.map(r=>({...r}));
+ ensureGrid().then(ok=>{if(epoch!==runEpoch||!last)return;if(ok)buildGrid(visible);else renderPlain(rows)});
  try{$("resultTitle").scrollIntoView({block:"start",behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"})}catch(_){/*noop*/}
 }
 function dl(name,content,type){const b=new Blob([content],{type}),u=URL.createObjectURL(b),a=document.createElement("a");a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();URL.revokeObjectURL(u)}
-$("x_json").onclick=()=>{if(!last)return;dl("clinicops-integrity-scan.json",JSON.stringify(last,null,2)+"\n","application/json")};
-const CSV_HEAD=["object","field","expected","observed","status","evidence","owner","next_action","review_state","note"];
-function csvOf(rows){const q=v=>`"${T(v).replaceAll('"','""')}"`;return CSV_HEAD.join(",")+"\n"+rows.map(r=>CSV_HEAD.map(h=>q(r[h])).join(",")).join("\n")+"\n"}
+async function exportPacket(){if(!last)return null;const epoch=runEpoch,p=JSON.parse(JSON.stringify(last));p.input_sha256=await RE.sha256(p.input_snapshot);const sealed=await RE.seal(p);if(epoch!==runEpoch||!last)return null;$("packet_info").textContent=`Input SHA-256: ${sealed.input_sha256} · Packet SHA-256: ${sealed.packet_sha256}`;return sealed}
+$("x_json").onclick=async()=>{try{const p=await exportPacket();if(p)dl("clinicops-integrity-scan.json",JSON.stringify(p,null,2)+"\n","application/json")}catch(e){$("packet_info").textContent=e.message}};
+$("x_html").onclick=async()=>{try{const p=await exportPacket();if(!p)return;const cols=["object","field","expected","observed","status","evidence","owner","next_action","review_state","closure_evidence","closed_at","note"];const html='<!doctype html><html lang="en"><meta charset="utf-8"><title>ClinicOps review packet</title><style>body{font:16px system-ui;margin:2rem}table{border-collapse:collapse;width:100%;font-size:14px}td,th{border:1px solid #bbb;padding:.5rem;text-align:left;overflow-wrap:anywhere}p{overflow-wrap:anywhere}</style><h1>ClinicOps review packet</h1><p>'+esc(p.boundary)+'</p><p>Self-reported review dispositions; no authenticated approval or independent evidence verification.</p><p>Rules: '+esc(p.rules_version)+' · Compared: '+esc(p.generated_at)+'</p><p>Input SHA-256: '+p.input_sha256+'</p><p>JSON packet SHA-256: '+p.packet_sha256+'</p><table><thead><tr>'+cols.map(c=>'<th>'+esc(c.replaceAll('_',' '))+'</th>').join('')+'</tr></thead><tbody>'+p.findings.map(r=>'<tr>'+cols.map(c=>'<td>'+esc(r[c]??'—')+'</td>').join('')+'</tr>').join('')+'</tbody></table></html>';dl("clinicops-review-report.html",html,"text/html")}catch(e){$("packet_info").textContent=e.message}};
+const CSV_HEAD=["object","field","expected","observed","status","evidence","owner","next_action","review_state","note","closure_evidence","closed_at"];
+function csvOf(rows){const q=RE.csvCell;return CSV_HEAD.join(",")+"\n"+rows.map(r=>CSV_HEAD.map(h=>q(r[h])).join(",")).join("\n")+"\n"}
 $("x_csv").onclick=()=>{if(!last)return;dl("clinicops-integrity-exceptions.csv",csvOf(rowsStore.filter(r=>r.status!=="aligned"&&r.status!=="not applicable")),"text/csv")};
 function wbMsg(t){$("wb_msg").textContent=t}
 $("wb_export_sel").onclick=()=>{if(!table)return;const sel=table.getSelectedData();if(!sel.length){wbMsg("No rows selected. Tick the checkbox on one or more rows (or the header checkbox) first.");return}wbMsg("");dl("clinicops-integrity-selected.csv",csvOf(sel.map(d=>rowsStore[d._i]||d)),"text/csv")};
@@ -254,33 +281,51 @@ $("x_copy").onclick=async()=>{if(!last)return;const s=last.summary;const ex=last
 // Print: show the plain findings table (prints fully and fits A4) instead of the virtualised grid.
 window.addEventListener("beforeprint",()=>{if(table)$("rows").innerHTML=plainRows(rowsStore.filter(r=>r.status!=="not applicable"))});
 // ---------- Mode switching ----------
-function setMode(m){$("modeA").setAttribute("aria-pressed",m==="A");$("modeB").setAttribute("aria-pressed",m==="B");$("paneA").hidden=m!=="A";$("paneB").hidden=m!=="B"}
-$("modeA").onclick=()=>setMode("A");$("modeB").onclick=()=>setMode("B");
+function setMode(m){$("modeA").setAttribute("aria-pressed",m==="A");$("modeB").setAttribute("aria-pressed",m==="B");$("paneA").hidden=m!=="A";$("paneB").hidden=m!=="B";$("modeC").setAttribute("aria-pressed",m==="C");$("paneC").hidden=m!=="C";invalidate("Run the selected mode to create a new review packet.")}
+$("modeA").onclick=()=>setMode("A");$("modeB").onclick=()=>setMode("B");$("modeC").onclick=()=>setMode("C");
+function invalidate(message="Inputs changed. Run the comparison again before exporting."){
+ ++runEpoch;last=null;rowsStore=[];if(table){table.destroy();table=null}$("grid").innerHTML="";$("rows").innerHTML='<tr><td colspan="8">'+esc(message)+'</td></tr>';$("plainwrap").hidden=false;$("wb_toolbar").hidden=true;
+ $("summary").textContent=message;$("badge").textContent="NOT RUN";$("badge").className="badge";$("resultTitle").textContent="Scan result";$("queue").innerHTML='<li>No current review packet.</li>';$("packet_info").textContent="";$("review_row").innerHTML="";$("review_message").textContent="";for(const id of ["mAligned","mMismatch","mMissing","mReview"])$(id).textContent="0";
+}
+for(const id of ["paneA","paneB","paneC"]){$(id).addEventListener("input",()=>invalidate());$(id).addEventListener("change",()=>invalidate())}
+function syncReviewForm(){const r=rowsStore[Number($("review_row").value)];if(!r)return;for(const[k,id]of [["owner","review_owner"],["next_action","review_action"],["closure_evidence","review_evidence"],["note","review_note"],["review_state","review_state"]])$(id).value=r[k]|| (k==="review_state"?"open":"")}
+$("review_row").onchange=syncReviewForm;
+$("review_save").onclick=()=>{if(!last)return;const i=Number($("review_row").value),r=rowsStore[i];try{const next=RE.review(r,{owner:tr($("review_owner").value),next_action:tr($("review_action").value),closure_evidence:tr($("review_evidence").value),note:tr($("review_note").value),review_state:$("review_state").value});Object.assign(r,next);if(table){const found=table.getRows().find(x=>x.getData()._i===i);if(found)found.update({...r})}$("rows").innerHTML=plainRows(rowsStore);$("review_message").textContent="Review disposition saved locally. Export to retain it."}catch(e){$("review_message").textContent=e.message}};
+const matrixExample={source:{id:"fictional-source",description:"Fictional trade-name change",fields:{tradeName:"Exempla Flow X",basicUdiDi:"FIC-BASIC-001"},evidence:{id:"FIC-CHG-42",sourceName:"Fictional approved change",pageOrSection:"section 2"}},surfaces:[{id:"register",name:"Fictional register export"},{id:"ifu",name:"Fictional IFU"},{id:"sscp",name:"Fictional SS(C)P"},{id:"label",name:"Fictional label"}],scope:[{surfaceId:"register",field:"tradeName"},{surfaceId:"ifu",field:"tradeName"},{surfaceId:"sscp",field:"tradeName"},{surfaceId:"label",field:"tradeName"},{surfaceId:"register",field:"basicUdiDi"}],observations:[{surfaceId:"register",field:"tradeName",observed:"Exempla Flow X",evidence:"Fictional export row 1"},{surfaceId:"ifu",field:"tradeName",observed:"Exempla Flow",evidence:"Fictional IFU page 1"},{surfaceId:"label",field:"tradeName",observed:"Exempla Flow X",evidence:"Fictional artwork C"},{surfaceId:"register",field:"basicUdiDi",observed:"FIC-BASIC-001",evidence:"Fictional export row 1"}],owners:{ifu:"Document Control",sscp:"Regulatory Affairs"}};
+$("c_example").onclick=()=>{matrixRead++;invalidate();$("c_input").value=JSON.stringify(matrixExample,null,2);$("fictionalNote").hidden=false;$("c_message").textContent="Fictional sample loaded. Five declared checks: three aligned, one mismatch and one missing observation."};
+$("c_choose").onclick=()=>$("c_file").click();
+$("c_file").onchange=async e=>{const read=++matrixRead;invalidate();const f=e.target.files?.[0];e.target.value="";if(!f)return;try{if(f.size>5000000)throw new Error("Use a matrix JSON file smaller than 5 MB.");const contents=await f.text();if(read!==matrixRead)return;invalidate();$("c_input").value=contents;$("fictionalNote").hidden=true;$("c_message").textContent="File read locally. Compare to validate the matrix."}catch(err){$("c_message").textContent=err.message}};
+$("c_input").addEventListener("input",()=>{matrixRead++});
+$("c_run").onclick=async()=>{matrixRead++;invalidate();const epoch=runEpoch;try{if($("c_input").value.length>5000000)throw new Error("Use a matrix smaller than 5 MB.");const input=JSON.parse($("c_input").value),result=await RE.compare(input);if(epoch!==runEpoch)return;render("C",result.findings,{input_snapshot:result.input_snapshot,input_sha256:result.input_sha256,scope_policy:result.scope_policy});$("c_message").textContent=result.scope_policy}catch(e){if(epoch===runEpoch){$("c_message").textContent="Cannot compare: "+e.message;invalidate("Matrix validation failed. Correct the input and run again.")}}};
+
 // ---------- MODE A: single change ----------
 const A_DEFAULT=[["IFU","IFU-12","","Document Control"],["EUDAMED export","IFU-11","","Regulatory Affairs"],["SS(C)P","","",""],["Label / artwork","IFU-12","",""]];
 $("a_records").innerHTML=A_DEFAULT.map((d,j)=>{const i=j+1;return `<div class="record"><div class="record-head"><strong>Record ${i}</strong><label class="scope"><input id="as${i}" type="checkbox" aria-label="Record ${i} in scope" checked> in scope</label></div><div class="field"><label for="an${i}">Record / surface</label><input id="an${i}" value="${esc(d[0])}"></div><div class="field"><label for="av${i}">Observed value</label><input id="av${i}" value="${esc(d[1])}" placeholder="enter observation"></div><div class="field"><label for="ae${i}">Evidence reference</label><input id="ae${i}" value="${esc(d[2])}" placeholder="file, section, export date, ticket…"></div><div class="field"><label for="ao${i}">Owner if review is needed</label><input id="ao${i}" value="${esc(d[3])}" placeholder="role or team"></div></div>`}).join("");
 function aNorm(v,m){const s=tr(v);return m==="relaxed"?s.replace(/\s+/g," ").toLowerCase():m==="exact"?T(v):s}
 function aRun(){
- const field=tr($("a_field").value)||"Declared field",ref=tr($("a_ref").value),mode=$("a_mode").value,refev=tr($("a_refev").value)||null,change=tr($("a_change").value)||null;
- if(!ref){$("badge").textContent="REFERENCE NEEDED";$("badge").className="badge hold";$("resultTitle").textContent="Reference needed";$("summary").textContent="Choose an approved reference before interpreting downstream records.";return}
+ invalidate();
+ const field=tr($("a_field").value)||"Declared field",ref=T($("a_ref").value),mode=$("a_mode").value,refev=tr($("a_refev").value)||null,change=tr($("a_change").value)||null;
+ if(!tr(ref)){$("badge").textContent="REFERENCE NEEDED";$("badge").className="badge hold";$("resultTitle").textContent="Reference needed";$("summary").textContent="Choose an approved reference before interpreting downstream records.";return}
  const rn=aNorm(ref,mode),rows=[];
  for(let i=1;i<=4;i++){
-  const inScope=$(`as${i}`).checked,name=tr($(`an${i}`).value)||`Record ${i}`,obs=tr($(`av${i}`).value),ev=tr($(`ae${i}`).value)||null,owner=tr($(`ao${i}`).value)||null;
+  const inScope=$(`as${i}`).checked,name=tr($(`an${i}`).value)||`Record ${i}`,obs=T($(`av${i}`).value),ev=tr($(`ae${i}`).value)||null,owner=tr($(`ao${i}`).value)||null;
   let status,next;
   if(!inScope){status="not applicable";next="none"}
-  else if(!obs){status="missing evidence";next="Obtain an observation with an evidence reference before interpreting propagation."}
+  else if(!tr(obs)){status="missing evidence";next="Obtain an observation with an evidence reference before interpreting propagation."}
   else if(aNorm(obs,mode)===rn){status="aligned";next=ev?"none":"Attach or cite the observation evidence for the closure record."}
   else{status="mismatch signal";next="Reconcile against the approved reference and record the disposition through change control."}
   rows.push({object:name,field,expected:ref,observed:obs||null,status,evidence:ev,owner,next_action:next});
  }
  if(!refev)rows.push({object:$("a_reflabel").value||"Approved reference",field,expected:ref,observed:ref,status:"requires qualified review",evidence:null,owner:null,next_action:"Attach or cite evidence for the approved reference itself."});
- render("A",rows,{change_id:change,reference:{label:tr($("a_reflabel").value)||"Approved reference",value:ref,evidence_ref:refev},comparison_rule:mode});
+ if(!rows.some(r=>r.status!=="not applicable"&&r.status!=="requires qualified review")){invalidate("No downstream records are in scope. Declare at least one record before comparing.");return}
+ const snapshot={field,reference:{value:ref,evidence:refev,label:$("a_reflabel").value},change,rule:mode,records:rows.map(r=>({...r}))};
+ render("A",rows,{input_snapshot:snapshot,change_id:change,reference:{label:tr($("a_reflabel").value)||"Approved reference",value:ref,evidence_ref:refev},comparison_rule:mode});
 }
 $("a_run").onclick=()=>{$("fictionalNote").hidden=true;aRun()};
 $("a_example").onclick=()=>{$("a_field").value="IFU revision";$("a_ref").value="IFU-12";$("a_reflabel").value="Approved ECO";$("a_refev").value="ECO-2026-041 §3.2";$("a_change").value="CHG-2417";$("a_mode").value="trim";
  [["IFU","IFU-12","DMS/IFU-12.pdf rev 12","Document Control"],["EUDAMED export","IFU-11","Export 2026-09-14 row 188","Regulatory Affairs"],["SS(C)P","IFU-12","SSCP-v7 §1.1","Regulatory Affairs"],["Label / artwork","IFU-12","ART-8812 rev C","Artwork Control"]].forEach((v,j)=>{const i=j+1;$(`as${i}`).checked=true;$(`an${i}`).value=v[0];$(`av${i}`).value=v[1];$(`ae${i}`).value=v[2];$(`ao${i}`).value=v[3]});
  $("fictionalNote").hidden=false;aRun()};
-$("a_clear").onclick=()=>{for(let i=1;i<=4;i++){$(`av${i}`).value="";$(`ae${i}`).value="";$(`ao${i}`).value=""}$("a_refev").value="";$("fictionalNote").hidden=true};
+$("a_clear").onclick=()=>{invalidate("Observations cleared. Run again after entering evidence.");for(let i=1;i<=4;i++){$(`av${i}`).value="";$(`ae${i}`).value="";$(`ao${i}`).value=""}$("a_refev").value="";$("fictionalNote").hidden=true};
 // ---------- MODE B: portfolio scan (device/UDI reconciliation v1) ----------
 const OBJECTS=[["basic_udi_di","Basic UDI-DI"],["udi_di","UDI-DI"],["trade_name","Device trade name"],["model_ref","Model / catalogue no."],["risk_class","Risk class"],["manufacturer_srn","Manufacturer SRN"],["ar_srn","AR SRN"],["emdn","EMDN code"],["certificate_no","Certificate number"],["sscp_ref","SS(C)P reference"],["doc_version","Document version"],["language","Language"],["record_status","Record status"],["source_system","Source system"],["source_role","Source role (authoritative / observed)"],["evidence_ref","Evidence reference"],["evidence_date","Evidence date / as-of"],["owner","Accountable owner"]];
 const COMPARE_FIELDS=["trade_name","model_ref","risk_class","manufacturer_srn","ar_srn","emdn","certificate_no","sscp_ref","doc_version"];
@@ -322,29 +367,32 @@ function showMapping(){
  $("b_mapping").hidden=false;
  try{profRefresh()}catch(_){/*not yet defined*/}
 }
+$("b_input").addEventListener("input",()=>{portfolioRead++;bData=null;$("b_mapping").hidden=true});
 $("b_choose").onclick=()=>$("b_file").click();
 let bXW=null,bXName="";
 async function handleXlsx(f){
+ const read=++portfolioRead;invalidate();
  $("b_parseinfo").textContent="Parsing workbook locally…";$("b_mapping").hidden=false;$("b_maprows").innerHTML="";bData=null;
  try{
   const buf=await f.arrayBuffer();
-  bXW=await parseXLSX(buf);bXName=f.name;
+  const workbook=await parseXLSX(buf);if(read!==portfolioRead)return;bXW=workbook;bXName=f.name;
   const sel=$("b_sheet");sel.innerHTML=bXW.sheets.map((n,i)=>`<option value="${i}">${esc(n)}</option>`).join("");
   $("b_sheetwrap").hidden=bXW.sheets.length<2;
   await extractSheet(0);
- }catch(e){bXW=null;$("b_sheetwrap").hidden=true;$("b_parseinfo").textContent="Could not read this workbook: "+(e&&e.message?e.message:e)+" Nothing was uploaded; the file was only read locally. Exporting the sheet as CSV also works."}
+ }catch(e){if(read!==portfolioRead)return;bXW=null;$("b_sheetwrap").hidden=true;$("b_parseinfo").textContent="Could not read this workbook: "+(e&&e.message?e.message:e)+" Nothing was uploaded; the file was only read locally. Exporting the sheet as CSV also works."}
 }
 async function extractSheet(i){
- const r=await bXW.extract(i);
+ const read=++portfolioRead,workbook=bXW;bData=null;invalidate("Reading the selected worksheet. Wait before running the scan.");
+ let r;try{r=await workbook.extract(i)}catch(e){if(read===portfolioRead)$("b_parseinfo").textContent="Could not read worksheet: "+e.message;return}if(read!==portfolioRead)return;
  bData={headers:r.headers,rows:r.rows};
  showMapping();
  $("b_parseinfo").textContent=`Workbook "${bXName}", sheet "${bXW.sheets[i]}": ${r.rows.length} rows × ${r.headers.length} columns parsed locally.`+(r.formulas?` ${r.formulas} formula cell(s) use their cached values — formulas are never evaluated.`:"")+(r.datesConverted?` ${r.datesConverted} Excel date serial(s) in date-named columns converted to ISO dates.`:"")+" Nothing was uploaded. Map the columns that exist; mapping \"Source role\" lets the scan compare observed records against your declared authoritative source.";
 }
 $("b_sheet").addEventListener("change",async ev=>{if(bXW)await extractSheet(parseInt(ev.target.value,10)||0)});
-$("b_file").onchange=async ev=>{const f=ev.target.files?.[0];if(!f)return;ev.target.value="";
+$("b_file").onchange=async ev=>{const read=++portfolioRead;bData=null;invalidate();const f=ev.target.files?.[0];if(!f)return;ev.target.value="";
  if(/\.xlsx$/i.test(f.name)){await handleXlsx(f);return}
  if(/\.xls$/i.test(f.name)){$("b_parseinfo").textContent="Legacy .xls (BIFF) is not supported — save the sheet as .xlsx or CSV first.";$("b_mapping").hidden=false;$("b_maprows").innerHTML="";bData=null;return}
- bXW=null;$("b_sheetwrap").hidden=true;$("b_input").value=await f.text();$("b_parse").click()};
+ bXW=null;$("b_sheetwrap").hidden=true;const contents=await f.text();if(read!==portfolioRead)return;$("b_input").value=contents;$("b_parse").click()};
 // ---- minimal fail-closed XLSX reader: ZIP + DecompressionStream + DOMParser.
 // Reads cached cell values only; formulas are counted, never evaluated.
 // Guardrails: 60MB file, 400 zip entries, 90MB per entry / 150MB total expanded, 20k rows.
@@ -418,12 +466,13 @@ async function parseXLSX(buf){
     o[h]=v});return o});
   return{headers,rows:data,formulas,datesConverted}}
  return{sheets:sheets.map(x=>x.name),extract}}
-$("b_parse").onclick=()=>{bXW=null;$("b_sheetwrap").hidden=true;const r=parseInput($("b_input").value);if(!r||r.error){$("b_parseinfo").textContent=r?r.error:"Nothing to parse.";$("b_mapping").hidden=false;$("b_maprows").innerHTML="";bData=null;return}bData=r;showMapping()};
+$("b_parse").onclick=()=>{portfolioRead++;invalidate();bXW=null;$("b_sheetwrap").hidden=true;const r=parseInput($("b_input").value);if(!r||r.error){$("b_parseinfo").textContent=r?r.error:"Nothing to parse.";$("b_mapping").hidden=false;$("b_maprows").innerHTML="";bData=null;return}bData=r;showMapping()};
 function ident(v){return T(v).trim().replace(/^\(01\)\s*/,"").replace(/[^0-9A-Za-z]/g,"").toUpperCase()}
 function mod10ok(d){let s=0;for(let i=0;i<13;i++)s+=parseInt(d[i],10)*(i%2===0?3:1);return((10-(s%10))%10)===parseInt(d[13],10)}
 const CLASSVOCAB=new Set(["i","is","im","ir","iia","iib","iii","a","b","c","d"]);
 function normVal(id,v){if(id==="udi_di"||id==="basic_udi_di")return ident(v);if(id==="risk_class")return v.toLowerCase().replace(/\bclass\b|\bklasse\b|\s+/g,"");return v.normalize("NFKC").replace(/\s+/g," ").trim().toLowerCase()}
 function bRun(){
+ invalidate();
  if(!bData){$("b_parseinfo").textContent="Parse the data first.";return}
  const map={};for(const[id]of OBJECTS){const v=$(`map_${id}`)?.value;if(v)map[id]=v}
  const get=(r,id)=>map[id]?tr(r[map[id]]):null;
@@ -479,7 +528,7 @@ function bRun(){
  // duplicate UDI-DI within the same system/role
  if(map.udi_di){const seen={};bData.rows.forEach((r,i)=>{const d=ident(r[map.udi_di]);if(!d)return;const key=d+"|"+(get(r,"source_system")||"")+"|"+(roleOf(r)||"");(seen[key]=seen[key]||[]).push(i)});
   for(const[key,idx]of Object.entries(seen))if(idx.length>1){const d=key.split("|")[0];rows.push({object:`UDI-DI ${d}`,field:"Duplicate records",expected:"one record per UDI-DI per source",observed:`${idx.length} rows (${idx.map(i=>i+2).join(", ")})`,status:"conflicting evidence",evidence:null,owner:null,next_action:"Determine which record is current; merge or retire duplicates through change control."})}}
- render("B",rows,{row_count:bData.rows.length,mapped_objects:Object.keys(map)});
+ render("B",rows,{input_snapshot:{rows:bData.rows,mapping:map,worksheet:bXW?bXW.sheets[Number($("b_sheet").value)||0]:null},row_count:bData.rows.length,mapped_objects:Object.keys(map)});
  if(!rows.length){const badge=$("badge");badge.textContent="NOTHING COMPARED";badge.className="badge review";$("resultTitle").textContent="Nothing was compared";
   $("summary").textContent=!bData.rows.length?"The file has no data rows, so nothing was compared. This is not a result about your records.":"No comparisons could be made from the mapped columns (map Basic UDI-DI plus at least one field to compare, and check the file has values). This is not a result about your records.";
   $("queue").innerHTML='<li class="muted">Nothing was compared, so there is no queue.</li>';last=null}
@@ -493,7 +542,7 @@ function profRefresh(){const o=profRead();const sel=$("prof_list");const cur=sel
 function currentMap(){const m={};for(const[id]of OBJECTS){const v=$(`map_${id}`)?.value;if(v)m[id]=v}return m}
 $("prof_save").onclick=()=>{const n=tr($("prof_name").value);if(!n||!bData)return;const o=profRead();const now=new Date().toISOString();
  o[n]={name:n,schema_version:1,created:o[n]?.created||now,updated:now,source_system:n,map:currentMap()};profWrite(o);profRefresh();$("prof_list").value=n};
-$("prof_apply").onclick=()=>{const n=$("prof_list").value;if(!n||!bData)return;const p=profRead()[n];if(!p||!p.map)return;
+$("prof_apply").onclick=()=>{invalidate();const n=$("prof_list").value;if(!n||!bData)return;const p=profRead()[n];if(!p||!p.map)return;
  for(const[id]of OBJECTS){const el=$(`map_${id}`);if(!el)continue;const want=p.map[id]||"";el.value=bData.headers.includes(want)?want:""}};
 $("prof_delete").onclick=()=>{const n=$("prof_list").value;if(!n)return;const o=profRead();delete o[n];profWrite(o);profRefresh()};
 $("prof_export").onclick=()=>{dl("clinicops-mapping-profiles.json",JSON.stringify({tool:"clinicops-regulatory-integrity-scanner",kind:"mapping-profiles",schema_version:1,exported_at:new Date().toISOString(),profiles:profRead()},null,2)+"\n","application/json")};
