@@ -163,6 +163,20 @@ def _prefix(page: Path) -> str:
     return "" if relative == "." else f"{relative}/"
 
 
+def _nav_href(prefix: str, href: str) -> str:
+    """Extensionless visitor-facing href for a NAV_ITEMS target.
+
+    The site root (index.html) is special-cased: GitHub Pages already serves
+    a directory path's index.html implicitly, so the prefix itself (e.g.
+    "../", or "/" when the page lives at the docs root) already resolves to
+    it. Every other target is a flat file, so dropping ".html" is enough —
+    GitHub Pages serves the extensionless path and the .html file identically.
+    """
+    if href == "index.html":
+        return prefix or "/"
+    return f"{prefix}{href[: -len('.html')]}"
+
+
 def _current_section(relative: str) -> str | None:
     if relative not in SECTION_BY_PAGE:
         raise ValueError(f"{relative}: add page to SECTION_BY_PAGE in harmonize_public_shell.py")
@@ -177,11 +191,11 @@ def _header(page: Path) -> str:
     assert current is None or current in {label for label, _ in NAV_ITEMS}
     for label, href in NAV_ITEMS:
         active = ' aria-current="page"' if label == current else ""
-        links.append(f'<a href="{prefix}{href}"{active}>{label}</a>')
+        links.append(f'<a href="{_nav_href(prefix, href)}"{active}>{label}</a>')
     nav = "".join(links)
     return (
         f'<header class="site"><div class="site-inner">'
-        f'<a class="brand" href="{prefix}index.html">Clinic<span>Ops</span></a>'
+        f'<a class="brand" href="{_nav_href(prefix, "index.html")}">Clinic<span>Ops</span></a>'
         f'<nav class="primary" aria-label="Primary">{nav}</nav>'
         f"</div></header>"
         f"{NAV_SCROLL_SCRIPT}"
@@ -252,7 +266,7 @@ def main() -> None:
                 page.write_text(transformed, encoding="utf-8")
         if relative not in EXCLUDED:
             for _, href in NAV_ITEMS:
-                expected = f'href="{_prefix(page)}{href}"'
+                expected = f'href="{_nav_href(_prefix(page), href)}"'
                 if expected not in transformed:
                     raise SystemExit(f"{relative}: missing harmonized nav target {href}")
 

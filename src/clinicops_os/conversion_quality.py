@@ -20,9 +20,9 @@ REQUIREMENTS = (
     ConversionRequirement(
         "index.html",
         (
-            "assessment-intake.html",
+            "assessment-intake",
             "transition-map-sample/",
-            "assessment-intake.html?workstream=integrity-review",
+            "assessment-intake?workstream=integrity-review",
             "specimen-register/",
         ),
     ),
@@ -31,38 +31,38 @@ REQUIREMENTS = (
         (
             "transition-map-sample/",
             "specimen-register/",
-            "assessment-intake.html?workstream=integrity-review",
+            "assessment-intake?workstream=integrity-review",
         ),
     ),
     ConversionRequirement(
         "integrity-gate.html",
-        ("specimen-register/", "assessment-intake.html?workstream=integrity-review"),
+        ("specimen-register/", "assessment-intake?workstream=integrity-review"),
     ),
     ConversionRequirement(
         "eu-mdr-regulatory-integrity.html",
-        ("specimen-register/", "assessment-intake.html?workstream=integrity-review"),
+        ("specimen-register/", "assessment-intake?workstream=integrity-review"),
     ),
     ConversionRequirement(
         "assessment-intake.html",
-        ("transition-map-sample/", "readiness-score.html", "specimen-register/"),
+        ("transition-map-sample/", "readiness-score", "specimen-register/"),
     ),
     ConversionRequirement(
         "readiness-score.html",
-        ("assessment-intake.html",),
+        ("assessment-intake",),
     ),
     ConversionRequirement(
         "class-iii-transition.html",
-        ("assessment-intake.html", "transition-map-sample/"),
+        ("assessment-intake", "transition-map-sample/"),
     ),
     ConversionRequirement(
         "transition-map-sample/index.html",
-        ("/assessment-intake.html",),
+        ("/assessment-intake",),
     ),
     ConversionRequirement(
         "specimen-register/index.html",
         (
             "ClinicOps_Regulatory_Integrity_Specimen_Register_v1.5.pdf",
-            "../assessment-intake.html?workstream=integrity-review",
+            "../assessment-intake?workstream=integrity-review",
         ),
     ),
 )

@@ -123,7 +123,7 @@ jobs:
           /tmp/clinicops-browser/node_modules/.bin/playwright install --with-deps chromium
       - name: Verify scanner and reconciliation journeys against this exact source
         run: |
-          python3 -m http.server 8103 --directory docs >/tmp/clinicops-http.log 2>&1 &
+          python3 scripts/serve_docs_like_pages.py docs 8103 >/tmp/clinicops-http.log 2>&1 &
           server_pid=$!
           trap 'kill "$server_pid"' EXIT
           for attempt in 1 2 3 4 5; do curl -fsS http://localhost:8103/integrity-scanner.html >/dev/null && break || sleep 1; done

@@ -41,7 +41,7 @@ def test_homepage_states_the_category_and_flagship() -> None:
     html = (DOCS / "index.html").read_text(encoding="utf-8")
     assert "EU MedTech Regulatory Data Integrity" in html
     assert "Regulatory Change Integrity Review" in html
-    assert 'href="integrity-scanner.html"' in html
+    assert 'href="integrity-scanner"' in html
     plain = "You changed something about a device. ClinicOps checks whether that change reached every regulatory record"
     assert plain in html
     assert html.index(plain) < html.index("Approved source")
@@ -157,6 +157,6 @@ def test_solution_page_is_flagship_first() -> None:
 
 def test_use_cases_hub_routes_to_products() -> None:
     html = (DOCS / "use-cases.html").read_text(encoding="utf-8")
-    assert "services.html#change-review" in html or "services.html#portfolio-scan" in html
-    for page in ("eudamed-transition.html", "sscp-operations.html", "class-iii-transition.html", "denmark-market-access.html"):
+    assert "services#change-review" in html or "services#portfolio-scan" in html
+    for page in ("eudamed-transition", "sscp-operations", "class-iii-transition", "denmark-market-access"):
         assert page in html

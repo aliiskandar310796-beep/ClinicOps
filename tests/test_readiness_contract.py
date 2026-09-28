@@ -16,4 +16,4 @@ def test_readiness_page_is_local_and_actionable() -> None:
 
 def test_readiness_page_links_back_to_identifier_check() -> None:
     text = PAGE.read_text(encoding="utf-8")
-    assert 'href="index.html"' in text
+    assert 'href="/"' in text

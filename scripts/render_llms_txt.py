@@ -55,6 +55,17 @@ def _local_path(url: str) -> Path:
     relative = url[len(BASE):]
     if relative == "" or relative.endswith("/"):
         relative += "index.html"
+    else:
+        candidate = DOCS / relative
+        if not candidate.suffix and not candidate.is_file():
+            # Extensionless canonical URL (e.g. /services); the real file on
+            # disk is still services.html — GitHub Pages serves both forms.
+            # is_file() (not exists()) matters: a stem can collide with an
+            # unrelated directory of the same name (e.g. /research vs. the
+            # docs/research/ subpage hub).
+            html_variant = candidate.with_suffix(".html")
+            if html_variant.is_file():
+                relative += ".html"
     return DOCS / relative
 
 

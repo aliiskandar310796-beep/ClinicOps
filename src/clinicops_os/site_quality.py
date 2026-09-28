@@ -210,6 +210,17 @@ def url_to_docs_path(docs_root: Path, url: str) -> Path:
         relative = Path(path.lstrip("/")) / "index.html"
     else:
         relative = Path(path.lstrip("/"))
+        # Extensionless canonical URLs (e.g. /services) map to the real
+        # on-disk .html file; GitHub Pages already serves both forms
+        # identically, so this is purely a lookup fallback, never a rename.
+        # Checked against is_file() rather than exists(): a name can collide
+        # with an unrelated directory of the same stem (e.g. /research vs.
+        # the docs/research/ subpage hub), and the .html file is what a bare,
+        # non-trailing-slash URL actually resolves to.
+        if not relative.suffix and not (docs_root / relative).is_file():
+            html_variant = relative.with_suffix(".html")
+            if (docs_root / html_variant).is_file():
+                relative = html_variant
 
     resolved_root = docs_root.resolve()
     target = (docs_root / relative).resolve()

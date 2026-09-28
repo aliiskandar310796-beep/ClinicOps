@@ -44,6 +44,6 @@ def test_missing_required_conversion_link_is_reported(tmp_path: Path) -> None:
     )
     assert (
         "transition-map-sample/index.html: missing high-intent path to "
-        "/assessment-intake.html"
+        "/assessment-intake"
         in errors
     )

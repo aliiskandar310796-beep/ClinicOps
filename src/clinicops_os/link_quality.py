@@ -50,6 +50,15 @@ def _local_target(page: Path, docs_root: Path, href: str) -> Path | None:
         candidate = base / relative
         if path.endswith("/"):
             candidate = candidate / "index.html"
+        elif not candidate.suffix and not candidate.is_file():
+            # Extensionless link (e.g. href="/services") resolving to the
+            # real .html file; GitHub Pages serves both forms identically.
+            # is_file() (not exists()) matters here: a stem can collide with
+            # an unrelated directory of the same name (e.g. /research vs.
+            # the docs/research/ subpage hub).
+            html_variant = candidate.with_suffix(".html")
+            if html_variant.is_file():
+                candidate = html_variant
 
     root = docs_root.resolve()
     resolved = candidate.resolve()
@@ -143,7 +152,7 @@ def validate_workstream_routes(docs_root: Path) -> list[str]:
                 f"assessment-intake.html: preset {slug!r} maps to missing option "
                 f"{option_text!r}"
             )
-    pattern = re.compile(r'assessment-intake\.html\?workstream=([a-z0-9-]+)')
+    pattern = re.compile(r'assessment-intake(?:\.html)?\?workstream=([a-z0-9-]+)')
     for page in sorted(docs_root.rglob("*.html")):
         html = page.read_text(encoding="utf-8")
         for href in extract_links(html):

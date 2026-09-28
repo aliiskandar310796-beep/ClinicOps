@@ -20,8 +20,8 @@ REQUIRED_MARKERS = (
     'labops',
     '"clinic-ops"',
     '"medical-content"',
-    'evidence-change-control-pack.html',
-    'assessment-intake.html',
+    'evidence-change-control-pack',
+    'assessment-intake',
     'Nothing has been sent or uploaded.',
 )
 
