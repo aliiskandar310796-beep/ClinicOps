@@ -4,7 +4,7 @@ import AxeBuilder from "@axe-core/playwright";
 const BASE = (process.env.E2E_BASE_URL || "http://localhost:8103").replace(/\/$/, "");
 const PAGES = [
   "/", "/services.html", "/integrity-scanner.html", "/tools.html",
-  "/evidence-change-control-pack.html", "/about.html", "/contact.html",
+  "/regulatory-change-integrity-review.html", "/about.html", "/contact.html",
   "/assessment-intake.html?workstream=integrity-review", "/privacy-notice/",
 ];
 const VIEWPORTS = [
