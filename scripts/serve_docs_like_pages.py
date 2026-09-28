@@ -30,7 +30,7 @@ from urllib.parse import unquote, urlsplit
 
 
 class CleanUrlRequestHandler(http.server.SimpleHTTPRequestHandler):
-    def translate_path(self, path: str) -> str:  # noqa: D102 (stdlib override)
+    def translate_path(self, path: str) -> str:
         raw = unquote(urlsplit(path).path)
         last_segment = raw.rsplit("/", 1)[-1]
         if raw and not raw.endswith("/") and "." not in last_segment:
