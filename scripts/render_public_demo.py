@@ -22,13 +22,17 @@ DESCRIPTION = (
 FORBIDDEN_PLACEHOLDER_DOMAINS = ("example.com", "example.org", "example.net", "test.invalid")
 
 # Shared public shell: same stylesheet, fonts and navigation as every other docs/ page.
+# Font files and theme-color values must stay identical to the sitewide values in
+# docs/site.css's own :root tokens -- this page is Python-generated rather than
+# static HTML, so it doesn't get the sitewide sed/harmonize passes automatically
+# and has to be kept in sync here by hand.
 SHELL_HEAD = (
-    '<link rel="preload" href="../assets/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>'
-    '<link rel="preload" href="../assets/fonts/geist-mono-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>'
+    '<link rel="preload" href="../assets/fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>'
+    '<link rel="preload" href="../assets/fonts/ibm-plex-mono-latin-400.woff2" as="font" type="font/woff2" crossorigin>'
     '<link rel="stylesheet" href="../site.css">\n'
     '<meta name="color-scheme" content="light dark">'
-    '<meta name="theme-color" content="#f6f7f5" media="(prefers-color-scheme: light)">'
-    '<meta name="theme-color" content="#0d1211" media="(prefers-color-scheme: dark)">'
+    '<meta name="theme-color" content="#f7f5f0" media="(prefers-color-scheme: light)">'
+    '<meta name="theme-color" content="#16130f" media="(prefers-color-scheme: dark)">'
 )
 SHELL_HEADER = (
     '<a class="skip-link" href="#main">Skip to content</a>'
@@ -62,13 +66,13 @@ def render_public_demo() -> str:
     metadata = f'''<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <link rel="canonical" href="{CANONICAL}">
 <meta name="description" content="{DESCRIPTION}">
-<meta property="og:title" content="Class III Transition Map Sample | ClinicOps">
+<meta property="og:title" content="{TITLE}">
 <meta property="og:description" content="{DESCRIPTION}">
 <meta property="og:type" content="website">
 <meta property="og:url" content="{CANONICAL}">
 <meta property="og:site_name" content="ClinicOps">
 <meta property="og:image" content="https://clinicops.dk/assets/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://clinicops.dk/assets/og-image.png">
-<script type="application/ld+json">{{"@context":"https://schema.org","@type":"WebPage","name":"Class III Transition Map Sample | ClinicOps","description":"{DESCRIPTION}","url":"{CANONICAL}","isPartOf":{{"@type":"WebSite","name":"ClinicOps","url":"https://clinicops.dk/"}},"publisher":{{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}}}</script>
+<script type="application/ld+json">{{"@context":"https://schema.org","@type":"WebPage","name":"{TITLE}","description":"{DESCRIPTION}","url":"{CANONICAL}","isPartOf":{{"@type":"WebSite","name":"ClinicOps","url":"https://clinicops.dk/"}},"publisher":{{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}}}</script>
 '''
     html = html.replace("<style>", metadata + "<style>", 1)
     html = html.replace("</style>\n</head>", "</style>\n" + SHELL_HEAD + "</head>", 1)

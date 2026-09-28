@@ -128,6 +128,22 @@ def validate_page_metadata(html: str, expected_url: str) -> list[str]:
     if parser.meta.get("twitter:card") not in {"summary", "summary_large_image"}:
         errors.append("twitter:card must be 'summary' or 'summary_large_image'")
 
+    # <title> and the meta description are the single source of truth for a
+    # page's identity and summary; og:title/og:description only restate them
+    # for link previews. Historically those restatements were hand-edited
+    # independently and drifted out of sync -- that let a retired claim
+    # ("500+ assignments, 100% on time") survive in one copy after being
+    # removed from the others. This gate, plus the auto-sync in
+    # harmonize_public_shell.py, makes that drift structurally impossible.
+    og_title = parser.meta.get("og:title")
+    if og_title is not None and og_title != parser.title:
+        errors.append("og:title must match <title> (run harmonize_public_shell.py)")
+    og_description = parser.meta.get("og:description")
+    if og_description is not None and og_description != parser.meta.get("description"):
+        errors.append(
+            "og:description must match the meta description (run harmonize_public_shell.py)"
+        )
+
     if not parser.json_ld_blocks:
         errors.append("missing application/ld+json structured data")
         return errors
@@ -149,6 +165,18 @@ def validate_page_metadata(html: str, expected_url: str) -> list[str]:
     ]
     if not any(item.get("url") == expected_url for item in web_pages):
         errors.append("WebPage structured data URL must match canonical")
+    for item in web_pages:
+        name = item.get("name")
+        if name is not None and name != parser.title:
+            errors.append(
+                "WebPage JSON-LD name must match <title> (run harmonize_public_shell.py)"
+            )
+        json_ld_description = item.get("description")
+        if json_ld_description is not None and json_ld_description != parser.meta.get("description"):
+            errors.append(
+                "WebPage JSON-LD description must match the meta description "
+                "(run harmonize_public_shell.py)"
+            )
 
     if expected_url == "https://clinicops.dk/":
         if "Organization" not in types:

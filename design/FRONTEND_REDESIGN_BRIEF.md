@@ -1,8 +1,48 @@
 # ClinicOps frontend redesign brief ("ledger")
 
-Status: ACTIVE for the 2026-09 redesign. Tokens remain canonical in `DESIGN_TOKENS.md`; this file names the composition rules.
+Status: SUPERSEDED 2026-09-28 by the "Clinical Ledger" full renovation (below). Kept as a dated
+record rather than deleted — the structural rules in "Language" and "Composition vocabulary"
+below are still accurate (hairline structure, tokens-only styling, no boxes/shadows/gradients);
+only the palette, type family and the "no visible-copy changes" non-negotiable changed. Current
+tokens are canonical in `DESIGN_TOKENS.md`; `docs/site.css`'s own header comment names the
+design-language version actually shipped.
 
-## Design read
+## 2026-09-28 update: Clinical Ledger full renovation
+
+Ali's request ("get rid of the generic AI looking form... colour palette choice which clearly
+shows its made in claude... completely renovated") could not be done within this brief's original
+non-negotiables 1 and 2 below (no visible-copy changes, no `site.css` edits) — those non-
+negotiables were written one day earlier for a narrower structural-harmonization pass, not a
+palette/typography/copy renovation. Given the explicit choice to override them ("Full
+renovation"), what changed:
+
+- Palette and type: teal accent / near-white-near-black neutrals / Geist sans+mono → the warm
+  paper/ink "Clinical Ledger" palette with Fraunces (display), Public Sans (body) and IBM Plex
+  Mono (data), all still self-hosted, still token-driven, still light+dark from `prefers-color-
+  scheme`. See `DESIGN_TOKENS.md` for the values.
+- `docs/site.css` was edited directly (font-face blocks, both `:root` token blocks, and a few
+  redundant CSS patterns identified as reading as templated/AI-generated — see its own header
+  comment and git history for the diff), which non-negotiable 2 below had forbidden.
+- Visible copy was rewritten on the two flagship pages (`index.html`, `about.html`) for
+  storytelling and concreteness, which non-negotiable 1 below had forbidden — but every string
+  locked by an existing regression test (`tests/test_positioning_contract.py`,
+  `tests/test_professional_claims_contract.py` — exact required wording, degree titles, claim
+  text) was preserved verbatim; new material was written into unlocked prose around those
+  strings rather than replacing them. Non-negotiables 3–6 (generated header/nav, meta/JSON-LD/
+  claim-comment integrity, and the validator + visual-regression checklist) still apply
+  unchanged and were run before every commit.
+- Separately, the meta-tag copy-paste drift that produced the original "500+ assignments, 100%
+  on time" incident (the same claim independently hand-edited in `<title>`/meta description/
+  og:description/JSON-LD, with copies silently falling out of sync) now has a structural fix:
+  `scripts/harmonize_public_shell.py` auto-syncs the derived fields from `<title>`/meta
+  description, and `validate_page_metadata` (`src/clinicops_os/site_quality.py`) hard-fails CI
+  if they drift again — see that script and module for detail rather than duplicating it here.
+- Remaining ~28 non-flagship pages: not yet given the same storytelling pass. Palette/
+  typography/pattern fixes reach them automatically via the shared `site.css` and harmonizer;
+  copy is unchanged pending a decision on whether "full renovation" extends the flagship-page
+  treatment sitewide or stops here.
+
+## Design read (original, 2026-09-27)
 
 Redesign, visual overhaul with information architecture, URLs and copy preserved. Audience: RA/QA leads and regulatory operations at EU medical-device manufacturers and authorised representatives. Trust-first, technical, Nordic. Dials: DESIGN_VARIANCE 4, MOTION_INTENSITY 3, VISUAL_DENSITY 5.
 

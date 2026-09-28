@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import json
 import os
 import re
 from pathlib import Path
@@ -33,6 +34,75 @@ FOOTER_BOUNDARY_TEXT = (
 )
 FOOTER_RE = re.compile(r"<footer\b[^>]*>.*?</footer>", re.IGNORECASE | re.DOTALL)
 FOOTER_CLOSE_RE = re.compile(r"</footer>", re.IGNORECASE)
+
+# A page's <title> and meta description are the single source of truth for
+# its identity and summary. og:title, og:description and the WebPage
+# JSON-LD name/description exist only to restate them for crawlers and link
+# previews, but because each copy has historically been hand-edited
+# independently, they drift: a retired claim (or any other wording fix) can
+# be removed from one copy and survive untouched in the other three. This is
+# the exact failure mode that let "500+ assignments / 100% on time" outlive
+# its own removal from visible page copy. Syncing the derived copies here,
+# on every harmonize run, makes that class of drift structurally impossible
+# instead of relying on someone remembering to grep for it.
+TITLE_TAG_RE = re.compile(r"(<title>)(.*?)(</title>)", re.DOTALL)
+META_DESCRIPTION_RE = re.compile(r'(<meta name="description" content=")(.*?)(">)')
+OG_TITLE_RE = re.compile(r'(<meta property="og:title" content=")(.*?)(">)')
+OG_DESCRIPTION_RE = re.compile(r'(<meta property="og:description" content=")(.*?)(">)')
+JSON_LD_RE = re.compile(r'(<script type="application/ld\+json">)(.*?)(</script>)', re.DOTALL)
+
+
+def _sync_json_ld_block(block: str, title: str, description: str) -> str:
+    try:
+        data = json.loads(block)
+    except json.JSONDecodeError:
+        return block
+    graph = data.get("@graph") if isinstance(data, dict) else None
+    candidates = graph if isinstance(graph, list) else [data]
+    changed = False
+    for obj in candidates:
+        if not isinstance(obj, dict) or obj.get("@type") != "WebPage":
+            continue
+        if "name" in obj and obj["name"] != title:
+            obj["name"] = title
+            changed = True
+        if "description" in obj and obj["description"] != description:
+            obj["description"] = description
+            changed = True
+    if not changed:
+        return block
+    return json.dumps(data, ensure_ascii=False, separators=(",", ":"))
+
+
+def sync_meta_consistency(text: str) -> str:
+    """Only touches fields that already exist; never invents a new og:title,
+    og:description or JSON-LD field. That keeps this additive-only, like
+    _ensure_footer_boundary, and out of the business of deciding what a page
+    should say -- only whether its existing restatements agree."""
+    title_match = TITLE_TAG_RE.search(text)
+    description_match = META_DESCRIPTION_RE.search(text)
+    if not title_match or not description_match:
+        return text
+    title = title_match.group(2)
+    description = description_match.group(2)
+
+    def _sync_attr(pattern: re.Pattern[str], value: str) -> None:
+        nonlocal text
+        match = pattern.search(text)
+        if match and match.group(2) != value:
+            text = pattern.sub(
+                lambda m: m.group(1) + value + m.group(3), text, count=1
+            )
+
+    _sync_attr(OG_TITLE_RE, title)
+    _sync_attr(OG_DESCRIPTION_RE, description)
+
+    def _replace_json_ld(match: re.Match[str]) -> str:
+        return match.group(1) + _sync_json_ld_block(match.group(2), title, description) + match.group(3)
+
+    text = JSON_LD_RE.sub(_replace_json_ld, text)
+    return text
+
 
 NAV_ITEMS = (
     ("Home", "index.html"),
@@ -137,6 +207,7 @@ def _ensure_footer_boundary(text: str) -> str:
 
 def transform(page: Path, text: str) -> str:
     relative = page.relative_to(DOCS).as_posix()
+    text = sync_meta_consistency(text)
     if relative in EXCLUDED:
         return _ensure_footer_boundary(text)
     if not HEADER_RE.search(text):
