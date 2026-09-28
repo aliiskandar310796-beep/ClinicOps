@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 from pathlib import Path
-from urllib.parse import urlparse
 from xml.etree import ElementTree
+
+from clinicops_os.site_quality import url_to_docs_path
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
@@ -21,19 +22,30 @@ TRACKING_RUNTIME_TOKENS = (
 )
 
 
-def _public_html_files() -> list[Path]:
+def _sitemap_urls() -> list[str]:
     root = ElementTree.fromstring(SITEMAP.read_text(encoding="utf-8"))
     namespace = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
-    files: list[Path] = []
-    for loc in root.findall("sm:url/sm:loc", namespace):
-        path = urlparse(loc.text or "").path
-        if path == "/":
-            files.append(DOCS / "index.html")
-        elif path.endswith("/"):
-            files.append(DOCS / path.strip("/") / "index.html")
-        elif path.endswith(".html"):
-            files.append(DOCS / path.lstrip("/"))
+    return [loc.text or "" for loc in root.findall("sm:url/sm:loc", namespace)]
+
+
+def _public_html_files() -> list[Path]:
+    # Resolve through the same mapper the site validator uses, so the URL
+    # form in the sitemap (.html, trailing slash, or extensionless since the
+    # 2026-09-28 clean-URL change) can never silently shrink the set of pages
+    # these contracts cover. The count assertion below is the guard against a
+    # repeat: after the extensionless change this helper quietly dropped to
+    # 6 of 38 pages and the no-tracking contract stopped checking the others.
+    urls = _sitemap_urls()
+    files = [url_to_docs_path(DOCS, url) for url in urls]
+    assert len(files) == len(urls)
+    assert all(path.is_file() for path in files), [str(p) for p in files if not p.is_file()]
     return files
+
+
+def test_public_surface_helper_covers_every_sitemap_url() -> None:
+    urls = _sitemap_urls()
+    assert len(urls) >= 30
+    assert len(_public_html_files()) == len(urls)
 
 
 def test_privacy_notice_is_part_of_the_public_surface() -> None:

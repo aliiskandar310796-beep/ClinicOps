@@ -30,7 +30,7 @@ class Result:
 # the page's identity actually changed.
 TARGETS = (
     Target("/", 200, "<title>ClinicOps | "),
-    Target("/services", 200, "<title>Solution | ClinicOps</title>"),
+    Target("/services", 200, "<title>Solution: Regulatory Change Integrity Review | ClinicOps</title>"),
     Target(
         "/denmark-market-access",
         200,
@@ -46,7 +46,7 @@ TARGETS = (
         200,
         "<title>Scope a ClinicOps Review | ClinicOps</title>",
     ),
-    Target("/tools", 200, "<title>Tools & Evidence | ClinicOps</title>"),
+    Target("/tools", 200, "<title>Tools: Integrity Scanner and Evidence Utilities | ClinicOps</title>"),
     Target(
         "/identifier-check",
         200,
@@ -126,7 +126,7 @@ TARGETS = (
     Target(
         "/use-cases",
         200,
-        "<title>Use Cases | ClinicOps</title>",
+        "<title>Use Cases: EUDAMED, SS(C)P, AR Portfolios, Denmark | ClinicOps</title>",
     ),
     Target(
         "/integrity-check",
