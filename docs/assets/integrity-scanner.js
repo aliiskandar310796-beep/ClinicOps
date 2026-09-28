@@ -231,7 +231,11 @@ async function parseXLSX(buf){
   if(out.byteLength>90*1024*1024)throw new Error("Workbook entry expands beyond guardrail.");
   return td.decode(out)}
  const dp=new DOMParser();
- const parseXml=(x,what)=>{const d=dp.parseFromString(x,"application/xml");if(d.getElementsByTagName("parsererror").length)throw new Error("Malformed XML in "+what+".");return d};
+ // Workbook parts are parsed as inert XML (never text/html, never rendered); every value read out of
+ // them is escaped before it reaches innerHTML. OOXML parts carry no DOCTYPE, so any DOCTYPE/ENTITY
+ // declaration is rejected up front: browsers do not fetch external entities, but internal entity
+ // expansion ("billion laughs") can still hang the tab on a browser-local tool.
+ const parseXml=(x,what)=>{if(/<!(?:DOCTYPE|ENTITY)/i.test(x))throw new Error("Unexpected DOCTYPE/ENTITY declaration in "+what+" — not an OOXML part.");const d=dp.parseFromString(x,"application/xml");if(d.getElementsByTagName("parsererror").length)throw new Error("Malformed XML in "+what+".");return d};
  const wbXml=await readEntry("xl/workbook.xml");if(!wbXml)throw new Error("No xl/workbook.xml — not an Excel workbook.");
  const wb=parseXml(wbXml,"workbook");
  const rels={};const relsXml=await readEntry("xl/_rels/workbook.xml.rels");
