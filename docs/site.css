@@ -32,7 +32,7 @@
   --accent-contrast:#ffffff;
   --accent-soft:#e7e8f2;
   --secondary:#b5502a;
-  --warn:#a6741a;
+  --warn:#8c6015; /* >=4.5:1 on --bg and --surface (axe color-contrast, qa gate) -- do not lighten */
   --ok:#2f6d4f;
   --hold:#b23a2e;
   --shadow:none;
