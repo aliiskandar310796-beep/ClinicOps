@@ -18,7 +18,7 @@ HEADER_RE = re.compile(
 )
 HEAD_CLOSE_RE = re.compile(r"</head>", re.IGNORECASE)
 SITE_CSS_RE = re.compile(r"href=[\"'][^\"']*site\.css[\"']", re.IGNORECASE)
-EXCLUDED = {"404.html", "clinical-operations.html"}
+EXCLUDED = {"404.html", "clinical-operations.html", "evidence-change-control-pack.html", "what-a-pilot-looks-like.html"}
 
 # Company-level scope/liability boundary. Every tool page already carries its
 # own method-specific "what this tool is and isn't" callout (a different,
@@ -120,7 +120,7 @@ SECTION_BY_PAGE = {
     "index.html": "Home",
     "services.html": "Solution",
     "assessment-intake.html": "Solution",
-    "evidence-change-control-pack.html": "Solution",
+    "regulatory-change-integrity-review.html": "Solution",
     "what-a-pilot-looks-like.html": "Solution",
     "evidence-pack-checklist.html": "Solution",
     "integrity-gate.html": "Solution",
