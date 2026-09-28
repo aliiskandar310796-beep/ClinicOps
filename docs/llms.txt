@@ -33,6 +33,9 @@ Research and primary sources:
 - The published SS(C)P and the public EUDAMED record — what a reader can and cannot reconcile | ClinicOps: https://clinicops.dk/research/sscp-public-record-scan/ - Public-source scan, September 2026: what a published SS(C)P and the public EUDAMED record can and cannot reconcile — identifiers, revisions, legacy DIs and pack records.
 
 
+Policies:
+- Privacy Notice | ClinicOps: https://clinicops.dk/privacy-notice/ - How ClinicOps processes personal data: website, email enquiries, client engagements, and business-development outreach, including your right to object.
+
 Operating boundaries:
 - ClinicOps structures evidence, reconciliation and operational change; it does not turn machine findings into legal, regulatory, clinical, safety, quality or compliance determinations.
 - Missing public records or links do not by themselves establish non-compliance.
