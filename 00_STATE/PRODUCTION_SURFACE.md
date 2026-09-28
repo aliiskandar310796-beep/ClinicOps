@@ -1,40 +1,50 @@
 # Production Surface
 
-> Migrated verbatim from the pre-2026-09-23 `AGENT_STATE.md` monolith as part of the connectome-lens shard proposal (draft, not yet reconciled against live `main`). Content below this line is unedited from the original section.
+Status: CURRENT as of 2026-09-28. This file records operating invariants; generated artifacts remain the source of truth for transient counts.
 
 ## Public production surface
 
 `clinicops.dk` is served from `docs/**` via GitHub Pages. GoDaddy is DNS only. HTTPS is enforced.
 
-The deterministic sitemap is the canonical list of production URLs — **derive it, do not hard-code it here** (this file previously said 16 while production had 29; transient counts belong in generated artifacts, not shared state). Source of truth: `docs/sitemap.xml`, generated and checked by `scripts/render_sitemap.py --check` (29 URLs as of 2026-09-17). The public surface spans the umbrella home, the three lanes (Denmark market access, MedTech/regulatory, clinical operations), the specialist service pages, tools, research, specimens, expert network, about/contact and privacy.
+Current production before this indexing release: `4059bdaae1721eb3517b095064b636fd818db917`, with CI, Integrity Gate, CodeQL and Pages deployment green.
 
-Do not mass-produce thin SEO pages while current production pages are still being discovered.
+Public identity is deliberately narrow:
+
+- **ClinicOps — EU MedTech Regulatory Data Integrity**
+- flagship: **Regulatory Change Integrity Review**
+- low-friction entry: **Portfolio Integrity Scan**
+- recurring extension: monitoring only where repeated real drift warrants it
+- secondary specialist capabilities: Denmark market access / Danish localisation and Danish pharmacovigilance
+
+Broad clinical-operations lanes remain archived.
 
 ### Browser-local acquisition path
 
-Current low-infrastructure path:
+`public site / research / free tool / specimen → browser-local scope brief → user's email client → controlled private scope/intake`
 
-`public site / free tool / sanitized sample → browser-local assessment brief → user's email client → controlled private scope/intake`
-
-`docs/assessment-intake.html` has no backend form action, analytics, tracking, `fetch`, XHR, `sendBeacon` or WebSocket submission. User input stays local until the user explicitly creates an email draft to `info@clinicops.dk`. The page warns against patient-identifiable data.
-
-The Readiness Score → assessment handoff uses one-shot tab-scoped `sessionStorage` containing score/band/gaps/timestamp only; no company/customer data.
-
-Keep the EUDAMED Identifier Check and Transition Readiness Score free.
+No first-party analytics or tracking runtime is introduced by default. Browser-local tools remain local unless a page explicitly states otherwise.
 
 ## Search / indexing
 
-Production canonical sitemap:
+Canonical sitemap:
 
 `https://clinicops.dk/sitemap.xml`
 
-Fresh GSC verification on 2026-09-13 confirms the Search Console property `https://clinicops.dk/` exists and is connected. The obsolete submitted sitemap `https://clinicops.dk/sitemap.website.xml` reports 7 submitted URLs, 0 indexed URLs, 1 warning and 1 error.
+This release intentionally reduces the sitemap from 38 discoverable URLs to **22 canonical index targets**. Support utilities, privacy/intake pages, specimens and legacy URLs remain accessible but carry `noindex,follow` and are excluded from the generated sitemap.
 
-Issue #28 tracks the actual action: submit the current 16-URL `sitemap.xml`, confirm acceptance/fetch, diagnose warning/error state and remove the obsolete entry only if appropriate afterward. Sitemap acceptance and indexing are separate facts.
+The canonical index set concentrates search authority on:
 
-The canonical sitemap itself is fetchable and contains the expected 16 URLs. Do not modify healthy XML merely because the obsolete GSC submission is red.
+- company / solution / use-case pages;
+- the flagship review;
+- the main Scanner;
+- high-value MedTech use cases;
+- primary-source and research pages.
 
-No current connector can submit the sitemap into the GSC UI; this remains a manual browser action.
+Legacy `evidence-change-control-pack.html` and `what-a-pilot-looks-like.html` are retained only as `noindex` move notices pointing to `regulatory-change-integrity-review.html`.
+
+External search can still surface the obsolete 2025 Danish clinic-compliance homepage and duplicate LinkedIn company identities even though the live origin is current. Treat that as an external indexing/entity-resolution defect, not a DNS/origin defect.
+
+Authoritative Google indexing state must be read from Search Console when an authenticated route is available. Do not reuse historical indexed-page counts as current evidence. Sitemap acceptance, crawling, indexing, impressions and qualified commercial discovery are separate facts.
 
 ## EUDAMED Watch — PRs #39–#41
 
