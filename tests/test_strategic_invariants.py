@@ -291,3 +291,20 @@ def test_production_surface_state_file_is_current() -> None:
     stated = re.findall(r"holds (\d+) URLs", text)
     if stated:
         assert int(stated[0]) == len(_sitemap_urls()), "state file sitemap count drifted from docs/sitemap.xml"
+
+
+HOMEPAGE_HEADING_CEILING = 18
+HOMEPAGE_WORD_CEILING = 950  # 1,117 before the 2026-09-29 cut; depth lives on Solution / Use cases / Research
+
+
+def test_homepage_stays_short_and_single_story() -> None:
+    """The homepage was 25 headings / ~1,100 words and had absorbed material
+    that belongs on Solution, Use cases and Research. Pin the cut so it does
+    not creep back; raising a ceiling is a deliberate decision."""
+    html = (DOCS / "index.html").read_text(encoding="utf-8")
+    main = html[html.index("<main") : html.index("</main>")]
+    headings = re.findall(r"<h[1-6]\b", main)
+    assert len(headings) <= HOMEPAGE_HEADING_CEILING, f"homepage has {len(headings)} headings"
+    text = re.sub(r"<style>.*?</style>", "", main, flags=re.DOTALL)
+    words = len(re.sub(r"<[^>]+>", " ", text).split())
+    assert words <= HOMEPAGE_WORD_CEILING, f"homepage grew to {words} words"
