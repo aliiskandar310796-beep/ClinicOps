@@ -5,7 +5,6 @@ ClinicOps is an EU MedTech regulatory data integrity practice. It reconciles app
 Core pages:
 - ClinicOps | EU MedTech Regulatory Data Integrity: https://clinicops.dk/ - Keep EUDAMED, UDI, certificates, SS(C)P and controlled records aligned when products change. Deterministic comparison, a reviewer-ready closure queue.
 - About ClinicOps | EU MedTech Regulatory Data Integrity: https://clinicops.dk/about - A one-person EU MedTech regulatory data integrity practice: MSc in Medicine (Translational Medicine), pharmacovigilance and CRO background, native Danish.
-- Scope a ClinicOps Review | ClinicOps: https://clinicops.dk/assessment-intake - Build a concise scope brief for a ClinicOps Regulatory Change Integrity Review or portfolio integrity scan in your browser. No form data is transmitted by this page.
 - Contact ClinicOps | EU MedTech Regulatory Data Integrity: https://clinicops.dk/contact - Contact ClinicOps to scope a Regulatory Change Integrity Review, a portfolio integrity scan, Denmark market access or Danish pharmacovigilance support.
 - Solution: Regulatory Change Integrity Review | ClinicOps: https://clinicops.dk/services - The Regulatory Change Integrity Review: one approved change reconciled against EUDAMED, UDI, certificates, SS(C)P and controlled records, with closure evidence.
 - Use Cases: EUDAMED, SS(C)P, AR Portfolios, Denmark | ClinicOps: https://clinicops.dk/use-cases - Where the discipline is applied: EUDAMED and UDI data, SS(C)P operations, class III MDR transition, AR portfolios, document control, language versions, Denmark.
@@ -17,7 +16,6 @@ Solution and use cases:
 - EU MDR Regulatory Data Integrity for Global MedTech | ClinicOps: https://clinicops.dk/eu-mdr-regulatory-integrity - Evidence-controlled EU MDR regulatory information review, remediation and change operations for medical-device manufacturers worldwide supporting the EU market.
 - EUDAMED Transition Work Plans for MedTech | ClinicOps: https://clinicops.dk/eudamed-transition - Turn legacy and MDR portfolio evidence into a prioritised EUDAMED transition work plan with role-aware screening, evidence gaps and human regulatory review.
 - Regulatory Change Integrity Review | ClinicOps: https://clinicops.dk/evidence-change-control-pack - One declared change and evidence population turned into a source register, change-surface matrix, unresolved queue and closure packet.
-- Evidence pack checklist | ClinicOps: https://clinicops.dk/evidence-pack-checklist - What to gather before a ClinicOps review: exports, records, version-control expectations and what not to send.
 - Specialist Expert Network | ClinicOps: https://clinicops.dk/expert-network - Project-specific regulatory, clinical, PV and local-market specialist capacity with credential, conflict, scope, confidentiality and assignment controls.
 - Regulatory Integrity Review for MedTech | ClinicOps: https://clinicops.dk/integrity-gate - Human-reviewed regulatory information reconciliation and change-propagation review across EUDAMED, IFU, SS(C)P, labels and client-controlled systems.
 - Medical Device Regulatory Document Control | ClinicOps: https://clinicops.dk/medical-device-document-control - Reconciliation-as-evidence review of consistency across EUDAMED records, IFU, labelling and market-language versions for MedTech, with RA/QA retaining sign-off.
@@ -26,20 +24,8 @@ Solution and use cases:
 - How a bounded Regulatory Change Integrity Review works | ClinicOps: https://clinicops.dk/what-a-pilot-looks-like - How a bounded ClinicOps Regulatory Change Integrity Review runs, what evidence it uses, what you receive, and who decides.
 
 Free browser-local tools and examples:
-- Change Surface Mapper | ClinicOps: https://clinicops.dk/change-surface-mapper - Map one approved change across affected systems, records, documents and owners, in your browser. A portable evidence brief; nothing is uploaded.
-- Danish DHPC Submission Checker | ClinicOps: https://clinicops.dk/danish-dhpc-checker - Free checklist for a Danish DHPC to the Danish Medicines Agency's documented rules: submission pack, format, plain-Danish translation, evidence. Browser-local.
-- Danish Local-Literature Source Register | ClinicOps: https://clinicops.dk/danish-pv-literature-register - Source-verified register of Danish periodicals for GVP Module VI local-literature monitoring, with a justification memo and screening-log generator.
-- EUDAMED Identifier Check | ClinicOps: https://clinicops.dk/identifier-check - Free, browser-only EUDAMED Identifier Check: B-prefix legacy screening, SRN actor-role decoding, and GS1 Mod-10 validation. Nothing is sent to ClinicOps.
-- Free Regulatory Change Integrity Check | ClinicOps: https://clinicops.dk/integrity-check - Build a browser-local evidence packet for one regulatory change: provenance, downstream comparison, gaps, owner routing, JSON fingerprint. Optional local PDF read to suggest values.
-- Regulatory Change Review Cost Calculator | ClinicOps: https://clinicops.dk/integrity-economics - Estimate the manual workload and labour cost of checking that a regulatory change reached EUDAMED, IFU, SS(C)P, labels and controlled systems.
 - Regulatory Integrity Scanner | ClinicOps: https://clinicops.dk/integrity-scanner - Check one approved change against downstream records, or scan a portfolio export for missing fields, duplicates and conflicts. Browser-local, exportable.
-- Transition Readiness Score | ClinicOps: https://clinicops.dk/readiness-score - A private, browser-only screening aid for organising EUDAMED transition work-plan evidence before a human regulatory review.
-- Regulatory Change Impact Mapper | ClinicOps: https://clinicops.dk/regulatory-change-impact - Pick a category of EU regulatory change, answer six portfolio questions, and get an impacted-surface checklist with severity bands. Browser-local.
-- SDEA / PV Agreement Clause Checker | ClinicOps: https://clinicops.dk/sdea-clause-checker - Screen a PV agreement or SDEA against the clause set required from 12 February 2026 by Implementing Regulation (EU) 2025/1466 and GVP. Paste text or upload a PDF; browser-local.
-- Interactive Regulatory Integrity Specimen Register | ClinicOps: https://clinicops.dk/specimen-register/ - A synthetic integrity register: traceable reference evidence, observations, discrepancy states, review owners and explicit human decisions.
-- Technical File Consistency Check | ClinicOps: https://clinicops.dk/technical-file-consistency - Paste or upload a PDF for each of up to five technical-documentation sources and get a severity-banded divergence report. Browser-local.
 - Tools: Integrity Scanner and Evidence Utilities | ClinicOps: https://clinicops.dk/tools - Browser-local regulatory data integrity tools: the Regulatory Integrity Scanner, identifier check, change and consistency utilities, PV utilities and specimens.
-- ClinicOps Class III Transition Map — Sanitized Sample: https://clinicops.dk/transition-map-sample/ - Sanitized fictional sample of the ClinicOps Class III Transition Map work-plan format.
 
 Research and primary sources:
 - Primary Public Sources | ClinicOps: https://clinicops.dk/primary-sources - The public authorities and official source systems ClinicOps works from: EUDAMED, MDR/IVDR, UDI, SS(C)P, Danish authorities and the EU health-data framework.

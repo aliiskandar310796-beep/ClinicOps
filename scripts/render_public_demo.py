@@ -64,7 +64,7 @@ def render_public_demo() -> str:
     html = render_client_html(rows, as_of=DEMO_DATE, title=TITLE, site_shell=True)
 
     metadata = f'''<link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="canonical" href="{CANONICAL}">
+<link rel="canonical" href="{CANONICAL}"><meta name="robots" content="noindex,follow">
 <meta name="description" content="{DESCRIPTION}">
 <meta property="og:title" content="{TITLE}">
 <meta property="og:description" content="{DESCRIPTION}">

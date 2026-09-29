@@ -264,4 +264,37 @@ def validate_site(docs_root: Path) -> tuple[int, list[str]]:
         )
         errors.extend(f"{url}: {error}" for error in page_errors)
 
+    # Every other public page must be a deliberate non-index target: it still
+    # needs a self-canonical, valid head (it is served and linked), and it must
+    # say noindex -- otherwise it belongs in the sitemap. Redirect stubs are
+    # exempt from the canonical check (their canonical points at the target).
+    errors.extend(validate_noindex_pages(docs_root, set(urls)))
+
     return len(urls), errors
+
+
+NOINDEX_EXEMPT = {"404.html"}
+
+
+def validate_noindex_pages(docs_root: Path, sitemap_urls_set: set[str]) -> list[str]:
+    errors: list[str] = []
+    for page_path in sorted(docs_root.rglob("*.html")):
+        relative = page_path.relative_to(docs_root).as_posix()
+        if relative in NOINDEX_EXEMPT or "vendor" in page_path.parts:
+            continue
+        html = page_path.read_text(encoding="utf-8")
+        parser = parse_metadata(html)
+        canonical = parser.canonical
+        if canonical in sitemap_urls_set:
+            continue
+        robots = {token.strip() for token in parser.meta.get("robots", "").lower().split(",")}
+        if "noindex" not in robots:
+            errors.append(f"{relative}: not in the sitemap and not noindex -- choose one")
+            continue
+        if "http-equiv" in html and "refresh" in html.lower():
+            continue  # redirect stub: canonical points at the destination
+        if not canonical:
+            errors.append(f"{relative}: noindex page has no canonical")
+            continue
+        errors.extend(f"{relative}: {error}" for error in validate_page_metadata(html, expected_url=canonical))
+    return errors
