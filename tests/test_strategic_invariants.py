@@ -275,3 +275,19 @@ def test_expert_network_never_claims_standing_staff() -> None:
     assert "private, project-specific expert-network model" in html
     assert "not represented as clinicops employees" in html
     assert "permanently staffed" in html
+
+
+def test_production_surface_state_file_is_current() -> None:
+    """00_STATE/PRODUCTION_SURFACE.md once described a three-lane site and a
+    16-URL sitemap for weeks after both were gone. Pin that it carries no
+    retired architecture or hard-coded counts, and that it names the
+    mechanisms (noindex set, ceiling, validator) that actually govern the
+    surface."""
+    text = (ROOT / "00_STATE" / "PRODUCTION_SURFACE.md").read_text(encoding="utf-8")
+    for stale in ("three lanes", "sitemap.website.xml is", "16-URL", "29 URLs", "clinical operations)"):
+        assert stale not in text, f"stale production-surface claim: {stale!r}"
+    for current in ("NOINDEX_SUPPORT_SET", "SITEMAP_URL_CEILING", "validate_noindex_pages", "derive it, do not hard-code"):
+        assert current in text, f"production-surface file no longer mentions {current!r}"
+    stated = re.findall(r"holds (\d+) URLs", text)
+    if stated:
+        assert int(stated[0]) == len(_sitemap_urls()), "state file sitemap count drifted from docs/sitemap.xml"
