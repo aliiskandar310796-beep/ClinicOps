@@ -44,7 +44,7 @@ def _public_html_files() -> list[Path]:
 
 def test_public_surface_helper_covers_every_sitemap_url() -> None:
     urls = _sitemap_urls()
-    assert len(urls) >= 30
+    assert len(urls) >= 20  # 24 primary URLs since the 2026-09-29 index-architecture cut
     assert len(_public_html_files()) == len(urls)
 
 

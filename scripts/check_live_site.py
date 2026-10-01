@@ -183,7 +183,7 @@ TARGETS = (
         200,
         "<title>Technical File Consistency Check | ClinicOps</title>",
     ),
-    Target("/sitemap.xml", 200, "https://clinicops.dk/assessment-intake"),
+    Target("/sitemap.xml", 200, "https://clinicops.dk/evidence-change-control-pack"),
     Target("/robots.txt", 200, "Sitemap: https://clinicops.dk/sitemap.xml"),
     Target(
         "/__clinicops_healthcheck_missing__.html",

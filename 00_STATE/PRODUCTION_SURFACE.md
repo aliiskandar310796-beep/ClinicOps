@@ -1,12 +1,24 @@
 # Production Surface
 
-> Migrated verbatim from the pre-2026-09-23 `AGENT_STATE.md` monolith as part of the connectome-lens shard proposal (draft, not yet reconciled against live `main`). Content below this line is unedited from the original section.
+Reconciled against live `main` on 2026-09-29 (supersedes the pre-2026-09-23 monolith copy, which described an obsolete three-lane site, a 16/29-URL sitemap and a `sitemap.website.xml` submission). Sections from *EUDAMED Watch* onward are unchanged.
 
 ## Public production surface
 
-`clinicops.dk` is served from `docs/**` via GitHub Pages. GoDaddy is DNS only. HTTPS is enforced.
+`clinicops.dk` is served from `docs/**` via GitHub Pages. GoDaddy is DNS only. HTTPS is enforced. Deploys run from `.github/workflows/pages.yml` for the exact SHA after workflow "CI" succeeds on `main`, followed by `scripts/check_live_site.py`. CDN and browser caching can show stale content for a short time after a deploy.
 
-The deterministic sitemap is the canonical list of production URLs — **derive it, do not hard-code it here** (this file previously said 16 while production had 29; transient counts belong in generated artifacts, not shared state). Source of truth: `docs/sitemap.xml`, generated and checked by `scripts/render_sitemap.py --check` (29 URLs as of 2026-09-17). The public surface spans the umbrella home, the three lanes (Denmark market access, MedTech/regulatory, clinical operations), the specialist service pages, tools, research, specimens, expert network, about/contact and privacy.
+### Architecture (current)
+
+The site tells one story: **EU MedTech regulatory data integrity** — keep EUDAMED, UDI, certificates, SS(C)P and controlled records aligned when products change, with source-linked exception queues for qualified human review. Positioning source of truth: `01_STRATEGY/POSITIONING_2026-09-18_REGULATORY_DATA_INTEGRITY.md`. Denmark market access, Danish localisation and pharmacovigilance are secondary specialist capabilities, not separate lanes. The old clinical-operations lane is retired; `docs/clinical-operations.html` is a `noindex` move notice pointing at `/services`.
+
+Page families (see the sitemap for the authoritative list): home; Solution (`/services`, flagship `/evidence-change-control-pack`, `/what-a-pilot-looks-like`, `/integrity-gate`); Use cases (EUDAMED, Class III transition, SS(C)P operations, AR portfolio intelligence, Denmark, document control, regulatory intelligence); Research and primary sources; Tools hub and the Integrity Scanner; About, Contact, Expert network, Privacy.
+
+The expert network (PR #90, `src/clinicops_os/expert_network.py`) is part of the public surface only as `/expert-network` (governed description) and the noindex interest form. The real expert roster is private and never committed here.
+
+### Sitemap and index policy
+
+The sitemap is the canonical list of primary, indexable URLs — **derive it, do not hard-code counts here**. Source of truth: `docs/sitemap.xml`, generated and checked by `scripts/render_sitemap.py --check`, which already skips any page marked `noindex`. As of 2026-09-29 it holds 24 URLs.
+
+Support utilities are served and linked but are `noindex,follow` and out of the sitemap: assessment intake, the calculators and checkers, the specimen register, the sanitized Transition Map sample, and the expert-interest form. The exact set is pinned in `tests/test_strategic_invariants.py` (`NOINDEX_SUPPORT_SET`), and `validate_noindex_pages` in `src/clinicops_os/site_quality.py` fails the build for any page that is neither in the sitemap nor `noindex` (redirect stubs and `404.html` exempt). `SITEMAP_URL_CEILING` in the same test file is the growth guard; raising it is a deliberate decision, not a side effect.
 
 Do not mass-produce thin SEO pages while current production pages are still being discovered.
 
@@ -24,17 +36,11 @@ Keep the EUDAMED Identifier Check and Transition Readiness Score free.
 
 ## Search / indexing
 
-Production canonical sitemap:
+Production canonical sitemap: `https://clinicops.dk/sitemap.xml` (advertised in `docs/robots.txt`).
 
-`https://clinicops.dk/sitemap.xml`
+Google Search Console (read via the Windsor.ai `searchconsole` connector, which exposes analytics and sitemap status only): property `https://clinicops.dk/` is connected. Observation on 2026-09-20: `sitemap.xml` last submitted 2026-09-17, last downloaded 2026-09-20 with 33 submitted URLs (the pre-cut count); only the homepage had impressions. The submitted count will fall to the current sitemap on the next fetch. Sitemap acceptance and indexing are separate facts; do not read either as a ranking claim.
 
-Fresh GSC verification on 2026-09-13 confirms the Search Console property `https://clinicops.dk/` exists and is connected. The obsolete submitted sitemap `https://clinicops.dk/sitemap.website.xml` reports 7 submitted URLs, 0 indexed URLs, 1 warning and 1 error.
-
-Issue #28 tracks the actual action: submit the current 16-URL `sitemap.xml`, confirm acceptance/fetch, diagnose warning/error state and remove the obsolete entry only if appropriate afterward. Sitemap acceptance and indexing are separate facts.
-
-The canonical sitemap itself is fetchable and contains the expected 16 URLs. Do not modify healthy XML merely because the obsolete GSC submission is red.
-
-No current connector can submit the sitemap into the GSC UI; this remains a manual browser action.
+The obsolete `sitemap.website.xml` submission and Issue #28 are historical. No connector can submit a sitemap, inspect URLs or request indexing in the GSC UI — those stay manual account-admin actions for Ali, and recrawl requests should follow only after live correctness is verified. Do not modify healthy XML merely because a GSC report is red.
 
 ## EUDAMED Watch — PRs #39–#41
 

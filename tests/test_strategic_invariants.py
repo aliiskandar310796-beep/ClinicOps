@@ -57,7 +57,29 @@ PINNED_TITLES = {
 FLAGSHIP_URL = "https://clinicops.dk/evidence-change-control-pack"
 
 # --- index architecture -----------------------------------------------------
-SITEMAP_URL_CEILING = 40
+# 2026-09-29: the primary index surface was cut from 38 to 24 URLs. Support
+# utilities (intake, calculators, checkers, specimens, the evidence-pack
+# checklist) stay fully usable and linked but carry noindex,follow and are
+# therefore excluded from the sitemap by render_sitemap.py. Adding a page to
+# the primary surface is a deliberate act, not a default.
+SITEMAP_URL_CEILING = 26
+NOINDEX_SUPPORT_SET = {
+    "assessment-intake.html",
+    "integrity-check.html",
+    "integrity-economics.html",
+    "readiness-score.html",
+    "identifier-check.html",
+    "change-surface-mapper.html",
+    "regulatory-change-impact.html",
+    "technical-file-consistency.html",
+    "sdea-clause-checker.html",
+    "danish-dhpc-checker.html",
+    "danish-pv-literature-register.html",
+    "evidence-pack-checklist.html",
+    "specimen-register/index.html",
+    "transition-map-sample/index.html",
+    "expert-network-interest.html",
+}
 REQUIRED_SITEMAP_URLS = {
     "https://clinicops.dk/",
     "https://clinicops.dk/services",
@@ -190,6 +212,26 @@ def test_sitemap_stays_bounded_and_carries_the_core_urls() -> None:
     assert FLAGSHIP_URL in urls
 
 
+def test_support_utilities_are_noindex_follow_and_out_of_the_sitemap() -> None:
+    sitemap = SITEMAP.read_text(encoding="utf-8")
+    for rel in sorted(NOINDEX_SUPPORT_SET):
+        page = DOCS / rel
+        assert page.is_file(), rel
+        parser = parse_metadata(page.read_text(encoding="utf-8"))
+        robots = {t.strip() for t in parser.meta.get("robots", "").lower().split(",")}
+        assert {"noindex", "follow"} <= robots, (rel, parser.meta.get("robots"))
+        assert parser.canonical and parser.canonical not in sitemap, (rel, parser.canonical)
+    # and nothing else public is quietly noindex: the set above is the whole list
+    quiet = []
+    for page in _all_html():
+        rel = page.relative_to(DOCS).as_posix()
+        if rel in NOINDEX_SUPPORT_SET or page == LEGACY_STUB or rel == "404.html":
+            continue
+        if "noindex" in parse_metadata(page.read_text(encoding="utf-8")).meta.get("robots", "").lower():
+            quiet.append(rel)
+    assert not quiet, f"noindex pages not declared in NOINDEX_SUPPORT_SET: {quiet}"
+
+
 def test_every_sitemap_page_is_indexable_and_self_canonical() -> None:
     for url, page in zip(_sitemap_urls(), _public_pages(), strict=True):
         parser = parse_metadata(page.read_text(encoding="utf-8"))
@@ -233,3 +275,36 @@ def test_expert_network_never_claims_standing_staff() -> None:
     assert "private, project-specific expert-network model" in html
     assert "not represented as clinicops employees" in html
     assert "permanently staffed" in html
+
+
+def test_production_surface_state_file_is_current() -> None:
+    """00_STATE/PRODUCTION_SURFACE.md once described a three-lane site and a
+    16-URL sitemap for weeks after both were gone. Pin that it carries no
+    retired architecture or hard-coded counts, and that it names the
+    mechanisms (noindex set, ceiling, validator) that actually govern the
+    surface."""
+    text = (ROOT / "00_STATE" / "PRODUCTION_SURFACE.md").read_text(encoding="utf-8")
+    for stale in ("three lanes", "sitemap.website.xml is", "16-URL", "29 URLs", "clinical operations)"):
+        assert stale not in text, f"stale production-surface claim: {stale!r}"
+    for current in ("NOINDEX_SUPPORT_SET", "SITEMAP_URL_CEILING", "validate_noindex_pages", "derive it, do not hard-code"):
+        assert current in text, f"production-surface file no longer mentions {current!r}"
+    stated = re.findall(r"holds (\d+) URLs", text)
+    if stated:
+        assert int(stated[0]) == len(_sitemap_urls()), "state file sitemap count drifted from docs/sitemap.xml"
+
+
+HOMEPAGE_HEADING_CEILING = 18
+HOMEPAGE_WORD_CEILING = 950  # 1,117 before the 2026-09-29 cut; depth lives on Solution / Use cases / Research
+
+
+def test_homepage_stays_short_and_single_story() -> None:
+    """The homepage was 25 headings / ~1,100 words and had absorbed material
+    that belongs on Solution, Use cases and Research. Pin the cut so it does
+    not creep back; raising a ceiling is a deliberate decision."""
+    html = (DOCS / "index.html").read_text(encoding="utf-8")
+    main = html[html.index("<main") : html.index("</main>")]
+    headings = re.findall(r"<h[1-6]\b", main)
+    assert len(headings) <= HOMEPAGE_HEADING_CEILING, f"homepage has {len(headings)} headings"
+    text = re.sub(r"<style>.*?</style>", "", main, flags=re.DOTALL)
+    words = len(re.sub(r"<[^>]+>", " ", text).split())
+    assert words <= HOMEPAGE_WORD_CEILING, f"homepage grew to {words} words"
