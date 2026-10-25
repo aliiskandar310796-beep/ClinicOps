@@ -57,13 +57,24 @@ def test_public_termbase_file_is_valid_and_matches_expected_state() -> None:
     2026-09-29 run -- MDR 2017/745 Art. 2(36)-(71) not covered by earlier
     rows (28 `verified`), the 'UDI' abbreviation from (15) (`verified`,
     synonym-of:TB-0033) and 8 within-definition sub-terms (`candidate`).
+
+    2026-10-25 t0-termbase Sunday PR: adds TB-0086..TB-0324 from the six
+    nightly runs 2026-10-19..2026-10-24, all quoted from the EUR-Lex
+    consolidated EN and DA texts -- MDR 2017/745 Chapter I-II headings and
+    phrases (Art. 1-21), IVDR 2017/746 Art. 2(1)-(74) definitions, IVDR
+    Chapter I-III headings, and IVDR Chapter II-III obligation phrases
+    (Art. 10-28). 224 `verified`, 15 `candidate`, append-only: no row
+    present before this change was touched. TB-0154 enters the public file
+    in its annotated form (the 2026-10-21 run re-pointed its `context_da`
+    NOTE at the defining provision TB-0169 and recorded
+    `annotated:t0-termbase-2026-10-21` in `job_run`).
     """
     assert validate(PUBLIC) == []
     rows = read_rows(PUBLIC)
-    assert len(rows) == 85
+    assert len(rows) == 324
     assert Counter(r["status"] for r in rows) == {
-        "verified": 73,
-        "candidate": 11,
+        "verified": 297,
+        "candidate": 26,
         "unverified-seed": 1,
     }
     assert all(r["domain"] == "regulatory" for r in rows)
