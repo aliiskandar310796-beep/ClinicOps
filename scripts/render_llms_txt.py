@@ -27,6 +27,7 @@ SECTIONS = (
         "sscp-operations.html", "authorised-representative-portfolio-intelligence.html",
         "medical-device-document-control.html", "regulatory-intelligence.html", "expert-network.html",
         "what-a-pilot-looks-like.html", "evidence-pack-checklist.html",
+        "eu-authorised-representative.html",
     }),
     ("Free browser-local tools and examples", lambda r: r in {
         "tools.html", "integrity-check.html", "integrity-scanner.html", "integrity-economics.html",
