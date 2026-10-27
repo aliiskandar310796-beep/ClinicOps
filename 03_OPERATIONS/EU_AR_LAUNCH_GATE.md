@@ -19,6 +19,12 @@ The SRN is EU-wide actor identification following competent-authority validation
 
 Sources: [EC Actor Registration](https://health.ec.europa.eu/medical-devices-eudamed/actor-registration-module_en); [EUDAMED mandates](https://webgate.ec.europa.eu/eudamed-help/en/actor/manage/manage-mandates.html); MDR Regulation (EU) 2017/745 Article 11; IVDR Regulation (EU) 2017/746 Article 11.
 
+## Owner decision 2026-10-27: sequencing
+
+Owner decided to defer insurance, PRRC file, counsel review of the Article 11 mandate and the other mandate-readiness items until the first manufacturer conversation produces a real prospect. Public information pages, discovery conversations and outreach may proceed in the meantime.
+
+Hard stop that stays in force: **no quote, no mandate acceptance and no representation of any manufacturer or device until the checklist below is complete.** A prospect asking for a start date does not move this line. Public wording must not imply an active mandate.
+
 ## Launch approval checklist — private evidence required
 
 - [ ] Independently recheck SRN, current AR actor role and operator identity in EUDAMED; privately retain dated verification evidence.
