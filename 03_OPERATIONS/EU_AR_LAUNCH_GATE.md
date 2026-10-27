@@ -27,6 +27,7 @@ Sources: [EC Actor Registration](https://health.ec.europa.eu/medical-devices-eud
 - [ ] Written Article 11 mandate template reviewed by counsel for **both MDR and IVDR** and scope per manufacturer and device family.
 - [ ] Manufacturer onboarding due diligence / technical documentation access and assessment criteria.
 - [ ] PRRC arrangement under Article 15 and appropriate qualifications/coverage, including absence/backup handling.
+  - 2026-10-27: owner states his Spanish legal advisers confirmed he may act as the AR's own PRRC. Still open: that confirmation in writing, a qualification file (Article 15(1) route evidenced), a signed PRRC appointment record, and a named backup PRRC. Box stays unticked until all exist. The manufacturer's PRRC must be a different person.
 - [ ] Product/professional liability insurance and contractual risk allocation reviewed, especially Article 11(5).
 - [ ] Complaint, incident/vigilance, FSCAs, competent-authority communication and EUDAMED mandate procedures documented and rehearsed.
 - [ ] Document retention, confidentiality, GDPR, client access, offboarding and termination transfer process approved.
