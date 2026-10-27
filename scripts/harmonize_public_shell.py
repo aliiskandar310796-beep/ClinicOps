@@ -124,6 +124,7 @@ SECTION_BY_PAGE = {
     "what-a-pilot-looks-like.html": "Solution",
     "evidence-pack-checklist.html": "Solution",
     "integrity-gate.html": "Solution",
+    "eu-authorised-representative.html": "Solution",
     "use-cases.html": "Use cases",
     "authorised-representative-portfolio-intelligence.html": "Use cases",
     "class-iii-transition.html": "Use cases",
