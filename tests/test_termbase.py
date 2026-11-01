@@ -68,13 +68,22 @@ def test_public_termbase_file_is_valid_and_matches_expected_state() -> None:
     in its annotated form (the 2026-10-21 run re-pointed its `context_da`
     NOTE at the defining provision TB-0169 and recorded
     `annotated:t0-termbase-2026-10-21` in `job_run`).
+
+    2026-11-01 t0-termbase Sunday PR: adds TB-0325..TB-0582 from the six
+    nightly runs 2026-10-25..2026-10-31 (no run on 2026-10-28), all quoted
+    from the EUR-Lex consolidated EN and DA texts -- MDR 2017/745 Chapter II
+    lettered points (Art. 11(3), 11(5), 11(7), 13(2), 14(2)) and the whole
+    of IVDR 2017/746 Chapter II at sentence level (Art. 10-16, incl. the
+    Art. 10(8) QMS list and Art. 10(13) in full). 242 `verified`, 16
+    `candidate`, append-only: no row present before this change was
+    touched.
     """
     assert validate(PUBLIC) == []
     rows = read_rows(PUBLIC)
-    assert len(rows) == 324
+    assert len(rows) == 582
     assert Counter(r["status"] for r in rows) == {
-        "verified": 297,
-        "candidate": 26,
+        "verified": 539,
+        "candidate": 42,
         "unverified-seed": 1,
     }
     assert all(r["domain"] == "regulatory" for r in rows)
