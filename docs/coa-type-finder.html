@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en" data-seg="ecoa">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<title>COA type finder and inventory | ClinicOps</title>
+<meta name="description" content="Free, browser-only COA type finder and inventory: sort an assessment into patient-, observer- or clinician-reported or performance outcome, and list a study's assessments with gaps flagged. Nothing is sent to ClinicOps.">
+<link rel="canonical" href="https://clinicops.dk/coa-type-finder">
+
+<meta property="og:title" content="COA type finder and inventory | ClinicOps">
+<meta property="og:description" content="Free, browser-only COA type finder and inventory: sort an assessment into patient-, observer- or clinician-reported or performance outcome, and list a study's assessments with gaps flagged. Nothing is sent to ClinicOps.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://clinicops.dk/coa-type-finder">
+<meta property="og:site_name" content="ClinicOps">
+
+<meta property="og:image" content="https://clinicops.dk/assets/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://clinicops.dk/assets/og-image.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "COA type finder and inventory | ClinicOps",
+  "description": "Free, browser-only COA type finder and inventory: sort an assessment into patient-, observer- or clinician-reported or performance outcome, and list a study's assessments with gaps flagged. Nothing is sent to ClinicOps.",
+  "url": "https://clinicops.dk/coa-type-finder",
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "ClinicOps",
+    "url": "https://clinicops.dk/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "ClinicOps",
+    "url": "https://clinicops.dk/"
+  }
+}
+</script>
+
+<style>
+.btn,.cta{white-space:normal;text-align:center;max-width:100%;padding-top:8px;padding-bottom:8px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:18px 0 6px}
+.toolbar .file{display:inline-flex;align-items:center;margin:0;cursor:pointer;position:relative}
+.toolbar .file input{position:absolute;width:1px;height:1px;opacity:0}
+.toolbar .file:focus-within{outline:2px solid var(--accent);outline-offset:3px;border-radius:var(--r)}
+.table-scroll{overflow-x:auto}
+
+main.wrap{padding-top:clamp(40px,6vw,72px)}
+.reporter{display:grid;gap:10px;margin:14px 0 20px;max-width:46em}
+.reporter label{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:start;padding:14px 16px;border:1px solid var(--border-strong);border-radius:var(--r);background:var(--surface);cursor:pointer;min-height:56px;transition:border-color var(--t-hover) var(--ease-out),background-color var(--t-hover) var(--ease-out)}
+.reporter input{margin-top:3px;accent-color:var(--accent)}
+.reporter label:has(input:checked){border-color:var(--accent);background:var(--accent-soft)}
+.follow{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;max-width:46em}
+#result{border-top:3px solid var(--accent);background:var(--surface);padding:6px 24px 18px;margin:20px 0;max-width:46em;border-radius:0 0 var(--r) var(--r)}
+.result-type{font-family:var(--font-display);font-size:1.5rem;margin:16px 0 6px}
+.result-type strong{color:var(--accent-strong)}
+#inv-wrap table{min-width:1500px}
+#inv-wrap td{padding:6px 8px;vertical-align:top}
+#inv-wrap input,#inv-wrap select{min-width:9em;width:100%;padding:8px 9px;font-size:.88rem}
+#findings{list-style:none;padding:0;margin:0}
+#findings li{padding:10px 0;border-top:1px solid var(--border);max-width:70ch}
+
+</style>
+<link rel="preload" href="assets/fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/fonts/ibm-plex-mono-latin-400.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="site.css"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f6f3ec" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0f1517" media="(prefers-color-scheme: dark)"></head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="/">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="/">Home</a><a href="ecoa" aria-current="page">eCOA</a><a href="services">Medical devices</a><a href="denmark-market-access">Danish &amp; PV</a><a href="tools">Tools</a><a href="about">About</a><a href="contact">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");var r=a?a.offsetLeft+a.offsetWidth+16-n.clientWidth:0;if(r>0)n.scrollLeft=r})()</script>
+<main id="main" tabindex="-1" class="wrap">
+<section class="hero"><h1>COA type finder and inventory</h1><p class="lede">Most eCOA delays start with a question nobody answered early: who actually reports this, and what does that ask of the sites, the participants and the vendor? Answer four questions to sort an assessment into patient-, observer- or clinician-reported, or performance outcome. Then list every assessment in a study in one inventory and see what is missing before the specification is frozen. It runs in your browser; <strong>nothing is sent to ClinicOps</strong>.</p><p class="meta">Free tool</p></section>
+
+<div class="callout boundary"><strong>Boundary.</strong> This sorts a described assessment into a type and flags gaps and inconsistencies in your own entries. It does not choose an instrument, judge whether an instrument is fit for an endpoint, or check licences with any copyright holder. Instrument names in the example are placeholders. Do not enter participant data.</div>
+<noscript><div class="callout boundary"><p>This tool runs in your browser and needs JavaScript enabled.</p></div></noscript>
+
+<h2 id="finder">1. Which type is it?</h2>
+<fieldset class="reporter" style="border:0;padding:0;margin:14px 0 20px"><legend class="hint">Who provides the information?</legend>
+<label><input type="radio" name="reporter" value="participant"><span><strong>The participant</strong>, about themselves<br><span class="hint">Symptoms, feelings, function, as the participant sees them.</span></span></label>
+<label><input type="radio" name="reporter" value="observer"><span><strong>An observer</strong>, such as a parent or caregiver<br><span class="hint">What they can see: events, behaviour, signs. No medical judgement needed.</span></span></label>
+<label><input type="radio" name="reporter" value="clinician"><span><strong>A trained clinician</strong>, using clinical judgement<br><span class="hint">A rating or assessment that needs professional training to make.</span></span></label>
+<label><input type="radio" name="reporter" value="task"><span><strong>A task</strong> the participant performs<br><span class="hint">A standardised task that is scored or measured, such as a timed test.</span></span></label>
+</fieldset>
+<div class="follow">
+<div class="field" id="w-interpreted" hidden><label for="q-interpreted">Will anyone interpret or edit the answers?</label><select id="q-interpreted"><option value="">Not decided</option><option value="no">No, recorded as given</option><option value="yes">Yes, a clinician interprets</option></select></div>
+<div class="field" id="w-child" hidden><label for="q-child">Are the participants young children?</label><select id="q-child"><option value="">Not decided</option><option value="no">No</option><option value="yes">Yes</option></select></div>
+<div class="field" id="w-judgement" hidden><label for="q-judgement">Does reporting need clinical judgement?</label><select id="q-judgement"><option value="">Not decided</option><option value="no">No</option><option value="yes">Yes</option></select></div>
+<div class="field" id="w-scored" hidden><label for="q-scored">Is the task and its scoring defined?</label><select id="q-scored"><option value="">Not decided</option><option value="yes">Yes</option><option value="no">No</option></select></div>
+</div>
+<div id="result" aria-live="polite"></div>
+<button type="button" class="btn primary-btn" id="add-from-finder" disabled>Add to the inventory</button>
+
+<h2 id="inventory">2. Inventory</h2>
+<p>One row per assessment. Everything that changes the delivery plan sits in one place: type, respondent, mode, recall period, languages, licence and training. The tool flags what is missing or does not fit together.</p>
+<div class="toolbar"><button type="button" class="btn secondary-btn" id="add-blank">Add a blank row</button><button type="button" class="btn secondary-btn" id="load-example">Load the fictional example</button><label class="btn secondary-btn file">Import (.json)<input type="file" id="import" accept=".json,application/json"></label><button type="button" class="btn secondary-btn" id="export-csv">Export CSV</button><button type="button" class="btn secondary-btn" id="export-json">Export (.json)</button><button type="button" class="btn secondary-btn" id="clear">Clear</button></div>
+<p class="status" id="status" role="status" aria-live="polite">Nothing is stored between visits. Export the file to keep your work.</p>
+<p id="inv-empty" class="muted">No assessments yet. Add one from the finder above, add a blank row, or load the fictional example.</p>
+<div id="inv-wrap" class="table-scroll" tabindex="0" role="region" aria-label="COA inventory, scrollable table" hidden><table><thead><tr><th scope="col">Concept of interest</th><th scope="col">Role</th><th scope="col">Instrument</th><th scope="col">Version</th><th scope="col">Type</th><th scope="col">Respondent</th><th scope="col">Mode</th><th scope="col">Recall period</th><th scope="col">Languages</th><th scope="col">Licence</th><th scope="col">Training</th><th scope="col"><span class="sr-only">Remove</span></th></tr></thead><tbody id="inv-body"></tbody></table></div>
+<p id="summary" class="status"></p>
+<div id="findings-wrap" hidden><h3>What to look at</h3><ul id="findings"></ul></div>
+
+<h2>Where this fits</h2>
+<p>The inventory is the input to everything after it: the <a href="ecoa-delivery-workbench">delivery workbench</a> plans each instrument-language version, and the <a href="ecoa-workflow">workflow map</a> shows where each decision is taken. <a href="coa-types">COA types</a> explains the four types and the sources behind them.</p>
+<div class="cta-row"><a class="cta primary" href="ecoa-delivery-workbench">Plan the delivery</a><a class="cta ghost" href="coa-types">Read about COA types</a></div>
+</main>
+<script src="assets/coa-finder-core.js"></script><script src="assets/coa-finder.js"></script>
+<footer class="site">
+<div class="footer-inner">
+<span>&copy; 2026 ClinicOps &middot; EU MedTech regulatory data integrity.</span>
+<span><a href="mailto:info@clinicops.dk">info@clinicops.dk</a> &middot; <a href="https://www.linkedin.com/company/clinicops-dk/">LinkedIn</a> &middot; <a href="privacy-notice/">Privacy</a></span>
+</div>
+<div class="footer-inner"><span>ClinicOps is not a notified body or a competent authority, and does not replace your RA/QA team, RIM, QMS, PLM or ERP.</span></div></footer>
+</body>
+</html>
