@@ -133,3 +133,16 @@ The site sets no analytics, by policy, so measures use what is already visible:
 - A repeat of the cold-read test, plus two or three real buyers asked to read the page for five minutes.
 
 Review date: 2027-02-14, about 13 weeks after release. Suggested tolerance: if no qualified enquiry names any of the three lanes by then, treat the broader front door as unproven and revisit D1. The numbers are the owner's to set.
+
+
+## 10. Design standard applied (2026-11-14)
+
+Decision D5: the site follows three published rule sets, each used for what fits a regulatory consultancy.
+
+| Source | Applied | Deliberately not applied |
+| --- | --- | --- |
+| Emil Kowalski design-engineering notes | One strong ease-out curve; press scale 0.97; hover only on hover-capable pointers; durations 140/180/260 ms; hero entrance 520 ms; reduced-motion keeps colour and opacity, drops movement | Spring and gesture patterns (no drag UI on this site) |
+| Impeccable (craft floor and detector) | No eyebrow labels above headings; no coloured side borders on callouts; themed caret, scrollbars and list markers; disabled states; reading measure near 70 characters; detector run on 8 rendered pages: clean except two advisories | Replacing Fraunces and the cream palette (see below) |
+| Taste (static-site rules) | One system, one radius scale, 44 px targets, no horizontal overflow at 320 px (all 40 sitemap pages checked), hover answers on every control, one entrance moment per page | Stock photographs, shader scenes, card loops, real-icon sets: they would put unapproved imagery on a practice whose credibility rests on stated limits |
+
+Two detector advisories are accepted risks, not oversights. `overused-font` (Fraunces) and `cream-palette` describe the Clinical Ledger identity pinned in `design/DESIGN_TOKENS.md`; changing them is a brand decision for Ali, not a polish step. Revisit at the 2027-02-14 benefits review.

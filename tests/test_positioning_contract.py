@@ -150,7 +150,7 @@ def test_flagship_page_is_reframed() -> None:
 def test_tools_keep_scanner_first() -> None:
     html = (DOCS / "tools.html").read_text(encoding="utf-8")
     assert "Not sure where to start?</strong> Use the Regulatory Integrity Scanner." in html
-    assert html.index("START HERE") < html.index("Focused utilities") < html.index("Pharmacovigilance utilities")
+    assert html.index("<h3>Regulatory Integrity Scanner</h3>") < html.index("Focused utilities") < html.index("Pharmacovigilance utilities")
 
 
 def test_solution_page_is_flagship_first() -> None:
