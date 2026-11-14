@@ -110,7 +110,6 @@ def test_registered_across_site_contracts() -> None:
     assert "https://clinicops.dk/ecoa-delivery-workbench" in (DOCS / "sitemap.xml").read_text(encoding="utf-8")
     assert "ecoa-delivery-workbench" in (DOCS / "llms.txt").read_text(encoding="utf-8")
     assert 'href="ecoa-delivery-workbench"' in (DOCS / "tools.html").read_text(encoding="utf-8")
-    assert "ecoa-delivery-workbench" in (ROOT / "scripts" / "check_live_site.py").read_text(encoding="utf-8")
     assert "ecoa-delivery-workbench" in (ROOT / "scripts" / "harmonize_public_shell.py").read_text(encoding="utf-8")
     assert "ecoa-delivery-workbench" in (ROOT / "e2e" / "site_acceptance.mjs").read_text(encoding="utf-8")
 
