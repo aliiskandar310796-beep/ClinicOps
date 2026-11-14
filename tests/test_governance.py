@@ -55,14 +55,14 @@ def test_review_expiry_blocks_stale_public_claim():
 def test_publication_pack_inherits_limitations_and_sources():
     pack = build_publication_pack(
         registry(),
-        ["CO-CLM-0002", "CO-CLM-0010"],
+        ["CO-CLM-0002", "CO-CLM-0019"],
         title="Transition evidence pack",
         use="research-note",
         as_of=date(2026, 9, 9),
     )
     rendered = render_publication_pack(pack)
     assert "not a population rate or full-register audit" in rendered
-    assert "27 February 2027" in rendered
+    assert "27 March 2027" in rendered
     assert "mdcg_2026-4_en.pdf" in rendered
     assert "Re-run the claim guard" in rendered
 
