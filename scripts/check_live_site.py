@@ -29,7 +29,7 @@ class Result:
 # promotional sentences: copy changes should not break the health check unless
 # the page's identity actually changed.
 TARGETS = (
-    Target("/", 200, "<title>ClinicOps | "),
+    Target("/", 200, "<title>ClinicOps | Clinical operations support from Denmark</title>"),
     Target("/services", 200, "<title>Solution: Regulatory Change Integrity Review | ClinicOps</title>"),
     Target(
         "/denmark-market-access",

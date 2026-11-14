@@ -1,6 +1,6 @@
 # ClinicOps positioning — source of truth (2026-09-18)
 
-Status: ACTIVE. This document supersedes all earlier broad positioning ("clinical operations", multi-lane Ops portfolio) for every public surface. Older strategy files remain as history; where they conflict with this file, this file wins.
+Status: ACTIVE for inner pages. See the 2026-11-14 addendum at the end: the homepage and navigation are proposed to change. This document supersedes all earlier broad positioning ("clinical operations", multi-lane Ops portfolio) for every public surface. Older strategy files remain as history; where they conflict with this file, this file wins.
 
 ## 1. The company
 
@@ -109,3 +109,7 @@ The CLINICOPS MASTER EXECUTION DIRECTIVE (2026-09-18) is adopted and supersedes 
 **Capability registry:** `03_OPERATIONS/CAPABILITY_REGISTRY.md` tracks major capabilities (PROPOSED/PILOT/ACTIVE/DEGRADED/DISABLED/RETIRED). Experimental infrastructure (semantic memory, Headroom, OmniRoute, deck.gl, Storybook, backend) stays PROPOSED until evidence.
 
 **Final rule (verbatim):** flagship workflow over another idea; test the primitive over a new market; less user friction over more technology; external evidence over internal confidence.
+
+## Addendum 2026-11-14 (proposed, awaiting owner confirmation)
+
+On 2026-11-14 the owner asked for the front page to read as Danish clinical operations, with eCOA highly visible and a clearer structure. The homepage and navigation on branch `feat/site-restructure-clinical-operations` now present three lanes: eCOA, medical device records, and Danish language and pharmacovigilance. Sections 1 to 3 above still describe the medical device lane and the inner pages. The decision record is `SITE_PROJECT_PID_2026-11-14.md`. Nothing above was deleted.
