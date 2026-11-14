@@ -9,7 +9,7 @@ const PAGES = [
 ];
 const LOCAL_UTILITIES = [
   "/identifier-check.html", "/integrity-check.html", "/change-surface-mapper.html",
-  "/regulatory-change-impact.html", "/technical-file-consistency.html",
+  "/regulatory-change-impact.html", "/technical-file-consistency.html", "/ecoa-delivery-workbench.html",
   "/readiness-score.html", "/integrity-economics.html",
   "/danish-pv-literature-register.html", "/sdea-clause-checker.html",
   "/danish-dhpc-checker.html",

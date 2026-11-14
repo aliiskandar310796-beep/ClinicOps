@@ -148,6 +148,7 @@ SECTION_BY_PAGE = {
     "regulatory-change-impact.html": "Tools",
     "specimen-register/index.html": "Tools",
     "technical-file-consistency.html": "Tools",
+    "ecoa-delivery-workbench.html": "Tools",
     "danish-pv-literature-register.html": "Tools",
     "sdea-clause-checker.html": "Tools",
     "danish-dhpc-checker.html": "Tools",

@@ -46,6 +46,11 @@ Component/supporting pages kept for URL continuity and focused jobs: Regulatory 
 ### EUDAMED Identifier Check (`identifier-check.html`)
 Status: PUBLIC utility. Structural screening only.
 
+### eCOA Delivery Workbench (`docs/ecoa-delivery-workbench.html`) — ADJACENT, SANITIZED PROTOTYPE
+Built 2026-11-14 on the owner's explicit instruction; the specialization gate answer is **adjacent, not core**: eCOA delivery shares the integrity kernel (protocol-vs-specification schedule reconciliation, change-surface closure with owner and evidence, language-version integrity) but is not EU MedTech regulatory data integrity. It therefore stays a browser-local sanitized prototype, outside primary navigation, with no engagement offer attached beyond the existing intake route. Full record: `01_STRATEGY/ECOA_WORKBENCH_PID_2026-11-14.md`.
+- Target user: study-start and delivery staff at sponsors, CROs, technology providers and translation vendors. Job: keep licence, translation, screenshot review, testing and change dependencies in one staged plan. Output: derived statuses, change-surface list, highlight report, RAID CSV. Decision boundary: structures recorded information; never a compliance determination, never a system of record. Owner: Ali. Real-world validation: NONE (no real study delivered; no design partner).
+- Kill condition: no unprompted use or qualified buyer conversation attributable to the page by 2027-02-14 and no design partner by 2027-05-14 → demote to the Demoted utilities list. Next loop: one real design-partner study run, then revise checklists and change rules from what was actually missed.
+
 ### Sanitized examples
 Interactive Integrity Specimen, Transition Map sample. Purpose: make the method inspectable before an engagement.
 

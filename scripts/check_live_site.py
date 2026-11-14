@@ -179,6 +179,11 @@ TARGETS = (
         "<title>SS(C)P Operations and Evidence Workflows | ClinicOps</title>",
     ),
     Target(
+        "/ecoa-delivery-workbench",
+        200,
+        "<title>eCOA Delivery Workbench | ClinicOps</title>",
+    ),
+    Target(
         "/technical-file-consistency",
         200,
         "<title>Technical File Consistency Check | ClinicOps</title>",
