@@ -19,22 +19,29 @@
 
 :root{
   color-scheme:light dark;
-  --bg:#f7f5f0;
+  --bg:#f6f3ec;
   --surface:#ffffff;
-  --surface-2:#efebe1;
-  --text:#1b1912;
-  --muted:#6b6455;
-  --border:#e2dccb;
-  --border-strong:#cbc2aa;
-  --control:#8b8371;
-  --accent:#33396b;
-  --accent-strong:#23274a;
+  --surface-2:#ece8dd;
+  --text:#12262c;
+  --muted:#58646a;
+  --border:#dcdfd6;
+  --border-strong:#c3cac4;
+  --control:#7d898c;
+  /* Three segment inks. Colour tells you where you are: teal = eCOA and participants,
+     cobalt = device records and registers, coral = Danish language and local work.
+     Every one is >=4.5:1 as text on --bg and as a button fill under white text. */
+  --seg-ecoa:#0b6e6a;--seg-ecoa-strong:#08524f;--seg-ecoa-soft:#d9efec;
+  --seg-device:#2447b5;--seg-device-strong:#1a3489;--seg-device-soft:#dde5f9;
+  --seg-dk:#b1331d;--seg-dk-strong:#8a2514;--seg-dk-soft:#f7ded6;
+  --ink:#0f2a33; /* deep ink for the closing band */
+  --accent:#1b4b5a;
+  --accent-strong:#12363f;
   --accent-contrast:#ffffff;
-  --accent-soft:#e7e8f2;
-  --secondary:#b5502a;
-  --warn:#8c6015; /* >=4.5:1 on --bg and --surface (axe color-contrast, qa gate) -- do not lighten */
-  --ok:#2f6d4f;
-  --hold:#b23a2e;
+  --accent-soft:#e1eaed;
+  --secondary:#b1331d;
+  --warn:#8a5c10; /* >=4.5:1 on --bg and --surface (axe color-contrast, qa gate) -- do not lighten */
+  --ok:#2a6e4a;
+  --hold:#a8301f;
   --shadow:none;
   --r:6px;
   --r-sm:4px;
@@ -52,25 +59,37 @@
 }
 @media(prefers-color-scheme:dark){
   :root{
-    --bg:#16130f;
-    --surface:#1e1a13;
-    --surface-2:#241f17;
-    --text:#ede8de;
-    --muted:#a79e8c;
-    --border:#362f23;
-    --border-strong:#4a4131;
-    --control:#6e6553;
-    --accent:#8b93d6;
-    --accent-strong:#a9afe3;
-    --accent-contrast:#12142b;
-    --accent-soft:#23264a;
-    --secondary:#e08a5f;
+    --bg:#0f1517;
+    --surface:#151d20;
+    --surface-2:#1a2427;
+    --text:#e9eeee;
+    --muted:#9aa7aa;
+    --border:#26323a;
+    --border-strong:#364650;
+    --control:#5c6b70;
+    --seg-ecoa:#55cdc4;--seg-ecoa-strong:#7fe0d9;--seg-ecoa-soft:#10302f;
+    --seg-device:#8fa8ff;--seg-device-strong:#b3c3ff;--seg-device-soft:#1a2447;
+    --seg-dk:#ff8f78;--seg-dk-strong:#ffb09f;--seg-dk-soft:#3a1a14;
+    --ink:#0a1114;
+    --accent:#7fc4d6;
+    --accent-strong:#a6d8e5;
+    --accent-contrast:#0b1214;
+    --accent-soft:#14303a;
+    --secondary:#ff8f78;
     --warn:#e3b15c;
     --ok:#7fd9a8;
-    --hold:#f0897a;
+    --hold:#ff9d8c;
   }
 }
 
+/* A page, or a band inside a page, takes its segment's ink. Links, buttons, rules and
+   numerals all read --accent, so one attribute recolours everything that belongs to it. */
+[data-seg=ecoa]{--accent:var(--seg-ecoa);--accent-strong:var(--seg-ecoa-strong);--accent-soft:var(--seg-ecoa-soft)}
+[data-seg=device]{--accent:var(--seg-device);--accent-strong:var(--seg-device-strong);--accent-soft:var(--seg-device-soft)}
+[data-seg=dk]{--accent:var(--seg-dk);--accent-strong:var(--seg-dk-strong);--accent-soft:var(--seg-dk-soft)}
+html[data-seg]{--tint:var(--accent-soft)}
+html[data-seg] .callout:not(.boundary){background:var(--accent-soft)}
+html[data-flow=ecoa]{--flow:var(--seg-ecoa)}html[data-flow=device]{--flow:var(--seg-device)}html[data-flow=dk]{--flow:var(--seg-dk)}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:76px;-webkit-text-size-adjust:100%}
 :target,[id]{scroll-margin-top:76px}
@@ -100,6 +119,13 @@ nav.primary a::after{content:"";position:absolute;left:11px;right:11px;bottom:-1
 @media(hover:hover) and (pointer:fine){nav.primary a:hover{color:var(--text)}nav.primary a:hover::after{transform:scaleX(.4)}}
 nav.primary a[aria-current="page"]{color:var(--text)}
 nav.primary a[aria-current="page"]::after{transform:scaleX(1)}
+
+header.site::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:3px;background:var(--flow,var(--accent));transform:scaleX(var(--p,0));transform-origin:left;transition:background-color .4s var(--ease-out);pointer-events:none}
+@supports(animation-timeline:scroll()){@media(prefers-reduced-motion:no-preference){
+  @keyframes read{to{transform:scaleX(1)}}
+  header.site::after{transform:scaleX(0);animation:read linear both;animation-timeline:scroll(root)}
+}}
+@media print{header.site::after{display:none}}
 
 /* ---------- Page rhythm ---------- */
 main{padding:clamp(40px,7vw,88px) 0 24px}
@@ -463,3 +489,6 @@ main .lede{max-width:34em}
 main p{orphans:2;widows:2}
 .callout{padding-right:max(24px,calc(100% - 64ch))}
 .chk{max-width:none}
+/* segment pages: the page's own ink carries through the headline and the lead rule */
+html[data-seg] main h1{color:var(--accent-strong)}
+html[data-seg] .callout.boundary{border-top-color:var(--accent)}

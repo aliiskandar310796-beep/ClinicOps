@@ -31,8 +31,8 @@ SHELL_HEAD = (
     '<link rel="preload" href="../assets/fonts/ibm-plex-mono-latin-400.woff2" as="font" type="font/woff2" crossorigin>'
     '<link rel="stylesheet" href="../site.css">\n'
     '<meta name="color-scheme" content="light dark">'
-    '<meta name="theme-color" content="#f7f5f0" media="(prefers-color-scheme: light)">'
-    '<meta name="theme-color" content="#16130f" media="(prefers-color-scheme: dark)">'
+    '<meta name="theme-color" content="#f6f3ec" media="(prefers-color-scheme: light)">'
+    '<meta name="theme-color" content="#0f1517" media="(prefers-color-scheme: dark)">'
 )
 SHELL_HEADER = (
     '<a class="skip-link" href="#main">Skip to content</a>'
@@ -74,6 +74,7 @@ def render_public_demo() -> str:
 <meta property="og:image" content="https://clinicops.dk/assets/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://clinicops.dk/assets/og-image.png">
 <script type="application/ld+json">{{"@context":"https://schema.org","@type":"WebPage","name":"{TITLE}","description":"{DESCRIPTION}","url":"{CANONICAL}","isPartOf":{{"@type":"WebSite","name":"ClinicOps","url":"https://clinicops.dk/"}},"publisher":{{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}}}</script>
 '''
+    html = html.replace('<html lang="en">', '<html lang="en" data-seg="device">', 1)
     html = html.replace("<style>", metadata + "<style>", 1)
     html = html.replace("</style>\n</head>", "</style>\n" + SHELL_HEAD + "</head>", 1)
     html = html.replace(
