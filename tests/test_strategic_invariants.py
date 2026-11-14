@@ -37,15 +37,17 @@ CANONICAL_CATEGORY = "EU MedTech regulatory data integrity"
 CONTACT_EMAIL = "info@clinicops.dk"
 
 # --- the homepage's single story -------------------------------------------
-HOMEPAGE_H1 = (
-    "Keep EUDAMED, UDI, certificates, SS(C)P and controlled records aligned "
-    "when products change."
-)
-PRIMARY_CTAS = (">Check a change free</a>", ">Scope a review</a>")
+# Amended 2026-11-14 on the owner's instruction (see
+# 01_STRATEGY/SITE_PROJECT_PID_2026-11-14.md): the front door is Danish clinical
+# operations support with three lanes; inner pages keep the MedTech integrity
+# identity.
+HOMEPAGE_CATEGORY = "Clinical operations support from Denmark"
+HOMEPAGE_H1 = "Clinical operations support from Denmark."
+PRIMARY_CTAS = (">Open the eCOA workbench</a>", ">Tell me about your project</a>")
 
 # --- page identity ----------------------------------------------------------
 PINNED_TITLES = {
-    "index.html": "ClinicOps | EU MedTech Regulatory Data Integrity",
+    "index.html": "ClinicOps | Clinical operations support from Denmark",
     "services.html": "Solution: Regulatory Change Integrity Review | ClinicOps",
     "use-cases.html": "Use Cases: EUDAMED, SS(C)P, AR Portfolios, Denmark | ClinicOps",
     "tools.html": "Tools: Integrity Scanner and Evidence Utilities | ClinicOps",
@@ -117,7 +119,7 @@ def test_homepage_organization_schema_pins_the_canonical_identity() -> None:
     assert org["url"] == "https://clinicops.dk/"
     assert org["email"] == CONTACT_EMAIL
     assert org["logo"].startswith("https://clinicops.dk/assets/")
-    assert CANONICAL_CATEGORY in org["description"]
+    assert HOMEPAGE_CATEGORY in org["description"]
     assert org["sameAs"] == [CANONICAL_COMPANY_LINKEDIN]
     assert org["founder"]["name"] == "Ali Iskandar"
     assert FOUNDER_LINKEDIN in org["founder"]["sameAs"]

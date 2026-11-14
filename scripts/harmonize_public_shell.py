@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+import html
 import json
 import os
 import re
@@ -106,9 +107,9 @@ def sync_meta_consistency(text: str) -> str:
 
 NAV_ITEMS = (
     ("Home", "index.html"),
-    ("Solution", "services.html"),
-    ("Use cases", "use-cases.html"),
-    ("Research", "research.html"),
+    ("eCOA", "ecoa-delivery-workbench.html"),
+    ("Medical devices", "services.html"),
+    ("Danish & PV", "denmark-market-access.html"),
     ("Tools", "tools.html"),
     ("About", "about.html"),
     ("Contact", "contact.html"),
@@ -118,26 +119,26 @@ NAV_ITEMS = (
 # carry no aria-current. Unknown new pages fail loudly so the map is kept current.
 SECTION_BY_PAGE = {
     "index.html": "Home",
-    "services.html": "Solution",
-    "assessment-intake.html": "Solution",
-    "evidence-change-control-pack.html": "Solution",
-    "what-a-pilot-looks-like.html": "Solution",
-    "evidence-pack-checklist.html": "Solution",
-    "integrity-gate.html": "Solution",
-    "eu-authorised-representative.html": "Solution",
-    "use-cases.html": "Use cases",
-    "authorised-representative-portfolio-intelligence.html": "Use cases",
-    "class-iii-transition.html": "Use cases",
-    "denmark-market-access.html": "Use cases",
-    "eu-mdr-regulatory-integrity.html": "Use cases",
-    "eudamed-transition.html": "Use cases",
-    "medical-device-document-control.html": "Use cases",
-    "regulatory-intelligence.html": "Use cases",
-    "sscp-operations.html": "Use cases",
-    "research.html": "Research",
-    "primary-sources.html": "Research",
-    "research/eudamed-watch/index.html": "Research",
-    "research/sscp-public-record-scan/index.html": "Research",
+    "services.html": "Medical devices",
+    "assessment-intake.html": "Medical devices",
+    "evidence-change-control-pack.html": "Medical devices",
+    "what-a-pilot-looks-like.html": "Medical devices",
+    "evidence-pack-checklist.html": "Medical devices",
+    "integrity-gate.html": "Medical devices",
+    "eu-authorised-representative.html": "Medical devices",
+    "use-cases.html": "Medical devices",
+    "authorised-representative-portfolio-intelligence.html": "Medical devices",
+    "class-iii-transition.html": "Medical devices",
+    "denmark-market-access.html": "Danish & PV",
+    "eu-mdr-regulatory-integrity.html": "Medical devices",
+    "eudamed-transition.html": "Medical devices",
+    "medical-device-document-control.html": "Medical devices",
+    "regulatory-intelligence.html": "Medical devices",
+    "sscp-operations.html": "Medical devices",
+    "research.html": "Medical devices",
+    "primary-sources.html": "Medical devices",
+    "research/eudamed-watch/index.html": "Medical devices",
+    "research/sscp-public-record-scan/index.html": "Medical devices",
     "tools.html": "Tools",
     "change-surface-mapper.html": "Tools",
     "identifier-check.html": "Tools",
@@ -148,10 +149,10 @@ SECTION_BY_PAGE = {
     "regulatory-change-impact.html": "Tools",
     "specimen-register/index.html": "Tools",
     "technical-file-consistency.html": "Tools",
-    "ecoa-delivery-workbench.html": "Tools",
-    "danish-pv-literature-register.html": "Tools",
-    "sdea-clause-checker.html": "Tools",
-    "danish-dhpc-checker.html": "Tools",
+    "ecoa-delivery-workbench.html": "eCOA",
+    "danish-pv-literature-register.html": "Danish & PV",
+    "sdea-clause-checker.html": "Danish & PV",
+    "danish-dhpc-checker.html": "Danish & PV",
     "transition-map-sample/index.html": "Tools",
     "about.html": "About",
     "expert-network.html": "About",
@@ -194,7 +195,7 @@ def _header(page: Path) -> str:
     assert current is None or current in {label for label, _ in NAV_ITEMS}
     for label, href in NAV_ITEMS:
         active = ' aria-current="page"' if label == current else ""
-        links.append(f'<a href="{_nav_href(prefix, href)}"{active}>{label}</a>')
+        links.append(f'<a href="{_nav_href(prefix, href)}"{active}>{html.escape(label)}</a>')
     nav = "".join(links)
     return (
         f'<header class="site"><div class="site-inner">'

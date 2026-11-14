@@ -41,10 +41,10 @@ try {
     }
 
     await page.goto(BASE + "/", { waitUntil: "load" });
-    pass(`[${width}] homepage buyer explanation visible`, await page.getByText("You changed something about a device.", { exact: false }).isVisible());
-    pass(`[${width}] homepage free CTA visible`, await page.getByRole("link", { name: "Check a change free" }).isVisible());
+    pass(`[${width}] homepage buyer explanation visible`, await page.getByText("I help sponsors, device manufacturers", { exact: false }).isVisible());
+    pass(`[${width}] homepage free CTA visible`, await page.getByRole("link", { name: "Open the eCOA workbench" }).first().isVisible());
     pass(`[${width}] homepage paid CTA visible`, await page.getByRole("link", { name: "Scope a review", exact: true }).first().isVisible());
-    const ctaBox = await page.getByRole("link", { name: "Check a change free" }).boundingBox();
+    const ctaBox = await page.getByRole("link", { name: "Open the eCOA workbench" }).first().boundingBox();
     pass(`[${width}] homepage free CTA remains tappable`, !!ctaBox && ctaBox.height >= 40, ctaBox ? String(ctaBox.height) : "missing");
 
     pass(`[${width}] no uncaught page errors`, pageErrors.length === 0, pageErrors.join(" | "));

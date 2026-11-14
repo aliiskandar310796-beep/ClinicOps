@@ -35,8 +35,8 @@ try {
 
   // 1. homepage → solution → scanner
   await page.goto(BASE.startsWith("file:") ? BASE + "/index.html" : BASE + "/", { waitUntil: "load" });
-  ok("homepage states the job", (await page.textContent("h1")).includes("EUDAMED"));
-  await page.click('nav.primary a:has-text("Solution")');
+  ok("homepage states the job", (await page.textContent("h1")).includes("Clinical operations"));
+  await page.click('nav.primary a:has-text("Medical devices")');
   ok("solution page is flagship-first", (await page.textContent("h1")).includes("Regulatory Change Integrity Review"));
   await page.goto(BASE + "/integrity-scanner.html", { waitUntil: "load" });
 

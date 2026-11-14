@@ -37,8 +37,8 @@ SHELL_HEAD = (
 SHELL_HEADER = (
     '<a class="skip-link" href="#main">Skip to content</a>'
     '<header class="site"><div class="site-inner"><a class="brand" href="../">Clinic<span>Ops</span></a>'
-    '<nav class="primary" aria-label="Primary"><a href="../">Home</a><a href="../services">Solution</a>'
-    '<a href="../use-cases">Use cases</a><a href="../research">Research</a>'
+    '<nav class="primary" aria-label="Primary"><a href="../">Home</a><a href="../ecoa-delivery-workbench">eCOA</a>'
+    '<a href="../services">Medical devices</a><a href="../denmark-market-access">Danish &amp; PV</a>'
     '<a href="../tools" aria-current="page">Tools</a><a href="../about">About</a>'
     '<a href="../contact">Contact</a></nav></div></header>'
     '<script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");'

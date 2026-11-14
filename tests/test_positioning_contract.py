@@ -1,6 +1,8 @@
-"""Positioning contract (2026-09-18 repositioning).
+"""Positioning contract (2026-09-18 repositioning, homepage amended 2026-11-14).
 
-The public site presents ONE company: EU MedTech Regulatory Data Integrity.
+The public site's inner pages stay on EU MedTech Regulatory Data Integrity; the
+homepage presents the three lanes under Danish clinical operations (amended
+2026-11-14 on the owner's instruction).
 These tests pin the repositioning so a later edit cannot quietly re-broaden
 the public architecture or reintroduce banned claim language. Source of
 truth: 01_STRATEGY/POSITIONING_2026-09-18_REGULATORY_DATA_INTEGRITY.md.
@@ -37,19 +39,27 @@ def _pages() -> list[Path]:
     return [p for p in DOCS.glob("*.html") if p.name not in {"404.html", "clinical-operations.html"}]
 
 
-def test_homepage_states_the_category_and_flagship() -> None:
+def test_homepage_states_the_umbrella_and_three_lanes() -> None:
+    """Homepage reframed 2026-11-14 on the owner's instruction: the front door
+    is Danish clinical operations support, with three plainly named lanes. The
+    MedTech data-integrity lane stays the best-evidenced one and keeps its
+    flagship pages; see 01_STRATEGY/SITE_PROJECT_PID_2026-11-14.md."""
     html = (DOCS / "index.html").read_text(encoding="utf-8")
-    assert "EU MedTech Regulatory Data Integrity" in html
-    assert "Regulatory Change Integrity Review" in html
-    assert 'href="integrity-scanner"' in html
-    plain = "You changed something about a device. ClinicOps checks whether that change reached every regulatory record"
-    assert plain in html
-    assert html.index(plain) < html.index("Approved source")
-    assert '>Check a change free</a>' in html
-    assert '>Scope a review</a>' in html
-    assert "Runs in your browser. No upload. No sign-up." in html
+    assert "<title>ClinicOps | Clinical operations support from Denmark</title>" in html
+    assert html.count("<h1") == 1
+    assert "Clinical operations support from Denmark." in html
+    for lane in ("eCOA and patient-reported outcomes", "Medical device records", "Danish language and pharmacovigilance"):
+        assert lane in html, lane
+    # eCOA is visible in the hero, the lanes and the tool list
+    assert html.index('href="ecoa-delivery-workbench"') < html.index("What I work on")
+    assert html.count('href="ecoa-delivery-workbench"') >= 3
+    # the flagship integrity journey is still one click away
+    assert 'href="integrity-scanner"' in html and 'href="services"' in html
+    assert "The free tools on this site run in your browser." in html
     # no black-box score on the primary journey
     assert "readiness-score" not in html
+    # approved boundary wording stays on the front door
+    assert "medical and regulatory sign-off stays with the formally responsible person or organisation" in html
 
 
 def test_primary_navigation_is_simplified() -> None:
@@ -58,8 +68,8 @@ def test_primary_navigation_is_simplified() -> None:
     assert nav
     links = re.findall(r"<a ", nav.group(0))
     assert len(links) <= 7, "primary navigation grew beyond 7 items"
-    for label in ("Solution", "Use cases", "Research", "Tools"):
-        assert f">{label}</a>" in nav.group(0)
+    for label in ("eCOA", "Medical devices", "Danish &amp; PV", "Tools", "About", "Contact"):
+        assert f">{label}</a>" in nav.group(0), label
 
 
 def test_broad_ops_categories_stay_archived() -> None:
@@ -140,7 +150,7 @@ def test_flagship_page_is_reframed() -> None:
 def test_tools_keep_scanner_first() -> None:
     html = (DOCS / "tools.html").read_text(encoding="utf-8")
     assert "Not sure where to start?</strong> Use the Regulatory Integrity Scanner." in html
-    assert html.index("START HERE") < html.index("Focused utilities") < html.index("Pharmacovigilance utilities")
+    assert html.index("<h3>Regulatory Integrity Scanner</h3>") < html.index("Focused utilities") < html.index("Pharmacovigilance utilities")
 
 
 def test_solution_page_is_flagship_first() -> None:
