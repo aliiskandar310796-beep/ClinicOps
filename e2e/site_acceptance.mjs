@@ -41,7 +41,7 @@ try {
     }
 
     await page.goto(BASE + "/", { waitUntil: "load" });
-    pass(`[${width}] homepage buyer explanation visible`, await page.getByText("I help sponsors, device manufacturers", { exact: false }).isVisible());
+    pass(`[${width}] homepage buyer explanation visible`, await page.getByText("ClinicOps helps sponsors, device manufacturers", { exact: false }).isVisible());
     pass(`[${width}] homepage free CTA visible`, await page.getByRole("link", { name: "Open the eCOA workbench" }).first().isVisible());
     pass(`[${width}] homepage paid CTA visible`, await page.getByRole("link", { name: "Scope a review", exact: true }).first().isVisible());
     const ctaBox = await page.getByRole("link", { name: "Open the eCOA workbench" }).first().boundingBox();

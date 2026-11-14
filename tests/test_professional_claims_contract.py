@@ -32,23 +32,24 @@ def test_proof_data_keeps_qsr_unpublished() -> None:
     assert all(p["id"] != "proof-pharma-qsr" for p in proof["proofs"])
 
 
-def test_public_degree_wording_uses_verified_titles() -> None:
-    """Neither degree carries an "Industrial Specialisation" title.
+def test_public_site_is_independent_of_any_individual() -> None:
+    """Decision 2026-11-14 (owner): the public structure names no individual and
+    carries no personal biography, degree, language list or personal profile link.
 
-    Corrected 2026-09-28: Ali confirmed directly, live in chat ("i took
-    master in medicine focusing on translational medicine"; "Bachelor in
-    Medicin") that this phrase — previously required by this very test —
-    was never accurate for either degree. See
-    VERIFIED_PROFILE_FACTS_ADDENDUM_2026-09-28_DEGREE_TITLE_CORRECTION.md
-    in the business project for the full record.
+    Three places keep an identity because the law or a registry requires it: the
+    privacy notice (GDPR controller identification), the registered-actor block on
+    the EU authorised representative page, and the contact address. Nothing else may.
     """
     docs = ROOT / "docs"
-    public = "\n".join(
-        path.read_text(encoding="utf-8")
-        for path in docs.rglob("*.html")
-        if path.name not in {"404.html", "clinical-operations.html"}
-    )
-    assert "Medicine with Industrial Specialisation" not in public
+    allowed = {"privacy-notice/index.html", "eu-authorised-representative.html"}
+    forbidden = ("Iskandar", "Aalborg University", "Bachelor of Medicine", "linkedin.com/in/", "Industrial Specialisation")
+    offenders = []
+    for path in list(docs.rglob("*.html")) + [docs / "llms.txt"]:
+        rel = path.relative_to(docs).as_posix()
+        if rel in allowed:
+            continue
+        text = path.read_text(encoding="utf-8")
+        offenders += [f"{rel}: {tok}" for tok in forbidden if tok in text]
+    assert not offenders, offenders
     about = (docs / "about.html").read_text(encoding="utf-8")
-    assert "Master of Science (MSc) in Medicine (Translational Medicine)" in about
-    assert "Bachelor of Medicine" in about
+    assert "explicitly appointed" in about

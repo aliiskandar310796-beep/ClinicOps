@@ -51,7 +51,7 @@ def test_homepage_states_the_umbrella_and_three_lanes() -> None:
     for lane in ("eCOA and patient-reported outcomes", "Medical device records", "Danish language and pharmacovigilance"):
         assert lane in html, lane
     # eCOA is visible in the hero, the lanes and the tool list
-    assert html.index('href="ecoa-delivery-workbench"') < html.index("What I work on")
+    assert html.index('href="ecoa-delivery-workbench"') < html.index("What ClinicOps works on")
     assert html.count('href="ecoa-delivery-workbench"') >= 3
     # the flagship integrity journey is still one click away
     assert 'href="integrity-scanner"' in html and 'href="services"' in html

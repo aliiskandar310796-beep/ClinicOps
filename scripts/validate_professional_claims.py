@@ -134,10 +134,17 @@ def main() -> int:
             )
 
     about = (DOCS / "about.html").read_text(encoding="utf-8")
-    if "Master of Science (MSc) in Medicine (Translational Medicine)" not in about:
-        errors.append("about.html: verified credential line missing")
-    if "Bachelor of Medicine" not in about:
-        errors.append("about.html: bachelor's degree line missing")
+    # Decision 2026-11-14: the public structure is independent of any individual.
+    # Identity is shown only where a law or registry requires it.
+    allowed_identity = {"privacy-notice/index.html", "eu-authorised-representative.html"}
+    for page in pages():
+        rel = page.relative_to(DOCS).as_posix()
+        if rel in allowed_identity:
+            continue
+        html = page.read_text(encoding="utf-8")
+        for token in ("Iskandar", "Aalborg University", "Bachelor of Medicine", "linkedin.com/in/"):
+            if token in html:
+                errors.append(f"{rel}: personal identity token {token!r} on a public page")
     if "explicitly appointed" not in about:
         errors.append("about.html: professional boundary statement missing")
 
