@@ -1,5 +1,10 @@
 # ClinicOps operating changelog
 
+## 2026-11-14
+- Added the eCOA Delivery Workbench (`docs/ecoa-delivery-workbench`) as an adjacent, browser-local sanitized prototype: instrument-language plan, protocol-vs-specification schedule comparison, testing skeleton, risk and issue registers, change-surface mapping, tolerances, highlight report; PRINCE2-structured; 18 sources verified against origin on 2026-11-14.
+- Added Node rule tests (30), a pytest contract test (9), and a Playwright journey (111 checks) to CI.
+- Fixed during testing: calendar-impossible dates (for example 30 February) were accepted by `isoDate`.
+
 ## 2026-09-09
 - Initialized public GitHub operating repository.
 - Encoded 8 Sep headline reversal into standing claim rules and claim guard.

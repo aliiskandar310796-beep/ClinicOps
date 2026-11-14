@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png"><link rel="stylesheet" href="site.css"><title>eCOA Delivery Workbench | ClinicOps</title><meta name="description" content="Free browser-local workbench for eCOA study delivery: licensing and translation plan, Nordic screenshot review, testing pack, risk and change control."><link rel="canonical" href="https://clinicops.dk/ecoa-delivery-workbench"><meta property="og:title" content="eCOA Delivery Workbench | ClinicOps"><meta property="og:description" content="Free browser-local workbench for eCOA study delivery: licensing and translation plan, Nordic screenshot review, testing pack, risk and change control."><meta property="og:type" content="website"><meta property="og:url" content="https://clinicops.dk/ecoa-delivery-workbench"><meta property="og:site_name" content="ClinicOps"><meta name="twitter:card" content="summary"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","name":"eCOA Delivery Workbench | ClinicOps","description":"Free browser-local workbench for eCOA study delivery: licensing and translation plan, Nordic screenshot review, testing pack, risk and change control.","url":"https://clinicops.dk/ecoa-delivery-workbench","isPartOf":{"@type":"WebSite","name":"ClinicOps","url":"https://clinicops.dk/"},"publisher":{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}</script>
+<style>
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.table-scroll{position:relative}
+.btn,.cta{white-space:normal;text-align:center;max-width:100%;padding-top:8px;padding-bottom:8px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:18px 0 6px}
+.toolbar .file{display:inline-flex;align-items:center;margin:0;cursor:pointer}
+.toolbar .file input{position:absolute;width:1px;height:1px;opacity:0}
+.toolbar .file:focus-within{outline:2px solid var(--accent);outline-offset:3px;border-radius:var(--r)}
+.tool-actions{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0 26px}
+.small-btn{min-height:40px;padding:0 12px;font-size:.85rem}
+.tablist{display:flex;gap:6px;overflow-x:auto;border-bottom:1px solid var(--border-strong);margin:28px 0 0;padding-bottom:0}
+.tablist button{font:inherit;font-weight:600;font-size:.95rem;min-height:44px;padding:0 14px;background:none;color:var(--muted);border:1px solid transparent;border-bottom:0;border-radius:var(--r) var(--r) 0 0;cursor:pointer;white-space:nowrap}
+.tablist button[aria-selected="true"]{color:var(--text);border-color:var(--border-strong);background:var(--surface)}
+.panel{padding-top:8px}
+.panel>h2:first-child{margin-top:26px}
+.panel h3{margin-top:34px}
+.panel h4{margin:22px 0 4px}
+.sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:12px;margin:14px 0}
+.sum-card{border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;background:var(--surface)}
+.sum-card strong{display:block;font-size:1.5rem;font-variant-numeric:tabular-nums}
+.chk{border-top:1px solid var(--border);padding:12px 0;display:grid;grid-template-columns:minmax(0,1fr) minmax(200px,280px);gap:14px;align-items:start}
+.chk p{margin:3px 0 0;font-size:.88rem;color:var(--muted)}
+.chk .basis{display:flex;gap:8px 12px;flex-wrap:wrap;align-items:center;font-size:.8rem;margin-top:6px}
+.chk-ctl{display:grid;gap:6px}
+.basis{display:flex;gap:8px 12px;flex-wrap:wrap;align-items:center;font-size:.8rem}
+.gate-line{font-weight:600;color:var(--text)}
+.table-scroll table.reg{font-size:.88rem}
+.reg td{padding:8px 10px 8px 0}
+.reg input,.reg select,.reg textarea{min-height:40px;padding:6px 8px;font-size:.9rem;min-width:110px}
+.reg textarea{min-width:200px}
+.reg .note{display:block;font-size:.8rem;color:var(--muted);margin-top:4px;white-space:normal;max-width:260px}
+.pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.four{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.checks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:4px 18px;margin:10px 0}
+.checks .check{display:flex;gap:8px;align-items:flex-start;font-weight:500;margin:0;padding:6px 0}
+.checks .check input{width:auto;min-height:0;margin-top:5px}
+details.ref{border:1px solid var(--border);border-radius:var(--r);padding:12px 16px;background:var(--surface);margin:14px 0}
+details.ref summary{cursor:pointer;font-weight:700}
+#sources td,#sources th{font-size:.86rem}
+@media(max-width:900px){
+.chk,.pair,.checks{grid-template-columns:1fr}
+.four{grid-template-columns:repeat(2,minmax(0,1fr))}
+.table-scroll table.reg{display:block;min-width:0!important}
+.reg thead{position:absolute;left:-9999px;top:auto}
+.reg tbody,.reg tr,.reg td{display:block}
+.reg tr{border:1px solid var(--border);border-radius:var(--r);padding:10px 12px;margin:0 0 12px}
+.reg td{border:0;padding:6px 0}
+.reg td::before{content:attr(data-label);display:block;font-family:var(--mono);font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.reg .note{max-width:none}
+}
+@media(max-width:520px){.four{grid-template-columns:1fr}}
+</style><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f7f5f0" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#16130f" media="(prefers-color-scheme: dark)"></head><body>
+<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="/">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="/">Home</a><a href="services">Solution</a><a href="use-cases">Use cases</a><a href="research">Research</a><a href="tools" aria-current="page">Tools</a><a href="about">About</a><a href="contact">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");var r=a?a.offsetLeft+a.offsetWidth+16-n.clientWidth:0;if(r>0)n.scrollLeft=r})()</script>
+<main id="main" tabindex="-1" class="wrap">
+<section class="hero"><span class="eyebrow">Free tool · Clinical outcome assessments · Sanitized prototype</span><h1>eCOA delivery workbench</h1><p class="lede">Electronic outcome assessments reach participants late for ordinary reasons: a licence that was not asked for, a language version still in review, a testing window squeezed by everything before it. This workbench keeps those dependencies in one place and runs them as a staged project: a plan per instrument and language, review and testing checklists, a risk register, change control and a report for the people who decide. It runs in your browser; <strong>nothing is sent to ClinicOps</strong>.</p></section>
+
+<div class="callout boundary"><strong>Boundary.</strong> A sanitized prototype of method, built from published guidance and consensus papers listed in the <a href="#sources">source register</a> (each checked on 2026-11-14). It structures what you record and shows what follows from it. It is not a compliance determination, not a validated system and not a system of record. Acceptance, go-live, data changes and every regulatory or clinical judgement stay with the sponsor, the investigator and their qualified staff. Do not enter participant data.</div>
+<noscript><div class="callout boundary"><p>This tool runs in your browser and needs JavaScript enabled.</p></div></noscript>
+
+<div class="toolbar"><button type="button" class="btn primary-btn" id="load-example">Load the fictional example</button><label class="btn secondary-btn file">Import workspace (.json)<input type="file" id="import" accept=".json,application/json"></label><button type="button" class="btn secondary-btn" id="export">Export workspace (.json)</button><button type="button" class="btn secondary-btn" id="clear">Clear</button></div>
+<p class="status" id="status" role="status" aria-live="polite">Nothing is stored between visits. Export the workspace file to keep your work.</p>
+
+<div class="four">
+<div id="study-fields" style="display:contents"></div>
+<div class="field"><label for="stage">Current stage</label><select id="stage"></select></div>
+<div class="field"><label for="fpi">First participant planned</label><input id="fpi" type="date"></div>
+</div>
+<p class="hint" id="stage-hint"></p>
+
+<div class="tablist" role="tablist" aria-label="Workbench sections, by PRINCE2 practice">
+<button type="button" role="tab" id="tab-bc" aria-controls="panel-bc">Business case</button>
+<button type="button" role="tab" id="tab-org" aria-controls="panel-org">Organising</button>
+<button type="button" role="tab" id="tab-plans" aria-controls="panel-plans">Plans</button>
+<button type="button" role="tab" id="tab-quality" aria-controls="panel-quality">Quality</button>
+<button type="button" role="tab" id="tab-risk" aria-controls="panel-risk">Risk</button>
+<button type="button" role="tab" id="tab-issues" aria-controls="panel-issues">Issues</button>
+<button type="button" role="tab" id="tab-progress" aria-controls="panel-progress">Progress</button>
+</div>
+
+<section class="panel" role="tabpanel" id="panel-bc" aria-labelledby="tab-bc" tabindex="0">
+<h2>Business case</h2>
+<p>Why collect these assessments electronically in this study, and is that still true? In one diary study of adults with chronic pain, paper-diary compliance was reported as 90% but measured at 11% (30-minute window); with an electronic diary the measured figure was 94% (<a href="#src-stone-2002">Stone 2002</a>). That is the kind of benefit a business case should state in numbers and re-confirm at each gate.</p>
+<div id="bc-fields"></div>
+<h3>Tolerances</h3>
+<p class="muted">The seven performance targets of PRINCE2. Inside a tolerance the project manager acts; beyond it the project board decides. Measures against these limits are under Progress.</p>
+<div id="tol-fields" class="pair"></div>
+<h3>Project brief</h3>
+<div id="cl-brief"></div>
+</section>
+
+<section class="panel" role="tabpanel" id="panel-org" aria-labelledby="tab-org" tabindex="0" hidden>
+<h2>Organising</h2>
+<p>An eCOA build has more parties than most study systems: sponsor functions, a provider, a translation vendor, copyright holders, sites. Give each a project role, so that every sign-off has a name behind it.</p>
+<details class="ref"><summary>Project roles and who usually holds them</summary><div class="table-scroll" tabindex="0" role="region" aria-label="Project roles, scrollable table"><table><thead><tr><th scope="col">Role</th><th scope="col">In an eCOA delivery</th></tr></thead><tbody id="roles"></tbody></table></div></details>
+<h3>Organisation and communication</h3>
+<div id="reg-org"></div>
+<h3>Project initiation</h3>
+<div id="cl-initiation"></div>
+</section>
+
+<section class="panel" role="tabpanel" id="panel-plans" aria-labelledby="tab-plans" tabindex="0" hidden>
+<h2>Plans</h2>
+<p>The plan is a list of products, one per instrument and language. Each has its own path: licence, translation, screenshot review, copyright-holder sign-off, submission. The status column reports what the recorded states imply; it does not judge whether a step was done well.</p>
+<div class="sum" id="plan-sum"></div>
+<p class="status" id="plan-wait"></p>
+<div id="reg-products"></div>
+<h3>Protocol schedule against the design specification</h3>
+<p>Paste the schedule of assessments from the protocol and the schedule built into the specification, one line per assessment: <code>instrument; timepoint; window</code> (window optional). The protocol is the reference. The comparison reports differences and does not decide which side is right.</p>
+<div class="pair">
+<div class="field"><label for="sched-protocol">Protocol schedule</label><textarea id="sched-protocol" rows="6" placeholder="Example Symptom Diary; Daily; 18:00-23:59&#10;Example Fatigue Scale; Baseline&#10;Example Fatigue Scale; Week 12; +/- 3 days"></textarea></div>
+<div class="field"><label for="sched-spec">Specification schedule</label><textarea id="sched-spec" rows="6" placeholder="Example Symptom Diary; Daily; 18:00-23:59&#10;Example Fatigue Scale; Week 12; +/- 2 days&#10;Example Fatigue Scale; Week 6"></textarea></div>
+</div>
+<div class="tool-actions"><button type="button" class="btn primary-btn" id="reconcile">Compare schedules</button></div>
+<div id="reg-schedule"></div>
+<h3>Design freeze readiness</h3>
+<div id="cl-freeze"></div>
+</section>
+
+<section class="panel" role="tabpanel" id="panel-quality" aria-labelledby="tab-quality" tabindex="0" hidden>
+<h2>Quality</h2>
+<p>Three products carry most of the quality risk: the screens participants read, the testing that accepts the build, and the training that tells people how to use it.</p>
+<h3>Screenshot and migration review</h3>
+<div class="field" style="max-width:320px"><label for="screen-lang">Language under review</label><select id="screen-lang"><option>Danish</option><option>Swedish</option><option>Norwegian</option><option>Other</option></select></div>
+<div id="cl-screens"></div>
+<h3>User acceptance testing: plan and exit</h3>
+<div id="cl-uat"></div>
+<h3>Testing script skeleton</h3>
+<p>One line per entry in each box. The generator drafts script headers with a stated coverage rule. It leaves the expected result blank: write it from the approved requirements before the script is run.</p>
+<div class="four">
+<div class="field"><label for="uat-instruments">Instruments</label><textarea id="uat-instruments" rows="4"></textarea></div>
+<div class="field"><label for="uat-timepoints">Timepoints</label><textarea id="uat-timepoints" rows="4" placeholder="Baseline&#10;Daily&#10;Week 12"></textarea></div>
+<div class="field"><label for="uat-devices">Device modes</label><textarea id="uat-devices" rows="4" placeholder="Own phone, iOS&#10;Own phone, Android&#10;Provisioned handheld"></textarea></div>
+<div class="field"><label for="uat-languages">Languages</label><textarea id="uat-languages" rows="4"></textarea></div>
+</div>
+<div class="tool-actions"><button type="button" class="btn secondary-btn" id="uat-from-plan">Use instruments and languages from the plan</button><button type="button" class="btn primary-btn" id="uat-generate">Generate script skeleton</button></div>
+<p class="status" id="uat-coverage"></p>
+<div id="reg-scripts"></div>
+<h3>Testing findings</h3>
+<div class="sum" id="defect-sum"></div>
+<p class="status" id="defect-exit"></p>
+<div id="reg-defects"></div>
+<h3>Site and participant training</h3>
+<div id="cl-training"></div>
+</section>
+
+<section class="panel" role="tabpanel" id="panel-risk" aria-labelledby="tab-risk" tabindex="0" hidden>
+<h2>Risk</h2>
+<p>Exposure is read from a visible matrix, not calculated behind the page: high when probability and impact are both high or one is high and the other medium; medium when both are medium or one is high and the other low; otherwise low. The seeded risks come with their basis and a suggested response. None is pre-rated: probability and impact belong to your study.</p>
+<div class="sum" id="risk-sum"></div>
+<div id="reg-risks"></div>
+<details class="ref"><summary>Seeded risks: cause, effect, basis and suggested response</summary><div class="table-scroll" tabindex="0" role="region" aria-label="Seeded risks, scrollable table"><table><thead><tr><th scope="col">ID</th><th scope="col">Risk</th><th scope="col">Suggested response</th></tr></thead><tbody id="seeded-risks"></tbody></table></div></details>
+</section>
+
+<section class="panel" role="tabpanel" id="panel-issues" aria-labelledby="tab-issues" tabindex="0" hidden>
+<h2>Issues</h2>
+<p>One register for problems, requests for change, off-specifications, assumptions and decisions. Together with the risk register it exports as a single log from the Progress tab.</p>
+<div id="reg-issues"></div>
+<h3>Change control: which surfaces should a change reach?</h3>
+<p>Tick what the change is. The rule table lists every surface it is expected to reach, with the reason. Each surface stays open until it has an owner and closure evidence, or a recorded reason it does not apply. The rules are a ClinicOps method; add surfaces your study has that the table does not.</p>
+<div class="field" style="max-width:420px"><label for="change-ref">Change reference</label><input id="change-ref" type="text" autocomplete="off" placeholder="e.g. Protocol amendment 2"></div>
+<fieldset style="border:0;padding:0;margin:0"><legend class="hint">Type of change</legend><div class="checks" id="change-types"></div></fieldset>
+<div class="tool-actions"><button type="button" class="btn primary-btn" id="map-change">Map expected surfaces</button></div>
+<div id="reg-surfaces"></div>
+<h3>Data change requests</h3>
+<p>A correction to participant-entered data is requested, justified and authorised on the site side, and leaves a trace. A request closed without a recorded investigator authorisation is flagged for qualified review.</p>
+<div id="reg-changes"></div>
+</section>
+
+<section class="panel" role="tabpanel" id="panel-progress" aria-labelledby="tab-progress" tabindex="0" hidden>
+<h2>Progress</h2>
+<p>Management by exception: each measure has a target and a tolerance limit. Between the two, the tolerance is threatened; beyond the limit it is an exception for the project board. Targets and limits are blank until you set them.</p>
+<div class="sum" id="kpi-sum"></div>
+<div id="reg-kpis"></div>
+<h3>Completion monitor</h3>
+<p>Counts only, no participant data: entries expected and completed per group. Paste <code>group, expected, completed</code>, one group per line, or add rows by hand.</p>
+<div class="pair">
+<div class="field"><label for="counts-raw">Paste counts</label><textarea id="counts-raw" rows="3" placeholder="Site 01 Danish own device, 140, 131"></textarea></div>
+<div class="field"><label for="completion-min">Completion tolerance (minimum %)</label><input id="completion-min" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 85"></div>
+</div>
+<div class="tool-actions"><button type="button" class="btn secondary-btn" id="paste-counts">Add pasted counts</button></div>
+<p class="status" id="completion-total"></p>
+<div id="reg-counts"></div>
+<h3>Checklists and gates</h3>
+<div id="gates"></div>
+<h3>Go-live readiness</h3>
+<div id="cl-golive"></div>
+<h3>Handover to the live-study team</h3>
+<div id="cl-handover"></div>
+<h3>Closeout and archiving</h3>
+<div id="cl-closeout"></div>
+<h3>Highlight report</h3>
+<p>A plain-text report for the project board, built from everything recorded here.</p>
+<div class="tool-actions"><button type="button" class="btn primary-btn" id="build-report">Build highlight report</button><button type="button" class="btn secondary-btn" id="copy-report" disabled>Copy report</button><button type="button" class="btn secondary-btn" id="dl-report" disabled>Download report (.txt)</button><button type="button" class="btn secondary-btn" id="dl-raid">Download risks, assumptions, issues and decisions (.csv)</button></div>
+<pre id="report" tabindex="0" aria-label="Highlight report">No report built yet.</pre>
+<h3>Lessons log</h3>
+<div id="reg-lessons"></div>
+</section>
+
+<h2>How the method is applied</h2>
+<p>The workbench follows PRINCE2 (7th edition): seven practices as the tabs above, the processes as stages and gates, and the principles as below.</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="PRINCE2 principles applied, scrollable table"><table><thead><tr><th scope="col">Principle</th><th scope="col">In this workbench</th></tr></thead><tbody id="principles"></tbody></table></div>
+<h3>Where a provider's delivery lifecycle meets the workbench</h3>
+<p class="small muted">Provider-neutral. Milestone names differ between providers and between full-service and self-service builds; the dependencies do not.</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Delivery lifecycle mapping, scrollable table"><table><thead><tr><th scope="col">Typical milestone</th><th scope="col">PRINCE2 process</th><th scope="col">Where in the workbench</th></tr></thead><tbody>
+<tr><td>Scope review and kick-off</td><td>Starting up a project</td><td>Business case: project brief. Organising: roles and reports.</td></tr>
+<tr><td>Solution design to signed specification (design freeze)</td><td>Initiating a project; managing a stage boundary</td><td>Organising: project initiation. Plans: schedule comparison and design freeze readiness.</td></tr>
+<tr><td>Build, licensing and localisation</td><td>Controlling a stage; managing product delivery</td><td>Plans: instrument-language plan. Quality: screenshot and migration review.</td></tr>
+<tr><td>Acceptance testing and sign-off</td><td>Managing product delivery</td><td>Quality: testing plan and exit, script skeleton, findings log.</td></tr>
+<tr><td>Test transfer, activation, first participant</td><td>Managing a stage boundary; directing a project</td><td>Progress: go-live readiness, handover, highlight report.</td></tr>
+<tr><td>Live study: change requests, amendments, data corrections</td><td>Controlling a stage</td><td>Issues: change surfaces and data change requests. Progress: tolerances and completion.</td></tr>
+<tr><td>Close-out</td><td>Closing a project</td><td>Progress: closeout and archiving, lessons log.</td></tr>
+</tbody></table></div>
+<p class="small muted">PRINCE2® is a registered trademark of PeopleCert. ClinicOps is not affiliated with, accredited by or endorsed by PeopleCert; this page applies the publicly described structure of the method and holds no PRINCE2 accreditation.</p>
+
+<h2 id="sources">Source register</h2>
+<p class="small muted">Each source was opened at its origin on 2026-11-14. Section numbers are given where they were read in the document. Items marked “ClinicOps method” in the checklists are working practice, not a rule stated by any source below. Guidance changes: confirm against the live document before relying on it.</p>
+<div class="table-scroll" tabindex="0" role="region" aria-label="Source register, scrollable table"><table><thead><tr><th scope="col">Source</th><th scope="col">Kind</th><th scope="col">What it supports here</th></tr></thead><tbody>
+<tr id="src-ema-cs" data-short="EMA 2023"><td><a href="https://www.ema.europa.eu/en/documents/regulatory-procedural-guideline/guideline-computerised-systems-and-electronic-data-clinical-trials_en.pdf" rel="noopener">EMA, Guideline on computerised systems and electronic data in clinical trials</a>, EMA/INS/GCP/112288/2023, 9 March 2023; in effect six months after publication.</td><td>Regulatory guidance (EU)</td><td>Training incl. participants (5.3); transfers validated and pre-specified (6.1.2); no sponsor change to entered data without investigator authorisation (6.1.4); audit trail (6.2.1); investigator control and copies (6.6); archiving and decommissioning (6.11, 6.12); testing and sign-off of trial-specific configuration (Annex 2); electronic outcome assessments and participants' own devices (Annex 5, A5.1).</td></tr>
+<tr id="src-ich-e6r3" data-short="ICH E6(R3)"><td><a href="https://www.ema.europa.eu/en/ich-e6-good-clinical-practice-scientific-guideline" rel="noopener">ICH E6(R3) Good Clinical Practice</a>. Principles and Annex 1: ICH Step 4 on 6 January 2025, in effect in the EU from 23 July 2025; published by FDA as final guidance in September 2025. Annex 2: ICH Step 4 on 3 June 2026, in effect in the EU from 15 January 2027.</td><td>Regulatory guidance (international)</td><td>Agreements with service providers (Annex 1, 3.6); sponsor oversight (3.9); data life cycle and computerised systems (4.2, 4.3); effort in proportion to risk.</td></tr>
+<tr id="src-eu-dct" data-short="EU DCT paper 2025"><td><a href="https://health.ec.europa.eu/document/download/2ccc46bf-2739-4b9a-ab6b-6f425db78c61_en?filename=mp_decentralised-elements_clinical-trials_rec_en.pdf" rel="noopener">Recommendation paper on decentralised elements in clinical trials</a>, Version 02, 1 October 2025 (HMA, European Commission, EMA).</td><td>Regulatory guidance (EU)</td><td>Participants' digital data-collection tasks and alternatives to using a private device (section 5); direct electronic data capture (section 6).</td></tr>
+<tr id="src-dkma-dct" data-short="DKMA 2026"><td><a href="https://laegemiddelstyrelsen.dk/en/licensing/clinical-trials/decentralised-clinical-trials/" rel="noopener">Danish Medicines Agency, Guidance on Digital and Decentralised Clinical Trials</a>, Version 3.0, May 2026.</td><td>Regulatory guidance (Denmark)</td><td>Digital elements described in cover letter, protocol and participant information; data flow for complex flows; investigator review of participant-reported data.</td></tr>
+<tr id="src-htacg-outcomes" data-short="HTA CG 2024"><td><a href="https://health.ec.europa.eu/publications/guidance-outcomes-joint-clinical-assessments_en" rel="noopener">HTA Coordination Group, Guidance on outcomes for joint clinical assessments</a>, adopted 10 June 2024.</td><td>Regulatory guidance (EU HTA)</td><td>Why instrument choice belongs in the business case: measurement properties, and translation with cross-cultural adaptation, are appraised (sections 5.1 to 5.3).</td></tr>
+<tr id="src-dmc-methods" data-short="Medicinrådet 2026"><td><a href="https://medicinraadet.dk/nyheder/2026/forbedret-vejledning-om-metoder-og-ansogningsskema-til-laegemiddelvirksomheder" rel="noopener">Medicinrådet, Metodevejledning for vurdering af nye lægemidler</a>, version 2.0, 6 February 2026.</td><td>HTA method guide (Denmark)</td><td>A national example of the same point: applications include quality-of-life data measured with EQ-5D-5L and Danish preference weights (section 5).</td></tr>
+<tr id="src-gdpr" data-short="GDPR"><td><a href="https://eur-lex.europa.eu/eli/reg/2016/679/oj" rel="noopener">Regulation (EU) 2016/679</a> (General Data Protection Regulation).</td><td>Regulation (EU)</td><td>Data protection roles and transfers are assessed by the sponsor's data protection function. This page gives no data protection advice.</td></tr>
+<tr id="src-cpath-uat" data-short="Gordon 2022"><td>Gordon S, et al. Best Practice Recommendations: User Acceptance Testing for Systems Designed to Collect Clinical Outcome Assessment Data Electronically. Ther Innov Regul Sci. 2022;56(3):442-453. <a href="https://doi.org/10.1007/s43441-021-00363-z" rel="noopener">doi:10.1007/s43441-021-00363-z</a></td><td>Consensus best practice (C-Path consortia)</td><td>Testing by the sponsor or a designee, not the provider's staff; at least two weeks assuming more than one round; plan, scripts, findings log, summary report, approval form; later changes tested before production.</td></tr>
+<tr id="src-cpath-dcr" data-short="Delong 2023"><td>Delong PS, et al. Best Practice Recommendations for Electronic Clinical Outcome Assessment Data Changes. J Soc Clin Data Manag. 2023;4(1). <a href="https://doi.org/10.47912/jscdm.249" rel="noopener">doi:10.47912/jscdm.249</a></td><td>Consensus best practice (C-Path consortia, eClinical Forum)</td><td>Data change requests: site-side control of source data, justification, authorisation and audit trail.</td></tr>
+<tr id="src-cpath-migration" data-short="Mowlem 2024"><td>Mowlem FD, et al. Best Practices for the Electronic Implementation and Migration of Patient-Reported Outcome Measures. Value Health. 2024;27(1):79-94. <a href="https://doi.org/10.1016/j.jval.2023.10.007" rel="noopener">doi:10.1016/j.jval.2023.10.007</a></td><td>Consensus best practice (C-Path eCOA Consortium)</td><td>Faithful migration: the electronic version keeps the content, order and response options of the source measure.</td></tr>
+<tr id="src-ispor-2023" data-short="O'Donohoe 2023"><td><a href="https://www.ispor.org/heor-resources/good-practices/article/updated-recommendations-on-evidence-needed-to-support-measurement-comparability-among-modes-of-data-collection-for-patient-reported-outcome-measures" rel="noopener">O'Donohoe P, et al. Updated recommendations on evidence needed to support measurement comparability among modes of data collection for patient-reported outcome measures</a>. Value Health. 2023;26(5):623-633.</td><td>Consensus good practice (ISPOR task force)</td><td>Existing comparability evidence plus faithful migration decides whether new testing is needed.</td></tr>
+<tr id="src-ispor-tca" data-short="Wild 2005"><td>Wild D, et al. Principles of Good Practice for the Translation and Cultural Adaptation Process for Patient-Reported Outcomes (PRO) Measures. Value Health. 2005;8(2):94-104. <a href="https://doi.org/10.1111/j.1524-4733.2005.04054.x" rel="noopener">doi:10.1111/j.1524-4733.2005.04054.x</a></td><td>Consensus good practice (ISPOR task force)</td><td>Translation as a ten-step process ending in proofreading and a final report; one product per language.</td></tr>
+<tr id="src-isoqol-etrans" data-short="Shalhoub 2025"><td>Shalhoub H, et al. Principles of good practice for translation of electronic clinical outcome assessments. J Patient Rep Outcomes. 2025;9:26. <a href="https://doi.org/10.1186/s41687-025-00859-4" rel="noopener">doi:10.1186/s41687-025-00859-4</a></td><td>Consensus recommendations (ISOQOL working group)</td><td>Translation and electronic implementation planned together.</td></tr>
+<tr id="src-tufts-amend" data-short="Getz 2024"><td>Getz K, et al. New Benchmarks on Protocol Amendment Practices, Trends and their Impact on Clinical Trial Performance. Ther Innov Regul Sci. 2024;58:539-548. <a href="https://doi.org/10.1007/s43441-024-00622-9" rel="noopener">doi:10.1007/s43441-024-00622-9</a></td><td>Peer-reviewed study</td><td>76% of protocols had at least one amendment (mean 3.3); a mean of 215 days with sites on different protocol versions. Not specific to outcome assessments.</td></tr>
+<tr id="src-krepper-2026" data-short="Krepper 2026"><td>Krepper D, et al. What's missing in patient-reported outcome reporting? A scoping review and aggregated trial-level analysis of completion rates in oncology randomized controlled trials. Crit Rev Oncol Hematol. 2026;218:105100. <a href="https://doi.org/10.1016/j.critrevonc.2025.105100" rel="noopener">doi:10.1016/j.critrevonc.2025.105100</a></td><td>Peer-reviewed review</td><td>In 222 oncology trials, completion fell from about 91 to 92% at baseline to about 82 to 83% at the first later assessment; reasons for missing data were documented in 18% of trials.</td></tr>
+<tr id="src-stone-2002" data-short="Stone 2002"><td>Stone AA, et al. Patient non-compliance with paper diaries. BMJ. 2002;324(7347):1193-1194. <a href="https://doi.org/10.1136/bmj.324.7347.1193" rel="noopener">doi:10.1136/bmj.324.7347.1193</a></td><td>Peer-reviewed study</td><td>80 adults with chronic pain: paper diary compliance reported 90%, measured 11%; electronic diary measured 94%.</td></tr>
+<tr id="src-byod-2022" data-short="Hudgens 2022"><td>Hudgens S, et al. Comparability of a provisioned device versus bring your own device for completion of patient-reported outcome measures by participants with chronic obstructive pulmonary disease. J Patient Rep Outcomes. 2022;6:119. <a href="https://doi.org/10.1186/s41687-022-00521-3" rel="noopener">doi:10.1186/s41687-022-00521-3</a></td><td>Peer-reviewed study</td><td>Scores on participants' own devices and provisioned devices were equivalent in one observational crossover study (64 enrolled; order not randomised).</td></tr>
+<tr id="src-cpath-2019" data-short="C-Path workshop 2019"><td><a href="https://c-path.org/wp-content/uploads/2019/05/2019_session5_ecoa_final.pdf" rel="noopener">Critical Path Institute, eCOA: Continuing to Get Better Together</a>. Session 5, Tenth Annual PRO Consortium Workshop, April 2019.</td><td>Industry source (workshop slides)</td><td>Presenters' statements, not a measured benchmark: set-up at about 16 weeks against a 12-week expectation; a study-level licence does not permit building library versions.</td></tr>
+<tr id="src-prince2" data-short="PRINCE2 7"><td><a href="https://www.peoplecert.org/prince2" rel="noopener">PRINCE2, 7th edition</a> (PeopleCert, 2023). Names of principles, practices and processes as listed in the PeopleCert syllabus.</td><td>Project-management framework</td><td>Stages and gates, roles, product focus, tolerances and management by exception, lessons.</td></tr>
+<tr id="src-fda-ecsq" data-short="FDA 2024"><td><a href="https://www.fda.gov/regulatory-information/search-fda-guidance-documents/electronic-systems-electronic-records-and-electronic-signatures-clinical-investigations-questions" rel="noopener">FDA, Electronic Systems, Electronic Records, and Electronic Signatures in Clinical Investigations: Questions and Answers</a>, final guidance, October 2024.</td><td>Regulatory guidance (United States)</td><td>Context for studies that also run under FDA expectations. Not mapped item by item in this version.</td></tr>
+<tr id="src-fda-pfdd" data-short="FDA PFDD"><td><a href="https://www.fda.gov/drugs/development-approval-process-drugs/fda-patient-focused-drug-development-guidance-series-enhancing-incorporation-patients-voice-medical" rel="noopener">FDA Patient-Focused Drug Development guidance series</a>. Guidance 3 on fit-for-purpose clinical outcome assessments: final, October 2025. Guidance 4 on endpoints: draft, April 2023.</td><td>Regulatory guidance (United States)</td><td>Context for instrument selection. Not mapped item by item in this version.</td></tr>
+</tbody></table></div>
+
+<h2>Tool assessment (documented-tool record)</h2>
+<details class="ref"><summary>Purpose, requirements, test evidence, limitations, change log</summary>
+<p><strong>Purpose.</strong> Structure the delivery of electronic outcome assessments in a clinical study as a staged project, and show what the recorded information implies: which products are waiting on which step, which change surfaces lack closure evidence, which tolerances are exceeded. A structuring aid; never the system of record.</p>
+<p><strong>Requirements.</strong> R1 Every checklist item and seeded risk names its basis; every cited source is in the source register. R2 Status values are derived by fixed rules from recorded states and can be read from the rule description on the page. R3 A step or checklist item marked not applicable counts as open until a reason is recorded. R4 A change surface closes only with an owner and closure evidence. R5 No targets, tolerance limits or risk ratings are pre-filled outside the fictional example. R6 All processing is local: no network call after page load, no browser storage; the workspace file is the only persistence. R7 Imported files are validated and rendered as text only. R8 Exports neutralise spreadsheet formulas.</p>
+<p><strong>Test evidence (v1.0.0, 2026-11-14).</strong> Automated rule tests cover product status, schedule comparison, exposure bands, change-surface mapping and closure, script generation, tolerance status, completion counts, export safety and workspace validation. A browser journey loads the fictional example, exercises each tab, confirms no request leaves the page and checks layout from 320 px. Both run in the repository's continuous integration on every change.</p>
+<p><strong>Known limitations.</strong> Not validated for use as a regulated system. The change-surface rule table and several checklist items are ClinicOps method and may not fit a given study or provider. Sequencing of screenshot review and acceptance testing differs between providers; the plan does not enforce one order. Source documents may change after the review date. No real study has been delivered with this workbench.</p>
+<p><strong>Change log.</strong> v1.0.0 (2026-11-14): first release; nine checklists, 19 seeded risks, 10 change types across 14 surfaces, 15 testing areas.</p>
+</details>
+
+<h2>When the open items are Danish-language work</h2>
+<p>Screens that read like a translation, system text nobody reviewed, participant material that does not match the build: if the open items on your plan are the Danish version itself, that is work ClinicOps takes on, reviewed by a native Danish speaker with an MSc in Medicine (Translational Medicine). The Swedish and Norwegian checks on this page are review prompts for your own reviewers. ClinicOps does not hold the provider, sponsor or investigator role in a study.</p>
+<div class="cta-row"><a class="cta primary" href="assessment-intake?workstream=trial-change">Scope a review</a><a class="cta ghost" href="tools">All tools</a><a class="cta ghost" href="denmark-market-access">Danish localisation</a></div>
+
+<script src="assets/ecoa-workbench-core.js"></script>
+<script src="assets/ecoa-workbench-data.js"></script>
+<script src="assets/ecoa-workbench.js"></script>
+</main>
+<footer class="site"><div class="footer-inner"><span>ClinicOps · Browser-local evidence tools.</span><span><a href="services">Solution</a><a href="primary-sources">Sources</a><a href="privacy-notice/">Privacy</a></span></div><div class="footer-inner"><span>ClinicOps is not a notified body or a competent authority, and does not replace your RA/QA team, RIM, QMS, PLM or ERP.</span></div></footer>
+</body></html>

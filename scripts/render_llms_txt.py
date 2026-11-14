@@ -32,7 +32,7 @@ SECTIONS = (
     ("Free browser-local tools and examples", lambda r: r in {
         "tools.html", "integrity-check.html", "integrity-scanner.html", "integrity-economics.html",
         "identifier-check.html", "readiness-score.html", "change-surface-mapper.html",
-        "regulatory-change-impact.html", "technical-file-consistency.html",
+        "regulatory-change-impact.html", "technical-file-consistency.html", "ecoa-delivery-workbench.html",
         "specimen-register/index.html", "transition-map-sample/index.html",
         "danish-pv-literature-register.html", "sdea-clause-checker.html", "danish-dhpc-checker.html",
     }),

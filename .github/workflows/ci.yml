@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: '22'
       - name: Browser reconciliation rules
-        run: node --test tests/reconciliation.test.cjs
+        run: node --test tests/reconciliation.test.cjs tests/ecoa_workbench.test.cjs
       - run: pytest -q
       - run: ruff check src tests scripts
       - name: Revenue OS experiment contract
@@ -130,6 +130,7 @@ jobs:
           E2E_BASE_URL=http://localhost:8103 node e2e/scanner_journey.mjs
           E2E_BASE_URL=http://localhost:8103 node e2e/scanner_full_journey.mjs
           E2E_BASE_URL=http://localhost:8103 node e2e/reconciliation_journey.mjs
+          E2E_BASE_URL=http://localhost:8103 node e2e/ecoa_workbench_journey.mjs
           E2E_BASE_URL=http://localhost:8103 node e2e/xlsx_xss_journey.mjs
           E2E_BASE_URL=http://localhost:8103 node e2e/site_acceptance.mjs
           E2E_BASE_URL=http://localhost:8103 node e2e/accessibility_journey.mjs
