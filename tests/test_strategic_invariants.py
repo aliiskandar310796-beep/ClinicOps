@@ -43,7 +43,7 @@ CONTACT_EMAIL = "info@clinicops.dk"
 # identity.
 HOMEPAGE_CATEGORY = "Clinical operations support from Denmark"
 HOMEPAGE_H1 = "Clinical operations support from Denmark."
-PRIMARY_CTAS = (">Open the eCOA workbench</a>", ">Tell me about your project</a>")
+PRIMARY_CTAS = (">Open the eCOA workbench</a>", ">Describe your project</a>")
 
 # --- page identity ----------------------------------------------------------
 PINNED_TITLES = {
@@ -121,19 +121,15 @@ def test_homepage_organization_schema_pins_the_canonical_identity() -> None:
     assert org["logo"].startswith("https://clinicops.dk/assets/")
     assert HOMEPAGE_CATEGORY in org["description"]
     assert org["sameAs"] == [CANONICAL_COMPANY_LINKEDIN]
-    assert org["founder"]["name"] == "Ali Iskandar"
-    assert FOUNDER_LINKEDIN in org["founder"]["sameAs"]
+    # Decision 2026-11-14: the public structure is independent of any individual.
+    assert "founder" not in org
 
 
-def test_about_person_schema_pins_the_founder_identity() -> None:
-    people = _schema_objects((DOCS / "about.html").read_text(encoding="utf-8"), "Person")
-    assert len(people) == 1
-    person = people[0]
-    assert person["name"] == "Ali Iskandar"
-    assert person["worksFor"]["name"] == "ClinicOps"
-    assert person["worksFor"]["url"] == "https://clinicops.dk/"
-    assert person["sameAs"] == [FOUNDER_LINKEDIN]
-    assert person["url"] == "https://clinicops.dk/about"
+def test_public_site_carries_no_person_schema() -> None:
+    """No page publishes Person structured data; authorship is the organisation."""
+    for page in _public_pages():
+        html = page.read_text(encoding="utf-8")
+        assert not _schema_objects(html, "Person"), page
 
 
 def test_only_the_canonical_company_linkedin_slug_appears_anywhere() -> None:

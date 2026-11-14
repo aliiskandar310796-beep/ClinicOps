@@ -146,3 +146,10 @@ Decision D5: the site follows three published rule sets, each used for what fits
 | Taste (static-site rules) | One system, one radius scale, 44 px targets, no horizontal overflow at 320 px (all 40 sitemap pages checked), hover answers on every control, one entrance moment per page | Stock photographs, shader scenes, card loops, real-icon sets: they would put unapproved imagery on a practice whose credibility rests on stated limits |
 
 Two detector advisories are accepted risks, not oversights. `overused-font` (Fraunces) and `cream-palette` describe the Clinical Ledger identity pinned in `design/DESIGN_TOKENS.md`; changing them is a brand decision for Ali, not a polish step. Revisit at the 2027-02-14 benefits review.
+
+
+## 11. Decision D6: structure independent of the owner (2026-11-14)
+
+Instruction: ClinicOps must not depend on, or show, its owner. Chosen approach, from the options put to the owner: an impersonal site that stays honest. Done: no name, bio, degree, languages or personal profile on public pages; voice is "ClinicOps"; the homepage section is now "How ClinicOps is run" (written scope, one accountable owner, files and a log the client keeps); the continuity question is answered without naming a person. Not done, on purpose: presenting ClinicOps as a team or firm. That would claim people and scale that do not exist and would breach the claim rules and Danish marketing law.
+
+Consequences accepted: the cold-read credibility ceiling noted in section 9 is now lower, because buyers can no longer see who does the work; anonymised outcomes, a platform list or a named reference (with consent) are the only ways to restore it. Identity remains in three places by legal necessity. Open: the public repository still names the owner in 6 documents and holds internal planning; changing its visibility is the owner's decision.
