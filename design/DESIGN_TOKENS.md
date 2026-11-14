@@ -40,7 +40,7 @@ values.
 Three self-hosted type families, each doing one job (`docs/assets/fonts/`, no third-party
 requests — Google Fonts and similar remain off-limits for this privacy-first audience):
 
-- `--font-display`: Fraunces (variable weight 500–700, optical size pinned at 36 to halve the file; the
+- `--font-display`: Source Serif 4 (variable weight 400–700; replaced Fraunces on 2026-11-14 because its J, j and & read as odd; the
   full opsz axis cost ~45 KB on the mobile critical path) — h1–h4 only. A serif reads as an
   authored, archival document rather than software chrome; this is the single biggest visual
   break from the prior Geist-everywhere system.

@@ -1,5 +1,9 @@
 # ClinicOps operating changelog
 
+## 2026-11-14 – Display font
+
+- Headline font changed from Fraunces to Source Serif 4. Fraunces drew a hooked J/j and a looped ampersand that read as odd; Source Serif 4 keeps the warmth with ordinary letterforms. Self-hosted, OFL licence included.
+
 ## 2026-11-14 – Living colour and a rebuilt homepage
 
 - Colour now follows the segment: eCOA teal, device cobalt, Danish coral, with a calm petrol-ink base. A page or band takes its segment ink through `data-seg`; status colours still pair colour with a word. All pairs checked at 4.5:1 or better in light and dark.
