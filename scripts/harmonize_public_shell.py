@@ -107,7 +107,7 @@ def sync_meta_consistency(text: str) -> str:
 
 NAV_ITEMS = (
     ("Home", "index.html"),
-    ("eCOA", "ecoa-delivery-workbench.html"),
+    ("eCOA", "ecoa.html"),
     ("Medical devices", "services.html"),
     ("Danish & PV", "denmark-market-access.html"),
     ("Tools", "tools.html"),
@@ -150,6 +150,13 @@ SECTION_BY_PAGE = {
     "specimen-register/index.html": "Tools",
     "technical-file-consistency.html": "Tools",
     "ecoa-delivery-workbench.html": "eCOA",
+    "ecoa.html": "eCOA",
+    "coa-types.html": "eCOA",
+    "ecoa-workflow.html": "eCOA",
+    "coa-nordic.html": "eCOA",
+    "coa-type-finder.html": "eCOA",
+    "ecoa-lead-time-planner.html": "eCOA",
+    "ecoa-visit-burden.html": "eCOA",
     "danish-pv-literature-register.html": "Danish & PV",
     "sdea-clause-checker.html": "Danish & PV",
     "danish-dhpc-checker.html": "Danish & PV",

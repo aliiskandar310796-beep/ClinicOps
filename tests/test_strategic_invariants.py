@@ -59,7 +59,9 @@ PINNED_TITLES = {
 FLAGSHIP_URL = "https://clinicops.dk/evidence-change-control-pack"
 
 # --- index architecture -----------------------------------------------------
-SITEMAP_URL_CEILING = 40
+# Raised 40 -> 48 on 2026-11-14 (decision D8): owner-directed COA/eCOA section (hub, types, workflow,
+# Nordic reference, three browser-local tools). Any further page needs its own recorded decision.
+SITEMAP_URL_CEILING = 48
 REQUIRED_SITEMAP_URLS = {
     "https://clinicops.dk/",
     "https://clinicops.dk/services",

@@ -1,5 +1,11 @@
 # ClinicOps operating changelog
 
+## 2026-11-14 – COA and eCOA section
+
+- New pages: `ecoa` (hub, now the eCOA navigation target), `coa-types`, `ecoa-workflow`, `coa-nordic`. Each carries a source register with the date opened and how much of each source was read; items that could not be verified are listed as open questions, not stated.
+- Three new free browser-local tools: COA type finder and inventory (`coa-type-finder`), licence and translation lead-time planner (`ecoa-lead-time-planner`), visit and diary burden estimator (`ecoa-visit-burden`). Core rules live in `docs/assets/coa-*-core.js` with 31 Node tests; no network, no storage, formula-safe CSV.
+- Sitemap ceiling 40 to 48 (decision D8 in the PID). One vendor the owner excluded is removed from the PID source list and appears nowhere.
+
 ## 2026-11-14 – Display font
 
 - Headline font changed from Fraunces to Source Serif 4. Fraunces drew a hooked J/j and a looped ampersand that read as odd; Source Serif 4 keeps the warmth with ordinary letterforms. Self-hosted, OFL licence included.

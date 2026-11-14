@@ -82,7 +82,7 @@ PRINCE2 tests a business case as desirable, viable and achievable. Each is rated
 
 ### 9.2 Benchmark of comparable practices (2026-11-14)
 
-Sources read: Signant Health eCOA science consulting pages and brochure, ICON eCOA and outcome-measures pages, ProPharma eCOA services, Clario eCOA science overview, Oxford University Innovation COA services, Pure Global, Johner Institut, Freyr and Fang Consulting device-regulatory pages, eCOA project-manager job postings (IQVIA, Clario, Syneos, Alimentiv, Medable), Everest Group (2024) and IDC MarketScape abstracts on life-science buyer selection, and agency articles on B2B homepages.
+Sources read: Signant Health eCOA science consulting pages and brochure, ICON eCOA and outcome-measures pages, ProPharma eCOA services, Clario eCOA science overview, Oxford University Innovation COA services, Pure Global, Johner Institut, Freyr and Fang Consulting device-regulatory pages, eCOA project-manager job postings (IQVIA, Clario, Syneos, Alimentiv), Everest Group (2024) and IDC MarketScape abstracts on life-science buyer selection, and agency articles on B2B homepages.
 
 What the evidence supports, and how the build uses it:
 
@@ -153,3 +153,15 @@ Two detector advisories are accepted risks, not oversights. `overused-font` (Fra
 Instruction: ClinicOps must not depend on, or show, its owner. Chosen approach, from the options put to the owner: an impersonal site that stays honest. Done: no name, bio, degree, languages or personal profile on public pages; voice is "ClinicOps"; the homepage section is now "How ClinicOps is run" (written scope, one accountable owner, files and a log the client keeps); the continuity question is answered without naming a person. Not done, on purpose: presenting ClinicOps as a team or firm. That would claim people and scale that do not exist and would breach the claim rules and Danish marketing law.
 
 Consequences accepted: the cold-read credibility ceiling noted in section 9 is now lower, because buyers can no longer see who does the work; anonymised outcomes, a platform list or a named reference (with consent) are the only ways to restore it. Identity remains in three places by legal necessity. Open: the public repository still names the owner in 6 documents and holds internal planning; changing its visibility is the owner's decision.
+
+
+## 12. Decision D8: COA and eCOA section, owner-directed (2026-11-14)
+
+Instruction: build the eCOA lane out so it mirrors how COA and eCOA work is actually run, with lean, fast, valuable tools, and research on COA types and workflows in Denmark and the Nordics. The owner's CV was given only to show which eCOA areas the owner has worked in; nothing from it appears on the site. One eCOA vendor named by the owner is excluded from every page, tool, research note and document.
+
+Chosen: a hub (`ecoa`), a COA types reference, an eCOA workflow map, a Nordic reference, and three browser-local tools beside the delivery workbench: COA type finder and inventory, licence and translation lead-time planner, visit and diary burden estimator. Sitemap ceiling raised from 40 to 48 (47 pages) by this decision; any further page needs its own record.
+
+Specialisation gate: passed on the owner's direction, not on market evidence. The lane is a stated priority, not a validated one; review at the 2027-02-14 benefits review with the question of whether any of the tools was used.
+
+Constraints kept: every regulatory statement traces to a source in the page's register with its read status; planning durations are published vendor and language-provider ranges shown with their basis, editable, and never presented as benchmarks; Nordic language rules are stated only where an authority page was read, and the rest are listed as open questions; Swedish and Norwegian language competence is not claimed anywhere on the site; Finnish and Icelandic need native-language reviewers.
+
