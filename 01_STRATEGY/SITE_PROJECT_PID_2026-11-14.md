@@ -66,3 +66,70 @@ Tolerances: no new claim without a registered source; no change to approved prof
 ## 8. Lessons logged
 
 - Contract tests that pin copy were the main cost of changing identity. Each pin now names the date and this document.
+
+## 9. Viability and validation record (added 2026-11-14, stage 4 assurance)
+
+PRINCE2 tests a business case as desirable, viable and achievable. Each is rated below with what supports it. Nothing here is rated higher than the evidence allows.
+
+### 9.1 Options appraised
+
+| Option | Verdict |
+|---|---|
+| A. Leave the MedTech-only front door | Rejected by the owner's 2026-11-14 feedback; eCOA stayed hidden. |
+| B. Restyle only | Does not fix structure or the missing eCOA path. |
+| C. Three-lane front door, tools as proof, plain copy (built) | Chosen. |
+| D. Large-firm style (service menu, scale and "track record" claims) | Rejected. A one-person practice cannot evidence scale, and the claim gates ban those words. |
+
+### 9.2 Benchmark of comparable practices (2026-11-14)
+
+Sources read: Signant Health eCOA science consulting pages and brochure, ICON eCOA and outcome-measures pages, ProPharma eCOA services, Clario eCOA science overview, Oxford University Innovation COA services, Pure Global, Johner Institut, Freyr and Fang Consulting device-regulatory pages, eCOA project-manager job postings (IQVIA, Clario, Syneos, Alimentiv, Medable), Everest Group (2024) and IDC MarketScape abstracts on life-science buyer selection, and agency articles on B2B homepages.
+
+What the evidence supports, and how the build uses it:
+
+- Large eCOA firms win on scale (Signant cites 50+ in-house scientists). A one-person practice should not copy that; it should be specific and checkable. Used: problem-first headline, three named lanes, free tools placed before the engagement process.
+- Job postings show the buyer's day-to-day words: licensing, translation vendors, migration, user acceptance testing, timelines, risk. Used in the eCOA lane, limited to what the workbench actually covers (no UAT or vendor-selection claim, because it has neither).
+- Everest's abstract says pharma buyers weight domain expertise and MedTech buyers lean to strategic partners; IDC stresses vetting references and project-management skill. Only abstracts were available. Used as direction, not as proof.
+- Agency pages cite conversion and trust statistics. Their sources are weak and mostly vendor marketing, so none is relied on or quoted on the site.
+- Practices lead with outcomes and named clients. ClinicOps cannot name clients. Substitute: inspectable tools, a named person with approved wording, stated limits, and a free first step.
+
+### 9.3 Cold-read test
+
+Three independent reader agents each read only the homepage text as a different buyer: an eCOA lead at a sponsor, a device regulatory manager, and a Danish pharma safety lead. These are simulated readers, not real buyers, and cannot replace interviews.
+
+| Reader | Clarity | Credibility | Relevance | Would email |
+|---|---|---|---|---|
+| eCOA lead | 7 | 4 | 6 | Maybe |
+| Device RA manager | 6 | 4 | 6 | Maybe |
+| Danish safety lead | 7 | 5 | 6 | Maybe |
+
+Fixed after the test: filler lines ("go wrong quietly", generic stage names), an unsupported Swedish and Norwegian review claim (now "review the Danish myself"), three repeats of "from Denmark", no explanation for the breadth of lanes (added the shared habit), no answer to the one-person risk (added), literature monitoring and DHPC tools not linked from the Danish lane, no Danish text on a page that sells Danish review, no LinkedIn link.
+
+Not fixable by copy, raised by all three readers: no evidence of experience. Missing items, each needing the owner's approval before use: years of experience, eCOA platforms worked with, anonymised outcomes, current availability, indicative rate, confidentiality and insurance statements, a photo. Until some of these are approved, credibility stays the weak point.
+
+### 9.4 Quality criteria and evidence
+
+| Criterion | Test | Result |
+|---|---|---|
+| Visitor can state what is offered in one sentence | Cold read, 3 readers | All three stated it correctly |
+| eCOA reachable in one click from home | Nav, hero button, lane, tool list | Pass |
+| No claim outside approved wording | `validate_professional_claims.py`, claim gate | Pass |
+| No data leaves the browser | Playwright network audits on the tools | Pass |
+| Accessibility | axe serious/critical gate, all key pages | Pass |
+| Mobile layout | 320, 390, 1024 and 1440 px checks | Pass |
+| Contract tests pin the new identity | `test_strategic_invariants.py`, positioning contract | Pass |
+
+### 9.5 Rating
+
+- Achievable: validated. Built, tested and reviewable.
+- Desirable: partly supported. Buyer vocabulary and role demand exist; no real buyer has been interviewed.
+- Viable: not validated. Commercial return is an assumption until the benefits review below.
+
+### 9.6 Benefits review (proposed, owner to confirm)
+
+The site sets no analytics, by policy, so measures use what is already visible:
+
+- Enquiries by email and scope form that arrive after merge, and which lane each names.
+- GitHub repository traffic (page views, referrers) for the 14-day window, read by the owner.
+- A repeat of the cold-read test, plus two or three real buyers asked to read the page for five minutes.
+
+Review date: 2027-02-14, about 13 weeks after release. Suggested tolerance: if no qualified enquiry names any of the three lanes by then, treat the broader front door as unproven and revisit D1. The numbers are the owner's to set.
