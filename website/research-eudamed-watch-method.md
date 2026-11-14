@@ -1,5 +1,5 @@
 <!-- claim-use: research-note -->
-<!-- claim-ids: CO-CLM-0001,CO-CLM-0004,CO-CLM-0005,CO-CLM-0008,CO-CLM-0009,CO-CLM-0010,CO-CLM-0013,CO-CLM-0017 -->
+<!-- claim-ids: CO-CLM-0001,CO-CLM-0004,CO-CLM-0005,CO-CLM-0009,CO-CLM-0013,CO-CLM-0017,CO-CLM-0018,CO-CLM-0019 -->
 
 # Method page — continuous monitoring of the public EUDAMED record — deployment pack
 
@@ -21,7 +21,7 @@ ClinicOps runs a monthly automated snapshot of what the public EUDAMED record sh
 
 ### Why now
 
-MDCG 2026-4 describes a revised EUDAMED operating model in which the manufacturer uploads the SS(C)P master and translations, while the notified body indicates the validated SS(C)P against the relevant Basic UDI-DI(s) — with production deployment planned for October 2026 and uploads recommended no later than 27 February 2027 for devices placed on the market before mandatory use. [CO-CLM-0008] [CO-CLM-0009] [CO-CLM-0010] Separately, following Commission Decision (EU) 2025/2371, legacy devices still on the market must be registered in EUDAMED by 28 November 2026. [CO-CLM-0013] Many more SS(C)Ps and Basic UDI-DIs will attach to public records in a short window, and the public record will move under any portfolio that is not watching it. Under MDR Article 32(1) the manufacturer is the duty holder for drawing up the SSCP for applicable implantable and class III devices, subject to the Article 32 exclusions — the monitoring watches the public trace of that work, not the work itself. [CO-CLM-0001]
+MDCG 2026-4 describes a revised EUDAMED operating model in which the manufacturer uploads the SS(C)P master and translations, while the notified body indicates the validated SS(C)P against the relevant Basic UDI-DI(s) — with production deployment planned for December 2026 in the revised paper (rev.1, October 2026), which replaced the earlier October 2026 plan, and uploads recommended no later than 27 March 2027 for devices placed on the market before mandatory use. [CO-CLM-0018] [CO-CLM-0009] [CO-CLM-0019] Separately, following Commission Decision (EU) 2025/2371, legacy devices still on the market must be registered in EUDAMED by 28 November 2026. [CO-CLM-0013] Many more SS(C)Ps and Basic UDI-DIs will attach to public records in a short window, and the public record will move under any portfolio that is not watching it. Under MDR Article 32(1) the manufacturer is the duty holder for drawing up the SSCP for applicable implantable and class III devices, subject to the Article 32 exclusions — the monitoring watches the public trace of that work, not the work itself. [CO-CLM-0001]
 
 ### Method
 

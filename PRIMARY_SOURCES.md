@@ -15,15 +15,15 @@ Use for:
 Do not use guidance to silently overwrite the regulation. When describing the 2026 operational transition, cite the MDCG position paper separately and distinguish it from binding law.
 
 ## MDCG 2026-4 — operational SS(C)P transition in EUDAMED
-Source: MDCG Position Paper: Management of SS(C)P in EUDAMED after mandatory use, June 2026
+Source: MDCG Position Paper: Management of SS(C)P in EUDAMED after mandatory use, June 2026; revised as MDCG 2026-4 rev.1, October 2026 (same URL now serves rev.1)
 https://health.ec.europa.eu/document/download/a80332cf-e9f0-4d45-8863-3d96e8c2a675_en?filename=mdcg_2026-4_en.pdf
 
 Use for:
 - planned reassignment of EUDAMED SS(C)P upload tasks to manufacturers;
 - manufacturer upload of master version and translations under the revised operating model;
 - notified-body indication of validated SS(C)P(s) against relevant Basic UDI-DI(s);
-- planned Playground deployment in July 2026 and Production deployment in October 2026;
-- the recommendation that manufacturers upload SS(C)Ps for devices placed on the market before mandatory use as soon as possible and no later than 27 February 2027.
+- planned Playground deployment in July 2026 and Production deployment in December 2026 (rev.1; the June version said October 2026);
+- the recommendation that manufacturers upload SS(C)Ps for devices placed on the market before mandatory use as soon as possible and no later than 27 March 2027 (rev.1; the June version said 27 February 2027).
 
 Qualification: MDCG documents are not legally binding and MDCG 2026-4 says so explicitly.
 

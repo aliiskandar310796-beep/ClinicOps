@@ -1,5 +1,5 @@
 <!-- claim-use: research-note -->
-<!-- claim-ids: CO-CLM-0001,CO-CLM-0002,CO-CLM-0004,CO-CLM-0005,CO-CLM-0006,CO-CLM-0007,CO-CLM-0008,CO-CLM-0009,CO-CLM-0010,CO-CLM-0012,CO-CLM-0013,CO-CLM-0014,CO-CLM-0015,CO-CLM-0016,CO-CLM-0017 -->
+<!-- claim-ids: CO-CLM-0001,CO-CLM-0002,CO-CLM-0004,CO-CLM-0005,CO-CLM-0006,CO-CLM-0007,CO-CLM-0009,CO-CLM-0012,CO-CLM-0013,CO-CLM-0014,CO-CLM-0015,CO-CLM-0016,CO-CLM-0017,CO-CLM-0018,CO-CLM-0019 -->
 
 # Research note — SS(C)P and the public EUDAMED record — deployment pack
 
@@ -42,7 +42,7 @@ A related observation on language versions: in 5 of 7 multi-language document se
 
 ### Why it matters now
 
-MDCG 2026-4 assigns the upload of the SS(C)P — master and translations — to the manufacturer, a task that sat with the notified body, with deployment in production planned for October 2026 and uploads due no later than 27 February 2027 for devices placed on the market before mandatory use. Separately, following Commission Decision (EU) 2025/2371, legacy devices still on the market must be registered in EUDAMED by 28 November 2026. Both are dated events that will attach many more SS(C)Ps and Basic UDI-DIs to public records, and the reconciliation questions above are the ones a manufacturer meets while doing it. [CO-CLM-0008] [CO-CLM-0009] [CO-CLM-0010] [CO-CLM-0013]
+MDCG 2026-4 assigns the upload of the SS(C)P — master and translations — to the manufacturer, a task that sat with the notified body, with deployment in production planned for December 2026 in the revised paper (rev.1, October 2026), which replaced the earlier October 2026 plan, and uploads recommended no later than 27 March 2027 for devices placed on the market before mandatory use. Separately, following Commission Decision (EU) 2025/2371, legacy devices still on the market must be registered in EUDAMED by 28 November 2026. Both are dated events that will attach many more SS(C)Ps and Basic UDI-DIs to public records, and the reconciliation questions above are the ones a manufacturer meets while doing it. [CO-CLM-0018] [CO-CLM-0009] [CO-CLM-0019] [CO-CLM-0013]
 
 ### The one-glance rule
 
