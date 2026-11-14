@@ -17,7 +17,7 @@ palette/typography/copy renovation. Given the explicit choice to override them (
 renovation"), what changed:
 
 - Palette and type: teal accent / near-white-near-black neutrals / Geist sans+mono → the warm
-  paper/ink "Clinical Ledger" palette with Fraunces (display), Public Sans (body) and IBM Plex
+  paper/ink "Clinical Ledger" palette with Source Serif 4 (display; was Fraunces until 2026-11-14), Public Sans (body) and IBM Plex
   Mono (data), all still self-hosted, still token-driven, still light+dark from `prefers-color-
   scheme`. See `DESIGN_TOKENS.md` for the values.
 - `docs/site.css` was edited directly (font-face blocks, both `:root` token blocks, and a few
