@@ -1,0 +1,2092 @@
+{
+  "tool": "eudamed_watch",
+  "tool_version": "1.0.0",
+  "extracted_at_utc": "2026-11-01T13:24:50+00:00",
+  "snapshot_date": "2026-11-01",
+  "mode": "live",
+  "max_pages": 8,
+  "page_size": 50,
+  "anonymisation": "aggregate+keyed",
+  "anonymisation_note": "Committed outputs are aggregate-level only and are designed to contain no string identifying a manufacturer, device, trade name, identifier or SS(C)P reference. Per-device rows, where present, are keyed by a truncated HMAC-SHA256 of the Basic UDI-DI under a private key and carry only classification-level fields.",
+  "counts_note": "All API counts are unstable and approximate; display only.",
+  "limits": [
+    "This is a snapshot of what the public EUDAMED record showed at the extraction date. It is not a compliance, conformity or diligence statement about any named company, and must not be quoted as one.",
+    "Trade-name search is a case-insensitive, unanchored substring match. Results can include unrelated devices; rows are filtered client-side by manufacturer_contains where configured.",
+    "Zero results means 'not findable under that search string at that time', not 'not registered'.",
+    "totalElements counts returned by the API are unstable and are reported as approximate; they are for display only.",
+    "pageSize is capped at 50 by the API; page coverage is bounded by --max-pages, so long result lists may be truncated (flagged per entry).",
+    "riskClass/legislation query parameters are ignored by the API; risk class is taken from each row and filtering is client-side.",
+    "No Basic UDI-DI lookup endpoint exists; detail lookups go through a UDI-DI uuid. Only identifiers and link metadata are retrievable; SS(C)P content is never retrievable through this API.",
+    "A basicUdi starting with 'B-' is a legacy (MDD/AIMDD) EUDAMED-generated DI that structurally cannot carry an SS(C)P link (ClinicOps derived screening logic, not quoted Commission law).",
+    "SRN role PR (system/procedure pack producer) records carry no SS(C)P duty and are not looked up.",
+    "Committed snapshots, diffs and LATEST.md are aggregate-level only: they name no manufacturer, device, trade name, identifier or SS(C)P reference. Per-device rows, where present, use pseudonymous HMAC keys.",
+    "sscp_expected is ClinicOps derived screening logic (class III or implantable, MDR, not legacy, not PR). 'sscp_expected_but_absent' means no SS(C)P link was visible in the public record at extraction; it is not a finding that any obligation is unmet.",
+    "Failed pages and lookups are recorded explicitly; a device 'no longer seen' next to a recorded failure may be an extraction artefact, not a registry change."
+  ],
+  "totals": {
+    "entries_queried": 14,
+    "pages_fetched": 25,
+    "pages_failed": 9,
+    "rows_seen": 1076,
+    "rows_filtered_out_by_manufacturer": 161,
+    "distinct_devices": 255,
+    "entries_truncated_by_max_pages": 1,
+    "entries_with_zero_rows": 8,
+    "classification_counts": {
+      "legacy_no_sscp_possible": 220,
+      "lookup_failed": 15,
+      "pr_no_sscp_duty": 5,
+      "sscp_expected_but_absent": 2,
+      "sscp_link_absent": 3,
+      "sscp_linked": 10
+    }
+  },
+  "failure_counts": {
+    "detail_lookup": 15,
+    "search_page": 9
+  },
+  "failures_recorded": 24,
+  "devices": {
+    "0113cf51708c7740": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "02c08dcdd8dd9bbf": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "03e2528bc152afe6": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "0592c09fd65351b8": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "06a131703fe8fa15": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "06b72c2199333cf2": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "07a6d17635ca52ae": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "07f4de917907ce66": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "0943ab1be3c4474e": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iib",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "0ac914ecefb319fa": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "0b0ff57a790c1c4e": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "0c2cde11b4f2f3a7": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "0c8ce39f0d0e2e9d": {
+      "classification": "lookup_failed",
+      "risk_class": "class-iib",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "0cd54011ee68f982": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "0d541f08f7d45634": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "0ec53d1b4e1ed902": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "0f0ab2c858ebd131": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "0feae2bd0a4eeb89": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "0fff31ef48b47bf0": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "10099aaeebdac511": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "107f3bea04a516cb": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "11453d5d54ec4e3e": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iib",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "12e5b29a8b347e70": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "132341516f393fa3": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "13613bbe9c84d6e6": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "14704c2d76747a9b": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "1554bf62c283a1fd": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "16a6b6b0295a6329": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "16de92a32b58172b": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "1771301610d2d0e7": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "17b90ea11276770e": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "1b66a112c7b2f77d": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iib",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "1d0df419133689c6": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "1f63269f2b9ab373": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "20bea80bebfcd01d": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "230929c3b01e547a": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "233fc91b3d62330d": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iib",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "238904e81eeca487": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "240fd78e522fbd43": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "24651e9cdf7a9c0a": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "252ef817e2abe387": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iib",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "25433e7e1d922d85": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "26b834a015c30f48": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "28eb28db1f324cc7": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "2a502ba7a68ce51d": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "2c274c6352a72235": {
+      "classification": "sscp_expected_but_absent",
+      "risk_class": "class-iib",
+      "sscp_expected": true,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "2d52cdc33c77e4cf": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "2d622632b88d77dd": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "2df077b3fb9a7b99": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "2f2951be6ef019eb": {
+      "classification": "sscp_linked",
+      "risk_class": "class-iii",
+      "sscp_expected": true,
+      "linked": true,
+      "validated": true,
+      "issue_year": 2026
+    },
+    "2fda44ce91717452": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "30b48b2140ae0590": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "30c124f2e3d227b9": {
+      "classification": "sscp_linked",
+      "risk_class": "class-iii",
+      "sscp_expected": true,
+      "linked": true,
+      "validated": true,
+      "issue_year": 2025
+    },
+    "324c5191ef26b024": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "3278992f810a1c28": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "33490e8be5be5dab": {
+      "classification": "sscp_link_absent",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "341427f257ea225d": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "351b8cf9c1e219ba": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "35272862bfff92b6": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iib",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "37b7b7009931ad99": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "3cfff68d6b830d60": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "3d00985aca822694": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "3d72d9237423829c": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "41ab6e5d8fd8f371": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "434ce1f019ebfca1": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "438177bb2baf1af8": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "43b1eab3b7bc5f47": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "463cc2c8a255e0f6": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "4a218a06747749b5": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "4b946883512fad8c": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "4c5fa796cf22924e": {
+      "classification": "lookup_failed",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "4ce681960505e466": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iib",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "4d9362c13ee79fa0": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "4e4a3c2a9717f2a8": {
+      "classification": "lookup_failed",
+      "risk_class": "class-iib",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "4f21d1dfe97004f0": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "50b64ece2147399a": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "5114a1cad8886f60": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "511bcfb3d685f866": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "5333a2ba5b300b84": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "53bd2a6f1eadd480": {
+      "classification": "sscp_linked",
+      "risk_class": "class-iii",
+      "sscp_expected": true,
+      "linked": true,
+      "validated": true,
+      "issue_year": 2025
+    },
+    "54347ca2ef54652e": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "54c182629923823d": {
+      "classification": "pr_no_sscp_duty",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "550e2069b940902f": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "5700fbc891121795": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "572ee7e1cc65c638": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "578f9a3a156caae1": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iib",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "57e181b6635a38ed": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "587bcddc9ed8005f": {
+      "classification": "lookup_failed",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "59b873f8c4475fc6": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "5a78eea7574ed6a4": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "5bc60e525a65e180": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "5c8c97ec3c601911": {
+      "classification": "sscp_linked",
+      "risk_class": "class-iii",
+      "sscp_expected": true,
+      "linked": true,
+      "validated": true,
+      "issue_year": 2025
+    },
+    "5ca00022ee2d0e00": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "5cc2ab671d6eaea8": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "5ccfd453c8a9f702": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "5d581193f1a22c38": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "5dcb4a63fe80b455": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "5f80ca6ffe74441b": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "5feccf56dac9c0bd": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "612706bc935737f7": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "641c5407377a179f": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "64af38e39a60e128": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "650652d77b08495e": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "654ffce067577b79": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "65817b29762769a2": {
+      "classification": "lookup_failed",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "65b9085507242f0c": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "661f9c0718fb8409": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "6783bd443c76e444": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "69934e10bbf914a9": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "69a10dffb8dc5892": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "69a70a219a176482": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "6c8623137b97a78a": {
+      "classification": "sscp_linked",
+      "risk_class": "class-iii",
+      "sscp_expected": true,
+      "linked": true,
+      "validated": true,
+      "issue_year": 2025
+    },
+    "6cdd27612c7d8889": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "6d7a904978c971cd": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "6df0ecee4b1dc3cb": {
+      "classification": "pr_no_sscp_duty",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "6e127fc1be0ef584": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "6f1686bf73ecd0d0": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "701bbf2ccd11e914": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "70c34e7241a7ebfc": {
+      "classification": "sscp_linked",
+      "risk_class": "class-iii",
+      "sscp_expected": true,
+      "linked": true,
+      "validated": true,
+      "issue_year": 2026
+    },
+    "718531036b04e6b6": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "725091e1d596913c": {
+      "classification": "sscp_linked",
+      "risk_class": "class-iii",
+      "sscp_expected": true,
+      "linked": true,
+      "validated": true,
+      "issue_year": 2025
+    },
+    "72c3ad8602795d73": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "74bd3c57dbc7f1c5": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "752f9f6a6cbf71b6": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "75d88d5164824ea1": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "7670efbbb5b8048e": {
+      "classification": "sscp_link_absent",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "76fa624b5f829b19": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "77b8aec982a8130d": {
+      "classification": "lookup_failed",
+      "risk_class": "class-iib",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "7a097345c7173829": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "7ac044c490dd1467": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "7acaaaa102ab7e60": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "7d375500616b84ba": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "7e0d463de02a23c7": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "7f501d092cc7d5d9": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "81a2fb4944357029": {
+      "classification": "lookup_failed",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "82af305ef5cdf863": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "842f5079415a4007": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "867b45c84198fc93": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "87e84c5a3d351293": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "8816851da7aba84f": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "882de21038b98e68": {
+      "classification": "lookup_failed",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "88acc3acdb7a9c74": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "8983742456afa663": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "8a4fca26c1b078eb": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "8e6a5c0fde440e78": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "8e8b96742810025d": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "8f1119f72cd7730a": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "8f8d4dc222af58e9": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "8fdefdde1b027559": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "9355d81741103dd4": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "95412886e69250cd": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iib",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "9691b709de85b574": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "97a461fb90803e51": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "97fa34b318901e64": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "980d24b8b232e714": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "985ace91d400ba68": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "98ef032bf6236a4f": {
+      "classification": "sscp_link_absent",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "9ab8c54e1cb2931b": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "9af7bc2fb08b94b8": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "9cbae3fd497089b2": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "9d4b7dddfce52693": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "9e3b6319f3d98e83": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "9ea6f66e2dd540ea": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "9ee13bedc0b9be23": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "a084239429f5d440": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "a418b16557e37d85": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "a4a133383826a21b": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "a4e201f3bbea6181": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "a55bc9c306e8b25e": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "a57f5203fd4767f1": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "a8ece82c859c3bd8": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "a9a75cf30c708144": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "ab814521ac40f4be": {
+      "classification": "pr_no_sscp_duty",
+      "risk_class": "class-iib",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "ac0784f8567f349a": {
+      "classification": "sscp_linked",
+      "risk_class": "class-iii",
+      "sscp_expected": true,
+      "linked": true,
+      "validated": true,
+      "issue_year": 2025
+    },
+    "acd22b1c4860587f": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "ad780c2b10635f9f": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "ad80f77da300da04": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "ae82abd4e9d498a9": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "b066ad0051cfba5b": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "b06a2864825f432a": {
+      "classification": "sscp_linked",
+      "risk_class": "class-iii",
+      "sscp_expected": true,
+      "linked": true,
+      "validated": true,
+      "issue_year": 2026
+    },
+    "b0e775c96d9f5877": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "b1ef57415fb526a7": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "b23c302ef3180838": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "b3aa1bc28e4adfdb": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "b4375c3d5e8fac19": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "b447318cbc17e8c8": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iib",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "b6f3bda9a8122d11": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "b723975970aafffd": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "b802a014354b6717": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "b97d64286f97e221": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "c085b31aa5017047": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "c1c0074525beada5": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "c54d4164d34bbd1e": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "c62f9c7d184aa103": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "c8b38ef96bd88898": {
+      "classification": "pr_no_sscp_duty",
+      "risk_class": "class-iib",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "c9abb7fe43e42272": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iib",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "ca5e60bbbc21a953": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "cafd38728980deca": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "cc2552f3e1bf1cf0": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "cc811f6be987ffc9": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "ccc0ea435839cf3b": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "cce60c4802ac9dd2": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "cd14a299878f5181": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "cf0d02aa16b576b5": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "cfe9edf68a6650c2": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "d0ddabd0ffb46f4f": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "d172e91ed9af59f0": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "d23d9a370aecace4": {
+      "classification": "lookup_failed",
+      "risk_class": "class-iib",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "d23e51398ee26018": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "d2a0092f91f562f3": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "d702f69e478285d2": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "d824898180b2e393": {
+      "classification": "lookup_failed",
+      "risk_class": "class-iib",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "d8404c68850f7075": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "d850051b734cc79d": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "dad5fcc95294ef6f": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "dba5369558476074": {
+      "classification": "lookup_failed",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "dbc3581179a8a890": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iib",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "dbf8d05b5aa7f509": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "de24a6182e9689ee": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "de3339a2e4d00f07": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "de7e1a8b0f5675b4": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iib",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "e033e3bae69b5438": {
+      "classification": "pr_no_sscp_duty",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "e06c67d83dc79483": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "e1b0e30ca5c6447b": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "e1c0cfd85b43e731": {
+      "classification": "sscp_expected_but_absent",
+      "risk_class": "class-iib",
+      "sscp_expected": true,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "e26354041e4bbab7": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iib",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "e377270545b4ae0a": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "e6aff8d84dfabf0b": {
+      "classification": "sscp_linked",
+      "risk_class": "class-iii",
+      "sscp_expected": true,
+      "linked": true,
+      "validated": true,
+      "issue_year": 2022
+    },
+    "ea4b34dbbe4ec199": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "ea7bac14acbc023f": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "eb84d2c498ffc0a7": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "ec1af7c1457ff08f": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "ed464344db02c1b2": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "ee3137d685a358a4": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "ee4dd8e3474732e9": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "ee6ab5a5670d820e": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "eed8e7fe90bc2abc": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "ef34b2cf94c33bd0": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iib",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "ef523f75195b3384": {
+      "classification": "lookup_failed",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "f012c8ba9c5e8805": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iib",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "f057d0d70aac4269": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "f0ad75c99f66ba5a": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "f0c5e1d1b722b51c": {
+      "classification": "lookup_failed",
+      "risk_class": "class-iib",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "f0e8208bab549cb0": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iib",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "f113cbd916e10e35": {
+      "classification": "lookup_failed",
+      "risk_class": "class-iib",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "f35af171ccbd572c": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "f38a777b186c9672": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "f6f42baf917a254d": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "f822e50f2745367a": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "f923f5aba89c86ed": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "fa9c199e6acbba97": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "faffd1c0112bda1a": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iii",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "fcd87ffe5d22b229": {
+      "classification": "lookup_failed",
+      "risk_class": "class-i",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "fce011a2cb8517fc": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    },
+    "ffcf20b8b7c34189": {
+      "classification": "legacy_no_sscp_possible",
+      "risk_class": "class-iia",
+      "sscp_expected": false,
+      "linked": false,
+      "validated": null,
+      "issue_year": null
+    }
+  },
+  "sha256": "0cf22ab7f2259263c2ee71601800a57251ee7278409b681a8244887670e6a627"
+}

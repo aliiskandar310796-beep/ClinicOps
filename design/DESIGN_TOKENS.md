@@ -40,7 +40,7 @@ values.
 Three self-hosted type families, each doing one job (`docs/assets/fonts/`, no third-party
 requests — Google Fonts and similar remain off-limits for this privacy-first audience):
 
-- `--font-display`: Fraunces (variable weight 500–700, optical size pinned at 36 to halve the file; the
+- `--font-display`: Source Serif 4 (variable weight 400–700; replaced Fraunces on 2026-11-14 because its J, j and & read as odd; the
   full opsz axis cost ~45 KB on the mobile critical path) — h1–h4 only. A serif reads as an
   authored, archival document rather than software chrome; this is the single biggest visual
   break from the prior Geist-everywhere system.
@@ -70,3 +70,16 @@ already diverged from. That mismatch between "canonical" docs and shipped code i
 kind of drift this repo's own tooling exists to catch elsewhere; keep this file in sync with
 `docs/site.css` when either changes; when a copy resolution is needed, `docs/site.css` is the
 implementation and its own header comment names the design-language version it ships.
+
+## Living colour (2026-11-14)
+
+Colour carries meaning, not decoration. A segment re-inks `--accent`, `--accent-strong` and `--accent-soft` through `data-seg` on `<html>` or on a band.
+
+| Segment | Meaning | Light | Dark |
+|---|---|---|---|
+| eCOA | calm, participant-facing | #0b6e6a | #55cdc4 |
+| Medical devices | precise, regulatory | #2447b5 | #8fa8ff |
+| Danish and PV | warm, local | #b1331d | #ff8f78 |
+| Base | neutral ink | #1b4b5a | #7fc4d6 |
+
+Status colours (ok, warn, hold) always appear with a word. `html[data-flow]` sets the header progress line colour from the band in view (`assets/flow.js`).

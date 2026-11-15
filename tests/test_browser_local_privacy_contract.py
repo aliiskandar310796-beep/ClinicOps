@@ -19,6 +19,7 @@ BROWSER_LOCAL = (
     "change-surface-mapper.html",
     "regulatory-change-impact.html",
     "technical-file-consistency.html",
+    "ecoa-delivery-workbench.html",
     "readiness-score.html",
     "integrity-economics.html",
     "danish-pv-literature-register.html",

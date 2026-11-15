@@ -27,14 +27,17 @@ SECTIONS = (
         "sscp-operations.html", "authorised-representative-portfolio-intelligence.html",
         "medical-device-document-control.html", "regulatory-intelligence.html", "expert-network.html",
         "what-a-pilot-looks-like.html", "evidence-pack-checklist.html",
+        "eu-authorised-representative.html",
     }),
     ("Free browser-local tools and examples", lambda r: r in {
         "tools.html", "integrity-check.html", "integrity-scanner.html", "integrity-economics.html",
         "identifier-check.html", "readiness-score.html", "change-surface-mapper.html",
-        "regulatory-change-impact.html", "technical-file-consistency.html",
+        "regulatory-change-impact.html", "technical-file-consistency.html", "ecoa-delivery-workbench.html",
+        "coa-type-finder.html", "ecoa-lead-time-planner.html", "ecoa-visit-burden.html",
         "specimen-register/index.html", "transition-map-sample/index.html",
         "danish-pv-literature-register.html", "sdea-clause-checker.html", "danish-dhpc-checker.html",
     }),
+    ("COA and eCOA reference", lambda r: r in {"ecoa.html", "coa-types.html", "ecoa-workflow.html", "coa-nordic.html"}),
     ("Research and primary sources", lambda r: r in {"research.html", "primary-sources.html"} or r.startswith("research/")),
     ("Policies", lambda r: r.startswith("privacy-notice/")),
 )

@@ -1,12 +1,12 @@
 # EUDAMED watch — latest snapshot (aggregate)
 
-- Snapshot date: 2026-10-01
-- Extracted at (UTC): 2026-10-01T13:16:26+00:00
+- Snapshot date: 2026-11-01
+- Extracted at (UTC): 2026-11-01T13:24:50+00:00
 - Tool: eudamed_watch 1.0.0 (mode: live)
-- Snapshot sha256: `2ddf0946822051e9e55486803a4ce71bba8c4e029f55421efb6f0dd81e51ef40`
+- Snapshot sha256: `0cf22ab7f2259263c2ee71601800a57251ee7278409b681a8244887670e6a627`
 - Anonymisation: aggregate+keyed
-- Recorded failures: 16 (detail_lookup=5, search_page=11)
-- Diff against previous snapshot: diffs/2026-10-01.md
+- Recorded failures: 24 (detail_lookup=15, search_page=9)
+- Diff against previous snapshot: diffs/2026-11-01.md
 
 Committed outputs are aggregate-level only and are designed to contain no string identifying a manufacturer, device, trade name, identifier or SS(C)P reference. Per-device rows, where present, are keyed by a truncated HMAC-SHA256 of the Basic UDI-DI under a private key and carry only classification-level fields.
 
@@ -15,25 +15,26 @@ Committed outputs are aggregate-level only and are designed to contain no string
 | Measure | Value |
 |---|---|
 | Watchlist entries queried | 14 |
-| Search pages fetched | 12 |
-| Search pages failed | 11 |
-| Rows seen (all entries) | 481 |
-| Rows filtered out client-side | 48 |
-| Distinct devices (deduped) | 59 |
-| Entries truncated by page cap | 0 |
-| Entries with zero rows | 11 |
+| Search pages fetched | 25 |
+| Search pages failed | 9 |
+| Rows seen (all entries) | 1076 |
+| Rows filtered out client-side | 161 |
+| Distinct devices (deduped) | 255 |
+| Entries truncated by page cap | 1 |
+| Entries with zero rows | 8 |
 
 ## Classification counts (all entries combined)
 
-- legacy_no_sscp_possible: 20
-- lookup_failed: 5
-- sscp_expected_but_absent: 4
-- sscp_link_absent: 28
-- sscp_linked: 2
+- legacy_no_sscp_possible: 220
+- lookup_failed: 15
+- pr_no_sscp_duty: 5
+- sscp_expected_but_absent: 2
+- sscp_link_absent: 3
+- sscp_linked: 10
 
 ## Standing limits
 
-- Extraction date: 2026-10-01.
+- Extraction date: 2026-11-01.
 - This is a snapshot of what the public EUDAMED record showed at the extraction date. It is not a compliance, conformity or diligence statement about any named company, and must not be quoted as one.
 - Trade-name search is a case-insensitive, unanchored substring match. Results can include unrelated devices; rows are filtered client-side by manufacturer_contains where configured.
 - Zero results means 'not findable under that search string at that time', not 'not registered'.

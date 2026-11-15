@@ -241,6 +241,6 @@ On **every** listing — free, paid, or service — the closing call to action m
 
 **Also carry these existing repository disclaimers into the live listings (already reflected in copy above, no new source needed but confirm wording against the claim registry before publish):**
 - B-prefixed EUDAMED DI is a legacy-style structural signal only; it does not establish full regulatory/SS(C)P state (CO-CLM-0004) — used in 1.1 EUDAMED Identifier Check.
-- If any listing ever references the 27 February 2027 MDCG SS(C)P-upload date, it must be described as a **non-binding MDCG recommendation, not a statutory Article 32 deadline** (CO-CLM-0010). *(Not currently used in this copy — flagged so it is handled correctly if added.)*
+- If any listing ever references the 27 March 2027 MDCG SS(C)P-upload date (rev.1; 27 February 2027 was the superseded June date), it must be described as a **non-binding MDCG recommendation, not a statutory Article 32 deadline** (CO-CLM-0019). *(Not currently used in this copy — flagged so it is handled correctly if added.)*
 
 **Note:** Do not render internal claim IDs on the public Gumroad listings. They are editorial traceability markers only. Run the repository claim gate and content-claim-reference validator before publishing any listing that carries a regulatory statement.

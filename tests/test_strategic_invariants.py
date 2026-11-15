@@ -37,15 +37,17 @@ CANONICAL_CATEGORY = "EU MedTech regulatory data integrity"
 CONTACT_EMAIL = "info@clinicops.dk"
 
 # --- the homepage's single story -------------------------------------------
-HOMEPAGE_H1 = (
-    "Keep EUDAMED, UDI, certificates, SS(C)P and controlled records aligned "
-    "when products change."
-)
-PRIMARY_CTAS = (">Check a change free</a>", ">Scope a review</a>")
+# Amended 2026-11-14 on the owner's instruction (see
+# 01_STRATEGY/SITE_PROJECT_PID_2026-11-14.md): the front door is Danish clinical
+# operations support with three lanes; inner pages keep the MedTech integrity
+# identity.
+HOMEPAGE_CATEGORY = "Clinical operations support from Denmark"
+HOMEPAGE_H1 = "Clinical operations support from Denmark."
+PRIMARY_CTAS = (">Open the eCOA workbench</a>", ">Describe your project</a>")
 
 # --- page identity ----------------------------------------------------------
 PINNED_TITLES = {
-    "index.html": "ClinicOps | EU MedTech Regulatory Data Integrity",
+    "index.html": "ClinicOps | Clinical operations support from Denmark",
     "services.html": "Solution: Regulatory Change Integrity Review | ClinicOps",
     "use-cases.html": "Use Cases: EUDAMED, SS(C)P, AR Portfolios, Denmark | ClinicOps",
     "tools.html": "Tools: Integrity Scanner and Evidence Utilities | ClinicOps",
@@ -57,7 +59,9 @@ PINNED_TITLES = {
 FLAGSHIP_URL = "https://clinicops.dk/evidence-change-control-pack"
 
 # --- index architecture -----------------------------------------------------
-SITEMAP_URL_CEILING = 40
+# Raised 40 -> 48 on 2026-11-14 (decision D8): owner-directed COA/eCOA section (hub, types, workflow,
+# Nordic reference, three browser-local tools). Any further page needs its own recorded decision.
+SITEMAP_URL_CEILING = 48
 REQUIRED_SITEMAP_URLS = {
     "https://clinicops.dk/",
     "https://clinicops.dk/services",
@@ -117,21 +121,17 @@ def test_homepage_organization_schema_pins_the_canonical_identity() -> None:
     assert org["url"] == "https://clinicops.dk/"
     assert org["email"] == CONTACT_EMAIL
     assert org["logo"].startswith("https://clinicops.dk/assets/")
-    assert CANONICAL_CATEGORY in org["description"]
+    assert HOMEPAGE_CATEGORY in org["description"]
     assert org["sameAs"] == [CANONICAL_COMPANY_LINKEDIN]
-    assert org["founder"]["name"] == "Ali Iskandar"
-    assert FOUNDER_LINKEDIN in org["founder"]["sameAs"]
+    # Decision 2026-11-14: the public structure is independent of any individual.
+    assert "founder" not in org
 
 
-def test_about_person_schema_pins_the_founder_identity() -> None:
-    people = _schema_objects((DOCS / "about.html").read_text(encoding="utf-8"), "Person")
-    assert len(people) == 1
-    person = people[0]
-    assert person["name"] == "Ali Iskandar"
-    assert person["worksFor"]["name"] == "ClinicOps"
-    assert person["worksFor"]["url"] == "https://clinicops.dk/"
-    assert person["sameAs"] == [FOUNDER_LINKEDIN]
-    assert person["url"] == "https://clinicops.dk/about"
+def test_public_site_carries_no_person_schema() -> None:
+    """No page publishes Person structured data; authorship is the organisation."""
+    for page in _public_pages():
+        html = page.read_text(encoding="utf-8")
+        assert not _schema_objects(html, "Person"), page
 
 
 def test_only_the_canonical_company_linkedin_slug_appears_anywhere() -> None:

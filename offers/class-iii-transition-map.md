@@ -111,7 +111,7 @@ Current claim IDs to use in discovery / deliverables only where their gate allow
 - `CO-CLM-0004` — B-prefixed EUDAMED DI identifier structure.
 - `CO-CLM-0005` — ClinicOps B-prefix operational derivation, explicitly labelled as derivation.
 - `CO-CLM-0009` — MDCG 2026-4 manufacturer-upload / notified-body indication operating model.
-- `CO-CLM-0010` — MDCG recommendation for pre-mandatory-use SS(C)P uploads by 27 February 2027, explicitly non-binding.
+- `CO-CLM-0019` — MDCG 2026-4 rev.1 recommendation for pre-mandatory-use SS(C)P uploads by 27 March 2027, explicitly non-binding (supersedes `CO-CLM-0010`, 27 February 2027).
 
 `CO-CLM-0002` is useful aggregate research context but must never be presented as a population rate.
 
@@ -120,7 +120,7 @@ Current claim IDs to use in discovery / deliverables only where their gate allow
 - Do not sell “we found your non-compliance” from public metadata.
 - Do not call a B-prefix consequence a directly stated Commission SS(C)P rule.
 - Do not interpret PR-role rows as ordinary MF-role manufacturer registrations.
-- Do not call the 27 February 2027 MDCG recommendation a statutory Article 32 deadline.
+- Do not call the 27 March 2027 MDCG recommendation a statutory Article 32 deadline.
 - Do not imply full-register API coverage.
 - Do not infer certificate expiry, market placement or language obligation when the evidence does not support it.
 - Do not undermine an AR's existing client mandate when the better commercial role is a white-label evidence/work-plan layer.
