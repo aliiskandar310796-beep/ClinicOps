@@ -77,13 +77,23 @@ def test_public_termbase_file_is_valid_and_matches_expected_state() -> None:
     Art. 10(8) QMS list and Art. 10(13) in full). 242 `verified`, 16
     `candidate`, append-only: no row present before this change was
     touched.
+
+    2026-11-15 t0-termbase Sunday PR (the 2026-11-08 PR night was missed):
+    adds TB-0583..TB-0967 from the nine nightly runs 2026-11-01..2026-11-14
+    (no rows on 11-04, 11-05, 11-06, 11-08, 11-11), all quoted from the
+    EUR-Lex consolidated EN and DA texts -- MDR 2017/745 Chapter I (Art.
+    1(1)-(6), 3, 4) and Chapter II at sentence level (Art. 5-16), and IVDR
+    2017/746 Chapter I (Art. 1, 3, 4) and the Chapter II remainder (Art.
+    5-9). 351 `verified`, 34 `candidate`, append-only: no row present
+    before this change was touched (the first 582 rows are byte-identical
+    to the file on PR #116).
     """
     assert validate(PUBLIC) == []
     rows = read_rows(PUBLIC)
-    assert len(rows) == 582
+    assert len(rows) == 967
     assert Counter(r["status"] for r in rows) == {
-        "verified": 539,
-        "candidate": 42,
+        "verified": 890,
+        "candidate": 76,
         "unverified-seed": 1,
     }
     assert all(r["domain"] == "regulatory" for r in rows)
