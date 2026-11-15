@@ -86,14 +86,17 @@ def test_public_termbase_file_is_valid_and_matches_expected_state() -> None:
     2017/746 Chapter I (Art. 1, 3, 4) and the Chapter II remainder (Art.
     5-9). 351 `verified`, 34 `candidate`, append-only: no row present
     before this change was touched (the first 582 rows are byte-identical
-    to the file on PR #116).
+    to the file on PR #116). The same night's own slice -- MDR 2017/745
+    Art. 1(7)-(12) (combination products, IVD-incorporating devices,
+    machinery) -- adds TB-0968..TB-1003 (29 `verified`, 7 `candidate`),
+    also EUR-Lex only.
     """
     assert validate(PUBLIC) == []
     rows = read_rows(PUBLIC)
-    assert len(rows) == 967
+    assert len(rows) == 1003
     assert Counter(r["status"] for r in rows) == {
-        "verified": 890,
-        "candidate": 76,
+        "verified": 919,
+        "candidate": 83,
         "unverified-seed": 1,
     }
     assert all(r["domain"] == "regulatory" for r in rows)
