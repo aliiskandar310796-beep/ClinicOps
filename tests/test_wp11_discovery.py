@@ -5,7 +5,7 @@ import re
 from pathlib import Path
 
 DOCS = Path(__file__).resolve().parents[1] / "docs"
-JSON_LD = re.compile(r'<script type="application/ld\+json">(.*?)</script>', re.S)
+JSON_LD = re.compile(r'<script type="application/ld\+json">(.*?)</script>', re.DOTALL)
 
 TOOL_PAGES = (
     "change-surface-mapper", "identifier-check", "integrity-check", "integrity-scanner",
