@@ -157,6 +157,7 @@ SECTION_BY_PAGE = {
     "coa-type-finder.html": "Clinical operations",
     "ecoa-lead-time-planner.html": "Clinical operations",
     "ecoa-visit-burden.html": "Clinical operations",
+    "ctis-clock.html": "Clinical operations",
     "danish-pv-literature-register.html": "Clinical operations",
     "sdea-clause-checker.html": "Clinical operations",
     "danish-dhpc-checker.html": "Clinical operations",

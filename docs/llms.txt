@@ -29,6 +29,7 @@ Solution and use cases:
 Free browser-local tools and examples:
 - Change Surface Mapper | ClinicOps: https://clinicops.dk/change-surface-mapper - Map one approved change across affected systems, records, documents and owners, in your browser. A portable evidence brief; nothing is uploaded.
 - COA type finder and inventory | ClinicOps: https://clinicops.dk/coa-type-finder - Free, browser-only COA type finder and inventory: sort an assessment into patient-, observer- or clinician-reported or performance outcome, and list a study's assessments with gaps flagged. Nothing is sent to ClinicOps.
+- CTIS Initial Application Clock | ClinicOps: https://clinicops.dk/ctis-clock - Planning dates for an EU clinical trial initial application in CTIS: validation, Part I, Part II and decision under Regulation 536/2014, with the winter clock stop. Browser-local, with calendar export.
 - Danish DHPC Submission Checker | ClinicOps: https://clinicops.dk/danish-dhpc-checker - Free checklist for a Danish DHPC to the Danish Medicines Agency's documented rules: submission pack, format, plain-Danish translation, evidence. Browser-local.
 - Danish Local-Literature Source Register | ClinicOps: https://clinicops.dk/danish-pv-literature-register - Source-verified register of Danish periodicals for GVP Module VI local-literature monitoring, with a justification memo and screening-log generator.
 - eCOA Delivery Workbench | ClinicOps: https://clinicops.dk/ecoa-delivery-workbench - Free browser-local workbench for eCOA study delivery: licensing and translation plan, Nordic screenshot review, testing pack, risk and change control.
@@ -37,7 +38,6 @@ Free browser-local tools and examples:
 - EUDAMED Identifier Check | ClinicOps: https://clinicops.dk/identifier-check - Free, browser-only EUDAMED Identifier Check: B-prefix legacy screening, SRN actor-role decoding, and GS1 Mod-10 validation. Nothing is sent to ClinicOps.
 - Free Regulatory Change Integrity Check | ClinicOps: https://clinicops.dk/integrity-check - Build a browser-local evidence packet for one regulatory change: provenance, downstream comparison, gaps, owner routing, JSON fingerprint. Optional local PDF read to suggest values.
 - Regulatory Integrity Scanner | ClinicOps: https://clinicops.dk/integrity-scanner - Check one approved change against downstream records, or scan a portfolio export for missing fields, duplicates and conflicts. Browser-local, exportable.
-- Regulatory Change Impact Mapper | ClinicOps: https://clinicops.dk/regulatory-change-impact - Pick a category of EU regulatory change, answer six portfolio questions, and get an impacted-surface checklist with severity bands. Browser-local.
 - SDEA / PV Agreement Clause Checker | ClinicOps: https://clinicops.dk/sdea-clause-checker - Screen a PV agreement or SDEA against the clause set required from 12 February 2026 by Implementing Regulation (EU) 2025/1466 and GVP. Paste text or upload a PDF; browser-local.
 - Interactive Regulatory Integrity Specimen Register | ClinicOps: https://clinicops.dk/specimen-register/ - A synthetic integrity register: traceable reference evidence, observations, discrepancy states, review owners and explicit human decisions.
 - Technical File Consistency Check | ClinicOps: https://clinicops.dk/technical-file-consistency - Paste or upload a PDF for each of up to five technical-documentation sources and get a severity-banded divergence report. Browser-local.
@@ -47,6 +47,7 @@ Free browser-local tools and examples:
 Archived tools, kept for existing links:
 - Regulatory Change Review Cost Calculator | ClinicOps: https://clinicops.dk/integrity-economics - Estimate the manual workload and labour cost of checking that a regulatory change reached EUDAMED, IFU, SS(C)P, labels and controlled systems.
 - Transition Readiness Score | ClinicOps: https://clinicops.dk/readiness-score - A private, browser-only screening aid for organising EUDAMED transition work-plan evidence before a human regulatory review.
+- Regulatory Change Impact Mapper | ClinicOps: https://clinicops.dk/regulatory-change-impact - Pick a category of EU regulatory change, answer six portfolio questions, and get an impacted-surface checklist with severity bands. Browser-local.
 
 COA and eCOA reference:
 - COA and eCOA in Denmark and the Nordics | ClinicOps: https://clinicops.dk/coa-nordic - What the Nordic authorities say about participant-facing electronic assessments, language, ethics review and data protection, which instrument languages exist, and what is still unconfirmed, with a dated source register.
