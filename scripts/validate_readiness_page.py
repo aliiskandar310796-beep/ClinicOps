@@ -62,7 +62,7 @@ def main() -> None:
     required_copy = (
         "Nothing is sent to ClinicOps",
         "not a regulatory determination",
-        "Request a Regulatory Intelligence Assessment",
+        "Request a scoping reply",
         "Resolve unresolved points against EUDAMED and your RA/QA team",
     )
     for phrase in required_copy:
