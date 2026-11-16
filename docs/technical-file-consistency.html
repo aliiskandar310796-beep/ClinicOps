@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" data-seg="device">
 <head>
-<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Rrp/oKlTF5JhFj1/wI5MXQooEKDuQe1flpA8aYc4skk=' 'sha256-09a7HaplGfj3EFOl8tDVInvLPQtid8QNAUvkjjxCHa8=' 'wasm-unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'none'; worker-src 'self' blob:; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'"><meta name="referrer" content="no-referrer">
+<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Rrp/oKlTF5JhFj1/wI5MXQooEKDuQe1flpA8aYc4skk=' 'sha256-pBu0nQt2X77ZsvPCshGthNxvcixH7BWtqshftR/5tkw=' 'wasm-unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'none'; worker-src 'self' blob:; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'"><meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <title>Technical File Consistency Check | ClinicOps</title>
@@ -157,7 +157,7 @@ async function handleUpload(c,file){
   if(skipped)bits.push(`${skipped} field(s) already had a value here and were left unchanged.`);
   if(filled===0)bits.push("No label patterns this tool recognizes were found — enter values manually.");
   setUplStatus(c,bits.join(" "),filled?null:"warn");
- }catch(e){setUplStatus(c,`Could not read "${file.name}" locally: ${e&&e.message?e.message:e} Nothing was uploaded; enter this column's values manually.`,"error")}
+ }catch(e){setUplStatus(c,`Could not read "${file.name}" locally: ${(e&&e.message?e.message:String(e)).replace(/\s*Nothing was uploaded\.?\s*$/,'')} Nothing was uploaded; enter this column's values manually.`,"error")}
 }
 // ---------- Scanned/image PDFs: an explicit, opt-in local OCR fallback (see assets/ocr-extract.js) ----------
 // A scanned PDF never runs OCR on its own — offerOcr() only ever offers a button; runOcr() only
@@ -198,7 +198,7 @@ async function runOcr(c,file){
   if(skipped)bits.push(`${skipped} field(s) already had a value here and were left unchanged.`);
   if(filled===0)bits.push("No label patterns this tool recognizes were found in the OCR text — enter values manually.");
   setUplStatus(c,bits.join(" "),filled?null:"warn");
- }catch(e){setUplStatus(c,`Could not run local OCR on "${file.name}": ${e&&e.message?e.message:e} Nothing was uploaded; enter this column's values manually.`,"error")}
+ }catch(e){setUplStatus(c,`Could not run local OCR on "${file.name}": ${(e&&e.message?e.message:String(e)).replace(/\s*Nothing was uploaded\.?\s*$/,'')} Nothing was uploaded; enter this column's values manually.`,"error")}
 }
 for(let c=1;c<=5;c++){$(`uplbtn${c}`).addEventListener("click",()=>$(`file${c}`).click());
  $(`file${c}`).addEventListener("change",ev=>{const f=ev.target.files&&ev.target.files[0];ev.target.value="";if(f){delete pendingOcrFiles[c];handleUpload(c,f)}})}
@@ -237,7 +237,7 @@ function classify(cols){const findings=[],fieldsOut=[];
      const fams=[...new Set(parsed.map(x=>x.p.family))];
      if(fams.length>1)ffind.push({type:"UNIT_FAMILY_MISMATCH",severity:"Major",detail:"Unit families differ ("+parsed.map(x=>`${x.c.source}: "${x.c.value_verbatim.trim()}"`).join("; ")+") — verify equivalence manually; families are never auto-equated."});
      else if(parsed.every(x=>x.p.canon===parsed[0].p.canon))ffind.push({type:"NORMALIZED_MATCH",severity:"Minor",detail:"Values agree after unit normalization: "+parsed.map(x=>`${x.c.source}: "${x.c.value_verbatim.trim()}"`).join("; ")+". Cosmetic harmonization only."});
-     else{const groups={};for(const x of parsed){const k=x.p.family+":"+x.p.canon;(groups[k]=groups[k]||[]).push(x.c)}ffind.push({type:"CONFLICT",severity:f.tier===1?"Critical":"Major",detail:"Sources disagree after unit normalization: "+Object.values(groups).map(g=>`[${g.map(c=>c.source).join(", ")}] = "${g[0].value_verbatim.trim()}"`).join(" vs ")})}
+     else{const groups=Object.create(null);for(const x of parsed){const k=x.p.family+":"+x.p.canon;(groups[k]=groups[k]||[]).push(x.c)}ffind.push({type:"CONFLICT",severity:f.tier===1?"Critical":"Major",detail:"Sources disagree after unit normalization: "+Object.values(groups).map(g=>`[${g.map(c=>c.source).join(", ")}] = "${g[0].value_verbatim.trim()}"`).join(" vs ")})}
     }else genericCompare(f,present,ffind);
    }
    else if(f.type==="class"){
@@ -257,7 +257,7 @@ function classify(cols){const findings=[],fieldsOut=[];
   fieldsOut.push({id:f.id,label:f.label,tier:f.tier,cells,status,findings:ffind});
  }
  return{findings,fieldsOut}}
-function clusterDetail(f,present){const groups={};for(const c of present){const k=normFor(f,c.value_verbatim);(groups[k]=groups[k]||[]).push(c)}return"Sources disagree: "+Object.values(groups).map(g=>`[${g.map(c=>c.source).join(", ")}] = "${g[0].value_verbatim.trim()}"`).join(" vs ")}
+function clusterDetail(f,present){const groups=Object.create(null);for(const c of present){const k=normFor(f,c.value_verbatim);(groups[k]=groups[k]||[]).push(c)}return"Sources disagree: "+Object.values(groups).map(g=>`[${g.map(c=>c.source).join(", ")}] = "${g[0].value_verbatim.trim()}"`).join(" vs ")}
 function genericCompare(f,present,ffind){const norms=[...new Set(present.map(c=>normFor(f,c.value_verbatim)))];
  if(norms.length===1)ffind.push({type:"NORMALIZED_MATCH",severity:"Minor",detail:"Values agree after normalization (whitespace / case / punctuation drift): "+present.map(c=>`${c.source}: "${c.value_verbatim.trim()}"`).join("; ")});
  else ffind.push({type:"CONFLICT",severity:f.tier===1?"Critical":"Major",detail:clusterDetail(f,present)})}

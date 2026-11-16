@@ -152,3 +152,12 @@ test('LT15 an entry that is not a number is an error, never zero weeks; a decima
   const none = L.plan({kickoff: '2026-11-16', products: [P({})]});
   assert.equal(blank.scenarios.expected.date, none.scenarios.expected.date);
 });
+
+test('LT16 absurd durations and dates are rejected with a message, never an uncaught exception', () => {
+  ['1e308', '1e10', '99999999999', '521'].forEach(v => {
+    const r = L.plan({kickoff: '2026-11-16', products: [P({translation_weeks: v})]});
+    assert.ok(r.errors.some(e => /Row 1, translation weeks/.test(e)), v);
+  });
+  assert.ok(L.plan({kickoff: '9999-12-31', products: [P({})]}).errors.length);
+  assert.deepEqual(L.plan({kickoff: '2026-11-16', products: [P({translation_weeks: '520'})]}).errors, []);
+});

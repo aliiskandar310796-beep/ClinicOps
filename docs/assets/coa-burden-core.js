@@ -11,13 +11,13 @@
   function amount(v) {
     if (v === '' || v === null || v === undefined) return null;
     const n = Number(String(v).replace(',', '.'));
-    return isFinite(n) && n >= 0 ? n : NaN;
+    return isFinite(n) && n >= 0 && n <= 1000000 ? n : NaN;
   }
   /* Study weeks may be negative: screening is usually before baseline. */
   function weekValue(v) {
     if (v === '' || v === null || v === undefined) return null;
     const n = Number(String(v).replace(',', '.'));
-    return isFinite(n) ? n : NaN;
+    return isFinite(n) && n >= -520 && n <= 1040 ? n : NaN;
   }
   const r1 = n => Math.round(n * 10) / 10;
 
@@ -31,7 +31,7 @@
     (input.instruments || []).forEach((i, n) => {
       if (!i || !text(i.name)) return;
       const minutes = amount(i.minutes), items = amount(i.items);
-      if (Number.isNaN(minutes) || Number.isNaN(items)) out.errors.push('Instrument ' + (n + 1) + ': minutes and items must be numbers of zero or more.');
+      if (Number.isNaN(minutes) || Number.isNaN(items)) out.errors.push('Instrument ' + (n + 1) + ': minutes and items must be numbers from 0 to 1,000,000.');
       inst[key(i.name)] = {name: i.name.trim(), minutes: Number.isNaN(minutes) ? null : minutes, items: Number.isNaN(items) ? null : items, used: false};
     });
     if (!Object.keys(inst).length) out.errors.push('Add at least one instrument.');
@@ -57,7 +57,7 @@
       if (!v || (!text(v.name) && !text(v.instruments))) return;
       const label = text(v.name) ? v.name.trim() : 'Visit ' + (n + 1);
       const wk = weekValue(v.week);
-      if (wk === null || Number.isNaN(wk)) { out.flags.push({level: 'gap', msg: label + ': study week is empty or not a number; the visit is left out of the weekly view.'}); }
+      if (wk === null || Number.isNaN(wk)) { out.flags.push({level: 'gap', msg: label + ': study week is empty, not a number, or outside -520 to 1040; the visit is left out of the weekly view.'}); }
       const s = sumFor(splitNames(v.instruments), label);
       const row = {name: label, week: (wk === null || Number.isNaN(wk)) ? null : wk, minutes: r1(s.minutes), items: s.items};
       out.visits.push(row);
@@ -75,7 +75,7 @@
       if (!d || !text(d.instrument)) return;
       const label = 'Diary ' + (n + 1) + ' (' + d.instrument.trim() + ')';
       const per = amount(d.per_week), from = weekValue(d.from_week), to = weekValue(d.to_week);
-      if ([per, from, to].some(x => x === null || Number.isNaN(x))) { out.flags.push({level: 'gap', msg: label + ': times per week, first week and last week must all be numbers.'}); return; }
+      if ([per, from, to].some(x => x === null || Number.isNaN(x))) { out.flags.push({level: 'gap', msg: label + ': times per week, first week (-520 to 1040) and last week must all be numbers.'}); return; }
       if (to < from) { out.flags.push({level: 'check', msg: label + ': last week is before first week; the diary is left out.'}); return; }
       if (to - from > 520) { out.flags.push({level: 'check', msg: label + ': longer than 520 weeks; the diary is left out.'}); return; }
       if (Math.round(from) !== from || Math.round(to) !== to) out.flags.push({level: 'check', msg: label + ': weeks are not whole numbers; the diary runs from week ' + Math.round(from) + ' to week ' + Math.round(to) + '.'});
