@@ -54,7 +54,7 @@ PINNED_TITLES = {
     "evidence-change-control-pack.html": "Regulatory Change Integrity Review | ClinicOps",
     "integrity-scanner.html": "Regulatory Integrity Scanner | ClinicOps",
     "about.html": "About ClinicOps | EU MedTech Regulatory Data Integrity",
-    "expert-network.html": "Specialist Expert Network | ClinicOps",
+    "expert-network.html": "Working with partners | ClinicOps",
 }
 FLAGSHIP_URL = "https://clinicops.dk/evidence-change-control-pack"
 
