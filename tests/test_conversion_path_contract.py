@@ -9,7 +9,6 @@ that would break the "nothing leaves your browser, no email gate" promise.
 from __future__ import annotations
 
 import re
-from html.parser import HTMLParser
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -22,8 +21,8 @@ def _read(rel: str) -> str:
 
 def _visible_text(html: str) -> str:
     body = html.split("<main", 1)[1].split("</main>", 1)[0]
-    body = re.sub(r"<script\b.*?</script>", " ", body, flags=re.S | re.I)
-    body = re.sub(r"<!--.*?-->", " ", body, flags=re.S)
+    body = re.sub(r"<script\b.*?</script>", " ", body, flags=re.DOTALL | re.IGNORECASE)
+    body = re.sub(r"<!--.*?-->", " ", body, flags=re.DOTALL)
     return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", body))
 
 
