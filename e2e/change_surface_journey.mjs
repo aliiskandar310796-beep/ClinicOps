@@ -99,7 +99,7 @@ try {
     const numbers = await page.locator("table").first().locator("tbody tr td.k").allInnerTexts();
     note(numbers.join(",") === "0,1,2,3,4,5,6,7,8,9,10,11", "workflow: steps numbered 0 to 11 in order", numbers.join(","));
     note(await page.locator("#step-test").isVisible(), "workflow: #step-test anchor resolves to the Test row");
-    note(/ClinicOps synthesis of published guidance, not a standard/.test(await page.locator("p.meta").first().innerText()), "workflow: synthesis label is in the page header");
+    note(await page.locator(".hero p.meta", { hasText: "ClinicOps synthesis of published guidance, not a standard" }).count() === 1, "workflow: synthesis label is in the page header");
     const hrefs = [...new Set(await page.locator("a[download]").evaluateAll(a => a.map(x => x.getAttribute("href"))))];
     note(hrefs.length === 3, "workflow: three distinct template files linked", hrefs.join(","));
     for (const href of hrefs) {

@@ -160,7 +160,7 @@ try {
     pass("mapper handoff writes the allow-listed sessionStorage key", sessionWrites.length > 0 && sessionWrites.every((k) => SESSION_ALLOW.has(k)), sessionWrites.join(","));
     pass("mapper handoff writes no localStorage", log.writes.every((w) => w.area === "session"), JSON.stringify(log.writes));
     pass("intake removes the handoff key as it reads it", snap.session.length === 0, snap.session.join(","));
-    const carried = await page.locator("#notes").inputValue().catch(() => "");
+    const carried = await page.locator("#context").inputValue().catch(() => "");
     pass("intake received the carried summary locally", /Change Surface Mapper/.test(carried), carried.slice(0, 80));
     const nav = log.referers.filter((r) => r.url.includes("assessment-intake"));
     pass("handoff navigation sends no Referer header", nav.length > 0 && nav.every((r) => r.referer === ""), JSON.stringify(nav));
