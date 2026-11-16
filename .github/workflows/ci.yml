@@ -1,13 +1,20 @@
 name: CI
 on:
   push:
+    branches: [main]
   pull_request:
+
+permissions:
+  contents: read
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+        with:
+          # Full history: render_sitemap.py derives <lastmod> from per-page git history.
+          fetch-depth: 0
       - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
@@ -16,7 +23,7 @@ jobs:
         with:
           node-version: '22'
       - name: Browser reconciliation rules
-        run: node --test tests/reconciliation.test.cjs tests/ecoa_workbench.test.cjs tests/coa_finder.test.cjs tests/coa_leadtime.test.cjs tests/coa_burden.test.cjs
+        run: node --test tests/reconciliation.test.cjs tests/ecoa_workbench.test.cjs tests/coa_finder.test.cjs tests/coa_leadtime.test.cjs tests/coa_burden.test.cjs tests/change_surface.test.cjs tests/ops_map.test.cjs tests/ctis_clock.test.cjs
       - run: pytest -q
       - run: ruff check src tests scripts
       - name: Revenue OS experiment contract
@@ -44,6 +51,8 @@ jobs:
         run: python scripts/validate_readiness_page.py
       - name: Change Surface Mapper contract
         run: python scripts/validate_change_surface_mapper.py
+      - name: Template downloads build contract
+        run: python scripts/build_ecoa_templates.py --check
       - name: Change Control Pack contract
         run: |
           python scripts/validate_change_control_packet.py examples/change_control_packet.example.json > /tmp/clinicops-change-control-packet.json
@@ -60,8 +69,16 @@ jobs:
         run: python scripts/validate_professional_claims.py
       - name: Sitemap contract
         run: python scripts/render_sitemap.py --check
+      - name: Workflow map contract
+        run: python scripts/render_ops_map.py --check
+      - name: Atom feed contract
+        run: python scripts/render_feed.py --check
+      - name: Regulatory-dates calendar contract
+        run: python scripts/render_ics.py --check
       - name: Public shell drift contract
         run: python scripts/harmonize_public_shell.py --check
+      - name: Page stamps contract (Rules as of, Last verified, answer-first)
+        run: python scripts/render_page_stamps.py --check
       - name: llms.txt contract
         run: python scripts/render_llms_txt.py --check
       - name: Internal link contract
@@ -102,8 +119,8 @@ jobs:
         run: python scripts/audit_claim_registry.py
       - name: Claim reference integrity
         run: python scripts/audit_claim_references.py
-      - name: Governed content claim validation
-        run: python scripts/validate_content_claims.py website
+      - name: Governed content claim validation (website markdown and served html/js)
+        run: python scripts/validate_content_claims.py
       - name: Sanitized report fixture
         run: python scripts/render_examples.py --check
       - name: Public-copy claim gate
@@ -132,7 +149,9 @@ jobs:
           E2E_BASE_URL=http://localhost:8103 node e2e/reconciliation_journey.mjs
           E2E_BASE_URL=http://localhost:8103 node e2e/ecoa_workbench_journey.mjs
           E2E_BASE_URL=http://localhost:8103 node e2e/coa_tools_journey.mjs
+          E2E_BASE_URL=http://localhost:8103 node e2e/change_surface_journey.mjs
           E2E_BASE_URL=http://localhost:8103 node e2e/ctis_clock_journey.mjs
+          E2E_BASE_URL=http://localhost:8103 node e2e/ops_map_journey.mjs
           E2E_BASE_URL=http://localhost:8103 node e2e/exports_journey.mjs
           E2E_BASE_URL=http://localhost:8103 node e2e/identifier_journey.mjs
           E2E_BASE_URL=http://localhost:8103 node e2e/xlsx_xss_journey.mjs
@@ -140,4 +159,5 @@ jobs:
           E2E_BASE_URL=http://localhost:8103 node e2e/accessibility_journey.mjs
           E2E_BASE_URL=http://localhost:8103 node e2e/performance_smoke.mjs
           E2E_BASE_URL=http://localhost:8103 node e2e/tool_privacy_journey.mjs
+          E2E_BASE_URL=http://localhost:8103 node e2e/release_privacy_test.mjs
           E2E_BASE_URL=http://localhost:8103 node e2e/pdf_upload_journey.mjs

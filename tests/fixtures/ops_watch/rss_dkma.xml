@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"><channel><title>Fixture feed C</title>
+<item><title>Fixture Danish news</title><link>https://example.test/c/1</link><guid>c-1</guid><pubDate>Thu, 12 Nov 2026 10:00:00 +0100</pubDate></item>
+</channel></rss>

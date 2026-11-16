@@ -44,7 +44,7 @@ REQUIREMENTS = (
     ),
     ConversionRequirement(
         "assessment-intake.html",
-        ("transition-map-sample/", "readiness-score", "specimen-register/"),
+        ("transition-map-sample/", "specimen-register/"),
     ),
     ConversionRequirement(
         "readiness-score.html",

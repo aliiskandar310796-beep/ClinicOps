@@ -1,40 +1,22 @@
 <!doctype html>
 <html lang="en" data-seg="ecoa">
 <head>
-<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'none'; worker-src 'self' blob:; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'">
+<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Rrp/oKlTF5JhFj1/wI5MXQooEKDuQe1flpA8aYc4skk=' 'wasm-unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'none'; worker-src 'self' blob:; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'"><meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <title>COA type finder and inventory | ClinicOps</title>
-<meta name="description" content="Free, browser-only COA type finder and inventory: sort an assessment into patient-, observer- or clinician-reported or performance outcome, and list a study's assessments with gaps flagged. Nothing is sent to ClinicOps.">
+<meta name="description" content="Free, browser-only COA type finder and inventory: sort an assessment by type and list a study's assessments with gaps flagged. Nothing is sent.">
 <link rel="canonical" href="https://clinicops.dk/coa-type-finder">
 
 <meta property="og:title" content="COA type finder and inventory | ClinicOps">
-<meta property="og:description" content="Free, browser-only COA type finder and inventory: sort an assessment into patient-, observer- or clinician-reported or performance outcome, and list a study's assessments with gaps flagged. Nothing is sent to ClinicOps.">
+<meta property="og:description" content="Free, browser-only COA type finder and inventory: sort an assessment by type and list a study's assessments with gaps flagged. Nothing is sent.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://clinicops.dk/coa-type-finder">
 <meta property="og:site_name" content="ClinicOps">
 
 <meta property="og:image" content="https://clinicops.dk/assets/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://clinicops.dk/assets/og-image.png">
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "COA type finder and inventory | ClinicOps",
-  "description": "Free, browser-only COA type finder and inventory: sort an assessment into patient-, observer- or clinician-reported or performance outcome, and list a study's assessments with gaps flagged. Nothing is sent to ClinicOps.",
-  "url": "https://clinicops.dk/coa-type-finder",
-  "isPartOf": {
-    "@type": "WebSite",
-    "name": "ClinicOps",
-    "url": "https://clinicops.dk/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "ClinicOps",
-    "url": "https://clinicops.dk/"
-  }
-}
-</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","@id":"https://clinicops.dk/coa-type-finder#webpage","name":"COA type finder and inventory | ClinicOps","description":"Free, browser-only COA type finder and inventory: sort an assessment by type and list a study's assessments with gaps flagged. Nothing is sent.","url":"https://clinicops.dk/coa-type-finder","isPartOf":{"@type":"WebSite","@id":"https://clinicops.dk/#website","name":"ClinicOps","url":"https://clinicops.dk/"},"publisher":{"@type":"Organization","@id":"https://clinicops.dk/#org","name":"ClinicOps","url":"https://clinicops.dk/"}}</script>
 
 <style>
 .btn,.cta{white-space:normal;text-align:center;max-width:100%;padding-top:8px;padding-bottom:8px}
@@ -60,13 +42,14 @@ main.wrap{padding-top:clamp(40px,6vw,72px)}
 #findings li{padding:10px 0;border-top:1px solid var(--border);max-width:70ch}
 
 </style>
-<link rel="preload" href="assets/fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/fonts/ibm-plex-mono-latin-400.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="site.css"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f6f3ec" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0f1517" media="(prefers-color-scheme: dark)"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"COA type finder and inventory","url":"https://clinicops.dk/coa-type-finder","description":"Free, browser-only COA type finder and inventory: sort an assessment into patient-, observer- or clinician-reported or performance outcome, and list a study's assessments with gaps flagged. Nothing is sent to ClinicOps.","applicationCategory":"BusinessApplication","operatingSystem":"Any modern browser","isAccessibleForFree":true,"publisher":{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}</script>
+<link rel="preload" href="assets/fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/fonts/ibm-plex-mono-latin-400.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="site.css"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f6f3ec" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0f1517" media="(prefers-color-scheme: dark)"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"COA type finder and inventory","url":"https://clinicops.dk/coa-type-finder","description":"Free, browser-only COA type finder and inventory: sort an assessment by type and list a study's assessments with gaps flagged. Nothing is sent.","applicationCategory":"BusinessApplication","operatingSystem":"Any modern browser","isAccessibleForFree":true,"publisher":{"@type":"Organization","@id":"https://clinicops.dk/#org","name":"ClinicOps","url":"https://clinicops.dk/"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://clinicops.dk/"},{"@type":"ListItem","position":2,"name":"Clinical operations","item":"https://clinicops.dk/ecoa"},{"@type":"ListItem","position":3,"name":"COA type finder and inventory","item":"https://clinicops.dk/coa-type-finder"}]}</script>
-</head>
+<link rel="alternate" type="application/atom+xml" title="ClinicOps verified changes" href="https://clinicops.dk/feed.xml"></head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="/">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="/">Home</a><a href="services">Medical devices</a><a href="ecoa" aria-current="page">Clinical operations</a><a href="tools">Tools</a><a href="research">Research</a><a href="about">About</a><a href="contact">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");var r=a?a.offsetLeft+a.offsetWidth+16-n.clientWidth:0;if(r>0)n.scrollLeft=r})()</script>
 <main id="main" tabindex="-1" class="wrap">
-<section class="hero"><h1>COA type finder and inventory</h1><p class="lede">Most eCOA delays start with a question nobody answered early: who actually reports this, and what does that ask of the sites, the participants and the vendor? Answer four questions to sort an assessment into patient-, observer- or clinician-reported, or performance outcome. Then list every assessment in a study in one inventory and see what is missing before the specification is frozen. It runs in your browser; <strong>nothing is sent to ClinicOps</strong>.</p><p class="meta">Free tool</p></section>
+<section class="hero"><h1>COA type finder and inventory</h1><p class="lede">Most eCOA delays start with a question nobody answered early: who actually reports this, and what does that ask of the sites, the participants and the vendor? Answer four questions to sort an assessment into patient-, observer- or clinician-reported, or performance outcome. Then list every assessment in a study in one inventory and see what is missing before the specification is frozen. It runs in your browser; <strong>nothing is sent to ClinicOps</strong>.</p><!-- stamp:line:start --><p class="meta stamp-line">Rules as of 16 November 2026 &middot; this tool applies no regulatory rule of its own and states none; it works on the values you enter. <a href="primary-sources">Primary sources</a>.</p><!-- stamp:line:end --><p class="meta">Free tool</p></section>
+<!-- answer-first:start --><section class="answer-first" aria-labelledby="answer-first-h"><h2 id="answer-first-h">Short answer</h2><p>Answer four questions to sort a described assessment into patient-reported, observer-reported, clinician-reported or performance outcome, then list every assessment in the study to see what is missing before the specification is frozen.</p><p class="small muted">Source: none needed: this tool applies no regulatory rule.</p><p class="small"><strong>Boundary.</strong> It sorts what you describe and flags gaps in your own entries. It does not choose an instrument, judge fitness for an endpoint or check a licence.</p></section><!-- answer-first:end -->
 
 <div class="callout boundary"><strong>Boundary.</strong> This sorts a described assessment into a type and flags gaps and inconsistencies in your own entries. It does not choose an instrument, judge whether an instrument is fit for an endpoint, or check licences with any copyright holder. Instrument names in the example are placeholders. Do not enter participant data.</div>
 <noscript><div class="callout boundary"><p>This tool runs in your browser and needs JavaScript enabled.</p></div></noscript>
@@ -100,6 +83,9 @@ main.wrap{padding-top:clamp(40px,6vw,72px)}
 <p>The inventory is the input to everything after it: the <a href="ecoa-delivery-workbench">delivery workbench</a> plans each instrument-language version, and the <a href="ecoa-workflow">workflow map</a> shows where each decision is taken. <a href="coa-types">COA types</a> explains the four types and the sources behind them.</p>
 <div class="cta-row"><a class="cta primary" href="ecoa-delivery-workbench">Plan the delivery</a><a class="cta ghost" href="coa-types">Read about COA types</a></div>
 <p class="small muted data-note">Do not enter patient-identifiable or other personal data. This tool runs in your browser and sends nothing anywhere.</p>
+<!-- next-step:start --><section class="next-step" aria-labelledby="next-step-h"><h2 id="next-step-h">What to do with this result</h2><ol><li>The inventory is the input to the licence and translation plan.</li><li>Next: <a href="ecoa-lead-time-planner">eCOA lead-time planner</a>.</li><li>If you want a second pair of eyes, send a question that contains no identifiers: <a href="mailto:support@clinicops.dk?subject=Question%3A%20COA%20type%20finder">Ask a question</a> (<a href="contact#ask">template</a>). Nothing leaves your browser until you send it.</li></ol></section><!-- next-step:end -->
+<div class="callout" id="what-leaves-your-browser" role="note"><p><strong>What leaves your browser: nothing.</strong> This page does not send what you type, paste or import to ClinicOps or to anyone else, and it loads nothing from other sites. The page&rsquo;s security policy also tells your browser to block its scripts from opening network connections. Exports are saved to your device; emailing one is your own action.</p><p class="small muted">Test note: before each release an automated browser test opens this page and fails if, on load, it contacts another site, sets a cookie or writes to browser storage.</p></div>
+<div class="callout" id="whats-missing" role="note"><p><strong>What is missing?</strong> If this tool lacks a check, field or source you need, <a href="mailto:info@clinicops.dk?subject=Request%3A%20COA%20type%20finder%20and%20inventory&amp;body=What%20is%20missing%3A%0A%0A">email a request</a>. There is no form and no account. Please do not include patient-identifiable or confidential data.</p></div>
 </main>
 <script src="assets/coa-finder-core.js"></script><script src="assets/coa-finder.js"></script>
 <footer class="site">

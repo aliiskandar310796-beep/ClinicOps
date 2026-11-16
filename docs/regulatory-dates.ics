@@ -1,0 +1,78 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//ClinicOps//Regulatory dates//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:ClinicOps regulatory dates
+X-WR-CALDESC:Dates from the ClinicOps claims registry that have been read a
+ t source. Dates are shown as stated in the source\, with no weekend roll-f
+ orward. Not legal advice: check the instrument for your own devices or tri
+ als.
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VEVENT
+UID:reg-co-clm-0013-value@clinicops.dk
+DTSTAMP:20261116T000000Z
+LAST-MODIFIED:20261116T000000Z
+SEQUENCE:0
+DTSTART;VALUE=DATE:20261128
+DTEND;VALUE=DATE:20261129
+SUMMARY:EUDAMED: Commission deadline to register legacy devices in the UDI/
+ Devices module
+DESCRIPTION:EUDAMED: Commission deadline to register legacy devices in the 
+ UDI/Devices module\nClinicOps plans to finish by Friday 27 November 2026.\
+ n28 November 2026 is a Saturday. No weekend roll-forward is applied: the d
+ ate is shown as stated in the source.\nRules as of 16 November 2026\, the 
+ date ClinicOps last read the source.\nSource: https://health.ec.europa.eu/
+ medical-devices-eudamed/overview_en\nSource: https://health.ec.europa.eu/d
+ ocument/download/3bb39d28-dcaa-4907-9ea9-ea89cee091c0_en?filename=md_eudam
+ ed_tp-leg-reg-devices_en.pdf\nSource: https://eur-lex.europa.eu/eli/dec/20
+ 25/2371/oj/eng\nPage: https://clinicops.dk/eudamed-transition\nPage: https
+ ://clinicops.dk/research/eudamed-watch/\nPage: https://clinicops.dk/resear
+ ch/sscp-public-record-scan/\nClinicOps registry id CO-CLM-0013 (status: qu
+ alified).\nVerify against the instrument for your own devices or trials. N
+ ot legal advice.
+URL:https://clinicops.dk/eudamed-transition
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+CLASS:PUBLIC
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:In 14 days: EUDAMED: Commission deadline to register legacy dev
+ ices in the UDI/Devices module
+TRIGGER:-P14D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:reg-co-clm-0019-sscp-upload-recommended-by@clinicops.dk
+DTSTAMP:20261114T000000Z
+LAST-MODIFIED:20261114T000000Z
+SEQUENCE:0
+DTSTART;VALUE=DATE:20270327
+DTEND;VALUE=DATE:20270328
+SUMMARY:EUDAMED: MDCG 2026-4 rev.1 recommends uploading SS(C)Ps for pre-man
+ datory-use devices by this date
+DESCRIPTION:EUDAMED: MDCG 2026-4 rev.1 recommends uploading SS(C)Ps for pre
+ -mandatory-use devices by this date\nA recommendation in a non-binding MDC
+ G paper\, not a statutory deadline.\nThis is a recommended date from a non
+ -binding document\, not a legal deadline.\n27 March 2027 is a Saturday. No
+  weekend roll-forward is applied: the date is shown as stated in the sourc
+ e.\nRules as of 14 November 2026\, the date ClinicOps last read the source
+ .\nSource: https://health.ec.europa.eu/document/download/a80332cf-e9f0-4d4
+ 5-8863-3d96e8c2a675_en?filename=mdcg_2026-4_en.pdf\nPage: https://clinicop
+ s.dk/research/eudamed-watch/\nPage: https://clinicops.dk/research/sscp-pub
+ lic-record-scan/\nPage: https://clinicops.dk/sscp-operations\nClinicOps re
+ gistry id CO-CLM-0019 (status: qualified).\nVerify against the instrument 
+ for your own devices or trials. Not legal advice.
+URL:https://clinicops.dk/research/eudamed-watch/
+STATUS:CONFIRMED
+TRANSP:TRANSPARENT
+CLASS:PUBLIC
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:In 14 days: EUDAMED: MDCG 2026-4 rev.1 recommends uploading SS(
+ C)Ps for pre-mandatory-use devices by this date
+TRIGGER:-P14D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

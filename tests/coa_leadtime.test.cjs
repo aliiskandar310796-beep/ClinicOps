@@ -129,3 +129,35 @@ test('LT14 ready dates equal kick-off plus the product weeks', () => {
   assert.equal(d.products[0].language_date, '2027-03-29'); // 12 weeks
   assert.equal(d.products[0].ready.expected, '2027-04-05'); // 12 + 1 weeks
 });
+
+test('LT14 share-safe summary has counts, weeks and the driver, and no instrument, language or date', () => {
+  const r = L.plan({kickoff: '2027-01-04', target: '2027-06-01', products: [P({instrument: 'Confidential Scale', language: 'Finnish', translation_weeks: '30'}), P({instrument: 'Other Diary', language: 'Danish'})]});
+  const s = L.shareSummary(r);
+  assert.match(s, /Rows: 2 instrument-language versions, 2 instruments, 2 languages/);
+  assert.match(s, /optimistic \/ expected \/ pessimistic\): [\d.]+ \/ [\d.]+ \/ [\d.]+/);
+  assert.match(s, /held up by: (licence|translation and screenshot review)/);
+  for (const leak of ['Confidential', 'Finnish', 'Danish', 'Diary', '2027', 'Scale']) assert.ok(!s.includes(leak), leak);
+  assert.equal(L.shareSummary({errors: ['x'], scenarios: {}, products: []}), '');
+});
+
+test('LT15 an entry that is not a number is an error, never zero weeks; a decimal comma is accepted', () => {
+  const bad = L.plan({kickoff: '2026-11-16', target: '2027-03-15', products: [P({translation_weeks: 'abc'})]});
+  assert.ok(bad.errors.some(e => /Row 1, translation weeks/.test(e)));
+  assert.ok(L.plan({kickoff: '2026-11-16', products: [P({licence_weeks: '-3'})]}).errors.length);
+  const comma = L.plan({kickoff: '2026-11-16', products: [P({translation_weeks: '1,5'})]});
+  const dot = L.plan({kickoff: '2026-11-16', products: [P({translation_weeks: '1.5'})]});
+  assert.deepEqual(comma.errors, []);
+  assert.equal(comma.scenarios.expected.date, dot.scenarios.expected.date);
+  const blank = L.plan({kickoff: '2026-11-16', products: [P({translation_weeks: '   '})]});
+  const none = L.plan({kickoff: '2026-11-16', products: [P({})]});
+  assert.equal(blank.scenarios.expected.date, none.scenarios.expected.date);
+});
+
+test('LT16 absurd durations and dates are rejected with a message, never an uncaught exception', () => {
+  ['1e308', '1e10', '99999999999', '521'].forEach(v => {
+    const r = L.plan({kickoff: '2026-11-16', products: [P({translation_weeks: v})]});
+    assert.ok(r.errors.some(e => /Row 1, translation weeks/.test(e)), v);
+  });
+  assert.ok(L.plan({kickoff: '9999-12-31', products: [P({})]}).errors.length);
+  assert.deepEqual(L.plan({kickoff: '2026-11-16', products: [P({translation_weeks: '520'})]}).errors, []);
+});

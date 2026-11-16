@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Fixture feed B</title>
+<entry><title>Fixture guideline update</title><id>urn:fixture:b-1</id><link href="https://example.test/b/1"/><updated>2026-11-12T08:00:00Z</updated></entry>
+<entry><title>Fixture consultation</title><id>urn:fixture:b-2</id><link href="https://example.test/b/2"/><updated>2026-11-13T08:00:00Z</updated></entry>
+</feed>

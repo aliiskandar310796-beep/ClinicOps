@@ -25,8 +25,14 @@
   };
   const SCENARIOS = ['optimistic', 'expected', 'pessimistic'];
 
-  const num = v => (v === '' || v === null || v === undefined) ? null : Number(v);
-  const isNum = v => typeof v === 'number' && isFinite(v) && v >= 0;
+  /* A comma is accepted as the decimal mark ("1,5"); a blank or whitespace-only cell is blank. */
+  const num = v => {
+    if (v === null || v === undefined) return null;
+    if (typeof v === 'string') { const s = v.trim().replace(',', '.'); return s === '' ? null : Number(s); }
+    return Number(v);
+  };
+  const MAX_WEEKS = 520;
+  const isNum = v => typeof v === 'number' && isFinite(v) && v >= 0 && v <= MAX_WEEKS;
   const pert = w => (w[0] + 4 * w[1] + w[2]) / 6;
   /* Scenario value of a three-point estimate. */
   function pick(w, scenario) { return scenario === 'optimistic' ? w[0] : scenario === 'pessimistic' ? w[2] : pert(w); }
@@ -34,7 +40,8 @@
   function isoDate(s) {
     if (typeof s !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(s)) return null;
     const d = new Date(s + 'T00:00:00Z');
-    return isNaN(d) || d.toISOString().slice(0, 10) !== s ? null : d;
+    const y = d.getUTCFullYear();
+    return isNaN(d) || d.toISOString().slice(0, 10) !== s || y < 1990 || y > 2200 ? null : d;
   }
   function addWeeks(d, weeks) { return new Date(d.getTime() + Math.round(weeks * 7) * 86400000); }
   const fmt = d => d.toISOString().slice(0, 10);
@@ -77,6 +84,12 @@
     if (!kick) res.errors.push('Enter the kick-off date.');
     const products = (input && Array.isArray(input.products) ? input.products : []).filter(p => p && (String(p.instrument || '').trim() || String(p.language || '').trim()));
     if (!products.length) res.errors.push('Add at least one instrument and language.');
+    /* An entry that is not a number is an error, never "0 weeks, already done". */
+    const FIELDS = [['licence_weeks', 'licence weeks'], ['translation_weeks', 'translation weeks'], ['screenshot_rounds', 'screenshot rounds'], ['signoff_weeks', 'sign-off weeks']];
+    products.forEach((p, i) => FIELDS.forEach(([k, label]) => {
+      const v = num(p[k]);
+      if (v !== null && !isNum(v)) res.errors.push('Row ' + (i + 1) + ', ' + label + ': enter a number from 0 to 520, such as 1.5 (a comma also works), or leave it blank to use the published range.');
+    }));
     if (res.errors.length) return res;
     const defaults = resolve(DEFAULTS, input.durations);
     const target = isoDate(input.target);
@@ -174,7 +187,23 @@
     return errs;
   }
 
-  const api = {VERSION, SCHEMA, DEFAULTS, SCENARIOS, pert, pick, isoDate, addWeeks, weeksBetween, productWeeks, resolve, plan, toCSV, toScenariosCSV, toICS, csvCell, validateWorkspace};
+  /* Share-safe summary: counts, weeks and the constraining step only. It carries no instrument name, language name,
+     date or note, so it can go into a question or a brief without disclosing the study. */
+  function shareSummary(result) {
+    if (!result || !result.scenarios || !result.scenarios.expected) return '';
+    const distinct = key => new Set(result.products.map(p => String(p[key] || '').trim().toLowerCase()).filter(Boolean)).size;
+    const x = result.scenarios;
+    const slow = result.products.find(p => p.critical);
+    return [
+      'ClinicOps share-safe summary (eCOA lead-time planner)',
+      'Rows: ' + result.products.length + ' instrument-language versions, ' + distinct('instrument') + ' instruments, ' + distinct('language') + ' languages',
+      'Weeks from kick-off to ready (optimistic / expected / pessimistic): ' + SCENARIOS.map(s => r1(x[s].weeks)).join(' / '),
+      'Expected case is set by: ' + x.expected.set_by + '; against the target: ' + x.expected.status,
+      slow ? 'Slowest version is held up by: ' + slow.driver : 'Slowest version: not identified',
+      'No instrument names, language names, dates or notes are included.'
+    ].join('\n');
+  }
+  const api = {VERSION, SCHEMA, DEFAULTS, SCENARIOS, pert, pick, isoDate, addWeeks, weeksBetween, productWeeks, resolve, plan, toCSV, toScenariosCSV, toICS, csvCell, validateWorkspace, shareSummary};
   if (typeof module === 'object' && module.exports) module.exports = api;
   else root.ClinicOpsLeadTime = api;
 })(typeof globalThis === 'object' ? globalThis : this);

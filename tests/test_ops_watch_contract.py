@@ -20,4 +20,4 @@ def test_live_site_watch_covers_public_research_pages() -> None:
     assert 'Target(\n        "/research/sscp-public-record-scan/"' in checker
     assert '"The published SS(C)P and the public EUDAMED record"' in checker
     assert 'Target(\n        "/research/eudamed-watch/"' in checker
-    assert '"Continuous monitoring of the public EUDAMED record"' in checker
+    assert '"Monthly monitoring of the public EUDAMED record"' in checker

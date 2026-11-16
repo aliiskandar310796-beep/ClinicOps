@@ -1,0 +1,1259 @@
+{
+  "schema": "clinicops-ops-map/1",
+  "version": "1.0.0",
+  "map_date": "2026-11-16",
+  "sources_opened": "2026-11-16",
+  "claim_use": "website",
+  "phases": [
+    {
+      "id": "p1",
+      "n": 1,
+      "title": "Plan and decide",
+      "summary": "Settle the question, the route and who does what before anything is submitted."
+    },
+    {
+      "id": "p2",
+      "n": 2,
+      "title": "Authorise and notify",
+      "summary": "Get permission to start, and keep the authorities told of changes."
+    },
+    {
+      "id": "p3",
+      "n": 3,
+      "title": "Build and activate",
+      "summary": "Systems, providers, sites, supplies and training made ready, in parallel."
+    },
+    {
+      "id": "p4",
+      "n": 4,
+      "title": "Conduct",
+      "summary": "Enrol, collect data and report safety. Version 1 shows the safety and notification clocks only."
+    },
+    {
+      "id": "p5",
+      "n": 5,
+      "title": "Close and report",
+      "summary": "End the study, report results, lock the data. Version 1 shows the notification clocks and the lock."
+    },
+    {
+      "id": "p6",
+      "n": 6,
+      "title": "Archive",
+      "summary": "Keep the record for as long as the rules say, and close out providers."
+    }
+  ],
+  "lanes": [
+    {
+      "id": "regulatory",
+      "title": "Regulatory and ethics",
+      "summary": "Applications, notifications, ethics review and national add-ons."
+    },
+    {
+      "id": "protocol",
+      "title": "Protocol and design",
+      "summary": "The question, the endpoints and the schedule of assessments."
+    },
+    {
+      "id": "safety",
+      "title": "Safety and PV",
+      "summary": "Adverse event capture, assessment and reporting to authorities."
+    },
+    {
+      "id": "coa",
+      "title": "COA and eCOA",
+      "summary": "Outcome assessments, their licences, languages and electronic delivery."
+    },
+    {
+      "id": "data",
+      "title": "Data and systems",
+      "summary": "EDC, eCOA and other systems, their testing, change control and lock."
+    },
+    {
+      "id": "sites",
+      "title": "Sites and investigators",
+      "summary": "Selection, activation and the people who run the study at each site."
+    },
+    {
+      "id": "vendors",
+      "title": "Vendor oversight",
+      "summary": "What is transferred to providers and how the sponsor oversees it."
+    },
+    {
+      "id": "supply",
+      "title": "Supply and logistics",
+      "summary": "Investigational product or device, comparators and ancillary supplies."
+    },
+    {
+      "id": "quality",
+      "title": "Quality and records",
+      "summary": "The master file, deviations, breaches and archiving."
+    },
+    {
+      "id": "contracts",
+      "title": "Contracts and budget",
+      "summary": "Agreements, budgets and the party that signs for each."
+    },
+    {
+      "id": "training",
+      "title": "Training",
+      "summary": "Who is trained on what, and how that is recorded."
+    },
+    {
+      "id": "patients",
+      "title": "Patient involvement",
+      "summary": "How patient input shapes the material and the burden of the study."
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-11-16",
+      "text": "Version 1 published: phases 1 to 3 in full, and the safety, notification and archive clocks for phases 4 to 6."
+    },
+    {
+      "date": "2026-11-16",
+      "text": "Coordinated assessment under MDR Article 78(14) is shown as the consolidated text of 10 January 2025 reads, as replaced by Regulation (EU) 2024/1860. An earlier working note gave a fixed date of 27 May 2027, which that text does not carry; it is not used."
+    },
+    {
+      "date": "2026-11-16",
+      "text": "Device safety-reporting day counts, the development safety update report due date and drug-trial modification day counts are marked Not shown: they were not read at the primary text."
+    },
+    {
+      "date": "2026-11-16",
+      "text": "Service-provider responsibility and oversight are cited to ICH E6(R3) sections 3.6 and 3.9.5."
+    }
+  ],
+  "steps": [
+    {
+      "slug": "route-and-regime",
+      "title": "Decide which rules the study sits under",
+      "phase": "p1",
+      "lanes": [
+        "regulatory",
+        "protocol"
+      ],
+      "overlay": "both",
+      "status": "synthesis",
+      "settle": "Whether the study is a clinical trial of a medicinal product, a clinical investigation of a device, or a combined study, and so which set of rules, forms and clocks applies. Who makes that decision and who records it.",
+      "leaves": "A short written route decision with its reasons, dated and signed off by the accountable person, kept in the study file.",
+      "owners": [
+        "Sponsor",
+        "Regulatory affairs"
+      ],
+      "notes": [
+        {
+          "overlay": "both",
+          "text": "This map does not classify any study. When the route is unclear, the authority's own guidance and the authority itself decide."
+        }
+      ]
+    },
+    {
+      "slug": "endpoints-and-assessments",
+      "title": "Fix the endpoints and how each is assessed",
+      "phase": "p1",
+      "lanes": [
+        "protocol",
+        "coa"
+      ],
+      "overlay": "both",
+      "status": "synthesis",
+      "settle": "What will be measured, when, and by whom or on what. Which assessments are clinician-reported, patient-reported, observer-reported or performance-based, and whether any instrument needs a licence or a translation.",
+      "leaves": "A schedule of assessments tied to the protocol objectives, with each instrument's type, languages and licence state noted.",
+      "owners": [
+        "Sponsor clinical lead",
+        "Clinical operations"
+      ],
+      "links": [
+        {
+          "href": "coa-type-finder",
+          "label": "COA type finder"
+        },
+        {
+          "href": "ecoa-workflow",
+          "label": "eCOA workflow map"
+        }
+      ]
+    },
+    {
+      "slug": "patient-input-on-materials",
+      "title": "Ask patients about the material and the burden",
+      "phase": "p1",
+      "lanes": [
+        "patients",
+        "protocol"
+      ],
+      "overlay": "both",
+      "status": "synthesis",
+      "settle": "Whether patients or their representatives review the participant information, the consent material and the burden of the visit schedule before they are final, and how their comments are handled.",
+      "leaves": "A record of what was asked, what changed because of it and what did not, and why.",
+      "owners": [
+        "Sponsor",
+        "Patient representatives"
+      ]
+    },
+    {
+      "slug": "sponsor-and-legal-representative",
+      "title": "Name the sponsor and any legal representative",
+      "phase": "p1",
+      "lanes": [
+        "regulatory",
+        "contracts"
+      ],
+      "overlay": "device",
+      "status": "qualified",
+      "settle": "Who the sponsor is, where it is established, and whether a legal representative or a contact person in the Union is needed.",
+      "leaves": "A named sponsor and, where the rule applies, a named representative with a written scope of what they answer for.",
+      "owners": [
+        "Sponsor",
+        "Legal representative, where one is needed"
+      ],
+      "claims": [
+        "CO-CLM-0132"
+      ],
+      "facts": [
+        {
+          "overlay": "device",
+          "kind": "rule",
+          "label": "Sponsor not established in the Union",
+          "ref": "MDR Article 62(2)",
+          "claim": "CO-CLM-0132",
+          "read_on": "2026-11-16"
+        }
+      ]
+    },
+    {
+      "slug": "service-provider-selection",
+      "title": "Decide what goes to providers and choose them",
+      "phase": "p1",
+      "lanes": [
+        "vendors",
+        "quality"
+      ],
+      "overlay": "both",
+      "status": "qualified",
+      "settle": "Which activities are handed to a contract research organisation or another provider, how providers are assessed and chosen, and what stays with the sponsor.",
+      "leaves": "A list of the activities handed over, a selection record, and a written agreement in place before those activities start.",
+      "owners": [
+        "Sponsor",
+        "Quality assurance"
+      ],
+      "claims": [
+        "CO-CLM-0140"
+      ],
+      "facts": [
+        {
+          "overlay": "both",
+          "kind": "rule",
+          "label": "Agreements and retained responsibility",
+          "ref": "ICH E6(R3) Annex 1, 3.6",
+          "claim": "CO-CLM-0140",
+          "read_on": "2026-11-16"
+        }
+      ]
+    },
+    {
+      "slug": "site-feasibility-and-selection",
+      "title": "Choose sites that can run the study",
+      "phase": "p1",
+      "lanes": [
+        "sites"
+      ],
+      "overlay": "both",
+      "status": "synthesis",
+      "settle": "Which sites can recruit the population, run the procedures and keep the records the protocol needs, and what each site said it could and could not do.",
+      "leaves": "A site list with the reason each site was chosen and the feasibility answers each one gave.",
+      "owners": [
+        "Sponsor",
+        "Clinical operations"
+      ]
+    },
+    {
+      "slug": "budget-and-agreements",
+      "title": "Agree the budget and the contracts",
+      "phase": "p1",
+      "lanes": [
+        "contracts"
+      ],
+      "overlay": "both",
+      "status": "synthesis",
+      "settle": "Who pays for what, how a change is priced, and who signs for the sponsor, each site and each provider.",
+      "leaves": "Signed agreements and a budget with a rule for changes. Each contract names the activities it covers.",
+      "owners": [
+        "Sponsor",
+        "Finance",
+        "Legal"
+      ]
+    },
+    {
+      "slug": "start-up-streams-in-parallel",
+      "title": "Plan start-up as parallel streams",
+      "phase": "p1",
+      "lanes": [
+        "regulatory",
+        "contracts",
+        "sites",
+        "supply",
+        "data"
+      ],
+      "overlay": "both",
+      "status": "synthesis",
+      "settle": "Which streams run at the same time (authorisation, contracts, systems, supply, site readiness), which one sets the date of the first subject in, and who watches that stream.",
+      "leaves": "A start-up plan that shows each stream, its owner and what it is waiting for, revised at each stage.",
+      "owners": [
+        "Sponsor study lead",
+        "Clinical operations"
+      ],
+      "notes": [
+        {
+          "overlay": "both",
+          "text": "This is a ClinicOps reading of how start-up work is organised, not a rule from any regulator. No duration is shown for any stream."
+        }
+      ]
+    },
+    {
+      "slug": "ctis-initial-application",
+      "title": "Submit the initial application in CTIS",
+      "phase": "p2",
+      "lanes": [
+        "regulatory"
+      ],
+      "overlay": "drug",
+      "status": "qualified",
+      "settle": "What goes into Part I and Part II, who prepares each part, and what the Member State is likely to ask.",
+      "leaves": "A submitted application with its dossier and a dated timeline of the statutory periods.",
+      "owners": [
+        "Regulatory affairs",
+        "Sponsor"
+      ],
+      "claims": [
+        "CO-CLM-0021"
+      ],
+      "facts": [
+        {
+          "overlay": "drug",
+          "kind": "clock",
+          "label": "Initial application",
+          "figure": "Validation 10 days; Part I 45 days; Part II 45 days; decision within 5 days of the later of the two",
+          "ref": "Regulation (EU) No 536/2014 Articles 5 to 8",
+          "claim": "CO-CLM-0021",
+          "read_on": null
+        }
+      ],
+      "links": [
+        {
+          "href": "ctis-clock",
+          "label": "CTIS initial application clock"
+        }
+      ]
+    },
+    {
+      "slug": "device-application",
+      "title": "Apply for the clinical investigation",
+      "phase": "p2",
+      "lanes": [
+        "regulatory"
+      ],
+      "overlay": "device",
+      "status": "qualified",
+      "settle": "Which application route applies, who prepares the documentation, and how changes to it will be notified.",
+      "leaves": "A submitted application, a validation date and, for investigations that need authorisation, an authorisation decision.",
+      "owners": [
+        "Regulatory affairs",
+        "Sponsor"
+      ],
+      "claims": [
+        "CO-CLM-0133"
+      ],
+      "facts": [
+        {
+          "overlay": "device",
+          "kind": "clock",
+          "label": "Application and authorisation",
+          "figure": "Validation notice within 10 days; sponsor response up to 10 days, extendable by 20; authorisation within 45 days of validation, extendable by 20",
+          "ref": "MDR Article 70",
+          "claim": "CO-CLM-0133",
+          "read_on": "2026-11-16"
+        }
+      ],
+      "not_shown": [
+        {
+          "overlay": "device",
+          "text": "National additions, ethics committee steps and fees are not shown. Read the Member State authority's current page."
+        }
+      ]
+    },
+    {
+      "slug": "device-pmcf-notification",
+      "title": "Notify a post-market clinical follow-up investigation",
+      "phase": "p2",
+      "lanes": [
+        "regulatory"
+      ],
+      "overlay": "device",
+      "status": "qualified",
+      "settle": "Whether the investigation adds procedures that are invasive or burdensome, and who sends the notification and when.",
+      "leaves": "A notification sent before the investigation starts, with the date recorded.",
+      "owners": [
+        "Regulatory affairs",
+        "Sponsor"
+      ],
+      "claims": [
+        "CO-CLM-0134"
+      ],
+      "facts": [
+        {
+          "overlay": "device",
+          "kind": "clock",
+          "label": "Notification before commencement",
+          "figure": "At least 30 days before the investigation starts",
+          "ref": "MDR Article 74(1)",
+          "claim": "CO-CLM-0134",
+          "read_on": "2026-11-16"
+        }
+      ]
+    },
+    {
+      "slug": "device-coordinated-assessment",
+      "title": "Check whether coordinated assessment applies",
+      "phase": "p2",
+      "lanes": [
+        "regulatory"
+      ],
+      "overlay": "device",
+      "status": "qualified",
+      "settle": "Whether the investigation will be conducted in more than one Member State and whether those Member States have agreed to apply the coordinated assessment procedure.",
+      "leaves": "A note of which Member States apply the procedure to this investigation, and the basis for that note.",
+      "owners": [
+        "Regulatory affairs"
+      ],
+      "claims": [
+        "CO-CLM-0137",
+        "CO-CLM-0139"
+      ],
+      "facts": [
+        {
+          "overlay": "device",
+          "kind": "rule",
+          "label": "Who must apply the procedure, and from when",
+          "ref": "MDR Article 78(14)",
+          "claim": "CO-CLM-0137",
+          "read_on": "2026-11-16"
+        }
+      ],
+      "not_shown": [
+        {
+          "overlay": "device",
+          "text": "No date for mandatory use is shown. It is counted from a Commission notice that was not found, so it cannot be worked out."
+        }
+      ]
+    },
+    {
+      "slug": "device-eudamed-module-status",
+      "title": "Check the EUDAMED module status for clinical investigations",
+      "phase": "p2",
+      "lanes": [
+        "regulatory",
+        "data"
+      ],
+      "overlay": "device",
+      "status": "qualified",
+      "settle": "Whether the module for clinical investigations has been declared functional and mandatory, because that changes where and how an application or a notification is made.",
+      "leaves": "A dated note of the module status and where it was read, refreshed before each submission.",
+      "owners": [
+        "Regulatory affairs"
+      ],
+      "claims": [
+        "CO-CLM-0139"
+      ],
+      "facts": [
+        {
+          "overlay": "device",
+          "kind": "rule",
+          "label": "Module status as the Commission states it",
+          "ref": "European Commission EUDAMED overview page",
+          "claim": "CO-CLM-0139",
+          "read_on": "2026-11-16"
+        }
+      ],
+      "links": [
+        {
+          "href": "eudamed-transition",
+          "label": "EUDAMED transition"
+        }
+      ]
+    },
+    {
+      "slug": "ethics-and-national-requirements",
+      "title": "Cover ethics review and national requirements",
+      "phase": "p2",
+      "lanes": [
+        "regulatory"
+      ],
+      "overlay": "both",
+      "status": "synthesis",
+      "settle": "Which ethics body or bodies review, which national or local documents, languages and fees apply in each country, and who submits each item.",
+      "leaves": "A country-by-country list of submissions, owners and dates.",
+      "owners": [
+        "Regulatory affairs",
+        "Local representative"
+      ],
+      "not_shown": [
+        {
+          "overlay": "both",
+          "text": "No national day counts, fees or language rules are shown on this map. Read the authority's current page for each country."
+        }
+      ]
+    },
+    {
+      "slug": "drug-substantial-modification",
+      "title": "Authorise a substantial modification",
+      "phase": "p2",
+      "lanes": [
+        "regulatory"
+      ],
+      "overlay": "drug",
+      "status": "not_shown",
+      "settle": "Whether a change to the protocol or the dossier needs authorisation before it is applied, and who assesses it.",
+      "leaves": "A change log and, where needed, an authorised modification before the change is used.",
+      "owners": [
+        "Regulatory affairs",
+        "Sponsor"
+      ],
+      "not_shown": [
+        {
+          "overlay": "drug",
+          "text": "No figure shown: not verified at primary source. The day counts for authorising a substantial modification were not read in this version."
+        }
+      ]
+    },
+    {
+      "slug": "device-substantial-modification",
+      "title": "Notify a substantial modification",
+      "phase": "p2",
+      "lanes": [
+        "regulatory"
+      ],
+      "overlay": "device",
+      "status": "qualified",
+      "settle": "Whether a change is likely to have a substantial impact on the safety, health or rights of subjects or on the data, and who decides that.",
+      "leaves": "A notification with the reasons and nature of the change, and a record of the earliest date it may be put into use.",
+      "owners": [
+        "Regulatory affairs",
+        "Sponsor"
+      ],
+      "claims": [
+        "CO-CLM-0135"
+      ],
+      "facts": [
+        {
+          "overlay": "device",
+          "kind": "clock",
+          "label": "Notification and earliest implementation",
+          "figure": "Notify within one week; implement at the earliest 38 days after notification, extendable by seven days",
+          "ref": "MDR Article 75",
+          "claim": "CO-CLM-0135",
+          "read_on": "2026-11-16"
+        }
+      ]
+    },
+    {
+      "slug": "site-activation",
+      "title": "Activate each site",
+      "phase": "p3",
+      "lanes": [
+        "sites",
+        "contracts"
+      ],
+      "overlay": "both",
+      "status": "synthesis",
+      "settle": "What each site must have before its first subject: approvals received, agreements signed, staff trained and assigned their duties, supplies and systems available.",
+      "leaves": "A site activation record per site, showing the date each requirement was met and who confirmed it.",
+      "owners": [
+        "Clinical operations",
+        "Principal investigator"
+      ]
+    },
+    {
+      "slug": "team-training",
+      "title": "Train the study team",
+      "phase": "p3",
+      "lanes": [
+        "training",
+        "sites"
+      ],
+      "overlay": "both",
+      "status": "synthesis",
+      "settle": "Who needs training on the protocol, the systems, the safety reporting duties and the procedures, and how completion is recorded.",
+      "leaves": "Training records linked to each person's role, and a plan for retraining when the protocol or a system changes.",
+      "owners": [
+        "Clinical operations",
+        "Principal investigator"
+      ]
+    },
+    {
+      "slug": "coa-licensing-and-translation",
+      "title": "Secure licences and language versions for assessments",
+      "phase": "p3",
+      "lanes": [
+        "coa",
+        "vendors"
+      ],
+      "overlay": "both",
+      "status": "synthesis",
+      "settle": "Whether each instrument may be used electronically in each language, and for each language whether an approved version exists or a new translation is needed, with a rule for who signs off wording.",
+      "leaves": "A licence request per instrument, a translation route per language, and a record of the wording that was signed off.",
+      "owners": [
+        "Sponsor clinical lead",
+        "Translation provider",
+        "eCOA provider"
+      ],
+      "not_shown": [
+        {
+          "overlay": "both",
+          "text": "No licensing or translation duration is shown. Durations vary by instrument and owner; the lead-time planner works from your own numbers."
+        }
+      ],
+      "links": [
+        {
+          "href": "ecoa-workflow",
+          "label": "eCOA workflow map"
+        },
+        {
+          "href": "ecoa-lead-time-planner",
+          "label": "Lead-time planner"
+        },
+        {
+          "href": "coa-nordic",
+          "label": "COA in Denmark and the Nordics"
+        }
+      ]
+    },
+    {
+      "slug": "system-build-and-testing",
+      "title": "Build and test the study systems",
+      "phase": "p3",
+      "lanes": [
+        "data",
+        "coa",
+        "vendors"
+      ],
+      "overlay": "both",
+      "status": "synthesis",
+      "settle": "That the data capture and eCOA systems collect what the protocol says, are tested against written requirements before use, and have a change control route once live.",
+      "leaves": "Written requirements, a test record signed off on the sponsor side, and a change log that stays open through the study.",
+      "owners": [
+        "Data management",
+        "Clinical operations",
+        "System provider"
+      ],
+      "links": [
+        {
+          "href": "ecoa-delivery-workbench",
+          "label": "eCOA delivery workbench"
+        }
+      ]
+    },
+    {
+      "slug": "provider-oversight-plan",
+      "title": "Plan how providers will be overseen",
+      "phase": "p3",
+      "lanes": [
+        "vendors",
+        "quality"
+      ],
+      "overlay": "both",
+      "status": "qualified",
+      "settle": "What is reviewed for each provider, how often, who acts on findings, and how the plan changes with the risk of the activity.",
+      "leaves": "An oversight plan, a meeting and issue log, and an escalation route that the provider has seen.",
+      "owners": [
+        "Sponsor",
+        "Quality assurance"
+      ],
+      "claims": [
+        "CO-CLM-0140"
+      ],
+      "facts": [
+        {
+          "overlay": "both",
+          "kind": "rule",
+          "label": "Oversight fit for purpose and tailored to risk",
+          "ref": "ICH E6(R3) Annex 1, 3.9.5",
+          "claim": "CO-CLM-0140",
+          "read_on": "2026-11-16"
+        }
+      ]
+    },
+    {
+      "slug": "supply-readiness",
+      "title": "Get supplies to sites",
+      "phase": "p3",
+      "lanes": [
+        "supply"
+      ],
+      "overlay": "both",
+      "status": "synthesis",
+      "settle": "That the investigational product or device, comparators and ancillary supplies are available at each site, with the storage and accountability records the protocol needs.",
+      "leaves": "A supply plan, a release record for each shipment and a way for a site to report a problem.",
+      "owners": [
+        "Sponsor supply lead",
+        "Depot or logistics provider"
+      ]
+    },
+    {
+      "slug": "safety-management-plan",
+      "title": "Write the safety management plan",
+      "phase": "p3",
+      "lanes": [
+        "safety",
+        "vendors"
+      ],
+      "overlay": "both",
+      "status": "synthesis",
+      "settle": "Who receives safety information at the site and at the sponsor and in what form, how fast it is assessed, who decides expectedness and causality, how reports reach the authorities and the sites, and who covers out-of-hours.",
+      "leaves": "A plan that names each role, each channel and each clock listed in the Conduct phase, with the training and the reconciliation routine behind it.",
+      "owners": [
+        "Sponsor safety lead",
+        "Safety provider, if used"
+      ],
+      "notes": [
+        {
+          "overlay": "both",
+          "text": "The clocks themselves are in the safety steps of the Conduct phase, each with its own source."
+        }
+      ]
+    },
+    {
+      "slug": "trial-master-file-setup",
+      "title": "Set up the master file",
+      "phase": "p3",
+      "lanes": [
+        "quality"
+      ],
+      "overlay": "both",
+      "status": "synthesis",
+      "settle": "Where the study's essential documents will be kept, who files them, and how completeness is checked as the study runs.",
+      "leaves": "A file structure and filing rules agreed with each provider, and a first completeness check date.",
+      "owners": [
+        "Clinical operations",
+        "Quality assurance"
+      ]
+    },
+    {
+      "slug": "first-subject-in-gate",
+      "title": "Take the go decision for the first subject",
+      "phase": "p3",
+      "lanes": [
+        "regulatory",
+        "contracts",
+        "sites",
+        "supply",
+        "data",
+        "quality"
+      ],
+      "overlay": "both",
+      "status": "synthesis",
+      "settle": "Each stream confirms its requirements are met, and one named person records the decision to start.",
+      "leaves": "A dated go record that lists each stream's confirmation and any open item that was accepted, with the reason.",
+      "owners": [
+        "Sponsor study lead"
+      ]
+    },
+    {
+      "slug": "notify-start-and-recruitment",
+      "title": "Notify start, first visit and end of recruitment",
+      "phase": "p4",
+      "lanes": [
+        "regulatory"
+      ],
+      "overlay": "drug",
+      "status": "qualified",
+      "settle": "Who sends each notification, from which date each period runs in each Member State, and what a restart of recruitment triggers.",
+      "leaves": "Three dated notifications per Member State, each matched to the event it reports.",
+      "owners": [
+        "Regulatory affairs",
+        "Sponsor"
+      ],
+      "claims": [
+        "CO-CLM-0120"
+      ],
+      "facts": [
+        {
+          "overlay": "drug",
+          "kind": "clock",
+          "label": "Start; first visit of the first subject; end of recruitment",
+          "figure": "Each within 15 days of the event",
+          "ref": "Regulation (EU) No 536/2014 Article 36",
+          "claim": "CO-CLM-0120",
+          "read_on": "2026-11-16"
+        }
+      ]
+    },
+    {
+      "slug": "investigator-sae-reporting",
+      "title": "Investigator reports a serious adverse event to the sponsor",
+      "phase": "p4",
+      "lanes": [
+        "safety",
+        "sites"
+      ],
+      "overlay": "drug",
+      "status": "qualified",
+      "settle": "That every site knows how to report, to whom, in what form, and which events the protocol says need no immediate report.",
+      "leaves": "A dated report from the investigator for each serious event and a record of when the sponsor received it.",
+      "owners": [
+        "Investigator",
+        "Sponsor safety lead"
+      ],
+      "claims": [
+        "CO-CLM-0125"
+      ],
+      "facts": [
+        {
+          "overlay": "drug",
+          "kind": "clock",
+          "label": "Investigator to sponsor",
+          "figure": "Within 24 hours of obtaining knowledge, unless the protocol provides otherwise for certain events",
+          "ref": "Regulation (EU) No 536/2014 Article 41(2)",
+          "claim": "CO-CLM-0125",
+          "read_on": "2026-11-16"
+        }
+      ]
+    },
+    {
+      "slug": "susar-reporting",
+      "title": "Report suspected unexpected serious adverse reactions",
+      "phase": "p4",
+      "lanes": [
+        "safety"
+      ],
+      "overlay": "drug",
+      "status": "qualified",
+      "settle": "Who assesses seriousness, expectedness and causality, on which reference safety information, and who submits the report.",
+      "leaves": "A dated submission for each reaction, the assessment behind it and the date the sponsor became aware.",
+      "owners": [
+        "Sponsor safety lead",
+        "Safety provider, if used"
+      ],
+      "claims": [
+        "CO-CLM-0126"
+      ],
+      "facts": [
+        {
+          "overlay": "drug",
+          "kind": "clock",
+          "label": "Fatal or life-threatening",
+          "figure": "As soon as possible and not later than 7 days after the sponsor became aware",
+          "ref": "Regulation (EU) No 536/2014 Article 42(2)(a)",
+          "claim": "CO-CLM-0126",
+          "read_on": "2026-11-16"
+        },
+        {
+          "overlay": "drug",
+          "kind": "clock",
+          "label": "Other reactions",
+          "figure": "Not later than 15 days after the sponsor became aware",
+          "ref": "Regulation (EU) No 536/2014 Article 42(2)(b)",
+          "claim": "CO-CLM-0126",
+          "read_on": "2026-11-16"
+        },
+        {
+          "overlay": "drug",
+          "kind": "clock",
+          "label": "First not fatal, later proved fatal or life-threatening",
+          "figure": "Not later than 7 days after the sponsor became aware that it was fatal or life-threatening",
+          "ref": "Regulation (EU) No 536/2014 Article 42(2)(c)",
+          "claim": "CO-CLM-0126",
+          "read_on": "2026-11-16"
+        }
+      ]
+    },
+    {
+      "slug": "device-adverse-event-reporting",
+      "title": "Report adverse events and device deficiencies in a device investigation",
+      "phase": "p4",
+      "lanes": [
+        "safety",
+        "sites"
+      ],
+      "overlay": "device",
+      "status": "qualified",
+      "settle": "Which events the investigator reports to the sponsor, which the sponsor reports to the Member States, in what form, and how the sponsor decides a causal relationship.",
+      "leaves": "A dated record of each event, who assessed it, and when each report was sent.",
+      "owners": [
+        "Investigator",
+        "Sponsor safety lead"
+      ],
+      "claims": [
+        "CO-CLM-0138"
+      ],
+      "facts": [
+        {
+          "overlay": "device",
+          "kind": "rule",
+          "label": "Sponsor reports to Member States without delay",
+          "ref": "MDR Article 80(2)",
+          "claim": "CO-CLM-0138",
+          "read_on": "2026-11-16"
+        }
+      ],
+      "not_shown": [
+        {
+          "overlay": "device",
+          "text": "No figure shown: not verified at primary source. The investigator-to-sponsor and sponsor-to-Member-State day counts used in practice come from MDCG 2020-10/1, which was not opened for this version."
+        }
+      ]
+    },
+    {
+      "slug": "other-unexpected-events",
+      "title": "Report other unexpected events that affect benefit and risk",
+      "phase": "p4",
+      "lanes": [
+        "safety"
+      ],
+      "overlay": "drug",
+      "status": "qualified",
+      "settle": "Who watches for events that are not suspected unexpected serious adverse reactions but change the benefit-risk balance, and who decides to report.",
+      "leaves": "A dated notification and the reasoning for it.",
+      "owners": [
+        "Sponsor safety lead",
+        "Sponsor medical lead"
+      ],
+      "claims": [
+        "CO-CLM-0129"
+      ],
+      "facts": [
+        {
+          "overlay": "drug",
+          "kind": "clock",
+          "label": "Notification to Member States",
+          "figure": "Without undue delay and no later than 15 days from the date the sponsor became aware",
+          "ref": "Regulation (EU) No 536/2014 Article 53(1)",
+          "claim": "CO-CLM-0129",
+          "read_on": "2026-11-16"
+        }
+      ]
+    },
+    {
+      "slug": "urgent-safety-measures",
+      "title": "Take and notify urgent safety measures",
+      "phase": "p4",
+      "lanes": [
+        "safety",
+        "regulatory"
+      ],
+      "overlay": "drug",
+      "status": "qualified",
+      "settle": "Who may decide on a measure at short notice, how the investigators are told, and who notifies the Member States.",
+      "leaves": "A record of the event, the measures taken and the date each was taken, with the notification.",
+      "owners": [
+        "Sponsor",
+        "Investigator"
+      ],
+      "claims": [
+        "CO-CLM-0130"
+      ],
+      "facts": [
+        {
+          "overlay": "drug",
+          "kind": "clock",
+          "label": "Notification to Member States",
+          "figure": "Without undue delay and no later than 7 days from the date the measures have been taken",
+          "ref": "Regulation (EU) No 536/2014 Article 54(2)",
+          "claim": "CO-CLM-0130",
+          "read_on": "2026-11-16"
+        }
+      ]
+    },
+    {
+      "slug": "serious-breach",
+      "title": "Notify a serious breach",
+      "phase": "p4",
+      "lanes": [
+        "quality",
+        "regulatory",
+        "safety"
+      ],
+      "overlay": "drug",
+      "status": "qualified",
+      "settle": "Who can raise a suspected breach, who decides whether it is serious, and who notifies the Member States.",
+      "leaves": "A breach record with the date the sponsor became aware, the decision and its reasons, and the notification.",
+      "owners": [
+        "Sponsor quality assurance",
+        "Sponsor"
+      ],
+      "claims": [
+        "CO-CLM-0128"
+      ],
+      "facts": [
+        {
+          "overlay": "drug",
+          "kind": "clock",
+          "label": "Notification to Member States",
+          "figure": "Without undue delay and not later than 7 days of becoming aware of the breach",
+          "ref": "Regulation (EU) No 536/2014 Article 52(1)",
+          "claim": "CO-CLM-0128",
+          "read_on": "2026-11-16"
+        }
+      ]
+    },
+    {
+      "slug": "annual-safety-report",
+      "title": "Submit the annual safety report",
+      "phase": "p4",
+      "lanes": [
+        "safety"
+      ],
+      "overlay": "drug",
+      "status": "qualified",
+      "settle": "Which investigational products need a report, which period it covers, and who compiles and submits it.",
+      "leaves": "A submitted report for each product, with aggregate and anonymised data.",
+      "owners": [
+        "Sponsor safety lead"
+      ],
+      "claims": [
+        "CO-CLM-0127"
+      ],
+      "facts": [
+        {
+          "overlay": "drug",
+          "kind": "rule",
+          "label": "Annual report per investigational product other than placebo",
+          "ref": "Regulation (EU) No 536/2014 Article 43",
+          "claim": "CO-CLM-0127",
+          "read_on": "2026-11-16"
+        }
+      ],
+      "not_shown": [
+        {
+          "overlay": "drug",
+          "text": "No due date is shown for a development safety update report. No figure shown: not verified at primary source, and how it serves as this report was not read."
+        }
+      ]
+    },
+    {
+      "slug": "halt-or-early-termination",
+      "title": "Notify a halt or early termination",
+      "phase": "p4",
+      "lanes": [
+        "safety",
+        "regulatory"
+      ],
+      "overlay": "both",
+      "status": "qualified",
+      "settle": "Who can decide to halt, how sites and participants are told, who notifies the authorities, and what is needed before a restart.",
+      "leaves": "A dated decision with its reasons, the notifications sent and, before any restart, a record of what was authorised.",
+      "owners": [
+        "Sponsor",
+        "Regulatory affairs"
+      ],
+      "claims": [
+        "CO-CLM-0124",
+        "CO-CLM-0136"
+      ],
+      "facts": [
+        {
+          "overlay": "drug",
+          "kind": "clock",
+          "label": "Halt or early termination for subject safety",
+          "figure": "Without undue delay and not later than 15 days of the date of the halt or termination",
+          "ref": "Regulation (EU) No 536/2014 Article 38(1)",
+          "claim": "CO-CLM-0124",
+          "read_on": "2026-11-16"
+        },
+        {
+          "overlay": "device",
+          "kind": "clock",
+          "label": "Temporary halt or early termination",
+          "figure": "Within 15 days, with a justification; within 24 hours to all Member States where it was on safety grounds",
+          "ref": "MDR Article 77(1)",
+          "claim": "CO-CLM-0136",
+          "read_on": "2026-11-16"
+        }
+      ]
+    },
+    {
+      "slug": "end-of-trial-notification",
+      "title": "Notify the end of the study",
+      "phase": "p5",
+      "lanes": [
+        "regulatory"
+      ],
+      "overlay": "both",
+      "status": "qualified",
+      "settle": "When the study ends, who fixes that date against the protocol, and who sends each notification.",
+      "leaves": "A recorded end date with its basis, and the notifications for each Member State.",
+      "owners": [
+        "Regulatory affairs",
+        "Sponsor"
+      ],
+      "claims": [
+        "CO-CLM-0121",
+        "CO-CLM-0136"
+      ],
+      "facts": [
+        {
+          "overlay": "drug",
+          "kind": "clock",
+          "label": "End of the trial",
+          "figure": "Within 15 days of the end in each Member State concerned, and within 15 days of the end in the last Member State and third country",
+          "ref": "Regulation (EU) No 536/2014 Article 37(1) to (3)",
+          "claim": "CO-CLM-0121",
+          "read_on": "2026-11-16"
+        },
+        {
+          "overlay": "device",
+          "kind": "clock",
+          "label": "End of the investigation",
+          "figure": "Within 15 days of the end in each Member State, and within 15 days of the end in all of them; the end is the last visit of the last subject unless the plan says otherwise",
+          "ref": "MDR Article 77(2) to (4)",
+          "claim": "CO-CLM-0136",
+          "read_on": "2026-11-16"
+        }
+      ]
+    },
+    {
+      "slug": "results-summary-and-report",
+      "title": "Submit the results summary or report",
+      "phase": "p5",
+      "lanes": [
+        "regulatory"
+      ],
+      "overlay": "both",
+      "status": "qualified",
+      "settle": "What the summary or report contains, who writes the lay summary, and what the protocol says when results cannot be ready in time.",
+      "leaves": "A submitted summary and, for devices, a report, each with the date of the end it is counted from.",
+      "owners": [
+        "Sponsor",
+        "Medical writing"
+      ],
+      "claims": [
+        "CO-CLM-0122",
+        "CO-CLM-0136"
+      ],
+      "facts": [
+        {
+          "overlay": "drug",
+          "kind": "clock",
+          "label": "Results summary",
+          "figure": "Within one year from the end of the trial in all Member States concerned, with a lay summary",
+          "ref": "Regulation (EU) No 536/2014 Article 37(4)",
+          "claim": "CO-CLM-0122",
+          "read_on": "2026-11-16"
+        },
+        {
+          "overlay": "device",
+          "kind": "clock",
+          "label": "Clinical investigation report and summary",
+          "figure": "Within one year of the end, or within three months of an early termination or temporary halt",
+          "ref": "MDR Article 77(5)",
+          "claim": "CO-CLM-0136",
+          "read_on": "2026-11-16"
+        }
+      ]
+    },
+    {
+      "slug": "clinical-study-report-for-ma",
+      "title": "Submit the clinical study report for a marketing authorisation",
+      "phase": "p5",
+      "lanes": [
+        "regulatory"
+      ],
+      "overlay": "drug",
+      "status": "qualified",
+      "settle": "Whether the trial was intended to support a marketing authorisation, and which party is the applicant that submits the report.",
+      "leaves": "A submitted clinical study report with a note of the event it was counted from.",
+      "owners": [
+        "Marketing authorisation applicant",
+        "Medical writing"
+      ],
+      "claims": [
+        "CO-CLM-0123"
+      ],
+      "facts": [
+        {
+          "overlay": "drug",
+          "kind": "clock",
+          "label": "Clinical study report",
+          "figure": "Within 30 days after the marketing authorisation is granted, the procedure is completed or the application is withdrawn",
+          "ref": "Regulation (EU) No 536/2014 Article 37(4)",
+          "claim": "CO-CLM-0123",
+          "read_on": "2026-11-16"
+        }
+      ]
+    },
+    {
+      "slug": "database-lock-and-reconciliation",
+      "title": "Reconcile and lock the data",
+      "phase": "p5",
+      "lanes": [
+        "data",
+        "safety",
+        "coa"
+      ],
+      "overlay": "both",
+      "status": "synthesis",
+      "settle": "That the data are complete and cleaned, that the clinical and safety databases agree, that open queries and protocol deviations are resolved or accepted, and who authorises the lock.",
+      "leaves": "A lock record, a reconciliation record and a list of the open items that were accepted, with reasons.",
+      "owners": [
+        "Data management",
+        "Sponsor safety lead",
+        "Sponsor study lead"
+      ]
+    },
+    {
+      "slug": "archive-trial-master-file",
+      "title": "Archive the study record",
+      "phase": "p6",
+      "lanes": [
+        "quality"
+      ],
+      "overlay": "both",
+      "status": "qualified",
+      "settle": "What goes into the archive, who holds it, who may open it, and how it stays readable for the whole period.",
+      "leaves": "An archive index, named archive holders and an access record, with the date the period started.",
+      "owners": [
+        "Sponsor",
+        "Investigator",
+        "Quality assurance"
+      ],
+      "claims": [
+        "CO-CLM-0131"
+      ],
+      "facts": [
+        {
+          "overlay": "drug",
+          "kind": "clock",
+          "label": "Master file archiving",
+          "figure": "At least 25 years after the end of the trial, unless other Union law requires longer",
+          "ref": "Regulation (EU) No 536/2014 Article 58(1)",
+          "claim": "CO-CLM-0131",
+          "read_on": "2026-11-16"
+        }
+      ],
+      "not_shown": [
+        {
+          "overlay": "device",
+          "text": "No figure shown: not verified at primary source. The archiving period for a device investigation was not read in this version."
+        }
+      ]
+    },
+    {
+      "slug": "provider-close-out",
+      "title": "Close out each provider",
+      "phase": "p6",
+      "lanes": [
+        "vendors",
+        "quality",
+        "data"
+      ],
+      "overlay": "both",
+      "status": "synthesis",
+      "settle": "What each provider hands back or transfers (data, documents, system access), what is deleted, and how the sponsor confirms it.",
+      "leaves": "A close-out checklist per provider and a signed handover record.",
+      "owners": [
+        "Sponsor",
+        "Provider",
+        "Quality assurance"
+      ]
+    }
+  ]
+}

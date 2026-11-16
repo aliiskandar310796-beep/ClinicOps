@@ -6,6 +6,7 @@ const PAGES = [
   "/", "/services.html", "/integrity-scanner.html", "/tools.html",
   "/evidence-change-control-pack.html", "/about.html", "/contact.html",
   "/assessment-intake.html?workstream=integrity-review", "/privacy-notice/",
+  "/denmark-market-access.html",
 ];
 const VIEWPORTS = [
   { name: "mobile", width: 390, height: 844 },

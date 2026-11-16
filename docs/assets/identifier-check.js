@@ -18,8 +18,11 @@
     if (srn) return 'Type: SRN-shaped identifier\nCountry code: ' + srn[1] + '\nRole: ' + srn[2] + ' \u2014 ' + roles[srn[2]] + '\n\nStructural decoding only. This does not verify actor status or device responsibility.';
     if (upper.startsWith('B-')) return 'Type: EUDAMED legacy-style identifier signal\nLegacy screen: yes\n\nClinicOps derived screening rule: the B-prefix is useful for identifying a legacy-style registration path. Do not treat the downstream SS(C)P-link consequence as a directly quoted Commission rule.';
     const compact = v.replace(/[\s-]/g, '');
-    if (/^\d+$/.test(compact)) return 'Type: numeric UDI candidate\nGS1 Mod-10 valid: ' + gs1Valid(compact) + '\n\nResolve against EUDAMED before drawing regulatory conclusions.';
-    return 'Identifier candidate not recognised by the local structural rules. Resolve against EUDAMED before drawing regulatory conclusions.';
+    if (/^\d+$/.test(compact)) {
+      if ([8, 12, 13, 14].includes(compact.length)) return 'Type: numeric UDI candidate (' + compact.length + ' digits, a GTIN length)\nGS1 check digit (Mod-10): ' + (gs1Valid(compact) ? 'correct' : 'incorrect') + '\n\nA correct check digit does not show that the number is a registered UDI-DI. Resolve against EUDAMED before drawing regulatory conclusions.';
+      return 'Type: digit string, ' + compact.length + ' digit' + (compact.length === 1 ? '' : 's') + '\nThe GS1 Mod-10 check applies to GTIN lengths only (8, 12, 13 or 14 digits), so it is not applied here.\n\nResolve against EUDAMED before drawing regulatory conclusions.';
+    }
+    return 'Identifier candidate not recognised by the local structural rules. Basic UDI-DI, HIBC and ICCBBA identifiers are not checked here. Resolve against EUDAMED before drawing regulatory conclusions.';
   }
   const input = document.getElementById('idc-value'), btn = document.getElementById('idc-check'), out = document.getElementById('idc-result');
   if (!input || !btn || !out) return;

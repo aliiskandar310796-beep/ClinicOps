@@ -87,3 +87,19 @@ test('BU08 module has no network, storage or eval', () => {
   const src = require('node:fs').readFileSync(require('node:path').join(__dirname, '../docs/assets/coa-burden-core.js'), 'utf8');
   assert.ok(!/fetch\(|XMLHttpRequest|localStorage|sessionStorage|eval\(|new Function|document\./.test(src));
 });
+
+test('BU-frac a visit in a fractional study week is counted in the rounded week and flagged, so totals match the by-visit table', () => {
+  const r = B.estimate({instruments: [{name: 'A', minutes: '5', items: '1'}], visits: [{name: 'v', week: '1,5', instruments: 'A'}, {name: 'w', week: '2', instruments: 'A'}], diaries: [], caps: {}});
+  assert.equal(r.totals.minutes, 10);
+  assert.equal(r.visits.reduce((s, v) => s + v.minutes, 0), 10);
+  assert.ok(r.flags.some(f => /not a whole number/.test(f.msg)));
+});
+
+test('BU-cap absurd weeks and minutes are flagged and cannot hang the weekly view', () => {
+  const t0 = Date.now();
+  const r = B.estimate({instruments: [{name: 'A', minutes: '5', items: '1'}], visits: [{name: 'v', week: '1e16', instruments: 'A'}], diaries: [{instrument: 'A', per_week: '1', from_week: '1e16', to_week: '1e16'}, {instrument: 'A', per_week: '1', from_week: '0', to_week: '1e8'}], caps: {}});
+  assert.ok(Date.now() - t0 < 2000);
+  assert.ok(r.flags.some(f => /outside -520 to 1040/.test(f.msg)));
+  assert.equal(r.weeks.length, 0);
+  assert.ok(B.estimate({instruments: [{name: 'A', minutes: '1e308', items: '1'}], visits: [], diaries: [], caps: {}}).errors.length);
+});

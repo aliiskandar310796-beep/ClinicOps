@@ -32,3 +32,5 @@ jobs:
           (python3 scripts/serve_docs_like_pages.py docs 8103 >/dev/null 2>&1 &)
           sleep 2
           E2E_BASE_URL=http://localhost:8103 node e2e/scanner_full_journey.mjs
+      - name: Release privacy test against production (no third-party requests, cookies or stray storage on any sitemap page)
+        run: E2E_BASE_URL=https://clinicops.dk node e2e/release_privacy_test.mjs

@@ -4,7 +4,7 @@ import argparse
 from pathlib import Path
 from xml.etree import ElementTree
 
-from clinicops_os.site_quality import parse_metadata
+from clinicops_os.site_quality import home_positioning, parse_metadata
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
@@ -13,14 +13,19 @@ SITEMAP = DOCS / "sitemap.xml"
 BASE = "https://clinicops.dk/"
 NS = {"sm": "http://www.sitemaps.org/schemas/sitemap/0.9"}
 
-INTRO = """# ClinicOps
 
-ClinicOps is an EU MedTech regulatory data integrity practice. It reconciles approved regulatory facts across EUDAMED, UDI data, certificates, SS(C)P and controlled records, producing source-linked exception queues for qualified human review. Denmark market access, Danish localisation and pharmacovigilance remain secondary specialist capabilities.
-"""
+def intro() -> str:
+    """Headline and summary come from the home page's own <title> and meta
+    description (clinicops_os.site_quality.home_positioning), the same source
+    the harmonizer mirrors into og/JSON-LD. There is no separate hand-written
+    company description here, so llms.txt cannot contradict the home page."""
+    positioning = home_positioning(DOCS)
+    return f"# ClinicOps\n\n> {positioning.description}\n"
+
 
 # Section title -> predicate on the path relative to the site root.
 SECTIONS = (
-    ("Core pages", lambda r: r in {"index.html", "services.html", "use-cases.html", "about.html", "contact.html", "assessment-intake.html"}),
+    ("Core pages", lambda r: r in {"index.html", "da/index.html", "services.html", "use-cases.html", "about.html", "contact.html", "assessment-intake.html"}),
     ("Solution and use cases", lambda r: r in {
         "integrity-gate.html", "evidence-change-control-pack.html", "denmark-market-access.html",
         "eu-mdr-regulatory-integrity.html", "eudamed-transition.html", "class-iii-transition.html",
@@ -37,10 +42,9 @@ SECTIONS = (
         "specimen-register/index.html", "transition-map-sample/index.html",
         "danish-pv-literature-register.html", "sdea-clause-checker.html", "danish-dhpc-checker.html",
     }),
-    ("Archived tools, kept for existing links", lambda r: r in {"integrity-economics.html", "readiness-score.html", "regulatory-change-impact.html", "identifier-check.html"}),
-    ("COA and eCOA reference", lambda r: r in {"ecoa.html", "coa-types.html", "ecoa-workflow.html", "coa-nordic.html"}),
+    ("COA and eCOA reference", lambda r: r in {"ecoa.html", "coa-types.html", "ecoa-workflow.html", "coa-nordic.html", "clinical-operations-workflow-map.html"}),
     ("Research and primary sources", lambda r: r in {"research.html", "primary-sources.html"} or r.startswith("research/")),
-    ("Policies", lambda r: r.startswith("privacy-notice/")),
+    ("Policies", lambda r: r.startswith(("privacy-notice/", "da/privacy-notice/"))),
 )
 
 OUTRO = """Operating boundaries:
@@ -96,7 +100,7 @@ def render() -> str:
                 break
         else:
             raise SystemExit(f"{relative}: not assigned to an llms.txt section; update SECTIONS")
-    lines = [INTRO.rstrip("\n"), ""]
+    lines = [intro().rstrip("\n"), ""]
     for section, _ in SECTIONS:
         rows = sorted(entries[section], key=lambda row: row[0])
         if not rows:

@@ -109,7 +109,16 @@
     copy.packet_sha256 = await sha256(copy);
     return copy;
   }
-  const api = {VERSION,STATUSES,canonical,sha256,normalize,evidenceLabel,validate,compare,review,csvCell,seal};
+  /* Share-safe summary: status counts and the rule version only. By construction it carries no record identifier,
+     field name, expected or observed value, owner or evidence reference, so it can go into a question or a brief. */
+  function shareSummary(summary,mode,comparisons){
+    const s=summary||{},n=k=>Number(s[k])||0,m=['single-change','evidence-matrix','portfolio-scan'].includes(mode)?mode:'scan';
+    return ['ClinicOps share-safe summary (Regulatory Integrity Scanner, '+m+')',
+      'Comparisons: '+(Number(comparisons)||0)+' | aligned '+n('aligned')+' | mismatch signals '+(n('mismatch signal')+n('conflicting evidence'))+' | missing evidence '+n('missing evidence')+' | qualified review '+(n('requires qualified review')+n('unresolved')),
+      'Rule version: '+VERSION,
+      'No record identifiers, field names, expected or observed values, owners or evidence references are included.'].join('\n');
+  }
+  const api = {VERSION,STATUSES,canonical,sha256,normalize,evidenceLabel,validate,compare,review,csvCell,seal,shareSummary};
   if (typeof module === 'object' && module.exports) module.exports = api;
   else root.ClinicOpsReconciliation = api;
 })(typeof globalThis === 'object' ? globalThis : this);
