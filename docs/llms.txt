@@ -35,7 +35,6 @@ Free browser-local tools and examples:
 - eCOA Delivery Workbench | ClinicOps: https://clinicops.dk/ecoa-delivery-workbench - Free browser-local workbench for eCOA study delivery: licensing and translation plan, Nordic screenshot review, testing pack, risk and change control.
 - eCOA licence and translation lead-time planner | ClinicOps: https://clinicops.dk/ecoa-lead-time-planner - Free, browser-only planner: from instruments, languages and a kick-off date to the earliest first-participant-in date, the version that sets it, and what dropping one language would save. Nothing is sent to ClinicOps.
 - Visit and diary burden estimator | ClinicOps: https://clinicops.dk/ecoa-visit-burden - Free, browser-only estimator: minutes and items per visit, per study week and in total, from the instrument times you enter, with your own limits flagged. Nothing is sent to ClinicOps.
-- EUDAMED Identifier Check | ClinicOps: https://clinicops.dk/identifier-check - Free, browser-only EUDAMED Identifier Check: B-prefix legacy screening, SRN actor-role decoding, and GS1 Mod-10 validation. Nothing is sent to ClinicOps.
 - Free Regulatory Change Integrity Check | ClinicOps: https://clinicops.dk/integrity-check - Build a browser-local evidence packet for one regulatory change: provenance, downstream comparison, gaps, owner routing, JSON fingerprint. Optional local PDF read to suggest values.
 - Regulatory Integrity Scanner | ClinicOps: https://clinicops.dk/integrity-scanner - Check one approved change against downstream records, or scan a portfolio export for missing fields, duplicates and conflicts. Browser-local, exportable.
 - SDEA / PV Agreement Clause Checker | ClinicOps: https://clinicops.dk/sdea-clause-checker - Screen a PV agreement or SDEA against the clause set required from 12 February 2026 by Implementing Regulation (EU) 2025/1466 and GVP. Paste text or upload a PDF; browser-local.
@@ -45,6 +44,7 @@ Free browser-local tools and examples:
 - ClinicOps Class III Transition Map — Sanitized Sample: https://clinicops.dk/transition-map-sample/ - Sanitized fictional sample of the ClinicOps Class III Transition Map work-plan format.
 
 Archived tools, kept for existing links:
+- EUDAMED Identifier Check | ClinicOps: https://clinicops.dk/identifier-check - Free, browser-only EUDAMED Identifier Check: B-prefix legacy screening, SRN actor-role decoding, and GS1 Mod-10 validation. Nothing is sent to ClinicOps.
 - Regulatory Change Review Cost Calculator | ClinicOps: https://clinicops.dk/integrity-economics - Estimate the manual workload and labour cost of checking that a regulatory change reached EUDAMED, IFU, SS(C)P, labels and controlled systems.
 - Transition Readiness Score | ClinicOps: https://clinicops.dk/readiness-score - A private, browser-only screening aid for organising EUDAMED transition work-plan evidence before a human regulatory review.
 - Regulatory Change Impact Mapper | ClinicOps: https://clinicops.dk/regulatory-change-impact - Pick a category of EU regulatory change, answer six portfolio questions, and get an impacted-surface checklist with severity bands. Browser-local.
