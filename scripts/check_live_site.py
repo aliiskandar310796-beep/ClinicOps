@@ -408,6 +408,7 @@ def check_dns(
 
 def fetch_cert_not_after(host: str = DOMAIN, port: int = 443) -> datetime:
     ctx = ssl.create_default_context()
+    ctx.minimum_version = ssl.TLSVersion.TLSv1_2
     with (
         socket.create_connection((host, port), timeout=TIMEOUT_SECONDS) as sock,
         ctx.wrap_socket(sock, server_hostname=host) as tls,
