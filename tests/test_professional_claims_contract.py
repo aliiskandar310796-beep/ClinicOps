@@ -36,12 +36,12 @@ def test_public_site_is_independent_of_any_individual() -> None:
     """Decision 2026-11-14 (owner): the public structure names no individual and
     carries no personal biography, degree, language list or personal profile link.
 
-    Three places keep an identity because the law or a registry requires it: the
-    privacy notice (GDPR controller identification), the registered-actor block on
-    the EU authorised representative page, and the contact address. Nothing else may.
+    Only the privacy notice (GDPR controller identification) and the contact
+    address keep an identity because the law requires it. Nothing else may; the
+    authorised-representative page no longer carries a registered-actor block.
     """
     docs = ROOT / "docs"
-    allowed = {"privacy-notice/index.html", "eu-authorised-representative.html"}
+    allowed = {"privacy-notice/index.html"}
     forbidden = ("Iskandar", "Aalborg University", "Bachelor of Medicine", "linkedin.com/in/", "Industrial Specialisation")
     offenders = []
     for path in list(docs.rglob("*.html")) + [docs / "llms.txt"]:
