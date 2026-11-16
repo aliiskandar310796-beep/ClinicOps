@@ -49,6 +49,24 @@ FORBIDDEN_PHRASES = (
     # network is not — no roster-shaped or recruitment language anywhere.
     "growing bench",
     "join our network",
+    # Retired 2026-11-16 (plenum lenses 18, 31, 33; correction log of that
+    # date): wording that implied a standing team, a staffed network or a
+    # ready-made compliance arrangement ClinicOps does not have. The
+    # corrections log paraphrases these on purpose so they stay out of the
+    # served pages.
+    "specialist depth on demand",
+    "expert-network model",
+    "medicine and nursing",
+    "independent clinical subject-matter",
+    "extension of your QPPV",
+    "contract-ready",
+    "audit-ready",
+    "Danish linguistic validation",
+    # Positioning and consistency wording retired the same day.
+    "Danish-led",
+    "foot of this page",
+    "vigilance contact",
+    "vigilance-kontakt",
 )
 FORBIDDEN_ACRONYMS = (re.compile(r"\bRAC\b"), re.compile(r"\bCCRA\b"))
 
