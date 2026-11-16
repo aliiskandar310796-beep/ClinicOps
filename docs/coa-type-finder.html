@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" data-seg="ecoa">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'none'; worker-src 'self' blob:; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <title>COA type finder and inventory | ClinicOps</title>
@@ -60,9 +60,11 @@ main.wrap{padding-top:clamp(40px,6vw,72px)}
 #findings li{padding:10px 0;border-top:1px solid var(--border);max-width:70ch}
 
 </style>
-<link rel="preload" href="assets/fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/fonts/ibm-plex-mono-latin-400.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="site.css"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f6f3ec" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0f1517" media="(prefers-color-scheme: dark)"></head>
+<link rel="preload" href="assets/fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/fonts/ibm-plex-mono-latin-400.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="site.css"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f6f3ec" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0f1517" media="(prefers-color-scheme: dark)"><script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"COA type finder and inventory","url":"https://clinicops.dk/coa-type-finder","description":"Free, browser-only COA type finder and inventory: sort an assessment into patient-, observer- or clinician-reported or performance outcome, and list a study's assessments with gaps flagged. Nothing is sent to ClinicOps.","applicationCategory":"BusinessApplication","operatingSystem":"Any modern browser","isAccessibleForFree":true,"publisher":{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://clinicops.dk/"},{"@type":"ListItem","position":2,"name":"Clinical operations","item":"https://clinicops.dk/ecoa"},{"@type":"ListItem","position":3,"name":"COA type finder and inventory","item":"https://clinicops.dk/coa-type-finder"}]}</script>
+</head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="/">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="/">Home</a><a href="ecoa" aria-current="page">eCOA</a><a href="services">Medical devices</a><a href="denmark-market-access">Danish &amp; PV</a><a href="tools">Tools</a><a href="about">About</a><a href="contact">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");var r=a?a.offsetLeft+a.offsetWidth+16-n.clientWidth:0;if(r>0)n.scrollLeft=r})()</script>
+<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="/">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="/">Home</a><a href="services">Medical devices</a><a href="ecoa" aria-current="page">Clinical operations</a><a href="tools">Tools</a><a href="research">Research</a><a href="about">About</a><a href="contact">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");var r=a?a.offsetLeft+a.offsetWidth+16-n.clientWidth:0;if(r>0)n.scrollLeft=r})()</script>
 <main id="main" tabindex="-1" class="wrap">
 <section class="hero"><h1>COA type finder and inventory</h1><p class="lede">Most eCOA delays start with a question nobody answered early: who actually reports this, and what does that ask of the sites, the participants and the vendor? Answer four questions to sort an assessment into patient-, observer- or clinician-reported, or performance outcome. Then list every assessment in a study in one inventory and see what is missing before the specification is frozen. It runs in your browser; <strong>nothing is sent to ClinicOps</strong>.</p><p class="meta">Free tool</p></section>
 
@@ -97,6 +99,7 @@ main.wrap{padding-top:clamp(40px,6vw,72px)}
 <h2>Where this fits</h2>
 <p>The inventory is the input to everything after it: the <a href="ecoa-delivery-workbench">delivery workbench</a> plans each instrument-language version, and the <a href="ecoa-workflow">workflow map</a> shows where each decision is taken. <a href="coa-types">COA types</a> explains the four types and the sources behind them.</p>
 <div class="cta-row"><a class="cta primary" href="ecoa-delivery-workbench">Plan the delivery</a><a class="cta ghost" href="coa-types">Read about COA types</a></div>
+<p class="small muted data-note">Do not enter patient-identifiable or other personal data. This tool runs in your browser and sends nothing anywhere.</p>
 </main>
 <script src="assets/coa-finder-core.js"></script><script src="assets/coa-finder.js"></script>
 <footer class="site">

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" data-seg="device">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'none'; worker-src 'self' blob:; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <title>Technical File Consistency Check | ClinicOps</title>
@@ -75,9 +75,10 @@ ol#queue{padding-left:1.3rem;max-width:42.43em}#queue li{margin:.5em 0}
 .legend .lg-ocr i{background:transparent;border:1.5px dashed currentColor}
 .uplstatus .ocrbtn{margin-top:8px;width:100%;font-size:.86rem;min-height:38px;height:auto;padding:8px 12px;white-space:normal;line-height:1.35}
 </style>
-<link rel="preload" href="assets/fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/fonts/ibm-plex-mono-latin-400.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="site.css"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f6f3ec" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0f1517" media="(prefers-color-scheme: dark)"></head>
+<link rel="preload" href="assets/fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/fonts/ibm-plex-mono-latin-400.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="site.css"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f6f3ec" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0f1517" media="(prefers-color-scheme: dark)"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://clinicops.dk/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://clinicops.dk/tools"},{"@type":"ListItem","position":3,"name":"Technical File Consistency Check","item":"https://clinicops.dk/technical-file-consistency"}]}</script>
+</head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="/">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="/">Home</a><a href="ecoa">eCOA</a><a href="services">Medical devices</a><a href="denmark-market-access">Danish &amp; PV</a><a href="tools" aria-current="page">Tools</a><a href="about">About</a><a href="contact">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");var r=a?a.offsetLeft+a.offsetWidth+16-n.clientWidth:0;if(r>0)n.scrollLeft=r})()</script>
+<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="/">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="/">Home</a><a href="services">Medical devices</a><a href="ecoa">Clinical operations</a><a href="tools" aria-current="page">Tools</a><a href="research">Research</a><a href="about">About</a><a href="contact">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");var r=a?a.offsetLeft+a.offsetWidth+16-n.clientWidth:0;if(r>0)n.scrollLeft=r})()</script>
 <main id="main" tabindex="-1" class="wrap">
 
 <h1>Does your technical documentation agree with itself?</h1>
@@ -105,6 +106,7 @@ ol#queue{padding-left:1.3rem;max-width:42.43em}#queue li{margin:.5em 0}
 <div class="principles"><div class="principle"><strong>Verbatim preserved</strong><span>Normalization ("N-200" vs "N200", "(01)" wrappers, "2 years" vs "24 months") only classifies; your pasted text is never altered in the report.</span></div><div class="principle"><strong>Fail-closed</strong><span>One source cannot corroborate itself. Different unit families are flagged for manual verification, never auto-equated across families.</span></div><div class="principle"><strong>Human-owned</strong><span>Findings route review work. Which value is correct — and whether it matters under MDR/IVDR — stays with your qualified owner.</span></div></div>
 <h2>From pasted values to a reviewed technical file</h2><p>This check tests one fact across several documents and reports whether the copies agree. A scoped review applies the same discipline across a full technical-documentation set with named owners, evidence references and a reviewer-ready closure packet.</p>
 <div class="actions"><a class="cta primary" href="assessment-intake?workstream=technical-file-consistency">Scope a consistency review</a><a class="cta secondary" href="integrity-check">Check one change's propagation</a><a class="cta secondary" href="regulatory-change-impact">Map a regulatory change's impact</a><a class="cta secondary" href="mailto:info@clinicops.dk?subject=Technical%20file%20consistency">Email ClinicOps</a></div>
+<p class="small muted data-note">Do not enter patient-identifiable or other personal data. This tool runs in your browser and sends nothing anywhere.</p>
 </main>
 <footer class="site"><div class="footer-inner"><span>ClinicOps · Evidence-first regulatory operations · <a href="privacy-notice/">Privacy</a></span></div><div class="footer-inner"><span>ClinicOps is not a notified body or a competent authority, and does not replace your RA/QA team, RIM, QMS, PLM or ERP.</span></div></footer>
 <script>

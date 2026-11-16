@@ -101,3 +101,31 @@ test('LT12 module has no network, storage or eval', () => {
   const src = require('node:fs').readFileSync(require('node:path').join(__dirname, '../docs/assets/coa-leadtime-core.js'), 'utf8');
   assert.ok(!/fetch\(|XMLHttpRequest|localStorage|sessionStorage|eval\(|new Function|document\./.test(src));
 });
+
+test('LT13 per-row CSV carries dates; scenarios CSV and ICS match the result', () => {
+  const r = L.plan({kickoff: '2027-01-04', target: '2027-06-01', products: [P({}), P({language: 'Finnish', translation_weeks: '30'})]});
+  const rows = L.toCSV(r).trim().split('\n');
+  assert.equal(rows.length, 3);
+  const head = rows[0].split(',');
+  assert.ok(head.includes('ready_date_expected') && head.includes('licence_date'));
+  const finnish = rows[2].split(',');
+  assert.equal(finnish[head.indexOf('ready_date_expected')], r.products[1].ready.expected);
+  assert.equal(finnish[head.indexOf('licence_date')], '2027-02-01'); // 4 weeks after 2027-01-04
+  const sc = L.toScenariosCSV(r).trim().split('\n');
+  assert.equal(sc.length, 1 + 3 + r.sensitivity.length);
+  assert.ok(sc[2].startsWith('scenario,expected,' + r.scenarios.expected.date + ','));
+  assert.ok(!/'-/.test(L.toScenariosCSV(r)), 'negative slack must not be quoted as text');
+  const ics = L.toICS(r, '20261116T000000Z');
+  assert.equal((ics.match(/BEGIN:VEVENT/g) || []).length, 5);
+  assert.ok(ics.includes('DTSTART;VALUE=DATE:20270104') && ics.includes('DTSTART;VALUE=DATE:20270601'));
+  assert.ok(ics.includes('DTSTART;VALUE=DATE:' + r.scenarios.expected.date.replace(/-/g, '')));
+  assert.ok(ics.endsWith('END:VCALENDAR\r\n'));
+});
+
+test('LT14 ready dates equal kick-off plus the product weeks', () => {
+  const r = L.plan({kickoff: '2027-01-04', products: [P({licence_weeks: '0', translation_weeks: '0', screenshot_rounds: '0', signoff_weeks: '0'})]});
+  assert.equal(r.products[0].ready.expected, '2027-01-04');
+  const d = L.plan({kickoff: '2027-01-04', products: [P({licence_weeks: '2', translation_weeks: '10', screenshot_rounds: '2', signoff_weeks: '1'})]});
+  assert.equal(d.products[0].language_date, '2027-03-29'); // 12 weeks
+  assert.equal(d.products[0].ready.expected, '2027-04-05'); // 12 + 1 weeks
+});
