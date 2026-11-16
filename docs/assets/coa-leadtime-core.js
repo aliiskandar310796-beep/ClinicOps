@@ -25,7 +25,12 @@
   };
   const SCENARIOS = ['optimistic', 'expected', 'pessimistic'];
 
-  const num = v => (v === '' || v === null || v === undefined) ? null : Number(v);
+  /* A comma is accepted as the decimal mark ("1,5"); a blank or whitespace-only cell is blank. */
+  const num = v => {
+    if (v === null || v === undefined) return null;
+    if (typeof v === 'string') { const s = v.trim().replace(',', '.'); return s === '' ? null : Number(s); }
+    return Number(v);
+  };
   const isNum = v => typeof v === 'number' && isFinite(v) && v >= 0;
   const pert = w => (w[0] + 4 * w[1] + w[2]) / 6;
   /* Scenario value of a three-point estimate. */
@@ -77,6 +82,12 @@
     if (!kick) res.errors.push('Enter the kick-off date.');
     const products = (input && Array.isArray(input.products) ? input.products : []).filter(p => p && (String(p.instrument || '').trim() || String(p.language || '').trim()));
     if (!products.length) res.errors.push('Add at least one instrument and language.');
+    /* An entry that is not a number is an error, never "0 weeks, already done". */
+    const FIELDS = [['licence_weeks', 'licence weeks'], ['translation_weeks', 'translation weeks'], ['screenshot_rounds', 'screenshot rounds'], ['signoff_weeks', 'sign-off weeks']];
+    products.forEach((p, i) => FIELDS.forEach(([k, label]) => {
+      const v = num(p[k]);
+      if (v !== null && !isNum(v)) res.errors.push('Row ' + (i + 1) + ', ' + label + ': enter a number such as 1.5 (a comma also works), or leave it blank to use the published range.');
+    }));
     if (res.errors.length) return res;
     const defaults = resolve(DEFAULTS, input.durations);
     const target = isoDate(input.target);

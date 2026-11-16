@@ -23,7 +23,7 @@ def _rows() -> list[tuple[str, str, str, str]]:
 
 
 def test_the_page_gives_one_date_with_the_agreed_wording() -> None:
-    assert "28 November 2026 per the Commission's legacy-device transition guidance" in PAGE
+    assert "28 November 2026 per the Commission's transition timeline for legacy devices and Regulation devices placed on the market before mandatory use" in PAGE
     assert "notice published 27 November 2025; mandatory use 28 May 2026; 6-month transition" in PAGE
     assert "Decision (EU) 2025/2371 itself states no calendar date" in PAGE
     assert "28 November 2026 is a Saturday: plan to finish by Friday 27 November 2026" in PAGE
@@ -42,7 +42,7 @@ def test_table_has_the_seven_obligation_rows() -> None:
         "UDI/Device registration module",
         "Notified bodies and certificates module",
         "Market surveillance module",
-        "Registration of legacy devices already on the market before mandatory use",
+        "Registration of devices placed on the market before mandatory use (legacy devices and Regulation devices)",
         "Clinical investigations and performance studies module",
         "Vigilance and post-market surveillance module",
     ]
@@ -70,7 +70,7 @@ def test_rows_say_only_what_the_registered_claims_say() -> None:
                   "Notified bodies and certificates module", "Market surveillance module"):
         assert "Mandatory to use since 28 May 2026" in rows[label][1]
         assert "28 May 2026" in REGISTRY["CO-CLM-0020"].text
-    legacy = rows["Registration of legacy devices already on the market before mandatory use"][1]
+    legacy = rows["Registration of devices placed on the market before mandatory use (legacy devices and Regulation devices)"][1]
     assert "28 November 2026" in legacy and "Friday 27 November 2026" in legacy
     for label in ("Clinical investigations and performance studies module",
                   "Vigilance and post-market surveillance module"):

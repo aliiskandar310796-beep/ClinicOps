@@ -61,7 +61,11 @@
       const s = sumFor(splitNames(v.instruments), label);
       const row = {name: label, week: (wk === null || Number.isNaN(wk)) ? null : wk, minutes: r1(s.minutes), items: s.items};
       out.visits.push(row);
-      if (row.week !== null) visitWeek[row.week] = (visitWeek[row.week] || 0) + s.minutes;
+      if (row.week !== null) {
+        const wkRounded = Math.round(row.week);
+        if (wkRounded !== row.week) out.flags.push({level: 'check', msg: label + ': study week ' + row.week + ' is not a whole number; its minutes are counted in week ' + wkRounded + ' of the weekly view.'});
+        visitWeek[wkRounded] = (visitWeek[wkRounded] || 0) + s.minutes;
+      }
       if (capMin !== null && !Number.isNaN(capMin) && s.minutes > capMin) out.flags.push({level: 'over', msg: label + ': ' + r1(s.minutes) + ' min is over the ' + capMin + ' min limit you set.'});
       if (capItems !== null && !Number.isNaN(capItems) && s.items > capItems) out.flags.push({level: 'over', msg: label + ': ' + s.items + ' items is over the ' + capItems + ' item limit you set.'});
     });
@@ -74,6 +78,7 @@
       if ([per, from, to].some(x => x === null || Number.isNaN(x))) { out.flags.push({level: 'gap', msg: label + ': times per week, first week and last week must all be numbers.'}); return; }
       if (to < from) { out.flags.push({level: 'check', msg: label + ': last week is before first week; the diary is left out.'}); return; }
       if (to - from > 520) { out.flags.push({level: 'check', msg: label + ': longer than 520 weeks; the diary is left out.'}); return; }
+      if (Math.round(from) !== from || Math.round(to) !== to) out.flags.push({level: 'check', msg: label + ': weeks are not whole numbers; the diary runs from week ' + Math.round(from) + ' to week ' + Math.round(to) + '.'});
       const s = sumFor([d.instrument], label);
       for (let w = Math.round(from); w <= Math.round(to); w++) diaryWeek[w] = (diaryWeek[w] || 0) + per * s.minutes;
     });

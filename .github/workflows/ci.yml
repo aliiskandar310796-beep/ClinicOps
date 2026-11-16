@@ -1,7 +1,11 @@
 name: CI
 on:
   push:
+    branches: [main]
   pull_request:
+
+permissions:
+  contents: read
 
 jobs:
   test:
@@ -19,7 +23,7 @@ jobs:
         with:
           node-version: '22'
       - name: Browser reconciliation rules
-        run: node --test tests/reconciliation.test.cjs tests/ecoa_workbench.test.cjs tests/coa_finder.test.cjs tests/coa_leadtime.test.cjs tests/coa_burden.test.cjs tests/change_surface.test.cjs tests/ops_map.test.cjs
+        run: node --test tests/reconciliation.test.cjs tests/ecoa_workbench.test.cjs tests/coa_finder.test.cjs tests/coa_leadtime.test.cjs tests/coa_burden.test.cjs tests/change_surface.test.cjs tests/ops_map.test.cjs tests/ctis_clock.test.cjs
       - run: pytest -q
       - run: ruff check src tests scripts
       - name: Revenue OS experiment contract

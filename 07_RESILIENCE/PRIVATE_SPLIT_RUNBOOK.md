@@ -12,7 +12,7 @@ A scan of the current tree for credentials (API-key, token, password and private
 
 ## 2. Inventory (from the manifest script)
 
-Run `python scripts/private_split_manifest.py` for the live numbers. On 2026-11-16 (`origin/main` a5bcf2b): 544 tracked paths, **109 private** (55 certain, 54 judgement for the founder to confirm), **435 public**, 0 unclassified. Historical paths that matched a private rule: 115 (`--list private-history`); two historical paths match no rule and need a human look (`__invalid__` and `x` look like junk).
+Run `python scripts/private_split_manifest.py` for the live numbers. On 2026-11-16, before #154 (`origin/main` a5bcf2b): 544 tracked paths, **109 private** (55 certain, 54 judgement for the founder to confirm), **435 public**, 0 unclassified. With #154 merged the manifest reports 621 tracked, 111 private (56 certain, 55 judgement) and 510 public; re-run the script and use its numbers, not these. Historical paths that matched a private rule: 115 (`--list private-history`); two historical paths match no rule and need a human look (`__invalid__` and `x` look like junk).
 
 | Private rule | Files | Confidence |
 |---|---:|---|
@@ -65,8 +65,8 @@ Produced by `python scripts/private_split_manifest.py --deps` and checked by run
 
 | # | Where | What it does with the private set | Action so CI keeps passing |
 |---|---|---|---|
-| 1 | `.github/workflows/ci.yml` lines 39-42 | `clinicops-sales-swarm sales/global-sales-swarm.json` plus three greps (33 cells, 99 leads, SWARM READY) | Remove the step from public CI. Run it in the private repo's overlay CI (below). The unit tests for the engine (`tests/test_sales_swarm.py`) build their own cells in code and stay public. |
-| 2 | `.github/workflows/ci.yml` line 110 | `claim_gate.py ... offers sales research content` | Drop `offers sales` from the arguments. The gate already tolerates missing directories (verified: exit 0 in the temp copy). Run the gate on those directories in private CI too. |
+| 1 | `.github/workflows/ci.yml`, the `clinicops-sales-swarm` step | `clinicops-sales-swarm sales/global-sales-swarm.json` plus three greps (33 cells, 99 leads, SWARM READY) | Remove the step from public CI. Run it in the private repo's overlay CI (below). The unit tests for the engine (`tests/test_sales_swarm.py`) build their own cells in code and stay public. |
+| 2 | `.github/workflows/ci.yml`, the `claim_gate.py` step | `claim_gate.py ... offers sales research content` | Drop `offers sales` from the arguments. The gate already tolerates missing directories (verified: exit 0 in the temp copy). Run the gate on those directories in private CI too. |
 | 3 | `tests/test_commercial_activation_gate.py`, `tests/test_delegation_proof_contract.py`, `tests/test_pilot_operator_contract.py` | Assert the content of `sales/` pilot, delegation and activation documents | Move these three files to the private repo (they test the private documents, and fail with `FileNotFoundError` without them). |
 | 4 | `tests/test_expansion_lane_contract.py` | Asserts `04_GROWTH/expansion_lanes.json` | Move to the private repo. |
 | 5 | `tests/test_expert_network.py::test_public_example_roster_is_synthetic` | Reads `03_OPERATIONS/expert_network/roster.example.json` | The two synthetic `*.example.json` files are kept public by an explicit rule. Cleaner: move them to `examples/expert_network/` and change one path in the test (small PR before the split). |
@@ -93,7 +93,7 @@ jobs:
         with: { repository: <owner>/clinicops, path: . }          # public repo, no token needed
       - uses: actions/checkout@v7
         with: { path: _private }                                  # this private repo
-      - run: cp -r _private/. . && rm -rf _private/.git
+      - run: rsync -a --exclude .git _private/ ./
       - uses: actions/setup-python@v7
         with: { python-version: '3.12' }
       - run: pip install -e .[dev]
@@ -108,11 +108,11 @@ Run on a trusted machine with `git` 2.30+ and `git-filter-repo` 2.47 or newer (t
 
 **P0. Approval and decisions.** Founder approves the history rewrite in writing (this repo's rule). Settle the five judgement decisions in section 2 and edit `RULES` in `scripts/private_split_manifest.py` accordingly.
 
-**P1. Freeze.** Merge or close every open pull request (26 on 2026-11-16) and delete stale branches. A rewrite changes every SHA, so open PRs and builder branches (`plenum/*`) cannot survive it. Create `autonomy/HALT.md` on `main` (the documented kill switch) so no scheduled job opens a PR mid-rewrite; remove it afterwards.
+**P1. Freeze (order matters).** First merge the integration pull request (#154) and the prep PR (P6 below): `scripts/private_split_manifest.py` is not on `main` until #154 merges, so P5 and P6 cannot run before it. Then merge or close every other open pull request (26 on 2026-11-16, the count changes) and delete stale branches. A rewrite changes every SHA, so open PRs and builder branches (`plenum/*`) cannot survive it. Only after the last merge, create `autonomy/HALT.md` on `main` (the documented kill switch) so no scheduled job opens a PR mid-rewrite. While `HALT.md` exists, `tests/test_autonomy_contract.py` fails, CI on `main` stays red and the Pages deploy is blocked: that is intended, and it is why `HALT.md` is created last and removed in step 4a. Take P3 and every clone after this point, never before.
 
 **P2. Domain safety (one-off, also needed for B and C).** Verify the custom domain for GitHub Pages (a `_github-pages-challenge-<owner>` TXT record), so nobody else can claim `clinicops.dk` if Pages is ever unpublished or the repo moves. Lens 30 could not confirm it is set.
 
-**P3. Backup.**
+**P3. Backup (after the last merge and after `HALT.md`).**
 ```
 git clone --mirror https://github.com/<owner>/clinicops.git clinicops-backup.git
 git -C clinicops-backup.git bundle create ../clinicops-pre-split.bundle --all
@@ -131,7 +131,7 @@ gitleaks detect --log-opts="--all"                                 # or truffleh
 ```
 Review the stderr "historic paths matching no rule" list and add rules. If the scanner finds a real credential, **revoke or rotate it first** (GitHub's guidance: rotate first; a rotated secret may make the rewrite unnecessary for that item).
 
-**P6. Prep PR on the public repo (merge before the rewrite).** CI independence changes from section 4 items 1, 2, 5, 6, 8. Merge it, then confirm `python scripts/private_split_manifest.py --verify-public-build` passes on updated `main`.
+**P6. Prep PR on the public repo (merge before the freeze in P1, not after it).** CI independence changes from section 4 items 1, 2, 5, 6, 8. Merge it, then confirm `python scripts/private_split_manifest.py --verify-public-build` passes on updated `main`.
 
 **1. Create the private repo.**
 ```
@@ -157,16 +157,18 @@ git filter-repo --sensitive-data-removal --invert-paths --paths-from-file ../pri
 Verify in `work-public`:
 ```
 for d in sales revenue offers 01_STRATEGY 04_GROWTH 05_CLIENT_DELIVERY 07_RESILIENCE; do git log --all --oneline -- $d | wc -l; done   # all 0
-git ls-files | wc -l                                                                                                                  # 435 (or your final public count)
+git ls-files | wc -l                                                                                                                  # 510 with #154 merged (435 before it), or your final public count
 python scripts/private_split_manifest.py --verify-public-build                                                                       # runs against the rewritten tree
 ```
 
 **4. Force-push.** Pull-request refs cannot be pushed; that is expected.
 ```
-git remote add origin git@github.com:<owner>/clinicops.git
+# guard: abort if main moved since the backup was taken
+test "$(git -C ../clinicops-backup.git rev-parse main)" = "$(git ls-remote git@github.com:<owner>/clinicops.git refs/heads/main | cut -f1)" || { echo 'main moved since the backup: stop and redo P3'; exit 1; }
+git remote remove origin 2>/dev/null; git remote add origin git@github.com:<owner>/clinicops.git
 git push origin --force --mirror
 ```
-Per GitHub's guide this overwrites all branches and tags and rejects `refs/pull/*` (read-only). If other refs are rejected, branch protection is on: disable it for the push and re-enable it. Then dispatch CI and Pages, and run the Ops Watch workflow to confirm the live site is unchanged.
+Per GitHub's guide this overwrites all branches and tags and rejects `refs/pull/*` (read-only). If other refs are rejected, branch protection is on: disable it for the push and re-enable it. **4a.** Delete `autonomy/HALT.md` in a commit to `main`, then dispatch CI and Pages, and run the Ops Watch workflow to confirm the live site is unchanged.
 
 **5. Rotate anything sensitive.** From P5: anything a scanner found, rotated before the rewrite. Not credentials and not rotated by default: `EUDAMED_WATCHLIST` and `EUDAMED_HMAC_KEY` live in Actions secrets, not in the repository; rotating the HMAC key changes every snapshot key and breaks diff continuity, so rotate it only if it was exposed. Treat the named-account list, outreach drafts and pipeline as **exposed since their first push**: rewriting history shortens the exposure, it does not undo it.
 

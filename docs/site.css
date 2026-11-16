@@ -361,6 +361,7 @@ h2.long{max-width:26.52em}
 .metric strong{display:block;font-family:var(--mono);font-weight:500;font-size:clamp(1.5rem,2.6vw,2rem);font-variant-numeric:tabular-nums}
 .table-scroll{overflow-x:auto}
 .table-scroll table{display:table;min-width:640px}
+@media(max-width:640px){.table-scroll::before{content:"Scroll sideways to see all columns";display:block;font-size:.8rem;color:var(--muted);padding-bottom:6px}.table-scroll{background:linear-gradient(to right,var(--bg) 30%,transparent),linear-gradient(to left,var(--bg) 30%,transparent) 100% 0,radial-gradient(farthest-side at 0 50%,rgba(0,0,0,.25),transparent),radial-gradient(farthest-side at 100% 50%,rgba(0,0,0,.25),transparent) 100% 0;background-repeat:no-repeat;background-size:40px 100%,40px 100%,14px 100%,14px 100%;background-attachment:local,local,scroll,scroll}}
 @media(max-width:960px){.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.metric:nth-child(2n){border-right:0;margin-right:0}}
 @media(max-width:640px){.cta{white-space:normal;text-align:center;padding-top:10px;padding-bottom:10px}}
 

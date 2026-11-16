@@ -20,8 +20,8 @@ try {
     ["DK-MF-123456789", /Role: MF/],
     ["es-ar-000000123", /Role: AR/],
     ["B-ABC123", /legacy-style/i],
-    ["4006381333931", /GS1 Mod-10 valid: true/],
-    ["4006381333932", /GS1 Mod-10 valid: false/],
+    ["4006381333931", /GS1 check digit \(Mod-10\): correct/],
+    ["4006381333932", /GS1 check digit \(Mod-10\): incorrect/],
     ["hello", /not recognised/i],
     ["", /Enter an identifier first/]
   ];

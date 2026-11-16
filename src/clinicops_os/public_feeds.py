@@ -295,7 +295,7 @@ def events_for(published: PublishedClaim) -> list[IcsEvent]:
     Two optional registry shapes are read; neither is required:
     * ``ics_events``: list of {key, date, summary, kind?, sequence?, note?}
     * ``fact_key`` + ``value`` where ``value`` is an ISO date (YYYY-MM-DD);
-      ``ics_summary`` and ``kind`` are optional companions.
+      ``ics_summary``, ``ics_note`` and ``kind`` are optional companions.
     Month-only or free-text values are not dates and are ignored."""
     row = published.row
     claim_id = published.claim.claim_id
@@ -363,7 +363,7 @@ def events_for(published: PublishedClaim) -> list[IcsEvent]:
                 str(row.get("ics_summary") or row["fact_key"]),
                 str(row.get("kind", "date")) if row.get("kind") in EVENT_KINDS else "date",
                 0,
-                "",
+                str(row.get("ics_note", "")),
             )
         )
 
@@ -394,6 +394,13 @@ class FeedEntry:
     source_urls: tuple[str, ...]
     claim_ids: tuple[str, ...]
     kind: str  # "claim" or "correction"
+
+
+def _first_sentence(text: str) -> str:
+    """First sentence of a claim, where a sentence ends at '. ' followed by a capital."""
+    text = " ".join(text.split())
+    match = re.search(r"(?<=[a-z0-9\)\"”])\.\s+(?=[A-Z])", text)
+    return text[: match.start()] if match else text.rstrip(".")
 
 
 def _shorten(text: str, limit: int = 110) -> str:
@@ -427,7 +434,7 @@ def claim_entry(published: PublishedClaim) -> FeedEntry:
     )
     return FeedEntry(
         entry_id=f"tag:clinicops.dk,2026:claim/{claim.claim_id}",
-        title=_shorten(claim.text),
+        title=_shorten(_first_sentence(claim.text), 150),
         updated=published.last_verified,
         summary=claim.text,
         content_html="".join(parts),
@@ -452,7 +459,10 @@ def correction_entry(item: Correction, by_id: dict[str, RegistryClaim]) -> FeedE
         entry_id=(
             f"tag:clinicops.dk,2026:correction/{item.day.isoformat()}-{item.ordinal}"
         ),
-        title=f"Correction, {item.day.day} {_MONTHS[item.day.month - 1]} {item.day.year}",
+        title=(
+            f"Correction, {item.day.day} {_MONTHS[item.day.month - 1]} {item.day.year}: "
+            f"{_shorten(_first_sentence(item.text), 90)}"
+        ),
         updated=item.day,
         summary=item.text,
         content_html="".join(parts),

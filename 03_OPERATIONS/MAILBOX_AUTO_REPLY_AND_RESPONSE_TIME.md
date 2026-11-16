@@ -12,8 +12,9 @@ These are promises about future behaviour, not regulatory claims, so they do not
 | CM-02 | A dated away line replaces the default when ClinicOps is travelling | `docs/contact.html` `#away` (hidden by default) | hidden | Founder removes `hidden` and sets the date before leaving, restores `hidden` on return. A stale away line is worse than none | Accept the procedure |
 | CM-03 | The reply names the public source if a public source answers the question; otherwise it says what a scope would look like | `docs/contact.html` Ask block | on | Replies actually do this | Accept |
 | CM-04 | ClinicOps does not forward a question or add the sender to a mailing list | `docs/contact.html` Ask block | on | No newsletter or list exists (none does; the privacy notice says no marketing list is kept) | Accept |
-| CM-05 | Enquiries that do not lead to an engagement are deleted twelve months after last contact | `docs/privacy-notice/index.html` section 7 | 12 months | A calendar reminder runs a quarterly deletion pass over both mailboxes | Accept 12 months or give another number, and set the reminder |
+| CM-05 | Enquiries that do not lead to an engagement are deleted twelve months after last contact | `docs/privacy-notice/index.html` section 7 | 12 months | A calendar reminder runs a monthly deletion pass over both mailboxes (a quarterly pass would keep some records for up to fifteen months, against the public twelve) | Accept 12 months or give another number, and set the reminder |
 | CM-06 | Questions and corrections go to `support@clinicops.dk`; scope requests go to `info@clinicops.dk` | `docs/contact.html`, `docs/research.html`, tool pages | on | Both mailboxes exist, are monitored and share one auto-reply | Accept the two-inbox split |
+| CM-07 | An error report is acknowledged within two working days and decided within ten | `docs/about.html`, `docs/research.html` | 2 and 10 working days | Corrections are read first each Monday; the auto-reply says error reports are acknowledged within two working days while questions and scope requests get three. Public pages should name `support@clinicops.dk` only, to match CM-06 | Accept 2 and 10 days, and confirm the one address |
 
 Not promised anywhere, on purpose: any "within 24 hours" or "same day" reply; anonymity (an email address identifies the sender); a fixed price; a booking link; a follow-up sequence.
 
@@ -21,7 +22,7 @@ Not promised anywhere, on purpose: any "within 24 hours" or "same day" reply; an
 
 Subject: `Received: <original subject>` (Microsoft 365 adds the prefix; leave the default if it differs)
 
-> Thanks, your message arrived. A reply follows within three working days, Spanish and Danish public holidays excluded. If ClinicOps is away, the date is shown at clinicops.dk/contact.
+> Thanks, your message arrived. Questions and scope requests get a reply within three working days, Spanish and Danish public holidays excluded; an error report is acknowledged within two working days. If ClinicOps is away, the date is shown at clinicops.dk/contact.
 >
 > Please do not send patient-identifiable data or confidential files by email. A secure route is agreed first.
 >
@@ -29,7 +30,7 @@ Subject: `Received: <original subject>` (Microsoft 365 adds the prefix; leave th
 
 ## 3. Auto-reply, Danish (use for senders writing in Danish, or add under the English text)
 
-> Tak, din besked er modtaget. Du får svar inden for tre hverdage, dog ikke på spanske og danske helligdage. Hvis ClinicOps er bortrejst, står datoen på clinicops.dk/contact.
+> Tak, din besked er modtaget. Spørgsmål og forespørgsler besvares inden for tre arbejdsdage; en fejlmelding bekræftes inden for to arbejdsdage. Spanske og danske helligdage tæller ikke med. Hvis ClinicOps er bortrejst, står datoen på clinicops.dk/contact.
 >
 > Send ikke patientidentificerbare oplysninger eller fortrolige filer pr. e-mail. En sikker fremgangsmåde aftales først.
 >

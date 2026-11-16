@@ -7,7 +7,7 @@ Deployed page: `docs/research/eudamed-watch/index.html` (canonical `https://clin
 
 ## SEO title
 
-Continuous monitoring of the public EUDAMED record | ClinicOps
+Monthly monitoring of the public EUDAMED record | ClinicOps
 
 ## Meta description
 

@@ -139,3 +139,16 @@ test('LT14 share-safe summary has counts, weeks and the driver, and no instrumen
   for (const leak of ['Confidential', 'Finnish', 'Danish', 'Diary', '2027', 'Scale']) assert.ok(!s.includes(leak), leak);
   assert.equal(L.shareSummary({errors: ['x'], scenarios: {}, products: []}), '');
 });
+
+test('LT15 an entry that is not a number is an error, never zero weeks; a decimal comma is accepted', () => {
+  const bad = L.plan({kickoff: '2026-11-16', target: '2027-03-15', products: [P({translation_weeks: 'abc'})]});
+  assert.ok(bad.errors.some(e => /Row 1, translation weeks/.test(e)));
+  assert.ok(L.plan({kickoff: '2026-11-16', products: [P({licence_weeks: '-3'})]}).errors.length);
+  const comma = L.plan({kickoff: '2026-11-16', products: [P({translation_weeks: '1,5'})]});
+  const dot = L.plan({kickoff: '2026-11-16', products: [P({translation_weeks: '1.5'})]});
+  assert.deepEqual(comma.errors, []);
+  assert.equal(comma.scenarios.expected.date, dot.scenarios.expected.date);
+  const blank = L.plan({kickoff: '2026-11-16', products: [P({translation_weeks: '   '})]});
+  const none = L.plan({kickoff: '2026-11-16', products: [P({})]});
+  assert.equal(blank.scenarios.expected.date, none.scenarios.expected.date);
+});

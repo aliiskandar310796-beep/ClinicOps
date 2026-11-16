@@ -105,7 +105,7 @@
         item('i08', 'Communication approach agreed', 'Which report goes to whom, how often, and the escalation route when a tolerance is threatened.', 'framework', ['prince2']),
         item('i09', 'Tolerances set by the board', 'For time, cost, scope, quality, risk, benefits and sustainability. See Business case.', 'framework', ['prince2']),
         item('i10', 'Stage plan with decision points', 'Specification sign-off, testing exit, go-live and closeout each end with a recorded decision.', 'framework', ['prince2']),
-        item('i11', 'Data protection roles and cross-border transfers assessed', 'By the sponsor’s data protection function; the participant information describes the electronic collection.', 'regulation', ['gdpr']),
+        item('i11', 'Data protection roles and cross-border transfers assessed', 'Controller and processor roles and cross-border transfers are assessed under GDPR Arts 24-28 and Chapter V; the participant information describes the electronic collection.', 'regulation', ['gdpr']),
         item('i13', 'Digital and decentralised elements described where the country asks for them', 'In Denmark, for example: in the cover letter with the trial-specific risk assessment, in the protocol and in the participant information.', 'guidance', ['dkma-dct#2.6', 'eu-dct']),
         item('i12', 'End-of-study data delivery to sites planned now', 'Format, timing and who confirms receipt. Leaving this to closeout is how sites lose access before they hold a copy.', 'guidance', ['ema-cs#6.6'])
       ]}]

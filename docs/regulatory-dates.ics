@@ -20,17 +20,18 @@ DTEND;VALUE=DATE:20261129
 SUMMARY:EUDAMED: Commission deadline to register legacy devices in the UDI/
  Devices module
 DESCRIPTION:EUDAMED: Commission deadline to register legacy devices in the 
- UDI/Devices module\n28 November 2026 is a Saturday. No weekend roll-forwar
- d is applied: the date is shown as stated in the source.\nRules as of 16 N
- ovember 2026\, the date ClinicOps last read the source.\nSource: https://h
- ealth.ec.europa.eu/medical-devices-eudamed/overview_en\nSource: https://he
- alth.ec.europa.eu/document/download/3bb39d28-dcaa-4907-9ea9-ea89cee091c0_e
- n?filename=md_eudamed_tp-leg-reg-devices_en.pdf\nSource: https://eur-lex.e
- uropa.eu/eli/dec/2025/2371/oj/eng\nPage: https://clinicops.dk/eudamed-tran
- sition\nPage: https://clinicops.dk/research/eudamed-watch/\nPage: https://
- clinicops.dk/research/sscp-public-record-scan/\nClinicOps registry id CO-C
- LM-0013 (status: qualified).\nVerify against the instrument for your own d
- evices or trials. Not legal advice.
+ UDI/Devices module\nClinicOps plans to finish by Friday 27 November 2026.\
+ n28 November 2026 is a Saturday. No weekend roll-forward is applied: the d
+ ate is shown as stated in the source.\nRules as of 16 November 2026\, the 
+ date ClinicOps last read the source.\nSource: https://health.ec.europa.eu/
+ medical-devices-eudamed/overview_en\nSource: https://health.ec.europa.eu/d
+ ocument/download/3bb39d28-dcaa-4907-9ea9-ea89cee091c0_en?filename=md_eudam
+ ed_tp-leg-reg-devices_en.pdf\nSource: https://eur-lex.europa.eu/eli/dec/20
+ 25/2371/oj/eng\nPage: https://clinicops.dk/eudamed-transition\nPage: https
+ ://clinicops.dk/research/eudamed-watch/\nPage: https://clinicops.dk/resear
+ ch/sscp-public-record-scan/\nClinicOps registry id CO-CLM-0013 (status: qu
+ alified).\nVerify against the instrument for your own devices or trials. N
+ ot legal advice.
 URL:https://clinicops.dk/eudamed-transition
 STATUS:CONFIRMED
 TRANSP:TRANSPARENT

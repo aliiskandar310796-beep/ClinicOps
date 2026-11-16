@@ -713,8 +713,17 @@ NEXT_STEP_BY_PAGE = {
 }
 
 
+INTAKE_BY_PAGE = {"ctis-clock.html": "ctis"}
+
+
 def _next_step_block(relative: str) -> str:
     line, (href, label), subject, share = NEXT_STEP_BY_PAGE[relative]
+    intake = INTAKE_BY_PAGE.get(relative)
+    intake_item = (
+        f'<li>To scope the work around a date, <a href="assessment-intake?workstream={intake}">send a brief</a>.</li>'
+        if intake
+        else ""
+    )
     ask = f"mailto:support@clinicops.dk?subject={quote('Question: ' + subject)}"
     summary = (
         " Use <em>Copy share-safe summary</em> above to share counts and rule names with no values."
@@ -726,6 +735,7 @@ def _next_step_block(relative: str) -> str:
         '<section class="next-step" aria-labelledby="next-step-h"><h2 id="next-step-h">What to do with this result</h2><ol>'
         f"<li>{html.escape(line, quote=False)}</li>"
         f'<li>Next: <a href="{href}">{html.escape(label, quote=False)}</a>.</li>'
+        f"{intake_item}"
         "<li>If you want a second pair of eyes, send a question that contains no identifiers: "
         f'<a href="{html.escape(ask)}">Ask a question</a> '
         f'(<a href="contact#ask">template</a>).{summary} Nothing leaves your browser until you send it.</li>'

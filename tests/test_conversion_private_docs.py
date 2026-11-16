@@ -16,6 +16,6 @@ ROOT = Path(__file__).resolve().parents[1]
 def test_auto_reply_document_exists_and_matches_the_site_commitment() -> None:
     doc = (ROOT / "03_OPERATIONS" / "MAILBOX_AUTO_REPLY_AND_RESPONSE_TIME.md").read_text(encoding="utf-8")
     assert "within three working days" in doc
-    assert "tre hverdage" in doc
+    assert "tre arbejdsdage" in doc
     assert "CM-01" in doc and "CM-05" in doc
     assert "Please do not send patient-identifiable data or confidential files by email" in doc

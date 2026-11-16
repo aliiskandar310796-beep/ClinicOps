@@ -114,8 +114,15 @@ TARGETS = (
     Target(
         "/research/eudamed-watch/",
         200,
-        "Continuous monitoring of the public EUDAMED record",
+        "Monthly monitoring of the public EUDAMED record",
     ),
+    Target("/clinical-operations-workflow-map", 200, "<title>Clinical operations workflow map | ClinicOps</title>"),
+    Target("/ecoa-workflow", 200, "<title>eCOA workflow map from decision to close-out | ClinicOps</title>"),
+    Target("/da/", 200, "<title>ClinicOps | "),
+    Target("/feed.xml", 200, "<feed xmlns=\"http://www.w3.org/2005/Atom\""),
+    Target("/regulatory-dates.ics", 200, "BEGIN:VCALENDAR"),
+    Target("/llms.txt", 200, "ClinicOps"),
+    Target("/downloads/clinicops-terminology-governance-v1.0.csv", 200, "Change log"),
     Target(
         "/about",
         200,
@@ -149,7 +156,7 @@ TARGETS = (
     Target(
         "/eudamed-transition",
         200,
-        "<title>EUDAMED Transition Work Plans for MedTech | ClinicOps</title>",
+        "<title>EUDAMED registration date 28 Nov 2026: work plan | ClinicOps</title>",
     ),
     Target(
         "/evidence-change-control-pack",
