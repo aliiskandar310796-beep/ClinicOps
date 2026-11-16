@@ -10,3 +10,4 @@ These are standing editorial and analytical constraints derived from the 8 Septe
 6. Use issue dates for currency comparison when revision-number semantics are not proven equivalent.
 7. "MATCH" means metadata identifiers/dates align; it never means document bodies were compared unless the actual files were retrieved and compared.
 8. Public outputs must state sample design, retrieval limits, unresolved cases, and whether examples are anonymised.
+9. The Atom feed (`docs/feed.xml`) and the regulatory-dates calendar (`docs/regulatory-dates.ics`) are generated only from registry claims that pass the `website` gate and carry a `last_verified` date, plus the dated corrections log. They are never edited by hand and never auto-refreshed; see `scripts/README_feeds.md`.
