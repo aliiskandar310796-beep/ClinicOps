@@ -176,7 +176,7 @@ TARGETS = (
     Target(
         "/sscp-operations",
         200,
-        "<title>SS(C)P Operations and Evidence Workflows | ClinicOps</title>",
+        "<title>SS(C)P operations explained: who does what | ClinicOps</title>",
     ),
     Target(
         "/technical-file-consistency",

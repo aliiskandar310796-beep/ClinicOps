@@ -17,7 +17,6 @@ docs/ecoa.html | names CTIS in section copy; not yet reviewed for rule statement
 docs/eu-authorised-representative.html | states authorised-representative rules without registry claims (backlog)
 docs/evidence-change-control-pack.html | names EUDAMED in offer copy; not yet reviewed for rule statements (backlog)
 docs/evidence-pack-checklist.html | names EUDAMED in checklist copy; not yet reviewed for rule statements (backlog)
-docs/expert-network.html | names EUDAMED as an expertise area; states no rule
 docs/integrity-check.html | none-stated tool (reviewed 2026-11-16): names EUDAMED as an example record source, applies no rule
 docs/integrity-economics.html | archived tool, no longer listed; names EUDAMED; retire or govern
 docs/primary-sources.html | source list that links regulators by name; states no figure of its own (backlog)

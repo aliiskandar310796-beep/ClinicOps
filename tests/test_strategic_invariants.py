@@ -85,6 +85,7 @@ RETIRED_PUBLIC_STRINGS = (
     "four-level",
     "risk scoring",
     "Danish-led, EU-wide medical device regulatory intelligence",
+    "Danish-led",  # 2026-11-16: positioning is "Denmark-specialised, EU-wide"
     DEPRECATED_COMPANY_LINKEDIN_SLUG,
 )
 
@@ -231,7 +232,12 @@ def test_flagship_and_scanner_carry_the_human_decision_boundary() -> None:
 
 
 def test_expert_network_never_claims_standing_staff() -> None:
+    # Amended 2026-11-16 (plenum lens 18): the "private, project-specific
+    # expert-network model" sentence implied a network that cannot be shown and
+    # was removed; the page now says ClinicOps does the work itself.
     html = (DOCS / "expert-network.html").read_text(encoding="utf-8").lower()
-    assert "private, project-specific expert-network model" in html
+    assert "expert-network model" not in html
+    assert "clinicops does the work itself" in html
+    assert "there is no standing team" in html
     assert "not represented as clinicops employees" in html
     assert "permanently staffed" in html

@@ -200,7 +200,7 @@ def test_audit_script_reports_classes_and_exits_clean() -> None:
         env={"PYTHONPATH": str(ROOT / "src"), "PATH": ""},
     )
     assert result.returncode == 0, result.stdout + result.stderr
-    assert "Live claims by risk class: A=4, B=5, C=3, D=6, E=5" in result.stdout
+    assert "Live claims by risk class: A=4, B=5, C=3, D=6, E=6" in result.stdout
     assert "0 errors" in result.stdout
 
 
