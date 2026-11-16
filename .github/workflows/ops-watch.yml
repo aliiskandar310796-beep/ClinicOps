@@ -1,22 +1,16 @@
 name: Ops Watch
 
+# Trimmed 2026-11-16: the push trigger and the EUDAMED reachability canary job
+# were removed. The canary's reachability probe had failed on every run since
+# early November, and research/eudamed-public-api-reuse-review.md says repeated
+# refusals from the public API must pause automated polling and trigger a review.
+# The monthly EUDAMED Watch workflow is unchanged. Canary scripts stay in the
+# repo; re-add the job only after that review.
+
 on:
   workflow_dispatch:
   schedule:
     - cron: '13 6 * * 1'
-  push:
-    paths:
-      - '.github/workflows/ops-watch.yml'
-      - 'scripts/check_live_site.py'
-      - 'scripts/eudamed_canary.py'
-      - 'scripts/evaluate_canary.py'
-      - 'src/clinicops_eudamed/canary.py'
-      - 'src/clinicops_eudamed/canary_eval.py'
-      - 'research/canary/baseline.json'
-      - 'scripts/audit_claim_registry.py'
-      - 'scripts/audit_claim_references.py'
-      - 'scripts/validate_content_claims.py'
-      - 'research/claims.jsonl'
 
 permissions:
   contents: read
@@ -55,35 +49,3 @@ jobs:
         run: python scripts/audit_claim_references.py
       - name: Governed content claim validation
         run: python scripts/validate_content_claims.py
-
-  eudamed-canary:
-    name: EUDAMED reachability canary
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-python@v7
-        with:
-          python-version: '3.12'
-      - run: pip install -e .
-      - name: Probe bounded public API pages
-        run: python scripts/eudamed_canary.py
-      - name: Evaluate reviewed canary drift
-        run: python scripts/evaluate_canary.py
-      - name: Add canary snapshot to job summary
-        if: always()
-        run: |
-          if [ -f research/canary/latest.json ]; then
-            echo '## EUDAMED canary snapshot' >> "$GITHUB_STEP_SUMMARY"
-            echo '```json' >> "$GITHUB_STEP_SUMMARY"
-            cat research/canary/latest.json >> "$GITHUB_STEP_SUMMARY"
-            echo '```' >> "$GITHUB_STEP_SUMMARY"
-          fi
-      - name: Upload canary snapshot
-        if: always()
-        uses: actions/upload-artifact@v7
-        with:
-          name: eudamed-canary-${{ github.run_id }}
-          path: research/canary/latest.json
-          if-no-files-found: warn
-          retention-days: 90
