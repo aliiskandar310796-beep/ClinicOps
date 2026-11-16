@@ -9,6 +9,7 @@ from pathlib import Path
 from .evidence import EvidenceClass, VerificationStatus
 
 CLAIM_ID_RE = re.compile(r"^CO-CLM-\d{4}$")
+LANGUAGE_CODE_RE = re.compile(r"^[a-z]{2}$")
 PUBLIC_USES = {
     "research-note",
     "website",
@@ -52,6 +53,10 @@ class RegistryClaim:
     source_date: str | None = None
     not_established: tuple[str, ...] = ()
     label: str | None = None
+    # Optional translations of `text`, as (language code, text) pairs. The English
+    # `text` stays the single authoritative wording; a translation carries the
+    # same limitations and allowed uses and never widens the claim.
+    translations: tuple[tuple[str, str], ...] = ()
 
     @classmethod
     def from_dict(cls, row: dict[str, object]) -> RegistryClaim:
@@ -80,6 +85,10 @@ class RegistryClaim:
             source_date=_opt_str(row.get("source_date")),
             not_established=tuple(str(item) for item in row.get("not_established", [])),
             label=_opt_str(row.get("label")),
+            translations=tuple(
+                (str(language), str(text))
+                for language, text in sorted(dict(row.get("translations") or {}).items())
+            ),
         )
 
     def gate(self, use: str, as_of: date) -> list[str]:
@@ -138,6 +147,21 @@ def audit_registry(claims: list[RegistryClaim], as_of: date) -> list[RegistryFin
 
         if not claim.text.strip():
             findings.append(RegistryFinding("error", claim.claim_id, "claim is empty"))
+        for language, translated in claim.translations:
+            if not LANGUAGE_CODE_RE.fullmatch(language) or language == "en":
+                findings.append(
+                    RegistryFinding(
+                        "error",
+                        claim.claim_id,
+                        f"translation language {language!r} must be a two-letter code other than 'en'",
+                    )
+                )
+            if not translated.strip():
+                findings.append(
+                    RegistryFinding(
+                        "error", claim.claim_id, f"{language} translation is empty"
+                    )
+                )
         if claim.evidence_class == EvidenceClass.PRIMARY and not claim.sources:
             findings.append(
                 RegistryFinding("error", claim.claim_id, "primary claim has no source")

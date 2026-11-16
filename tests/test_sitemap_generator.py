@@ -124,12 +124,46 @@ def test_invalid_pair_declarations_fail_the_build(site, pairs, message) -> None:
         _render(site)
 
 
+def test_draft_pairs_are_skipped_not_emitted_and_not_validated(site) -> None:
+    # A draft Danish page is noindex: it is not in the sitemap, so the pair must neither fail
+    # validation as "not an indexable sitemap page" nor produce an hreflang alternate.
+    _write_pairs(
+        site,
+        [{"en": "https://clinicops.dk/tool", "da": "https://clinicops.dk/hidden", "status": "draft_pending_review"}],
+    )
+    xml = _render(site)
+    assert "hreflang" not in xml and "xhtml" not in xml
+
+
+def test_reviewed_pairs_are_emitted_and_the_status_key_is_not_a_language(site) -> None:
+    _write_pairs(
+        site,
+        [{"en": "https://clinicops.dk/tool", "da": "https://clinicops.dk/da/tool", "status": "reviewed"}],
+    )
+    xml = _render(site)
+    assert 'hreflang="da" href="https://clinicops.dk/da/tool"' in xml
+    assert 'hreflang="status"' not in xml
+
+
+def test_unknown_pair_status_fails_the_build(site) -> None:
+    _write_pairs(
+        site,
+        [{"en": "https://clinicops.dk/tool", "da": "https://clinicops.dk/da/tool", "status": "published"}],
+    )
+    with pytest.raises(SystemExit, match="status 'published'"):
+        _render(site)
+
+
 def test_committed_pair_map_is_valid_against_the_real_site() -> None:
     data = json.loads((ROOT / "data" / "hreflang_pairs.json").read_text(encoding="utf-8"))
     assert isinstance(data["pairs"], list)
     sitemap = (ROOT / "docs" / "sitemap.xml").read_text(encoding="utf-8")
-    # Initially empty: an English-only site carries no hreflang at all.
-    assert bool(data["pairs"]) == ("hreflang" in sitemap)
+    active = [pair for pair in data["pairs"] if pair.get("status", "reviewed") == "reviewed"]
+    assert bool(active) == ("hreflang" in sitemap)
+    for pair in data["pairs"]:
+        if pair.get("status") == "draft_pending_review":
+            assert pair["da"] not in sitemap, "a draft Danish page must not be in the sitemap"
+            assert f"<loc>{pair['en']}</loc>" in sitemap or pair["en"].rstrip("/") == "https://clinicops.dk"
 
 
 # --- lastmod -----------------------------------------------------------------

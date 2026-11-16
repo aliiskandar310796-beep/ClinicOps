@@ -175,7 +175,31 @@ def load_hreflang_groups(path: Path | None = None) -> list[dict[str, str]]:
     groups = data.get("pairs", [])
     if not isinstance(groups, list):
         raise SystemExit(f"{path.name}: 'pairs' must be a list")
-    return groups
+    return active_groups(groups)
+
+
+PAIR_STATUSES = ("draft_pending_review", "reviewed")
+
+
+def active_groups(groups: list[dict[str, str]]) -> list[dict[str, str]]:
+    """Pairs that may be emitted as hreflang: status "reviewed" (or no status).
+
+    A "draft_pending_review" pair points at a noindex Danish draft. Google ignores
+    hreflang to a noindex page and the draft is not in the sitemap, so the pair is
+    skipped here and its URLs are not validated as sitemap pages. The "status" key
+    is stripped; the remaining keys are language codes."""
+    active: list[dict[str, str]] = []
+    for index, group in enumerate(groups, start=1):
+        if not isinstance(group, dict):
+            raise SystemExit(f"hreflang_pairs.json pair {index}: must be an object")
+        status = group.get("status", "reviewed")
+        if status not in PAIR_STATUSES:
+            raise SystemExit(
+                f"hreflang_pairs.json pair {index}: status {status!r} must be one of {', '.join(PAIR_STATUSES)}"
+            )
+        if status == "reviewed":
+            active.append({lang: url for lang, url in group.items() if lang != "status"})
+    return active
 
 
 def validate_hreflang_groups(groups: list[dict[str, str]], pages: list[Page]) -> None:
