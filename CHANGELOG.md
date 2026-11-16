@@ -1,5 +1,11 @@
 # ClinicOps operating changelog
 
+## 2026-11-16 – eCOA workflow map: twelve steps, templates, language dimension
+
+- `ecoa-workflow` updated in place from ten stages to twelve steps (0 to 11): new step 0 (decide and select) and new step 10 (control change and transfer data); the former step 10 is now step 11, steps 1 to 9 keep their numbers. Rows carry slug anchors (`#step-test`). Labelled a ClinicOps synthesis of published guidance, not a standard. The source register gained a "last opened" column; all eight sources were reopened on 2026-11-16. Claims `CO-CLM-0050` to `CO-CLM-0052` added for the statements the new rows and templates rely on.
+- Change Surface Mapper: optional "language versions and deliverables affected" input (`docs/assets/change-surface-core.js`, `tests/change_surface.test.cjs`); the brief and JSON gain the field only when it is used.
+- Static template downloads in `docs/downloads/` (not pages, not in the sitemap, no email gate), built deterministically by `scripts/build_ecoa_templates.py` with the standard library only: eCOA UAT script skeleton, findings log and approval form (XLSX, adapted from a CC BY 4.0 paper); terminology governance template (one-page XLSX and CSV). Both CC BY 4.0, version 1.0.
+
 ## 2026-11-14 – COA and eCOA section
 
 - New pages: `ecoa` (hub, now the eCOA navigation target), `coa-types`, `ecoa-workflow`, `coa-nordic`. Each carries a source register with the date opened and how much of each source was read; items that could not be verified are listed as open questions, not stated.
