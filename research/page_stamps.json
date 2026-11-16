@@ -1,0 +1,101 @@
+{
+ "_comment": "Config for scripts/render_page_stamps.py. tool_pages: the 12 listed tools. variant 'claims' = stamp from the registry claims the page declares; 'none-stated' = a person read the page text on 'reviewed' and found no regulatory rule stated; 'unregistered' = the page names rules or dates that are not in the registry, so it is not stamped. answer_first: wording must come from the cited claims (a test checks every number). full_block_exclude: governed pages that get no Last-verified block, with the reason.",
+ "tool_pages": {
+  "docs/ctis-clock.html": {
+   "variant": "claims"
+  },
+  "docs/sdea-clause-checker.html": {
+   "variant": "claims"
+  },
+  "docs/danish-dhpc-checker.html": {
+   "variant": "claims"
+  },
+  "docs/integrity-scanner.html": {
+   "variant": "claims"
+  },
+  "docs/coa-type-finder.html": {
+   "variant": "none-stated",
+   "reviewed": "2026-11-16"
+  },
+  "docs/ecoa-lead-time-planner.html": {
+   "variant": "none-stated",
+   "reviewed": "2026-11-16"
+  },
+  "docs/ecoa-visit-burden.html": {
+   "variant": "none-stated",
+   "reviewed": "2026-11-16"
+  },
+  "docs/integrity-check.html": {
+   "variant": "none-stated",
+   "reviewed": "2026-11-16"
+  },
+  "docs/change-surface-mapper.html": {
+   "variant": "none-stated",
+   "reviewed": "2026-11-16"
+  },
+  "docs/technical-file-consistency.html": {
+   "variant": "none-stated",
+   "reviewed": "2026-11-16"
+  },
+  "docs/ecoa-delivery-workbench.html": {
+   "variant": "unregistered"
+  },
+  "docs/danish-pv-literature-register.html": {
+   "variant": "unregistered"
+  }
+ },
+ "full_block_exclude": {
+  "docs/index.html": "homepage: no Last-verified block on the front page; the claim gate still scans it",
+  "docs/about.html": "About copy is out of scope for the stamps change; the claim gate still scans it"
+ },
+ "answer_first": {
+  "docs/ctis-clock.html": {
+   "claims": [
+    "CO-CLM-0021"
+   ],
+   "source_label": "Regulation (EU) No 536/2014, Articles 5 to 8",
+   "answer": "Under Regulation (EU) No 536/2014 Articles 5 to 8, validation of an initial clinical trial application takes 10 days (up to 25 with a request for information), Part I takes 45 days and Part II takes 45 days, and the decision follows within 5 days of the later of the Part I reporting date and the end of Part II. Without requests for information the periods give 60 days; with all of them, the EMA CTIS Sponsor Handbook states 106.",
+   "boundary": "A planning aid, not legal advice and not a prediction. The tool carries no Member State holiday calendars. Check the current rules and the CTIS handbook before relying on a date."
+  },
+  "docs/sdea-clause-checker.html": {
+   "claims": [
+    "CO-CLM-0051"
+   ],
+   "source_label": "Implementing Regulation (EU) 2025/1466",
+   "answer": "From 12 February 2026, Implementing Regulation (EU) 2025/1466 requires a marketing authorisation holder's pharmacovigilance subcontract to describe the third party's roles and responsibilities, its safety-data exchange, the inspection and audit arrangements, and its agreement to be audited and inspected (Article 6(3) of Regulation (EU) No 520/2012 as amended). Third parties are to be audited by or on behalf of the holder, taking the risk of the subcontracted activity into account (Article 13(1a)).",
+   "boundary": "A structuring aid, not legal advice and not a substitute for reading the agreement; keyword detection finds words, not meaning. The severity bands and GVP expectations in the checker go beyond this registered claim, so confirm every line manually."
+  },
+  "docs/danish-dhpc-checker.html": {
+   "claims": [
+    "CO-CLM-0052"
+   ],
+   "source_label": "Danish Medicines Agency, Preparing, translating and distributing safety information (DHPC)",
+   "answer": "In Denmark the marketing authorisation holder supplies the draft Danish translation of a DHPC letter together with the final English version. The Danish Medicines Agency quality-assures it, may return it if the translation quality is poor, and disseminates the final DHPC itself (Agency page updated 1 May 2024).",
+   "boundary": "A checklist that follows the Agency's page and GVP Module XV. The holder and its QPPV own the content, the timeline and the submission. GVP Module XV is not covered by the registered claim, so confirm against the live page before submitting."
+  },
+  "docs/ecoa-delivery-workbench.html": {
+   "claims": [],
+   "source_note": "the source register further down this page (the page records its sources as opened on 14 November 2026). Its regulatory dates are not yet in the ClinicOps claim registry.",
+   "answer": "Use it to plan an eCOA study by instrument and language: licences, translations, review and testing, risks and change control, kept in one workspace that you export yourself.",
+   "boundary": "A planning structure, not a compliance determination and not a system of record. Confirm every regulatory date in the source register at the source before relying on it."
+  },
+  "docs/coa-type-finder.html": {
+   "claims": [],
+   "source_note": "none needed: this tool applies no regulatory rule.",
+   "answer": "Answer four questions to sort a described assessment into patient-reported, observer-reported, clinician-reported or performance outcome, then list every assessment in the study to see what is missing before the specification is frozen.",
+   "boundary": "It sorts what you describe and flags gaps in your own entries. It does not choose an instrument, judge fitness for an endpoint or check a licence."
+  },
+  "docs/ecoa-lead-time-planner.html": {
+   "claims": [],
+   "source_note": "none needed: this tool applies no regulatory rule. Default durations are vendor and survey ranges, not regulatory figures.",
+   "answer": "Enter the instruments, the languages, the kick-off date and the date you need the first participant in. It shows the earliest date that holds, which version sets it, and what dropping one language from the first wave would save.",
+   "boundary": "A date calculator, not a forecast. Replace the default durations with the figures your own providers give you."
+  },
+  "docs/ecoa-visit-burden.html": {
+   "claims": [],
+   "source_note": "none needed: this tool applies no regulatory rule.",
+   "answer": "Enter how long each instrument takes and which visits and diaries use it. It adds up the minutes at each visit, in each study week and across the study, and shows where your own limits are exceeded.",
+   "boundary": "It adds up the minutes and items you enter. It does not know how long any instrument takes and does not say what burden is acceptable."
+  }
+ }
+}
