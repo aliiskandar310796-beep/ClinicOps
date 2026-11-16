@@ -225,7 +225,7 @@ def test_allowlist_format(tmp_path: Path) -> None:
 
 # The ceiling is the size of the committed baseline. Lowering it is the only
 # direction allowed: pages leave the allowlist when they gain claim-ids.
-ALLOWLIST_CEILING = 26
+ALLOWLIST_CEILING = 24
 ALLOWLIST = ROOT / "research" / "ungoverned_pages_allowlist.txt"
 
 
