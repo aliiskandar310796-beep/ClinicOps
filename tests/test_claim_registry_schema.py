@@ -200,7 +200,14 @@ def test_audit_script_reports_classes_and_exits_clean() -> None:
         env={"PYTHONPATH": str(ROOT / "src"), "PATH": ""},
     )
     assert result.returncode == 0, result.stdout + result.stderr
-    assert "Live claims by risk class: A=4, B=5, C=3, D=6, E=6" in result.stdout
+    # Expected counts are derived from the registry itself, so adding a claim does not edit this test.
+    import json
+    from collections import Counter
+
+    rows = [json.loads(line) for line in (ROOT / "research" / "claims.jsonl").read_text(encoding="utf-8").splitlines() if line.strip()]
+    live = Counter(r["risk_class"] for r in rows if not r["superseded_by"] and r["status"] in {"verified", "qualified"})
+    expected = ", ".join(f"{cls}={live[cls]}" for cls in sorted(live))
+    assert f"Live claims by risk class: {expected}" in result.stdout
     assert "0 errors" in result.stdout
 
 

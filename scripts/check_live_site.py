@@ -190,6 +190,7 @@ TARGETS = (
         404,
         "That page moved or never existed.",
     ),
+    Target("/.well-known/security.txt", 200, "Contact: mailto:info@clinicops.dk"),
 )
 
 

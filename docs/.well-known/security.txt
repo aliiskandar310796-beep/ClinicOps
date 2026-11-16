@@ -1,0 +1,5 @@
+Contact: mailto:info@clinicops.dk
+Expires: 2027-11-15T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://clinicops.dk/.well-known/security.txt
+Policy: https://clinicops.dk/contact
