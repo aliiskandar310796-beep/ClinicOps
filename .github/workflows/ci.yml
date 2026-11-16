@@ -65,6 +65,8 @@ jobs:
         run: python scripts/render_sitemap.py --check
       - name: Public shell drift contract
         run: python scripts/harmonize_public_shell.py --check
+      - name: Page stamps contract (Rules as of, Last verified, answer-first)
+        run: python scripts/render_page_stamps.py --check
       - name: llms.txt contract
         run: python scripts/render_llms_txt.py --check
       - name: Internal link contract
@@ -105,8 +107,8 @@ jobs:
         run: python scripts/audit_claim_registry.py
       - name: Claim reference integrity
         run: python scripts/audit_claim_references.py
-      - name: Governed content claim validation
-        run: python scripts/validate_content_claims.py website
+      - name: Governed content claim validation (website markdown and served html/js)
+        run: python scripts/validate_content_claims.py
       - name: Sanitized report fixture
         run: python scripts/render_examples.py --check
       - name: Public-copy claim gate

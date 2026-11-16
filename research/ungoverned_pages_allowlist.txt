@@ -1,0 +1,32 @@
+# Pages that name a regulation or guidance set but declare no claim-ids (lens 29 ratchet).
+# Format: docs/<page>.html | reason
+# This list can only shrink: tests/test_page_claim_gate.py fails on a page that is
+# flagged and missing here, on a stale entry, and on growth past ALLOWLIST_CEILING.
+# Remove a line when the page declares claim-ids (and add them to the registry first).
+# Baseline written 2026-11-16 (registry-stamps).
+docs/assessment-intake.html | names EUDAMED as a workstream label; not yet reviewed for rule statements (backlog)
+docs/authorised-representative-portfolio-intelligence.html | names EUDAMED in service copy; not yet reviewed for rule statements (backlog)
+docs/change-surface-mapper.html | none-stated tool (reviewed 2026-11-16): names registries as change surfaces, applies no rule
+docs/coa-nordic.html | mentions the clinical trials regulation in a source table; not yet reviewed (backlog)
+docs/coa-types.html | names FDA and ICH guidance in definitions; states rules without registry claims (backlog)
+docs/contact.html | names EUDAMED and MDR as topics a reader may write about; states no rule
+docs/danish-pv-literature-register.html | tool quotes GVP Module VI; unregistered, shown as not stamped (backlog: register after reading GVP VI)
+docs/denmark-market-access.html | states Danish and EU rules without registry claims (backlog, Denmark hub)
+docs/ecoa-delivery-workbench.html | source register lists EMA, ICH and FDA dates not in the registry; shown as not stamped (backlog)
+docs/ecoa.html | names CTIS in section copy; not yet reviewed for rule statements (backlog)
+docs/eu-authorised-representative.html | states authorised-representative rules without registry claims (backlog)
+docs/evidence-change-control-pack.html | names EUDAMED in offer copy; not yet reviewed for rule statements (backlog)
+docs/evidence-pack-checklist.html | names EUDAMED in checklist copy; not yet reviewed for rule statements (backlog)
+docs/expert-network.html | names EUDAMED as an expertise area; states no rule
+docs/integrity-check.html | none-stated tool (reviewed 2026-11-16): names EUDAMED as an example record source, applies no rule
+docs/integrity-economics.html | archived tool, no longer listed; names EUDAMED; retire or govern
+docs/primary-sources.html | source list that links regulators by name; states no figure of its own (backlog)
+docs/privacy-notice/index.html | names EUDAMED among public sources of data; privacy copy is owned elsewhere
+docs/regulatory-change-impact.html | archived tool, no longer listed; names MDR, IVDR and MDCG; retire or govern
+docs/services.html | names EUDAMED and MDR in service copy; not yet reviewed for rule statements (backlog)
+docs/specimen-register/index.html | synthetic specimen; names EUDAMED as the register type; states no rule
+docs/technical-file-consistency.html | none-stated tool (reviewed 2026-11-16): MDR and IVDR are framework labels, applies no rule
+docs/tools.html | tool index; link text names CTIS, GVP and an implementing regulation; states no figure
+docs/transition-map-sample/index.html | synthetic sample map; names EUDAMED and MDR; states no rule
+docs/use-cases.html | names EUDAMED and MDR in use-case copy; not yet reviewed for rule statements (backlog)
+docs/what-a-pilot-looks-like.html | names EUDAMED in pilot copy; not yet reviewed for rule statements (backlog)
