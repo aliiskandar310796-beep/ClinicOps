@@ -114,6 +114,7 @@ ol#queue{padding-left:1.3rem;max-width:42.43em}#queue li{margin:.5em 0}
 #grid.tabulator .tabulator-footer .tabulator-page:disabled{opacity:.45}
 #grid.tabulator .tabulator-placeholder span{color:var(--muted);font-family:var(--font);font-size:.95rem;font-weight:450}
 @media print{.mode,.actions,#wb_toolbar,#grid{display:none!important}#plainwrap[hidden]{display:block!important}.tablewrap{overflow:visible}.tablewrap table{min-width:0;width:100%;table-layout:fixed;font-size:8pt}.tablewrap td,.tablewrap th{overflow-wrap:anywhere}.tablewrap .st{white-space:normal}.tablewrap th,.tablewrap td{padding-right:6px}thead{display:table-header-group}.principles,.grid{break-inside:avoid}}
+.idc-embed{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;max-width:760px;margin:12px 0}.idc-embed input{min-height:48px;font-family:var(--mono)}.idc-embed button{min-height:48px}.idc-embed pre{grid-column:1/-1;margin:6px 0 0;min-height:120px;white-space:pre-wrap}@media(max-width:560px){.idc-embed{grid-template-columns:1fr}}
 </style>
 <link rel="preload" href="assets/fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/fonts/ibm-plex-mono-latin-400.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="site.css"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f6f3ec" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0f1517" media="(prefers-color-scheme: dark)"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://clinicops.dk/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://clinicops.dk/tools"},{"@type":"ListItem","position":3,"name":"Regulatory Integrity Scanner","item":"https://clinicops.dk/integrity-scanner"}]}</script>
 </head>
@@ -189,6 +190,10 @@ ol#queue{padding-left:1.3rem;max-width:42.43em}#queue li{margin:.5em 0}
 
 <div class="principles"><div class="principle"><strong>Deterministic</strong><span>Identical inputs always produce identical statuses and queues. No scoring model, no inference, no black-box number.</span></div><div class="principle"><strong>Fail-closed</strong><span>No reference means no interpretation. An empty observation is missing evidence, never an invented conclusion. Unknown vocabulary routes to qualified review.</span></div><div class="principle"><strong>Human-owned</strong><span>Every exception carries an owner and a bounded next action. Which value is correct — and whether it matters — is your qualified reviewer's decision.</span></div></div>
 
+<section id="identifier-check" aria-labelledby="idc-h"><h2 id="idc-h">Check one identifier</h2>
+<p>Paste a Basic UDI-DI, a UDI-DI candidate or an SRN to read its structure: prefix shape, actor role, check digit. This runs in your browser and nothing is sent. It is a screening aid, not a live EUDAMED lookup and not regulatory advice.</p>
+<div class="idc-embed"><label for="idc-value" class="sr-only">Identifier to check</label><input id="idc-value" name="identifier" type="text" inputmode="text" autocomplete="off" autocapitalize="characters" autocorrect="off" spellcheck="false" enterkeyhint="go" placeholder="e.g. B-... or DK-MF-123456789"><button id="idc-check" type="button" class="btn secondary">Check identifier</button><pre id="idc-result" aria-live="polite">No identifier checked yet.</pre></div>
+<p class="small muted">Can: recognise a B-prefix as a legacy-style signal, decode the role in a common SRN shape (MF, AR, IM, PR), check numeric GS1 Mod-10 digits. Cannot: prove current status, show that an actor is active or responsible for a device, or say what the live register shows.</p></section>
 <h2>From free scan to reviewed closure</h2><p>The scanner does the first pass. What it leaves behind &mdash; reconciliation across systems, unclear ownership, records that no longer match their sources &mdash; is what the paid formats close: the <a href="services#portfolio-scan">Portfolio Integrity Scan</a> and the <a href="evidence-change-control-pack">Regulatory Change Integrity Review</a>.</p>
 <div class="cta-row"><a class="cta primary" href="assessment-intake?workstream=integrity-review">Scope a review</a></div>
 <p class="cta-links"><a href="integrity-check">Build a single-change evidence packet</a><a href="change-surface-mapper">Map a change&rsquo;s surfaces first</a><a href="mailto:info@clinicops.dk?subject=Regulatory%20Integrity%20Scanner">Email info@clinicops.dk</a></p>
@@ -196,6 +201,6 @@ ol#queue{padding-left:1.3rem;max-width:42.43em}#queue li{margin:.5em 0}
 </main>
 <footer class="site"><div class="footer-inner"><span>ClinicOps · EU MedTech regulatory data integrity · <a href="privacy-notice/">Privacy</a></span></div><div class="footer-inner"><span>ClinicOps is not a notified body or a competent authority, and does not replace your RA/QA team, RIM, QMS, PLM or ERP.</span></div></footer>
 <script src="assets/reconciliation.js" defer></script>
-<script src="assets/integrity-scanner.js" defer></script>
+<script src="assets/integrity-scanner.js" defer></script><script src="assets/identifier-check.js" defer></script>
 </body>
 </html>
