@@ -310,10 +310,12 @@ def build_xlsx(sheets: list[Sheet], *, title: str, subject: str, description: st
     parts.extend((f"xl/worksheets/sheet{i}.xml", sheet_xml(s)) for i, s in enumerate(sheets, start=1))
 
     buffer = io.BytesIO()
-    with zipfile.ZipFile(buffer, "w", zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
+    # ZIP_STORED, not DEFLATED: deflate output varies with the zlib build, so a committed
+    # file built on one Python would differ byte-for-byte from the same build on another.
+    with zipfile.ZipFile(buffer, "w", zipfile.ZIP_STORED) as archive:
         for name, text in parts:
             info = zipfile.ZipInfo(name, date_time=(2026, 11, 16, 0, 0, 0))
-            info.compress_type = zipfile.ZIP_DEFLATED
+            info.compress_type = zipfile.ZIP_STORED
             info.external_attr = 0o644 << 16
             info.create_system = 3
             archive.writestr(info, text.encode("utf-8"))

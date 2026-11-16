@@ -97,7 +97,8 @@ def test_every_public_page_carries_a_hash_based_csp_and_no_referrer_policy() -> 
 def test_csp_hashes_match_the_script_text_exactly() -> None:
     """A hash only helps if it is computed over the bytes the browser parses."""
     for page in _pages():
-        assert "\r" not in page.read_text(encoding="utf-8", newline=""), page.name
+        # read_bytes: Path.read_text(newline=) only exists from Python 3.13; CI runs 3.12.
+        assert b"\r" not in page.read_bytes(), page.name
 
 
 def test_harmonizer_tool_list_is_the_twelve_listed_tools() -> None:
