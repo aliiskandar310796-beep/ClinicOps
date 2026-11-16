@@ -50,15 +50,20 @@ def test_public_termbase_file_is_valid_and_matches_expected_state() -> None:
     definition -- plus 26 new `verified` rows for definitions (1)-(35) not
     already covered by a seed. See data/termbase/README.md for the schema
     and provenance rules this file must keep satisfying as later slices
-    (Art. 2(36)-(71) and beyond) are added; update the expected counts below
-    together with any future change to this file.
+    are added; update the expected counts below together with any future
+    change to this file.
+
+    2026-10-04 t0-termbase Sunday PR: adds TB-0049..TB-0085 from the
+    2026-09-29 run -- MDR 2017/745 Art. 2(36)-(71) not covered by earlier
+    rows (28 `verified`), the 'UDI' abbreviation from (15) (`verified`,
+    synonym-of:TB-0033) and 8 within-definition sub-terms (`candidate`).
     """
     assert validate(PUBLIC) == []
     rows = read_rows(PUBLIC)
-    assert len(rows) == 48
+    assert len(rows) == 85
     assert Counter(r["status"] for r in rows) == {
-        "verified": 44,
-        "candidate": 3,
+        "verified": 73,
+        "candidate": 11,
         "unverified-seed": 1,
     }
     assert all(r["domain"] == "regulatory" for r in rows)
