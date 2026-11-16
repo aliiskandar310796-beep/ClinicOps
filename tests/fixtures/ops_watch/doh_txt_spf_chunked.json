@@ -1,0 +1,3 @@
+{"Status":0,"Answer":[
+ {"name":"clinicops.dk.","type":16,"TTL":3600,"data":"\"v=spf1 include:spf.protection.outlook.com \" \"-all\""},
+ {"name":"clinicops.dk.","type":16,"TTL":3600,"data":"MS=ms00000000"}]}

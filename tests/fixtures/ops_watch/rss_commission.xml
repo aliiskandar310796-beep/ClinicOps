@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"><channel><title>Fixture feed A</title>
+<item><title>Fixture item one</title><link>https://example.test/a/1</link><guid isPermaLink="false">a-1</guid><pubDate>Mon, 09 Nov 2026 09:00:00 +0100</pubDate></item>
+<item><title>Fixture item two</title><link>https://example.test/a/2</link><guid isPermaLink="false">a-2</guid><pubDate>Tue, 10 Nov 2026 09:00:00 +0100</pubDate></item>
+<item><title>Fixture item three</title><link>https://example.test/a/3</link><pubDate>Wed, 11 Nov 2026 09:00:00 +0100</pubDate></item>
+</channel></rss>

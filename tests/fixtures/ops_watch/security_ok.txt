@@ -1,0 +1,4 @@
+# fixture
+Contact: mailto:security@example.test
+Expires: 2027-06-01T00:00:00Z
+Canonical: https://example.test/.well-known/security.txt
