@@ -87,3 +87,13 @@ def test_auto_reply_document_exists_and_matches_the_site_commitment() -> None:
     assert "tre hverdage" in doc
     assert "CM-01" in doc and "CM-05" in doc
     assert "Please do not send patient-identifiable data or confidential files by email" in doc
+
+
+def test_research_page_has_the_question_block_and_a_corrections_line() -> None:
+    html = _read("research.html")
+    assert 'id="ask"' in html
+    assert re.search(r'href="mailto:support@clinicops\.dk\?subject=Question%3A%20[^"]*"', html)
+    assert 'href="mailto:support@clinicops.dk?subject=Correction%3A%20"' in html
+    assert "logged in the open" in html
+    # the older address-only line is gone; corrections now go to support@
+    assert "If you find an error, write to info@clinicops.dk" not in html
