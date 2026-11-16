@@ -136,7 +136,7 @@ def main() -> int:
     about = (DOCS / "about.html").read_text(encoding="utf-8")
     # Decision 2026-11-14: the public structure is independent of any individual.
     # Identity is shown only where a law or registry requires it.
-    allowed_identity = {"privacy-notice/index.html", "eu-authorised-representative.html"}
+    allowed_identity = {"privacy-notice/index.html"}
     for page in pages():
         rel = page.relative_to(DOCS).as_posix()
         if rel in allowed_identity:
