@@ -34,7 +34,7 @@ TARGETS = (
     Target(
         "/denmark-market-access",
         200,
-        "<title>Denmark Market Access | ClinicOps</title>",
+        "<title>Denmark Reference: Clinical Trial and Device Study Routes | ClinicOps</title>",
     ),
     Target(
         "/integrity-gate",

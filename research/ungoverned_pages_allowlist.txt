@@ -11,7 +11,6 @@ docs/coa-nordic.html | mentions the clinical trials regulation in a source table
 docs/coa-types.html | names FDA and ICH guidance in definitions; states rules without registry claims (backlog)
 docs/contact.html | names EUDAMED and MDR as topics a reader may write about; states no rule
 docs/danish-pv-literature-register.html | tool quotes GVP Module VI; unregistered, shown as not stamped (backlog: register after reading GVP VI)
-docs/denmark-market-access.html | states Danish and EU rules without registry claims (backlog, Denmark hub)
 docs/ecoa-delivery-workbench.html | source register lists EMA, ICH and FDA dates not in the registry; shown as not stamped (backlog)
 docs/ecoa.html | names CTIS in section copy; not yet reviewed for rule statements (backlog)
 docs/eu-authorised-representative.html | states authorised-representative rules without registry claims (backlog)
