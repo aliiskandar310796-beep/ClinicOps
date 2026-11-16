@@ -174,7 +174,23 @@
     return errs;
   }
 
-  const api = {VERSION, SCHEMA, DEFAULTS, SCENARIOS, pert, pick, isoDate, addWeeks, weeksBetween, productWeeks, resolve, plan, toCSV, toScenariosCSV, toICS, csvCell, validateWorkspace};
+  /* Share-safe summary: counts, weeks and the constraining step only. It carries no instrument name, language name,
+     date or note, so it can go into a question or a brief without disclosing the study. */
+  function shareSummary(result) {
+    if (!result || !result.scenarios || !result.scenarios.expected) return '';
+    const distinct = key => new Set(result.products.map(p => String(p[key] || '').trim().toLowerCase()).filter(Boolean)).size;
+    const x = result.scenarios;
+    const slow = result.products.find(p => p.critical);
+    return [
+      'ClinicOps share-safe summary (eCOA lead-time planner)',
+      'Rows: ' + result.products.length + ' instrument-language versions, ' + distinct('instrument') + ' instruments, ' + distinct('language') + ' languages',
+      'Weeks from kick-off to ready (optimistic / expected / pessimistic): ' + SCENARIOS.map(s => r1(x[s].weeks)).join(' / '),
+      'Expected case is set by: ' + x.expected.set_by + '; against the target: ' + x.expected.status,
+      slow ? 'Slowest version is held up by: ' + slow.driver : 'Slowest version: not identified',
+      'No instrument names, language names, dates or notes are included.'
+    ].join('\n');
+  }
+  const api = {VERSION, SCHEMA, DEFAULTS, SCENARIOS, pert, pick, isoDate, addWeeks, weeksBetween, productWeeks, resolve, plan, toCSV, toScenariosCSV, toICS, csvCell, validateWorkspace, shareSummary};
   if (typeof module === 'object' && module.exports) module.exports = api;
   else root.ClinicOpsLeadTime = api;
 })(typeof globalThis === 'object' ? globalThis : this);

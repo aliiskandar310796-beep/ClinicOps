@@ -143,6 +143,12 @@
     if (!lastResult) { say('Enter a kick-off date and at least one row first.'); return; }
     download('lead-time-plan.ics', L.toICS(lastResult, new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z'), 'text/calendar'); say('Calendar file downloaded. Dates are all-day events.');
   });
+  $('export-share').addEventListener('click', async () => {
+    if (!lastResult) { say('Enter a kick-off date and at least one row first.'); return; }
+    const text = L.shareSummary(lastResult);
+    try { await navigator.clipboard.writeText(text); say('Share-safe summary copied: counts and weeks only, no names or dates. Paste it into a question or a scope brief. Nothing has been sent.'); }
+    catch (err) { say('Copy was blocked by the browser. Select and copy this instead: ' + text.replace(/\n/g, ' ')); }
+  });
   $('export-json').addEventListener('click', () => {
     download('lead-time-plan.json', JSON.stringify({schema: L.SCHEMA, kickoff: $('kickoff').value, target: $('target').value, durations, products}, null, 2), 'application/json'); say('Workspace file downloaded.');
   });

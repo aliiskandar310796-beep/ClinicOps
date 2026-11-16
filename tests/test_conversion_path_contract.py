@@ -164,3 +164,26 @@ def test_footer_imprint_slot_exists_and_stays_empty_until_d1_is_decided() -> Non
     assert module.FOOTER_IMPRINT_LINE == ""
     for page in DOCS.rglob("*.html"):
         assert "data-imprint" not in page.read_text(encoding="utf-8"), page.name
+
+
+def test_share_safe_summary_buttons_exist_on_scanner_and_planner_and_stay_local() -> None:
+    scanner = _read("integrity-scanner.html")
+    planner = _read("ecoa-lead-time-planner.html")
+    assert 'id="x_share"' in scanner and "Copy share-safe summary" in scanner
+    assert 'id="export-share"' in planner and "Copy share-safe summary" in planner
+    scanner_js = (DOCS / "assets" / "integrity-scanner.js").read_text(encoding="utf-8")
+    planner_js = (DOCS / "assets" / "coa-leadtime.js").read_text(encoding="utf-8")
+    assert "RE.shareSummary(" in scanner_js and "L.shareSummary(" in planner_js
+    # The planner keeps its "no browser storage" promise: copy only, no handoff write.
+    assert "sessionStorage" not in planner_js and "localStorage" not in planner_js
+    # The scanner's only storage remains the mapping profiles (also pinned in the privacy contract).
+    assert "clinicops.handoff" not in scanner_js
+
+
+def test_mapper_writes_the_generalised_handoff_the_intake_reads() -> None:
+    mapper = _read("change-surface-mapper.html")
+    intake = _read("assessment-intake.html")
+    assert 'sessionStorage.setItem("clinicops.handoff"' in mapper
+    assert "clinicops.changeSurface.handoff" not in mapper + intake
+    assert 'tool:"Change Surface Mapper"' in mapper
+    assert 'HANDOFF_KEY="clinicops.handoff"' in intake
