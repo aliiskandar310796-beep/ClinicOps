@@ -97,3 +97,70 @@ def test_research_page_has_the_question_block_and_a_corrections_line() -> None:
     assert "logged in the open" in html
     # the older address-only line is gone; corrections now go to support@
     assert "If you find an error, write to info@clinicops.dk" not in html
+
+
+def _listed_tools() -> set[str]:
+    from test_wp07_tool_shelf import _listed_tools as listed
+
+    return listed()
+
+
+NEXT_STEP_RE = re.compile(r"<!-- next-step:start -->(.*?)<!-- next-step:end -->", re.DOTALL)
+
+
+def test_every_listed_tool_ends_with_one_static_next_step_block() -> None:
+    tools = _listed_tools()
+    assert len(tools) == 12
+    for slug in sorted(tools):
+        html = _read(f"{slug}.html")
+        blocks = NEXT_STEP_RE.findall(html)
+        assert len(blocks) == 1, slug
+        block = blocks[0]
+        assert "What to do with this result" in block, slug
+        # static HTML: the block adds no script, form, fetch or storage
+        for token in ("<script", "<form", "fetch(", "localstorage", "sessionstorage", "onclick"):
+            assert token not in block.lower(), (slug, token)
+        # exactly one ClinicOps offer: a question to support@, no call booking, no urgency
+        assert block.count("mailto:support@clinicops.dk?subject=Question%3A%20") == 1, slug
+        assert "mailto:info@" not in block, slug
+        for phrase in BANNED_PUBLIC_PHRASES + ("urgent", "limited time", "download the full report"):
+            assert phrase not in block.lower(), (slug, phrase)
+        # the block sits inside <main>, above the footer
+        assert html.index("<!-- next-step:end -->") < html.index("</main>"), slug
+        neighbour = re.search(r'<li>Next: <a href="([a-z0-9-]+)">', block).group(1)
+        assert (DOCS / f"{neighbour}.html").is_file(), (slug, neighbour)
+        assert neighbour != slug, slug
+
+
+def test_next_step_block_comes_from_the_harmonizer_not_from_hand_edits() -> None:
+    import subprocess
+    import sys
+
+    result = subprocess.run(
+        [sys.executable, str(ROOT / "scripts" / "harmonize_public_shell.py"), "--check"],
+        cwd=ROOT,
+        capture_output=True,
+        text=True,
+        check=False,
+        env={"PYTHONPATH": str(ROOT / "src"), "PATH": ""},
+    )
+    assert result.returncode == 0, result.stdout + result.stderr
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location("harmonize", ROOT / "scripts" / "harmonize_public_shell.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    assert {f"{slug}.html" for slug in _listed_tools()} == set(module.NEXT_STEP_BY_PAGE)
+
+
+def test_footer_imprint_slot_exists_and_stays_empty_until_d1_is_decided() -> None:
+    """D1 (domicile, tax ID) is open. The slot is documented and empty; no page
+    may show an imprint, and no test requires one to be visible."""
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location("harmonize", ROOT / "scripts" / "harmonize_public_shell.py")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    assert module.FOOTER_IMPRINT_LINE == ""
+    for page in DOCS.rglob("*.html"):
+        assert "data-imprint" not in page.read_text(encoding="utf-8"), page.name

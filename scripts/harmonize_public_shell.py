@@ -6,6 +6,7 @@ import json
 import os
 import re
 from pathlib import Path
+from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
@@ -231,15 +232,165 @@ def _ensure_footer_boundary(text: str) -> str:
     return text[:start] + footer_block + text[end:]
 
 
+# Legal-identification (imprint) line for the shared footer. EMPTY BY DEFAULT.
+#
+# Decision D1 (publish a registered business domicile and tax ID, or take the
+# adviser's written view that "on request" is enough) is still open, so nothing
+# is published. When D1 is decided, set this ONE string to the exact line the
+# adviser approves and re-run this script: it is added to every standard footer
+# inside a marked <div> and replaced or removed if the value later changes.
+# Nothing in the test suite requires it to be visible; a test only requires
+# that it stays empty until D1 is recorded.
+FOOTER_IMPRINT_LINE = ""
+FOOTER_IMPRINT_RE = re.compile(r'<div class="footer-inner" data-imprint>.*?</div>', re.DOTALL)
+
+# "What to do with this result" block on the twelve listed tool pages (lens 19,
+# section 5). Static HTML, no script. One config row per page keeps the block
+# identical in position and shape everywhere and lets it be regenerated instead
+# of hand-edited. Each row: result-specific line, neighbouring page
+# (href, label), question subject, offer the share-safe summary button.
+# Copy rules: no claim about any named party, no urgency, no "book a call".
+NEXT_STEP_START = "<!-- next-step:start -->"
+NEXT_STEP_END = "<!-- next-step:end -->"
+NEXT_STEP_RE = re.compile(re.escape(NEXT_STEP_START) + r".*?" + re.escape(NEXT_STEP_END), re.DOTALL)
+NEXT_STEP_BY_PAGE = {
+    "integrity-scanner.html": (
+        "Exceptions are signals to check, not findings. Assign an owner to each before anything is changed.",
+        ("change-surface-mapper", "Change Surface Mapper"),
+        "Regulatory Integrity Scanner",
+        True,
+    ),
+    "integrity-check.html": (
+        "Keep the evidence JSON and its fingerprint with the change record. If you ask a question, send only the fingerprint and counts.",
+        ("integrity-scanner", "Regulatory Integrity Scanner"),
+        "Regulatory Change Integrity Check",
+        False,
+    ),
+    "change-surface-mapper.html": (
+        "Take the list to your regulatory owner before the next change meeting.",
+        ("integrity-check", "Regulatory Change Integrity Check"),
+        "Change Surface Mapper",
+        False,
+    ),
+    "technical-file-consistency.html": (
+        "A difference is a question for the document owner, not a finding about the document.",
+        ("integrity-scanner", "Regulatory Integrity Scanner"),
+        "Technical File Consistency Check",
+        False,
+    ),
+    "ecoa-delivery-workbench.html": (
+        "Export the workspace file to keep your work. The open items on your plan are the ones to move first.",
+        ("ecoa-lead-time-planner", "eCOA lead-time planner"),
+        "eCOA delivery workbench",
+        False,
+    ),
+    "coa-type-finder.html": (
+        "The inventory is the input to the licence and translation plan.",
+        ("ecoa-lead-time-planner", "eCOA lead-time planner"),
+        "COA type finder",
+        False,
+    ),
+    "ecoa-lead-time-planner.html": (
+        "The language version that is ready last sets the earliest start date in this plan. Confirm its licence and translation dates first.",
+        ("ecoa-delivery-workbench", "eCOA delivery workbench"),
+        "eCOA lead-time planner",
+        True,
+    ),
+    "ecoa-visit-burden.html": (
+        "Check the figure against the protocol schedule.",
+        ("ecoa-delivery-workbench", "eCOA delivery workbench"),
+        "Visit and diary burden estimator",
+        False,
+    ),
+    "ctis-clock.html": (
+        "This is a planning aid. Check the current EMA handbook for your submission.",
+        ("ecoa-delivery-workbench", "eCOA delivery workbench"),
+        "CTIS initial application clock",
+        False,
+    ),
+    "danish-dhpc-checker.html": (
+        "Confirm the current process with the competent authority before you submit.",
+        ("danish-pv-literature-register", "Danish local-literature source register"),
+        "Danish DHPC submission checker",
+        False,
+    ),
+    "sdea-clause-checker.html": (
+        "Take the missing-clause list to whoever signs the agreement.",
+        ("danish-dhpc-checker", "Danish DHPC submission checker"),
+        "SDEA clause checker",
+        False,
+    ),
+    "danish-pv-literature-register.html": (
+        "Check each entry against its source before you rely on it.",
+        ("sdea-clause-checker", "SDEA / PV agreement clause checker"),
+        "Danish local-literature source register",
+        False,
+    ),
+}
+
+
+def _next_step_block(relative: str) -> str:
+    line, (href, label), subject, share = NEXT_STEP_BY_PAGE[relative]
+    ask = f"mailto:support@clinicops.dk?subject={quote('Question: ' + subject)}"
+    summary = (
+        " Use <em>Copy share-safe summary</em> above to share counts and rule names with no values."
+        if share
+        else ""
+    )
+    return (
+        f"{NEXT_STEP_START}"
+        '<section class="next-step" aria-labelledby="next-step-h"><h2 id="next-step-h">What to do with this result</h2><ol>'
+        f"<li>{html.escape(line, quote=False)}</li>"
+        f'<li>Next: <a href="{href}">{html.escape(label, quote=False)}</a>.</li>'
+        "<li>If you want a second pair of eyes, send a question that contains no identifiers: "
+        f'<a href="{html.escape(ask)}">Ask a question</a> '
+        f'(<a href="contact#ask">template</a>).{summary} Nothing leaves your browser until you send it.</li>'
+        f"</ol></section>{NEXT_STEP_END}"
+    )
+
+
+def _ensure_next_step(relative: str, text: str) -> str:
+    """Insert (or refresh) the next-step block just before the closing </main>.
+    Pages not in NEXT_STEP_BY_PAGE are left alone; a stray block is removed."""
+    block = _next_step_block(relative) if relative in NEXT_STEP_BY_PAGE else ""
+    if NEXT_STEP_RE.search(text):
+        return NEXT_STEP_RE.sub(lambda _: block, text, count=1)
+    if not block:
+        return text
+    index = text.rfind("</main>")
+    if index == -1:
+        raise ValueError(f"{relative}: tool page has no </main> for the next-step block")
+    return text[:index] + block + "\n" + text[index:]
+
+
+def _ensure_footer_imprint(text: str) -> str:
+    """Add, refresh or remove the optional imprint line (see FOOTER_IMPRINT_LINE)."""
+    match = FOOTER_RE.search(text)
+    if not match:
+        return text
+    footer = match.group(0)
+    line = (
+        f'<div class="footer-inner" data-imprint><span>{html.escape(FOOTER_IMPRINT_LINE, quote=False)}</span></div>'
+        if FOOTER_IMPRINT_LINE
+        else ""
+    )
+    if FOOTER_IMPRINT_RE.search(footer):
+        footer = FOOTER_IMPRINT_RE.sub(lambda _: line, footer, count=1)
+    elif line:
+        footer = FOOTER_CLOSE_RE.sub(f"{line}</footer>", footer, count=1)
+    return text[: match.start()] + footer + text[match.end() :]
+
+
 def transform(page: Path, text: str) -> str:
     relative = page.relative_to(DOCS).as_posix()
     text = sync_meta_consistency(text)
     if relative in EXCLUDED:
-        return _ensure_footer_boundary(text)
+        return _ensure_footer_imprint(_ensure_footer_boundary(text))
     if not HEADER_RE.search(text):
         raise ValueError(f"{relative}: public page has no replaceable <header>")
     transformed = HEADER_RE.sub(_header(page), text, count=1)
-    transformed = _ensure_footer_boundary(transformed)
+    transformed = _ensure_footer_imprint(_ensure_footer_boundary(transformed))
+    transformed = _ensure_next_step(relative, transformed)
     if "skip-link" not in transformed:
         transformed = transformed.replace(
             '<header class="site"',
