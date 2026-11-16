@@ -60,6 +60,10 @@ jobs:
         run: python scripts/validate_professional_claims.py
       - name: Sitemap contract
         run: python scripts/render_sitemap.py --check
+      - name: Atom feed contract
+        run: python scripts/render_feed.py --check
+      - name: Regulatory-dates calendar contract
+        run: python scripts/render_ics.py --check
       - name: Public shell drift contract
         run: python scripts/harmonize_public_shell.py --check
       - name: llms.txt contract

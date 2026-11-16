@@ -33,6 +33,9 @@ SHELL_HEAD = (
     '<meta name="color-scheme" content="light dark">'
     '<meta name="theme-color" content="#f6f3ec" media="(prefers-color-scheme: light)">'
     '<meta name="theme-color" content="#0f1517" media="(prefers-color-scheme: dark)">'
+    # Feed autodiscovery; keep identical to harmonize_public_shell.FEED_LINK.
+    '<link rel="alternate" type="application/atom+xml" title="ClinicOps verified changes" '
+    'href="https://clinicops.dk/feed.xml">'
 )
 SHELL_HEADER = (
     '<a class="skip-link" href="#main">Skip to content</a>'

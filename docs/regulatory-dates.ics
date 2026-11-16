@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//ClinicOps//Regulatory dates//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:ClinicOps regulatory dates
+X-WR-CALDESC:Dates from the ClinicOps claims registry that have been read a
+ t source. Dates are shown as stated in the source\, with no weekend roll-f
+ orward. Not legal advice: check the instrument for your own devices or tri
+ als. No dates are listed yet.
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+END:VCALENDAR
