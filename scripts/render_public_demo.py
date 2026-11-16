@@ -37,9 +37,10 @@ SHELL_HEAD = (
 SHELL_HEADER = (
     '<a class="skip-link" href="#main">Skip to content</a>'
     '<header class="site"><div class="site-inner"><a class="brand" href="../">Clinic<span>Ops</span></a>'
-    '<nav class="primary" aria-label="Primary"><a href="../">Home</a><a href="../ecoa">eCOA</a>'
-    '<a href="../services">Medical devices</a><a href="../denmark-market-access">Danish &amp; PV</a>'
-    '<a href="../tools" aria-current="page">Tools</a><a href="../about">About</a>'
+    '<nav class="primary" aria-label="Primary"><a href="../">Home</a>'
+    '<a href="../services">Medical devices</a><a href="../ecoa">Clinical operations</a>'
+    '<a href="../tools" aria-current="page">Tools</a><a href="../research">Research</a>'
+    '<a href="../about">About</a>'
     '<a href="../contact">Contact</a></nav></div></header>'
     '<script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");'
     'var r=a?a.offsetLeft+a.offsetWidth+16-n.clientWidth:0;if(r>0)n.scrollLeft=r})()</script>\n'

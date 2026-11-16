@@ -37,17 +37,17 @@ CANONICAL_CATEGORY = "EU MedTech regulatory data integrity"
 CONTACT_EMAIL = "info@clinicops.dk"
 
 # --- the homepage's single story -------------------------------------------
-# Amended 2026-11-14 on the owner's instruction (see
-# 01_STRATEGY/SITE_PROJECT_PID_2026-11-14.md): the front door is Danish clinical
-# operations support with three lanes; inner pages keep the MedTech integrity
-# identity.
-HOMEPAGE_CATEGORY = "Clinical operations support from Denmark"
-HOMEPAGE_H1 = "Clinical operations support from Denmark."
+# Amended 2026-11-16 (decision record, D-1): two doors (clinical studies, medical
+# devices) with the Danish layer running through both; the operator works from
+# Spain, so the headline no longer says "from Denmark". Inner pages keep the
+# MedTech integrity identity.
+HOMEPAGE_CATEGORY = "Clinical and device operations support for Denmark and the EU"
+HOMEPAGE_H1 = "Clinical and device operations support for Denmark and the EU."
 PRIMARY_CTAS = (">Open the eCOA workbench</a>", ">Describe your project</a>")
 
 # --- page identity ----------------------------------------------------------
 PINNED_TITLES = {
-    "index.html": "ClinicOps | Clinical operations support from Denmark",
+    "index.html": "ClinicOps | Clinical and device operations support for Denmark and the EU",
     "services.html": "Solution: Regulatory Change Integrity Review | ClinicOps",
     "use-cases.html": "Use Cases: EUDAMED, SS(C)P, AR Portfolios, Denmark | ClinicOps",
     "tools.html": "Tools: Integrity Scanner and Evidence Utilities | ClinicOps",

@@ -1,8 +1,7 @@
 """Positioning contract (2026-09-18 repositioning, homepage amended 2026-11-14).
 
 The public site's inner pages stay on EU MedTech Regulatory Data Integrity; the
-homepage presents the three lanes under Danish clinical operations (amended
-2026-11-14 on the owner's instruction).
+homepage presents two doors with a Danish layer (amended 2026-11-16, D-1).
 These tests pin the repositioning so a later edit cannot quietly re-broaden
 the public architecture or reintroduce banned claim language. Source of
 truth: 01_STRATEGY/POSITIONING_2026-09-18_REGULATORY_DATA_INTEGRITY.md.
@@ -39,17 +38,22 @@ def _pages() -> list[Path]:
     return [p for p in DOCS.glob("*.html") if p.name not in {"404.html", "clinical-operations.html"}]
 
 
-def test_homepage_states_the_umbrella_and_three_lanes() -> None:
+def test_homepage_states_the_umbrella_and_two_doors() -> None:
     """Homepage reframed 2026-11-14 on the owner's instruction: the front door
     is Danish clinical operations support, with three plainly named lanes. The
     MedTech data-integrity lane stays the best-evidenced one and keeps its
     flagship pages; see 01_STRATEGY/SITE_PROJECT_PID_2026-11-14.md."""
     html = (DOCS / "index.html").read_text(encoding="utf-8")
-    assert "<title>ClinicOps | Clinical operations support from Denmark</title>" in html
+    assert "<title>ClinicOps | Clinical and device operations support for Denmark and the EU</title>" in html
     assert html.count("<h1") == 1
-    assert "Clinical operations support from Denmark." in html
+    assert "Clinical and device operations support for Denmark and the EU." in html
+    assert "from Denmark" not in html
     for lane in ("eCOA and patient-reported outcomes", "Medical device records", "Danish language and pharmacovigilance"):
         assert lane in html, lane
+    # two doors in the hero, Danish is a layer and not a third door
+    hero = html.split('<nav class="doors"', 1)[1].split("</nav>", 1)[0]
+    assert hero.count('class="door"') == 2
+    assert 'data-seg="dk"' not in hero
     # eCOA is visible in the hero, the lanes and the tool list
     assert html.index('href="ecoa-delivery-workbench"') < html.index("Medical device records")
     assert html.count('href="ecoa-delivery-workbench"') >= 3
@@ -68,7 +72,8 @@ def test_primary_navigation_is_simplified() -> None:
     assert nav
     links = re.findall(r"<a ", nav.group(0))
     assert len(links) <= 7, "primary navigation grew beyond 7 items"
-    for label in ("eCOA", "Medical devices", "Danish &amp; PV", "Tools", "About", "Contact"):
+    assert "Danish &amp; PV" not in nav.group(0)
+    for label in ("Medical devices", "Clinical operations", "Tools", "Research", "About", "Contact"):
         assert f">{label}</a>" in nav.group(0), label
 
 
