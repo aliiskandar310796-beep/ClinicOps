@@ -13,43 +13,10 @@
 </head><body>
 <a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="/">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="/">Home</a><a href="ecoa">eCOA</a><a href="services">Medical devices</a><a href="denmark-market-access">Danish &amp; PV</a><a href="tools">Tools</a><a href="about" aria-current="page">About</a><a href="contact">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");var r=a?a.offsetLeft+a.offsetWidth+16-n.clientWidth:0;if(r>0)n.scrollLeft=r})()</script>
 <main id="main" tabindex="-1" class="wrap">
-<section class="hero axis"><h1>Tell ClinicOps what you can actually be assigned to.</h1><p class="lede">This page creates a short professional expression of interest locally in your browser, then opens it as a draft in your own email application. Nothing entered here is transmitted until you choose to send the email.</p></section>
-
-<div class="callout"><strong>Do not upload or paste credential documents, ID documents, client-confidential material, patient data, passwords or other sensitive information here.</strong> If ClinicOps decides to continue screening, any required verification is requested separately through a controlled channel.</div>
-
-<form id="interest" class="form-grid" onsubmit="return false">
-<div><label for="name">Name</label><input id="name" autocomplete="name"></div>
-<div><label for="role">Professional role</label><input id="role" placeholder="e.g. MDR regulatory consultant"></div>
-<div><label for="country">Country / base</label><input id="country" placeholder="e.g. Denmark"></div>
-<div><label for="markets">Markets / jurisdictions</label><input id="markets" placeholder="e.g. DK, EU"></div>
-<div><label for="languages">Professional languages</label><input id="languages" placeholder="e.g. Danish, English"></div>
-<div><label for="availability">Current availability</label><select id="availability"><option>Limited project capacity</option><option>Available for project work</option><option>Available for ad hoc review</option><option>Not currently available; future interest</option></select></div>
-<div class="full"><label for="domains">Competency domains</label><input id="domains" placeholder="e.g. EUDAMED/UDI, SS(C)P, PV, IVD, clinical evidence, localisation"></div>
-<div class="full"><label for="work">Work you would accept</label><textarea id="work" placeholder="Describe the bounded tasks you are comfortable being assigned to — and any important exclusions."></textarea></div>
-<div class="full"><label for="profile">Professional profile URL</label><input id="profile" type="url" placeholder="LinkedIn, professional website or public profile"></div>
-<div class="full"><label for="note">Relevant experience summary</label><textarea id="note" placeholder="Keep this concise. Do not include confidential client information."></textarea></div>
-</form>
-
-<div class="actions"><a class="cta primary" id="draft" href="mailto:info@clinicops.dk?subject=ClinicOps%20Expert%20Network%20Expression%20of%20Interest">Create email draft</a><a class="cta" href="expert-network">How the network works</a></div>
-<p class="small muted note">Submitting an expression of interest does not create employment, contractor status, network membership or a promise of work. Inclusion requires separate screening, verification, conflict review and written terms.</p>
+<section class="hero axis"><h1>Specialist expressions of interest are paused.</h1>
+<p class="lede">ClinicOps is not taking new specialist expressions of interest at the moment. When a defined question needs outside expertise, specialists are approached for that question only, under written terms.</p></section>
+<p>If you are a consultancy or sponsor with a unit of work to hand over, see <a href="expert-network">working with partners</a>.</p>
+<div class="actions"><a class="cta primary" href="expert-network">Working with partners</a><a class="cta" href="contact">Contact ClinicOps</a></div>
 </main>
 <footer class="site"><div class="footer-inner"><span>ClinicOps · private, project-specific specialist network.</span><span><a href="expert-network">Expert network</a><a href="privacy-notice/">Privacy</a></span></div><div class="footer-inner"><span>ClinicOps is not a notified body or a competent authority, and does not replace your RA/QA team, RIM, QMS, PLM or ERP.</span></div></footer>
-<script>
-(function(){
-  const ids=["name","role","country","markets","languages","availability","domains","work","profile","note"];
-  const labels={name:"Name",role:"Professional role",country:"Country / base",markets:"Markets / jurisdictions",languages:"Professional languages",availability:"Availability",domains:"Competency domains",work:"Work accepted / exclusions",profile:"Professional profile",note:"Experience summary"};
-  function clean(v){return String(v||"").trim().replace(/\r/g,"");}
-  function brief(){
-    const lines=["ClinicOps Expert Network Expression of Interest",""];
-    ids.forEach(id=>{const el=document.getElementById(id);lines.push(labels[id]+": "+(clean(el.value)||"Not provided"));});
-    lines.push("","Confirmation: I have not included credential documents, ID documents, patient data or confidential client material in this brief.","","Generated locally at clinicops.dk/expert-network-interest");
-    return lines.join("\n");
-  }
-  document.getElementById("draft").addEventListener("click",function(e){
-    e.preventDefault();
-    const subject="ClinicOps Expert Network Expression of Interest";
-    window.location.href="mailto:info@clinicops.dk?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(brief());
-  });
-})();
-</script>
 </body></html>
