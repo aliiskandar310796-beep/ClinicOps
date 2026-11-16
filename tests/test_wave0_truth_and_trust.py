@@ -30,9 +30,9 @@ def test_ar_page_is_not_offered_as_a_service_elsewhere() -> None:
 def test_privacy_notice_matches_current_practice() -> None:
     html = _read("privacy-notice/index.html")
     assert "Gumroad" not in html
-    assert "Madrid" not in html
-    assert "AEPD" not in html
-    assert "Datatilsynet" in html
+    assert "Spain (self-employed, serving Denmark and the EU)" in html
+    assert "AEPD" in html and "Datatilsynet" in html
+    assert "Egedalsv" not in html and "Kokkedal" not in html
     assert "do not send unsolicited email or direct messages to organisations established in Denmark" in html
     assert "sender ikke uopfordret e-mail" in html
 
