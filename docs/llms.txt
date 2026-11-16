@@ -1,6 +1,6 @@
 # ClinicOps
 
-ClinicOps is an EU MedTech regulatory data integrity practice. It reconciles approved regulatory facts across EUDAMED, UDI data, certificates, SS(C)P and controlled records, producing source-linked exception queues for qualified human review. Denmark market access, Danish localisation and pharmacovigilance remain secondary specialist capabilities.
+> Clinical and device operations support for Denmark and the EU: eCOA delivery planning, regulatory records for medical devices, and Danish-language and pharmacovigilance support. Free browser-local tools.
 
 Core pages:
 - ClinicOps | Clinical and device operations support for Denmark and the EU: https://clinicops.dk/ - Clinical and device operations support for Denmark and the EU: eCOA delivery planning, regulatory records for medical devices, and Danish-language and pharmacovigilance support. Free browser-local tools.
@@ -42,12 +42,6 @@ Free browser-local tools and examples:
 - Technical File Consistency Check | ClinicOps: https://clinicops.dk/technical-file-consistency - Paste or upload a PDF for each of up to five technical-documentation sources and get a severity-banded divergence report. Browser-local.
 - Tools: Integrity Scanner and Evidence Utilities | ClinicOps: https://clinicops.dk/tools - Browser-local regulatory data integrity tools: the Regulatory Integrity Scanner, identifier check, change and consistency utilities, PV utilities and specimens.
 - ClinicOps Class III Transition Map — Sanitized Sample: https://clinicops.dk/transition-map-sample/ - Sanitized fictional sample of the ClinicOps Class III Transition Map work-plan format.
-
-Archived tools, kept for existing links:
-- EUDAMED Identifier Check | ClinicOps: https://clinicops.dk/identifier-check - Free, browser-only EUDAMED Identifier Check: B-prefix legacy screening, SRN actor-role decoding, and GS1 Mod-10 validation. Nothing is sent to ClinicOps.
-- Regulatory Change Review Cost Calculator | ClinicOps: https://clinicops.dk/integrity-economics - Estimate the manual workload and labour cost of checking that a regulatory change reached EUDAMED, IFU, SS(C)P, labels and controlled systems.
-- Transition Readiness Score | ClinicOps: https://clinicops.dk/readiness-score - A private, browser-only screening aid for organising EUDAMED transition work-plan evidence before a human regulatory review.
-- Regulatory Change Impact Mapper | ClinicOps: https://clinicops.dk/regulatory-change-impact - Pick a category of EU regulatory change, answer six portfolio questions, and get an impacted-surface checklist with severity bands. Browser-local.
 
 COA and eCOA reference:
 - COA and eCOA in Denmark and the Nordics | ClinicOps: https://clinicops.dk/coa-nordic - What the Nordic authorities say about participant-facing electronic assessments, language, ethics review and data protection, which instrument languages exist, and what is still unconfirmed, with a dated source register.

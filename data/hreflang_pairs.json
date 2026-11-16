@@ -1,0 +1,10 @@
+{
+  "_readme": [
+    "Declares which public pages are language alternates of each other. scripts/render_sitemap.py reads this file and, for each group, writes self-referencing, reciprocal <xhtml:link rel=\"alternate\" hreflang> entries plus an x-default that points at the English page into docs/sitemap.xml. Pages not listed here get no hreflang.",
+    "Format: each entry in \"pairs\" maps a language code to the canonical URL of that language's page. Example: {\"en\": \"https://clinicops.dk/danish-dhpc-checker\", \"da\": \"https://clinicops.dk/da/danish-dhpc-checker\"}.",
+    "Rules (the script fails the build otherwise): every group contains \"en\" and at least one other language; codes are language-only (\"en\", \"da\"), never region-only or \"EU\"; every URL is an indexable, self-canonical page that is already in the sitemap; each URL is in at most one group; each page's <html lang> matches its code. Never point a Danish page's canonical at the English page.",
+    "After editing, run: python scripts/render_sitemap.py && python scripts/render_llms_txt.py. Adding /da/ pages also counts against the sitemap URL ceiling in tests/test_strategic_invariants.py.",
+    "Mechanism chosen: sitemap method only (no <link rel=alternate> in page heads), because GitHub Pages cannot set headers and one generated place is easy to check in CI. Do not add head tags as well."
+  ],
+  "pairs": []
+}

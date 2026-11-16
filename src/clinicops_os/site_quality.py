@@ -72,6 +72,34 @@ def parse_metadata(html: str) -> MetadataParser:
     return parser
 
 
+SITE_ORIGIN = "https://clinicops.dk/"
+ORGANIZATION_ID = SITE_ORIGIN + "#org"
+WEBSITE_ID = SITE_ORIGIN + "#website"
+CANONICAL_ORG_SAMEAS = ["https://www.linkedin.com/company/clinicops-dk/"]
+
+
+class Positioning:
+    """The home page's own <title> and meta description: the one positioning
+    source. The harmonizer mirrors it into og/JSON-LD, render_llms_txt.py
+    derives llms.txt from it, and the consistency test reads it too, so no
+    second copy of the company description exists to drift."""
+
+    def __init__(self, title: str, description: str) -> None:
+        self.title = title
+        self.description = description
+        # "ClinicOps | <tagline>" -> "<tagline>"
+        self.tagline = title.split(" | ", 1)[1] if " | " in title else title
+
+
+def home_positioning(docs_root: Path) -> Positioning:
+    parser = parse_metadata((docs_root / "index.html").read_text(encoding="utf-8"))
+    description = " ".join(parser.meta.get("description", "").split())
+    title = " ".join(parser.title.split())
+    if not title or not description:
+        raise ValueError("docs/index.html must carry a <title> and a meta description")
+    return Positioning(title, description)
+
+
 def parse_json_ld(blocks: list[str]) -> tuple[list[object], list[str]]:
     values: list[object] = []
     errors: list[str] = []
