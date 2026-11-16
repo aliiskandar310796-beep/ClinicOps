@@ -26,7 +26,8 @@ def test_assessment_intake_is_browser_local_and_user_controlled() -> None:
     assert "patient-identifiable data" in lower
     assert 'maxlength="1200"' in html
     assert "transition-map-sample/" in html
-    assert "readiness-score" in html
+    # readiness-score is retired (noindex, unlisted); the page must not send visitors to it
+    assert "readiness-score" not in html
     assert "info@clinicops.dk" in html
     assert "mailto:info@clinicops.dk" in html
     assert "ClinicOps Regulatory Data Integrity Scope Brief" in html

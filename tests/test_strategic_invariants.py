@@ -149,11 +149,13 @@ def test_only_the_canonical_company_linkedin_slug_appears_anywhere() -> None:
     assert linked, "no page links the canonical company LinkedIn page"
 
 
-def test_llms_txt_opens_with_the_canonical_category() -> None:
+def test_llms_txt_opens_with_the_homepage_positioning() -> None:
+    """llms.txt derives its summary from the home page (amended 2026-11-16, D-1):
+    it must not carry its own older company description."""
     llms = (DOCS / "llms.txt").read_text(encoding="utf-8")
     first_paragraph = llms.split("\n\n")[1]
-    assert first_paragraph.startswith("ClinicOps is an EU MedTech regulatory data integrity practice.")
-    assert "secondary specialist capabilities" in first_paragraph
+    assert first_paragraph.startswith(f"> {HOMEPAGE_CATEGORY}:")
+    assert "regulatory data integrity practice" not in llms
 
 
 # ---------------------------------------------------------------------------

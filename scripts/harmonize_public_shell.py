@@ -7,6 +7,13 @@ import os
 import re
 from pathlib import Path
 
+from clinicops_os.site_quality import (
+    CANONICAL_ORG_SAMEAS,
+    ORGANIZATION_ID,
+    SITE_ORIGIN,
+    WEBSITE_ID,
+)
+
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 NAV_SCROLL_SCRIPT = (
@@ -53,7 +60,73 @@ OG_DESCRIPTION_RE = re.compile(r'(<meta property="og:description" content=")(.*?
 JSON_LD_RE = re.compile(r'(<script type="application/ld\+json">)(.*?)(</script>)', re.DOTALL)
 
 
-def _sync_json_ld_block(block: str, title: str, description: str) -> str:
+ORG_REF_KEYS = ("publisher", "provider", "author")
+
+
+def _put_id(obj: dict, identifier: str) -> bool:
+    """Set "@id" right after "@type" (stable, readable key order)."""
+    if obj.get("@id") == identifier:
+        return False
+    rest = {k: v for k, v in obj.items() if k != "@id"}
+    obj.clear()
+    for key, value in rest.items():
+        obj[key] = value
+        if key == "@type":
+            obj["@id"] = identifier
+    obj.setdefault("@id", identifier)
+    return True
+
+
+def _organization_stub() -> dict:
+    return {"@type": "Organization", "@id": ORGANIZATION_ID, "name": "ClinicOps", "url": SITE_ORIGIN}
+
+
+def _website_stub() -> dict:
+    return {"@type": "WebSite", "@id": WEBSITE_ID, "name": "ClinicOps", "url": SITE_ORIGIN}
+
+
+def _link_entities(obj: dict, description: str, is_home: bool) -> bool:
+    """Give the Organization / WebSite / WebPage nodes stable @id values and
+    make every cross-reference point at them, so crawlers see one entity
+    instead of a new anonymous "ClinicOps" per page. Deliberately carries no
+    author or person node (impersonal brand)."""
+    changed = False
+    node_type = obj.get("@type")
+    if node_type == "Organization":
+        changed |= _put_id(obj, ORGANIZATION_ID)
+        if "sameAs" in obj and obj["sameAs"] != CANONICAL_ORG_SAMEAS:
+            obj["sameAs"] = list(CANONICAL_ORG_SAMEAS)
+            changed = True
+        if is_home and "description" in obj and obj["description"] != description:
+            obj["description"] = description
+            changed = True
+    elif node_type == "WebSite":
+        changed |= _put_id(obj, WEBSITE_ID)
+        if is_home and obj.get("publisher") != {"@id": ORGANIZATION_ID}:
+            obj["publisher"] = {"@id": ORGANIZATION_ID}
+            changed = True
+    elif node_type == "WebPage":
+        url = obj.get("url")
+        if "@id" not in obj and isinstance(url, str) and url:
+            # An existing @id is kept: the research pages already use their URL
+            # as @id and point Article.mainEntityOfPage at it.
+            changed |= _put_id(obj, url + "#webpage")
+        if obj.get("isPartOf") != _website_stub():
+            obj["isPartOf"] = _website_stub()
+            changed = True
+        if obj.get("publisher") != _organization_stub():
+            obj["publisher"] = _organization_stub()
+            changed = True
+    # Organization references nested inside WebPage / WebApplication / Service /
+    # Article nodes: same @id, existing fields untouched.
+    for key in ORG_REF_KEYS:
+        ref = obj.get(key)
+        if isinstance(ref, dict) and ref.get("@type") == "Organization":
+            changed |= _put_id(ref, ORGANIZATION_ID)
+    return changed
+
+
+def _sync_json_ld_block(block: str, title: str, description: str, is_home: bool = False) -> str:
     try:
         data = json.loads(block)
     except json.JSONDecodeError:
@@ -62,24 +135,35 @@ def _sync_json_ld_block(block: str, title: str, description: str) -> str:
     candidates = graph if isinstance(graph, list) else [data]
     changed = False
     for obj in candidates:
-        if not isinstance(obj, dict) or obj.get("@type") != "WebPage":
+        if not isinstance(obj, dict):
             continue
-        if "name" in obj and obj["name"] != title:
-            obj["name"] = title
-            changed = True
-        if "description" in obj and obj["description"] != description:
-            obj["description"] = description
-            changed = True
+        if obj.get("@type") == "WebPage":
+            if "name" in obj and obj["name"] != title:
+                obj["name"] = title
+                changed = True
+            if "description" in obj and obj["description"] != description:
+                obj["description"] = description
+                changed = True
+        changed |= _link_entities(obj, description, is_home)
     if not changed:
         return block
+    if "\n" in block:
+        return "\n" + json.dumps(data, ensure_ascii=False, indent=2) + "\n"
     return json.dumps(data, ensure_ascii=False, separators=(",", ":"))
 
 
-def sync_meta_consistency(text: str) -> str:
+def sync_meta_consistency(text: str, is_home: bool = False) -> str:
     """Only touches fields that already exist; never invents a new og:title,
     og:description or JSON-LD field. That keeps this additive-only, like
     _ensure_footer_boundary, and out of the business of deciding what a page
-    should say -- only whether its existing restatements agree."""
+    should say -- only whether its existing restatements agree.
+
+    The single exception is the @id / cross-reference linking of the
+    Organization, WebSite and WebPage JSON-LD nodes, which is structural
+    identity (not copy). On the home page the page's own title and meta
+    description are the positioning source of truth, so the Organization
+    description is mirrored from them here too (llms.txt is derived from the
+    same source by render_llms_txt.py)."""
     title_match = TITLE_TAG_RE.search(text)
     description_match = META_DESCRIPTION_RE.search(text)
     if not title_match or not description_match:
@@ -99,7 +183,11 @@ def sync_meta_consistency(text: str) -> str:
     _sync_attr(OG_DESCRIPTION_RE, description)
 
     def _replace_json_ld(match: re.Match[str]) -> str:
-        return match.group(1) + _sync_json_ld_block(match.group(2), title, description) + match.group(3)
+        return (
+            match.group(1)
+            + _sync_json_ld_block(match.group(2), title, description, is_home)
+            + match.group(3)
+        )
 
     text = JSON_LD_RE.sub(_replace_json_ld, text)
     return text
@@ -233,7 +321,7 @@ def _ensure_footer_boundary(text: str) -> str:
 
 def transform(page: Path, text: str) -> str:
     relative = page.relative_to(DOCS).as_posix()
-    text = sync_meta_consistency(text)
+    text = sync_meta_consistency(text, is_home=relative == "index.html")
     if relative in EXCLUDED:
         return _ensure_footer_boundary(text)
     if not HEADER_RE.search(text):

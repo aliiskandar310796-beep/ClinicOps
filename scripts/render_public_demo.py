@@ -73,7 +73,7 @@ def render_public_demo() -> str:
 <meta property="og:url" content="{CANONICAL}">
 <meta property="og:site_name" content="ClinicOps">
 <meta property="og:image" content="https://clinicops.dk/assets/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://clinicops.dk/assets/og-image.png">
-<script type="application/ld+json">{{"@context":"https://schema.org","@type":"WebPage","name":"{TITLE}","description":"{DESCRIPTION}","url":"{CANONICAL}","isPartOf":{{"@type":"WebSite","name":"ClinicOps","url":"https://clinicops.dk/"}},"publisher":{{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}}}</script>
+<script type="application/ld+json">{{"@context":"https://schema.org","@type":"WebPage","@id":"{CANONICAL}#webpage","name":"{TITLE}","description":"{DESCRIPTION}","url":"{CANONICAL}","isPartOf":{{"@type":"WebSite","@id":"https://clinicops.dk/#website","name":"ClinicOps","url":"https://clinicops.dk/"}},"publisher":{{"@type":"Organization","@id":"https://clinicops.dk/#org","name":"ClinicOps","url":"https://clinicops.dk/"}}}}</script>
 '''
     html = html.replace('<html lang="en">', '<html lang="en" data-seg="device">', 1)
     html = html.replace("<style>", metadata + "<style>", 1)
@@ -94,7 +94,7 @@ def render_public_demo() -> str:
     )
     html = html.replace(
         "</main>",
-        '''<section class="notice"><h2>Want this applied to a real portfolio?</h2><p><strong>What to bring:</strong> start with a small portfolio export or agreed record set. Known identifiers, certificate timing and target-market context help; missing evidence can stay explicit rather than being guessed.</p><p><strong>What a scoped pilot produces:</strong> a prioritised work plan, evidence-gap queue and human-reviewed next steps grounded in the supplied or reachable evidence. The responsible regulatory team retains final judgement.</p><p><a href="/assessment-intake"><strong>Build an assessment brief</strong></a> · <a href="mailto:info@clinicops.dk?subject=Class%20III%20Transition%20Map%20Assessment">Email ClinicOps directly</a> · <a href="/readiness-score">Use the free readiness score</a> · <a href="/privacy-notice/">Privacy</a> · <a href="/">Back to ClinicOps</a></p></section>
+        '''<section class="notice"><h2>Want this applied to a real portfolio?</h2><p><strong>What to bring:</strong> start with a small portfolio export or agreed record set. Known identifiers, certificate timing and target-market context help; missing evidence can stay explicit rather than being guessed.</p><p><strong>What a scoped pilot produces:</strong> a prioritised work plan, evidence-gap queue and human-reviewed next steps grounded in the supplied or reachable evidence. The responsible regulatory team retains final judgement.</p><p><a href="/assessment-intake"><strong>Build an assessment brief</strong></a> · <a href="mailto:info@clinicops.dk?subject=Class%20III%20Transition%20Map%20Assessment">Email ClinicOps directly</a> · <a href="/privacy-notice/">Privacy</a> · <a href="/">Back to ClinicOps</a></p></section>
 </main>''',
         1,
     )
