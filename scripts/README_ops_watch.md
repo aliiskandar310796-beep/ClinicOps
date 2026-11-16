@@ -1,6 +1,6 @@
 # Ops Watch and Regulatory Watch: keep-alive design and what each check means
 
-Written 2026-11-16 (plenum lens 29 and 30). Applies to `.github/workflows/ops-watch.yml` and `.github/workflows/regulatory-watch.yml`.
+Written 2026-11-16 (2026-11-16 plenum review, lenses 29 and 30). Applies to `.github/workflows/ops-watch.yml` and `.github/workflows/regulatory-watch.yml`.
 
 ## The problem
 

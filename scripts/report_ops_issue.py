@@ -11,7 +11,7 @@ Behaviour:
   not one email per week.
 * all clear         -> if that issue is open, comment "clear" and close it.
 * heartbeat         -> at most one comment per ~28 days on the open
-  "Ops Watch heartbeat" issue. See docs in 07_RESILIENCE/OPS_WATCH_KEEPALIVE.md.
+  "Ops Watch heartbeat" issue. See docs in scripts/README_ops_watch.md.
 """
 
 from __future__ import annotations

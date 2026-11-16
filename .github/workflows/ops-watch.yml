@@ -55,7 +55,7 @@ jobs:
       # Keep-alive: GitHub disables scheduled workflows in a public repo after 60
       # days without repository activity. report_ops_issue.py leaves one heartbeat
       # comment about every 28 days; this step also re-enables both schedules.
-      # No commits to main. See 07_RESILIENCE/OPS_WATCH_KEEPALIVE.md.
+      # No commits to main. See scripts/README_ops_watch.md.
       - name: Keep schedules enabled
         if: always()
         continue-on-error: true
