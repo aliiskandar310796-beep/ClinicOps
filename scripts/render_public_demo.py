@@ -4,6 +4,8 @@ import argparse
 from datetime import date
 from pathlib import Path
 
+from harmonize_public_shell import _ensure_security_meta
+
 from clinicops_os.client_report import render_client_html
 from clinicops_os.transition_report import load_portfolio
 
@@ -105,7 +107,9 @@ def render_public_demo() -> str:
                 f"'{domain}'; fix examples/portfolio.csv (blank source_url for "
                 "fictional records) instead of publishing fake evidence links"
             )
-    return html
+    # The harmonizer owns the meta CSP and referrer policy (script hashes included); apply it here
+    # too so a fresh render equals the harmonized, committed file.
+    return _ensure_security_meta("transition-map-sample/index.html", html)
 
 
 def main() -> None:

@@ -1,11 +1,14 @@
 from __future__ import annotations
 
 import argparse
+import base64
+import hashlib
 import html
 import json
 import os
 import re
 from pathlib import Path
+from urllib.parse import quote
 
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
@@ -103,6 +106,222 @@ def sync_meta_consistency(text: str) -> str:
 
     text = JSON_LD_RE.sub(_replace_json_ld, text)
     return text
+
+
+# ---------------------------------------------------------------------------
+# Security meta (plenum lenses 28 and 30, PR tool-privacy)
+#
+# GitHub Pages cannot send response headers, so the page itself carries the
+# policy. Every public page gets a meta Content-Security-Policy and a
+# no-referrer policy. The policy is generated here, not hand-written, because
+# script-src lists a SHA-256 hash for every executable inline script on the
+# page instead of 'unsafe-inline': a hash only matches the exact script text
+# that was reviewed, so injected script cannot run. Any edit to an inline
+# script changes its hash; `harmonize_public_shell.py --check` (CI) fails until
+# the harmonizer is re-run, which is the intended behaviour.
+#
+# Known limits, stated in the PR and the privacy notice rather than hidden:
+# - style-src keeps 'unsafe-inline' (pages carry inline <style> blocks and a few
+#   style attributes). CSS cannot run script or open a connection while
+#   connect-src, img-src and font-src are 'self'/'none'.
+# - frame-ancestors, report-uri and sandbox are not honoured in a meta policy.
+# - connect-src 'none' stops fetch, XHR, WebSocket, EventSource and
+#   sendBeacon. It does not stop a link click or a script that sets
+#   location, so it is defence in depth, not a proof of "nothing leaves".
+# ---------------------------------------------------------------------------
+# Pages that run the heavy browser-local tooling (PDF text extraction, OCR,
+# workers). They keep wasm and blob: sources, exactly as shipped in #132.
+CSP_TOOL_PAGES = frozenset(
+    {
+        "change-surface-mapper.html",
+        "coa-type-finder.html",
+        "ctis-clock.html",
+        "danish-dhpc-checker.html",
+        "danish-pv-literature-register.html",
+        "ecoa-delivery-workbench.html",
+        "ecoa-lead-time-planner.html",
+        "ecoa-visit-burden.html",
+        "identifier-check.html",
+        "integrity-check.html",
+        "integrity-economics.html",
+        "integrity-scanner.html",
+        "readiness-score.html",
+        "regulatory-change-impact.html",
+        "sdea-clause-checker.html",
+        "technical-file-consistency.html",
+    }
+)
+CSP_META_RE = re.compile(r'<meta http-equiv="Content-Security-Policy"[^>]*>', re.IGNORECASE)
+REFERRER_META_RE = re.compile(r'<meta name="referrer"[^>]*>', re.IGNORECASE)
+CHARSET_META_RE = re.compile(r"<meta charset=[^>]*>", re.IGNORECASE)
+INLINE_SCRIPT_RE = re.compile(r"<script\b(?![^>]*\bsrc=)([^>]*)>(.*?)</script>", re.IGNORECASE | re.DOTALL)
+SCRIPT_TYPE_RE = re.compile(r'\btype=["\']([^"\']*)["\']', re.IGNORECASE)
+EXECUTABLE_SCRIPT_TYPES = {"", "text/javascript", "application/javascript", "module"}
+REFERRER_META = '<meta name="referrer" content="no-referrer">'
+
+
+def inline_script_hashes(text: str) -> list[str]:
+    """CSP source tokens ('sha256-...') for every executable inline script."""
+    hashes: list[str] = []
+    for attrs, body in INLINE_SCRIPT_RE.findall(text):
+        type_match = SCRIPT_TYPE_RE.search(attrs)
+        if (type_match.group(1).strip().lower() if type_match else "") not in EXECUTABLE_SCRIPT_TYPES:
+            continue  # JSON-LD and JSON data blocks are never executed
+        digest = base64.b64encode(hashlib.sha256(body.encode("utf-8")).digest()).decode("ascii")
+        token = f"'sha256-{digest}'"
+        if token not in hashes:
+            hashes.append(token)
+    return hashes
+
+
+def build_csp(relative: str, text: str) -> str:
+    hashes = " ".join(inline_script_hashes(text))
+    script_src = "'self'" + (f" {hashes}" if hashes else "")
+    tool = relative in CSP_TOOL_PAGES
+    if tool:
+        script_src += " 'wasm-unsafe-eval' blob:"
+    directives = [
+        "default-src 'self'",
+        f"script-src {script_src}",
+        "style-src 'self' 'unsafe-inline'",
+        "img-src 'self' data: blob:" if tool else "img-src 'self' data:",
+        "font-src 'self'",
+        "connect-src 'none'",
+    ]
+    if tool:
+        directives.append("worker-src 'self' blob:")
+    directives += ["object-src 'none'", "frame-src 'none'", "base-uri 'none'", "form-action 'none'"]
+    return "; ".join(directives)
+
+
+def _ensure_security_meta(relative: str, text: str) -> str:
+    """Write (or rewrite in place) the CSP and referrer metas. Idempotent."""
+    csp_meta = f'<meta http-equiv="Content-Security-Policy" content="{build_csp(relative, text)}">'
+    if CSP_META_RE.search(text):
+        text = CSP_META_RE.sub(lambda _m: csp_meta, text, count=1)
+        if REFERRER_META_RE.search(text):
+            text = REFERRER_META_RE.sub(lambda _m: REFERRER_META, text, count=1)
+        else:
+            text = text.replace(csp_meta, csp_meta + REFERRER_META, 1)
+        return text
+    if REFERRER_META_RE.search(text):
+        text = REFERRER_META_RE.sub(lambda _m: "", text, count=1)
+    charset = CHARSET_META_RE.search(text)
+    if not charset:
+        raise ValueError(f"{relative}: public page has no <meta charset> to anchor the security meta")
+    return text[: charset.end()] + csp_meta + REFERRER_META + text[charset.end() :]
+
+
+# ---------------------------------------------------------------------------
+# Tool-page trust notes (plenum lenses 19, 20, 28; PR tool-privacy)
+#
+# Two static blocks, written here so they are identical on every listed tool
+# page and cannot drift:
+#   1. "What leaves your browser: nothing." plus a one-line test note. The
+#      wording is bounded by what e2e/release_privacy_test.mjs measures: on
+#      load, no request to another origin, no cookie, empty browser storage,
+#      and that storage keys written during the scripted journeys stay inside
+#      an allow-list. It must not claim more than that.
+#   2. "What is missing?": a plain mailto link (subject prefix "Request:"),
+#      no form and no script, to the address already public on the site.
+# The 12 listed tools are pinned to tools.html by tests/test_tool_privacy_pack.py.
+# ---------------------------------------------------------------------------
+LISTED_TOOL_PAGES = (
+    "change-surface-mapper.html",
+    "coa-type-finder.html",
+    "ctis-clock.html",
+    "danish-dhpc-checker.html",
+    "danish-pv-literature-register.html",
+    "ecoa-delivery-workbench.html",
+    "ecoa-lead-time-planner.html",
+    "ecoa-visit-burden.html",
+    "integrity-check.html",
+    "integrity-scanner.html",
+    "sdea-clause-checker.html",
+    "technical-file-consistency.html",
+)
+REQUEST_ADDRESS = "info@clinicops.dk"
+LOCAL_NOTE_ID = "what-leaves-your-browser"
+REQUEST_NOTE_ID = "whats-missing"
+LOCAL_NOTE_RE = re.compile(
+    r'<div class="callout" id="' + LOCAL_NOTE_ID + r'" role="note">.*?</div>\n?', re.DOTALL
+)
+REQUEST_NOTE_RE = re.compile(
+    r'<div class="callout" id="' + REQUEST_NOTE_ID + r'" role="note">.*?</div>\n?', re.DOTALL
+)
+MAIN_CLOSE_RE = re.compile(r"</main>", re.IGNORECASE)
+
+# Tools that keep a small amount of working data in this browser. The note
+# names it, because "nothing leaves" is true while "nothing is stored" is not.
+STORAGE_CLAUSES = {
+    "integrity-scanner.html": (
+        " If you save a mapping profile, its name and column mappings are kept in this "
+        "browser&rsquo;s local storage until you delete them."
+    ),
+    "change-surface-mapper.html": (
+        " If you choose to scope a review, a short summary is held in this tab&rsquo;s session "
+        "storage for the next page, which removes it when it reads it."
+    ),
+}
+
+
+def _local_note(relative: str) -> str:
+    extra = STORAGE_CLAUSES.get(relative, "")
+    return (
+        f'<div class="callout" id="{LOCAL_NOTE_ID}" role="note">'
+        "<p><strong>What leaves your browser: nothing.</strong> "
+        "This page does not send what you type, paste or import to ClinicOps or to anyone else, "
+        "and it loads nothing from other sites. The page&rsquo;s security policy also tells "
+        "your browser to block its scripts from opening network connections. Exports are saved "
+        f"to your device; emailing one is your own action.{extra}</p>"
+        "<p class=\"small muted\">Test note: before each release an automated browser test opens "
+        "this page and fails if, on load, it contacts another site, sets a cookie or writes to "
+        "browser storage.</p>"
+        "</div>\n"
+    )
+
+
+def _request_subject(relative: str, text: str) -> str:
+    if relative == "tools.html":
+        return "Request: new tool"
+    match = TITLE_TAG_RE.search(text)
+    name = html.unescape(match.group(2)) if match else relative.removesuffix(".html")
+    name = name.split(" | ")[0].strip()
+    return f"Request: {name}"
+
+
+def _request_note(relative: str, text: str) -> str:
+    subject = quote(_request_subject(relative, text), safe="")
+    body = quote("What is missing:\n\n", safe="")
+    href = f"mailto:{REQUEST_ADDRESS}?subject={subject}&amp;body={body}"
+    lead = (
+        "If a tool you need is not on this shelf,"
+        if relative == "tools.html"
+        else "If this tool lacks a check, field or source you need,"
+    )
+    return (
+        f'<div class="callout" id="{REQUEST_NOTE_ID}" role="note">'
+        f'<p><strong>What is missing?</strong> {lead} <a href="{href}">email a request</a>. '
+        "There is no form and no account. Please do not include patient-identifiable or "
+        "confidential data.</p>"
+        "</div>\n"
+    )
+
+
+def _ensure_tool_notes(relative: str, text: str) -> str:
+    """Insert or rewrite the trust notes immediately before </main>. Idempotent."""
+    text = LOCAL_NOTE_RE.sub("", text)
+    text = REQUEST_NOTE_RE.sub("", text)
+    blocks = ""
+    if relative in LISTED_TOOL_PAGES:
+        blocks += _local_note(relative)
+    if relative in LISTED_TOOL_PAGES or relative == "tools.html":
+        blocks += _request_note(relative, text)
+    if not blocks:
+        return text
+    if not MAIN_CLOSE_RE.search(text):
+        raise ValueError(f"{relative}: tool page has no </main> to anchor the trust notes")
+    return MAIN_CLOSE_RE.sub(lambda _m: blocks + "</main>", text, count=1)
 
 
 NAV_ITEMS = (
@@ -235,7 +454,7 @@ def transform(page: Path, text: str) -> str:
     relative = page.relative_to(DOCS).as_posix()
     text = sync_meta_consistency(text)
     if relative in EXCLUDED:
-        return _ensure_footer_boundary(text)
+        return _ensure_security_meta(relative, _ensure_footer_boundary(text))
     if not HEADER_RE.search(text):
         raise ValueError(f"{relative}: public page has no replaceable <header>")
     transformed = HEADER_RE.sub(_header(page), text, count=1)
@@ -255,7 +474,9 @@ def transform(page: Path, text: str) -> str:
         )
         if count != 1:
             raise ValueError(f"{relative}: public page has no </head>")
-    return transformed
+    transformed = _ensure_tool_notes(relative, transformed)
+    # Last, so the script hashes cover the final page text.
+    return _ensure_security_meta(relative, transformed)
 
 
 def main() -> None:

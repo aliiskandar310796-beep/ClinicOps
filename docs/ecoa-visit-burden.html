@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" data-seg="ecoa">
 <head>
-<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'none'; worker-src 'self' blob:; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'">
+<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Rrp/oKlTF5JhFj1/wI5MXQooEKDuQe1flpA8aYc4skk=' 'wasm-unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'none'; worker-src 'self' blob:; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'"><meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <title>Visit and diary burden estimator | ClinicOps</title>
@@ -93,6 +93,8 @@ ul.plain li{padding:8px 0;border-top:1px solid var(--border);max-width:70ch}
 <p>Sort the assessments by type in the <a href="coa-type-finder">COA type finder</a> before counting them. The <a href="ecoa-lead-time-planner">lead-time planner</a> shows when each language version can be ready. The <a href="ecoa-delivery-workbench">delivery workbench</a> carries the plan into the build.</p>
 <div class="cta-row"><a class="cta primary" href="ecoa-lead-time-planner">Plan licence and translation dates</a><a class="cta ghost" href="coa-type-finder">Sort the assessments by type</a></div>
 <p class="small muted data-note">Do not enter patient-identifiable or other personal data. This tool runs in your browser and sends nothing anywhere.</p>
+<div class="callout" id="what-leaves-your-browser" role="note"><p><strong>What leaves your browser: nothing.</strong> This page does not send what you type, paste or import to ClinicOps or to anyone else, and it loads nothing from other sites. The page&rsquo;s security policy also tells your browser to block its scripts from opening network connections. Exports are saved to your device; emailing one is your own action.</p><p class="small muted">Test note: before each release an automated browser test opens this page and fails if, on load, it contacts another site, sets a cookie or writes to browser storage.</p></div>
+<div class="callout" id="whats-missing" role="note"><p><strong>What is missing?</strong> If this tool lacks a check, field or source you need, <a href="mailto:info@clinicops.dk?subject=Request%3A%20Visit%20and%20diary%20burden%20estimator&amp;body=What%20is%20missing%3A%0A%0A">email a request</a>. There is no form and no account. Please do not include patient-identifiable or confidential data.</p></div>
 </main>
 <script src="assets/coa-burden-core.js"></script><script src="assets/coa-burden.js"></script>
 <footer class="site">
