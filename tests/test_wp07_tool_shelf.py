@@ -7,7 +7,7 @@ DOCS = Path(__file__).resolve().parents[1] / "docs"
 
 # Target by end of Wave 2 is 12 or fewer listed tools; the ceiling ratchets down.
 LISTED_TOOL_CEILING = 13
-ARCHIVED = ("readiness-score", "integrity-economics")
+ARCHIVED = ("readiness-score", "integrity-economics", "regulatory-change-impact")
 
 
 def _listed_tools() -> set[str]:

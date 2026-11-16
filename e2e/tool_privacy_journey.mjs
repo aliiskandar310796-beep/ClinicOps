@@ -2,7 +2,7 @@ import { chromium } from "playwright";
 
 const BASE = (process.env.E2E_BASE_URL || "http://localhost:8103").replace(/\/$/, "");
 const TOOLS = [
-  "change-surface-mapper", "identifier-check", "integrity-check", "integrity-scanner",
+  "change-surface-mapper", "ctis-clock", "identifier-check", "integrity-check", "integrity-scanner",
   "regulatory-change-impact", "technical-file-consistency", "ecoa-delivery-workbench",
   "coa-type-finder", "ecoa-lead-time-planner", "ecoa-visit-burden", "danish-dhpc-checker",
   "danish-pv-literature-register", "sdea-clause-checker", "readiness-score", "integrity-economics",
