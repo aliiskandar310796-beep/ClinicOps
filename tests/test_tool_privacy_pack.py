@@ -20,7 +20,7 @@ import yaml
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / "docs"
 
-HANDOFF_KEYS = {"clinicops.changeSurface.handoff", "clinicops.readiness.handoff"}
+HANDOFF_KEYS = {"clinicops.handoff", "clinicops.readiness.handoff"}
 PROFILE_KEYS = {"clinicops.scanner.mappingProfiles"}
 
 

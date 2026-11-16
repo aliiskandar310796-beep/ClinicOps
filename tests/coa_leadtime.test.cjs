@@ -129,3 +129,13 @@ test('LT14 ready dates equal kick-off plus the product weeks', () => {
   assert.equal(d.products[0].language_date, '2027-03-29'); // 12 weeks
   assert.equal(d.products[0].ready.expected, '2027-04-05'); // 12 + 1 weeks
 });
+
+test('LT14 share-safe summary has counts, weeks and the driver, and no instrument, language or date', () => {
+  const r = L.plan({kickoff: '2027-01-04', target: '2027-06-01', products: [P({instrument: 'Confidential Scale', language: 'Finnish', translation_weeks: '30'}), P({instrument: 'Other Diary', language: 'Danish'})]});
+  const s = L.shareSummary(r);
+  assert.match(s, /Rows: 2 instrument-language versions, 2 instruments, 2 languages/);
+  assert.match(s, /optimistic \/ expected \/ pessimistic\): [\d.]+ \/ [\d.]+ \/ [\d.]+/);
+  assert.match(s, /held up by: (licence|translation and screenshot review)/);
+  for (const leak of ['Confidential', 'Finnish', 'Danish', 'Diary', '2027', 'Scale']) assert.ok(!s.includes(leak), leak);
+  assert.equal(L.shareSummary({errors: ['x'], scenarios: {}, products: []}), '');
+});

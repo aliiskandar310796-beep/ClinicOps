@@ -28,7 +28,7 @@ const BASE = (process.env.E2E_BASE_URL || "http://localhost:8103").replace(/\/$/
 const ORIGIN = new URL(BASE).origin;
 const ROOT = new URL("../", import.meta.url).pathname;
 const LOCAL_ALLOW = new Set(["clinicops.scanner.mappingProfiles"]);
-const SESSION_ALLOW = new Set(["clinicops.changeSurface.handoff", "clinicops.readiness.handoff"]);
+const SESSION_ALLOW = new Set(["clinicops.handoff", "clinicops.readiness.handoff"]);
 
 const failures = [];
 const pass = (name, cond, detail = "") => {
