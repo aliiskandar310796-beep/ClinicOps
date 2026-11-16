@@ -33,6 +33,12 @@ FOOTER_BOUNDARY_TEXT = (
     "ClinicOps is not a notified body or a competent authority, and does not "
     "replace your RA/QA team, RIM, QMS, PLM or ERP."
 )
+# Danish pages (docs/da/, lang="da") carry the same boundary in Danish and a
+# Danish header; see DA_NAV_ITEMS and data/hreflang_pairs.json.
+FOOTER_BOUNDARY_TEXT_DA = (
+    "ClinicOps er hverken et bemyndiget organ eller en kompetent myndighed og "
+    "erstatter ikke dit RA/QA-team, RIM, QMS, PLM eller ERP."
+)
 FOOTER_RE = re.compile(r"<footer\b[^>]*>.*?</footer>", re.IGNORECASE | re.DOTALL)
 FOOTER_CLOSE_RE = re.compile(r"</footer>", re.IGNORECASE)
 
@@ -167,7 +173,44 @@ SECTION_BY_PAGE = {
     "expert-network-interest.html": "About",
     "contact.html": "Contact",
     "privacy-notice/index.html": None,
+    "da/index.html": "Forside",
+    "da/privacy-notice/index.html": "Privatlivspolitik",
 }
+
+# Danish pages get their own small header: they link only to Danish pages and to
+# their English twin, never to English pages under a Danish label. Targets are
+# root-relative because the Danish tree is one level deeper than the root.
+DA_NAV_ITEMS = (
+    ("Forside", "/da/"),
+    ("Privatlivspolitik", "/da/privacy-notice/"),
+)
+DA_SKIP_LINK = '<a class="skip-link" href="#main">Gå til indhold</a>'
+HREFLANG_PAIRS = ROOT / "data" / "hreflang_pairs.json"
+HTML_LANG_DA_RE = re.compile(r"<html\b[^>]*\blang=[\"']da[\"']", re.IGNORECASE)
+
+
+def _is_danish(text: str) -> bool:
+    return bool(HTML_LANG_DA_RE.search(text))
+
+
+def _url_to_relative(url: str) -> str:
+    path = url.removeprefix("https://clinicops.dk")
+    return (path.lstrip("/") + "index.html") if path.endswith("/") else path.lstrip("/")
+
+
+def _pairs() -> list[dict[str, str]]:
+    """EN<->DA pairs from data/hreflang_pairs.json; empty when the file is absent."""
+    if not HREFLANG_PAIRS.exists():
+        return []
+    return json.loads(HREFLANG_PAIRS.read_text(encoding="utf-8")).get("pairs", [])
+
+
+def _twin(relative: str, *, language: str) -> dict[str, str] | None:
+    """The pair whose `language` member is the page at `relative`."""
+    for pair in _pairs():
+        if _url_to_relative(pair[language]) == relative:
+            return pair
+    return None
 
 
 def _prefix(page: Path) -> str:
@@ -195,8 +238,31 @@ def _current_section(relative: str) -> str | None:
     return SECTION_BY_PAGE[relative]
 
 
+def _da_header(page: Path) -> str:
+    relative = page.relative_to(DOCS).as_posix()
+    current = _current_section(relative)
+    assert current is None or current in {label for label, _ in DA_NAV_ITEMS}
+    links = []
+    for label, href in DA_NAV_ITEMS:
+        active = ' aria-current="page"' if label == current else ""
+        links.append(f'<a href="{href}"{active}>{html.escape(label)}</a>')
+    twin = _twin(relative, language="da")
+    if twin:
+        english = twin["en"].removeprefix("https://clinicops.dk") or "/"
+        links.append(f'<a href="{english}" hreflang="en" lang="en">English</a>')
+    return (
+        f'<header class="site"><div class="site-inner">'
+        f'<a class="brand" href="/da/">Clinic<span>Ops</span></a>'
+        f'<nav class="primary" aria-label="Primær navigation">{"".join(links)}</nav>'
+        f"</div></header>"
+        f"{NAV_SCROLL_SCRIPT}"
+    )
+
+
 def _header(page: Path) -> str:
     relative = page.relative_to(DOCS).as_posix()
+    if relative.startswith("da/"):
+        return _da_header(page)
     prefix = _prefix(page)
     current = _current_section(relative)
     links: list[str] = []
@@ -214,7 +280,7 @@ def _header(page: Path) -> str:
     )
 
 
-def _ensure_footer_boundary(text: str) -> str:
+def _ensure_footer_boundary(text: str, boundary: str = FOOTER_BOUNDARY_TEXT) -> str:
     """Insert the shared boundary line into a standard <footer class="site">
     block if the page has one and doesn't already carry that exact line.
     Idempotent (safe to run repeatedly) and additive only: it never touches
@@ -222,28 +288,57 @@ def _ensure_footer_boundary(text: str) -> str:
     copy already in place (e.g. tool pages read "Browser-local evidence
     tools.") is preserved exactly."""
     match = FOOTER_RE.search(text)
-    if not match or FOOTER_BOUNDARY_TEXT in match.group(0):
+    if not match or boundary in match.group(0):
         return text
-    addition = f'<div class="footer-inner"><span>{FOOTER_BOUNDARY_TEXT}</span></div>'
+    addition = f'<div class="footer-inner"><span>{boundary}</span></div>'
     start, end = match.span()
     footer_block = text[start:end]
     footer_block = FOOTER_CLOSE_RE.sub(f"{addition}</footer>", footer_block, count=1)
     return text[:start] + footer_block + text[end:]
 
 
+def _ensure_language_switch(text: str, relative: str) -> str:
+    """Add a visible "Dansk" link to an English page that has a *reviewed* Danish twin.
+
+    A twin that is still a draft (noindex, pending founder review) is not
+    linked from the English page, so an unreviewed machine translation of a
+    legal notice is not promoted to visitors. No redirect of any kind: the
+    visitor chooses. Idempotent.
+    """
+    pair = _twin(relative, language="en")
+    if not pair or pair.get("status") != "reviewed":
+        return text
+    match = FOOTER_RE.search(text)
+    if not match or 'hreflang="da"' in match.group(0):
+        return text
+    danish = pair["da"].removeprefix("https://clinicops.dk")
+    addition = (
+        f'<div class="footer-inner"><span><a href="{danish}" hreflang="da" lang="da">Dansk</a></span></div>'
+    )
+    start, end = match.span()
+    block = FOOTER_CLOSE_RE.sub(f"{addition}</footer>", text[start:end], count=1)
+    return text[:start] + block + text[end:]
+
+
 def transform(page: Path, text: str) -> str:
     relative = page.relative_to(DOCS).as_posix()
     text = sync_meta_consistency(text)
+    danish = _is_danish(text)
+    boundary = FOOTER_BOUNDARY_TEXT_DA if danish else FOOTER_BOUNDARY_TEXT
     if relative in EXCLUDED:
         return _ensure_footer_boundary(text)
+    if danish != relative.startswith("da/"):
+        raise ValueError(f"{relative}: lang=\"da\" is required for, and only allowed on, pages under docs/da/")
     if not HEADER_RE.search(text):
         raise ValueError(f"{relative}: public page has no replaceable <header>")
     transformed = HEADER_RE.sub(_header(page), text, count=1)
-    transformed = _ensure_footer_boundary(transformed)
+    transformed = _ensure_footer_boundary(transformed, boundary)
+    transformed = _ensure_language_switch(transformed, relative)
     if "skip-link" not in transformed:
         transformed = transformed.replace(
             '<header class="site"',
-            '<a class="skip-link" href="#main">Skip to content</a><header class="site"',
+            (DA_SKIP_LINK if danish else '<a class="skip-link" href="#main">Skip to content</a>')
+            + '<header class="site"',
             1,
         )
     transformed = re.sub(r"<main(?![^>]*\bid=)([^>]*)>", r'<main id="main" tabindex="-1"\1>', transformed, count=1)
@@ -277,8 +372,13 @@ def main() -> None:
             if not args.check:
                 page.write_text(transformed, encoding="utf-8")
         if relative not in EXCLUDED:
-            for _, href in NAV_ITEMS:
-                expected = f'href="{_nav_href(_prefix(page), href)}"'
+            if relative.startswith("da/"):
+                nav_targets = [(href, f'href="{href}"') for _, href in DA_NAV_ITEMS]
+            else:
+                nav_targets = [
+                    (href, f'href="{_nav_href(_prefix(page), href)}"') for _, href in NAV_ITEMS
+                ]
+            for href, expected in nav_targets:
                 if expected not in transformed:
                     raise SystemExit(f"{relative}: missing harmonized nav target {href}")
 

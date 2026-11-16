@@ -41,7 +41,7 @@ def test_public_site_is_independent_of_any_individual() -> None:
     authorised-representative page no longer carries a registered-actor block.
     """
     docs = ROOT / "docs"
-    allowed = {"privacy-notice/index.html"}
+    allowed = {"privacy-notice/index.html", "da/privacy-notice/index.html"}
     forbidden = ("Iskandar", "Aalborg University", "Bachelor of Medicine", "linkedin.com/in/", "Industrial Specialisation")
     offenders = []
     for path in list(docs.rglob("*.html")) + [docs / "llms.txt"]:

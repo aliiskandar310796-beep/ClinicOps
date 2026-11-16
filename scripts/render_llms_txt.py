@@ -20,7 +20,7 @@ ClinicOps is an EU MedTech regulatory data integrity practice. It reconciles app
 
 # Section title -> predicate on the path relative to the site root.
 SECTIONS = (
-    ("Core pages", lambda r: r in {"index.html", "services.html", "use-cases.html", "about.html", "contact.html", "assessment-intake.html"}),
+    ("Core pages", lambda r: r in {"index.html", "da/index.html", "services.html", "use-cases.html", "about.html", "contact.html", "assessment-intake.html"}),
     ("Solution and use cases", lambda r: r in {
         "integrity-gate.html", "evidence-change-control-pack.html", "denmark-market-access.html",
         "eu-mdr-regulatory-integrity.html", "eudamed-transition.html", "class-iii-transition.html",
@@ -40,7 +40,7 @@ SECTIONS = (
     ("Archived tools, kept for existing links", lambda r: r in {"integrity-economics.html", "readiness-score.html", "regulatory-change-impact.html", "identifier-check.html"}),
     ("COA and eCOA reference", lambda r: r in {"ecoa.html", "coa-types.html", "ecoa-workflow.html", "coa-nordic.html"}),
     ("Research and primary sources", lambda r: r in {"research.html", "primary-sources.html"} or r.startswith("research/")),
-    ("Policies", lambda r: r.startswith("privacy-notice/")),
+    ("Policies", lambda r: r.startswith(("privacy-notice/", "da/privacy-notice/"))),
 )
 
 OUTRO = """Operating boundaries:
