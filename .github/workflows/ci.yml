@@ -136,3 +136,5 @@ jobs:
           E2E_BASE_URL=http://localhost:8103 node e2e/site_acceptance.mjs
           E2E_BASE_URL=http://localhost:8103 node e2e/accessibility_journey.mjs
           E2E_BASE_URL=http://localhost:8103 node e2e/performance_smoke.mjs
+          E2E_BASE_URL=http://localhost:8103 node e2e/tool_privacy_journey.mjs
+          E2E_BASE_URL=http://localhost:8103 node e2e/pdf_upload_journey.mjs

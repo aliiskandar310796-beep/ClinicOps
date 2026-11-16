@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" data-seg="device">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'none'; worker-src 'self' blob:; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <title>Regulatory Change Impact Mapper | ClinicOps</title>
@@ -92,6 +92,7 @@ ol#queue{padding-left:1.3rem;max-width:42.43em}#queue li{margin:.5em 0}
 <div class="principles"><div class="principle"><strong>Deterministic</strong><span>Identical inputs always produce the identical checklist and queue. No scoring model, no inference.</span></div><div class="principle"><strong>Fail-closed</strong><span>Surfaces the profile does not support are excluded, not guessed. A missing obligation maps to a consistency check, not an assumed duty.</span></div><div class="principle"><strong>Human-owned</strong><span>Bands route review effort. Regulatory interpretation and every disposition stay with your qualified owner.</span></div></div>
 <h2>From triage structure to reviewed evidence</h2><p>This mapper structures the first hour after a regulatory change lands: which surfaces to look at, in what order, and what evidence each look should leave behind. When the queue exposes reconciliation across documents, unclear ownership or a register that no longer matches them, a scoped review takes it from there.</p>
 <div class="actions"><a class="cta primary" href="assessment-intake?workstream=regulatory-change-impact">Scope a change-impact review</a><a class="cta secondary" href="integrity-check">Check one change's propagation</a><a class="cta secondary" href="technical-file-consistency">Check cross-document consistency</a><a class="cta secondary" href="mailto:info@clinicops.dk?subject=Regulatory%20change%20impact">Email ClinicOps</a></div>
+<p class="small muted data-note">Do not enter patient-identifiable or other personal data. This tool runs in your browser and sends nothing anywhere.</p>
 </main>
 <footer class="site"><div class="footer-inner"><span>ClinicOps · Evidence-first regulatory operations · <a href="privacy-notice/">Privacy</a></span></div><div class="footer-inner"><span>ClinicOps is not a notified body or a competent authority, and does not replace your RA/QA team, RIM, QMS, PLM or ERP.</span></div></footer>
 <script>
