@@ -40,7 +40,9 @@ details{border:1px solid var(--border);border-radius:12px;padding:12px 16px;back
 
 <div class="field" style="margin-top:20px"><label for="notes">Open questions / notes for the QPPV</label><textarea id="notes" placeholder="e.g. Danish specialty list for recipients agreed with medical affairs? Co-MAH contacts confirmed?"></textarea></div>
 <div class="actions"><button class="btn primary-btn" id="make">Build readiness summary</button><button class="btn secondary-btn" id="copy" disabled>Copy summary</button><button class="btn secondary-btn" id="dl" disabled>Download summary (.txt)</button></div>
-<p class="status" id="status"></p>
+<div class="actions"><button class="btn secondary-btn" id="save">Save progress (.json)</button><label class="btn secondary-btn" for="load" style="cursor:pointer">Load saved progress</label><input type="file" id="load" accept="application/json,.json" style="position:absolute;left:-9999px" aria-label="Load saved progress (.json)"><button class="btn secondary-btn" id="example">Load a fictional example</button></div>
+<p class="small muted">Progress is kept only in the file you save. Nothing is stored in the browser, and nothing is uploaded.</p>
+<p class="status" id="status" role="status" aria-live="polite"></p>
 </form>
 <div class="summary-grid" id="sum"></div>
 <pre id="out">No summary built yet.</pre>
@@ -106,6 +108,32 @@ document.getElementById('make').onclick=()=>{const prod=document.getElementById(
  txt=o;document.getElementById('out').textContent=o;document.getElementById('sum').innerHTML=[['Confirmed',done],['Open',open],['Total',total]].map(x=>`<div class="card"><strong>${x[1]}</strong><span class="muted small">${x[0]}</span></div>`).join('');document.getElementById('copy').disabled=false;document.getElementById('dl').disabled=false;document.getElementById('status').textContent='Summary built. Nothing left your browser.';};
 document.getElementById('copy').onclick=()=>navigator.clipboard.writeText(txt).then(()=>document.getElementById('status').textContent='Summary copied.');
 document.getElementById('dl').onclick=()=>dl('danish-dhpc-readiness-summary.txt',txt,'text/plain');
+
+(function(){
+var SCHEMA='clinicops-dhpc/1',dirty=false;
+function st(m){document.getElementById('status').textContent=m;}
+function state(){var c={};for(var g in ITEMS){c[g]=ITEMS[g].map(function(_,i){return document.getElementById(g+i).checked;});}
+ return {schema:SCHEMA,product:document.getElementById('prod').value,due:document.getElementById('due').value,notes:document.getElementById('notes').value,checked:c};}
+function apply(d){document.getElementById('prod').value=typeof d.product==='string'?d.product.slice(0,300):'';
+ document.getElementById('due').value=/^\d{4}-\d{2}-\d{2}$/.test(d.due||'')?d.due:'';
+ document.getElementById('notes').value=typeof d.notes==='string'?d.notes.slice(0,5000):'';
+ for(var g in ITEMS){ITEMS[g].forEach(function(_,i){document.getElementById(g+i).checked=!!(d.checked&&d.checked[g]&&d.checked[g][i]===true);});}
+ document.getElementById('out').textContent='No summary built yet.';document.getElementById('sum').innerHTML='';
+ document.getElementById('copy').disabled=true;document.getElementById('dl').disabled=true;}
+function valid(d){if(!d||typeof d!=='object'||Array.isArray(d))return 'Not a saved-progress file.';if(d.schema!==SCHEMA)return 'Unexpected schema.';
+ if(!d.checked||typeof d.checked!=='object'||Array.isArray(d.checked))return 'The checklist is missing.';
+ for(var g in ITEMS){if(!Array.isArray(d.checked[g])||d.checked[g].length!==ITEMS[g].length)return 'The checklist does not match this version of the checker.';}
+ return '';}
+document.addEventListener('input',function(){dirty=true;});document.addEventListener('change',function(){dirty=true;});
+window.addEventListener('beforeunload',function(e){if(dirty){e.preventDefault();e.returnValue='';}});
+document.getElementById('save').onclick=function(){dl('danish-dhpc-progress.json',JSON.stringify(state(),null,2),'application/json');dirty=false;st('Progress saved to a file. Nothing left your browser.');};
+document.getElementById('load').addEventListener('change',function(e){var f=e.target.files[0];e.target.value='';if(!f)return;
+ if(f.size>200000){st('That file is too large to be a saved-progress file.');return;}
+ f.text().then(function(x){var d;try{d=JSON.parse(x);}catch(err){st('Not loaded: the file is not valid JSON.');return;}
+  var bad=valid(d);if(bad){st('Not loaded: '+bad);return;}apply(d);dirty=false;st('Saved progress loaded. Build the summary to refresh it.');});});
+document.getElementById('example').onclick=function(){var c={};for(var g in ITEMS){c[g]=ITEMS[g].map(function(_,i){return i===0;});}
+ apply({product:'Examplemab 100 mg (fictional)',due:'2027-03-15',notes:'Fictional example: first item in each group confirmed, the rest open.',checked:c});dirty=false;st('Fictional example loaded. It is placeholder data.');};
+})();
 </script>
 </main>
 <footer class="site"><div class="footer-inner"><span>ClinicOps · Browser-local evidence tools.</span><span><a href="services">Solution</a><a href="primary-sources">Sources</a><a href="privacy-notice/">Privacy</a></span></div><div class="footer-inner"><span>ClinicOps is not a notified body or a competent authority, and does not replace your RA/QA team, RIM, QMS, PLM or ERP.</span></div></footer>
