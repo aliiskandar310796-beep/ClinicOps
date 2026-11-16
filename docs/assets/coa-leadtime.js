@@ -135,6 +135,14 @@
     if (!lastResult) { say('Enter a kick-off date and at least one row first.'); return; }
     download('lead-time-plan.csv', L.toCSV(lastResult), 'text/csv'); say('CSV downloaded.');
   });
+  $('export-scenarios').addEventListener('click', () => {
+    if (!lastResult) { say('Enter a kick-off date and at least one row first.'); return; }
+    download('lead-time-scenarios.csv', L.toScenariosCSV(lastResult), 'text/csv'); say('Scenario CSV downloaded.');
+  });
+  $('export-ics').addEventListener('click', () => {
+    if (!lastResult) { say('Enter a kick-off date and at least one row first.'); return; }
+    download('lead-time-plan.ics', L.toICS(lastResult, new Date().toISOString().replace(/[-:]/g, '').slice(0, 15) + 'Z'), 'text/calendar'); say('Calendar file downloaded. Dates are all-day events.');
+  });
   $('export-json').addEventListener('click', () => {
     download('lead-time-plan.json', JSON.stringify({schema: L.SCHEMA, kickoff: $('kickoff').value, target: $('target').value, durations, products}, null, 2), 'application/json'); say('Workspace file downloaded.');
   });
@@ -152,6 +160,13 @@
       renderRows(); renderDurations(); recompute(); say('Imported ' + products.length + ' row' + (products.length === 1 ? '' : 's') + '.');
     } catch (err) { say('Not imported: the file is not valid JSON.'); }
   });
+
+  /* Work lives only in this tab: warn before it is lost, until it has been exported or cleared. */
+  let dirty = false;
+  const markDirty = () => { dirty = products.length > 0; };
+  document.addEventListener('input', markDirty);
+  ['export-json', 'clear'].forEach(id => $(id).addEventListener('click', () => { dirty = false; }));
+  window.addEventListener('beforeunload', e => { if (dirty) { e.preventDefault(); e.returnValue = ''; } });
 
   renderRows(); renderDurations(); recompute();
 })();
