@@ -206,7 +206,7 @@ def test_legacy_clinical_operations_url_is_a_noindex_redirect_stub() -> None:
     assert "noindex" in parser.meta.get("robots", "")
     assert parser.canonical == "https://clinicops.dk/services"
     assert re.search(r'http-equiv="refresh"\s+content="0;\s*url=services"', html)
-    assert "https://clinicops.dk/clinical-operations" not in SITEMAP.read_text(encoding="utf-8")
+    assert "<loc>https://clinicops.dk/clinical-operations</loc>" not in SITEMAP.read_text(encoding="utf-8")
 
 
 # ---------------------------------------------------------------------------

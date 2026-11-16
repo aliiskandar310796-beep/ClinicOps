@@ -44,6 +44,7 @@ Free browser-local tools and examples:
 - ClinicOps Class III Transition Map — Sanitized Sample: https://clinicops.dk/transition-map-sample/ - Sanitized fictional sample of the ClinicOps Class III Transition Map work-plan format.
 
 COA and eCOA reference:
+- Clinical operations workflow map | ClinicOps: https://clinicops.dk/clinical-operations-workflow-map - A map of the work in an EU clinical study, from planning to archive: six phases, twelve lanes, what each step leaves behind, and clocks only where the Regulation text was read. Filter by drug or device.
 - COA and eCOA in Denmark and the Nordics | ClinicOps: https://clinicops.dk/coa-nordic - What the Nordic authorities say about participant-facing electronic assessments, language, ethics review and data protection, which instrument languages exist, and what is still unconfirmed, with a dated source register.
 - COA types and what each asks of an eCOA study | ClinicOps: https://clinicops.dk/coa-types - The four clinical outcome assessment types, the questions to settle before choosing an instrument, and what regulators and consensus groups say about electronic versions, translation and testing, with a dated source register.
 - COA and eCOA: workflow, assessment types, Nordic context and free tools | ClinicOps: https://clinicops.dk/ecoa - A reference and four free browser-only tools for planning electronic clinical outcome assessments: workflow map, assessment types, what changes in Denmark and the Nordics, and where the dates and burden come from.

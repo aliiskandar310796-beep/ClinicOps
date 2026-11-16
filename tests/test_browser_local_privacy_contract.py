@@ -27,6 +27,7 @@ BROWSER_LOCAL = (
     "danish-dhpc-checker.html",
     "assessment-intake.html",
     "integrity-scanner.html",
+    "clinical-operations-workflow-map.html",
 )
 
 NETWORK_PRIMITIVES = ("fetch(", "xmlhttprequest", "sendbeacon", "websocket")
