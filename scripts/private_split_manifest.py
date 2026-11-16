@@ -249,10 +249,16 @@ def _area(path: str) -> str:
     return "other"
 
 
+# The split tooling itself names private paths by design; it is not a dependency.
+SELF_PATHS = frozenset({"scripts/private_split_manifest.py", "tests/test_private_split_manifest.py"})
+
+
 def find_dependencies(root: Path, manifest: dict) -> list[dict]:
     pattern = _private_patterns(manifest)
     deps: list[dict] = []
     for path in paths_of(manifest, PUBLIC):
+        if path in SELF_PATHS:
+            continue
         if Path(path).suffix not in TEXT_SUFFIXES and Path(path).name not in {"CODEOWNERS", ".gitignore"}:
             continue
         full = root / path
