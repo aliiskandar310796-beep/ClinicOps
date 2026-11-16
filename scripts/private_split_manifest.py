@@ -140,6 +140,7 @@ MOVES_WITH_PRIVATE_TESTS: tuple[str, ...] = (
     "tests/test_delegation_proof_contract.py",  # asserts content of sales/ delegation docs
     "tests/test_pilot_operator_contract.py",  # asserts content of sales/ pilot playbooks
     "tests/test_expansion_lane_contract.py",  # asserts content of 04_GROWTH/expansion_lanes.json
+    "tests/test_conversion_private_docs.py",  # asserts content of 03_OPERATIONS auto-reply document
 )
 
 TEXT_SUFFIXES = {

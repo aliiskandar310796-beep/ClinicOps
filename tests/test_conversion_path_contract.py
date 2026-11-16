@@ -81,14 +81,6 @@ def test_privacy_notice_gives_a_retention_number_for_enquiries() -> None:
     assert "as long as needed" in section  # client files keep the legal-obligation wording
 
 
-def test_auto_reply_document_exists_and_matches_the_site_commitment() -> None:
-    doc = (ROOT / "03_OPERATIONS" / "MAILBOX_AUTO_REPLY_AND_RESPONSE_TIME.md").read_text(encoding="utf-8")
-    assert "within three working days" in doc
-    assert "tre hverdage" in doc
-    assert "CM-01" in doc and "CM-05" in doc
-    assert "Please do not send patient-identifiable data or confidential files by email" in doc
-
-
 def test_research_page_has_the_question_block_and_a_corrections_line() -> None:
     html = _read("research.html")
     assert 'id="ask"' in html
