@@ -1,0 +1,48 @@
+name: Regulatory Watch
+
+# Weekly read of three official public feeds (lens 29). It OPENS GitHub ISSUES
+# and nothing else: it never edits a claim, stamp, page or the registry, never
+# commits, never publishes. A feed item is a prompt for a human to read the
+# primary source.
+#
+# Reuse rules (research/eudamed-public-api-reuse-review.md, lens 29 section 5):
+# one request per feed per week, identifying User-Agent, robots.txt checked
+# first, no retry after a 403 or 429 (the refusal opens an Issue and that feed
+# stays paused while the Issue is open), and no EUDAMED public API polling here
+# (the monthly EUDAMED Watch workflow is a separate job).
+#
+# Triggers are the weekly cron and manual dispatch only. The first run of each
+# month also opens the "Monthly verification YYYY-MM" Issue from
+# .github/ISSUE_TEMPLATE/monthly-verification.md.
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '23 6 * * 1'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: clinicops-regulatory-watch
+  cancel-in-progress: false
+
+jobs:
+  regulatory-watch:
+    name: Official feed watch
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # issues: write opens the watch Issues. contents stays read-only on purpose.
+    permissions:
+      contents: read
+      issues: write
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+      - name: Compare official feeds and open Issues
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: python scripts/regulatory_watch.py run

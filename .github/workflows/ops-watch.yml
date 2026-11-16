@@ -23,15 +23,53 @@ jobs:
   live-site-health:
     name: Live site health
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
+    # issues: write is used only by scripts/report_ops_issue.py (open/update/close
+    # the ops-watch Issues). actions: write is used only to re-enable the two
+    # scheduled workflows (keep-alive). Nothing here can write repository contents.
+    permissions:
+      contents: read
+      issues: write
+      actions: write
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
       - run: pip install -e .
-      - name: Verify clinicops.dk over HTTPS
-        run: python scripts/check_live_site.py
+      # --full adds DNS (public DoH), TLS expiry, sitemap parity and security.txt.
+      # continue-on-error so the Issue step below always runs; the last step
+      # re-fails the job so the run still shows red.
+      - name: Verify clinicops.dk (HTTPS, DNS, TLS, sitemap, security.txt)
+        id: check
+        continue-on-error: true
+        run: python scripts/check_live_site.py --full --report "$RUNNER_TEMP/ops-report.json"
+      - name: Open, update or close the ops-watch Issue
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          python scripts/report_ops_issue.py --report "$RUNNER_TEMP/ops-report.json" \
+            --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+      # Keep-alive: GitHub disables scheduled workflows in a public repo after 60
+      # days without repository activity. report_ops_issue.py leaves one heartbeat
+      # comment about every 28 days; this step also re-enables both schedules.
+      # No commits to main. See scripts/README_ops_watch.md.
+      - name: Keep schedules enabled
+        if: always()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for wf in ops-watch.yml regulatory-watch.yml; do
+            gh api -X PUT "repos/$GITHUB_REPOSITORY/actions/workflows/$wf/enable" || true
+          done
+      - name: Fail the job if the check found failures
+        if: steps.check.outcome == 'failure'
+        run: |
+          echo "::error::Live-site check reported failures; see the ops-watch Issue and the Verify step log."
+          exit 1
 
   evidence-freshness:
     name: Evidence freshness
