@@ -158,6 +158,7 @@ SECTION_BY_PAGE = {
     "ecoa-lead-time-planner.html": "Clinical operations",
     "ecoa-visit-burden.html": "Clinical operations",
     "ctis-clock.html": "Clinical operations",
+    "clinical-operations-workflow-map.html": "Clinical operations",
     "danish-pv-literature-register.html": "Clinical operations",
     "sdea-clause-checker.html": "Clinical operations",
     "danish-dhpc-checker.html": "Clinical operations",

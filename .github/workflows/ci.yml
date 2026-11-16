@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: '22'
       - name: Browser reconciliation rules
-        run: node --test tests/reconciliation.test.cjs tests/ecoa_workbench.test.cjs tests/coa_finder.test.cjs tests/coa_leadtime.test.cjs tests/coa_burden.test.cjs
+        run: node --test tests/reconciliation.test.cjs tests/ecoa_workbench.test.cjs tests/coa_finder.test.cjs tests/coa_leadtime.test.cjs tests/coa_burden.test.cjs tests/ops_map.test.cjs
       - run: pytest -q
       - run: ruff check src tests scripts
       - name: Revenue OS experiment contract
@@ -60,6 +60,8 @@ jobs:
         run: python scripts/validate_professional_claims.py
       - name: Sitemap contract
         run: python scripts/render_sitemap.py --check
+      - name: Workflow map contract
+        run: python scripts/render_ops_map.py --check
       - name: Public shell drift contract
         run: python scripts/harmonize_public_shell.py --check
       - name: llms.txt contract
@@ -133,6 +135,7 @@ jobs:
           E2E_BASE_URL=http://localhost:8103 node e2e/ecoa_workbench_journey.mjs
           E2E_BASE_URL=http://localhost:8103 node e2e/coa_tools_journey.mjs
           E2E_BASE_URL=http://localhost:8103 node e2e/ctis_clock_journey.mjs
+          E2E_BASE_URL=http://localhost:8103 node e2e/ops_map_journey.mjs
           E2E_BASE_URL=http://localhost:8103 node e2e/exports_journey.mjs
           E2E_BASE_URL=http://localhost:8103 node e2e/identifier_journey.mjs
           E2E_BASE_URL=http://localhost:8103 node e2e/xlsx_xss_journey.mjs

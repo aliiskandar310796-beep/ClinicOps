@@ -38,7 +38,7 @@ SECTIONS = (
         "danish-pv-literature-register.html", "sdea-clause-checker.html", "danish-dhpc-checker.html",
     }),
     ("Archived tools, kept for existing links", lambda r: r in {"integrity-economics.html", "readiness-score.html", "regulatory-change-impact.html", "identifier-check.html"}),
-    ("COA and eCOA reference", lambda r: r in {"ecoa.html", "coa-types.html", "ecoa-workflow.html", "coa-nordic.html"}),
+    ("COA and eCOA reference", lambda r: r in {"ecoa.html", "coa-types.html", "ecoa-workflow.html", "coa-nordic.html", "clinical-operations-workflow-map.html"}),
     ("Research and primary sources", lambda r: r in {"research.html", "primary-sources.html"} or r.startswith("research/")),
     ("Policies", lambda r: r.startswith("privacy-notice/")),
 )
