@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" data-seg="ecoa">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'none'; worker-src 'self' blob:; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <title>eCOA licence and translation lead-time planner | ClinicOps</title>
@@ -94,6 +94,7 @@ details.fold summary{cursor:pointer;font-weight:650;min-height:44px;display:flex
 <h2>Where this fits</h2>
 <p>List the assessments first in the <a href="coa-type-finder">COA type finder</a>. Once the dates look workable, run the study in the <a href="ecoa-delivery-workbench">delivery workbench</a>. <a href="coa-nordic">COA in Denmark and the Nordics</a> covers what adds work in each language.</p>
 <div class="cta-row"><a class="cta primary" href="ecoa-delivery-workbench">Plan the delivery</a><a class="cta ghost" href="coa-type-finder">Sort the assessments by type</a></div>
+<p class="small muted data-note">Do not enter patient-identifiable or other personal data. This tool runs in your browser and sends nothing anywhere.</p>
 </main>
 <script src="assets/coa-leadtime-core.js"></script><script src="assets/coa-leadtime.js"></script>
 <footer class="site">

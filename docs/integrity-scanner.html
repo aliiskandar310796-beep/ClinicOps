@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" data-seg="device">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'none'; worker-src 'self' blob:; object-src 'none'; frame-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <title>Regulatory Integrity Scanner | ClinicOps</title>
@@ -154,7 +154,7 @@ ol#queue{padding-left:1.3rem;max-width:42.43em}#queue li{margin:.5em 0}
 <div id="b_mapping" hidden><h2>2 · Map columns to regulatory objects</h2><div class="panel"><p class="hint" id="b_parseinfo" role="status"></p>
 <div id="b_sheetwrap" class="field sheetwrap" hidden><label for="b_sheet">Worksheet</label><select id="b_sheet"></select></div>
 <div id="b_maprows"></div>
-<div class="actions profbar"><input id="prof_name" name="profile_name" autocomplete="off" spellcheck="false" aria-label="Mapping profile name" placeholder="Mapping profile name (e.g. RIM export)"><button class="btn secondary" id="prof_save" type="button">Save profile</button><select id="prof_list" aria-label="Saved profiles"><option value="">— saved profiles —</option></select><button class="btn secondary" id="prof_apply" type="button">Apply</button><button class="btn secondary" id="prof_delete" type="button">Delete</button><button class="btn secondary" id="prof_export" type="button">Export profiles</button><input id="prof_file" type="file" aria-label="Import profiles JSON file" accept=".json,application/json" hidden><button class="btn secondary" id="prof_import" type="button">Import profiles</button></div>
+<div class="actions profbar"><input id="prof_name" name="profile_name" autocomplete="off" spellcheck="false" aria-label="Mapping profile name" placeholder="Mapping profile name (e.g. RIM export)"><button class="btn secondary" id="prof_save" type="button">Save profile</button><span class="small muted"> Profiles hold column names only and are kept in this browser's local storage on this device.</span><select id="prof_list" aria-label="Saved profiles"><option value="">— saved profiles —</option></select><button class="btn secondary" id="prof_apply" type="button">Apply</button><button class="btn secondary" id="prof_delete" type="button">Delete</button><button class="btn secondary" id="prof_export" type="button">Export profiles</button><input id="prof_file" type="file" aria-label="Import profiles JSON file" accept=".json,application/json" hidden><button class="btn secondary" id="prof_import" type="button">Import profiles</button></div>
 <p class="hint">Profiles are stored only in this browser (and in files you export). They are convenience configuration, not regulatory evidence.</p>
 <div class="actions"><button class="btn primary" id="b_run" type="button">Run portfolio scan</button></div></div></div>
 </section>
@@ -191,6 +191,7 @@ ol#queue{padding-left:1.3rem;max-width:42.43em}#queue li{margin:.5em 0}
 <h2>From free scan to reviewed closure</h2><p>The scanner does the first pass. What it leaves behind &mdash; reconciliation across systems, unclear ownership, records that no longer match their sources &mdash; is what the paid formats close: the <a href="services#portfolio-scan">Portfolio Integrity Scan</a> and the <a href="evidence-change-control-pack">Regulatory Change Integrity Review</a>.</p>
 <div class="cta-row"><a class="cta primary" href="assessment-intake?workstream=integrity-review">Scope a review</a></div>
 <p class="cta-links"><a href="integrity-check">Build a single-change evidence packet</a><a href="change-surface-mapper">Map a change&rsquo;s surfaces first</a><a href="mailto:info@clinicops.dk?subject=Regulatory%20Integrity%20Scanner">Email info@clinicops.dk</a></p>
+<p class="small muted data-note">Do not enter patient-identifiable or other personal data. This tool runs in your browser and sends nothing anywhere.</p>
 </main>
 <footer class="site"><div class="footer-inner"><span>ClinicOps · EU MedTech regulatory data integrity · <a href="privacy-notice/">Privacy</a></span></div><div class="footer-inner"><span>ClinicOps is not a notified body or a competent authority, and does not replace your RA/QA team, RIM, QMS, PLM or ERP.</span></div></footer>
 <script src="assets/reconciliation.js" defer></script>
