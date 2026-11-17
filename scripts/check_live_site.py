@@ -154,6 +154,11 @@ TARGETS = (
         "<title>EU MDR Regulatory Data Integrity for Global MedTech | ClinicOps</title>",
     ),
     Target(
+        "/subscribe",
+        200,
+        "<title>Follow ClinicOps updates by feed or calendar | ClinicOps</title>",
+    ),
+    Target(
         "/eudamed-transition",
         200,
         "<title>EUDAMED registration date 28 Nov 2026: work plan | ClinicOps</title>",

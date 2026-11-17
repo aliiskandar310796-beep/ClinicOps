@@ -420,7 +420,7 @@ def test_every_public_page_advertises_the_feed() -> None:
 def test_subscribe_line_is_visible_static_and_resolves(page: str) -> None:
     text = (DOCS / page).read_text(encoding="utf-8")
     assert (
-        'Subscribe: <a href="feed.xml">Atom feed</a> / '
+        'Subscribe: <a href="subscribe">Atom feed</a> / '
         '<a href="regulatory-dates.ics">calendar (.ics)</a>'
     ) in text
     assert (DOCS / "feed.xml").is_file()
