@@ -50,7 +50,6 @@ COA and eCOA reference:
 - eCOA workflow map from decision to close-out | ClinicOps: https://clinicops.dk/ecoa-workflow - Twelve steps of an eCOA study, from the decision to close-out: what to settle, what each leaves behind, which free tool helps. A synthesis, not a standard.
 
 Research and primary sources:
-- Follow ClinicOps updates by feed or calendar | ClinicOps: https://clinicops.dk/feed - How to follow ClinicOps verified changes in a feed reader or calendar app. The feed is made for readers; opening the raw file in a browser shows code.
 - Primary Public Sources | ClinicOps: https://clinicops.dk/primary-sources - The public authorities and official source systems ClinicOps works from: EUDAMED, MDR/IVDR, UDI, SS(C)P, Danish authorities and the EU health-data framework.
 - Research & Methodology | ClinicOps: https://clinicops.dk/research - ClinicOps research and methodology for evidence-controlled EU MedTech regulatory data integrity, market access and related evidence workflows.
 - Monthly monitoring of the public EUDAMED record | ClinicOps: https://clinicops.dk/research/eudamed-watch/ - How ClinicOps monitors the public EUDAMED record each month: monthly versioned snapshots of SS(C)P linkage for a private watchlist, diffed, aggregates only.

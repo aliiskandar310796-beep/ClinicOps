@@ -443,7 +443,7 @@ NAV_ITEMS = (
 # carry no aria-current. Unknown new pages fail loudly so the map is kept current.
 SECTION_BY_PAGE = {
     "index.html": "Home",
-    "feed.html": "Research",
+    "subscribe.html": "Research",
     "services.html": "Medical devices",
     "assessment-intake.html": "Medical devices",
     "evidence-change-control-pack.html": "Medical devices",
