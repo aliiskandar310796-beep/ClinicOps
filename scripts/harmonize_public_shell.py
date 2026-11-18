@@ -465,6 +465,7 @@ SECTION_BY_PAGE = {
     "research/eudamed-watch/index.html": "Research",
     "research/sscp-public-record-scan/index.html": "Research",
     "tools.html": "Tools",
+    "learn.html": "Clinical operations",
     "change-surface-mapper.html": "Tools",
     "identifier-check.html": "Tools",
     "integrity-check.html": "Tools",

@@ -7,6 +7,7 @@ Core pages:
 - About ClinicOps | EU MedTech Regulatory Data Integrity: https://clinicops.dk/about - How ClinicOps works: the method, how projects are run, and what is not claimed.
 - Scope a ClinicOps Review | ClinicOps: https://clinicops.dk/assessment-intake - Build a concise scope brief for a ClinicOps Regulatory Change Integrity Review or portfolio integrity scan in your browser. No form data is transmitted by this page.
 - Contact ClinicOps | EU MedTech Regulatory Data Integrity: https://clinicops.dk/contact - Contact ClinicOps to scope a Regulatory Change Integrity Review, a portfolio integrity scan, Denmark market access or Danish pharmacovigilance support.
+- Learning hub: life-science operations and the Nordic market | ClinicOps: https://clinicops.dk/learn - Free, sourced learning for people who run or oversee regulated life-science work in Europe, with a Nordic focus: video, workflow maps, dated references and browser-only tools.
 - Solution: Regulatory Change Integrity Review | ClinicOps: https://clinicops.dk/services - The Regulatory Change Integrity Review: one approved change reconciled against EUDAMED, UDI, certificates, SS(C)P and controlled records, with closure evidence.
 - Use Cases: EUDAMED, SS(C)P, AR Portfolios, Denmark | ClinicOps: https://clinicops.dk/use-cases - Where the discipline is applied: EUDAMED and UDI data, SS(C)P operations, class III MDR transition, AR portfolios, document control, language versions, Denmark.
 
