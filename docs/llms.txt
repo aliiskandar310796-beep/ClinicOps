@@ -46,7 +46,7 @@ COA and eCOA reference:
 - Clinical operations workflow map | ClinicOps: https://clinicops.dk/clinical-operations-workflow-map - Map of the work in an EU clinical study, planning to archive: six phases, twelve lanes, what each step leaves behind, and clocks where the text was read.
 - COA and eCOA in Denmark and the Nordics | ClinicOps: https://clinicops.dk/coa-nordic - What the Nordic authorities say about electronic participant assessments, language, ethics review and data protection, and what is unconfirmed. Dated sources.
 - COA types and what each asks of an eCOA study | ClinicOps: https://clinicops.dk/coa-types - The four clinical outcome assessment types, questions to settle before choosing an instrument, and what regulators say about electronic versions. Dated sources.
-- COA and eCOA: workflow, types, Nordic context, free tools | ClinicOps: https://clinicops.dk/ecoa - Reference and four free browser-only tools for planning electronic clinical outcome assessments: workflow, types, Nordic context, dates and burden.
+- COA and eCOA learning hub: video, workflow, types, free tools | ClinicOps: https://clinicops.dk/ecoa - Learn eCOA planning: a 12-minute walkthrough, the workflow map, COA types, Nordic context and four free browser-only tools. Nothing is sent to ClinicOps.
 - eCOA workflow map from decision to close-out | ClinicOps: https://clinicops.dk/ecoa-workflow - Twelve steps of an eCOA study, from the decision to close-out: what to settle, what each leaves behind, which free tool helps. A synthesis, not a standard.
 
 Research and primary sources:
