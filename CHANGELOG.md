@@ -1,5 +1,11 @@
 # ClinicOps operating changelog
 
+## 2026-11-18 – Learning hub (`/learn`)
+
+- New page `learn` (life-science operations and the Nordic market): five learning areas, paths by role, how the material is made, follow-by-feed, a pre-filled topic request. Navigation only; it states no rule and declares no claims, and keeps regulation names out of its own copy so the page-claim gate stays unchanged. Linked from `ecoa` and `research`. Not in the header: the positioning test caps primary navigation at seven items.
+- Internal plan `04_GROWTH/LEARNING_HUB_RESILIENT_MARKETING_2026-11-18.md`: owned-surface-first, channel guardrails, measurement without tracking, risk register, 90-day gates, decisions for the owner. Nothing in it is sent or posted.
+- `scripts/render_llms_txt.py` and `scripts/harmonize_public_shell.py` know the new page.
+
 ## 2026-11-18 – eCOA learning hub: narrated walkthrough
 
 - `ecoa` now opens with a "Start here" block: a 12 min 27 s narrated walkthrough of the twelve workflow steps, self-hosted (`docs/assets/video/ecoa-12-steps.mp4`, about 10 MB, 1280x720, poster alongside), `preload="none"`, no third-party player, no cookies, no network call until play. Chapter list seeks the video (`docs/assets/ecoa-video.js`, no network) and links each chapter to its step on `ecoa-workflow`; full transcript in a `<details>` block; `VideoObject` JSON-LD; "A suggested learning path" replaces "How the pieces work together". `ecoa-workflow` gains a "Prefer to watch?" link.

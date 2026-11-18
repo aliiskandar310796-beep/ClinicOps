@@ -25,7 +25,7 @@ def intro() -> str:
 
 # Section title -> predicate on the path relative to the site root.
 SECTIONS = (
-    ("Core pages", lambda r: r in {"index.html", "da/index.html", "services.html", "use-cases.html", "about.html", "contact.html", "assessment-intake.html"}),
+    ("Core pages", lambda r: r in {"index.html", "da/index.html", "services.html", "use-cases.html", "about.html", "contact.html", "assessment-intake.html", "learn.html"}),
     ("Solution and use cases", lambda r: r in {
         "integrity-gate.html", "evidence-change-control-pack.html", "denmark-market-access.html",
         "eu-mdr-regulatory-integrity.html", "eudamed-transition.html", "class-iii-transition.html",
