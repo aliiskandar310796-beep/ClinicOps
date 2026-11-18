@@ -1,5 +1,10 @@
 # ClinicOps operating changelog
 
+## 2026-11-18 – eCOA learning hub: narrated walkthrough
+
+- `ecoa` now opens with a "Start here" block: a 12 min 27 s narrated walkthrough of the twelve workflow steps, self-hosted (`docs/assets/video/ecoa-12-steps.mp4`, about 10 MB, 1280x720, poster alongside), `preload="none"`, no third-party player, no cookies, no network call until play. Chapter list seeks the video (`docs/assets/ecoa-video.js`, no network) and links each chapter to its step on `ecoa-workflow`; full transcript in a `<details>` block; `VideoObject` JSON-LD; "A suggested learning path" replaces "How the pieces work together". `ecoa-workflow` gains a "Prefer to watch?" link.
+- The narration is a synthetic voice (local open-source TTS), disclosed on the page. One imagined study, not a client, runs through it. Labelled a ClinicOps synthesis, not a standard.
+
 ## 2026-11-16 – eCOA workflow map: twelve steps, templates, language dimension
 
 - `ecoa-workflow` updated in place from ten stages to twelve steps (0 to 11): new step 0 (decide and select) and new step 10 (control change and transfer data); the former step 10 is now step 11, steps 1 to 9 keep their numbers. Rows carry slug anchors (`#step-test`). Labelled a ClinicOps synthesis of published guidance, not a standard. The source register gained a "last opened" column; all eight sources were reopened on 2026-11-16. Claims `CO-CLM-0053` to `CO-CLM-0055` added (renumbered from 0050 to 0052 at integration, where registry-stamps already used those ids) for the statements the new rows and templates rely on.
