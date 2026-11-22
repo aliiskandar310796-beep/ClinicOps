@@ -50,16 +50,68 @@ def test_public_termbase_file_is_valid_and_matches_expected_state() -> None:
     definition -- plus 26 new `verified` rows for definitions (1)-(35) not
     already covered by a seed. See data/termbase/README.md for the schema
     and provenance rules this file must keep satisfying as later slices
-    (Art. 2(36)-(71) and beyond) are added; update the expected counts below
-    together with any future change to this file.
+    are added; update the expected counts below together with any future
+    change to this file.
+
+    2026-10-04 t0-termbase Sunday PR: adds TB-0049..TB-0085 from the
+    2026-09-29 run -- MDR 2017/745 Art. 2(36)-(71) not covered by earlier
+    rows (28 `verified`), the 'UDI' abbreviation from (15) (`verified`,
+    synonym-of:TB-0033) and 8 within-definition sub-terms (`candidate`).
+
+    2026-10-25 t0-termbase Sunday PR: adds TB-0086..TB-0324 from the six
+    nightly runs 2026-10-19..2026-10-24, all quoted from the EUR-Lex
+    consolidated EN and DA texts -- MDR 2017/745 Chapter I-II headings and
+    phrases (Art. 1-21), IVDR 2017/746 Art. 2(1)-(74) definitions, IVDR
+    Chapter I-III headings, and IVDR Chapter II-III obligation phrases
+    (Art. 10-28). 224 `verified`, 15 `candidate`, append-only: no row
+    present before this change was touched. TB-0154 enters the public file
+    in its annotated form (the 2026-10-21 run re-pointed its `context_da`
+    NOTE at the defining provision TB-0169 and recorded
+    `annotated:t0-termbase-2026-10-21` in `job_run`).
+
+    2026-11-01 t0-termbase Sunday PR: adds TB-0325..TB-0582 from the six
+    nightly runs 2026-10-25..2026-10-31 (no run on 2026-10-28), all quoted
+    from the EUR-Lex consolidated EN and DA texts -- MDR 2017/745 Chapter II
+    lettered points (Art. 11(3), 11(5), 11(7), 13(2), 14(2)) and the whole
+    of IVDR 2017/746 Chapter II at sentence level (Art. 10-16, incl. the
+    Art. 10(8) QMS list and Art. 10(13) in full). 242 `verified`, 16
+    `candidate`, append-only: no row present before this change was
+    touched.
+
+    2026-11-15 t0-termbase Sunday PR (the 2026-11-08 PR night was missed):
+    adds TB-0583..TB-0967 from the nine nightly runs 2026-11-01..2026-11-14
+    (no rows on 11-04, 11-05, 11-06, 11-08, 11-11), all quoted from the
+    EUR-Lex consolidated EN and DA texts -- MDR 2017/745 Chapter I (Art.
+    1(1)-(6), 3, 4) and Chapter II at sentence level (Art. 5-16), and IVDR
+    2017/746 Chapter I (Art. 1, 3, 4) and the Chapter II remainder (Art.
+    5-9). 351 `verified`, 34 `candidate`, append-only: no row present
+    before this change was touched (the first 582 rows are byte-identical
+    to the file on PR #116). The same night's own slice -- MDR 2017/745
+    Art. 1(7)-(12) (combination products, IVD-incorporating devices,
+    machinery) -- adds TB-0968..TB-1003 (29 `verified`, 7 `candidate`),
+    also EUR-Lex only.
+
+    2026-11-22 t0-termbase Sunday PR: adds TB-1004..TB-1240 from the four
+    nightly runs 2026-11-19..2026-11-22 (no run on 11-16, 11-17, 11-18),
+    all quoted from the EUR-Lex consolidated EN and DA texts (20.03.2023)
+    -- MDR 2017/745 Art. 1(13)-(16) and the Art. 2 opener (Chapter I
+    complete), and Chapter III at sentence level: the chapter title, the
+    Art. 25-34 headings, Art. 25-32 in full, Art. 28-31 in full, Art. 33(1)
+    -(4) and the Art. 34 opening. 225 `verified`, 12 `candidate`. Two rows
+    are changed IN PLACE (the first dated exception to append-only, each
+    documented in that night's Drive log): TB-0016 (SSCP seed) promoted
+    `unverified-seed` -> `verified` on 2026-11-20 after Art. 32 was quoted
+    at source, and TB-1077 (Art. 27(1)) promoted `candidate` -> `verified`
+    on 2026-11-21; TB-1079 (Art. 29(1)) was likewise promoted on
+    2026-11-22 but enters this file already verified. Every other row
+    present before this change is byte-identical to the file on PR #126.
     """
     assert validate(PUBLIC) == []
     rows = read_rows(PUBLIC)
-    assert len(rows) == 48
+    assert len(rows) == 1240
     assert Counter(r["status"] for r in rows) == {
-        "verified": 44,
-        "candidate": 3,
-        "unverified-seed": 1,
+        "verified": 1144,
+        "candidate": 96,
     }
     assert all(r["domain"] == "regulatory" for r in rows)
     assert all(r["source_url"] for r in rows)
