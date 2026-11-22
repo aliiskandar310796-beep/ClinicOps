@@ -23,6 +23,8 @@ REQUIRED_MARKERS = (
     'evidence-change-control-pack',
     'assessment-intake',
     'Nothing has been sent or uploaded.',
+    'id="lang-list"',
+    'assets/change-surface-core.js',
 )
 
 FORBIDDEN_NETWORK_MARKERS = (

@@ -1,15 +1,15 @@
 <!doctype html>
 <html lang="en" data-seg="device">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Rrp/oKlTF5JhFj1/wI5MXQooEKDuQe1flpA8aYc4skk='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'"><meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml"><link rel="icon" href="/assets/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<title>Continuous monitoring of the public EUDAMED record | ClinicOps</title>
-<meta name="description" content="How ClinicOps continuously monitors the public EUDAMED record: monthly versioned snapshots of SS(C)P linkage for a private watchlist, diffed, aggregates only.">
+<title>Monthly monitoring of the public EUDAMED record | ClinicOps</title>
+<meta name="description" content="How ClinicOps monitors the public EUDAMED record each month: monthly versioned snapshots of SS(C)P linkage for a private watchlist, diffed, aggregates only.">
 <link rel="canonical" href="https://clinicops.dk/research/eudamed-watch/">
 
-<meta property="og:title" content="Continuous monitoring of the public EUDAMED record | ClinicOps">
-<meta property="og:description" content="How ClinicOps continuously monitors the public EUDAMED record: monthly versioned snapshots of SS(C)P linkage for a private watchlist, diffed, aggregates only.">
+<meta property="og:title" content="Monthly monitoring of the public EUDAMED record | ClinicOps">
+<meta property="og:description" content="How ClinicOps monitors the public EUDAMED record each month: monthly versioned snapshots of SS(C)P linkage for a private watchlist, diffed, aggregates only.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://clinicops.dk/research/eudamed-watch/">
 <meta property="og:site_name" content="ClinicOps">
@@ -23,30 +23,68 @@
     {
       "@type": "WebPage",
       "@id": "https://clinicops.dk/research/eudamed-watch/",
-      "name": "Continuous monitoring of the public EUDAMED record | ClinicOps",
-      "description": "How ClinicOps continuously monitors the public EUDAMED record: monthly versioned snapshots of SS(C)P linkage for a private watchlist, diffed, aggregates only.",
+      "name": "Monthly monitoring of the public EUDAMED record | ClinicOps",
+      "description": "How ClinicOps monitors the public EUDAMED record each month: monthly versioned snapshots of SS(C)P linkage for a private watchlist, diffed, aggregates only.",
       "url": "https://clinicops.dk/research/eudamed-watch/",
-      "isPartOf": {"@type": "WebSite", "name": "ClinicOps", "url": "https://clinicops.dk/"},
-      "publisher": {"@type": "Organization", "name": "ClinicOps", "url": "https://clinicops.dk/"}
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://clinicops.dk/#website",
+        "name": "ClinicOps",
+        "url": "https://clinicops.dk/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://clinicops.dk/#org",
+        "name": "ClinicOps",
+        "url": "https://clinicops.dk/"
+      }
     },
     {
       "@type": "Article",
-      "headline": "Continuous monitoring of the public EUDAMED record",
+      "headline": "Monthly monitoring of the public EUDAMED record",
       "description": "Monthly automated, versioned snapshots of SS(C)P linkage in the public EUDAMED record for a private watchlist, diffed run to run, published as aggregates only.",
-      "mainEntityOfPage": {"@id": "https://clinicops.dk/research/eudamed-watch/"},
+      "mainEntityOfPage": {
+        "@id": "https://clinicops.dk/research/eudamed-watch/"
+      },
       "url": "https://clinicops.dk/research/eudamed-watch/",
       "inLanguage": "en",
       "datePublished": "2026-09-11",
       "dateModified": "2026-09-11",
-      "author": {"@type": "Organization", "name": "ClinicOps", "url": "https://clinicops.dk/", "email": "info@clinicops.dk"},
-      "publisher": {"@type": "Organization", "name": "ClinicOps", "url": "https://clinicops.dk/"}
+      "author": {
+        "@type": "Organization",
+        "@id": "https://clinicops.dk/#org",
+        "name": "ClinicOps",
+        "url": "https://clinicops.dk/",
+        "email": "info@clinicops.dk"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://clinicops.dk/#org",
+        "name": "ClinicOps",
+        "url": "https://clinicops.dk/"
+      }
     },
     {
       "@type": "BreadcrumbList",
       "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Home", "item": "https://clinicops.dk/"},
-        {"@type": "ListItem", "position": 2, "name": "Research", "item": "https://clinicops.dk/research"},
-        {"@type": "ListItem", "position": 3, "name": "EUDAMED record monitoring", "item": "https://clinicops.dk/research/eudamed-watch/"}
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://clinicops.dk/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Research",
+          "item": "https://clinicops.dk/research"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "EUDAMED record monitoring",
+          "item": "https://clinicops.dk/research/eudamed-watch/"
+        }
       ]
     }
   ]
@@ -54,24 +92,24 @@
 </script>
 
 <style>main.wrap{padding-top:clamp(40px,7vw,88px);padding-bottom:24px}.crumbs{font-family:var(--mono);font-size:.76rem;letter-spacing:.02em;color:var(--muted);margin:0 0 clamp(28px,4vw,44px)}.crumbs a{color:var(--muted);text-decoration-color:var(--border-strong)}.rail>p,.rail>.rows,.rail>ol{max-width:68ch}.rail>p{line-height:1.64;margin-bottom:1.1em}.rail .rows li{font-size:1rem;line-height:1.6}.rows.num li strong{display:block;margin-bottom:.2em}.rows.num li{padding-bottom:16px}.hero+p.muted{max-width:68ch;font-size:.95rem}.callout+.cta-links{margin-top:20px}.cta-links+.closing{margin-top:clamp(56px,8vw,96px)}.crumbs a:hover{color:var(--text)}.rows{list-style:none;margin:20px 0;padding:0;max-width:68ch}.rows li{margin:0;padding:11px 0;border-top:1px solid var(--border)}.rows li:last-child{border-bottom:1px solid var(--border)}.rail{margin-top:clamp(56px,7vw,96px)}.cta-row{align-items:center}.cta-links a{display:inline-flex;align-items:center;min-height:44px}.hero+p{margin-top:clamp(28px,4vw,44px)}.crumbs a{display:inline-block;padding:14px 4px;margin:-14px -4px}</style>
-<link rel="preload" href="../../assets/fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="../../assets/fonts/ibm-plex-mono-latin-400.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="../../site.css"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f6f3ec" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0f1517" media="(prefers-color-scheme: dark)"></head>
+<link rel="preload" href="../../assets/fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="../../assets/fonts/ibm-plex-mono-latin-400.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="../../site.css"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f6f3ec" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0f1517" media="(prefers-color-scheme: dark)"><link rel="alternate" type="application/atom+xml" title="ClinicOps verified changes" href="https://clinicops.dk/feed.xml"></head>
 <body>
 <!-- claim-use: research-note -->
 <!-- claim-ids: CO-CLM-0001,CO-CLM-0004,CO-CLM-0005,CO-CLM-0009,CO-CLM-0013,CO-CLM-0017,CO-CLM-0018,CO-CLM-0019 -->
 <!-- controlled source: website/research-eudamed-watch-method.md -->
-<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="../../">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="../../">Home</a><a href="../../ecoa">eCOA</a><a href="../../services" aria-current="page">Medical devices</a><a href="../../denmark-market-access">Danish &amp; PV</a><a href="../../tools">Tools</a><a href="../../about">About</a><a href="../../contact">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");var r=a?a.offsetLeft+a.offsetWidth+16-n.clientWidth:0;if(r>0)n.scrollLeft=r})()</script>
+<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="../../">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="../../">Home</a><a href="../../services">Medical devices</a><a href="../../ecoa">Clinical operations</a><a href="../../tools">Tools</a><a href="../../research" aria-current="page">Research</a><a href="../../about">About</a><a href="../../contact">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");var r=a?a.offsetLeft+a.offsetWidth+16-n.clientWidth:0;if(r>0)n.scrollLeft=r})()</script>
 <main id="main" tabindex="-1" class="wrap">
 <nav class="crumbs" aria-label="Breadcrumb"><a href="/">Home</a> &rsaquo; <a href="/research">Research</a> &rsaquo; EUDAMED record monitoring</nav>
 <section class="hero">
 
-<h1>Continuous monitoring of the public EUDAMED record</h1>
-<p class="lede">A monthly, automated, versioned snapshot of what the public record shows &mdash; diffed run to run, published as aggregates only.</p>
+<h1>Monthly monitoring of the public EUDAMED record</h1>
+<p class="lede">A monthly, automated, versioned snapshot of what the public record shows &mdash; diffed run to run, published as aggregates only.</p><!-- stamp:line:start --><p class="meta stamp-line">Rules as of 14 November 2026 &middot; <a href="#last-verified">last verified</a> against the sources named below &middot; next review by 28 November 2026.</p><!-- stamp:line:end -->
 </section>
 
 <section class="rail"><h2>What it does</h2>
 <p>ClinicOps runs a monthly automated snapshot of what the public EUDAMED record shows for a private watchlist of devices: whether each registration carries a linked SS(C)P, its validation flag and issue year, and how each record is classified &mdash; a genuine MDR registration, a legacy registration identified by its <code>B-</code> EUDAMED DI, or a system/procedure-pack record. Each snapshot is versioned and diffed against the previous one, so what changed in the public record between runs &mdash; a link appearing, a revision moving, a registration vanishing from search &mdash; is recorded rather than remembered. Published results are aggregate-level only: counts and changes, never names, identifiers or document references.</p></section>
 <section class="rail"><h2>Why now</h2>
-<p>MDCG 2026-4 describes a revised EUDAMED operating model in which the manufacturer uploads the SS(C)P master and translations, while the notified body indicates the validated SS(C)P against the relevant Basic UDI-DI(s) &mdash; with production deployment planned for December 2026 in the revised paper (rev.1, October 2026), which replaced the earlier October 2026 plan, and uploads recommended no later than 27 March 2027 for devices placed on the market before mandatory use. Separately, following Commission Decision (EU) 2025/2371, legacy devices still on the market must be registered in EUDAMED by 28 November 2026. Many more SS(C)Ps and Basic UDI-DIs will attach to public records in a short window, and the public record will move under any portfolio that is not watching it.</p>
+<p>MDCG 2026-4 describes a revised EUDAMED operating model in which the manufacturer uploads the SS(C)P master and translations, while the notified body indicates the validated SS(C)P against the relevant Basic UDI-DI(s) &mdash; with production deployment planned for December 2026 in the revised paper (rev.1, October 2026), which replaced the earlier October 2026 plan, and uploads recommended no later than 27 March 2027 for devices placed on the market before mandatory use. Separately, the Commission's legacy-device transition timeline gives 28 November 2026 as the deadline to register devices placed on the market before mandatory use; the timeline carries no document date, Decision (EU) 2025/2371 states no calendar date, and 28 November 2026 is a Saturday, so ClinicOps plans to finish by Friday 27 November 2026. Many more SS(C)Ps and Basic UDI-DIs will attach to public records in a short window, and the public record will move under any portfolio that is not watching it.</p>
 <p>Under MDR Article 32(1) the manufacturer is the duty holder for drawing up the SSCP for applicable implantable and class III devices, subject to the Article 32 exclusions &mdash; the monitoring watches the public trace of that work, not the work itself.</p></section>
 <section class="rail"><h2>Method</h2>
 <p>Automated, read-only, and polite to the public API: bounded page counts, spaced requests, an identifying agent string, no login, no scraping of anything beyond the public JSON record. Records are deduplicated by Basic UDI-DI; legacy <code>B-</code> identifiers are treated as structurally unable to carry an SS(C)P link, as ClinicOps derived screening logic rather than quoted Commission law. Every failed request is recorded, never silently skipped, so a record &ldquo;no longer seen&rdquo; next to a failure is flagged as a possible extraction artefact rather than a registry change.</p></section>
@@ -88,6 +126,7 @@
 <div class="cta-links"><a href="/research">Back to Research</a><a href="/research/sscp-public-record-scan/">Related: the SS(C)P public-record scan</a></div>
 
 <section class="closing"><h2>Take the next step</h2><div class="cta-row"><a class="cta primary" href="../../integrity-check">Run the free browser-local check</a><div class="cta-links"><a href="../../specimen-register/">View the synthetic specimen</a><a href="../../assessment-intake?workstream=integrity-review">Scope one real review</a></div></div></section>
+<!-- stamp:block:start --><section class="stamp-block" id="last-verified" aria-labelledby="last-verified-h"><h2 id="last-verified-h">Last verified</h2><p class="small muted">Every claim above is registered with the ClinicOps claim registry. The table says what was read, when, how, and what is not established. It is a record of a reading, not continuous monitoring: a rule that changed after the read date is not shown here. Corrections are logged on <a href="../../research#cite-and-correct">the research page</a>.</p><div class="table-scroll" tabindex="0" role="region" aria-label="Last verified claims, scrollable table"><table><thead><tr><th scope="col">Claim</th><th scope="col">Source and source date</th><th scope="col">Read on</th><th scope="col">Method</th><th scope="col">Not established</th><th scope="col">Next review</th></tr></thead><tbody><tr><th scope="row">CO-CLM-0001<br><span class="small muted">MDR Art. 32(1): SSCP for implantable and class III devices</span></th><td><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/HTML/?uri=CELEX:02017R0745-20250110">eur-lex.europa.eu</a>, <a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32017R0745">eur-lex.europa.eu</a><br>MDR consolidated text of 10 January 2025 (EUR-Lex)</td><td>16 November 2026</td><td>Read at the source</td><td>Whether a particular device falls inside the Article 32 exclusions.</td><td>15 May 2027</td></tr><tr><th scope="row">CO-CLM-0004<br><span class="small muted">EUDAMED legacy devices: B- prefixed EUDAMED DI</span></th><td><a href="https://webgate.ec.europa.eu/eudamed-help/en/search-by-module/devices/legacy-devices/basic-concepts/identification-details/generation-of-identification-details-for-a-legacy-device-when-a-udi-di-does-not-exist.html">webgate.ec.europa.eu</a>, <a href="https://webgate.ec.europa.eu/eudamed-help/en/search-by-module/devices/legacy-devices/basic-concepts/identification-details/generation-of-identification-details-for-a-legacy-device-when-a-udi-di-already-exists.html">webgate.ec.europa.eu</a><br>EUDAMED help site v2.27.0, published 24 July 2026</td><td>16 November 2026</td><td>Read at the source</td><td>The complete regulatory or SS(C)P status of a device from its identifier.</td><td>15 May 2027</td></tr><tr><th scope="row">CO-CLM-0005<br><span class="small muted">B- prefix as a screening signal (ClinicOps derivation)</span></th><td><a href="https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX:32017R0745">eur-lex.europa.eu</a>, <a href="https://health.ec.europa.eu/document/download/a80332cf-e9f0-4d45-8863-3d96e8c2a675_en?filename=mdcg_2026-4_en.pdf">health.ec.europa.eu</a>, <a href="https://webgate.ec.europa.eu/eudamed-help/en/search-by-module/devices/legacy-devices/basic-concepts/identification-details/generation-of-identification-details-for-a-legacy-device-when-a-udi-di-already-exists.html">webgate.ec.europa.eu</a><br>MDCG 2026-4 rev.1 (October 2026); EUDAMED help v2.27.0 (24 July 2026)</td><td>14 November 2026</td><td>Read at the source</td><td>That any Commission rule states that legacy records cannot carry an SS(C)P link.</td><td>29 December 2026</td></tr><tr><th scope="row">CO-CLM-0009<br><span class="small muted">MDCG 2026-4: manufacturer uploads the SS(C)P, notified body marks the validated one</span></th><td><a href="https://health.ec.europa.eu/document/download/a80332cf-e9f0-4d45-8863-3d96e8c2a675_en?filename=mdcg_2026-4_en.pdf">health.ec.europa.eu</a><br>MDCG 2026-4 rev.1, October 2026</td><td>14 November 2026</td><td>Read at the source</td><td>That the Production functionality is available; the paper is non-binding.</td><td>29 December 2026</td></tr><tr><th scope="row">CO-CLM-0013<br><span class="small muted">Legacy devices: deadline to register in the UDI/Device module</span></th><td><a href="https://health.ec.europa.eu/medical-devices-eudamed/overview_en">health.ec.europa.eu</a>, <a href="https://health.ec.europa.eu/document/download/3bb39d28-dcaa-4907-9ea9-ea89cee091c0_en?filename=md_eudamed_tp-leg-reg-devices_en.pdf">health.ec.europa.eu</a>, <a href="https://eur-lex.europa.eu/eli/dec/2025/2371/oj/eng">eur-lex.europa.eu</a><br>Commission legacy-device transition timeline (undated); notice published in the OJ on 27 November 2025</td><td>16 November 2026</td><td>Read at the source</td><td>The legal basis or counting rule behind the date: the Commission timeline cites none and the Decision states no calendar date. Whether a particular device counts as a legacy device.</td><td>28 November 2026</td></tr><tr><th scope="row">CO-CLM-0017<br><span class="small muted">Public EUDAMED device API behaviour, September 2026</span></th><td>ClinicOps sample records<br>ClinicOps observations of September 2026</td><td>9 September 2026</td><td>ClinicOps observation (sample date shown)</td><td>That the behaviour is stable or that coverage was complete.</td><td>31 December 2026</td></tr><tr><th scope="row">CO-CLM-0018<br><span class="small muted">MDCG 2026-4 rev.1: Production deployment planned for December 2026</span></th><td><a href="https://health.ec.europa.eu/document/download/a80332cf-e9f0-4d45-8863-3d96e8c2a675_en?filename=mdcg_2026-4_en.pdf">health.ec.europa.eu</a><br>MDCG 2026-4 rev.1, October 2026</td><td>14 November 2026</td><td>Read at the source</td><td>That the functionality is available; the dates are plans.</td><td>14 December 2026</td></tr><tr><th scope="row">CO-CLM-0019<br><span class="small muted">MDCG 2026-4 rev.1: upload SS(C)Ps no later than 27 March 2027</span></th><td><a href="https://health.ec.europa.eu/document/download/a80332cf-e9f0-4d45-8863-3d96e8c2a675_en?filename=mdcg_2026-4_en.pdf">health.ec.europa.eu</a><br>MDCG 2026-4 rev.1, October 2026</td><td>14 November 2026</td><td>Read at the source</td><td>That this is a statutory deadline: it is a recommendation in a non-binding paper.</td><td>14 December 2026</td></tr></tbody></table></div><p class="meta">Page version <code>2026-11-14-0391c9c0</code> (stamp date and a digest of the registry rows shown).</p></section><!-- stamp:block:end -->
 </main>
 <footer class="site">
 <div class="footer-inner">

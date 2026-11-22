@@ -1,0 +1,17 @@
+{
+ "feeds": {
+  "commission-eudamed": {
+   "seen": {},
+   "url": "https://health.ec.europa.eu/node/12988/rss_en"
+  },
+  "dkma-news": {
+   "seen": {},
+   "url": "https://laegemiddelstyrelsen.dk/en/news/rss-feed/"
+  },
+  "ema-whats-new": {
+   "seen": {},
+   "url": "https://www.ema.europa.eu/en/whats-new.xml"
+  }
+ },
+ "schema": 1
+}

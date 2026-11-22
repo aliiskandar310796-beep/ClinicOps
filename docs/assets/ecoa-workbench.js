@@ -78,7 +78,7 @@
         for (const col of derived) {
           const cell = tr.querySelector('[data-derived="' + col.key + '"]');
           const r = col.compute(row);
-          cell.replaceChildren(h('span', {class: 'st ' + (STATUS_CLASS[r.text] || 'st-na')}, r.text), r.note ? h('span', {class: 'note'}, r.note) : null);
+          cell.replaceChildren(...[h('span', {class: 'st ' + (STATUS_CLASS[r.text] || 'st-na')}, r.text), r.note ? h('span', {class: 'note'}, r.note) : null].filter(Boolean));
         }
       });
       if (opts.summary) opts.summary();

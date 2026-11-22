@@ -49,6 +49,24 @@ FORBIDDEN_PHRASES = (
     # network is not — no roster-shaped or recruitment language anywhere.
     "growing bench",
     "join our network",
+    # Retired 2026-11-16 (plenum lenses 18, 31, 33; correction log of that
+    # date): wording that implied a standing team, a staffed network or a
+    # ready-made compliance arrangement ClinicOps does not have. The
+    # corrections log paraphrases these on purpose so they stay out of the
+    # served pages.
+    "specialist depth on demand",
+    "expert-network model",
+    "medicine and nursing",
+    "independent clinical subject-matter",
+    "extension of your QPPV",
+    "contract-ready",
+    "audit-ready",
+    "Danish linguistic validation",
+    # Positioning and consistency wording retired the same day.
+    "Danish-led",
+    "foot of this page",
+    "vigilance contact",
+    "vigilance-kontakt",
 )
 FORBIDDEN_ACRONYMS = (re.compile(r"\bRAC\b"), re.compile(r"\bCCRA\b"))
 
@@ -128,7 +146,12 @@ def main() -> int:
         for name in RESTRICTED_CLIENT_NAMES:
             if name.lower() in html.lower():
                 errors.append(f"{rel}: restricted client name {name!r} on a public page")
-        if "QPPV" in html and "explicitly appointed" not in html:
+        # The Danish translation of the boundary sentence ("udtrykkeligt udpeget")
+        # satisfies the same rule, but only on pages under docs/da/.
+        appointed_only = "explicitly appointed" in html or (
+            rel.as_posix().startswith("da/") and "udtrykkeligt udpeget" in html
+        )
+        if "QPPV" in html and not appointed_only:
             errors.append(
                 f"{rel}: 'QPPV' outside the appointed-only boundary framing"
             )
@@ -136,7 +159,8 @@ def main() -> int:
     about = (DOCS / "about.html").read_text(encoding="utf-8")
     # Decision 2026-11-14: the public structure is independent of any individual.
     # Identity is shown only where a law or registry requires it.
-    allowed_identity = {"privacy-notice/index.html", "eu-authorised-representative.html"}
+    # The Danish privacy notice is the translation of the same GDPR controller block.
+    allowed_identity = {"privacy-notice/index.html", "da/privacy-notice/index.html"}
     for page in pages():
         rel = page.relative_to(DOCS).as_posix()
         if rel in allowed_identity:

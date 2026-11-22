@@ -53,14 +53,14 @@
     if (!current.type) { box.append(h('p', {class: 'muted'}, 'Choose who provides the information to see the type.')); $('add-from-finder').disabled = true; return; }
     $('add-from-finder').disabled = false;
     const t = C.TYPES[current.type];
-    box.append(
+    box.append(...[
       h('p', {class: 'result-type'}, h('strong', null, current.type), ' ', t.name.replace(/ \(.*\)/, '')),
       h('p', null, h('strong', null, 'Who reports. '), t.who),
       h('p', null, t.note),
       current.flags.length ? h('div', {class: 'callout'}, h('strong', null, 'Look again. '), current.flags.map(f => h('span', null, f + ' '))) : null,
       h('h3', null, 'What it asks of the delivery team'),
       h('ul', null, C.IMPLICATIONS[current.type].map(x => h('li', null, x)))
-    );
+    ].filter(Boolean));
   }
 
   /* ---------- step 2: inventory ---------- */
@@ -123,9 +123,10 @@
     $('findings-wrap').hidden = list.children.length === 0;
   }
   function addRow(over) {
-    if (rows.length >= 500) { say('Limit of 500 rows reached.'); return; }
+    if (rows.length >= 500) { say('Limit of 500 rows reached.'); return false; }
     rows.push(Object.assign(C.emptyRow(), over || {}));
     renderInventory();
+    return true;
   }
 
   const EXAMPLE = [
@@ -143,7 +144,7 @@
     say('Row added to the inventory below.');
     $('inventory').scrollIntoView({block: 'start'});
   });
-  $('add-blank').addEventListener('click', () => { addRow(); say('Blank row added.'); });
+  $('add-blank').addEventListener('click', () => { if (addRow()) say('Blank row added.'); });
   $('load-example').addEventListener('click', () => { rows = EXAMPLE.map(r => Object.assign(C.emptyRow(), r)); renderInventory(); say('Fictional example loaded: four assessments, one of each type. The names are placeholders, not real instruments.'); });
   $('clear').addEventListener('click', () => { rows = []; renderInventory(); say('Cleared.'); });
   $('export-csv').addEventListener('click', () => {

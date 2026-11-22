@@ -9,7 +9,7 @@ PAGE = ROOT / "docs" / "readiness-score.html"
 def test_readiness_page_is_local_and_actionable() -> None:
     text = PAGE.read_text(encoding="utf-8")
     assert "Nothing is sent to ClinicOps" in text
-    assert "Request a Regulatory Intelligence Assessment" in text
+    assert "Request a scoping reply" in text
     assert "fetch(" not in text
     assert "XMLHttpRequest" not in text
 

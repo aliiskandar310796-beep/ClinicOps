@@ -1,77 +1,54 @@
 <!-- claim-use: website -->
-<!-- claim-ids: CO-CLM-0001,CO-CLM-0009 -->
+<!-- claim-ids: CO-CLM-0001,CO-CLM-0009,CO-CLM-0012,CO-CLM-0018,CO-CLM-0019 -->
 
-# SS(C)P Operations — deployment pack
+# SS(C)P operations: plain explainer
+
+Rewritten 2026-11-16 (plenum lens 18/31/33): the page was a sales page; it is now a plain explainer. Dates come only from registered claims allowed for website use.
 
 ## SEO title
 
-SS(C)P Operations and Evidence Workflows | ClinicOps
+SS(C)P operations explained: who does what | ClinicOps
 
 ## Meta description
 
-Organise SS(C)P evidence, Basic UDI-DI relationships, translations and operational handoffs with a human-reviewed MedTech regulatory work plan.
+A plain explainer: what a summary of safety and clinical performance (SS(C)P) is, who draws it up and who uploads and validates it in EUDAMED, the dates that apply, and where ClinicOps stops.
 
 ## H1
 
-SS(C)P operations without losing the evidence trail
+SS(C)P operations explained: what it is and who does what
 
 ## Intro
 
-SS(C)P work is not just a document-upload task. It sits across manufacturer responsibility, Basic UDI-DI relationships, translations, notified-body validation context and downstream publication operations.
+An SS(C)P is a manufacturer's summary of safety and clinical performance. The page says what it is, who does which part, which dates apply, and where ClinicOps stops. It covers MDR Article 32 only.
 
-ClinicOps helps teams organise that evidence into a traceable work plan while preserving duty-holder context and unresolved questions.
+## What it is
 
-**Primary CTA:** Scope an SS(C)P operations review
+Under MDR Article 32(1), the manufacturer draws up the summary for implantable devices and class III devices, subject to the Article 32 exclusions. [CO-CLM-0001] The summary must include the identification of the device, including the Basic UDI-DI (Article 32(2)(a)). [CO-CLM-0012]
 
-## Regulatory boundary
+## Who does what
 
-Under MDR Article 32, the manufacturer is the duty holder for drawing up the SSCP for applicable implantable and class III devices, subject to the Article 32 exclusions. [CO-CLM-0001]
+- Manufacturer: draws up the SS(C)P. Under the operating model in MDCG 2026-4, uploads the master version and its translations to EUDAMED. [CO-CLM-0009]
+- Notified body: under the same model, indicates which SS(C)P is validated by ticking the box for the relevant Basic UDI-DI(s). [CO-CLM-0009]
+- ClinicOps: none of these roles. On request, compares the records that describe the same device and lists where they differ.
 
-ClinicOps does not replace that responsibility. The service is an evidence and operations layer around the work.
+MDCG 2026-4 is a non-binding position paper tied to the new EUDAMED functionality; check current Production behaviour before relying on it operationally. Other roles, such as authorised representatives and importers, are not covered.
 
-## What ClinicOps can organise
+## Dates
 
-- Basic UDI-DI and portfolio relationships;
-- master-version and translation inventories;
-- evidence provenance and unresolved source conflicts;
-- publication-readiness questions;
-- role and handoff responsibilities;
-- a human-reviewed action queue.
+Both dates come from MDCG 2026-4 rev.1 (October 2026). The first is a plan; the second is a recommendation, not a statutory deadline.
 
-## EUDAMED operating model
+- December 2026: planned Production deployment in EUDAMED of the revised SS(C)P operating model, after a planned Playground deployment in July 2026. Plans, not evidence that the functionality is available. [CO-CLM-0018]
+- 27 March 2027: for devices placed on the market before mandatory use of the UDI/Devices module, manufacturers "should" upload SS(C)Ps as soon as possible and no later than this date. [CO-CLM-0019]
 
-MDCG 2026-4 describes a revised EUDAMED operating model in which the manufacturer uploads the SS(C)P master version and translations, while the notified body indicates the validated SS(C)P against the relevant Basic UDI-DI(s). This is a non-binding MDCG operating model tied to implementation of the new EUDAMED functionality and should be verified against current production behaviour before operational reliance. [CO-CLM-0009]
+Rules as of 16 November 2026. Next review by 31 January 2027.
 
-## Good fit
+## Boundary
 
-This review is designed for:
-
-- manufacturers managing several SS(C)Ps and translations;
-- authorised representatives that need portfolio visibility;
-- regulatory teams preparing an evidence-led operational handoff;
-- consultancies that want a repeatable reconciliation layer.
-
-## Deliverable
-
-A typical engagement can return:
-
-1. evidence inventory;
-2. unresolved-source register;
-3. Basic UDI-DI / SS(C)P relationship questions;
-4. translation and handoff matrix;
-5. prioritised human-review actions.
-
-No missing public field is treated as a standalone non-compliance finding.
-
-## Start with one portfolio
-
-Begin with one SS(C)P family or a small portfolio. ClinicOps will identify what can be reconciled, what remains unresolved and where authoritative evidence is needed.
-
-**CTA:** Scope an SS(C)P operations review
+ClinicOps does not draw up, validate or approve an SS(C)P, holds no manufacturer, authorised-representative or notified-body role, and does not decide whether a record is correct. A missing public field is not a finding of non-compliance. Where records differ, ClinicOps lists the difference for the responsible person to resolve.
 
 ## Internal implementation notes
 
-- URL slug: `/sscp-operations`
+- URL slug: `/sscp-operations` (unchanged).
 - One H1 only.
-- Link to `/eudamed-transition` and the homepage.
 - Do not render claim IDs publicly.
+- Title is pinned in `scripts/check_live_site.py`; change both together.

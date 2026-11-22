@@ -37,24 +37,24 @@ CANONICAL_CATEGORY = "EU MedTech regulatory data integrity"
 CONTACT_EMAIL = "info@clinicops.dk"
 
 # --- the homepage's single story -------------------------------------------
-# Amended 2026-11-14 on the owner's instruction (see
-# 01_STRATEGY/SITE_PROJECT_PID_2026-11-14.md): the front door is Danish clinical
-# operations support with three lanes; inner pages keep the MedTech integrity
-# identity.
-HOMEPAGE_CATEGORY = "Clinical operations support from Denmark"
-HOMEPAGE_H1 = "Clinical operations support from Denmark."
+# Amended 2026-11-16 (decision record, D-1): two doors (clinical studies, medical
+# devices) with the Danish layer running through both; the operator works from
+# Spain, so the headline no longer says "from Denmark". Inner pages keep the
+# MedTech integrity identity.
+HOMEPAGE_CATEGORY = "Clinical and device operations support for Denmark and the EU"
+HOMEPAGE_H1 = "Clinical and device operations support for Denmark and the EU."
 PRIMARY_CTAS = (">Open the eCOA workbench</a>", ">Describe your project</a>")
 
 # --- page identity ----------------------------------------------------------
 PINNED_TITLES = {
-    "index.html": "ClinicOps | Clinical operations support from Denmark",
+    "index.html": "ClinicOps | Clinical and device operations support for Denmark and the EU",
     "services.html": "Solution: Regulatory Change Integrity Review | ClinicOps",
     "use-cases.html": "Use Cases: EUDAMED, SS(C)P, AR Portfolios, Denmark | ClinicOps",
     "tools.html": "Tools: Integrity Scanner and Evidence Utilities | ClinicOps",
     "evidence-change-control-pack.html": "Regulatory Change Integrity Review | ClinicOps",
     "integrity-scanner.html": "Regulatory Integrity Scanner | ClinicOps",
     "about.html": "About ClinicOps | EU MedTech Regulatory Data Integrity",
-    "expert-network.html": "Specialist Expert Network | ClinicOps",
+    "expert-network.html": "Working with partners | ClinicOps",
 }
 FLAGSHIP_URL = "https://clinicops.dk/evidence-change-control-pack"
 
@@ -85,6 +85,7 @@ RETIRED_PUBLIC_STRINGS = (
     "four-level",
     "risk scoring",
     "Danish-led, EU-wide medical device regulatory intelligence",
+    "Danish-led",  # 2026-11-16: positioning is "Denmark-specialised, EU-wide"
     DEPRECATED_COMPANY_LINKEDIN_SLUG,
 )
 
@@ -149,11 +150,13 @@ def test_only_the_canonical_company_linkedin_slug_appears_anywhere() -> None:
     assert linked, "no page links the canonical company LinkedIn page"
 
 
-def test_llms_txt_opens_with_the_canonical_category() -> None:
+def test_llms_txt_opens_with_the_homepage_positioning() -> None:
+    """llms.txt derives its summary from the home page (amended 2026-11-16, D-1):
+    it must not carry its own older company description."""
     llms = (DOCS / "llms.txt").read_text(encoding="utf-8")
     first_paragraph = llms.split("\n\n")[1]
-    assert first_paragraph.startswith("ClinicOps is an EU MedTech regulatory data integrity practice.")
-    assert "secondary specialist capabilities" in first_paragraph
+    assert first_paragraph.startswith(f"> {HOMEPAGE_CATEGORY}:")
+    assert "regulatory data integrity practice" not in llms
 
 
 # ---------------------------------------------------------------------------
@@ -203,7 +206,7 @@ def test_legacy_clinical_operations_url_is_a_noindex_redirect_stub() -> None:
     assert "noindex" in parser.meta.get("robots", "")
     assert parser.canonical == "https://clinicops.dk/services"
     assert re.search(r'http-equiv="refresh"\s+content="0;\s*url=services"', html)
-    assert "https://clinicops.dk/clinical-operations" not in SITEMAP.read_text(encoding="utf-8")
+    assert "<loc>https://clinicops.dk/clinical-operations</loc>" not in SITEMAP.read_text(encoding="utf-8")
 
 
 # ---------------------------------------------------------------------------
@@ -229,7 +232,12 @@ def test_flagship_and_scanner_carry_the_human_decision_boundary() -> None:
 
 
 def test_expert_network_never_claims_standing_staff() -> None:
+    # Amended 2026-11-16 (plenum lens 18): the "private, project-specific
+    # expert-network model" sentence implied a network that cannot be shown and
+    # was removed; the page now says ClinicOps does the work itself.
     html = (DOCS / "expert-network.html").read_text(encoding="utf-8").lower()
-    assert "private, project-specific expert-network model" in html
+    assert "expert-network model" not in html
+    assert "clinicops does the work itself" in html
+    assert "there is no standing team" in html
     assert "not represented as clinicops employees" in html
     assert "permanently staffed" in html

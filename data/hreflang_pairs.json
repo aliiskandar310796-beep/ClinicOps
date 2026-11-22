@@ -1,0 +1,40 @@
+{
+  "_readme": [
+    "Declares which public pages are language alternates of each other. scripts/render_sitemap.py reads this file and, for each group, writes self-referencing, reciprocal <xhtml:link rel=\"alternate\" hreflang> entries plus an x-default that points at the English page into docs/sitemap.xml. Pages not listed here get no hreflang.",
+    "Format: each entry in \"pairs\" maps a language code to the canonical URL of that language's page, plus an optional \"status\" (\"draft_pending_review\" or \"reviewed\"; missing means reviewed). Example: {\"en\": \"https://clinicops.dk/danish-dhpc-checker\", \"da\": \"https://clinicops.dk/da/danish-dhpc-checker\", \"status\": \"reviewed\"}.",
+    "Rules (the script fails the build otherwise): every group contains \"en\" and at least one other language; codes are language-only (\"en\", \"da\"), never region-only or \"EU\"; every URL is an indexable, self-canonical page that is already in the sitemap; each URL is in at most one group; each page's <html lang> matches its code. A pair with status \"draft_pending_review\" is skipped entirely by render_sitemap.py (no hreflang, the noindex Danish page is not in the sitemap, and its URLs are not validated as sitemap pages); only reviewed pairs are emitted. Never point a Danish page's canonical at the English page.",
+    "After editing, run: python scripts/render_sitemap.py && python scripts/render_llms_txt.py. Adding /da/ pages also counts against the sitemap URL ceiling in tests/test_strategic_invariants.py.",
+    "Mechanism chosen: sitemap method only (no <link rel=alternate> in page heads), because GitHub Pages cannot set headers and one generated place is easy to check in CI. Do not add head tags as well."
+  ],
+  "_schema": {
+    "purpose": "Explicit EN<->DA page pairs. Single source for (a) hreflang alternates in docs/sitemap.xml, (b) the language switcher that scripts/harmonize_public_shell.py adds, (c) tests/test_danish_pilot.py.",
+    "method": "Sitemap method only (no <link rel=alternate> in page heads), per research /tmp/plenum/27-languages.md section 3. Each member of a pair lists itself and the other; x-default points at the English page.",
+    "fields": {
+      "default_language": "Language of the authoritative source pages. English is authoritative; Danish pages are translations.",
+      "x_default": "Language whose URL is emitted as hreflang=x-default.",
+      "pairs[].en / pairs[].da": "Absolute canonical URL of each page. Each page must self-canonicalise to exactly this URL (never DA -> EN).",
+      "pairs[].status": "draft_pending_review = the Danish page is noindex,follow, is NOT in the sitemap, and must NOT be emitted as an hreflang alternate (hreflang to a noindex page is ignored by Google and Danish pages do not count against the 48-URL ceiling). reviewed = the founder has reviewed the Danish page, noindex is removed, the page is in the sitemap, and both URLs may be emitted as alternates and the English page may link to it."
+    },
+    "go_live_steps": [
+      "1. Founder reads the Danish page against the English source and corrects it.",
+      "2. In the Danish page set <meta name=translation-status content=reviewed>, add <meta name=translation-reviewed content=YYYY-MM-DD>, change robots to index,follow, and replace the draft banner with the reviewed banner.",
+      "3. Set the pair status below to reviewed.",
+      "4. Raise SITEMAP_URL_CEILING in tests/test_strategic_invariants.py only as a recorded decision (each Danish URL counts once indexable).",
+      "5. Run scripts/render_sitemap.py, scripts/render_llms_txt.py and scripts/harmonize_public_shell.py; run scripts/check_translation_sync.py."
+    ]
+  },
+  "default_language": "en",
+  "x_default": "en",
+  "pairs": [
+    {
+      "en": "https://clinicops.dk/",
+      "da": "https://clinicops.dk/da/",
+      "status": "draft_pending_review"
+    },
+    {
+      "en": "https://clinicops.dk/privacy-notice/",
+      "da": "https://clinicops.dk/da/privacy-notice/",
+      "status": "draft_pending_review"
+    }
+  ]
+}

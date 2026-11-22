@@ -84,5 +84,6 @@ def test_consistency_check_keeps_fictional_fixture_and_mod10() -> None:
 
 def test_tools_page_links_both_prototypes() -> None:
     tools = (DOCS / "tools.html").read_text(encoding="utf-8")
-    assert 'href="regulatory-change-impact"' in tools
+    # Regulatory Change Impact Mapper is unlisted (page kept with an archive note)
+    assert 'href="regulatory-change-impact"' not in tools
     assert 'href="technical-file-consistency"' in tools

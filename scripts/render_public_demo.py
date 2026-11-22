@@ -4,6 +4,8 @@ import argparse
 from datetime import date
 from pathlib import Path
 
+from harmonize_public_shell import _ensure_security_meta
+
 from clinicops_os.client_report import render_client_html
 from clinicops_os.transition_report import load_portfolio
 
@@ -33,13 +35,17 @@ SHELL_HEAD = (
     '<meta name="color-scheme" content="light dark">'
     '<meta name="theme-color" content="#f6f3ec" media="(prefers-color-scheme: light)">'
     '<meta name="theme-color" content="#0f1517" media="(prefers-color-scheme: dark)">'
+    # Feed autodiscovery; keep identical to harmonize_public_shell.FEED_LINK.
+    '<link rel="alternate" type="application/atom+xml" title="ClinicOps verified changes" '
+    'href="https://clinicops.dk/feed.xml">'
 )
 SHELL_HEADER = (
     '<a class="skip-link" href="#main">Skip to content</a>'
     '<header class="site"><div class="site-inner"><a class="brand" href="../">Clinic<span>Ops</span></a>'
-    '<nav class="primary" aria-label="Primary"><a href="../">Home</a><a href="../ecoa">eCOA</a>'
-    '<a href="../services">Medical devices</a><a href="../denmark-market-access">Danish &amp; PV</a>'
-    '<a href="../tools" aria-current="page">Tools</a><a href="../about">About</a>'
+    '<nav class="primary" aria-label="Primary"><a href="../">Home</a>'
+    '<a href="../services">Medical devices</a><a href="../ecoa">Clinical operations</a>'
+    '<a href="../tools" aria-current="page">Tools</a><a href="../research">Research</a>'
+    '<a href="../about">About</a>'
     '<a href="../contact">Contact</a></nav></div></header>'
     '<script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");'
     'var r=a?a.offsetLeft+a.offsetWidth+16-n.clientWidth:0;if(r>0)n.scrollLeft=r})()</script>\n'
@@ -72,7 +78,7 @@ def render_public_demo() -> str:
 <meta property="og:url" content="{CANONICAL}">
 <meta property="og:site_name" content="ClinicOps">
 <meta property="og:image" content="https://clinicops.dk/assets/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://clinicops.dk/assets/og-image.png">
-<script type="application/ld+json">{{"@context":"https://schema.org","@type":"WebPage","name":"{TITLE}","description":"{DESCRIPTION}","url":"{CANONICAL}","isPartOf":{{"@type":"WebSite","name":"ClinicOps","url":"https://clinicops.dk/"}},"publisher":{{"@type":"Organization","name":"ClinicOps","url":"https://clinicops.dk/"}}}}</script>
+<script type="application/ld+json">{{"@context":"https://schema.org","@type":"WebPage","@id":"{CANONICAL}#webpage","name":"{TITLE}","description":"{DESCRIPTION}","url":"{CANONICAL}","isPartOf":{{"@type":"WebSite","@id":"https://clinicops.dk/#website","name":"ClinicOps","url":"https://clinicops.dk/"}},"publisher":{{"@type":"Organization","@id":"https://clinicops.dk/#org","name":"ClinicOps","url":"https://clinicops.dk/"}}}}</script>
 '''
     html = html.replace('<html lang="en">', '<html lang="en" data-seg="device">', 1)
     html = html.replace("<style>", metadata + "<style>", 1)
@@ -93,7 +99,7 @@ def render_public_demo() -> str:
     )
     html = html.replace(
         "</main>",
-        '''<section class="notice"><h2>Want this applied to a real portfolio?</h2><p><strong>What to bring:</strong> start with a small portfolio export or agreed record set. Known identifiers, certificate timing and target-market context help; missing evidence can stay explicit rather than being guessed.</p><p><strong>What a scoped pilot produces:</strong> a prioritised work plan, evidence-gap queue and human-reviewed next steps grounded in the supplied or reachable evidence. The responsible regulatory team retains final judgement.</p><p><a href="/assessment-intake"><strong>Build an assessment brief</strong></a> · <a href="mailto:info@clinicops.dk?subject=Class%20III%20Transition%20Map%20Assessment">Email ClinicOps directly</a> · <a href="/readiness-score">Use the free readiness score</a> · <a href="/privacy-notice/">Privacy</a> · <a href="/">Back to ClinicOps</a></p></section>
+        '''<section class="notice"><h2>Want this applied to a real portfolio?</h2><p><strong>What to bring:</strong> start with a small portfolio export or agreed record set. Known identifiers, certificate timing and target-market context help; missing evidence can stay explicit rather than being guessed.</p><p><strong>What a scoped pilot produces:</strong> a prioritised work plan, evidence-gap queue and human-reviewed next steps grounded in the supplied or reachable evidence. The responsible regulatory team retains final judgement.</p><p><a href="/assessment-intake"><strong>Build an assessment brief</strong></a> · <a href="mailto:info@clinicops.dk?subject=Class%20III%20Transition%20Map%20Assessment">Email ClinicOps directly</a> · <a href="/privacy-notice/">Privacy</a> · <a href="/">Back to ClinicOps</a></p></section>
 </main>''',
         1,
     )
@@ -104,7 +110,9 @@ def render_public_demo() -> str:
                 f"'{domain}'; fix examples/portfolio.csv (blank source_url for "
                 "fictional records) instead of publishing fake evidence links"
             )
-    return html
+    # The harmonizer owns the meta CSP and referrer policy (script hashes included); apply it here
+    # too so a fresh render equals the harmonized, committed file.
+    return _ensure_security_meta("transition-map-sample/index.html", html)
 
 
 def main() -> None:

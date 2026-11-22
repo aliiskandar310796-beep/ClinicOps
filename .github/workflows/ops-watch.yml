@@ -1,22 +1,16 @@
 name: Ops Watch
 
+# Trimmed 2026-11-16: the push trigger and the EUDAMED reachability canary job
+# were removed. The canary's reachability probe had failed on every run since
+# early November, and research/eudamed-public-api-reuse-review.md says repeated
+# refusals from the public API must pause automated polling and trigger a review.
+# The monthly EUDAMED Watch workflow is unchanged. Canary scripts stay in the
+# repo; re-add the job only after that review.
+
 on:
   workflow_dispatch:
   schedule:
     - cron: '13 6 * * 1'
-  push:
-    paths:
-      - '.github/workflows/ops-watch.yml'
-      - 'scripts/check_live_site.py'
-      - 'scripts/eudamed_canary.py'
-      - 'scripts/evaluate_canary.py'
-      - 'src/clinicops_eudamed/canary.py'
-      - 'src/clinicops_eudamed/canary_eval.py'
-      - 'research/canary/baseline.json'
-      - 'scripts/audit_claim_registry.py'
-      - 'scripts/audit_claim_references.py'
-      - 'scripts/validate_content_claims.py'
-      - 'research/claims.jsonl'
 
 permissions:
   contents: read
@@ -29,15 +23,53 @@ jobs:
   live-site-health:
     name: Live site health
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 8
+    # issues: write is used only by scripts/report_ops_issue.py (open/update/close
+    # the ops-watch Issues). actions: write is used only to re-enable the two
+    # scheduled workflows (keep-alive). Nothing here can write repository contents.
+    permissions:
+      contents: read
+      issues: write
+      actions: write
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
       - run: pip install -e .
-      - name: Verify clinicops.dk over HTTPS
-        run: python scripts/check_live_site.py
+      # --full adds DNS (public DoH), TLS expiry, sitemap parity and security.txt.
+      # continue-on-error so the Issue step below always runs; the last step
+      # re-fails the job so the run still shows red.
+      - name: Verify clinicops.dk (HTTPS, DNS, TLS, sitemap, security.txt)
+        id: check
+        continue-on-error: true
+        run: python scripts/check_live_site.py --full --report "$RUNNER_TEMP/ops-report.json"
+      - name: Open, update or close the ops-watch Issue
+        if: always()
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          python scripts/report_ops_issue.py --report "$RUNNER_TEMP/ops-report.json" \
+            --run-url "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+      # Keep-alive: GitHub disables scheduled workflows in a public repo after 60
+      # days without repository activity. report_ops_issue.py leaves one heartbeat
+      # comment about every 28 days; this step also re-enables both schedules.
+      # No commits to main. See scripts/README_ops_watch.md.
+      - name: Keep schedules enabled
+        if: always()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for wf in ops-watch.yml regulatory-watch.yml; do
+            gh api -X PUT "repos/$GITHUB_REPOSITORY/actions/workflows/$wf/enable" || true
+          done
+      - name: Fail the job if the check found failures
+        if: steps.check.outcome == 'failure'
+        run: |
+          echo "::error::Live-site check reported failures; see the ops-watch Issue and the Verify step log."
+          exit 1
 
   evidence-freshness:
     name: Evidence freshness
@@ -55,35 +87,3 @@ jobs:
         run: python scripts/audit_claim_references.py
       - name: Governed content claim validation
         run: python scripts/validate_content_claims.py
-
-  eudamed-canary:
-    name: EUDAMED reachability canary
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v7
-      - uses: actions/setup-python@v7
-        with:
-          python-version: '3.12'
-      - run: pip install -e .
-      - name: Probe bounded public API pages
-        run: python scripts/eudamed_canary.py
-      - name: Evaluate reviewed canary drift
-        run: python scripts/evaluate_canary.py
-      - name: Add canary snapshot to job summary
-        if: always()
-        run: |
-          if [ -f research/canary/latest.json ]; then
-            echo '## EUDAMED canary snapshot' >> "$GITHUB_STEP_SUMMARY"
-            echo '```json' >> "$GITHUB_STEP_SUMMARY"
-            cat research/canary/latest.json >> "$GITHUB_STEP_SUMMARY"
-            echo '```' >> "$GITHUB_STEP_SUMMARY"
-          fi
-      - name: Upload canary snapshot
-        if: always()
-        uses: actions/upload-artifact@v7
-        with:
-          name: eudamed-canary-${{ github.run_id }}
-          path: research/canary/latest.json
-          if-no-files-found: warn
-          retention-days: 90

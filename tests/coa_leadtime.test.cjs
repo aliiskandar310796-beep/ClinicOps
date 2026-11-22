@@ -101,3 +101,63 @@ test('LT12 module has no network, storage or eval', () => {
   const src = require('node:fs').readFileSync(require('node:path').join(__dirname, '../docs/assets/coa-leadtime-core.js'), 'utf8');
   assert.ok(!/fetch\(|XMLHttpRequest|localStorage|sessionStorage|eval\(|new Function|document\./.test(src));
 });
+
+test('LT13 per-row CSV carries dates; scenarios CSV and ICS match the result', () => {
+  const r = L.plan({kickoff: '2027-01-04', target: '2027-06-01', products: [P({}), P({language: 'Finnish', translation_weeks: '30'})]});
+  const rows = L.toCSV(r).trim().split('\n');
+  assert.equal(rows.length, 3);
+  const head = rows[0].split(',');
+  assert.ok(head.includes('ready_date_expected') && head.includes('licence_date'));
+  const finnish = rows[2].split(',');
+  assert.equal(finnish[head.indexOf('ready_date_expected')], r.products[1].ready.expected);
+  assert.equal(finnish[head.indexOf('licence_date')], '2027-02-01'); // 4 weeks after 2027-01-04
+  const sc = L.toScenariosCSV(r).trim().split('\n');
+  assert.equal(sc.length, 1 + 3 + r.sensitivity.length);
+  assert.ok(sc[2].startsWith('scenario,expected,' + r.scenarios.expected.date + ','));
+  assert.ok(!/'-/.test(L.toScenariosCSV(r)), 'negative slack must not be quoted as text');
+  const ics = L.toICS(r, '20261116T000000Z');
+  assert.equal((ics.match(/BEGIN:VEVENT/g) || []).length, 5);
+  assert.ok(ics.includes('DTSTART;VALUE=DATE:20270104') && ics.includes('DTSTART;VALUE=DATE:20270601'));
+  assert.ok(ics.includes('DTSTART;VALUE=DATE:' + r.scenarios.expected.date.replace(/-/g, '')));
+  assert.ok(ics.endsWith('END:VCALENDAR\r\n'));
+});
+
+test('LT14 ready dates equal kick-off plus the product weeks', () => {
+  const r = L.plan({kickoff: '2027-01-04', products: [P({licence_weeks: '0', translation_weeks: '0', screenshot_rounds: '0', signoff_weeks: '0'})]});
+  assert.equal(r.products[0].ready.expected, '2027-01-04');
+  const d = L.plan({kickoff: '2027-01-04', products: [P({licence_weeks: '2', translation_weeks: '10', screenshot_rounds: '2', signoff_weeks: '1'})]});
+  assert.equal(d.products[0].language_date, '2027-03-29'); // 12 weeks
+  assert.equal(d.products[0].ready.expected, '2027-04-05'); // 12 + 1 weeks
+});
+
+test('LT14 share-safe summary has counts, weeks and the driver, and no instrument, language or date', () => {
+  const r = L.plan({kickoff: '2027-01-04', target: '2027-06-01', products: [P({instrument: 'Confidential Scale', language: 'Finnish', translation_weeks: '30'}), P({instrument: 'Other Diary', language: 'Danish'})]});
+  const s = L.shareSummary(r);
+  assert.match(s, /Rows: 2 instrument-language versions, 2 instruments, 2 languages/);
+  assert.match(s, /optimistic \/ expected \/ pessimistic\): [\d.]+ \/ [\d.]+ \/ [\d.]+/);
+  assert.match(s, /held up by: (licence|translation and screenshot review)/);
+  for (const leak of ['Confidential', 'Finnish', 'Danish', 'Diary', '2027', 'Scale']) assert.ok(!s.includes(leak), leak);
+  assert.equal(L.shareSummary({errors: ['x'], scenarios: {}, products: []}), '');
+});
+
+test('LT15 an entry that is not a number is an error, never zero weeks; a decimal comma is accepted', () => {
+  const bad = L.plan({kickoff: '2026-11-16', target: '2027-03-15', products: [P({translation_weeks: 'abc'})]});
+  assert.ok(bad.errors.some(e => /Row 1, translation weeks/.test(e)));
+  assert.ok(L.plan({kickoff: '2026-11-16', products: [P({licence_weeks: '-3'})]}).errors.length);
+  const comma = L.plan({kickoff: '2026-11-16', products: [P({translation_weeks: '1,5'})]});
+  const dot = L.plan({kickoff: '2026-11-16', products: [P({translation_weeks: '1.5'})]});
+  assert.deepEqual(comma.errors, []);
+  assert.equal(comma.scenarios.expected.date, dot.scenarios.expected.date);
+  const blank = L.plan({kickoff: '2026-11-16', products: [P({translation_weeks: '   '})]});
+  const none = L.plan({kickoff: '2026-11-16', products: [P({})]});
+  assert.equal(blank.scenarios.expected.date, none.scenarios.expected.date);
+});
+
+test('LT16 absurd durations and dates are rejected with a message, never an uncaught exception', () => {
+  ['1e308', '1e10', '99999999999', '521'].forEach(v => {
+    const r = L.plan({kickoff: '2026-11-16', products: [P({translation_weeks: v})]});
+    assert.ok(r.errors.some(e => /Row 1, translation weeks/.test(e)), v);
+  });
+  assert.ok(L.plan({kickoff: '9999-12-31', products: [P({})]}).errors.length);
+  assert.deepEqual(L.plan({kickoff: '2026-11-16', products: [P({translation_weeks: '520'})]}).errors, []);
+});

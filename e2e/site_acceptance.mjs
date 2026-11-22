@@ -41,7 +41,7 @@ try {
     }
 
     await page.goto(BASE + "/", { waitUntil: "load" });
-    pass(`[${width}] homepage buyer explanation visible`, await page.getByText("ClinicOps works on those three", { exact: false }).isVisible());
+    pass(`[${width}] homepage buyer explanation visible`, await page.getByText("ClinicOps works on those two", { exact: false }).isVisible());
     pass(`[${width}] homepage free CTA visible`, await page.getByRole("link", { name: "Open the eCOA workbench" }).first().isVisible());
     pass(`[${width}] homepage paid CTA visible`, await page.getByRole("link", { name: "Scope a review", exact: true }).first().isVisible());
     const ctaBox = await page.getByRole("link", { name: "Open the eCOA workbench" }).first().boundingBox();
@@ -75,7 +75,17 @@ try {
     const page = await context.newPage();
     await page.goto(BASE + "/assessment-intake.html?workstream=integrity-review&src=qa&campaign=acceptance&segment=ra", { waitUntil: "load" });
     pass("[intake] workstream preset resolved", await page.locator("#workstream").inputValue() === "Regulatory Change Integrity Review");
-    for (const id of ["org", "size", "timing", "evidence", "buying"]) await page.selectOption("#" + id, { index: 1 });
+    pass("[intake] preset sets the door", await page.locator("#door").inputValue() === "devices");
+    {
+      const extra = await context.newPage();
+      await extra.goto(BASE + "/assessment-intake.html?workstream=ctis", { waitUntil: "load" });
+      pass("[intake] eCOA preset lands on the eCOA door, not Other / mixed", await extra.locator("#door").inputValue() === "ecoa" && await extra.locator("#workstream").inputValue() === "CTIS submission timing");
+      await extra.goto(BASE + "/assessment-intake.html?door=denmark", { waitUntil: "load" });
+      pass("[intake] door parameter reveals only that door's workstreams", await extra.locator("#workstream-field").isVisible() && await extra.locator("#workstream option:not([disabled]):not([hidden])").count() > 1 && !(await extra.locator("#workstream optgroup[data-door=devices]").isVisible()));
+      await extra.close();
+    }
+    pass("[intake] only four fields are required", await page.locator("#brief-form select[required], #brief-form input[required]:not([type=checkbox]), #brief-form textarea[required]").count() === 4);
+    for (const id of ["org", "timing"]) await page.selectOption("#" + id, { index: 1 });
     await page.fill("#name", "Exempla & Co. A/S");
     await page.fill("#notes", "One controlled change — Danish æøå; apostrophe O'Reilly & quoted values.");
     await page.check("#safe");
@@ -90,6 +100,12 @@ try {
     pass("[intake] preview states nothing sent", /Nothing has been sent/.test(await page.locator("#status").textContent()));
     await page.click("#copy");
     pass("[intake] copy remains local", /Nothing has been sent/.test(await page.locator("#status").textContent()));
+    pass("[intake] preview shows the target address and subject", /info@clinicops\.dk/.test(await page.locator("#target").textContent()) && /ClinicOps scope/.test(await page.locator("#subject").textContent()));
+    await page.fill("#notes", "æøå ".repeat(200));
+    await page.fill("#constraints", "æøå ".repeat(125));
+    await page.click('button[type=submit]');
+    await page.waitForFunction(() => /too long for a reliable email link/.test(document.getElementById("status").textContent), null, { timeout: 2000 }).catch(() => {});
+    pass("[intake] an over-long brief is copied instead of opened as a mailto link", /too long for a reliable email link/.test(await page.locator("#status").textContent()));
     const after = interactions.slice(before);
     pass("[intake] preview/copy make no network request", after.length === 0, after.map(x => x.method + " " + x.url).join(" | "));
     await context.close();

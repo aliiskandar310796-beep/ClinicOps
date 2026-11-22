@@ -1,40 +1,24 @@
 <!doctype html>
 <html lang="en" data-seg="ecoa">
 <head>
-<meta charset="utf-8">
+<meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Rrp/oKlTF5JhFj1/wI5MXQooEKDuQe1flpA8aYc4skk='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; object-src 'none'; frame-src 'none'; base-uri 'none'; form-action 'none'"><meta name="referrer" content="no-referrer">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<title>COA and eCOA: workflow, assessment types, Nordic context and free tools | ClinicOps</title>
-<meta name="description" content="A reference and four free browser-only tools for planning electronic clinical outcome assessments: workflow map, assessment types, what changes in Denmark and the Nordics, and where the dates and burden come from.">
+<title>COA and eCOA learning hub: video, workflow, types, free tools | ClinicOps</title>
+<meta name="description" content="Learn eCOA planning: a 12-minute walkthrough, the workflow map, COA types, Nordic context and four free browser-only tools. Nothing is sent to ClinicOps.">
 <link rel="canonical" href="https://clinicops.dk/ecoa">
 
-<meta property="og:title" content="COA and eCOA: workflow, assessment types, Nordic context and free tools | ClinicOps">
-<meta property="og:description" content="A reference and four free browser-only tools for planning electronic clinical outcome assessments: workflow map, assessment types, what changes in Denmark and the Nordics, and where the dates and burden come from.">
+<meta property="og:title" content="COA and eCOA learning hub: video, workflow, types, free tools | ClinicOps">
+<meta property="og:description" content="Learn eCOA planning: a 12-minute walkthrough, the workflow map, COA types, Nordic context and four free browser-only tools. Nothing is sent to ClinicOps.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://clinicops.dk/ecoa">
 <meta property="og:site_name" content="ClinicOps">
 
 <meta property="og:image" content="https://clinicops.dk/assets/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://clinicops.dk/assets/og-image.png">
 
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "COA and eCOA: workflow, assessment types, Nordic context and free tools | ClinicOps",
-  "description": "A reference and four free browser-only tools for planning electronic clinical outcome assessments: workflow map, assessment types, what changes in Denmark and the Nordics, and where the dates and burden come from.",
-  "url": "https://clinicops.dk/ecoa",
-  "isPartOf": {
-    "@type": "WebSite",
-    "name": "ClinicOps",
-    "url": "https://clinicops.dk/"
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": "ClinicOps",
-    "url": "https://clinicops.dk/"
-  }
-}
-</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","@id":"https://clinicops.dk/ecoa#webpage","name":"COA and eCOA learning hub: video, workflow, types, free tools | ClinicOps","description":"Learn eCOA planning: a 12-minute walkthrough, the workflow map, COA types, Nordic context and four free browser-only tools. Nothing is sent to ClinicOps.","url":"https://clinicops.dk/ecoa","isPartOf":{"@type":"WebSite","@id":"https://clinicops.dk/#website","name":"ClinicOps","url":"https://clinicops.dk/"},"publisher":{"@type":"Organization","@id":"https://clinicops.dk/#org","name":"ClinicOps","url":"https://clinicops.dk/"}}</script>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","@id":"https://clinicops.dk/ecoa#video","name":"The eCOA workflow in twelve steps","description":"A 12-minute narrated walkthrough of the twelve steps of an electronic clinical outcome assessment study, from the decision to close-out: what to settle, what each step leaves behind and how it holds up when something slips. One imagined study, not a client, runs through it. The narration is a synthetic voice.","thumbnailUrl":"https://clinicops.dk/assets/video/ecoa-12-steps-poster.jpg","uploadDate":"2026-11-18","duration":"PT12M27S","contentUrl":"https://clinicops.dk/assets/video/ecoa-12-steps.mp4","inLanguage":"en","isPartOf":{"@id":"https://clinicops.dk/ecoa#webpage"},"publisher":{"@id":"https://clinicops.dk/#org"}}</script>
 
 <style>
 
@@ -44,6 +28,23 @@ main.wrap{padding-top:clamp(40px,6vw,72px)}
 .btn,.cta{white-space:normal;text-align:center;max-width:100%}
 .flag{font-size:.8rem;font-weight:650}
 td.k{white-space:nowrap}
+
+.watch{margin:8px 0 44px}
+.watch .vid{margin:18px 0 10px;max-width:960px}
+.watch video:focus,.watch video:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.watch video{display:block;width:100%;height:auto;aspect-ratio:16/9;background:#0f2a33;border-radius:6px;box-shadow:0 0 0 1px var(--border-strong)}
+.watch .fine{font-size:.8125rem;color:var(--muted);max-width:60em;margin:0 0 18px}
+.chapters{list-style:none;margin:22px 0 0;padding:0;border-top:1px solid var(--border-strong);max-width:960px}
+.chapters li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 18px;align-items:baseline;padding:10px 8px;border-bottom:1px solid var(--border-strong)}
+.chapters li.now{background:var(--accent-soft)}
+.chapters a.go{color:var(--text);text-decoration:none;display:flex;gap:16px;align-items:baseline}
+.chapters a.go:hover,.chapters a.go:focus-visible{color:var(--accent)}
+.chapters .t{font-family:var(--font-mono,monospace);font-size:.8rem;color:var(--muted);min-width:3.2em}
+.chapters a.read{font-size:.875rem;white-space:nowrap}
+details.transcript{margin:26px 0 0;max-width:960px;border-top:1px solid var(--border-strong);padding-top:14px}
+details.transcript summary{cursor:pointer;font-weight:600;color:var(--accent)}
+details.transcript h3{font-size:1.05rem;margin:1.6em 0 .4em}
+details.transcript p{max-width:37em}
 
 .index li{max-width:none}
 .index{list-style:none;margin:28px 0 20px;padding:0;border-top:1px solid var(--border-strong)}
@@ -56,15 +57,102 @@ main .index li>a:only-child{display:grid;grid-template-columns:minmax(0,.9fr) mi
 @media(max-width:900px){main .index li>a:only-child{grid-template-columns:1fr auto}.index span{grid-column:1}.index i{grid-row:1;grid-column:2}}
 
 </style>
-<link rel="preload" href="assets/fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/fonts/ibm-plex-mono-latin-400.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="site.css"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f6f3ec" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0f1517" media="(prefers-color-scheme: dark)"></head>
+<link rel="preload" href="assets/fonts/public-sans-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="assets/fonts/ibm-plex-mono-latin-400.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="site.css"><meta name="color-scheme" content="light dark"><meta name="theme-color" content="#f6f3ec" media="(prefers-color-scheme: light)"><meta name="theme-color" content="#0f1517" media="(prefers-color-scheme: dark)"><link rel="alternate" type="application/atom+xml" title="ClinicOps verified changes" href="https://clinicops.dk/feed.xml"></head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="/">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="/">Home</a><a href="ecoa" aria-current="page">eCOA</a><a href="services">Medical devices</a><a href="denmark-market-access">Danish &amp; PV</a><a href="tools">Tools</a><a href="about">About</a><a href="contact">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");var r=a?a.offsetLeft+a.offsetWidth+16-n.clientWidth:0;if(r>0)n.scrollLeft=r})()</script>
+<a class="skip-link" href="#main">Skip to content</a><header class="site"><div class="site-inner"><a class="brand" href="/">Clinic<span>Ops</span></a><nav class="primary" aria-label="Primary"><a href="/">Home</a><a href="services">Medical devices</a><a href="ecoa" aria-current="page">Clinical operations</a><a href="tools">Tools</a><a href="research">Research</a><a href="about">About</a><a href="contact">Contact</a></nav></div></header><script>(function(){var n=document.querySelector("nav.primary"),a=n&&n.querySelector("[aria-current]");var r=a?a.offsetLeft+a.offsetWidth+16-n.clientWidth:0;if(r>0)n.scrollLeft=r})()</script>
 <main id="main" tabindex="-1" class="wrap">
-<section class="hero"><h1>COA and eCOA, from instrument to first participant</h1><p class="lede">An electronic outcome assessment is a small piece of a study that has to be right in every language and on every device before the first participant starts. This section maps the work, explains the four assessment types, covers what changes in Denmark and the Nordics, and offers four free tools that run in your browser. <strong>Nothing is sent to ClinicOps.</strong></p><p class="meta">Reference and tools · sources checked 2026-11-14</p></section>
+<section class="hero"><h1>COA and eCOA, from instrument to first participant</h1><p class="lede">An electronic outcome assessment is a small piece of a study that has to be right in every language and on every device before the first participant starts. Start with the twelve-minute walkthrough, then use the pages and tools below. This section maps the work, explains the four assessment types, covers what changes in Denmark and the Nordics, and offers four free tools that run in your browser. <strong>Nothing is sent to ClinicOps.</strong></p><p class="meta">Clinical operations hub · learning path, reference and tools · sources checked 2026-11-14</p></section>
+
+<section class="watch" id="watch" aria-labelledby="watch-h">
+<h2 id="watch-h">Start here: the twelve steps in twelve minutes</h2>
+<p>A narrated walkthrough of the <a href="ecoa-workflow">workflow map</a>. One imagined study runs through it, a sponsor adding a Danish version of a patient diary. It is not a client. For each step: what to settle, what it leaves behind, and how it holds up when something slips.</p>
+<div class="vid"><video id="ecoa-video" controls preload="none" playsinline width="1280" height="720" poster="assets/video/ecoa-12-steps-poster.jpg"><source src="assets/video/ecoa-12-steps.mp4" type="video/mp4"><p>Your browser cannot play this video. <a href="assets/video/ecoa-12-steps.mp4">Download it (MP4)</a> or read the <a href="#transcript">transcript</a>.</p></video></div>
+<p class="fine">12 minutes 27 seconds · English · captions on screen · the narration is a synthetic voice, not a recording of a person. Nothing loads until you press play, and nothing is sent to ClinicOps. A ClinicOps synthesis of published guidance, not a standard or a compliance determination; sources are on the workflow map.</p>
+<ol class="chapters" aria-label="Chapters">
+<li><a class="go" href="#watch" data-t="0.0"><span class="t">0:00</span>Introduction</a></li>
+<li><a class="go" href="#watch" data-t="47.4"><span class="t">0:47</span>Step 0 · Decide and select</a><a class="read" href="ecoa-workflow#step-decide">Read step</a></li>
+<li><a class="go" href="#watch" data-t="86.0"><span class="t">1:25</span>Step 1 · Start</a><a class="read" href="ecoa-workflow#step-start">Read step</a></li>
+<li><a class="go" href="#watch" data-t="117.1"><span class="t">1:57</span>Step 2 · Align protocol and specification</a><a class="read" href="ecoa-workflow#step-align">Read step</a></li>
+<li><a class="go" href="#watch" data-t="161.3"><span class="t">2:41</span>Step 3 · Plan</a><a class="read" href="ecoa-workflow#step-plan">Read step</a></li>
+<li><a class="go" href="#watch" data-t="208.6"><span class="t">3:28</span>Step 4 · Licences and languages</a><a class="read" href="ecoa-workflow#step-licences">Read step</a></li>
+<li><a class="go" href="#watch" data-t="261.4"><span class="t">4:21</span>Step 5 · Build and migrate</a><a class="read" href="ecoa-workflow#step-build">Read step</a></li>
+<li><a class="go" href="#watch" data-t="304.8"><span class="t">5:04</span>Step 6 · Test</a><a class="read" href="ecoa-workflow#step-test">Read step</a></li>
+<li><a class="go" href="#watch" data-t="356.2"><span class="t">5:56</span>Step 7 · Participant material and approvals</a><a class="read" href="ecoa-workflow#step-participant-material">Read step</a></li>
+<li><a class="go" href="#watch" data-t="401.9"><span class="t">6:41</span>Step 8 · Go-live and site readiness</a><a class="read" href="ecoa-workflow#step-go-live">Read step</a></li>
+<li><a class="go" href="#watch" data-t="448.7"><span class="t">7:28</span>Step 9 · Run the study</a><a class="read" href="ecoa-workflow#step-run">Read step</a></li>
+<li><a class="go" href="#watch" data-t="487.2"><span class="t">8:07</span>Step 10 · Control change and transfer data</a><a class="read" href="ecoa-workflow#step-change-transfer">Read step</a></li>
+<li><a class="go" href="#watch" data-t="542.0"><span class="t">9:01</span>Step 11 · Close and learn</a><a class="read" href="ecoa-workflow#step-close">Read step</a></li>
+<li><a class="go" href="#watch" data-t="583.1"><span class="t">9:43</span>Across every step: five threads, four catch points</a></li>
+<li><a class="go" href="#watch" data-t="646.5"><span class="t">10:46</span>Free tools, next steps and notes</a></li>
+</ol>
+<details class="transcript" id="transcript"><summary>Read the transcript</summary>
+<h3>Introduction</h3>
+<p>This is the work behind electronic clinical outcome assessment, eCOA. Twelve steps, from the first decision to the final close-out. Along the way, you will follow one imagined study, not a client: a sponsor adding a Danish version of a patient diary. For each step, three questions: what to settle, what it leaves behind, and how it holds up when something slips.</p>
+<p>Here is the map. Twelve steps, in the usual order, grouped here into five phases. The grouping is ClinicOps's own. Two things overlap: licensing and translation start early and run alongside the build, and steps nine and ten run side by side after go-live.</p>
+<h3>Step 0 · Decide and select</h3>
+<p>Step zero. Before anything is built, someone decides whether this study collects data electronically at all. Our imagined sponsor starts here, choosing who provides the system, and who oversees it. And, in ClinicOps's reading, the sponsor stays answerable for what the provider does.</p>
+<p>It leaves three records: a decision, a written agreement, and an oversight plan.</p>
+<p>Done when all three exist. Watch for a question nobody can answer: what will the sponsor review? Then oversight is a promise, not a plan.</p>
+<h3>Step 1 · Start</h3>
+<p>Step one: who decides what, and what is in scope? Name the roles. List every assessment, with its reporter, languages and licence state. A blank licence state is an early warning.</p>
+<p>It leaves behind named roles, and an assessment register.</p>
+<p>Done when every role is named and no assessment has a blank field. Watch for an unknown licence. Then every later step is planned on an incomplete list.</p>
+<h3>Step 2 · Align protocol and specification</h3>
+<p>Step two: will the system collect what the protocol says, when it says? Here is an example schedule of assessments from a protocol. Put the specification beside it. Differences show up here, before the build, not after. In this example, assessment B has different windows.</p>
+<p>It leaves a side-by-side of protocol and specification: the fields, like visit windows and recall periods, and the rules, like reminders and edit checks.</p>
+<p>Done when no difference is left unexplained. Watch for a late specification change. It reopens the comparison; missed, the system collects the wrong thing.</p>
+<h3>Step 3 · Plan</h3>
+<p>Step three: plan. Our imagined sponsor wants a first-participant date. How much slip can it accept? That is the tolerance. This chart is an illustration; the durations are made up. Licence and translation start early, and overlap the build. Here, translation sets the date. If it slips, so does the first participant.</p>
+<p>It leaves a plan that shows what sets the date, what a change would do to it, and, with the burden estimator, what the study asks of participants.</p>
+<p>Done when the plan names what sets the date. Watch for a licence not yet granted. The first plan is rarely the last. Re-plan, and show what moved.</p>
+<h3>Step 4 · Licences and languages</h3>
+<p>Step four: licences and languages. May the diary be used electronically, and in Danish? Picture each instrument against each language. Each cell shows licensed, in review, or requested. Every language needs a route: an approved version, or a new translation. Reported licence times run from two to twelve weeks, across market sources, not a benchmark.</p>
+<p>It leaves a licence request for each instrument, a translation route for each language, and a rule for who signs off the wording.</p>
+<p>Done when every instrument has a request, and every language a route. Watch for a version still in review: a risk with an owner and a date. If it slips, it may set the first-participant date. Go back to step three.</p>
+<h3>Step 5 · Build and migrate</h3>
+<p>Step five: turn the paper original into screens, without changing what it measures. The paper becomes screens. Translated text can run longer, and has to fit. Then screenshot review rounds. One distributor reports thirty-two percent of its projects needing three or more. That is the market describing itself, not a benchmark.</p>
+<p>It leaves screens in every language, a text-fit check, and screenshot review rounds.</p>
+<p>Done when the screens still measure what the paper measured. Watch for translated text that does not fit. If review rounds repeat, group the findings by cause.</p>
+<h3>Step 6 · Test</h3>
+<p>Step six: test. Does the configured system behave as specified, for the people who will use it? Here is a scripted test case for our diary. Open it: pass. Answer an item: pass. Submit the entry: fail. In best practice, one failed step fails the whole case. In best practice, every finding goes in one log. It ends in a signed approval. Best practice, not requirement: do not test in Production.</p>
+<p>It leaves a scripted acceptance cycle, led by the sponsor, a findings log, and a signed approval.</p>
+<p>Done when the approval is signed and kept. Watch for a testing window squeezed by earlier delays. Log it as a risk. Do not shorten the test without saying so.</p>
+<h3>Step 7 · Participant material and approvals</h3>
+<p>Step seven: what will participants see, and which authority sees it first? Start with the screens and instructions. Then the question of which authority sees them first. Each country gets a decision: in the application or outside it, in which language, and who approves changes. These countries are an example.</p>
+<p>It leaves a decision for each country: in the application, or outside it, in which language, and who approves each change.</p>
+<p>Done when each country has a decision, a language and an approver. Watch for a country where no authority has seen the material. Then go-live may wait on an approval nobody asked for.</p>
+<h3>Step 8 · Go-live and site readiness</h3>
+<p>Step eight: can sites and participants start? Check readiness, then decide. Sites and raters are trained. Devices, or own-device guidance, and a support route are ready. Then the decision: go, or no-go, against criteria agreed in advance.</p>
+<p>It leaves training, with devices or own-device guidance, a support route, and a go-live decision against agreed criteria.</p>
+<p>Done when training, devices and support are ready, and the decision is made. Watch for devices not yet settled. Imagine the Danish diary is not ready on the day. No-go is a valid decision, and needs no argument.</p>
+<h3>Step 9 · Run the study</h3>
+<p>Step nine: keep the data complete, and the plan true, while the study runs. An illustration, not data: compliance across study weeks. Reviews run on a cadence, and a dip gets an owner and an action. Then the hand-over, to the day-to-day team.</p>
+<p>It leaves a review cadence for compliance and missing data, and a hand-over of how the system works.</p>
+<p>Done each cycle when the review is held, and every gap has an owner. Watch for missing data, or a compliance gap. A fix that changes the system goes to step ten.</p>
+<h3>Step 10 · Control change and transfer data</h3>
+<p>Step ten runs alongside step nine. Weeks in, someone asks to change one word in the diary's source text. A change is requested, assessed, approved, and told to everyone it affects. And, where needed, what it touched is tested again. A change to the source text reaches every language version, and the copyright holder may need to agree. The other half is data transfer: specified first, tested, and recorded.</p>
+<p>It leaves a change record: who asked, who approved, what it touched, a transfer specification, agreed first, and a record of every transfer.</p>
+<p>Done when every change has a record, and the transfer specification came first. Watch for a wording change after sign-off. An unrecorded change cannot be shown to have been approved.</p>
+<h3>Step 11 · Close and learn</h3>
+<p>Step eleven: close and learn. What do we keep, transfer, and change next time? The final transfer is confirmed against the specification from step ten. The system is decommissioned, and its configuration recorded. And a short review of what the plan got wrong, kept for the next study.</p>
+<p>It leaves the confirmed final transfer, a decommissioning record, and a lessons review.</p>
+<p>Done when the transfer matches, the system is closed, and the lessons are written. Watch for a transfer that differs from the specification. Then the close-out is not clean.</p>
+<h3>Across every step</h3>
+<p>Five threads run through every step. Change: record every change, who approved it, and what it touched. Oversight: the sponsor stays answerable for what a provider does. The EMA guideline concerns medicines trials; its reach to device studies is not established. Risk: one register, every risk with an owner and a date. Education: say what the study can and cannot show. Communication: everyone knows what is decided, and what waits on them.</p>
+<p>Where can a slip be caught? ClinicOps's reading: at four points. Re-plan at each stage, as at step three. Decide go or no-go against agreed criteria. Record every change. And keep the lessons.</p>
+<p>What does good look like at the end? Anyone running the study can say, for each assessment, who answers, and on what. In which language, and when. What happens if they do not, and who may change it.</p>
+<h3>Free tools, next steps and notes</h3>
+<p>Try the work first. Free tools and blank templates. No sign-up, no email address, and the tools run in your browser and send nothing. The workbench plans each instrument and language. The type finder sorts the assessments. A lead-time planner, and a burden estimator. And two blank templates: a UAT script, and a terminology page.</p>
+<p>Have an eCOA study in mind? You can describe it as a pattern, with no company or product name. Ask a question, or request a scope, at clinicops.dk/contact. The full workflow map is at clinicops.dk/ecoa-workflow. You are welcome to write in Danish.</p>
+<p>A few notes on what this is. A ClinicOps synthesis of published guidance, not a standard, and not a checklist that makes a study compliant. Rules are as of sixteen November twenty twenty-six. The done-when, watch-for and if-it-slips lines, the catch points, and the phase names are ClinicOps's own reading. Sources include the ePRO Consortium, ISOQOL, C-Path, ISPOR, the EMA, the European Commission, and CDISC. None of them has reviewed or endorsed this. The screenshot figures come from one licensing distributor, the licence times from several sources: the market describing itself, not a benchmark. The narration is a synthetic voice, not a recording of a person.</p>
+</details>
+<div class="cta-row"><a class="cta primary" href="contact">Ask a question or request a scope</a><a class="cta ghost" href="ecoa-workflow">Read the workflow map</a></div>
+</section>
 
 <h2>Understand the work</h2>
 <ul class="index">
-<li><a href="ecoa-workflow"><b>eCOA workflow map</b><span>Ten stages from kick-off to close-out: what is settled at each, what it leaves behind, which tool helps.</span><i aria-hidden="true">&rarr;</i></a></li>
+<li><a href="ecoa-workflow"><b>eCOA workflow map</b><span>Twelve steps from the decision to close-out: what is settled at each, what it leaves behind, which tool helps.</span><i aria-hidden="true">&rarr;</i></a></li>
+<li><a href="clinical-operations-workflow-map"><b>Clinical operations workflow map</b><span>Six phases and twelve lanes from planning to archive, drug trials and device investigations side by side, with a clock only where the legal text was read.</span><i aria-hidden="true">&rarr;</i></a></li>
 <li><a href="coa-types"><b>COA types</b><span>Patient, observer, clinician and performance outcomes, and what each asks of an electronic study. With regulator and consensus sources.</span><i aria-hidden="true">&rarr;</i></a></li>
 <li><a href="coa-nordic"><b>COA in Denmark and the Nordics</b><span>What the authorities say about language, ethics review and data protection, which instrument languages exist, and what is not confirmed.</span><i aria-hidden="true">&rarr;</i></a></li>
 </ul>
@@ -77,11 +165,43 @@ main .index li>a:only-child{display:grid;grid-template-columns:minmax(0,.9fr) mi
 <li><a href="ecoa-delivery-workbench"><b>eCOA delivery workbench</b><span>Plan every instrument and language, compare the protocol schedule with the specification, build a testing script skeleton, and keep risks and changes together.</span><i aria-hidden="true">&rarr;</i></a></li>
 </ul>
 
-<h2>How the pieces work together</h2>
-<p>Start with the <a href="coa-type-finder">type finder</a> to list what the study collects. The <a href="ecoa-visit-burden">burden estimator</a> shows whether the schedule asks too much of a participant, and the <a href="ecoa-lead-time-planner">planner</a> shows whether the languages fit the timeline. The <a href="ecoa-delivery-workbench">workbench</a> then carries the plan through the build, the testing and the changes.</p>
+<h2>Clinical trial submissions</h2>
+<p>For sponsors and CROs planning an initial application in the EU clinical trials system.</p>
+<ul class="index">
+<li><a href="ctis-clock"><b>CTIS Initial Application Clock</b><span>Dates for validation, Part I, Part II and the decision from a submission date, with requests for information, plus the EMA handbook's winter pause (not in the Regulation).</span><i aria-hidden="true">&rarr;</i></a></li>
+</ul>
+
+<h2>Danish language and pharmacovigilance</h2>
+<p>The Danish layer sits beside the eCOA work: what changes for Danish patients, authorities and safety communications. These tools also run in your browser, and the first link covers the cross-cutting scope.</p>
+<ul class="index">
+<li><a href="denmark-market-access"><b>Denmark market access</b><span>Danish authority mapping, language and localisation, for devices and IVDs as well as studies.</span><i aria-hidden="true">&rarr;</i></a></li>
+<li><a href="danish-dhpc-checker"><b>Danish DHPC Submission Checker</b><span>A checklist against the Danish Medicines Agency's documented rules for a DHPC.</span><i aria-hidden="true">&rarr;</i></a></li>
+<li><a href="danish-pv-literature-register"><b>Danish Local-Literature Source Register</b><span>Danish periodicals for local-literature monitoring, with a justification memo and screening log.</span><i aria-hidden="true">&rarr;</i></a></li>
+<li><a href="sdea-clause-checker"><b>SDEA / PV Agreement Clause Checker</b><span>Screen a PV agreement against the clause set required from 12 February 2026.</span><i aria-hidden="true">&rarr;</i></a></li>
+</ul>
+
+<h2>Checklist: overseeing a provider of study technology or services</h2>
+<p>A template for the sponsor or CRO team that has handed work to a provider such as an eCOA vendor. It is a planning aid, not a compliance determination, and it does not quote any standard; check the requirements that apply to your study.</p>
+<ol class="steps">
+<li><strong>Duties.</strong> Write down who does what, including what stays with the sponsor, in a simple responsibility table.</li>
+<li><strong>Written agreement before work.</strong> Scope, data handling, change control, access, exit and file hand-over are agreed in writing first.</li>
+<li><strong>Provider assessment.</strong> Record how you checked the provider is fit for this task, and when you will check again.</li>
+<li><strong>Evidence log.</strong> Keep what the provider showed you, with dates, in one place a monitor or auditor can open.</li>
+<li><strong>Measures and escalation.</strong> Agree a few measures, who reviews them and how often, and who is told when one goes wrong.</li>
+<li><strong>Exit.</strong> Know in advance what you receive if the provider stops, and how a successor picks up.</li>
+</ol>
+
+<h2 id="path">A suggested learning path</h2>
+<ol class="steps">
+<li><strong>Watch</strong> the <a href="#watch">twelve-minute walkthrough</a> for the shape of the work.</li>
+<li><strong>Read</strong> the <a href="ecoa-workflow">workflow map</a> for the detail at each step and the sources behind it.</li>
+<li><strong>List</strong> what the study collects with the <a href="coa-type-finder">type finder</a>.</li>
+<li><strong>Check</strong> the schedule with the <a href="ecoa-visit-burden">burden estimator</a> and the languages with the <a href="ecoa-lead-time-planner">planner</a>.</li>
+<li><strong>Carry</strong> the plan through the build, the testing and the changes in the <a href="ecoa-delivery-workbench">workbench</a>.</li>
+</ol>
 
 <div class="callout boundary"><strong>What these are not.</strong> They organise what you enter and show what follows from it. They do not choose instruments, confirm licences, say what burden is acceptable or give regulatory advice. Where a figure is a published planning range, the page shows its source and lets you replace it.</div>
-<div class="cta-row"><a class="cta primary" href="ecoa-workflow">See the workflow map</a><a class="cta ghost" href="tools">All tools</a></div>
+<div class="cta-row"><a class="cta primary" href="#watch">Watch the walkthrough</a><a class="cta ghost" href="ecoa-workflow">See the workflow map</a><a class="cta ghost" href="tools">All tools</a><a class="cta ghost" href="assessment-intake?workstream=coa">Scope eCOA work</a></div>
 </main>
 <footer class="site">
 <div class="footer-inner">
@@ -89,5 +209,6 @@ main .index li>a:only-child{display:grid;grid-template-columns:minmax(0,.9fr) mi
 <span><a href="mailto:info@clinicops.dk">info@clinicops.dk</a> &middot; <a href="https://www.linkedin.com/company/clinicops-dk/">LinkedIn</a> &middot; <a href="privacy-notice/">Privacy</a></span>
 </div>
 <div class="footer-inner"><span>ClinicOps is not a notified body or a competent authority, and does not replace your RA/QA team, RIM, QMS, PLM or ERP.</span></div></footer>
+<script src="assets/ecoa-video.js" defer></script>
 </body>
 </html>
