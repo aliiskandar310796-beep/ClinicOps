@@ -90,14 +90,28 @@ def test_public_termbase_file_is_valid_and_matches_expected_state() -> None:
     Art. 1(7)-(12) (combination products, IVD-incorporating devices,
     machinery) -- adds TB-0968..TB-1003 (29 `verified`, 7 `candidate`),
     also EUR-Lex only.
+
+    2026-11-22 t0-termbase Sunday PR: adds TB-1004..TB-1240 from the four
+    nightly runs 2026-11-19..2026-11-22 (no run on 11-16, 11-17, 11-18),
+    all quoted from the EUR-Lex consolidated EN and DA texts (20.03.2023)
+    -- MDR 2017/745 Art. 1(13)-(16) and the Art. 2 opener (Chapter I
+    complete), and Chapter III at sentence level: the chapter title, the
+    Art. 25-34 headings, Art. 25-32 in full, Art. 28-31 in full, Art. 33(1)
+    -(4) and the Art. 34 opening. 225 `verified`, 12 `candidate`. Two rows
+    are changed IN PLACE (the first dated exception to append-only, each
+    documented in that night's Drive log): TB-0016 (SSCP seed) promoted
+    `unverified-seed` -> `verified` on 2026-11-20 after Art. 32 was quoted
+    at source, and TB-1077 (Art. 27(1)) promoted `candidate` -> `verified`
+    on 2026-11-21; TB-1079 (Art. 29(1)) was likewise promoted on
+    2026-11-22 but enters this file already verified. Every other row
+    present before this change is byte-identical to the file on PR #126.
     """
     assert validate(PUBLIC) == []
     rows = read_rows(PUBLIC)
-    assert len(rows) == 1003
+    assert len(rows) == 1240
     assert Counter(r["status"] for r in rows) == {
-        "verified": 919,
-        "candidate": 83,
-        "unverified-seed": 1,
+        "verified": 1144,
+        "candidate": 96,
     }
     assert all(r["domain"] == "regulatory" for r in rows)
     assert all(r["source_url"] for r in rows)
